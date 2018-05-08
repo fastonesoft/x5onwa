@@ -1,0 +1,18 @@
+<!--index.wxml-->
+<view class="container">
+  <!--功能导航-->
+   <scroll-view scroll-y class="main-swpier">
+    <view class="main-flex">
+      <view class="main-core" wx:for="{{cores}}" wx:key="id"> 
+        <view wx:if="{{item.disabled}}" class="main-core-item">
+          <image class="core-item-icon" src="/images/core/{{item.name}}.png"></image>
+          <text class="core-item-name">{{item.title}}</text>
+        </view>
+        <view wx:else class="main-core-item disabled" bindtap="disabled_item">
+          <image class="core-item-icon" src="/images/core/{{item.name}}@disabled.png"></image>
+          <text class="core-item-name">{{item.title}}</text>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</view>

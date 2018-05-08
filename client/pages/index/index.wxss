@@ -1,0 +1,38 @@
+/**index.wxss**/
+.container{
+  padding-bottom: 0;
+  background-repeat: no-repeat;
+  background-size: 100% auto; 
+  background-position: bottom center;
+  /*background-image: url('/images/index/tri.png');*/
+  /*微信暂不支持静态bgimg文件，改用服务器url*/
+ /* background-image: url('https://we.cqu.pt/app/images/index/tri.png');*/
+}
+/**功能导航**/
+.main-swpier{
+  padding: 0rpx;
+  margin: 0rpx;
+}
+.main-flex{
+  display: flex;
+  flex-flow: row wrap;
+}
+.main-core{
+  width: 25%;
+}
+.main-core-item{
+  display: flex;
+  flex-flow: column wrap;
+  height: 240rpx;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+.main-core-item.disabled{
+  color: #9c9c9c;
+}
+.core-item-icon{
+  width: 85rpx;
+  height: 85rpx;
+  margin-bottom: 25rpx;
+}
