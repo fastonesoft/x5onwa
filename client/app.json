@@ -16,20 +16,26 @@
       {
         "text": "学校",
         "pagePath": "pages/index/index",
-        "iconPath": "images/tabs/index.png",
-        "selectedIconPath": "images/tabs/indexa.png"
+        "iconPath": "images/tabs/indexa.png",
+        "selectedIconPath": "images/tabs/index.png"
       },
       {
-        "text": "日志",
+        "text": "通讯录",
         "pagePath": "pages/memo/memo",
-        "iconPath": "images/tabs/news.png",
-        "selectedIconPath": "images/tabs/newsa.png"
+        "iconPath": "images/tabs/infora.png",
+        "selectedIconPath": "images/tabs/infor.png"
       },
       {
-        "text": "日志",
+        "text": "班级圈",
         "pagePath": "pages/addCgi/addCgi",
-        "iconPath": "images/tabs/news.png",
-        "selectedIconPath": "images/tabs/newsa.png"
+        "iconPath": "images/tabs/rounda.png",
+        "selectedIconPath": "images/tabs/round.png"
+      },
+      {
+        "text": "我的",
+        "pagePath": "pages/addCgi/addCgi",
+        "iconPath": "images/tabs/mya.png",
+        "selectedIconPath": "images/tabs/my.png"
       }
     ]
   }
