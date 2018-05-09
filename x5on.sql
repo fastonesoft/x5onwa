@@ -70,14 +70,16 @@ CREATE TABLE `xonRoleGroup` (
 CREATE TABLE `xonUser` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `uid` varchar(100) NOT NULL,  /*unionid*/
-  `open_id` varchar(100) NOT NULL,  /*小程序的openid*/
+  `open_id` varchar(100) NOT NULL,  /*openid*/
   `name` varchar(100) NOT NULL,
   `passed` boolean NOT NULL,
   `fixed` boolean NOT NULL,
   `parent_id` int(11),
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `last_visit_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uid` (`uid`),
+  UNIQUE KEY `open_id` (`open_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户列表';
 
 CREATE TABLE `xonGroupUser` (
