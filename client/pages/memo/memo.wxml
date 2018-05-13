@@ -8,10 +8,11 @@
             background-size="cover"
         ></image>
         <view>
-            <text class="userinfo-nickname">{{logged ? userInfo.nickName : '点击测试登录接口'}}</text>
+            <text class="userinfo-nickname">{{logged ? userInfo.nickName : ''}}</text>
             <text class="userinfo-nickname" wx:if="{{logged}}">{{userInfo.lastLoginTime}}</text>
         </view>
     </view>
+    <button open-type="getUserInfo" wx:if="{{!logged}}">授权登录</button>
 
     <!-- 上传图片测试 -->
     <view class="uploader">
