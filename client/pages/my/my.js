@@ -55,7 +55,6 @@ Page({
             }
         })
     },
-
     // 预览图片
     previewImg: function () {
         wx.previewImage({
@@ -63,5 +62,4 @@ Page({
             urls: [this.data.imgUrl]
         });
     }
-
 })

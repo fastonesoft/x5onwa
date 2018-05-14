@@ -1,4 +1,4 @@
-<!--index.wxml-->
+<!-- index.wxml -->
 <view class="container">
     <!-- 用户登录测试 -->
     <view class="userinfo" bindtap="login">
