@@ -7,7 +7,7 @@ use QCloud_WeApp_SDK\Constants as Constants;
 class Login extends CI_Controller {
     public function index() {
         $result = LoginService::login();
-        
+
         if ($result['loginState'] === Constants::S_AUTH) {
             $this->json([
                 'code' => 0,

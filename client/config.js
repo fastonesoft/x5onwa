@@ -12,6 +12,7 @@ var config = {
         host,
 
         roleUrl: `${host}/weapp/role`,
+        demoUrl: `${host}/weapp/demo`,
 
         // 登录地址，用于建立会话
         loginUrl: `${host}/weapp/login`,

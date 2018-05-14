@@ -2,6 +2,7 @@
 var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
 var util = require('../../utils/util.js')
+var app = getApp();
 
 Page({
     data: {
@@ -10,13 +11,16 @@ Page({
     },
 
     testCgi: function () {
-        util.showBusy('请求中...')
+        if (app.logged) {
+            util.showSuccess('已经登录！')
+        }
+        //util.showBusy('请求中...')
         var that = this
         qcloud.request({
-            url: `${config.service.host}/weapp/demo`,
+            url: config.service.demoUrl,
             login: false,
             success (result) {
-                util.showSuccess('请求成功完成')
+                //util.showSuccess('请求成功完成')
                 that.setData({
                     requestResult: JSON.stringify(result.data)
                 })
