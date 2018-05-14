@@ -1,7 +1,7 @@
 {
     "pages": [
         "pages/index/index",
-        "pages/memo/memo",
+        "pages/my/my",
         "pages/addCgi/addCgi"
     ],
     "window": {
@@ -21,19 +21,13 @@
             },
             {
                 "text": "通讯录",
-                "pagePath": "pages/memo/memo",
+                "pagePath": "pages/addCgi/addCgi",
                 "iconPath": "images/tabs/infora.png",
                 "selectedIconPath": "images/tabs/infor.png"
             },
             {
-                "text": "班级圈",
-                "pagePath": "pages/addCgi/addCgi",
-                "iconPath": "images/tabs/rounda.png",
-                "selectedIconPath": "images/tabs/round.png"
-            },
-            {
                 "text": "我的",
-                "pagePath": "pages/addCgi/addCgi",
+                "pagePath": "pages/my/my",
                 "iconPath": "images/tabs/mya.png",
                 "selectedIconPath": "images/tabs/my.png"
             }
