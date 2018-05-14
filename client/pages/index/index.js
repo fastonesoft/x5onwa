@@ -12,12 +12,18 @@ Page({
 
   onShow: function() {
       var that = this;
-      wx.request({
+
+      qcloud.request({
           url: config.service.roleUrl,
-          success: function (res) {
+          login: true,
+          success(result) {
               that.setData({
-                  cores: res.data.data
+                  cores: result.data.data
               })
+          },
+
+          fail(error) {
+              util.showModel('查询过期', error.message)
           }
       })
   }
