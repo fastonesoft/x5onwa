@@ -35,7 +35,7 @@ CREATE TABLE xonRole (
 	uid VARCHAR(100) NOT NULL,
 	name VARCHAR(20) NOT NULL,
 	title VARCHAR(20) NOT NULL,
-	to_show boolean NOT NULL,
+	to_show BOOLEAN NOT NULL,
 	PRIMARY KEY (id),
 	UNIQUE KEY uid (uid),
 	UNIQUE KEY name (name)
@@ -69,18 +69,19 @@ CREATE TABLE xonRoleGroup (
 	uid VARCHAR(100) NOT NULL,
 	role_id INT(11) NOT NULL,
 	group_id INT(11) NOT NULL,
-	has_role boolean NOT NULL,
+	has_role BOOLEAN NOT NULL,
 	PRIMARY KEY (id),
+	UNIQUE KEY uid (uid),
 	FOREIGN KEY (role_id) REFERENCES xonRole(id),
-	FOREIGN KEY (group_id) REFERENCES xonGroup(id),
-	UNIQUE KEY uid (uid)
+	FOREIGN KEY (group_id) REFERENCES xonGroup(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='分组权限';
 
 CREATE TABLE xonUser (
   id INT(11) NOT NULL AUTO_INCREMENT,
-  uid VARCHAR(100) NOT NULL,  /*unionid*/
+  uid VARCHAR(100) NOT NULL,  /*uniond*/
   name VARCHAR(100) NOT NULL,
-  fixed boolean NOT NULL,
+  mobil VARCHAR(20),  /*绑定学生时，检测是否为空*/
+  fixed BOOLEAN NOT NULL,
   create_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   last_visit_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (id),
@@ -115,9 +116,9 @@ CREATE TABLE xonEdu (
   name VARCHAR(20) NOT NULL,
   edu_type_id INT(11) NOT NULL,
   PRIMARY KEY (id),
-  FOREIGN KEY (edu_type_id) REFERENCES xonEduType(id),
   UNIQUE KEY uid (uid),
-  UNIQUE KEY name (name)
+  UNIQUE KEY name (name),
+  FOREIGN KEY (edu_type_id) REFERENCES xonEduType(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学制编排';
 
 INSERT INTO xonEdu VALUES (0, replace(uuid(), '-', ''), '小班', 1);
@@ -136,14 +137,60 @@ INSERT INTO xonEdu VALUES (0, replace(uuid(), '-', ''), '高一年级', 4);
 INSERT INTO xonEdu VALUES (0, replace(uuid(), '-', ''), '高二年级', 4);
 INSERT INTO xonEdu VALUES (0, replace(uuid(), '-', ''), '高三年级', 4);
 
-CREATE TABLE xonEduReg (
+CREATE TABLE xonSchool (
+  id INT(11) NOT NULL AUTO_INCREMENT,
   uid VARCHAR(100) NOT NULL,
-  edu_id INT(11) NOT NULL,
-  PRIMARY KEY (uid, edu_id),
-  FOREIGN KEY (edu_id) REFERENCES xonEdu(id),
-  UNIQUE KEY uid (uid)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='报名学校';
+  name VARCHAR(20) NOT NULL,
+  full_name VARCHAR(100) NOT NULL,
+  edu_type_id INT(11) NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY uid (uid),
+  UNIQUE KEY name (name),
+  UNIQUE KEY full_name (full_name),
+  FOREIGN KEY (edu_id) REFERENCES xonEduType(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学校列表';
 
+INSERT INTO xonSchool VALUES (0, replace(uuid(), '-', ''), '实验初中', '泰州市姜堰区实验初级中学', 3);
+
+CREATE TABLE xonUserSch (
+  user_id INT(11) NOT NULL,
+  edu_type_id INT(11) NOT NULL,
+  current_sch BOOLEAN NOT NULL,
+  PRIMARY KEY (user_id, edu_type_id),  /*同类学校只能注册一个*/
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户注册的学校';
+
+CREATE TABLE xonStudent (
+  idc VARCHAR(20) NOT NULL,
+  uid VARCHAR(100) NOT NULL,
+  name VARCHAR(20) NOT NULL,
+  mobil VARCHAR(20),  /*用来记录学生绑定用户的联系电话*/
+  mobil2 VARCHAR(20),
+  PRIMARY KEY (idc),
+  UNIQUE KEY uid (uid),
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学生表';
+
+CREATE TABLE xonRelation (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  uid VARCHAR(100) NOT NULL,
+  name VARCHAR(20) NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY uid (uid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='关系表';
+
+INSERT INTO xonRelation VALUES (0, replace(uuid(), '-', ''), '爸爸');
+INSERT INTO xonRelation VALUES (0, replace(uuid(), '-', ''), '妈妈');
+INSERT INTO xonRelation VALUES (0, replace(uuid(), '-', ''), '亲戚');
+INSERT INTO xonRelation VALUES (0, replace(uuid(), '-', ''), '朋友');
+
+CREATE TABLE xonUserStud (
+  user_uid VARCHAR(100) NOT NULL,
+  idc VARCHAR(20) NOT NULL,
+  relation_id INT(11) NOT NULL,
+  PRIMARY KEY (user_uid, idc, relation_id),
+  FOREIGN KEY (user_uid) REFERENCES xonUser(uid),
+  FOREIGN KEY (idc) REFERENCES xonStudent(idc),
+  FOREIGN KEY (relation_id) REFERENCES xonRelation(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户学生表';
 
 
 
