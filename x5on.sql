@@ -1,7 +1,8 @@
 
 /*这句只能在测试阶段使用，运行阶段删除*/
-DROP DATABASE cAuth;
+DROP DATABASE IF EXISTS cAuth;
 CREATE DATABASE IF NOT EXISTS cAuth DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+USE cAuth;
 
 SET NAMES utf8;
 SET FOREIGN_KEY_CHECKS = 0;
@@ -147,7 +148,7 @@ CREATE TABLE xonSchool (
   UNIQUE KEY uid (uid),
   UNIQUE KEY name (name),
   UNIQUE KEY full_name (full_name),
-  FOREIGN KEY (edu_id) REFERENCES xonEduType(id)
+  FOREIGN KEY (edu_type_id) REFERENCES xonEduType(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学校列表';
 
 INSERT INTO xonSchool VALUES (0, replace(uuid(), '-', ''), '实验初中', '泰州市姜堰区实验初级中学', 3);
@@ -156,7 +157,7 @@ CREATE TABLE xonUserSch (
   user_id INT(11) NOT NULL,
   edu_type_id INT(11) NOT NULL,
   current_sch BOOLEAN NOT NULL,
-  PRIMARY KEY (user_id, edu_type_id),  /*同类学校只能注册一个*/
+  PRIMARY KEY (user_id, edu_type_id)  /*同类学校只能注册一个*/
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户注册的学校';
 
 CREATE TABLE xonStudent (
@@ -166,7 +167,7 @@ CREATE TABLE xonStudent (
   mobil VARCHAR(20),  /*用来记录学生绑定用户的联系电话*/
   mobil2 VARCHAR(20),
   PRIMARY KEY (idc),
-  UNIQUE KEY uid (uid),
+  UNIQUE KEY uid (uid)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学生表';
 
 CREATE TABLE xonRelation (
