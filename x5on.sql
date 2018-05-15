@@ -41,10 +41,10 @@ CREATE TABLE `xonRole` (
 	UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='权限列表';
 
-INSERT INTO `xonRole` VALUES (0, replace(uuid(), '-', ''), 'xs', '学生查询', 1);
-INSERT INTO `xonRole` VALUES (0, replace(uuid(), '-', ''), 'kb', '课表查询', 1);
-INSERT INTO `xonRole` VALUES (0, replace(uuid(), '-', ''), 'ks', '考试安排', 1);
-INSERT INTO `xonRole` VALUES (0, replace(uuid(), '-', ''), 'cj', '成绩查询', 1);
+INSERT INTO `xonRole` VALUES (0, replace(uuid(), '-', ''), 'stud', '学生查询', 1);
+INSERT INTO `xonRole` VALUES (0, replace(uuid(), '-', ''), 'sub', '课表查询', 1);
+INSERT INTO `xonRole` VALUES (0, replace(uuid(), '-', ''), 'kao', '考试安排', 1);
+INSERT INTO `xonRole` VALUES (0, replace(uuid(), '-', ''), 'score', '成绩查询', 1);
 
 CREATE TABLE `xonGroup` (
 	`id` int(11) NOT NULL AUTO_INCREMENT,
@@ -54,6 +54,15 @@ CREATE TABLE `xonGroup` (
 	UNIQUE KEY `uid` (`uid`),
 	UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='分组列表';
+
+INSERT INTO `xonGroup` VALUES (0, replace(uuid(), '-', ''), '学生家长');
+INSERT INTO `xonGroup` VALUES (0, replace(uuid(), '-', ''), '科任老师');
+INSERT INTO `xonGroup` VALUES (0, replace(uuid(), '-', ''), '班级主管');
+INSERT INTO `xonGroup` VALUES (0, replace(uuid(), '-', ''), '学科主管');
+INSERT INTO `xonGroup` VALUES (0, replace(uuid(), '-', ''), '年级主管');
+INSERT INTO `xonGroup` VALUES (0, replace(uuid(), '-', ''), '学校管理');
+INSERT INTO `xonGroup` VALUES (0, replace(uuid(), '-', ''), '集团管理');
+INSERT INTO `xonGroup` VALUES (99, replace(uuid(), '-', ''), '系统管理');
 
 CREATE TABLE `xonRoleGroup` (
 	`id` int(11) NOT NULL AUTO_INCREMENT,
@@ -70,20 +79,15 @@ CREATE TABLE `xonRoleGroup` (
 CREATE TABLE `xonUser` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `uid` varchar(100) NOT NULL,  /*unionid*/
-  `open_id` varchar(100) NOT NULL,  /*openid*/
   `name` varchar(100) NOT NULL,
-  `passed` boolean NOT NULL,
   `fixed` boolean NOT NULL,
-  `parent_id` int(11),
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `last_visit_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `uid` (`uid`),
-  UNIQUE KEY `open_id` (`open_id`)
+  UNIQUE KEY `uid` (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户列表';
 
 CREATE TABLE `xonGroupUser` (
-  `uid` varchar(100) NOT NULL,
   `group_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   PRIMARY KEY (`group_id`, `user_id`),
