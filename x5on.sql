@@ -138,7 +138,7 @@ INSERT INTO xonEdu VALUES (14, replace(uuid(), '-', ''), '高二年级', 4);
 INSERT INTO xonEdu VALUES (15, replace(uuid(), '-', ''), '高三年级', 4);
 
 CREATE TABLE xonSchool (
-  id INT(11) NOT NULL,
+  id VARCHAR(10) NOT NULL,
   uid VARCHAR(60) NOT NULL,
   name VARCHAR(20) NOT NULL,
   full_name VARCHAR(100) NOT NULL,
@@ -150,12 +150,12 @@ CREATE TABLE xonSchool (
   FOREIGN KEY (edu_type_id) REFERENCES xonEduType(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学校列表';
 
-INSERT INTO xonSchool VALUES (32128402, replace(uuid(), '-', ''), '实验初中', '泰州市姜堰区实验初级中学', 3);
+INSERT INTO xonSchool VALUES ('32128402', replace(uuid(), '-', ''), '实验初中', '泰州市姜堰区实验初级中学', 3);
 
 CREATE TABLE xonUserSch (
   user_uid VARCHAR(60) NOT NULL,
   edu_type_id INT(11) NOT NULL,
-  sch_id INT(11) NOT NULL,
+  sch_id VARCHAR(10) NOT NULL,
   uid VARCHAR(60) NOT NULL,
   current_sch BOOLEAN NOT NULL,
   PRIMARY KEY (user_uid, edu_type_id),  /*同类学校只能注册一个*/
@@ -207,14 +207,44 @@ CREATE TABLE xonUserStud (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户学生表';
 
 /**
-  学生与学校（学校、年级、班级）关系表
+  学生与学校（学校、年度、级、年级、班级）关系表
   存在外键引用的，尽量使用数值型作主键
  */
+/** 年度 **/
+CREATE TABLE xonYear (
+  id INT(11) NOT NULL,
+  uid VARCHAR(60) NOT NULL,
+  current_year BOOLEAN NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY uid (uid),
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='年度';
+
+INSERT INTO xonYear VALUES (2004, replace(uuid(), '-', ''), 0);
+INSERT INTO xonYear VALUES (2005, replace(uuid(), '-', ''), 0);
+INSERT INTO xonYear VALUES (2006, replace(uuid(), '-', ''), 0);
+INSERT INTO xonYear VALUES (2007, replace(uuid(), '-', ''), 0);
+INSERT INTO xonYear VALUES (2008, replace(uuid(), '-', ''), 0);
+INSERT INTO xonYear VALUES (2009, replace(uuid(), '-', ''), 0);
+INSERT INTO xonYear VALUES (2010, replace(uuid(), '-', ''), 0);
+INSERT INTO xonYear VALUES (2011, replace(uuid(), '-', ''), 0);
+INSERT INTO xonYear VALUES (2012, replace(uuid(), '-', ''), 0);
+INSERT INTO xonYear VALUES (2013, replace(uuid(), '-', ''), 0);
+INSERT INTO xonYear VALUES (2014, replace(uuid(), '-', ''), 0);
+INSERT INTO xonYear VALUES (2015, replace(uuid(), '-', ''), 0);
+INSERT INTO xonYear VALUES (2016, replace(uuid(), '-', ''), 0);
+INSERT INTO xonYear VALUES (2017, replace(uuid(), '-', ''), 0);
+INSERT INTO xonYear VALUES (2018, replace(uuid(), '-', ''), 1);
+
 /** 级 **/
 CREATE TABLE xonStep (
-  id INT(11) NOT NULL,
-
-
+  id VARCHAR(16) NOT NULL,  /*学校10+分级编号6*/
+  uid VARCHAR(60) NOT NULL,
+  name VARCHAR(20) NOT NULL,
+  sch_id VARCHAR(10) NOT NULL,
+  graduated BOOLEAN NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY uid (uid),
+  FOREIGN KEY (sch_id) REFERENCES xonSchool(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='年级';
 
 /** 年级 **/
