@@ -36,7 +36,7 @@ CREATE TABLE xonRole (
 	uid VARCHAR(60) NOT NULL,
 	name VARCHAR(20) NOT NULL,
 	title VARCHAR(20) NOT NULL,
-	to_show BOOLEAN NOT NULL,
+	can_show BOOLEAN NOT NULL,  /*没有权限时，是否可以显示*/
 	PRIMARY KEY (id),
 	UNIQUE KEY uid (uid),
 	UNIQUE KEY name (name)
@@ -105,10 +105,9 @@ CREATE TABLE xonEduType (
   UNIQUE KEY name (name)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学制类型';
 
-INSERT INTO xonEduType VALUES (1, replace(uuid(), '-', ''), '幼儿园');
-INSERT INTO xonEduType VALUES (2, replace(uuid(), '-', ''), '小学');
-INSERT INTO xonEduType VALUES (3, replace(uuid(), '-', ''), '初中');
-INSERT INTO xonEduType VALUES (4, replace(uuid(), '-', ''), '高中');
+INSERT INTO xonEduType VALUES (1, replace(uuid(), '-', ''), '小学');
+INSERT INTO xonEduType VALUES (2, replace(uuid(), '-', ''), '初中');
+INSERT INTO xonEduType VALUES (3, replace(uuid(), '-', ''), '高中');
 
 CREATE TABLE xonEdu (
   id INT(11) NOT NULL,
@@ -121,21 +120,19 @@ CREATE TABLE xonEdu (
   FOREIGN KEY (edu_type_id) REFERENCES xonEduType(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学制编排';
 
-INSERT INTO xonEdu VALUES (1, replace(uuid(), '-', ''), '小班', 1);
-INSERT INTO xonEdu VALUES (2, replace(uuid(), '-', ''), '中班', 1);
-INSERT INTO xonEdu VALUES (3, replace(uuid(), '-', ''), '大班', 1);
-INSERT INTO xonEdu VALUES (4, replace(uuid(), '-', ''), '一年级', 2);
-INSERT INTO xonEdu VALUES (5, replace(uuid(), '-', ''), '二年级', 2);
-INSERT INTO xonEdu VALUES (6, replace(uuid(), '-', ''), '三年级', 2);
-INSERT INTO xonEdu VALUES (7, replace(uuid(), '-', ''), '四年级', 2);
-INSERT INTO xonEdu VALUES (8, replace(uuid(), '-', ''), '五年级', 2);
-INSERT INTO xonEdu VALUES (9, replace(uuid(), '-', ''), '六年级', 2);
-INSERT INTO xonEdu VALUES (10, replace(uuid(), '-', ''), '七年级', 3);
-INSERT INTO xonEdu VALUES (11, replace(uuid(), '-', ''), '八年级', 3);
-INSERT INTO xonEdu VALUES (12, replace(uuid(), '-', ''), '九年级', 3);
-INSERT INTO xonEdu VALUES (13, replace(uuid(), '-', ''), '高一年级', 4);
-INSERT INTO xonEdu VALUES (14, replace(uuid(), '-', ''), '高二年级', 4);
-INSERT INTO xonEdu VALUES (15, replace(uuid(), '-', ''), '高三年级', 4);
+
+INSERT INTO xonEdu VALUES (1, replace(uuid(), '-', ''), '一年级', 1);
+INSERT INTO xonEdu VALUES (2, replace(uuid(), '-', ''), '二年级', 1);
+INSERT INTO xonEdu VALUES (3, replace(uuid(), '-', ''), '三年级', 1);
+INSERT INTO xonEdu VALUES (4, replace(uuid(), '-', ''), '四年级', 1);
+INSERT INTO xonEdu VALUES (5, replace(uuid(), '-', ''), '五年级', 1);
+INSERT INTO xonEdu VALUES (6, replace(uuid(), '-', ''), '六年级', 1);
+INSERT INTO xonEdu VALUES (7, replace(uuid(), '-', ''), '七年级', 2);
+INSERT INTO xonEdu VALUES (8, replace(uuid(), '-', ''), '八年级', 2);
+INSERT INTO xonEdu VALUES (9, replace(uuid(), '-', ''), '九年级', 2);
+INSERT INTO xonEdu VALUES (10, replace(uuid(), '-', ''), '高一年级', 3);
+INSERT INTO xonEdu VALUES (11, replace(uuid(), '-', ''), '高二年级', 3);
+INSERT INTO xonEdu VALUES (12, replace(uuid(), '-', ''), '高三年级', 3);
 
 CREATE TABLE xonSchool (
   id VARCHAR(10) NOT NULL,
@@ -150,7 +147,7 @@ CREATE TABLE xonSchool (
   FOREIGN KEY (edu_type_id) REFERENCES xonEduType(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学校列表';
 
-INSERT INTO xonSchool VALUES ('32128402', replace(uuid(), '-', ''), '实验初中', '泰州市姜堰区实验初级中学', 3);
+INSERT INTO xonSchool VALUES ('32128402', replace(uuid(), '-', ''), '实验初中', '泰州市姜堰区实验初级中学', 2);
 
 CREATE TABLE xonUserSch (
   user_uid VARCHAR(60) NOT NULL,
@@ -235,9 +232,14 @@ INSERT INTO xonYear VALUES (2016, replace(uuid(), '-', ''), 0);
 INSERT INTO xonYear VALUES (2017, replace(uuid(), '-', ''), 0);
 INSERT INTO xonYear VALUES (2018, replace(uuid(), '-', ''), 1);
 
-/** 级 **/
+/**
+  分级编号 定义规则：
+  同年进，同年出，不需要分级
+  同年进，异年出，分级定义
+  比如，完中：一年级，七年级，这种类型学校的分级，就必须要分
+ */
 CREATE TABLE xonStep (
-  id VARCHAR(16) NOT NULL,  /*学校10+分级编号6*/
+  id VARCHAR(16) NOT NULL,  /*学校10+分级学校编号6（2018、201801）*/
   uid VARCHAR(60) NOT NULL,
   name VARCHAR(20) NOT NULL,
   sch_id VARCHAR(10) NOT NULL,
@@ -249,9 +251,14 @@ CREATE TABLE xonStep (
 
 /** 年级 **/
 CREATE TABLE xonGrade (
-  id INT(11) NOT NULL,
-
-
+  id VARCHAR(18) NOT NULL,  /*分组编号16+学制编号2*/
+  step_id VARCHAR(16) NOT NULL,
+  year_id INT(11) NOT NULL,
+  edu_id INT(11) NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (step_id) REFERENCES xonStep(id),
+  FOREIGN KEY (year_id) REFERENCES xonYear(id),
+  FOREIGN KEY (edu_id) REFERENCES xonEdu(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='年级';
 
 /** 班级 **/
@@ -265,6 +272,28 @@ CREATE TABLE xonGradeStud (
 
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='年级';
+
+
+
+/*分级数据*/
+INSERT INTO xonStep VALUES ('321284022004', replace(uuid(), '-', ''), '2004级', '32128402', 1);
+INSERT INTO xonStep VALUES ('321284022005', replace(uuid(), '-', ''), '2005级', '32128402', 1);
+INSERT INTO xonStep VALUES ('321284022006', replace(uuid(), '-', ''), '2006级', '32128402', 1);
+INSERT INTO xonStep VALUES ('321284022007', replace(uuid(), '-', ''), '2007级', '32128402', 1);
+INSERT INTO xonStep VALUES ('321284022008', replace(uuid(), '-', ''), '2008级', '32128402', 1);
+INSERT INTO xonStep VALUES ('321284022009', replace(uuid(), '-', ''), '2009级', '32128402', 1);
+INSERT INTO xonStep VALUES ('321284022010', replace(uuid(), '-', ''), '2010级', '32128402', 1);
+INSERT INTO xonStep VALUES ('321284022011', replace(uuid(), '-', ''), '2011级', '32128402', 1);
+INSERT INTO xonStep VALUES ('321284022012', replace(uuid(), '-', ''), '2012级', '32128402', 1);
+INSERT INTO xonStep VALUES ('321284022013', replace(uuid(), '-', ''), '2013级', '32128402', 1);
+INSERT INTO xonStep VALUES ('321284022014', replace(uuid(), '-', ''), '2014级', '32128402', 1);
+INSERT INTO xonStep VALUES ('321284022015', replace(uuid(), '-', ''), '2015级', '32128402', 0);
+INSERT INTO xonStep VALUES ('321284022016', replace(uuid(), '-', ''), '2016级', '32128402', 0);
+INSERT INTO xonStep VALUES ('321284022017', replace(uuid(), '-', ''), '2017级', '32128402', 0);
+INSERT INTO xonStep VALUES ('321284022018', replace(uuid(), '-', ''), '2018级', '32128402', 0);
+
+
+
 
 
 /*外键约束开启*/
