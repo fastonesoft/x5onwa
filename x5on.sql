@@ -276,8 +276,8 @@ CREATE TABLE xonGrade (
   step_id VARCHAR(16) NOT NULL,
   year_id INT(11) NOT NULL,
   edu_id INT(11) NOT NULL,
-  PRIMARY KEY (uid),
-  UNIQUE KEY id (id),
+  PRIMARY KEY (id),
+  UNIQUE KEY uid (uid),
   FOREIGN KEY (step_id) REFERENCES xonStep(id),
   FOREIGN KEY (year_id) REFERENCES xonYear(id),
   FOREIGN KEY (edu_id) REFERENCES xonEdu(id)
@@ -289,8 +289,8 @@ CREATE TABLE xonClass (
   uid VARCHAR(60) NOT NULL,
   grade_id VARCHAR(18) NOT NULL,
   num VARCHAR(2) NOT NULL,
-  PRIMARY KEY (uid),
-  UNIQUE KEY id (id),
+  PRIMARY KEY (id),
+  UNIQUE KEY uid (uid),
   FOREIGN KEY (grade_id) REFERENCES xonGrade(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='班级';
 
@@ -301,8 +301,8 @@ CREATE TABLE xonGradeGroup (
   grade_id VARCHAR(18) NOT NULL,
   num VARCHAR(2) NOT NULL,  /* 分组序号 */
   name VARCHAR(20) NOT NULL,  /* 分组名称：智慧班、普通班 */
-  PRIMARY KEY (uid),
-  UNIQUE KEY id (id),
+  PRIMARY KEY (id),
+  UNIQUE KEY uid (uid),
   FOREIGN KEY (grade_id) REFERENCES xonGrade(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='年级对应分组';
 
