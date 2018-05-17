@@ -31,21 +31,37 @@ CREATE TABLE cSessionInfo (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='会话管理用户信息';
 
 /*自定义*/
+CREATE TABLE xonRoleType (
+	id INT(11) NOT NULL,
+	uid VARCHAR(60) NOT NULL,
+	name VARCHAR(20) NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY uid (uid),
+	UNIQUE KEY name (name)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='权限分类';
+
+INSERT INTO xonRoleType VALUES (1, replace(uuid(), '-', ''), '报名');
+INSERT INTO xonRoleType VALUES (2, replace(uuid(), '-', ''), '学籍');
+INSERT INTO xonRoleType VALUES (3, replace(uuid(), '-', ''), '考试');
+
+
 CREATE TABLE xonRole (
 	id INT(11) NOT NULL,
 	uid VARCHAR(60) NOT NULL,
 	name VARCHAR(20) NOT NULL,
 	title VARCHAR(20) NOT NULL,
 	can_show BOOLEAN NOT NULL,  /*没有权限时，是否可以显示*/
+	role_type_id INT(11) NOT NULL,
 	PRIMARY KEY (id),
 	UNIQUE KEY uid (uid),
-	UNIQUE KEY name (name)
+	UNIQUE KEY name (name),
+	FOREIGN KEY (role_type_id) REFERENCES xonRoleType(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='权限列表';
 
-INSERT INTO xonRole VALUES (1, replace(uuid(), '-', ''), 'stud', '学生查询', 1);
-INSERT INTO xonRole VALUES (2, replace(uuid(), '-', ''), 'sub', '课表查询', 1);
-INSERT INTO xonRole VALUES (3, replace(uuid(), '-', ''), 'kao', '考试安排', 1);
-INSERT INTO xonRole VALUES (4, replace(uuid(), '-', ''), 'score', '成绩查询', 1);
+INSERT INTO xonRole VALUES (1, replace(uuid(), '-', ''), 'stud', '学生查询', 1, 2);
+INSERT INTO xonRole VALUES (2, replace(uuid(), '-', ''), 'sub', '课表查询', 1, 2);
+INSERT INTO xonRole VALUES (3, replace(uuid(), '-', ''), 'kao', '考试安排', 1, 3);
+INSERT INTO xonRole VALUES (4, replace(uuid(), '-', ''), 'score', '成绩查询', 1,3);
 
 CREATE TABLE xonGroup (
 	id INT(11) NOT NULL,
@@ -217,7 +233,7 @@ CREATE TABLE xonYear (
   uid VARCHAR(60) NOT NULL,
   current_year BOOLEAN NOT NULL,
   PRIMARY KEY (id),
-  UNIQUE KEY uid (uid),
+  UNIQUE KEY uid (uid)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='年度';
 
 INSERT INTO xonYear VALUES (2004, replace(uuid(), '-', ''), 0);
@@ -255,13 +271,13 @@ CREATE TABLE xonStep (
 
 /** 年级 **/
 CREATE TABLE xonGrade (
-  id VARCHAR(18) AS (CONCAT(step_id, edu_id)),  /*分级编号16+学制编号2*/
+  id VARCHAR(18) NOT NULL,  /*分级编号16+学制编号2  (CONCAT(step_id, edu_id))*/
   uid VARCHAR(60) NOT NULL,
   step_id VARCHAR(16) NOT NULL,
   year_id INT(11) NOT NULL,
-  edu_id VARCHAR(2) NOT NULL,
-  PRIMARY KEY (id),
-  UNIQUE KEY uid (uid),
+  edu_id INT(11) NOT NULL,
+  PRIMARY KEY (uid),
+  UNIQUE KEY id (id),
   FOREIGN KEY (step_id) REFERENCES xonStep(id),
   FOREIGN KEY (year_id) REFERENCES xonYear(id),
   FOREIGN KEY (edu_id) REFERENCES xonEdu(id)
@@ -269,7 +285,7 @@ CREATE TABLE xonGrade (
 
 /** 班级 **/
 CREATE TABLE xonClass (
-  id VARCHAR(20) AS (CONCAT(grade_id, num)),  /*年级编号18+班级序号2*/
+  id VARCHAR(20) NOT NULL,  /*年级编号18+班级序号2 */
   uid VARCHAR(60) NOT NULL,
   grade_id VARCHAR(18) NOT NULL,
   num VARCHAR(2) NOT NULL,
@@ -280,7 +296,7 @@ CREATE TABLE xonClass (
 
 /** 年级对应分组名称，分类统计用 **/
 CREATE TABLE xonGradeGroup (
-  id VARCHAR(20) AS (CONCAT(grade_id, num)),  /*年级编号18 + 分组序号2*/
+  id VARCHAR(20) NOT NULL,  /*年级编号18 + 分组序号2(CONCAT(grade_id, num))*/
   uid VARCHAR(60) NOT NULL,
   grade_id VARCHAR(18) NOT NULL,
   num VARCHAR(2) NOT NULL,  /* 分组序号 */
@@ -300,20 +316,20 @@ CREATE TABLE xonClassGroup (
   FOREIGN KEY (grade_group_id) REFERENCES xonGradeGroup(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='分组对应班级';
 
-/** 学生来源 **/
-CREATE TABLE xonStudCome (
+/** 学籍状态 **/
+CREATE TABLE xonStudType (
   id INT(11) NOT NULL,
   uid VARCHAR(60) NOT NULL,
   name VARCHAR(10) NOT NULL,
   PRIMARY KEY (id),
   UNIQUE KEY uid (uid)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学生来源';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学籍状态';
 
-INSERT INTO xonStudCome VALUES (1, replace(uuid(), '-', ''), '应届生');
-INSERT INTO xonStudCome VALUES (2, replace(uuid(), '-', ''), '往届生');
+INSERT INTO xonStudType VALUES (1, replace(uuid(), '-', ''), '应届生');
+INSERT INTO xonStudType VALUES (2, replace(uuid(), '-', ''), '往届生');
 
-/** 学籍性质 **/
-CREATE TABLE xonStudType (
+/** 学籍办理信息 **/
+CREATE TABLE xonStudCome (
   id INT(11) NOT NULL,
   uid VARCHAR(60) NOT NULL,
   name VARCHAR(10) NOT NULL,
@@ -322,16 +338,16 @@ CREATE TABLE xonStudType (
   PRIMARY KEY (id),
   UNIQUE KEY uid (uid),
   FOREIGN KEY (stud_come_id) REFERENCES xonStudCome(id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学籍性质';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学籍办理信息';
 
-INSERT INTO xonStudType VALUES (1, replace(uuid(), '-', ''), '正常', 0, 1);
-INSERT INTO xonStudType VALUES (2, replace(uuid(), '-', ''), '休复', 1, 1);
-INSERT INTO xonStudType VALUES (3, replace(uuid(), '-', ''), '转入', 1, 1);
-INSERT INTO xonStudType VALUES (4, replace(uuid(), '-', ''), '外省', 1, 1);
-INSERT INTO xonStudType VALUES (5, replace(uuid(), '-', ''), '借读', 1, 1);
-INSERT INTO xonStudType VALUES (6, replace(uuid(), '-', ''), '重读', 1, 2);
+INSERT INTO xonStudCome VALUES (1, replace(uuid(), '-', ''), '正常', 0, 1);
+INSERT INTO xonStudCome VALUES (2, replace(uuid(), '-', ''), '休复', 1, 1);
+INSERT INTO xonStudCome VALUES (3, replace(uuid(), '-', ''), '转入', 1, 1);
+INSERT INTO xonStudCome VALUES (4, replace(uuid(), '-', ''), '外省', 1, 1);
+INSERT INTO xonStudCome VALUES (5, replace(uuid(), '-', ''), '借读', 1, 1);
+INSERT INTO xonStudCome VALUES (6, replace(uuid(), '-', ''), '重读', 1, 2);
 
-/** 学籍变更 **/
+/** 学籍变更信息 **/
 CREATE TABLE xonStudOut (
   id INT(11) NOT NULL,
   uid VARCHAR(60) NOT NULL,
@@ -340,7 +356,7 @@ CREATE TABLE xonStudOut (
   down_return BOOLEAN NOT NULL,  /* 降级回校 */
   PRIMARY KEY (id),
   UNIQUE KEY uid (uid)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学籍变更';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学籍变更信息';
 
 INSERT INTO xonStudOut VALUES (1, replace(uuid(), '-', ''), '休学', 0, 1);
 INSERT INTO xonStudOut VALUES (2, replace(uuid(), '-', ''), '转出', 0, 0);
@@ -356,19 +372,19 @@ CREATE TABLE xonGradeStud (
   grade_id VARCHAR(18) NOT NULL,
   cls_id VARCHAR(20) NOT NULL,
   stud_id VARCHAR(20) NOT NULL,
-  stud_come_id INT(11) NOT NULL,  /* 学生来源：应届生、往届生 */
-  stud_type_id INT(11) NOT NULL,
+  stud_type_id INT(11) NOT NULL,  /* 学籍状态：应届生、往届生 */
+  stud_come_id INT(11) NOT NULL,  /* 学籍办理信息 */
   in_sch BOOLEAN NOT NULL,
   index_student BOOLEAN NOT NULL,  /* 是否指标生 */
   same_group VARCHAR(60),  /* 同组标志 */
-  school_status VARCHAR(60),  /* 学籍号，应届生有，往届生无 */
+  stud_code VARCHAR(60),  /* 学籍号，应届生有，往届生无 */
   PRIMARY KEY (id),
   UNIQUE KEY uid (uid),
   FOREIGN KEY (grade_id) REFERENCES xonGrade(id),
   FOREIGN KEY (cls_id) REFERENCES xonClass(id),
   FOREIGN KEY (stud_id) REFERENCES xonStudent(id),
-  FOREIGN KEY (stud_come_id) REFERENCES xonStudCome(id),
-  FOREIGN KEY (stud_type_id) REFERENCES xonStudType(id)
+  FOREIGN KEY (stud_type_id) REFERENCES xonStudType(id),
+  FOREIGN KEY (stud_come_id) REFERENCES xonStudCome(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='年级学生';
 
 /** 年级学生变更 **/
@@ -377,13 +393,13 @@ CREATE TABLE xonGradeStudOut (
   grade_stud_id VARCHAR(22) NOT NULL,
   stud_out_id INT(11) NOT NULL,
   begin_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,  /* 手续开启时间 */
-  end_time TIMESTAMP,  /* 手续到期提醒时间 */
-  done BOOLEAN NOT NULL,
-  memo VARCHAR(60),
+  end_time INT(11) NOT NULL DEFAULT 0,  /* 多长时间到期提醒 */
+  done BOOLEAN NOT NULL DEFAULT 0,
+  memo VARCHAR(60) DEFAULT NULL,
   PRIMARY KEY (uid),
   FOREIGN KEY (grade_stud_id) REFERENCES xonGradeStud(id),
   FOREIGN KEY (stud_out_id) REFERENCES xonStudOut(id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='年级学生';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='年级学生变更';
 
 
 
