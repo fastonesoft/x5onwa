@@ -5,11 +5,11 @@
     <view class="main-flex">
       <view class="main-core" wx:for="{{cores}}" wx:key="id"> 
         <view wx:if="{{can_use}}" class="main-core-item">
-          <image class="core-item-icon" src="/images/core/{{item.name}}.png"></image>
+          <image class="core-item-icon" src="/images/index/{{item.name}}.png"></image>
           <text class="core-item-name">{{item.title}}</text>
         </view>
         <view wx:else class="main-core-item disabled" bindtap="disabled_item">
-          <image class="core-item-icon" src="/images/core/{{item.name}}@disabled.png"></image>
+          <image class="core-item-icon" src="/images/index/{{item.name}}@disabled.png"></image>
           <text class="core-item-name">{{item.title}}</text>
         </view>
       </view>

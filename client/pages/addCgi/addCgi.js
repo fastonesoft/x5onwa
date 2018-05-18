@@ -10,6 +10,10 @@ Page({
         canIUseClipboard: wx.canIUse('setClipboardData')
     },
 
+    onPullDownRefresh: function () {
+        wx.stopPullDownRefresh();
+    },
+    
     testCgi: function () {
         if (app.logged) {
             util.showSuccess('已经登录！')

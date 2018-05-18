@@ -5,27 +5,31 @@ var util = require('../../utils/util.js')
 var app = getApp();
 
 Page({
-  data: {
-    cores: [],
-    can_use: true,
-  },
+    data: {
+        cores: [],
+        can_use: false,
+    },
 
-  onShow: function() {
-      var that = this;
+    onPullDownRefresh: function () {
+        wx.stopPullDownRefresh();
+    },
 
-      qcloud.request({
-          url: config.service.roleUrl,
-          login: true,
-          success(result) {
-              that.setData({
-                  cores: result.data.data
-              })
-          },
+    onShow: function() {
+        var that = this;
 
-          fail(error) {
-              util.showModel('查询过期', error.message)
-          }
-      })
-  }
+        qcloud.request({
+            url: config.service.roleUrl,
+            login: true,
+            success(result) {
+                that.setData({
+                    cores: result.data.data
+                })
+            },
+
+            fail(error) {
+                util.showModel('查询过期', error.message)
+            }
+        })
+    }
 
 });

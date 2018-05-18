@@ -2,12 +2,22 @@
 var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
 var util = require('../../utils/util.js')
-var app = getApp();
+var x5on = require('../../utils/x5on.js')
 
+var app = getApp();
 Page({
     data: {
         logged: false,
         userInfo: {},
+    },
+
+    onPullDownRefresh: function () {
+        // 检测是否登录
+        if (!logged) x5on.qcloudLogin(app)
+        else util.showSuccess('已经登录了')
+
+        // 停止动画
+        wx.stopPullDownRefresh();
     },
 
     onShow: function () {

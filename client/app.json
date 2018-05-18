@@ -9,7 +9,8 @@
         "backgroundTextStyle": "light",
         "navigationBarBackgroundColor": "#F6F6F6",
         "navigationBarTitleText": "校务在线",
-        "navigationBarTextStyle": "black"
+        "navigationBarTextStyle": "black",
+        "enablePullDownRefresh": true
     },
     "tabBar": {
         "list": [
