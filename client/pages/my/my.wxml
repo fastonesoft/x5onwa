@@ -4,7 +4,7 @@
     <view class="userinfo" bindtap="login">
         <image
             class="userinfo-avatar"
-            src="{{logged ? userInfo.avatarUrl : './user-unlogin.png'}}"
+            src="{{logged ? userInfo.avatarUrl : './unlogin.png'}}"
             background-size="cover"
         ></image>
         <view>

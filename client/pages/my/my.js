@@ -13,8 +13,7 @@ Page({
 
     onPullDownRefresh: function () {
         // 检测是否登录
-        if (!logged) x5on.qcloudLogin(app)
-        else util.showSuccess('已经登录了')
+        if (!this.data.logged) x5on.qcloudLogin(app)
 
         // 停止动画
         wx.stopPullDownRefresh();

@@ -1,3 +1,5 @@
+var qcloud = require('../vendor/wafer2-client-sdk/index')
+var config = require('../config')
 var util = require('./util.js')
 
 // 调用登录接口
@@ -7,7 +9,7 @@ var qcloudLogin = function (app) {
             if (result) {
                 app.logged = true
                 app.userInfo = result
-                util.showSuccess('登录成功')
+                //util.showSuccess('登录成功')
             } else {
                 // 如果不是首次登录，不会返回用户信息，请求用户信息接口获取
                 qcloud.request({
@@ -16,11 +18,11 @@ var qcloudLogin = function (app) {
                     success(result) {
                         app.logged = true
                         app.userInfo = result.data.data
-                        util.showSuccess('查询成功')
+                        //util.showSuccess('查询成功')
                     },
 
                     fail(error) {
-                        util.showModel('出错信息', '查询已过期，请重新登录')
+                        util.showModel('查询过期', '请转到“我的”页面下拉刷新')
                     }
                 })
             }

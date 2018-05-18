@@ -1,5 +1,15 @@
 <!--index.wxml-->
 <view class="container">
+  <!--滑动展示-->
+<swiper indicator-dots="{{indicatorDots}}"
+  autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+  <block wx:for="{{imgUrls}}" wx:key="">
+    <swiper-item>
+      <image src="{{item}}" class="slide-image" width="355" height="150"/>
+    </swiper-item>
+  </block>
+</swiper>
+
   <!--功能导航-->
    <scroll-view scroll-y class="main-swpier">
     <view class="main-flex">
