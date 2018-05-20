@@ -1,3 +1,5 @@
+@import "../../weui.wxss";
+
 /**index.wxss**/
 page {
     background: #F6F6F6;
@@ -16,31 +18,35 @@ page {
     background-position: bottom center;
     margin: 40rpx 0rpx 0rpx 0rpx;
 }
-/**功能导航**/
-.main-swpier{
-    padding: 0rpx;
+.index-swiper{
+  height: 360rpx;
 }
-.main-flex{
+.index-swiper-img{
+  border: none;
+  width: 100%;
+}
+
+.index-scroll{
     display: flex;
     flex-flow: row wrap;
 }
-.main-core{
+.index-scroll .cores{
     width: 25%;
 }
-.main-core-item{
+.index-scroll .core-item{
     display: flex;
     flex-flow: column wrap;
-    height: 240rpx;
+    height: 170rpx;
     align-items: center;
     align-content: center;
     justify-content: center;
     font-size: 30rpx;
 }
-.main-core-item.disabled{
+.index-scroll .core-item.disabled{
     color: #9c9c9c;
 }
-.core-item-icon{
+.index-scroll .core-item image{
     width: 85rpx;
     height: 85rpx;
-    margin-bottom: 25rpx;
+    margin: 5rpx 0 5rpx 0;
 }

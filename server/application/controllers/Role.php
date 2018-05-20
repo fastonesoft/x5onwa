@@ -11,8 +11,8 @@ class Role extends CI_Controller {
         $result = LoginService::check();
         if ($result['loginState'] === Constants::E_AUTH) {
             $this->json([
-                'code' => 1,
-                'data' => []
+                'code' => -1,
+                'error' => '查询已过期，请重新登录！'
             ]);
             return;
         }

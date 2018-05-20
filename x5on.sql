@@ -58,9 +58,7 @@ CREATE TABLE xonRole (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='权限列表';
 
 INSERT INTO xonRole VALUES (1, replace(uuid(), '-', ''), 'stud', '学生查询', 1, 2);
-INSERT INTO xonRole VALUES (2, replace(uuid(), '-', ''), 'sub', '课表查询', 1, 2);
-INSERT INTO xonRole VALUES (3, replace(uuid(), '-', ''), 'kao', '考试安排', 1, 3);
-INSERT INTO xonRole VALUES (4, replace(uuid(), '-', ''), 'score', '成绩查询', 1,3);
+
 
 CREATE TABLE xonGroup (
 	id INT(11) NOT NULL,
