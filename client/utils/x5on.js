@@ -9,17 +9,17 @@ var qcloudLogin = function (app) {
             if (result) {
                 app.logged = true
                 app.userInfo = result
-                console.log(result)
+                console.log(app)
                 //util.showSuccess('登录成功')
             } else {
                 // 如果不是首次登录，不会返回用户信息，请求用户信息接口获取
                 qcloud.request({
-                    url: config.service.userUrl,
+                    url: config.service.requestUrl,
                     login: true,
                     success(result) {
                         app.logged = true
                         app.userInfo = result.data.data
-                        console.log(result)
+                        console.log(app)
                         //util.showSuccess('查询成功')
                     },
 

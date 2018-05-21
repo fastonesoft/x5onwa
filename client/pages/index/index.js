@@ -24,8 +24,9 @@ Page({
             url: config.service.roleUrl,
             login: true,
             success(result) {
+                console.log(result)
                 that.setData({
-                    cores: result.data.data
+                    cores: result.data
                 })
             },
 
@@ -33,6 +34,7 @@ Page({
                 util.showModel('查询过期', '请转到“我的”页面下拉刷新')
             }
         })
+
     }
 
 });
