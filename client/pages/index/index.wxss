@@ -28,10 +28,12 @@ page {
 
 .index-scroll{
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: row-reverse wrap;
+    background: green;
 }
 .index-scroll .cores{
     width: 25%;
+    background: red;
 }
 .index-scroll .core-item{
     display: flex;

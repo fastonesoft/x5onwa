@@ -2,30 +2,14 @@
 var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
 var util = require('../../utils/util.js')
-var x5on = require('../../utils/x5on.js')
 
-var app = getApp();
 Page({
     data: {
-        logged: false,
         userInfo: {},
+        logged: false,
+        takeSession: false,
+        requestResult: ''
     },
-
-    onShow: function () {
-        this.setData({
-            logged: app.logged,
-            userInfo: app.userInfo
-        })
-    },
-
-    onPullDownRefresh: function () {
-        // 检测是否登录
-        if (!this.data.logged) x5on.qcloudLogin(app)
-
-        // 停止动画
-        wx.stopPullDownRefresh();
-    },
-
 
     // 用户登录示例
     login: function () {

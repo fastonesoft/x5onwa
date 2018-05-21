@@ -7,17 +7,6 @@ use \QCloud_WeApp_SDK\Constants as Constants;
 
 class Upload extends CI_Controller {
     public function index() {
-        // 检测是否登录
-/*
-        $result = LoginService::check();
-        if ($result['loginState'] === Constants::E_AUTH) {
-            $this->json([
-                'code' => 1,
-                'data' => '没有登录，不可以上传文件'
-            ]);
-            return;
-        }
-*/
         // 处理文件上传
         $file = $_FILES['file']; // 去除 field 值为 file 的文件
 

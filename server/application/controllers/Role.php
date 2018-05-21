@@ -12,12 +12,12 @@ class Role extends CI_Controller {
         if ($result['loginState'] === Constants::E_AUTH) {
             $this->json([
                 'code' => -1,
-                'error' => '查询已过期，请重新登录！'
+                'error' => $result['error']
             ]);
             return;
         }
-       
-       // 返回权限列表
+
+        // 返回权限列表
         $res = DB::select('xonRole', ['*']);
         $this->json([
             'code' => 0,
