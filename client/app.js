@@ -8,6 +8,6 @@ App({
     userInfo: {},
     onLaunch: function () {
         qcloud.setLoginUrl(config.service.loginUrl)
-        x5on.qcloudLogin(this)
+        x5on.login(this)
     }
 })

@@ -24,7 +24,7 @@ var LoginError = (function () {
  */
 var getWxLoginResult = function getLoginCode(callback) {
     wx.login({
-        success: function (loginResult) {
+        success: function (loginResult) {          
           wx.getUserInfo({
             success: function (userResult) {
               callback(null, {
@@ -101,7 +101,6 @@ var login = function login(options) {
             data: options.data,
             success: function (result) {
                 var data = result.data;
-
                 // 成功地响应会话信息
                 if (data && data.code === 0 && data.data.skey) {
                     var res = data.data

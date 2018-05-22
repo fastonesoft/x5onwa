@@ -8,20 +8,18 @@ use QCloud_WeApp_SDK\Mysql\Mysql as DB;
 class Role extends CI_Controller {
     public function index() {
         $result = LoginService::check();
-
-        if ($result['loginState'] === Constants::E_AUTH) {
+        if ($result['loginState'] === Constants::S_AUTH) {
+            // 返回权限列表
+            $res = DB::select('xonRole', ['*']);
+            $this->json([
+                'code' => 0,
+                'data' => $res,
+            ]);
+        } else {
             $this->json([
                 'code' => -1,
-                'error' => $result['error']
+                'data' => $result['userinfo']
             ]);
-            return;
         }
-
-        // 返回权限列表
-        $res = DB::select('xonRole', ['*']);
-        $this->json([
-            'code' => 0,
-            'data' => $res,
-        ]);
     }
 }
