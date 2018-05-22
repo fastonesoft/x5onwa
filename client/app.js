@@ -5,7 +5,7 @@ var x5on = require('./utils/x5on.js')
 
 App({
     logged: false,
-    userInfo: {},
+    userInfo: null,
     onLaunch: function () {
         qcloud.setLoginUrl(config.service.loginUrl)
     }
