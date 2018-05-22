@@ -2,6 +2,7 @@
 var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
 var util = require('../../utils/util.js')
+var x5on = require('../../utils/x5on.js')
 
 var app = getApp();
 
@@ -17,7 +18,15 @@ Page({
     },
 
     onShow: function() {
-
+        var that = this;
+        x5on.request({
+            url: config.service.roleUrl,
+            success: function(result) {
+                that.setData({
+                    cores: result.data
+                })
+            }
+        })
 
 
 /*
@@ -35,24 +44,7 @@ Page({
             }
         })
 */
-        util.showBusy('请求中...')
-        var that = this
-        var options = {
-          url: config.service.roleUrl,
-          login: true,
-          success(result) {
-            util.showSuccess('请求成功完成')
-            console.log(result.data)
-            that.setData({
-              cores: result.data.data
-            })
-          },
-          fail(error) {
-            util.showModel('请求失败', error);
-            console.log('request fail', error);
-          }
-        }
-        wx.request(options)
+
 
     }
 /*

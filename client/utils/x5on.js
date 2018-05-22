@@ -39,31 +39,23 @@ var login = function (app) {
  * 数据查询
  *
  * @param {Object} options 登录配置
- * @param {string} options.loginUrl 登录使用的 URL，服务器应该在这个 URL 上处理登录请求
- * @param {string} [options.method] 请求使用的 HTTP 方法，默认为 "GET"
- * @param {Function} options.success() 登录成功后的回调函数
- * @param {Function} options.fail(error) 登录失败后的回调函数，参数 error 错误信息
+ * @param {string} options.url 
+ * @param {Function} options.success(result) 登录成功后的回调函数
  */
-var request = function (requestOption) {
-  util.showBusy('请求中...')
-  var that = this
-  var options = {
-    url: requestOption.url,
-    login: requestOption.login,
-    success(result) {
-      util.showSuccess('请求成功完成')
-      console.log('request success', result)
-      that.setData(requestOption.data)
-    },
-    fail(error) {
-      util.showModel('请求失败', error);
-    }
-  }
-  if (requestOption.login) {
-    qcloud.request(options)
-  } else {
-    wx.request(options)
-  }
+
+var request = function(options) {
+    qcloud.request({
+        url: options.url,
+        login: true,
+        success(result) {
+            options.success(result.data)
+        },
+        fail(error) {
+            var message = options.error || error.message
+            util.showModel('查询失败', message)
+        }
+    })
 }
+
 
 module.exports = { login,  request}

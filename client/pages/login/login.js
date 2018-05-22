@@ -24,6 +24,7 @@ Page({
 
         var that = this;
         var userInfo = e.detail.userInfo;
+        console.log(e)
 
         // 查看是否授权
         wx.getSetting({

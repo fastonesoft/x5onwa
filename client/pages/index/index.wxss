@@ -1,12 +1,12 @@
-@import "../../weui.wxss";
-
 /**index.wxss**/
+@import "../../weui.wxss";
 page {
     background: #F6F6F6;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
 }
+
 .container{
     background: #FFF;
     border: 1px solid rgba(0, 0, 0, .1);
@@ -16,7 +16,6 @@ page {
     background-repeat: no-repeat;
     background-size: 100% auto;
     background-position: bottom center;
-    margin: 40rpx 0rpx 0rpx 0rpx;
 }
 .index-swiper{
   height: 360rpx;
@@ -27,18 +26,17 @@ page {
 }
 
 .index-scroll{
+    width: 100%;
     display: flex;
     flex-flow: row wrap;
-    background: green;
 }
 .index-scroll .cores{
     width: 25%;
-    background: red;
 }
 .index-scroll .core-item{
     display: flex;
     flex-flow: column wrap;
-    height: 100rpx;
+    height: 160rpx;
     align-items: center;
     align-content: center;
     justify-content: center;
@@ -50,5 +48,5 @@ page {
 .index-scroll .core-item image{
     width: 85rpx;
     height: 85rpx;
-    margin: 5rpx 0 5rpx 0;
+    margin: 15rpx 0 15rpx 0;
 }
