@@ -13,13 +13,13 @@ class Role extends CI_Controller {
             // 返回权限列表
             $res = DB::select('xonRole', ['*']);
             $this->json([
-                'code' => 0,
+                'error' => 0,
                 'data' => $res
             ]);
         } else {
             $this->json([
-                'code' => -1,
-                'data' => $result['error']
+                'error' => -1,
+                'data' => []
             ]);
         }
     }

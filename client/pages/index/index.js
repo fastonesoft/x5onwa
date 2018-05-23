@@ -18,16 +18,18 @@ Page({
 
   onShow: function () {
     var that = this;
-    //检测
+    // 检测
     x5on.check(app, function () {
-      //登录成功，执行查询
+      // 登录成功，执行查询
+      // TODO：经常会有服务端的出错提示
       x5on.request({
-        url: config.service.roleUrl,
+        url: x5on.url.role,
         success: function (result) {
           that.setData({ cores: result.data })
         }
       })
     });
+
   }
 
 });

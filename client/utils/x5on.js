@@ -25,7 +25,7 @@ var doLogin = function (app, e, succ) {
           success: function () {
             // 登录态未过期
             util.showSuccess('登录成功');
-            app.userInfo = userInfo;
+            app.userInfo = doSession.get();
             app.logged = true;
             // 登录成功
             succ();
@@ -135,8 +135,21 @@ var doSession = {
   }
 };
 
+// 请求列表
+var host = config.service.host;
+var url = {
+  host,
+  // 权限地址
+  role: `${host}/weapp/role`,
+  // 登录地址
+  login: `${host}/weapp/login`,
+  // TODO用户请求
+  user: `${host}/weapp/user`,
+}
+
 // 对外接口
 module.exports = {
+  url,
   login: doLogin,
   check: doCheck,
   request: doRequest,

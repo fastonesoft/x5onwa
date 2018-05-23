@@ -21,12 +21,8 @@ Page({
   bindGetUserInfo: function (e) {
     var that = this;
     x5on.login(app, e, function() {
-      that.setData({
-        logged: app.logged,
-        userInfo: app.userInfo
-      })
+      that.onLoad();
     });
-
   },
 
   // 上传图片接口

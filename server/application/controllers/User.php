@@ -10,12 +10,12 @@ class User extends CI_Controller {
 
         if ($result['loginState'] === Constants::S_AUTH) {
             $this->json([
-                'code' => 0,
+                'error' => 0,
                 'data' => $result['userinfo']
             ]);
         } else {
             $this->json([
-                'code' => -1,
+                'error' => -1,
                 'data' => []
             ]);
         }

@@ -16,7 +16,7 @@ class Upload extends CI_Controller {
         // 限制文件格式，支持图片上传
         if ($file['type'] !== 'image/jpeg' && $file['type'] !== 'image/png' && $file['type'] !== 'image/jpg') {
             $this->json([
-                'code' => 1,
+                'error' => 1,
                 'data' => '不支持的上传图片类型：' . $file['type']
             ]);
             return;
@@ -25,7 +25,7 @@ class Upload extends CI_Controller {
         // 限制文件大小：5M 以内
         if ($file['size'] > 5 * 1024 * 1024) {
             $this->json([
-                'code' => 1,
+                'error' => 1,
                 'data' => '上传图片过大，仅支持 5M 以内的图片上传'
             ]);
             return;
@@ -66,7 +66,7 @@ class Upload extends CI_Controller {
             )->toArray();
 
             $this->json([
-                'code' => 0,
+                'error' => 0,
                 'data' => [
                     'imgUrl' => $uploadStatus['ObjectURL'],
                     'size' => $file['size'],
