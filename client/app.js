@@ -8,5 +8,7 @@ App({
     userInfo: null,
     onLaunch: function () {
         qcloud.setLoginUrl(x5on.url.login)
+
+        x5on.check(this, function () {});
     }
 })

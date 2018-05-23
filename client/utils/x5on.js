@@ -5,7 +5,8 @@ var util = require('./util.js')
 /*
  * 程序登录
  * @param {Object} app 登录配置
- * @param {Object} e open_type 传递的参数
+ * @param {Object} e open_type 的传递参数
+ * @param {Function} succ 登录成功后的回调函数
  */
 var doLogin = function (app, e, succ) {
   if (app.logged) {
@@ -93,6 +94,11 @@ var doRequest = function(options) {
     })
 }
 
+/*
+ * 登录检测
+ * @param {Object} app 全局变量
+ * @param {Function} succ 登录成功后的回调函数
+ */
 var doCheck = function (app, succ) {
   // 查看是否授权
   wx.getSetting({
@@ -121,7 +127,10 @@ var doCheck = function (app, succ) {
   });
 }
 
-// 缓存登录用户基本信息
+/*
+ * 缓存检测
+ * @param {Object} 提供本地缓存的get\set\clear
+ */
 const X5ON_NICK_NAME = 'X5ON-Nick-Name';
 var doSession = {
   get: function () {
@@ -135,16 +144,19 @@ var doSession = {
   }
 };
 
-// 请求列表
+/*
+ * 请求列表
+ * @param {String} 地外服务地址列表
+ */
 var host = config.service.host;
 var url = {
   host,
   // 权限地址
-  role: `${host}/weapp/role`,
+  role: `${host}/role`,
   // 登录地址
-  login: `${host}/weapp/login`,
+  login: `${host}/login`,
   // TODO用户请求
-  user: `${host}/weapp/user`,
+  user: `${host}//user`,
 }
 
 // 对外接口
