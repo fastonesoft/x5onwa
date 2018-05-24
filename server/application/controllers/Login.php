@@ -10,13 +10,13 @@ class Login extends CI_Controller {
         
         if ($result['loginState'] === Constants::S_AUTH) {
             $this->json([
-                'error' => 0,
+                'code' => 0,
                 'data' => $result['userinfo']
             ]);
         } else {
             $this->json([
                 'error' => -1,
-                'data' => []
+                'message' => '没有登录，不能访问'
             ]);
         }
     }

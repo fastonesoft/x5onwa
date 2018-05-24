@@ -11,17 +11,20 @@ Page({
     userInfo: null
   },
 
-  onLoad: function () {
-    this.setData({
-      logged: app.logged,
-      userInfo: app.userInfo
-    })
+  onShow: function () {
+    var that = this;
+    x5on.check(app, null, function() {}, function() {
+      that.setData({
+        logged: app.logged,
+        userInfo: app.userInfo
+      })    
+    });
   },
 
   bindGetUserInfo: function (e) {
     var that = this;
-    x5on.login(app, e, function() {
-      that.onLoad();
+    x5on.login(app, e, function () {
+      that.onShow();
     });
   },
 

@@ -88,6 +88,7 @@ var doRequest = function(options) {
             options.success(result.data)
         },
         fail(error) {
+          console.log(options.url)
             var message = options.error || error.message
             util.showModel('查询失败', message)
         }
@@ -99,7 +100,7 @@ var doRequest = function(options) {
  * @param {Object} app 全局变量
  * @param {Function} succ 登录成功后的回调函数
  */
-var doCheck = function (app, succ) {
+var doCheck = function (app, succ, fail, comp) {
   // 查看是否授权
   wx.getSetting({
     success: function (res) {
@@ -107,24 +108,37 @@ var doCheck = function (app, succ) {
         // 检查登录是否过期
         wx.checkSession({
           success: function () {
-            // 登录态未过期
-            app.logged = true;
+            // 登录有效
             app.userInfo = doSession.get();
+            app.logged = app.userInfo === null ? false : true;
+            console.log(app)
             // 执行回调
-            succ();
+            if (succ) succ();
           },
           fail: function () {
-            // 登录态清除
+            // 登录清除
             qcloud.clearSession();
             doSession.clear();
-            // 清除登录标志
+            // 清除登录
             app.logged = false;
             app.userInfo = null;
+            // 
+            if (fail) fail(); else util.showModel('登录信息', '请转到“我的”页面登录');
           },
         });
+      } else {
+        // 登录清除
+        doSession.clear();
+        // 清除登录
+        app.logged = false;
+        app.userInfo = null;
+        //
+        if (fail) fail(); else util.showModel('授权信息', '请转到“我的”页面授权');
       }
     }
   });
+  // 执行完毕回调
+  if (comp) comp();
 }
 
 /*
@@ -136,8 +150,8 @@ var doSession = {
   get: function () {
     return wx.getStorageSync(X5ON_NICK_NAME) || null;
   },
-  set: function (session) {
-    wx.setStorageSync(X5ON_NICK_NAME, session);
+  set: function (value) {
+    wx.setStorageSync(X5ON_NICK_NAME, value);
   },
   clear: function () {
     wx.removeStorageSync(X5ON_NICK_NAME);
@@ -149,19 +163,19 @@ var doSession = {
  * @param {String} 地外服务地址列表
  */
 var host = config.service.host;
-var url = {
+var doUrl = {
   host,
   // 权限地址
-  role: `${host}/role`,
+  role: `${host}/weapp/role`,
   // 登录地址
-  login: `${host}/login`,
+  login: `${host}/weapp/login`,
   // TODO用户请求
-  user: `${host}//user`,
+  user: `${host}/weapp/user`,
 }
 
 // 对外接口
 module.exports = {
-  url,
+  url: doUrl,
   login: doLogin,
   check: doCheck,
   request: doRequest,

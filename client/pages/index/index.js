@@ -25,12 +25,10 @@ Page({
       x5on.request({
         url: x5on.url.role,
         success: function (result) {
-          console.log(result)
           that.setData({ cores: result.data })
         }
       })
     });
-
   }
 
 });
