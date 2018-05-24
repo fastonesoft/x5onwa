@@ -13,11 +13,12 @@ Page({
 
   onShow: function () {
     var that = this;
-    x5on.check(app, null, function() {}, function() {
-      that.setData({
-        logged: app.logged,
-        userInfo: app.userInfo
-      })    
+    x5on.check(app, function() {}, function() {}, function() {
+      console.log(app)
+    });
+    this.setData({
+      logged: app.logged,
+      userInfo: app.userInfo,
     });
   },
 

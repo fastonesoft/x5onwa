@@ -10,7 +10,7 @@ var util = require('./util.js')
  */
 var doLogin = function (app, e, succ) {
   if (app.logged) {
-    succ();
+    if (typeof succ === 'function') succ();
     return;
   }
 
@@ -29,7 +29,7 @@ var doLogin = function (app, e, succ) {
             app.userInfo = doSession.get();
             app.logged = true;
             // 登录成功
-            succ();
+            if (typeof succ === 'function') succ();
           },
           fail: function () {
             // 清除记录、缓存
@@ -53,7 +53,7 @@ var doLogin = function (app, e, succ) {
                     app.userInfo = userInfo;
                     app.logged = true;
                     // 登录成功
-                    succ();
+                    if (typeof succ === 'function') succ();
                   },
                   fail(error) {
                     util.showModel('登录失败', error)
@@ -85,7 +85,7 @@ var doRequest = function(options) {
         url: options.url,
         login: true,
         success(result) {
-            options.success(result.data)
+            if (typeof options.success == 'function') options.success(result.data)
         },
         fail(error) {
           console.log(options.url)
@@ -111,9 +111,8 @@ var doCheck = function (app, succ, fail, comp) {
             // 登录有效
             app.userInfo = doSession.get();
             app.logged = app.userInfo === null ? false : true;
-            console.log(app)
             // 执行回调
-            if (succ) succ();
+            if (typeof succ === 'function') succ();
           },
           fail: function () {
             // 登录清除
@@ -123,7 +122,7 @@ var doCheck = function (app, succ, fail, comp) {
             app.logged = false;
             app.userInfo = null;
             // 
-            if (fail) fail(); else util.showModel('登录信息', '请转到“我的”页面登录');
+            if (typeof fail === 'function') fail(); else util.showModel('登录信息', '请转到“我的”页面登录');
           },
         });
       } else {
@@ -133,12 +132,12 @@ var doCheck = function (app, succ, fail, comp) {
         app.logged = false;
         app.userInfo = null;
         //
-        if (fail) fail(); else util.showModel('授权信息', '请转到“我的”页面授权');
+        if (typeof fail === 'function') fail(); else util.showModel('授权信息', '请转到“我的”页面授权');
       }
     }
   });
   // 执行完毕回调
-  if (comp) comp();
+  if (typeof comp === 'function') comp();
 }
 
 /*
