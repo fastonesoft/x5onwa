@@ -110,7 +110,7 @@ var doCheck = function (app, succ, fail, comp) {
           success: function () {
             // 登录有效
             app.userInfo = doSession.get();
-            app.logged = app.userInfo === null ? false : true;
+            app.logged = typeof app.userInfo === 'object' ? true : false;
             // 执行回调
             if (typeof succ === 'function') succ();
           },
