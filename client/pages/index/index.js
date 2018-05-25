@@ -19,15 +19,21 @@ Page({
   onShow: function () {
     var that = this;
     // 检测
-    x5on.check(app, function () {
-      // 登录成功，执行查询
-      // TODO：经常会有服务端的出错提示
-      x5on.request({
-        url: x5on.url.role,
-        success: function (result) {
-          that.setData({ cores: result.data })
-        }
-      })
+    x5on.check({
+      showError: true,
+      success: function () {
+        app.logged = true;
+        // 登录成功，执行查询
+        x5on.request({
+          url: x5on.url.role,
+          success: function (result) {
+            that.setData({ cores: result.data })
+          }
+        })
+      },
+      fail: function () {
+        that.setData({ cores: [] })
+      }
     });
   }
 

@@ -5,9 +5,10 @@ var x5on = require('./utils/x5on.js')
 
 App({
   logged: false,
-  userInfo: null,
+  userinfor: null,
+
   onLaunch: function () {
-    qcloud.setLoginUrl(x5on.url.login)
-    x5on.check(this, function() {});
+    qcloud.setLoginUrl(x5on.url.login);
+    
   }
 })

@@ -8,24 +8,29 @@ var app = getApp()
 Page({
   data: {
     logged: false,
-    userInfo: null
+    userinfor: null
   },
 
   onShow: function () {
     var that = this;
-    x5on.check(app, function() {}, function() {}, function() {
-      console.log(app)
+    x5on.check({
+      app: app,
+      error: false
     });
     this.setData({
       logged: app.logged,
-      userInfo: app.userInfo,
+      userinfor: app.userinfor,
     });
   },
 
   bindGetUserInfo: function (e) {
     var that = this;
-    x5on.login(app, e, function () {
-      that.onShow();
+    x5on.login({
+      e: e,
+      success: function () {
+        app.logged = true;
+        that.onShow();
+      }
     });
   },
 
