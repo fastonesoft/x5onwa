@@ -4,9 +4,10 @@ var config = require('../../config')
 var util = require('../../utils/util.js')
 var x5on = require('../../utils/x5on.js')
 
-var app = getApp();
+
 Page({
   data: {
+    logged: false,
     cores: [],
     can_use: true,
     imgUrls: [
@@ -18,23 +19,28 @@ Page({
 
   onShow: function () {
     var that = this;
-    // 检测
+    // 检测登录
     x5on.check({
       showError: true,
       success: function () {
-        app.logged = true;
-        // 登录成功，执行查询
+        // 执行查询
         x5on.request({
           url: x5on.url.role,
           success: function (result) {
-            that.setData({ cores: result.data })
+            // 更新数据
+            that.setData({
+              logged: typeof (result) === 'undefined' ? false : true,
+              cores: typeof (result) === 'undefined' ? [] : result.data
+            })
+          },
+          fail: function () {
+            that.setData({ logged: false, cores: [] })
           }
         })
       },
       fail: function () {
-        that.setData({ cores: [] })
+        that.setData({ logged: false, cores: [] })
       }
     });
-  }
-
+  },
 });

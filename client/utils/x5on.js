@@ -24,13 +24,13 @@ var doCheck = function (options) {
             // 登录清除
             qcloud.clearSession();
             // 错误提示
-            if (options.error) util.showModel('登录信息', '请转到“我的”页面登录');
+            if (options.showError) util.showModel('登录信息', '请转到“登录”页面登录');
             if (typeof options.fail === 'function') options.fail();
           },
         });
       } else {
         // 错误提示
-        if (option.showError) util.showModel('授权信息', '请转到“我的”页面授权');
+        if (options.showError) util.showModel('授权信息', '请转到“登录”页面授权');
         if (typeof options.fail === 'function') options.fail();
       }
     },
@@ -48,8 +48,7 @@ var doCheck = function (options) {
  * @param {Function} succ 登录成功后的回调函数
  */
 var doLogin = function (options) {
-  util.showBusy('正在登录');
-  var userInfo = options.e.detail.userInfo;
+  util.showBusy('正在登录')
   // 查看是否授权
   wx.getSetting({
     success: function (res) {
@@ -73,12 +72,12 @@ var doLogin = function (options) {
                 if (typeof options.success === 'function') options.success();
               },
               fail: function (qcloudError) {
-                util.showModel('微信登录', qcloudError)
+                util.showModel('微信登录', '登录查询出错，请重试')
               }
             });
           },
           fail: function (loginError) {
-            util.showModel('微信登录', loginError)
+            util.showModel('微信登录', '登录出错，请重试')
           }
         })
       } else {
@@ -95,19 +94,20 @@ var doLogin = function (options) {
  * @param {string} options.error 错误提示
  * @param {Function} options.success(result) 登录成功后的回调函数
  */
-var doRequest = function(options) {
-    qcloud.request({
-        url: options.url,
-        login: true,
-        success: function (result) {
-            if (typeof options.success == 'function') options.success(result.data)
-        },
-        fail: function (error) {
-          console.log(options.url)
-            var message = options.error || error.message
-            util.showModel('查询失败', message)
-        }
-    })
+var doRequest = function (options) {
+  qcloud.request({
+    url: options.url,
+    login: true,
+    success: function (result) {
+      // 请求成功
+      if (typeof options.success === 'function') options.success(result.data)
+    },
+    fail: function (error) {
+      if (typeof options.fail === 'function') options.fail()
+      var message = options.error || error.message
+      util.showModel('查询失败', message)
+    }
+  })
 }
 
 /*
@@ -123,6 +123,8 @@ var doUrl = {
   login: `${host}/weapp/login`,
   // TODO用户请求
   user: `${host}/weapp/user`,
+  // 错误测试地址
+  error: `${host}/weapp/error`,
 }
 
 // 对外接口
@@ -130,5 +132,5 @@ module.exports = {
   url: doUrl,
   login: doLogin,
   check: doCheck,
-  request: doRequest,
+  request: doRequest
 }

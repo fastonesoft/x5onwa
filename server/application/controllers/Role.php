@@ -18,8 +18,8 @@ class Role extends CI_Controller {
             ]);
         } else {
             $this->json([
-                'error' => -1,
-                'message' => '没有登录，不能访问'
+                'code' => -1,
+                'data' => []
             ]);
         }
     }

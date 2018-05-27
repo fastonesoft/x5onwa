@@ -1,4 +1,5 @@
 //index.js
+var session = require('../../vendor/wafer2-client-sdk/lib/session.js')
 var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
 var util = require('../../utils/util.js')
@@ -11,16 +12,37 @@ Page({
     userinfor: null
   },
 
+
   onShow: function () {
     var that = this;
+    // 检测登录
     x5on.check({
-      app: app,
-      error: false
+      showError: false,
+      success: function () {
+        var infor = session.get();
+        that.setData({
+          logged: infor ? true : false,
+          userinfor: infor ? infor.userinfo : null,
+        })
+      },
+      fail: function () {
+        // 登录失败 -> 清除数据
+        that.setData({
+          logged: false,
+          userinfor: null
+        })
+      }
     });
-    this.setData({
-      logged: app.logged,
-      userinfor: app.userinfor,
-    });
+  },
+
+  canScan: function () {
+    // 只允许从相机扫码
+    wx.scanCode({
+      onlyFromCamera: true,
+      success: (res) => {
+        console.log(res)
+      }
+    })
   },
 
   bindGetUserInfo: function (e) {
@@ -28,8 +50,18 @@ Page({
     x5on.login({
       e: e,
       success: function () {
-        app.logged = true;
+        var infor = session.get();
+        that.setData({
+          logged: infor ? true : false,
+          userinfor: infor ? infor.userinfo : null,
+        })
         that.onShow();
+      },
+      fail: function() {
+        that.setData({
+          logged: false,
+          userinfor: null
+        })
       }
     });
   },
