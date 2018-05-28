@@ -33,10 +33,6 @@ var doCheck = function (options) {
         if (options.showError) util.showModel('授权信息', '请转到“登录”页面授权');
         if (typeof options.fail === 'function') options.fail();
       }
-    },
-    complete: function () {
-      // 执行完毕回调
-      if (typeof options.complete === 'function') options.complete();
     }
   });
 }

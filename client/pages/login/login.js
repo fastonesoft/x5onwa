@@ -18,14 +18,14 @@ Page({
     // 检测登录
     x5on.check({
       showError: false,
-      success: function () {
+      success: () => {
         var infor = session.get();
         that.setData({
           logged: infor ? true : false,
           userinfor: infor ? infor.userinfo : null,
         })
       },
-      fail: function () {
+      fail: () => {
         // 登录失败 -> 清除数据
         that.setData({
           logged: false,
@@ -49,7 +49,7 @@ Page({
     var that = this;
     x5on.login({
       e: e,
-      success: function () {
+      success: () => {
         var infor = session.get();
         that.setData({
           logged: infor ? true : false,
@@ -57,7 +57,7 @@ Page({
         })
         that.onShow();
       },
-      fail: function() {
+      fail: () => {
         that.setData({
           logged: false,
           userinfor: null

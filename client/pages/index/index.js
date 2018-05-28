@@ -22,7 +22,7 @@ Page({
     // 检测登录
     x5on.check({
       showError: true,
-      success: function () {
+      success: () => {
         // 执行查询
         x5on.request({
           url: x5on.url.role,
@@ -38,7 +38,7 @@ Page({
           }
         })
       },
-      fail: function () {
+      fail: () => {
         that.setData({ logged: false, cores: [] })
       }
     });
