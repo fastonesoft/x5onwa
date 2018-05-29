@@ -93,7 +93,7 @@ var doLogin = function (options) {
 var doRequest = function (options) {
   qcloud.request({
     url: options.url,
-    login: true,
+    login: false,
     success: function (result) {
       // 请求成功
       if (typeof options.success === 'function') options.success(result.data)

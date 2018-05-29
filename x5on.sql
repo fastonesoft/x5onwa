@@ -469,7 +469,11 @@ CREATE TABLE xonGradeStudOut (
   FOREIGN KEY (stud_out_id) REFERENCES xonStudOut(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='年级学生变更';
 
-
+CREATE TABLE xonTest (
+  uid VARCHAR(100),
+  name VARCHAR(100)
+  PRIMARY KEY (uid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='测试数据';
 
 
 /*分级数据*/
