@@ -469,6 +469,12 @@ CREATE TABLE xonGradeStudOut (
   FOREIGN KEY (stud_out_id) REFERENCES xonStudOut(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='年级学生变更';
 
+CREATE TABLE xonError (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  message VARCHAR(2048) NOT NULL,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='错误输出检测';
+
 /*分级数据*/
 INSERT INTO xonStep VALUES ('321284022004', replace(uuid(), '-', ''), '2004级', '32128402', 1);
 INSERT INTO xonStep VALUES ('321284022005', replace(uuid(), '-', ''), '2005级', '32128402', 1);

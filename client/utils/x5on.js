@@ -68,7 +68,7 @@ var doLogin = function (options) {
                 if (typeof options.success === 'function') options.success();
               },
               fail: function (qcloudError) {
-                util.showModel('微信登录', '登录查询出错，请重试')
+                util.showModel('微信登录', qcloudError.message)
               }
             });
           },

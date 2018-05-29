@@ -4,6 +4,8 @@ namespace QCloud_WeApp_SDK\Model;
 use Guzzle\Cache\NullCacheAdapter;
 use QCloud_WeApp_SDK\Mysql\Mysql as DB;
 use QCloud_WeApp_SDK\Constants;
+use QCloud_WeApp_SDK\Helper;
+
 use \Exception;
 
 class xonUser
@@ -15,10 +17,16 @@ class xonUser
    */
     public static function store ($userinfor) {
       $uid = $userinfor->unionId;
-      $name = $userinfor->nickName;
+      $name = json_decode($userinfor->nickName);
       $fixed = false;
       $create_time = date('Y-m-d H:i:s');
       $last_visit_time = $create_time;
+
+      xonError::insert(json_encode($uid));
+      xonError::insert('中文');
+      xonError::insert(json_encode($fixed));
+      xonError::insert(json_encode($create_time));
+      xonError::insert(json_encode($last_visit_time));
 
       $res = DB::row('xonUser', ['*'], compact('uid'));
       if ($res === NULL) {

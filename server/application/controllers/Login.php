@@ -12,11 +12,13 @@ class Login extends CI_Controller {
     if ($result['loginState'] === Constants::S_AUTH) {
       $userinfor = $result['userinfo'];
 
-      // 记录用户
-      Model\xonUser::store($userinfor);
+      // 测试数据
+      $datainfor = $userinfor['userinfo'];
 
+      // 记录用户
+      Model\xonUser::store($datainfor);
       // 用户权限
-      Model\xonUserGroup::first($userinfor->unionId, 1);
+      Model\xonUserGroup::first($datainfor, 1);
 
       // 输出结果
       $this->json([
