@@ -86,13 +86,14 @@ CREATE TABLE xonGroup (
 	UNIQUE KEY name (name)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='分组列表';
 
-INSERT INTO xonGroup VALUES (1, replace(uuid(), '-', ''), '学生家长');
-INSERT INTO xonGroup VALUES (2, replace(uuid(), '-', ''), '科任老师');
-INSERT INTO xonGroup VALUES (3, replace(uuid(), '-', ''), '班级主管');
-INSERT INTO xonGroup VALUES (4, replace(uuid(), '-', ''), '学科主管');
-INSERT INTO xonGroup VALUES (5, replace(uuid(), '-', ''), '年级主管');
-INSERT INTO xonGroup VALUES (6, replace(uuid(), '-', ''), '学校管理');
-INSERT INTO xonGroup VALUES (7, replace(uuid(), '-', ''), '集团管理');
+INSERT INTO xonGroup VALUES (1, replace(uuid(), '-', ''), '临时用户');
+INSERT INTO xonGroup VALUES (2, replace(uuid(), '-', ''), '学生家长');
+INSERT INTO xonGroup VALUES (3, replace(uuid(), '-', ''), '科任老师');
+INSERT INTO xonGroup VALUES (4, replace(uuid(), '-', ''), '班级主管');
+INSERT INTO xonGroup VALUES (5, replace(uuid(), '-', ''), '学科主管');
+INSERT INTO xonGroup VALUES (6, replace(uuid(), '-', ''), '年级主管');
+INSERT INTO xonGroup VALUES (7, replace(uuid(), '-', ''), '学校管理');
+INSERT INTO xonGroup VALUES (8, replace(uuid(), '-', ''), '集团管理');
 INSERT INTO xonGroup VALUES (99, replace(uuid(), '-', ''), '系统管理');
 
 CREATE TABLE xonGroupRole (
@@ -111,7 +112,6 @@ CREATE TABLE xonUser (
   name VARCHAR(60) NOT NULL,
   mobil VARCHAR(20),  /*绑定学生时，检测是否为空*/
   fixed BOOLEAN NOT NULL DEFAULT 0,
-  is_teacher BOOLEAN NOT NULL DEFAULT 0,
   create_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   last_visit_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (uid)
@@ -468,13 +468,6 @@ CREATE TABLE xonGradeStudOut (
   FOREIGN KEY (grade_stud_id) REFERENCES xonGradeStud(id),
   FOREIGN KEY (stud_out_id) REFERENCES xonStudOut(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='年级学生变更';
-
-CREATE TABLE xonTest (
-  uid VARCHAR(100),
-  name VARCHAR(100)
-  PRIMARY KEY (uid)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='测试数据';
-
 
 /*分级数据*/
 INSERT INTO xonStep VALUES ('321284022004', replace(uuid(), '-', ''), '2004级', '32128402', 1);

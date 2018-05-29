@@ -3,6 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 use QCloud_WeApp_SDK\Auth\LoginService as LoginService;
 use QCloud_WeApp_SDK\Constants as Constants;
+use QCloud_WeApp_SDK\Model;
 
 class Login extends CI_Controller {
   public function index() {
@@ -11,9 +12,16 @@ class Login extends CI_Controller {
     if ($result['loginState'] === Constants::S_AUTH) {
       $userinfor = $result['userinfo'];
 
+      // 记录用户
+      Model\xonUser::store($userinfor);
+
+      // 用户权限
+      Model\xonUserGroup::first($userinfor->unionId, 1);
+
+      // 输出结果
       $this->json([
         'code' => 0,
-        'data' => userinfor
+        'data' => $userinfor
       ]);
     } else {
       $this->json([
