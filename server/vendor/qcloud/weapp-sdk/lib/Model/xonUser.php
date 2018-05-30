@@ -12,6 +12,7 @@ class xonUser
 {
   /**
    * 保存、更新用户信息
+   *
    * @param $userinfor 用户帐号
    * @throws Exception
    */
@@ -19,17 +20,10 @@ class xonUser
       $uid = $userinfor->unionId;
       $name = $userinfor->nickName;
       $mobil = null;
-      $fixed = false;
+      // 布尔型，直接设置数值
+      $fixed = 0;
       $create_time = date('Y-m-d H:i:s');
       $last_visit_time = $create_time;
-
-      xonError::insert($uid);
-      xonError::insert($name);
-      xonError::insert(json_decode($mobil));
-      xonError::insert(json_encode($fixed));
-      xonError::insert($create_time);
-      xonError::insert($last_visit_time);
-
 
       $res = DB::row('xonUser', ['*'], compact('uid'));
       if ($res === NULL) {

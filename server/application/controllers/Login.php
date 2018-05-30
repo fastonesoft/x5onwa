@@ -11,8 +11,6 @@ class Login extends CI_Controller {
 
     if ($result['loginState'] === Constants::S_AUTH) {
       $userinfor = $result['userinfo'];
-
-      // 测试数据
       $datainfor = $userinfor['userinfo'];
 
       // 记录用户
