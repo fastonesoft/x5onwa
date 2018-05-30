@@ -26,8 +26,8 @@ class xonUserGroup
 
   /**
    * 用户权限组添加
-   * @param $user_uid   用户编号
-   * @param $group_id   用户权限组
+   * @param     $user_uid     用户编号
+   * @param     $group_id     用户权限组
    * @throws Exception
    */
   public static function insert ($user_uid, $group_id) {

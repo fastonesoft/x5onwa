@@ -57,24 +57,13 @@ CREATE TABLE xonRole (
 	FOREIGN KEY (role_type_id) REFERENCES xonRoleType(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='权限列表';
 
-INSERT INTO xonRole VALUES (1, replace(uuid(), '-', ''), 'stud1', '学生查询1', 1, 2);
-INSERT INTO xonRole VALUES (2, replace(uuid(), '-', ''), 'stud2', '学生查询2', 1, 2);
-INSERT INTO xonRole VALUES (3, replace(uuid(), '-', ''), 'stud3', '学生查询3', 1, 2);
-INSERT INTO xonRole VALUES (4, replace(uuid(), '-', ''), 'stud4', '学生查询4', 1, 2);
-INSERT INTO xonRole VALUES (5, replace(uuid(), '-', ''), 'stud5', '学生查询5', 1, 2);
-INSERT INTO xonRole VALUES (6, replace(uuid(), '-', ''), 'stud6', '学生查询6', 1, 2);
-INSERT INTO xonRole VALUES (7, replace(uuid(), '-', ''), 'stud7', '学生查询7', 1, 2);
-INSERT INTO xonRole VALUES (8, replace(uuid(), '-', ''), 'stud8', '学生查询8', 1, 2);
-INSERT INTO xonRole VALUES (9, replace(uuid(), '-', ''), 'stud9', '学生查询9', 1, 2);
-INSERT INTO xonRole VALUES (11, replace(uuid(), '-', ''), 'stud11', '学生查询11', 1, 2);
-INSERT INTO xonRole VALUES (12, replace(uuid(), '-', ''), 'stud12', '学生查询12', 1, 2);
-INSERT INTO xonRole VALUES (13, replace(uuid(), '-', ''), 'stud13', '学生查询13', 1, 2);
-INSERT INTO xonRole VALUES (14, replace(uuid(), '-', ''), 'stud14', '学生查询14', 1, 2);
-INSERT INTO xonRole VALUES (15, replace(uuid(), '-', ''), 'stud15', '学生查询15', 1, 2);
-INSERT INTO xonRole VALUES (16, replace(uuid(), '-', ''), 'stud16', '学生查询16', 1, 2);
-INSERT INTO xonRole VALUES (17, replace(uuid(), '-', ''), 'stud17', '学生查询17', 1, 2);
-INSERT INTO xonRole VALUES (18, replace(uuid(), '-', ''), 'stud18', '学生查询18', 1, 2);
-INSERT INTO xonRole VALUES (19, replace(uuid(), '-', ''), 'stud19', '学生查询19', 1, 2);
+INSERT INTO xonRole VALUES (1, replace(uuid(), '-', ''), 'regStud', '新生报名', 1, 1);
+INSERT INTO xonRole VALUES (2, replace(uuid(), '-', ''), 'regExam', '报名审核', 0, 1);
+INSERT INTO xonRole VALUES (3, replace(uuid(), '-', ''), 'regConfirm', '确认审核', 0, 1);
+INSERT INTO xonRole VALUES (4, replace(uuid(), '-', ''), 'regCount', '报名统计', 0, 1);
+INSERT INTO xonRole VALUES (5, replace(uuid(), '-', ''), 'studList', '学生名册', 0, 2);
+
+
 
 
 CREATE TABLE xonGroup (

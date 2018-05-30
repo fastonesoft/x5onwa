@@ -15,8 +15,11 @@ class Login extends CI_Controller {
 
       // 记录用户
       Model\xonUser::store($datainfor);
-      // 用户权限
-      Model\xonUserGroup::first($datainfor, 1);
+
+      // 添加默认用户权限（临时用户组）
+      // 以用户的unionId + group_id作主键索引
+      $user_uid = $datainfor->unionId;
+      Model\xonUserGroup::first($user_uid, 1);
 
       // 输出结果
       $this->json([
