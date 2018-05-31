@@ -29,8 +29,8 @@ Page({
           success: function (result) {
             // 更新数据
             that.setData({
-              logged: typeof (result) === 'undefined' ? false : true,
-              cores: typeof (result) === 'undefined' ? [] : result.data
+              logged: result ? true : false,
+              cores: result ? result.data : []
             })
           },
           fail: function () {

@@ -12,7 +12,8 @@ var session = require('../vendor/wafer2-client-sdk/lib/session.js')
 var doCheck = function (options) {
   // 检测缓存
   if (!session.get()) {
-    if (options.showError) util.showModel('缓存过期', '请转到“登录”页面登录')
+    if (options.showError) util.showModel('缓存过期', '请转到“登录”页面登录');
+    if (typeof options.fail === 'function') options.fail();
     return
   }
   // 查看是否授权
@@ -73,7 +74,8 @@ var doLogin = function (options) {
                 if (typeof options.success === 'function') options.success();
               },
               fail: function (qcloudError) {
-                util.showModel('微信登录', qcloudError.message)
+                // 这里经常出错，提示OpenID为空，要尝试找出原因
+                util.showModel('查询登录', '登录出错，请重试')
               }
             });
           },
