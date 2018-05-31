@@ -10,6 +10,11 @@ var session = require('../vendor/wafer2-client-sdk/lib/session.js')
  * @param {Function} succ 登录成功后的回调函数
  */
 var doCheck = function (options) {
+  // 检测缓存
+  if (!session.get()) {
+    if (options.showError) util.showModel('缓存过期', '请转到“登录”页面登录')
+    return
+  }
   // 查看是否授权
   wx.getSetting({
     success: function (res) {
@@ -24,13 +29,13 @@ var doCheck = function (options) {
             // 登录清除
             qcloud.clearSession();
             // 错误提示
-            if (options.showError) util.showModel('登录信息', '请转到“登录”页面登录');
+            if (options.showError) util.showModel('登录过期', '请转到“登录”页面登录');
             if (typeof options.fail === 'function') options.fail();
           },
         });
       } else {
         // 错误提示
-        if (options.showError) util.showModel('授权信息', '请转到“登录”页面授权');
+        if (options.showError) util.showModel('授权失败', '请转到“登录”页面授权');
         if (typeof options.fail === 'function') options.fail();
       }
     }
