@@ -12,6 +12,7 @@ class Role extends CI_Controller {
         if ($result['loginState'] === Constants::S_AUTH) {
             // 返回权限列表
             $res = DB::select('xonRole', ['*']);
+
             $this->json([
                 'code' => 0,
                 'data' => $res

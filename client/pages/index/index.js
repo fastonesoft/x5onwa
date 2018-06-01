@@ -1,7 +1,4 @@
-//index.js
-var qcloud = require('../../vendor/wafer2-client-sdk/index')
-var config = require('../../config')
-var util = require('../../utils/util.js')
+// index.js
 var x5on = require('../../utils/x5on.js')
 
 
@@ -28,10 +25,7 @@ Page({
           url: x5on.url.role,
           success: function (result) {
             // 更新数据
-            that.setData({
-              logged: result ? true : false,
-              cores: result ? result.data : []
-            })
+            that.setData({ logged: true, cores: result.data })
           },
           fail: function () {
             that.setData({ logged: false, cores: [] })

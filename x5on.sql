@@ -57,11 +57,11 @@ CREATE TABLE xonRole (
 	FOREIGN KEY (role_type_id) REFERENCES xonRoleType(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='权限列表';
 
-INSERT INTO xonRole VALUES (1, replace(uuid(), '-', ''), 'regStud', '新生报名', 1, 1);
-INSERT INTO xonRole VALUES (2, replace(uuid(), '-', ''), 'regExam', '报名审核', 0, 1);
-INSERT INTO xonRole VALUES (3, replace(uuid(), '-', ''), 'regConfirm', '确认审核', 0, 1);
-INSERT INTO xonRole VALUES (4, replace(uuid(), '-', ''), 'regCount', '报名统计', 0, 1);
-INSERT INTO xonRole VALUES (5, replace(uuid(), '-', ''), 'studList', '学生名册', 0, 2);
+INSERT INTO xonRole VALUES (1, replace(uuid(), '-', ''), 'regstud', '新生报名', 1, 1);
+INSERT INTO xonRole VALUES (2, replace(uuid(), '-', ''), 'regexam', '报名审核', 0, 1);
+INSERT INTO xonRole VALUES (3, replace(uuid(), '-', ''), 'regconfirm', '确认审核', 0, 1);
+INSERT INTO xonRole VALUES (4, replace(uuid(), '-', ''), 'regcount', '报名统计', 0, 1);
+INSERT INTO xonRole VALUES (5, replace(uuid(), '-', ''), 'students', '学生名册', 0, 2);
 
 
 
