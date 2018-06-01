@@ -12,7 +12,7 @@
   <!--功能导航-->
   <view class="index-scroll">
     <view wx:for="{{cores}}" wx:key="id" class="cores">
-      <view wx:if="{{can_use}}" class="core-item">
+      <view wx:if="{{item.can_show}}" class="core-item">
         <image src="/images/index/{{item.name}}.png"></image>
         <text>{{item.title}}</text>
       </view>
