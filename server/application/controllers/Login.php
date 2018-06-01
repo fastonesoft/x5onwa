@@ -18,8 +18,8 @@ class Login extends CI_Controller {
 
       // 添加默认用户权限（临时用户组）
       // 以用户的unionId + group_id作主键索引
-      $user_uid = $datainfor->unionId;
-      Model\xonUserGroup::first($user_uid, 1);
+      $user_id = $datainfor->unionId;
+      Model\xonUserGroup::first($user_id, 1);
 
       // 输出结果
       $this->json([

@@ -89,32 +89,61 @@ CREATE TABLE xonGroupRole (
 	group_id INT(11) NOT NULL,
 	role_id INT(11) NOT NULL,
 	uid VARCHAR(60) NOT NULL,
-	has_role BOOLEAN NOT NULL,
 	PRIMARY KEY (group_id, role_id),
 	UNIQUE KEY uid (uid),
 	FOREIGN KEY (group_id) REFERENCES xonGroup(id),
 	FOREIGN KEY (role_id) REFERENCES xonRole(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='分组权限';
 
+/**
+  临时用户组权限
+  新生报名
+ */
+INSERT INTO xonGroupRole VALUES (1, 1, replace(uuid(), '-', ''));
+
+/**
+  管理员组权限
+ */
+INSERT INTO xonGroupRole VALUES (99, 1, replace(uuid(), '-', ''));
+INSERT INTO xonGroupRole VALUES (99, 2, replace(uuid(), '-', ''));
+INSERT INTO xonGroupRole VALUES (99, 3, replace(uuid(), '-', ''));
+INSERT INTO xonGroupRole VALUES (99, 4, replace(uuid(), '-', ''));
+INSERT INTO xonGroupRole VALUES (99, 5, replace(uuid(), '-', ''));
+
+
+
 CREATE TABLE xonUser (
-  uid VARCHAR(60) NOT NULL,  /*uniond*/
+  id VARCHAR(60) NOT NULL,  /*uniond*/
+  uid VARCHAR(60) NOT NULL,
   name VARCHAR(60) NOT NULL,
   mobil VARCHAR(20),  /*绑定学生时，检测是否为空*/
   fixed BOOLEAN NOT NULL DEFAULT 0,
   create_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   last_visit_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (uid)
+  PRIMARY KEY (id),
+  UNIQUE KEY uid (uid)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户列表';
 
 CREATE TABLE xonUserGroup (
-  user_uid VARCHAR(60) NOT NULL,
+  user_id VARCHAR(60) NOT NULL,
   group_id INT(11) NOT NULL,
   uid VARCHAR(60) NOT NULL,
-  PRIMARY KEY (user_uid, group_id),
+  PRIMARY KEY (user_id, group_id),
   UNIQUE KEY uid (uid),
-  FOREIGN KEY (user_uid) REFERENCES xonUser(uid),
+  FOREIGN KEY (user_id) REFERENCES xonUser(id),
   FOREIGN KEY (group_id) REFERENCES xonGroup(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='分组用户';
+
+/**
+  用户权限视图
+ */
+CREATE VIEW xovUserRole
+AS
+  SELECT DISTINCT user_id, role_id
+  FROM xonUserGroup c INNER JOIN xonGroupRole d
+  ON c.group_id = d.group_id
+
+
 
 CREATE TABLE xonEduType (
   id INT(11) NOT NULL,
@@ -169,14 +198,14 @@ CREATE TABLE xonSchool (
 INSERT INTO xonSchool VALUES ('32128402', replace(uuid(), '-', ''), '实验初中', '泰州市姜堰区实验初级中学', 2);
 
 CREATE TABLE xonUserSch (
-  user_uid VARCHAR(60) NOT NULL,
+  user_id VARCHAR(60) NOT NULL,
   edu_type_id INT(11) NOT NULL,
   sch_id VARCHAR(10) NOT NULL,
   uid VARCHAR(60) NOT NULL,
   current_sch BOOLEAN NOT NULL,
-  PRIMARY KEY (user_uid, edu_type_id),  /*同类学校只能注册一个*/
+  PRIMARY KEY (user_id, edu_type_id),  /*同类学校只能注册一个*/
   UNIQUE KEY uid (uid),
-  FOREIGN KEY (user_uid) REFERENCES xonUser(uid),
+  FOREIGN KEY (user_id) REFERENCES xonUser(id),
   FOREIGN KEY (edu_type_id) REFERENCES xonEduType(id),
   FOREIGN KEY (sch_id) REFERENCES xonSchool(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户注册的学校';
@@ -213,15 +242,15 @@ INSERT INTO xonRelation VALUES (4, replace(uuid(), '-', ''), '朋友');
   可以根据与不同学生的关系，关注不同的学生
  */
 CREATE TABLE xonUserStud (
-  user_uid VARCHAR(60) NOT NULL,
+  user_id VARCHAR(60) NOT NULL,
   stud_id VARCHAR(20) NOT NULL,
   relation_id INT(11) NOT NULL,
   uid VARCHAR(60) NOT NULL,
   pay_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   pay_day INT(11) NOT NULL DEFAULT 0,
-  PRIMARY KEY (user_uid, stud_id, relation_id),
+  PRIMARY KEY (user_id, stud_id, relation_id),
   UNIQUE KEY uid (uid),
-  FOREIGN KEY (user_uid) REFERENCES xonUser(uid),
+  FOREIGN KEY (user_id) REFERENCES xonUser(id),
   FOREIGN KEY (stud_id) REFERENCES xonStudent(uid),
   FOREIGN KEY (relation_id) REFERENCES xonRelation(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户学生表';
@@ -323,10 +352,10 @@ CREATE TABLE xonClassGroup (
 CREATE TABLE xonGradeUser (
   uid VARCHAR(60) NOT NULL,
   grade_id VARCHAR(18) NOT NULL,
-  user_uid VARCHAR(60) NOT NULL,
+  user_id VARCHAR(60) NOT NULL,
   PRIMARY KEY (uid),
   FOREIGN KEY (grade_id) REFERENCES xonGrade(id),
-  FOREIGN KEY (user_uid) REFERENCES xonUser(uid)
+  FOREIGN KEY (user_id) REFERENCES xonUser(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='年级教师';
 
 /** 班级教师 **/
@@ -334,12 +363,12 @@ CREATE TABLE xonClassUser (
   uid VARCHAR(60) NOT NULL,
   cls_id VARCHAR(18) NOT NULL,
   sub_id INT(11) NOT NULL,
-  user_uid VARCHAR(60) NOT NULL,
+  user_id VARCHAR(60) NOT NULL,
   is_master BOOLEAN NOT NULL,
   PRIMARY KEY (cls_id, sub_id),
   UNIQUE KEY uid (uid),
   FOREIGN KEY (sub_id) REFERENCES xonSub(id),
-  FOREIGN KEY (user_uid) REFERENCES xonUser(uid)
+  FOREIGN KEY (user_id) REFERENCES xonUser(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='班级教师';
 
 /** 学科设置 **/

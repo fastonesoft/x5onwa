@@ -17,7 +17,8 @@ class xonUser
    * @throws Exception
    */
     public static function store ($userinfor) {
-      $uid = $userinfor->unionId;
+      $id = $userinfor->unionId;
+      $uid = bin2hex(openssl_random_pseudo_bytes(16));
       $name = $userinfor->nickName;
       $mobil = null;
       // 布尔型，直接设置数值
@@ -25,14 +26,14 @@ class xonUser
       $create_time = date('Y-m-d H:i:s');
       $last_visit_time = $create_time;
 
-      $res = DB::row('xonUser', ['*'], compact('uid'));
+      $res = DB::row('xonUser', ['*'], compact('id'));
       if ($res === NULL) {
-        DB::insert('xonUser', compact('uid', 'name', 'mobil', 'fixed', 'create_time', 'last_visit_time'));
+        DB::insert('xonUser', compact('id', 'uid', 'name', 'mobil', 'fixed', 'create_time', 'last_visit_time'));
       } else {
         DB::update(
           'xonUser',
           compact('name', 'last_visit_time'),
-          compact('uid')
+          compact('id')
         );
       }
     }

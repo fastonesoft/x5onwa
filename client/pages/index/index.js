@@ -23,6 +23,7 @@ Page({
         x5on.request({
           url: x5on.url.role,
           success: function (result) {
+            console.log(result)
             // 更新数据
             that.setData({ logged: true, cores: result.data })
           },
