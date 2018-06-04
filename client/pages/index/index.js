@@ -1,5 +1,5 @@
 // index.js
-var x5on = require('../../utils/x5on.js')
+var x5on = require('../x5on.js')
 
 
 Page({

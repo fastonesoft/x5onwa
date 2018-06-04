@@ -112,7 +112,9 @@ INSERT INTO xonGroupRole VALUES (99, 1, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (99, 2, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (99, 3, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (99, 4, replace(uuid(), '-', ''));
-INSERT INTO xonGroupRole VALUES (99, 5, replace(uuid(), '-', ''));
+INSERT INTO xonGroupRole VALUES (99, 21, replace(uuid(), '-', ''));
+INSERT INTO xonGroupRole VALUES (99, 91, replace(uuid(), '-', ''));
+INSERT INTO xonGroupRole VALUES (99, 92, replace(uuid(), '-', ''));
 
 
 

@@ -1,25 +1,29 @@
 <!--index.wxml-->
 <view class="container">
-  <!--滑动展示-->
-  <swiper indicator-dots="true" autoplay="true" circular="true" interval="2000" duration="500" class="index-swiper">
-    <block wx:for="{{imgUrls}}" wx:key="*this">
-      <swiper-item>
-        <image src="{{item}}" class="index-swiper-img"></image>
-      </swiper-item>
-    </block>
-  </swiper>
+    <!--滑动展示-->
+    <swiper indicator-dots="true" autoplay="true" circular="true" interval="2000" duration="500" class="index-swiper">
+        <block wx:for="{{imgUrls}}" wx:key="*this">
+            <swiper-item>
+                <image src="{{item}}" class="index-swiper-img"></image>
+            </swiper-item>
+        </block>
+    </swiper>
 
-  <!--功能导航-->
-  <view class="index-scroll">
-    <view wx:for="{{cores}}" wx:key="id" class="cores">
-      <view wx:if="{{item.has_role}}" class="core-item" data-itemid="{{item.name}}" bindtap="itemClick">
-        <image src="/images/index/{{item.name}}.png"></image>
-        <text>{{item.title}}</text>
-      </view>
-      <view wx:elif="{{item.can_show}}" class="core-item disabled">
-        <image src="/images/index/{{item.name}}@disabled.png"></image>
-        <text>{{item.title}}</text>
-      </view>
+    <!--功能导航-->
+    <view class="index-scroll">
+        <view wx:for="{{cores}}" wx:key="id" class="cores">
+            <block wx:if="{{item.has_role}}" >
+                <view class="core-item" data-itemid="{{item.name}}" bindtap="itemClick">
+                    <image src="/images/index/{{item.name}}.png"></image>
+                    <text>{{item.title}}</text>
+                </view>
+            </block>
+            <block wx:elif="{{item.can_show}}">
+                <view class="core-item disabled">
+                    <image src="/images/index/{{item.name}}@disabled.png"></image>
+                    <text>{{item.title}}</text>
+                </view>
+            </block>
+        </view>
     </view>
-  </view>
 </view>

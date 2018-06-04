@@ -27,6 +27,11 @@ class xonRole
       }
       $roles[$k]->has_role = $has_role;
     }
-    return $roles;
+    // 筛选数组
+    $result = array_filter($roles, function ($role) {
+        // 返回：有权限的 || 看得见的
+        return $role->has_role || $role->can_show;
+    });
+    return $result;
   }
 }

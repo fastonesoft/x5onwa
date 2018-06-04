@@ -3,7 +3,7 @@ var session = require('../../vendor/wafer2-client-sdk/lib/session.js')
 var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
 var util = require('../../utils/util.js')
-var x5on = require('../../utils/x5on.js')
+var x5on = require('../x5on.js')
 
 var app = getApp()
 Page({
