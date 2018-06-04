@@ -75,7 +75,7 @@ var doLogin = function (options) {
               },
               fail: function (qcloudError) {
                 // 这里经常出错，提示OpenID为空，要尝试找出原因
-                util.showModel('查询登录', '登录出错，请重试')
+                util.showModel('查询登录', qcloudError.message)
               }
             });
           },

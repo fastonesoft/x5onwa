@@ -23,8 +23,7 @@ Page({
         x5on.request({
           url: x5on.url.role,
           success: function (result) {
-            console.log(result)
-            // 更新数据
+            // 更新
             that.setData({ logged: true, cores: result.data })
           },
           fail: function () {
@@ -37,4 +36,20 @@ Page({
       }
     });
   },
+
+  itemClick: function (event) {
+    var itemid = event.currentTarget.dataset.itemid;
+    console.log(itemid)
+    // 检测是否拥有权限
+    
+    wx.navigateTo({
+      url: itemid,
+      success: () => {
+        // 
+      },
+      fail: () => {
+        wx.navigateBack();
+      }
+    })
+  }
 });

@@ -28,6 +28,8 @@ class Mysql
 
             try {
                 self::$conn = new PDO($dsn, $_user, $_pass);
+                self::$conn->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+                self::$conn->setAttribute(PDO::ATTR_STRINGIFY_FETCHES, false);
             } catch (PDOException $e) {
                 throw new Exception(Constants::E_CONNECT_TO_DB . ': '. $e->getMessage());
             }

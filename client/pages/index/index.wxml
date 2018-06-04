@@ -12,11 +12,11 @@
   <!--功能导航-->
   <view class="index-scroll">
     <view wx:for="{{cores}}" wx:key="id" class="cores">
-      <view wx:if="{{item.can_show}}" class="core-item">
+      <view wx:if="{{item.has_role}}" class="core-item" data-itemid="{{item.name}}" bindtap="itemClick">
         <image src="/images/index/{{item.name}}.png"></image>
         <text>{{item.title}}</text>
       </view>
-      <view wx:else class="core-item disabled" bindtap="disabled_item">
+      <view wx:elif="{{item.can_show}}" class="core-item disabled">
         <image src="/images/index/{{item.name}}@disabled.png"></image>
         <text>{{item.title}}</text>
       </view>

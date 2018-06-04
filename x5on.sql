@@ -43,6 +43,7 @@ CREATE TABLE xonRoleType (
 INSERT INTO xonRoleType VALUES (1, replace(uuid(), '-', ''), '报名');
 INSERT INTO xonRoleType VALUES (2, replace(uuid(), '-', ''), '学籍');
 INSERT INTO xonRoleType VALUES (3, replace(uuid(), '-', ''), '考试');
+INSERT INTO xonRoleType VALUES (9, replace(uuid(), '-', ''), '设置');
 
 CREATE TABLE xonRole (
 	id INT(11) NOT NULL,
@@ -61,8 +62,11 @@ INSERT INTO xonRole VALUES (1, replace(uuid(), '-', ''), 'regstud', '新生报�
 INSERT INTO xonRole VALUES (2, replace(uuid(), '-', ''), 'regexam', '报名审核', 0, 1);
 INSERT INTO xonRole VALUES (3, replace(uuid(), '-', ''), 'regconfirm', '确认审核', 0, 1);
 INSERT INTO xonRole VALUES (4, replace(uuid(), '-', ''), 'regcount', '报名统计', 0, 1);
-INSERT INTO xonRole VALUES (5, replace(uuid(), '-', ''), 'students', '学生名册', 0, 2);
 
+INSERT INTO xonRole VALUES (21, replace(uuid(), '-', ''), 'students', '学生名册', 0, 2);
+
+INSERT INTO xonRole VALUES (91, replace(uuid(), '-', ''), 'users', '用户列表', 0, 9);
+INSERT INTO xonRole VALUES (92, replace(uuid(), '-', ''), 'userset', '用户设置', 0, 9);
 
 
 
@@ -141,7 +145,7 @@ CREATE VIEW xovUserRole
 AS
   SELECT DISTINCT user_id, role_id
   FROM xonUserGroup c INNER JOIN xonGroupRole d
-  ON c.group_id = d.group_id
+  ON c.group_id = d.group_id;
 
 
 
