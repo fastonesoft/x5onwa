@@ -67,6 +67,7 @@ INSERT INTO xonRole VALUES (21, replace(uuid(), '-', ''), 'students', '学生名
 
 INSERT INTO xonRole VALUES (91, replace(uuid(), '-', ''), 'users', '用户列表', 0, 9);
 INSERT INTO xonRole VALUES (92, replace(uuid(), '-', ''), 'userset', '用户设置', 0, 9);
+INSERT INTO xonRole VALUES (93, replace(uuid(), '-', ''), 'userole', '权限设置', 0, 9);
 
 
 
@@ -115,6 +116,7 @@ INSERT INTO xonGroupRole VALUES (99, 4, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (99, 21, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (99, 91, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (99, 92, replace(uuid(), '-', ''));
+INSERT INTO xonGroupRole VALUES (99, 93, replace(uuid(), '-', ''));
 
 
 
