@@ -40,14 +40,14 @@ $config = [
          * 新加坡：sg
          * @see https://www.qcloud.com/document/product/436/6224
          */
-        'region' => 'cn-sorth',
+        'region' => 'cn-east',
         // Bucket 名称
         'fileBucket' => 'wafer',
         // 文件夹
-        'uploadFolder' => ''
+        'uploadFolder' => 'x5on'
     ],
 
     // 微信登录态有效期
     'wxLoginExpires' => 7200,
-    'wxMessageToken' => 'abcdefgh'
+    'wxMessageToken' => 'ToX5onKen'
 ];
