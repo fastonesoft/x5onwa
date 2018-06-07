@@ -98,7 +98,7 @@ CREATE TABLE xonGroupRole (
 	UNIQUE KEY uid (uid),
 	FOREIGN KEY (group_id) REFERENCES xonGroup(id),
 	FOREIGN KEY (role_id) REFERENCES xonRole(id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=  COMMENT='分组权限';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='分组权限';
 
 /**
   临时用户组权限
@@ -190,21 +190,38 @@ INSERT INTO xonEdu VALUES (10, replace(uuid(), '-', ''), '高一年级', 3);
 INSERT INTO xonEdu VALUES (11, replace(uuid(), '-', ''), '高二年级', 3);
 INSERT INTO xonEdu VALUES (12, replace(uuid(), '-', ''), '高三年级', 3);
 
+CREATE TABLE xonArea (
+  id VARCHAR(6) NOT NULL,
+  uid VARCHAR(36) NOT NULL,
+  name VARCHAR(20) NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY uid (uid),
+  UNIQUE KEY name (name)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='地区列表';
+
+INSERT INTO xonArea VALUES ('321284', replace(uuid(), '-', ''), '泰州市姜堰区');
+
+
 CREATE TABLE xonSchool (
   id VARCHAR(10) NOT NULL,
   uid VARCHAR(36) NOT NULL,
+  code VARCHAR(5) NOT NULL,
   name VARCHAR(20) NOT NULL,
   full_name VARCHAR(100) NOT NULL,
   edu_type_id INT(11) NOT NULL,
+  area_id VARCHAR(6) NOT NULL,
   PRIMARY KEY (id),
   UNIQUE KEY uid (uid),
   UNIQUE KEY name (name),
   UNIQUE KEY full_name (full_name),
-  FOREIGN KEY (edu_type_id) REFERENCES xonEduType(id)
+  FOREIGN KEY (edu_type_id) REFERENCES xonEduType(id),
+  FOREIGN KEY (area_id) REFERENCES xonArea(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学校列表';
 
-INSERT INTO xonSchool VALUES ('32128402', replace(uuid(), '-', ''), '实验初中', '泰州市姜堰区实验初级中学', 2);
+INSERT INTO xonSchool VALUES ('32128402', replace(uuid(), '-', ''), '02', '实验初中', '泰州市姜堰区实验初级中学', 2, '321284');
 
+
+-------------------要删除的
 CREATE TABLE xonUserSch (
   user_id VARCHAR(36) NOT NULL,
   edu_type_id INT(11) NOT NULL,
@@ -218,19 +235,30 @@ CREATE TABLE xonUserSch (
   FOREIGN KEY (sch_id) REFERENCES xonSchool(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户注册的学校';
 
-CREATE TABLE xonStudent (
-  id VARCHAR(20) NOT NULL,  /* 分级编号 + 学生序号 */
+CREATE TABLE xonChild (
+  id VARCHAR(20) NOT NULL,  /* 用身份证号 - 不可变更 */
   uid VARCHAR(36) NOT NULL,
-  step_id VARCHAR(16) NOT NULL,
   idc VARCHAR(20) NOT NULL,
   name VARCHAR(20) NOT NULL,
-  mobil VARCHAR(20),  /*用来记录学生绑定用户的联系电话，只有爸爸、妈妈的电话才会记录*/
-  mobil2 VARCHAR(20),
   PRIMARY KEY (id),
   UNIQUE KEY uid (uid),
-  UNIQUE KEY idc (idc),
-  FOREIGN KEY (step_id) REFERENCES xonStep(id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学生表';
+  UNIQUE KEY idc (idc)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='孩子表';
+
+CREATE TABLE xonUserChilds (
+  uid VARCHAR(36) NOT NULL,
+  user_id VARCHAR(36) NOT NULL,
+  child_id VARCHAR(20) NOT NULL,
+  relation_id INT(11) NOT NULL,
+  pay_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  pay_day INT(11) NOT NULL DEFAULT 0,
+  PRIMARY KEY (uid),
+  UNIQUE KEY user_child (user_id, child_id),
+  UNIQUE KEY child_relation (chile_id, relation_id),
+  FOREIGN KEY (user_id) REFERENCES xonUser(id),
+  FOREIGN KEY (child_id) REFERENCES xonChild(id),
+  FOREIGN KEY (relation_id) REFERENCES xonRelation(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='我的孩子';
 
 CREATE TABLE xonRelation (
   id INT(11) NOT NULL,
@@ -246,22 +274,14 @@ INSERT INTO xonRelation VALUES (3, replace(uuid(), '-', ''), '亲戚');
 INSERT INTO xonRelation VALUES (4, replace(uuid(), '-', ''), '朋友');
 
 /**
-  用户与学生的关系表
-  可以根据与不同学生的关系，关注不同的学生
+  学生报名
+  同种类型学校，只能报一所
  */
-CREATE TABLE xonUserStud (
-  user_id VARCHAR(36) NOT NULL,
-  stud_id VARCHAR(20) NOT NULL,
-  relation_id INT(11) NOT NULL,
-  uid VARCHAR(36) NOT NULL,
-  pay_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  pay_day INT(11) NOT NULL DEFAULT 0,
-  PRIMARY KEY (user_id, stud_id, relation_id),
-  UNIQUE KEY uid (uid),
-  FOREIGN KEY (user_id) REFERENCES xonUser(id),
-  FOREIGN KEY (stud_id) REFERENCES xonStudent(uid),
-  FOREIGN KEY (relation_id) REFERENCES xonRelation(id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户学生表';
+CREATE TABLE xonStudSch (
+  id
+
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学生学校';
+
 
 /**
   学生与学校（学校、年度、级、年级、班级）关系表
@@ -496,50 +516,56 @@ CREATE TABLE xonGradeStudOut (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='年级学生变更';
 
 /**
-  可变属性记录表 - 定制表格名称
+  可变属性记录表 - 定制表格
  */
-CREATE TABLE xonTable (
-  id INT(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE xonUserCustom (
+  id VARCHAR(15) NOT NULL,  /* 学校编号 + 5位流水号 => sch_id + code */
   uid VARCHAR(36) NOT NULL,
-  name VARCHAR(20) NOT NULL,
+  code VARCHAR(5) NOT NULL,
+  name VARCHAR(20) NOT NULL,  /* 定制表格分类名称 */
   type_id INT(11) NOT NULL,
+  sch_id VARCHAR(10) NOT NULL,
   PRIMARY KEY (id),
-  UNION KEY uid (uid),
-  UNION KEY name (name),
+  UNIQUE KEY uid (uid),
   FOREIGN KEY (type_id) REFERENCES xonType(id),
+  FOREIGN KEY (sch_id) REFERENCES xonSchool(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='定制表格名称';
 
+INSERT INTO xonUserCustom VALUES ('321284020001', replace(uuid(), '-', ''), '0001', '报名信息', 1, '32128402');
+
 /**
-  可变属性记录表 - 定制表格字段
+  可变属性记录表 - 定制字段
  */
-CREATE TABLE xonField (
-  id INT(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE xonUserCustProp (
+  id VARCHAR(20) NOT NULL,  /* 定制表格编号 + 流水号 => custom_id + code */
   uid VARCHAR(36) NOT NULL,
+  code VARCHAR(2) NOT NULL,
   name VARCHAR(20) NOT NULL,
-  data_reg VARCHAR(200) NOT NULL,   /* 数据正则 */
-  data_type VARCHAR(20) NOT NULL,   /* int bool var */
-  table_id INT(11) NOT NULL,
+  data_required BOOLEAN NOT NULL,  /* 是否必填 */
+  data_regex VARCHAR(200) NOT NULL,   /* 数据正则 */
+  custom_id VARCHAR(15) NOT NULL,
   PRIMARY KEY (id),
-  UNION KEY uid (uid),
-  FOREIGN KEY (table_id) REFERENCES xonTable(id),
+  UNIQUE KEY uid (uid),
+  FOREIGN KEY (custom_id) REFERENCES xonUserCustom(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='定制表格字段';
+
+INSERT INTO xonUserCustProp VALUES ('32128402000101', replace(uuid(), '-', ''), '01', '身份证号', 1, '', '321284020001');
+
 
 /**
   可变属性记录表 - 定制表格数据
  */
-CREATE TABLE xonData (
-  id INT(11) NOT NULL,
+CREATE TABLE xonUserCustValue (
   uid VARCHAR(36) NOT NULL,
-  value_int INT(11) NOT NULL DEFAULT 0,
-  value_bool BOOLEAN NOT NULL DEFAULT 0,
-  value_var VARCHAR(200) DEFAULT NULL,
-  field_id INT(11) NOT NULL,
-  PRIMARY KEY (id),
-  UNION KEY uid (uid),
-  UNION KEY name (name),
-  FOREIGN KEY (field_id) REFERENCES xonField(id),
+  prop_id VARCHAR(20) NOT NULL,
+  user_id VARCHAR(36) NOT NULL,
+  value VARCHAR(200) NOT NULL,
+  PRIMARY KEY (uid),
+  FOREIGN KEY (prop_id) REFERENCES xonUserCustProp(id),
+  FOREIGN KEY (user_id) REFERENCES xonUser(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='定制表格数据';
 
+INSERT INTO xonUserCustValue VALUES (replace(uuid(), '-', ''), '32128402000101', 'o47ZhvzWPWSNS26vG_45Fuz5JMZk', '32102819790209301X');
 
 
 
