@@ -2,6 +2,7 @@
   "pages": [
     "pages/index/index",
     "pages/index/regstud",
+    "pages/index/schcode",
     "pages/login/login",
     "pages/class/class",
     "pages/phone/phone"

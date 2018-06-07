@@ -59,15 +59,16 @@ CREATE TABLE xonRole (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='权限列表';
 
 INSERT INTO xonRole VALUES (1, replace(uuid(), '-', ''), 'regstud', '新生报名', 1, 1);
-INSERT INTO xonRole VALUES (2, replace(uuid(), '-', ''), 'regexam', '报名审核', 0, 1);
-INSERT INTO xonRole VALUES (3, replace(uuid(), '-', ''), 'regconfirm', '确认审核', 0, 1);
-INSERT INTO xonRole VALUES (4, replace(uuid(), '-', ''), 'regcount', '报名统计', 0, 1);
+INSERT INTO xonRole VALUES (2, replace(uuid(), '-', ''), 'regexam', '报名审核', 1, 1);
+INSERT INTO xonRole VALUES (3, replace(uuid(), '-', ''), 'regconfirm', '确认审核', 1, 1);
+INSERT INTO xonRole VALUES (4, replace(uuid(), '-', ''), 'regcount', '报名统计', 1, 1);
 
-INSERT INTO xonRole VALUES (21, replace(uuid(), '-', ''), 'students', '学生名册', 0, 2);
+INSERT INTO xonRole VALUES (21, replace(uuid(), '-', ''), 'students', '学生名册', 1, 2);
 
-INSERT INTO xonRole VALUES (91, replace(uuid(), '-', ''), 'users', '用户列表', 0, 9);
-INSERT INTO xonRole VALUES (92, replace(uuid(), '-', ''), 'userset', '用户设置', 0, 9);
-INSERT INTO xonRole VALUES (93, replace(uuid(), '-', ''), 'userole', '权限设置', 0, 9);
+INSERT INTO xonRole VALUES (91, replace(uuid(), '-', ''), 'users', '用户列表', 1, 9);
+INSERT INTO xonRole VALUES (92, replace(uuid(), '-', ''), 'userset', '用户设置', 1, 9);
+INSERT INTO xonRole VALUES (93, replace(uuid(), '-', ''), 'userole', '权限设置', 1, 9);
+INSERT INTO xonRole VALUES (94, replace(uuid(), '-', ''), 'schcode', '编码设置', 1, 9);
 
 
 
@@ -117,6 +118,7 @@ INSERT INTO xonGroupRole VALUES (99, 21, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (99, 91, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (99, 92, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (99, 93, replace(uuid(), '-', ''));
+INSERT INTO xonGroupRole VALUES (99, 94, replace(uuid(), '-', ''));
 
 
 
@@ -221,7 +223,7 @@ CREATE TABLE xonSchool (
 INSERT INTO xonSchool VALUES ('32128402', replace(uuid(), '-', ''), '02', '实验初中', '泰州市姜堰区实验初级中学', 2, '321284');
 
 
--------------------要删除的
+/*要删除的*/
 CREATE TABLE xonUserSch (
   user_id VARCHAR(36) NOT NULL,
   edu_type_id INT(11) NOT NULL,
@@ -254,7 +256,7 @@ CREATE TABLE xonUserChilds (
   pay_day INT(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (uid),
   UNIQUE KEY user_child (user_id, child_id),
-  UNIQUE KEY child_relation (chile_id, relation_id),
+  UNIQUE KEY child_relation (child_id, relation_id),
   FOREIGN KEY (user_id) REFERENCES xonUser(id),
   FOREIGN KEY (child_id) REFERENCES xonChild(id),
   FOREIGN KEY (relation_id) REFERENCES xonRelation(id)
@@ -274,12 +276,34 @@ INSERT INTO xonRelation VALUES (3, replace(uuid(), '-', ''), '亲戚');
 INSERT INTO xonRelation VALUES (4, replace(uuid(), '-', ''), '朋友');
 
 /**
-  学生报名
+  自定义编号
+ */
+CREATE TABLE xonCode (
+  id VARCHAR(20) NOT NULL,  /* id = sch_id + code */
+  uid VARCHAR(36) NOT NULL,
+  sch_id VARCHAR(10) NOT NULL,
+  code VARCHAR(10) NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY uid (uid),
+  FOREIGN KEY (sch_id) REFERENCES xonSchool(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='录取编号';
+
+/**
+  学生报名表
   同种类型学校，只能报一所
  */
-CREATE TABLE xonStudSch (
-  id
-
+CREATE TABLE xonStudRegSch (
+  id VARCHAR(20) NOT NULL,
+  uid VARCHAR(36) NOT NULL,
+  code VARCHAR(10) NOT NULL,
+  stud_id VARCHAR(20) NOT NULL,
+  sch_id VARCHAR(10) NOT NULL,
+  sch_edu_type_id INT(11) NOT NULL,
+  PRIMARY KEY (uid),
+  UNIQUE KEY stud_edu_type (stud_id, sch_edu_type_id),
+  FOREIGN KEY (stud_id) REFERENCES xonChild(id),
+  FOREIGN KEY (sch_id) REFERENCES xonSchool(id),
+  FOREIGN KEY (sch_edu_type_id) REFERENCES xonEduType(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学生学校';
 
 
