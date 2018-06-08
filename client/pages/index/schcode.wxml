@@ -2,88 +2,88 @@
 <view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">{{errorMessage}}</view>
 
 <form bindsubmit="partSubmit" bindreset="partReset">
-<view class="weui-cells__title">分段编码</view>
-<view class="weui-cells weui-cells_after-title">
+  <view class="weui-cells__title">分段编码</view>
+  <view class="weui-cells weui-cells_after-title">
     <view class="weui-cell weui-cell_input">
-        <view class="weui-cell__hd">
-            <view class="weui-label">编码总数</view>
-        </view>
-        <view class="weui-cell__bd">
-            <input class="weui-input" placeholder="生成多少号码" confirm-type="next" type="number" data-reg="^[0-9]+$" data-index="0" data-message="号码数有误！" bindblur="checkInput"/>
-        </view>
-                                <view class="weui-cell__ft" wx:if="{{numCheck[0]}}">
-                    <icon type="warn" size="23" color="#E64340"></icon>
-                </view>
+      <view class="weui-cell__hd">
+        <view class="weui-label">编码总数</view>
+      </view>
+      <view class="weui-cell__bd">
+        <input class="weui-input" placeholder="生成多少号码" confirm-type="next" type="number" data-reg="^[0-9]+$" data-index="0" data-message="号码数有误！" bindblur="checkInput"/>
+      </view>
+      <view class="weui-cell__ft" wx:if="{{numCheck[0]}}">
+        <icon type="warn" size="23" color="#E64340"></icon>
+      </view>
     </view>
 
     <view class="weui-cell weui-cell_input">
-        <view class="weui-cell__hd">
-            <view class="weui-label">分段总数</view>
-        </view>
-        <view class="weui-cell__bd">
-            <input class="weui-input" placeholder="每段号码数" confirm-type="next" type="number" data-reg="^[0-9]+$" data-index="1" data-message="段号码数有误！" bindblur="checkInput"/>
-        </view>
-                                <view class="weui-cell__ft" wx:if="{{numCheck[1]}}">
-                    <icon type="warn" size="23" color="#E64340"></icon>
-                </view>
+      <view class="weui-cell__hd">
+        <view class="weui-label">分段总数</view>
+      </view>
+      <view class="weui-cell__bd">
+        <input class="weui-input" placeholder="每段号码数" confirm-type="next" type="number" data-reg="^[0-9]+$" data-index="1" data-message="段号码数有误！" bindblur="checkInput"/>
+      </view>
+      <view class="weui-cell__ft" wx:if="{{numCheck[1]}}">
+        <icon type="warn" size="23" color="#E64340"></icon>
+      </view>
     </view>
     <view class="weui-cell weui-cell_input">
-        <view class="weui-cell__hd">
-            <view class="weui-label">分段位数</view>
-        </view>
-        <view class="weui-cell__bd">
-            <input class="weui-input" placeholder="段号码位数" confirm-type="next" type="number" data-reg="^[0-9]+$" data-index="2" data-message="段号码位数有误！" bindblur="checkInput"/>
-        </view>
-                                <view class="weui-cell__ft" wx:if="{{numCheck[2]}}">
-                    <icon type="warn" size="23" color="#E64340"></icon>
-                </view>
+      <view class="weui-cell__hd">
+        <view class="weui-label">分段位数</view>
+      </view>
+      <view class="weui-cell__bd">
+        <input class="weui-input" placeholder="段号码位数" confirm-type="next" type="number" data-reg="^[0-9]+$" data-index="2" data-message="段号码位数有误！" bindblur="checkInput"/>
+      </view>
+      <view class="weui-cell__ft" wx:if="{{numCheck[2]}}">
+        <icon type="warn" size="23" color="#E64340"></icon>
+      </view>
     </view>
     <view class="weui-cell weui-cell_input">
-        <view class="weui-cell__hd">
-            <view class="weui-label">前缀位数</view>
-        </view>
-        <view class="weui-cell__bd">
-            <input class="weui-input" placeholder="段前缀位数" confirm-type="done" type="number" data-reg="^[0-9]+$" data-index="3" data-message="段前缀位数有误！" bindblur="checkInput"/>
-        </view>
+      <view class="weui-cell__hd">
+        <view class="weui-label">前缀位数</view>
+      </view>
+      <view class="weui-cell__bd">
+        <input class="weui-input" placeholder="段前缀位数" confirm-type="done" type="number" data-reg="^[0-9]+$" data-index="3" data-message="段前缀位数有误！" bindblur="checkInput"/>
+      </view>
 
-                                <view class="weui-cell__ft" wx:if="{{numCheck[3]}}">
-                    <icon type="warn" size="23" color="#E64340"></icon>
-                </view>
-    </view>    
-</view>
-<view class="weui-btn-area">
+      <view class="weui-cell__ft" wx:if="{{numCheck[3]}}">
+        <icon type="warn" size="23" color="#E64340"></icon>
+      </view>
+    </view>
+  </view>
+  <view class="weui-btn-area">
     <button class="weui-btn" type="primary" bindtap="showTopTips">生成分段号</button>
-</view>
+  </view>
 </form>
 
 
 <form bindsubmit="orderSubmit" bindreset="orderReset">
-<view class="weui-cells__title">流水号编码</view>
-<view class="weui-cells weui-cells_after-title">
+  <view class="weui-cells__title">流水号编码</view>
+  <view class="weui-cells weui-cells_after-title">
     <view class="weui-cell weui-cell_input">
-        <view class="weui-cell__hd">
-            <view class="weui-label">编码总数</view>
-        </view>
-        <view class="weui-cell__bd">
-            <input class="weui-input" placeholder="生成多少流水号" confirm-type="next" type="number" data-reg="^[0-9]+$" data-index="4" data-message="流水号有误！" bindblur="checkInput"/>
-        </view>
-                                <view class="weui-cell__ft" wx:if="{{numCheck[4]}}">
-                    <icon type="warn" size="23" color="#E64340"></icon>
-                </view>
+      <view class="weui-cell__hd">
+        <view class="weui-label">编码总数</view>
+      </view>
+      <view class="weui-cell__bd">
+        <input class="weui-input" placeholder="生成多少流水号" confirm-type="next" type="number" data-reg="^[0-9]+$" data-index="4" data-message="流水号有误！" bindblur="checkInput"/>
+      </view>
+      <view class="weui-cell__ft" wx:if="{{numCheck[4]}}">
+        <icon type="warn" size="23" color="#E64340"></icon>
+      </view>
     </view>
     <view class="weui-cell weui-cell_input">
-        <view class="weui-cell__hd">
-            <view class="weui-label">编码位数</view>
-        </view>
-        <view class="weui-cell__bd">
-            <input class="weui-input" placeholder="流水号位数" type="number" confirm-type="done" type="number" data-reg="^[0-9]+$" data-index="5" data-message="流水号位数有误！" bindblur="checkInput"/>
-        </view>
-                        <view class="weui-cell__ft" wx:if="{{numCheck[5]}}">
-                    <icon type="warn" size="23" color="#E64340"></icon>
-                </view>
+      <view class="weui-cell__hd">
+        <view class="weui-label">编码位数</view>
+      </view>
+      <view class="weui-cell__bd">
+        <input class="weui-input" placeholder="流水号位数" type="number" confirm-type="done" type="number" data-reg="^[0-9]+$" data-index="5" data-message="流水号位数有误！" bindblur="checkInput"/>
+      </view>
+      <view class="weui-cell__ft" wx:if="{{numCheck[5]}}">
+        <icon type="warn" size="23" color="#E64340"></icon>
+      </view>
     </view>
-</view>
-<view class="weui-btn-area">
+  </view>
+  <view class="weui-btn-area">
     <button class="weui-btn" type="primary" bindtap="showTopTips">生成流水号</button>
-</view>
+  </view>
 </form>
