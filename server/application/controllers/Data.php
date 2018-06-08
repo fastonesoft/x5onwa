@@ -47,20 +47,24 @@ class Data extends CI_Controller {
 //            );
 //        }
 
-        $uid = bin2hex(openssl_random_pseudo_bytes(16));
-        $group_id = 1;
-        $user_uid = 'asdfasdf';
+        // $uid = bin2hex(openssl_random_pseudo_bytes(16));
+        // $group_id = 1;
+        // $user_uid = 'asdfasdf';
 
-        // 只要用户已经有权限组，不再添加
-        $res = DB::row('xonUserGroup', ['*'], compact('user_uid'));
-        if ($res === NULL) {
-            DB::insert('xonUserGroup', compact('user_uid', 'group_id', 'uid'));
-        }
+        // // 只要用户已经有权限组，不再添加
+        // $res = DB::row('xonUserGroup', ['*'], compact('user_uid'));
+        // if ($res === NULL) {
+        //     DB::insert('xonUserGroup', compact('user_uid', 'group_id', 'uid'));
+        // }
 
-        $res = DB::select('xonUserGroup', ['*']);
-        $this->json([
-          'code' => -1,
-          'data' => $res
-        ]);
+        // $res = DB::select('xonUserGroup', ['*']);
+        // $this->json([
+        //   'code' => -1,
+        //   'data' => $res
+        // ]);
+
+
+        var_dump($_POST);
+
     }
 }
