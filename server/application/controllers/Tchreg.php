@@ -6,24 +6,24 @@ use QCloud_WeApp_SDK\Constants as Constants;
 use QCloud_WeApp_SDK\Mysql\Mysql as DB;
 use QCloud_WeApp_SDK\Model;
 
-class Role extends CI_Controller {
+class Tchreg extends CI_Controller {
   public function index() {
     $result = LoginService::check();
-
+    // 权限判断
+    // TODO
     if ($result['loginState'] === Constants::S_AUTH) {
-      // 查询我的权限
-      $userinfor = $result['userinfo'];
-      $myrole = DB::select('xovUserRole', ['*'], ['user_id' => $userinfor['unionId']]);
+      // 获取参数
+      $param = $_POST;      
+      // 处理数据
+      $name = $param["name"];
 
-      // 构造权限列表
-      $roles = DB::select('xonRole', ['*']);
+      $res = DB::select('xovNotTeacher', ['*'], [`name like '%$name%'`]);
 
-      // 处理权限结果
-      $res = Model\xonRole::sign($roles, $myrole);
 
+      // 返回信息
       $this->json([
         'code' => 0,
-        'data' => $res
+        'data' => $name
       ]);
     } else {
       $this->json([

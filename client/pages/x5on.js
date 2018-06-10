@@ -6,8 +6,9 @@ var session = require('../vendor/wafer2-client-sdk/lib/session.js')
 
 /**
  * 登录检测
- * @param {Object} app 全局变量
- * @param {Function} succ 登录成功后的回调函数
+ * @param {Boolean}  showError  显示自定义提示
+ * @param {Function} success    检测成功回调
+ * @param {Function} fali       检测失败回调
  */
 var doCheck = function (options) {
   // 检测缓存
@@ -45,9 +46,9 @@ var doCheck = function (options) {
 
 /**
  * 程序登录
- * @param {Object} app 登录配置
- * @param {Object} e open_type 的传递参数
- * @param {Function} succ 登录成功后的回调函数
+ * @param {Object} e open_type  传递参数
+ * @param {Function} success    登录成功回调
+ * @param {Function} fail       登录失败回调
  */
 var doLogin = function (options) {
   util.showBusy('正在登录')
@@ -61,6 +62,8 @@ var doLogin = function (options) {
             // 清除
             qcloud.clearSession();
             // 更新
+            console.log(loginResult)
+            //////////////////////////
             var loginParams = {
               code: loginResult.code,
               encryptedData: options.e.detail.encryptedData,
@@ -100,7 +103,7 @@ var doLogin = function (options) {
 var doRequest = function (options) {
   qcloud.request({
     url: options.url,
-    login: false,
+    login: true,
     success: function (result) {
       // 请求成功
       if (typeof options.success === 'function') options.success(result.data)
@@ -135,7 +138,7 @@ var doShowError = function (that, message) {
  * 页面数据准备：
  *   errorShow: false
  *   errorMessage: '错误提示'
- *   errorArray: new Array(0, 0, 0, 0, 0, 0, 0, 0)，根据检测控件个数来定大小
+ *   errorArray: [0, 0, 0, 0, 0, 0, 0, 0]，根据检测控件个数来定大小
  * @param {Object} 事件参数
  * @param {Object} 页面对象
  */
@@ -166,11 +169,12 @@ var doCheckInput = function (event, that) {
  * @param {Int} 检测结束位
  */
 var doCheckForm = function (that, begin, end, success) {
-  var error = false;
+  var error = false
   for (var i=begin; i<=end; i++) {
     if (that.data.errorArray[i]) {
       error = true
       break
+      console.log(that.data.errorArray[i])
     }
   }
   if (error) {
@@ -190,33 +194,42 @@ var doCheckForm = function (that, begin, end, success) {
  * @param {Function} 失败回调
  */
 var doPostForm = function (options) {
+  // 提取session-skey
+  var sessionkey = session.get()
+  var skey = sessionkey ? sessionkey.skey  : null;
+  if (!skey) {
+    if (typeof options.fail === 'function') options.fail()
+    util.showModel('数据提交', '请求数据出错，检查是否登录过期！')
+    // 退出
+    return
+  }
   wx.request({
     url: options.url,
     data: options.data,
     method: 'POST',
     header: {
-      'Content-Type': 'application/x-www-form-urlencoded'
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'x-wx-skey': skey
     },
     success: function (res) {
       // 错误检测
       var data = res.data;
       if (data && data.code === -1) {
         if (typeof options.fail === 'function') options.fail()
-        util.showModel('登录过期', '请转到“登录”页面登录')
+        util.showModel('数据提交', '请求数据出错，检查是否登录过期！')
         // 退出
-        return  
+        return
       }
-
+      // 没错误
       if (typeof options.success === 'function') options.success(res.data)
     },
     fail: function (error) {
       if (typeof options.fail === 'function') options.fail()
       var message = options.error || error.message
-      util.showModel('提交失败', message)
+      util.showModel('数据提交', message)
     }
   })  
 }
-
 
 /**
  * 请求列表
@@ -231,16 +244,14 @@ var doUrl = {
   login: `${host}/weapp/login`,
   // TODO用户请求
   user: `${host}/weapp/user`,
-  // 错误测试地址
-  test: `${host}/weapp/data`,
-}
+  // 编码地址
+  schcode: `${host}/weapp/schcode`,
+  // 教师注册
+  tchreg: `${host}/weapp/tchreg`,
 
-/**
- * 提交方式
- */
-var doMethod = {
-  get: 'GET',
-  set: 'POST',
+
+  // 错误测试地址
+  test: `${host}/weapp/data`
 }
 
 // 对外接口
@@ -248,9 +259,8 @@ module.exports = {
   url: doUrl,
   login: doLogin,
   check: doCheck,
-  method: doMethod,
   request: doRequest,
-  checkinput: doCheckInput,
-  checkform: doCheckForm,
-  postform: doPostForm,
+  checkInput: doCheckInput,
+  checkForm: doCheckForm,
+  postForm: doPostForm,
 }

@@ -55,7 +55,7 @@
         <view class="weui-label">编码前缀</view>
       </view>
       <view class="weui-cell__bd">
-        <input class="weui-input" placeholder="区分生成号码" name="paraPrev" value="2018" confirm-type="done" type="number" maxlength="4" data-reg="^[0-9]{4}$" data-index="4" data-message="编码前缀有误！" bindblur="checkInput"/>
+        <input class="weui-input" placeholder="区分生成号码" name="paraPrev" value="2018" confirm-type="done" type="number" maxlength="6" data-reg="^[0-9]{4,6}$" data-index="4" data-message="编码前缀有误！" bindblur="checkInput"/>
       </view>
       <view class="weui-cell__ft" wx:if="{{errorArray[4]}}">
         <icon type="warn" size="23" color="#E64340"></icon>
@@ -76,7 +76,7 @@
         <view class="weui-label">编码总数</view>
       </view>
       <view class="weui-cell__bd">
-        <input class="weui-input" placeholder="生成多少号码" name="howMany2" value="2000" confirm-type="next" type="number" maxlength="4" data-reg="^[0-9]+$" data-index="5" data-message="编码总数有误！" bindblur="checkInput"/>
+        <input class="weui-input" placeholder="生成多少号码" name="howMany" value="2000" confirm-type="next" type="number" maxlength="4" data-reg="^[0-9]+$" data-index="5" data-message="编码总数有误！" bindblur="checkInput"/>
       </view>
       <view class="weui-cell__ft" wx:if="{{errorArray[5]}}">
         <icon type="warn" size="23" color="#E64340"></icon>
@@ -98,7 +98,7 @@
         <view class="weui-label">编码前缀</view>
       </view>
       <view class="weui-cell__bd">
-        <input class="weui-input" placeholder="区分生成号码" name="orderPrev" value="2018" confirm-type="done" type="number" maxlength="4" data-reg="^[0-9]{4}$" data-index="7" data-message="编码前缀有误！" bindblur="checkInput"/>
+        <input class="weui-input" placeholder="区分生成号码" name="orderPrev" value="2018" confirm-type="done" type="number" maxlength="6" data-reg="^[0-9]{4,6}$" data-index="7" data-message="编码前缀有误！" bindblur="checkInput"/>
       </view>
       <view class="weui-cell__ft" wx:if="{{errorArray[7]}}">
         <icon type="warn" size="23" color="#E64340"></icon>

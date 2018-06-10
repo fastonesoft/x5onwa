@@ -69,7 +69,7 @@ INSERT INTO xonRole VALUES (91, replace(uuid(), '-', ''), 'users', '用户列表
 INSERT INTO xonRole VALUES (92, replace(uuid(), '-', ''), 'userset', '用户设置', 1, 9);
 INSERT INTO xonRole VALUES (93, replace(uuid(), '-', ''), 'userole', '权限设置', 1, 9);
 INSERT INTO xonRole VALUES (94, replace(uuid(), '-', ''), 'schcode', '编码设置', 1, 9);
-
+INSERT INTO xonRole VALUES (95, replace(uuid(), '-', ''), 'tchreg', '教师注册', 1, 9);
 
 
 CREATE TABLE xonGroup (
@@ -119,12 +119,13 @@ INSERT INTO xonGroupRole VALUES (99, 91, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (99, 92, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (99, 93, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (99, 94, replace(uuid(), '-', ''));
-
+INSERT INTO xonGroupRole VALUES (99, 95, replace(uuid(), '-', ''));
 
 
 CREATE TABLE xonUser (
   id VARCHAR(36) NOT NULL,  /*uniond*/
   uid VARCHAR(36) NOT NULL,
+  nick_name VARCHAR(36) NOT NULL,
   name VARCHAR(36) NOT NULL,
   mobil VARCHAR(20),  /*绑定学生时，检测是否为空*/
   fixed BOOLEAN NOT NULL DEFAULT 0,
@@ -133,6 +134,14 @@ CREATE TABLE xonUser (
   PRIMARY KEY (id),
   UNIQUE KEY uid (uid)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户列表';
+
+CREATE VIEW xovNotTeacher
+AS
+  SELECT id, name
+  FROM xonUser a
+  WHERE a.id NOT IN (
+    SELECT user_id FROM xonSchUser
+  )
 
 CREATE TABLE xonUserGroup (
   user_id VARCHAR(36) NOT NULL,
@@ -223,17 +232,17 @@ CREATE TABLE xonSchool (
 INSERT INTO xonSchool VALUES ('32128402', replace(uuid(), '-', ''), '02', '实验初中', '泰州市姜堰区实验初级中学', 2, '321284');
 
 
-/*要删除的*/
-CREATE TABLE xonUserSch (
-  user_id VARCHAR(36) NOT NULL,
-  edu_type_id INT(11) NOT NULL,
-  sch_id VARCHAR(10) NOT NULL,
+/**
+  学校用户 -> 老师
+ */
+CREATE TABLE xonSchUser (
   uid VARCHAR(36) NOT NULL,
-  current_sch BOOLEAN NOT NULL,
-  PRIMARY KEY (user_id, edu_type_id),  /*同类学校只能注册一个*/
-  UNIQUE KEY uid (uid),
+  user_id VARCHAR(36) NOT NULL,
+  sch_id VARCHAR(10) NOT NULL,
+  /* 可以扩展属性 */
+  PRIMARY KEY (uid),
+  UNIQUE KEY user_id (user_id),
   FOREIGN KEY (user_id) REFERENCES xonUser(id),
-  FOREIGN KEY (edu_type_id) REFERENCES xonEduType(id),
   FOREIGN KEY (sch_id) REFERENCES xonSchool(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户注册的学校';
 
@@ -278,7 +287,7 @@ INSERT INTO xonRelation VALUES (4, replace(uuid(), '-', ''), '朋友');
 /**
   自定义编号
  */
-CREATE TABLE xonCode (
+CREATE TABLE xonSchCode (
   id VARCHAR(20) NOT NULL,  /* id = sch_id + code */
   uid VARCHAR(36) NOT NULL,
   sch_id VARCHAR(10) NOT NULL,
@@ -286,7 +295,7 @@ CREATE TABLE xonCode (
   PRIMARY KEY (id),
   UNIQUE KEY uid (uid),
   FOREIGN KEY (sch_id) REFERENCES xonSchool(id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='录取编号';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='自定义编号';
 
 /**
   学生报名表

@@ -19,7 +19,8 @@ class xonUser
     public static function store ($userinfor) {
       $id = $userinfor->unionId;
       $uid = bin2hex(openssl_random_pseudo_bytes(16));
-      $name = $userinfor->nickName;
+      $nick_name = $userinfor->nickName;
+      $name = $nick_name;
       $mobil = null;
       // 布尔型，直接设置数值
       $fixed = 0;
@@ -28,11 +29,11 @@ class xonUser
 
       $res = DB::row('xonUser', ['*'], compact('id'));
       if ($res === NULL) {
-        DB::insert('xonUser', compact('id', 'uid', 'name', 'mobil', 'fixed', 'create_time', 'last_visit_time'));
+        DB::insert('xonUser', compact('id', 'uid', 'nick_name', 'name', 'mobil', 'fixed', 'create_time', 'last_visit_time'));
       } else {
         DB::update(
           'xonUser',
-          compact('name', 'last_visit_time'),
+          compact('nick_name', 'last_visit_time'),
           compact('id')
         );
       }

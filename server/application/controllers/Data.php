@@ -63,8 +63,9 @@ class Data extends CI_Controller {
         //   'data' => $res
         // ]);
 
-
-        var_dump($_POST);
-
+        $this->json([
+          'code' => -1,
+          'data' => []
+        ]);
     }
 }
