@@ -16,14 +16,12 @@ class Tchreg extends CI_Controller {
       $param = $_POST;      
       // 处理数据
       $name = $param["name"];
-
-      $res = DB::select('xovNotTeacher', ['*'], [`name like '%$name%'`]);
-
+      $res = DB::select('xovUserNotTeach', ['*'], ['name' => $name]);
 
       // 返回信息
       $this->json([
         'code' => 0,
-        'data' => $name
+        'data' => $res
       ]);
     } else {
       $this->json([

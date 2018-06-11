@@ -135,9 +135,9 @@ CREATE TABLE xonUser (
   UNIQUE KEY uid (uid)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户列表';
 
-CREATE VIEW xovNotTeacher
+CREATE VIEW xovUserNotTeach
 AS
-  SELECT id, name
+  SELECT id, nick_name, name, 0 as checked
   FROM xonUser a
   WHERE a.id NOT IN (
     SELECT user_id FROM xonSchUser

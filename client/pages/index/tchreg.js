@@ -6,7 +6,8 @@ Page({
   data: {
     errorShow: false,
     errorMessage: '错误提示',
-    errorArray: [1]
+    errorArray: [1],
+    radioItems: []
   },
 
   checkInput: function (e) {
@@ -14,15 +15,28 @@ Page({
   },
 
   findSubmit: function (e) {
-    x5on.checkForm(this, 0, 0, function () {
+    var that = this;
+    x5on.checkForm(that, 0, 0, function () {
       x5on.postForm({
         url: x5on.url.tchreg,
         data: e.detail.value,
-        success: (res) => {
-          console.log(res)
+        success: (res) => {          
+          that.setData({
+            radioItems: res.data
+          })
         }
       })
     })
+  },
+
+  itemChecked: function (e) {
+    var radioItems = this.data.radioItems;
+    for (var i = 0; i < radioItems.length; ++i) {
+      radioItems[i].checked = radioItems[i].id == e.detail.value;
+    }
+    this.setData({
+      radioItems: radioItems
+    });
   }
 
 })
