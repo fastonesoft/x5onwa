@@ -11,18 +11,20 @@
       <view class="weui-label">教师姓名</view>
     </view>
     <view class="weui-cell__bd">
-      <input class="weui-input" placeholder="输入老师姓名" name="name" confirm-type="done" type="text" maxlength="4" data-reg="^[\\u4e00-\\u9fa5]{1,4}$" data-index="0" data-message="教师姓名有误！" bindblur="checkInput"/>
+      <input class="weui-input" placeholder="输入老师姓名" name="name" confirm-type="done" type="text" maxlength="4" data-reg="^[\\u4e00-\\u9fa5]{2,4}$" data-index="0" data-message="教师姓名有误！" bindblur="checkInput"/>
     </view>
     <view class="weui-cell__ft">
-      <button class="weui-btn" type="primary" form-type="submit">查询</button>
+      <button type="primary" form-type="submit">查询</button>
     </view>
   </view>
 </view>
+</form>
 
+<form bindsubmit="updateSubmit">
 <view wx:if="{{radioItems.length>0}}">
   <view class="weui-cells__title">教师选择</view>
   <view class="weui-cells weui-cells_after-title">
-    <radio-group bindchange="itemChecked">
+    <radio-group bindchange="radioChange">
       <label class="weui-cell weui-check__label" wx:for="{{radioItems}}" wx:key="id">
         <radio class="weui-check" value="{{item.id}}" checked="{{item.checked}}" bindtap=""/>
         <view class="weui-cell__bd">{{item.name}}（{{item.nick_name}}）</view>
@@ -34,9 +36,15 @@
   </view>
 </view>
 
-<picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+<picker bindchange="pickerChange" value="{{schId}}" range="{{array}}" range-key="" disabled="{{pickerDisabled}}">
   <view class="weui-btn-area">
-    <button type="default" bindtap="open">学校选择</button>
+    <button type="{{pickerDisabled?'default':'primary'}}" bindtap="open">{{schName}}</button>
   </view>
 </picker>
+
+  <view class="weui-btn-area">
+    <button type="primary" bindtap="open">教师注册</button>
+  </view>
+
+
 </form>

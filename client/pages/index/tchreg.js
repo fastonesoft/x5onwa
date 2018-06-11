@@ -7,7 +7,21 @@ Page({
     errorShow: false,
     errorMessage: '错误提示',
     errorArray: [1],
-    radioItems: []
+
+    radioItems: [],
+
+    schId: '',
+    schName: '学校选择',
+    pickerItems: [],
+    pickerDisabled: true
+  },
+
+  onLoad: function () {
+    // 确定用户身份
+    this.setData({
+      schId: 'asdfasdfasdf',
+      schName: '没有学校'
+    })
   },
 
   checkInput: function (e) {
@@ -16,20 +30,30 @@ Page({
 
   findSubmit: function (e) {
     var that = this;
-    x5on.checkForm(that, 0, 0, function () {
-      x5on.postForm({
-        url: x5on.url.tchreg,
-        data: e.detail.value,
-        success: (res) => {          
-          that.setData({
-            radioItems: res.data
+    // 检测登录
+    x5on.check({
+      showError: true,
+      success: () => {
+        x5on.checkForm(that, 0, 0, function () {
+          x5on.postForm({
+            url: x5on.url.tchreg,
+            data: e.detail.value,
+            success: (res) => {
+              that.setData({
+                radioItems: res.data
+              })
+            }
           })
-        }
-      })
-    })
+        })      
+      }
+    });
   },
 
-  itemChecked: function (e) {
+  updateSubmit: function (e) {
+
+  },
+
+  radioChange: function (e) {
     var radioItems = this.data.radioItems;
     for (var i = 0; i < radioItems.length; ++i) {
       radioItems[i].checked = radioItems[i].id == e.detail.value;
@@ -37,6 +61,10 @@ Page({
     this.setData({
       radioItems: radioItems
     });
+  },
+
+  pickerChange: function (e) {
+
   }
 
 })

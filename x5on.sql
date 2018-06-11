@@ -135,6 +135,10 @@ CREATE TABLE xonUser (
   UNIQUE KEY uid (uid)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户列表';
 
+/**
+  视图：不是教师的用户
+ */
+
 CREATE VIEW xovUserNotTeach
 AS
   SELECT id, nick_name, name, 0 as checked
