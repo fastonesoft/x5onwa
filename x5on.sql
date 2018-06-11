@@ -236,6 +236,12 @@ CREATE TABLE xonSchool (
 INSERT INTO xonSchool VALUES ('32128402', replace(uuid(), '-', ''), '02', '实验初中', '泰州市姜堰区实验初级中学', 2, '321284');
 
 
+CREATE VIEW xovSchUser
+AS
+  SELECT user_id, sch_id, name as sch_name
+  FROM xonSchUser A LEFT JOIN xonSchool B
+  ON A.sch_id = B.id
+
 /**
   学校用户 -> 老师
  */

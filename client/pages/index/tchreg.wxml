@@ -24,7 +24,7 @@
 <view wx:if="{{radioItems.length>0}}">
   <view class="weui-cells__title">教师选择</view>
   <view class="weui-cells weui-cells_after-title">
-    <radio-group bindchange="radioChange">
+    <radio-group name="user_id" bindchange="radioChange">
       <label class="weui-cell weui-check__label" wx:for="{{radioItems}}" wx:key="id">
         <radio class="weui-check" value="{{item.id}}" checked="{{item.checked}}" bindtap=""/>
         <view class="weui-cell__bd">{{item.name}}（{{item.nick_name}}）</view>
@@ -36,14 +36,29 @@
   </view>
 </view>
 
-<picker bindchange="pickerChange" value="{{schId}}" range="{{array}}" range-key="" disabled="{{pickerDisabled}}">
+<picker bindchange="" name="sch_id" value="{{id}}" range="{{pickerItems}}" range-key="id" disabled="{{pickerDisabled}}">
   <view class="weui-btn-area">
-    <button type="{{pickerDisabled?'default':'primary'}}" bindtap="open">{{schName}}</button>
+    <button type="{{pickerDisabled?'default':'primary'}}">{{sch_name}}</button>
   </view>
 </picker>
 
+        <view class="weui-cells__title">学校选择</view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_select">
+                <view class="weui-cell__hd weui-cell__hd_in-select-after">
+                    <view class="weui-label">当前学校</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <picker bindchange="pickerChange" value="{{countryIndex}}" range="{{pickerItems}}">
+                        <view class="weui-select weui-select_in-select-after">{{countries[countryIndex]}}</view>
+                    </picker>
+                </view>
+            </view>
+        </view>
+
+
   <view class="weui-btn-area">
-    <button type="primary" bindtap="open">教师注册</button>
+    <button type="primary" form-type="submit">教师注册</button>
   </view>
 
 

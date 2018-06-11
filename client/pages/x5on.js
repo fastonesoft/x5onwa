@@ -246,8 +246,10 @@ var doUrl = {
   user: `${host}/weapp/user`,
   // 编码地址
   schcode: `${host}/weapp/schcode`,
+
   // 教师注册
   tchreg: `${host}/weapp/tchreg`,
+  tchsch: `${host}/weapp/tchreg/usersch`,
 
 
   // 错误测试地址

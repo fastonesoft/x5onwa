@@ -10,13 +10,30 @@ Page({
 
     radioItems: [],
 
-    schId: '',
-    schName: '学校选择',
+    sch_id: '',
+    sch_name: '学校选择',
     pickerItems: [],
     pickerDisabled: true
   },
 
   onLoad: function () {
+    var that = this
+    x5on.check({
+      showError: true,
+      success: () => {
+        // 执行查询
+        x5on.request({
+          url: x5on.url.tchsch,
+          success: function (result) {
+            console.log(result)
+            var data = result.data
+            var items = result.items
+            if (data) that.setData({sch_id: data.sch_id, sch_name: data.sch_name})
+            if (items) that.setData({pickerItems: items})
+          }
+        })
+      }
+    });
     // 确定用户身份
     this.setData({
       schId: 'asdfasdfasdf',
@@ -50,7 +67,7 @@ Page({
   },
 
   updateSubmit: function (e) {
-
+    console.log(e.detail.value)
   },
 
   radioChange: function (e) {
@@ -64,7 +81,7 @@ Page({
   },
 
   pickerChange: function (e) {
-
+    console.log(e)
   }
 
 })
