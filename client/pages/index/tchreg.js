@@ -11,7 +11,8 @@ Page({
     radios: [],
     pickers: [],
     sch_id: '',
-    pIndex: 0
+    pIndex: 0,
+    rIndex: 0
   },
 
   onLoad: function () {
@@ -43,8 +44,8 @@ Page({
           url: x5on.url.tchreg,
           data: e.detail.value,
           success: (result) => {
-            console.log(result)
-            that.setData({ radios: result.data })
+            var data = result.data
+            data.length === 0 ? x5on.showError(that, '没有找到你说的老师！') : that.setData({ radios: result.data })
           }
         })
       })
@@ -52,11 +53,13 @@ Page({
   },
 
   radioChange: function (e) {
-    var radios = this.data.radios;
+    var index = 0
+    var radios = this.data.radios
     for (var i = 0; i < radios.length; ++i) {
-      radios[i].checked = radios[i].id == e.detail.value;
+      radios[i].checked = radios[i].id == e.detail.value
+      index = radios[i].checked ? i : index
     }
-    this.setData({ radios: radios });
+    this.setData({ radios: radios, rIndex: index })
   },
 
   pickerChange: function (e) {
@@ -66,6 +69,7 @@ Page({
   },
 
   updateSubmit: function (e) {
+    var that = this
     var data = e.detail.value
     if (data.user_id && data.sch_id) {
       // 提交
@@ -73,7 +77,10 @@ Page({
         url: x5on.url.tchschreg,
         data: e.detail.value,
         success: (result) => {
-          console.log(result)
+          // 数据提交成功，清除已添加的教师
+          var radios = this.data.radios
+          radios.splice(this.data.rIndex, 1)
+          that.setData({ radios: radios })
         }
       })
     } else {

@@ -67,7 +67,7 @@ INSERT INTO xonRole VALUES (21, replace(uuid(), '-', ''), 'students', '学生名
 
 INSERT INTO xonRole VALUES (91, replace(uuid(), '-', ''), 'users', '用户列表', 1, 9);
 INSERT INTO xonRole VALUES (92, replace(uuid(), '-', ''), 'userset', '用户设置', 1, 9);
-INSERT INTO xonRole VALUES (93, replace(uuid(), '-', ''), 'userole', '权限设置', 1, 9);
+INSERT INTO xonRole VALUES (93, replace(uuid(), '-', ''), 'userole', '权限分配', 1, 9);
 INSERT INTO xonRole VALUES (94, replace(uuid(), '-', ''), 'schcode', '编码设置', 1, 9);
 INSERT INTO xonRole VALUES (95, replace(uuid(), '-', ''), 'tchreg', '教师注册', 1, 9);
 
