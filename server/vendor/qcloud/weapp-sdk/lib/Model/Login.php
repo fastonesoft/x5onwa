@@ -7,7 +7,7 @@ use QCloud_WeApp_SDK\Constants;
 use QCloud_WeApp_SDK\Auth\LoginService as LoginService;
 use \Exception;
 
-class Check
+class Login
 {
   public static function check ($success, $fail) {
     $result = LoginService::check();

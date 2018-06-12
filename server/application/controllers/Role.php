@@ -19,11 +19,11 @@ class Role extends CI_Controller {
       $roles = DB::select('xonRole', ['*']);
 
       // 处理权限结果
-      $res = Model\xonRole::sign($roles, $myrole);
+      $result = Model\xonRole::sign($roles, $myrole);
 
       $this->json([
         'code' => 0,
-        'data' => $res
+        'data' => $result
       ]);
     } else {
       $this->json([

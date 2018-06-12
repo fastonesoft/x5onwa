@@ -234,6 +234,7 @@ CREATE TABLE xonSchool (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学校列表';
 
 INSERT INTO xonSchool VALUES ('32128402', replace(uuid(), '-', ''), '02', '实验初中', '泰州市姜堰区实验初级中学', 2, '321284');
+INSERT INTO xonSchool VALUES ('32128401', replace(uuid(), '-', ''), '02', '励才实验', '泰州市姜堰区励才实验', 2, '321284');
 
 
 CREATE VIEW xovSchUser

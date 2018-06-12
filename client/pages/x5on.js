@@ -250,7 +250,7 @@ var doUrl = {
   // 教师注册
   tchreg: `${host}/weapp/tchreg`,
   tchsch: `${host}/weapp/tchreg/usersch`,
-
+  tchschreg: `${host}/weapp/tchreg/usereg`,
 
   // 错误测试地址
   test: `${host}/weapp/data`
@@ -265,4 +265,5 @@ module.exports = {
   checkInput: doCheckInput,
   checkForm: doCheckForm,
   postForm: doPostForm,
+  showError: doShowError,
 }

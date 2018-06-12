@@ -27,8 +27,8 @@ class xonUser
       $create_time = date('Y-m-d H:i:s');
       $last_visit_time = $create_time;
 
-      $res = DB::row('xonUser', ['*'], compact('id'));
-      if ($res === NULL) {
+      $result = DB::row('xonUser', ['*'], compact('id'));
+      if ($result === NULL) {
         DB::insert('xonUser', compact('id', 'uid', 'nick_name', 'name', 'mobil', 'fixed', 'create_time', 'last_visit_time'));
       } else {
         DB::update(
@@ -46,8 +46,8 @@ class xonUser
    * @throws Exception
    */
     public static function update ($uid, $fixed) {
-      $res = DB::row('xonUser', ['*'], compact('uid'));
-      if ($res !== NULL) {
+      $result = DB::row('xonUser', ['*'], compact('uid'));
+      if ($result !== NULL) {
         DB::update(
           'xonUser',
           compact('fixed'),
