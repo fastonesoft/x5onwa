@@ -8,10 +8,7 @@ use QCloud_WeApp_SDK\Model;
 
 class Schcode extends CI_Controller {
   public function index() {
-    $result = LoginService::check();
-    // 权限判断
-    // TODO
-    if ($result['loginState'] === Constants::S_AUTH) {
+    Model\Login::check(function ($user) {
       // 获取参数
       $param = $_POST;
       if (count($param) == 5) {
@@ -29,17 +26,12 @@ class Schcode extends CI_Controller {
         $orderPrev = $param['orderPrev'];
         // 生成数据
       }
-      // 处理数据
+
       // 返回信息
-      $this->json([
-        'code' => 0,
-        'data' => $howMany
-      ]);
-    } else {
-      $this->json([
-        'code' => -1,
-        'data' => []
-      ]);
-    }
+      $this->json(['code' => 0, 'data' => $howMany]);
+    }, function ($error) {
+      $this->json($error);
+    });
+
   }
 }

@@ -6,7 +6,7 @@ Page({
   data: {
     errorShow: false,
     errorMessage: '错误提示',
-    errorArray: [1, 1, 1],
+    errorArray: [1],
 
     radios: [],
     pickers: [],

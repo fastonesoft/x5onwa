@@ -173,8 +173,7 @@ var doCheckForm = function (that, begin, end, success) {
   for (var i=begin; i<=end; i++) {
     if (that.data.errorArray[i]) {
       error = true
-      break
-      console.log(that.data.errorArray[i])
+      break;
     }
   }
   if (error) {

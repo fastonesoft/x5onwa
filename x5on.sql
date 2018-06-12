@@ -135,17 +135,6 @@ CREATE TABLE xonUser (
   UNIQUE KEY uid (uid)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户列表';
 
-/**
-  视图：不是教师的用户
- */
-
-CREATE VIEW xovUserNotTeach
-AS
-  SELECT id, nick_name, name, 0 as checked
-  FROM xonUser a
-  WHERE a.id NOT IN (
-    SELECT user_id FROM xonSchUser
-  )
 
 CREATE TABLE xonUserGroup (
   user_id VARCHAR(36) NOT NULL,
@@ -156,15 +145,6 @@ CREATE TABLE xonUserGroup (
   FOREIGN KEY (user_id) REFERENCES xonUser(id),
   FOREIGN KEY (group_id) REFERENCES xonGroup(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='分组用户';
-
-/**
-  用户权限视图
- */
-CREATE VIEW xovUserRole
-AS
-  SELECT DISTINCT user_id, role_id
-  FROM xonUserGroup c INNER JOIN xonGroupRole d
-  ON c.group_id = d.group_id;
 
 
 
@@ -236,17 +216,10 @@ CREATE TABLE xonSchool (
 INSERT INTO xonSchool VALUES ('32128402', replace(uuid(), '-', ''), '02', '实验初中', '泰州市姜堰区实验初级中学', 2, '321284');
 INSERT INTO xonSchool VALUES ('32128401', replace(uuid(), '-', ''), '02', '励才实验', '泰州市姜堰区励才实验', 2, '321284');
 
-
-CREATE VIEW xovSchUser
-AS
-  SELECT user_id, sch_id, name as sch_name
-  FROM xonSchUser A LEFT JOIN xonSchool B
-  ON A.sch_id = B.id
-
 /**
   学校用户 -> 老师
  */
-CREATE TABLE xonSchUser (
+CREATE TABLE xonSchoolTeach (
   uid VARCHAR(36) NOT NULL,
   user_id VARCHAR(36) NOT NULL,
   sch_id VARCHAR(10) NOT NULL,
@@ -256,6 +229,7 @@ CREATE TABLE xonSchUser (
   FOREIGN KEY (user_id) REFERENCES xonUser(id),
   FOREIGN KEY (sch_id) REFERENCES xonSchool(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户注册的学校';
+
 
 CREATE TABLE xonChild (
   id VARCHAR(20) NOT NULL,  /* 用身份证号 - 不可变更 */
@@ -267,7 +241,7 @@ CREATE TABLE xonChild (
   UNIQUE KEY idc (idc)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='孩子表';
 
-CREATE TABLE xonUserChilds (
+CREATE TABLE xonParentChilds (
   uid VARCHAR(36) NOT NULL,
   user_id VARCHAR(36) NOT NULL,
   child_id VARCHAR(20) NOT NULL,
@@ -280,7 +254,7 @@ CREATE TABLE xonUserChilds (
   FOREIGN KEY (user_id) REFERENCES xonUser(id),
   FOREIGN KEY (child_id) REFERENCES xonChild(id),
   FOREIGN KEY (relation_id) REFERENCES xonRelation(id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='我的孩子';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='家长孩子';
 
 CREATE TABLE xonRelation (
   id INT(11) NOT NULL,
@@ -298,7 +272,7 @@ INSERT INTO xonRelation VALUES (4, replace(uuid(), '-', ''), '朋友');
 /**
   自定义编号
  */
-CREATE TABLE xonSchCode (
+CREATE TABLE xonSchoolCode (
   id VARCHAR(20) NOT NULL,  /* id = sch_id + code */
   uid VARCHAR(36) NOT NULL,
   sch_id VARCHAR(10) NOT NULL,
@@ -562,7 +536,7 @@ CREATE TABLE xonGradeStudOut (
 /**
   可变属性记录表 - 定制表格
  */
-CREATE TABLE xonUserCustom (
+CREATE TABLE xonParentCustom (
   id VARCHAR(15) NOT NULL,  /* 学校编号 + 5位流水号 => sch_id + code */
   uid VARCHAR(36) NOT NULL,
   code VARCHAR(5) NOT NULL,
@@ -575,12 +549,12 @@ CREATE TABLE xonUserCustom (
   FOREIGN KEY (sch_id) REFERENCES xonSchool(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='定制表格名称';
 
-INSERT INTO xonUserCustom VALUES ('321284020001', replace(uuid(), '-', ''), '0001', '报名信息', 1, '32128402');
+INSERT INTO xonParentCustom VALUES ('321284020001', replace(uuid(), '-', ''), '0001', '报名信息', 1, '32128402');
 
 /**
   可变属性记录表 - 定制字段
  */
-CREATE TABLE xonUserCustProp (
+CREATE TABLE xonParentCustProp (
   id VARCHAR(20) NOT NULL,  /* 定制表格编号 + 流水号 => custom_id + code */
   uid VARCHAR(36) NOT NULL,
   code VARCHAR(2) NOT NULL,
@@ -590,28 +564,26 @@ CREATE TABLE xonUserCustProp (
   custom_id VARCHAR(15) NOT NULL,
   PRIMARY KEY (id),
   UNIQUE KEY uid (uid),
-  FOREIGN KEY (custom_id) REFERENCES xonUserCustom(id)
+  FOREIGN KEY (custom_id) REFERENCES xonParentCustom(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='定制表格字段';
 
-INSERT INTO xonUserCustProp VALUES ('32128402000101', replace(uuid(), '-', ''), '01', '身份证号', 1, '', '321284020001');
+INSERT INTO xonParentCustProp VALUES ('32128402000101', replace(uuid(), '-', ''), '01', '身份证号', 1, '', '321284020001');
 
 
 /**
   可变属性记录表 - 定制表格数据
  */
-CREATE TABLE xonUserCustValue (
+CREATE TABLE xonParentCustValue (
   uid VARCHAR(36) NOT NULL,
   prop_id VARCHAR(20) NOT NULL,
   user_id VARCHAR(36) NOT NULL,
   value VARCHAR(200) NOT NULL,
   PRIMARY KEY (uid),
-  FOREIGN KEY (prop_id) REFERENCES xonUserCustProp(id),
+  FOREIGN KEY (prop_id) REFERENCES xonParentCustProp(id),
   FOREIGN KEY (user_id) REFERENCES xonUser(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='定制表格数据';
 
-INSERT INTO xonUserCustValue VALUES (replace(uuid(), '-', ''), '32128402000101', 'o47ZhvzWPWSNS26vG_45Fuz5JMZk', '32102819790209301X');
-
-
+INSERT INTO xonParentCustValue VALUES (replace(uuid(), '-', ''), '32128402000101', 'o47ZhvzWPWSNS26vG_45Fuz5JMZk', '32102819790209301X');
 
 
 
@@ -678,6 +650,39 @@ INSERT INTO xonGrade VALUES ('32128402201509', replace(uuid(), '-', ''), '321284
 INSERT INTO xonGrade VALUES ('32128402201607', replace(uuid(), '-', ''), '321284022016', 2016, 7);
 INSERT INTO xonGrade VALUES ('32128402201608', replace(uuid(), '-', ''), '321284022016', 2017, 8);
 INSERT INTO xonGrade VALUES ('32128402201707', replace(uuid(), '-', ''), '321284022017', 2017, 7);
+
+
+
+
+/**
+  视图：用户权限
+ */
+CREATE VIEW xovUserRole
+AS
+  SELECT DISTINCT user_id, role_id
+  FROM xonUserGroup c INNER JOIN xonGroupRole d
+  ON c.group_id = d.group_id;
+
+/**
+  视图：不是教师的用户
+ */
+CREATE VIEW xovUserNotTeach
+AS
+  SELECT id, nick_name, name, 0 as checked
+  FROM xonUser a
+  WHERE a.id NOT IN (
+    SELECT user_id FROM xonSchoolTeach
+  );
+
+/**
+  视图：查询学校老师
+ */
+CREATE VIEW xovSchoolTeach
+AS
+  SELECT user_id, sch_id, name as sch_name
+  FROM xonSchoolTeach A LEFT JOIN xonSchool B
+  ON A.sch_id = B.id;
+
 
 
 

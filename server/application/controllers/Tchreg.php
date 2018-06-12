@@ -1,8 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-use QCloud_WeApp_SDK\Auth\LoginService as LoginService;
-use QCloud_WeApp_SDK\Constants as Constants;
 use QCloud_WeApp_SDK\Mysql\Mysql as DB;
 use QCloud_WeApp_SDK\Model;
 
@@ -42,7 +40,7 @@ class Tchreg extends CI_Controller {
         $result = DB::select('xonSchool', ['id as sch_id', 'name as sch_name']);
       } else {
         // 检查注册学校
-        $result = DB::select('xovSchUser', ['sch_id', 'sch_name'], ['user_id' => $unionId]);
+        $result = DB::select('xovSchoolTeach', ['sch_id', 'sch_name'], ['user_id' => $unionId]);
       }
       // 返回信息
       $this->json(['code' => 0, 'data' => $result]);
@@ -64,9 +62,9 @@ class Tchreg extends CI_Controller {
       $user_id = $param['user_id'];
       $uid = bin2hex(openssl_random_pseudo_bytes(16));
       // 添加数据
-      $result = DB::row('xonSchUser', ['*'], compact('user_id'));
+      $result = DB::row('xonSchoolTeach', ['*'], compact('user_id'));
       if ($result === NULL) {
-        DB::insert('xonSchUser', compact('uid', 'user_id', 'sch_id'));
+        DB::insert('xonSchoolTeach', compact('uid', 'user_id', 'sch_id'));
       }
       // 返回信息
       $this->json(['code' => 0, 'data' => []]);

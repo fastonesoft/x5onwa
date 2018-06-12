@@ -9,9 +9,20 @@ use \Exception;
 
 class Login
 {
+  public static function login ($success, $fail) {
+    $result = LoginService::login();
+    if ($result['loginState'] === Constants::S_AUTH) {
+      call_user_func($success, $result['userinfo']);
+    } else {
+      call_user_func($fail, ['code' => -1, 'data' => $result['error']]);
+    }
+  }
+
   public static function check ($success, $fail) {
     $result = LoginService::check();
     if ($result['loginState'] === Constants::S_AUTH) {
+      // 增加权限检测
+      // 失败 call_user_func($fail, ['code' => -1, 'data' => []]);
       call_user_func($success, $result['userinfo']);
     } else {
       call_user_func($fail, ['code' => -1, 'data' => []]);
