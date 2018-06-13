@@ -24,7 +24,7 @@ Page({
   },
 
   rolesetSubmit: function (e) {
-    // 此表单不需要检测
+    // 不需要检测
     x5on.postForm({
       url: x5on.url.rolesetupdate,
       data: e.detail.value,

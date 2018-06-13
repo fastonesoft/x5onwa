@@ -1,1 +1,35 @@
 <!--pages/index/rolegroup.wxml-->
+
+<view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
+
+  <view class="weui-cells__title">分组设置</view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_select">
+      <view class="weui-cell__hd weui-cell__hd_in-select-after">
+        <view class="weui-label">分组选择</view>
+      </view>
+      <view class="weui-cell__bd">
+        <picker bindchange="pickerChange" value="{{pIndex}}" range="{{pickers}}" range-key="name" disabled="{{pickers.length===0}}">
+          <view class="weui-select weui-select_in-select-after">{{pickers[pIndex].name}}</view>
+        </picker>
+      </view>
+    </view>
+  </view>
+
+<form bindsubmit="rolegroupSubmit" wx:if="{{roleItems.length>0}}">
+  <view class="weui-cells__title">是否设置</view>
+  <view class="weui-cells weui-cells_after-title">
+  <block wx:for="{{roleItems}}" wx:key="id">
+    <view class="weui-cell weui-cell_switch">
+      <view class="weui-cell__bd">{{item.title}}</view>
+      <view class="weui-cell__ft">
+        <switch name="{{item.id}}" checked="{{item.has_role}}"/>
+      </view>
+    </view>
+  </block>
+  </view>
+  <view class="weui-btn-area">
+    <button type="primary" form-type="submit">提交修改</button>
+  </view>
+    <input name="group_id" hidden="true" value="{{group_id}}"></input>
+</form>

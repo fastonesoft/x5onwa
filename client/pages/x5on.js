@@ -3,6 +3,40 @@ var config = require('../config')
 var util = require('../utils/util.js')
 var session = require('../vendor/wafer2-client-sdk/lib/session.js')
 
+/**
+ * 请求列表
+ * @param {String} 地外服务地址列表
+ */
+var host = config.service.host;
+var doUrl = {
+  host,
+  // 权限地址
+  role: `${host}/weapp/role`,
+  // 登录地址
+  login: `${host}/weapp/login`,
+  // TODO用户请求
+  user: `${host}/weapp/user`,
+  // 编码地址
+  schcode: `${host}/weapp/schcode`,
+
+  // 教师注册
+  tchreg: `${host}/weapp/tchreg`,
+  tchsch: `${host}/weapp/tchreg/usersch`,
+  tchschreg: `${host}/weapp/tchreg/usereg`,
+
+  // 权限设置
+  roleset: `${host}/weapp/roleset`,
+  rolesetupdate: `${host}/weapp/roleset/update`,
+
+  // 权限分组
+  rolegroup: `${host}/weapp/rolegroup`,
+  rolegrouprole: `${host}/weapp/rolegroup/role`,
+  rolegroupupdate: `${host}/weapp/rolegroup/update`,
+
+  // 错误测试地址
+  test: `${host}/weapp/data`
+};
+
 
 /**
  * 登录检测
@@ -42,7 +76,7 @@ var doCheck = function (options) {
       }
     }
   });
-}
+};
 
 /**
  * 程序登录
@@ -91,7 +125,7 @@ var doLogin = function (options) {
       }
     }
   });
-}
+};
 
 /**
  * 数据查询
@@ -114,7 +148,7 @@ var doRequest = function (options) {
       util.showModel('查询失败', message)
     }
   })
-}
+};
 
 /**
  * 错误显示
@@ -131,14 +165,14 @@ var doShowError = function (that, message) {
       errorMessage: '错误提示'
     });
   }, 3000);
-}
+};
 
 /**
  * 成功提示
  */
 var doSuccess = function (message) {
   util.showSuccess(message);
-}
+};
 
 /**
  * 输入检测
@@ -166,7 +200,7 @@ var doCheckInput = function (event, that) {
   if (!error) return
   // 出错提示
   doShowError(that, message)
-}
+};
 
 /**
  * 表单提交
@@ -190,7 +224,7 @@ var doCheckForm = function (that, begin, end, success) {
   }
   // 成功回调
   if (typeof success === 'function') success()
-}
+};
 
 /**
  * 数据提交
@@ -235,36 +269,7 @@ var doPostForm = function (options) {
       util.showModel('数据提交', message)
     }
   })  
-}
-
-/**
- * 请求列表
- * @param {String} 地外服务地址列表
- */
-var host = config.service.host;
-var doUrl = {
-  host,
-  // 权限地址
-  role: `${host}/weapp/role`,
-  // 登录地址
-  login: `${host}/weapp/login`,
-  // TODO用户请求
-  user: `${host}/weapp/user`,
-  // 编码地址
-  schcode: `${host}/weapp/schcode`,
-
-  // 教师注册
-  tchreg: `${host}/weapp/tchreg`,
-  tchsch: `${host}/weapp/tchreg/usersch`,
-  tchschreg: `${host}/weapp/tchreg/usereg`,
-
-  // 权限设置
-  roleset: `${host}/weapp/roleset`,
-  rolesetupdate: `${host}/weapp/roleset/update`,
-
-  // 错误测试地址
-  test: `${host}/weapp/data`
-}
+};
 
 // 对外接口
 module.exports = {
