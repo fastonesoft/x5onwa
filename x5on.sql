@@ -67,9 +67,11 @@ INSERT INTO xonRole VALUES (21, replace(uuid(), '-', ''), 'students', '学生名
 
 INSERT INTO xonRole VALUES (91, replace(uuid(), '-', ''), 'users', '用户列表', 1, 9);
 INSERT INTO xonRole VALUES (92, replace(uuid(), '-', ''), 'userset', '用户设置', 1, 9);
-INSERT INTO xonRole VALUES (93, replace(uuid(), '-', ''), 'userole', '权限分配', 1, 9);
-INSERT INTO xonRole VALUES (94, replace(uuid(), '-', ''), 'schcode', '编码设置', 1, 9);
-INSERT INTO xonRole VALUES (95, replace(uuid(), '-', ''), 'tchreg', '教师注册', 1, 9);
+INSERT INTO xonRole VALUES (93, replace(uuid(), '-', ''), 'roleset', '权限设置', 1, 9);
+INSERT INTO xonRole VALUES (94, replace(uuid(), '-', ''), 'rolegroup', '权限分组', 1, 9);
+INSERT INTO xonRole VALUES (95, replace(uuid(), '-', ''), 'roledist', '权限分配', 1, 9);
+INSERT INTO xonRole VALUES (96, replace(uuid(), '-', ''), 'schcode', '编码设置', 1, 9);
+INSERT INTO xonRole VALUES (97, replace(uuid(), '-', ''), 'tchreg', '教师注册', 1, 9);
 
 
 CREATE TABLE xonGroup (
@@ -120,6 +122,8 @@ INSERT INTO xonGroupRole VALUES (99, 92, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (99, 93, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (99, 94, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (99, 95, replace(uuid(), '-', ''));
+INSERT INTO xonGroupRole VALUES (99, 96, replace(uuid(), '-', ''));
+INSERT INTO xonGroupRole VALUES (99, 97, replace(uuid(), '-', ''));
 
 
 CREATE TABLE xonUser (
