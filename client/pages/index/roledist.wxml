@@ -1,4 +1,4 @@
-<!--pages/index/tchreg.wxml-->
+<!--pages/index/roledist.wxml-->
 
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
@@ -25,7 +25,7 @@
     <view class="weui-cells weui-cells_after-title">
       <radio-group name="user_id" bindchange="radioChange">
         <label class="weui-cell weui-check__label" wx:for="{{radios}}" wx:key="id">
-          <radio class="weui-check" value="{{item.id}}" checked="{{item.checked}}"/>
+          <radio class="weui-check" value="{{item.id}}" checked="{{item.checked}}" bindtap=""/>
           <view class="weui-cell__bd">{{item.name}}（{{item.nick_name}}）</view>
           <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
             <icon class="weui-icon-radio" type="success_no_circle" size="16"></icon>
@@ -34,11 +34,11 @@
       </radio-group>
     </view>
   </view>
-  <view class="weui-cells__title">学校选择</view>
+  <view class="weui-cells__title">权限分组</view>
   <view class="weui-cells weui-cells_after-title">
     <view class="weui-cell weui-cell_select">
       <view class="weui-cell__hd weui-cell__hd_in-select-after">
-        <view class="weui-label">注册学校</view>
+        <view class="weui-label">分组选择</view>
       </view>
       <view class="weui-cell__bd">
         <picker bindchange="pickerChange" value="{{pIndex}}" range="{{pickers}}" range-key="sch_name" disabled="{{pickers.length===0||pickers.length===1}}">
@@ -48,7 +48,17 @@
     </view>
   </view>
   <view class="weui-btn-area">
-    <button type="primary" form-type="submit">教师注册</button>
+    <button type="primary" form-type="submit">设置权限</button>
   </view>
   <input name="sch_id" hidden="true" value="{{sch_id}}"></input>
 </form>
+
+<view wx:if="{{1}}">
+  <view class="weui-cells__title">成员列表</view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell">
+      <view class="weui-cell__bd">教师姓名</view>
+      <view class="weui-cell__ft"><icon type="cancel" size="26"></icon></view>
+    </view>
+  </view>
+</view>     

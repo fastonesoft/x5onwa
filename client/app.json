@@ -6,6 +6,7 @@
     "pages/index/tchreg",
     "pages/index/roleset",
     "pages/index/rolegroup",
+    "pages/index/roledist",
     "pages/login/login",
     "pages/class/class",
     "pages/phone/phone"
