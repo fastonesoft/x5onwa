@@ -34,4 +34,27 @@ class xonRole
     });
     return $result;
   }
+
+  /**
+   * 更新权限列表中“显示”设置
+   * @param $roles        变更列表
+   * @throws Exception
+   */
+  public static function update ($roles) {
+    // 计数
+    $result = 0;
+    foreach ($roles as $k => $v) {
+      // 对象截取
+      $uid = $k;
+      $can_show = $v === 'true' ? 1 : 0;
+      // 查询记录
+      $res = DB::row('xonRole', ['*'], compact('uid', 'can_show'));
+      if ($res === NULL) {
+        // 更新记录
+        DB::update('xonRole', compact('can_show'), compact('uid'));
+        $result++;
+      }
+    }
+    return $result;
+  }
 }

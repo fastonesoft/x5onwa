@@ -1,0 +1,19 @@
+<!--pages/index/roleset.wxml-->
+<view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
+
+<form bindsubmit="rolesetSubmit">
+  <view class="weui-cells__title">是否显示</view>
+  <view class="weui-cells weui-cells_after-title">
+  <block wx:for="{{roleItems}}" wx:key="uid">
+    <view class="weui-cell weui-cell_switch">
+      <view class="weui-cell__bd">{{item.title}}</view>
+      <view class="weui-cell__ft">
+        <switch name="{{item.uid}}" checked="{{item.can_show}}"/>
+      </view>
+    </view>
+  </block>
+  </view>
+  <view class="weui-btn-area">
+    <button type="primary" form-type="submit">提交修改</button>
+  </view>
+</form>

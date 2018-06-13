@@ -63,7 +63,7 @@
     </view>
   </view>
   <view class="weui-btn-area">
-    <button class="weui-btn" type="primary" form-type="submit">生成分段号</button>
+    <button type="primary" form-type="submit">生成分段号</button>
   </view>
 </form>
 
@@ -106,6 +106,6 @@
     </view>    
   </view>
   <view class="weui-btn-area">
-    <button class="weui-btn" type="primary" form-type="submit">生成流水号</button>
+    <button type="primary" form-type="submit">生成流水号</button>
   </view>
 </form>

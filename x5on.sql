@@ -91,6 +91,7 @@ INSERT INTO xonGroup VALUES (5, replace(uuid(), '-', ''), '学科主管');
 INSERT INTO xonGroup VALUES (6, replace(uuid(), '-', ''), '年级主管');
 INSERT INTO xonGroup VALUES (7, replace(uuid(), '-', ''), '学校管理');
 INSERT INTO xonGroup VALUES (8, replace(uuid(), '-', ''), '集团管理');
+INSERT INTO xonGroup VALUES (9, replace(uuid(), '-', ''), '流量控制');
 INSERT INTO xonGroup VALUES (99, replace(uuid(), '-', ''), '系统管理');
 
 CREATE TABLE xonGroupRole (

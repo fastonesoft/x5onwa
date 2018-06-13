@@ -4,6 +4,8 @@
     "pages/index/regstud",
     "pages/index/schcode",
     "pages/index/tchreg",
+    "pages/index/roleset",
+    "pages/index/rolegroup",
     "pages/login/login",
     "pages/class/class",
     "pages/phone/phone"

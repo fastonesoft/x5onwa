@@ -134,6 +134,13 @@ var doShowError = function (that, message) {
 }
 
 /**
+ * 成功提示
+ */
+var doSuccess = function (message) {
+  util.showSuccess(message);
+}
+
+/**
  * 输入检测
  * 页面数据准备：
  *   errorShow: false
@@ -251,6 +258,10 @@ var doUrl = {
   tchsch: `${host}/weapp/tchreg/usersch`,
   tchschreg: `${host}/weapp/tchreg/usereg`,
 
+  // 权限设置
+  roleset: `${host}/weapp/roleset`,
+  rolesetupdate: `${host}/weapp/roleset/update`,
+
   // 错误测试地址
   test: `${host}/weapp/data`
 }
@@ -265,4 +276,5 @@ module.exports = {
   checkForm: doCheckForm,
   postForm: doPostForm,
   showError: doShowError,
+  showSuccess: doSuccess,
 }

@@ -1,17 +1,17 @@
 <!--index.wxml-->
 <view class="container">
   <!--滑动展示-->
-  <swiper indicator-dots="true" autoplay="true" circular="true" interval="2000" duration="500" class="index-swiper">
+  <swiper indicator-dots="true" autoplay="true" circular="true" interval="2000" duration="500" class="swiper">
     <block wx:for="{{imgUrls}}" wx:key="*this">
       <swiper-item>
-        <image src="{{item}}" class="index-swiper-img"></image>
+        <image src="{{item}}" class="swiper-img"></image>
       </swiper-item>
     </block>
   </swiper>
 
   <!--功能导航-->
-  <view class="index-scroll">
-    <view wx:for="{{cores}}" wx:key="id" class="cores">
+  <view class="cores">
+    <block wx:for="{{cores}}" wx:key="id">
       <view wx:if="{{item.has_role}}" class="core-item" data-itemid="{{item.name}}" bindtap="itemClick">
         <image src="/images/index/{{item.name}}.png"></image>
         <text>{{item.title}}</text>
@@ -20,6 +20,6 @@
         <image src="/images/index/{{item.name}}@disabled.png"></image>
         <text>{{item.title}}</text>
       </view>
-    </view>
+    </block>
   </view>
 </view>
