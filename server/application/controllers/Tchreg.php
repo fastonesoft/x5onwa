@@ -31,15 +31,16 @@ class Tchreg extends CI_Controller {
    */
   public function usersch() {
     Model\xonLogin::check(function ($user) {
-      $unionId = $user['unionId'];
-      $result = DB::select('xonUserGroup', ['*'], ['user_id' => $unionId, 'group_id' => Model\X5on::GROUP_ADMIN_VALUE]);
+      $user_id = $user['unionId'];
+      $group_id = Model\X5on::GROUP_ADMIN_VALUE;
+      $result = DB::select('xonUserGroup', ['*'], compact('user_id', 'group_id'));
       // 检测是否：系统管理员
       if (count($result) === 1) {
         // 显示学校列表
         $result = DB::select('xonSchool', ['id as sch_id', 'name as sch_name']);
       } else {
         // 检查注册学校
-        $result = DB::select('xovSchoolTeach', ['sch_id', 'sch_name'], ['user_id' => $unionId]);
+        $result = DB::select('xovSchoolTeach', ['sch_id', 'sch_name'], compact('user_id'));
       }
       // 返回信息
       $this->json(['code' => 0, 'data' => $result]);

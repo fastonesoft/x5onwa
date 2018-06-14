@@ -684,9 +684,11 @@ AS
  */
 CREATE VIEW xovSchoolTeach
 AS
-  SELECT user_id, sch_id, name as sch_name
+  SELECT user_id, C.name as user_name, nick_name, sch_id, B.name as sch_name
   FROM xonSchoolTeach A LEFT JOIN xonSchool B
-  ON A.sch_id = B.id;
+  ON A.sch_id = B.id
+  LEFT JOIN xonUser C
+  ON A.user_id = C.id;
 
 
 

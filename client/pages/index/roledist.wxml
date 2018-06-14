@@ -59,7 +59,9 @@
   <view class="weui-cells weui-cells_after-title">
     <view class="weui-cell">
       <view class="weui-cell__bd">教师姓名</view>
-      <view class="weui-cell__ft"><icon type="cancel" size="30"></icon></view>
+      <view class="weui-cell__ft">
+       <image src="../../images/remove.png" class="remove-icon"></image>
+      </view>
     </view>
   </view>
     <input name="group_id" hidden="true" value="{{group_id}}"></input>

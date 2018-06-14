@@ -1,4 +1,6 @@
 // pages/index/roledist.js
+var x5on = require('../x5on.js')
+
 Page({
   data: {
     errorShow: false,
@@ -7,6 +9,10 @@ Page({
 
     radios: [],
     rIndex: 0,
+  },
+
+  checkInput: function (e) {
+    x5on.checkInput(e, this)
   },
 
   findSubmit: function (e) {
