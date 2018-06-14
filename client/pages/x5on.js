@@ -5,7 +5,7 @@ var session = require('../vendor/wafer2-client-sdk/lib/session.js')
 
 /**
  * 请求列表
- * @param {String} 地外服务地址列表
+ * @param {String} 服务地址列表
  */
 var host = config.service.host;
 var doUrl = {
@@ -32,6 +32,9 @@ var doUrl = {
   rolegroup: `${host}/weapp/rolegroup`,
   rolegrouprole: `${host}/weapp/rolegroup/role`,
   rolegroupupdate: `${host}/weapp/rolegroup/update`,
+
+  // 权限分配
+  roledist: `${host}/weapp/roledist`,
 
   // 错误测试地址
   test: `${host}/weapp/data`
