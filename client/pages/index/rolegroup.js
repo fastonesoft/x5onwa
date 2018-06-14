@@ -6,7 +6,7 @@ Page({
     roleItems: [],
     pickers: [],
     pIndex: -1,
-    group_id: ''
+    group_id: '',
   },
 
   onLoad: function () {

@@ -47,4 +47,45 @@ class Roledist extends CI_Controller
       $this->json($error);
     });
   }
+
+  /**
+   * 添加用户进组
+   */
+  public function update() {
+    Model\xonLogin::check(function ($user) {
+      // 获取参数
+      $param = $_POST;
+      // 准备数据
+      $result = 0;
+      $user_id = $param['user_id'];
+      $group_id = $param['group_id'];
+      $uid = bin2hex(openssl_random_pseudo_bytes(16));
+      $res = DB::row('xonUserGroup', ['*'], compact('user_id', 'group_id'));
+      if ($res === NULL) {
+        $result++;
+        DB::insert('xonUserGroup', compact('uid', 'user_id', 'group_id'));
+      }
+      // 返回信息
+      $this->json(['code' => 0, 'data' => $result]);
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
+
+  /**
+   * 获取当前组下用户列表
+   */
+  public function groupuser() {
+    Model\xonLogin::check(function ($user) {
+      // 获取参数
+      $param = $_POST;
+      // 准备数据
+      $group_id = $param['group_id'];
+      $result = DB::select('xovSchoolTeach', ['sch_id'], compact('user_id'));
+      // 返回信息
+      $this->json(['code' => 0, 'data' => $result]);
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
 }

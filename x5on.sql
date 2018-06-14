@@ -85,13 +85,13 @@ CREATE TABLE xonGroup (
 
 INSERT INTO xonGroup VALUES (1, replace(uuid(), '-', ''), '临时用户');
 INSERT INTO xonGroup VALUES (2, replace(uuid(), '-', ''), '学生家长');
-INSERT INTO xonGroup VALUES (3, replace(uuid(), '-', ''), '科任老师');
-INSERT INTO xonGroup VALUES (4, replace(uuid(), '-', ''), '班级主管');
-INSERT INTO xonGroup VALUES (5, replace(uuid(), '-', ''), '学科主管');
-INSERT INTO xonGroup VALUES (6, replace(uuid(), '-', ''), '年级主管');
-INSERT INTO xonGroup VALUES (7, replace(uuid(), '-', ''), '学校管理');
-INSERT INTO xonGroup VALUES (8, replace(uuid(), '-', ''), '集团管理');
-INSERT INTO xonGroup VALUES (9, replace(uuid(), '-', ''), '流量控制');
+INSERT INTO xonGroup VALUES (3, replace(uuid(), '-', ''), '流量控制');
+INSERT INTO xonGroup VALUES (4, replace(uuid(), '-', ''), '科任老师');
+INSERT INTO xonGroup VALUES (5, replace(uuid(), '-', ''), '班级主管');
+INSERT INTO xonGroup VALUES (6, replace(uuid(), '-', ''), '学科主管');
+INSERT INTO xonGroup VALUES (7, replace(uuid(), '-', ''), '年级主管');
+INSERT INTO xonGroup VALUES (8, replace(uuid(), '-', ''), '学校管理');
+INSERT INTO xonGroup VALUES (9, replace(uuid(), '-', ''), '集团管理');
 INSERT INTO xonGroup VALUES (99, replace(uuid(), '-', ''), '系统管理');
 
 CREATE TABLE xonGroupRole (

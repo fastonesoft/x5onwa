@@ -19,7 +19,7 @@
   </view>
 </form>
 
-<form bindsubmit="updateSubmit">
+<form bindsubmit="roledistSubmit">
   <view wx:if="{{radios.length>0}}">
     <view class="weui-cells__title">教师选择</view>
     <view class="weui-cells weui-cells_after-title">
@@ -40,17 +40,17 @@
       <view class="weui-cell__hd weui-cell__hd_in-select-after">
         <view class="weui-label">分组选择</view>
       </view>
-      <view class="weui-cell__bd">
-        <picker bindchange="pickerChange" value="{{pIndex}}" range="{{pickers}}" range-key="sch_name" disabled="{{pickers.length===0||pickers.length===1}}">
-          <view class="weui-select weui-select_in-select-after">{{pickers[pIndex].sch_name}}</view>
-        </picker>
-      </view>
+    <view class="weui-cell__bd">
+      <picker bindchange="pickerChange" value="{{pIndex}}" range="{{pickers}}" range-key="name" disabled="{{pickers.length===0}}">
+        <view class="weui-select weui-select_in-select-after">{{pickers[pIndex].name}}</view>
+      </picker>
+    </view>
     </view>
   </view>
   <view class="weui-btn-area">
     <button type="primary" form-type="submit">设置权限</button>
   </view>
-  <input name="sch_id" hidden="true" value="{{sch_id}}"></input>
+  <input name="group_id" hidden="true" value="{{group_id}}"></input>
 </form>
 
 <form bindsubmit="updateSubmit" wx:if="{{1}}">
@@ -64,6 +64,6 @@
       </view>
     </view>
   </view>
-    <input name="group_id" hidden="true" value="{{group_id}}"></input>
+
         <input name="user_id" hidden="true" value="{{user_id}}"></input>
 </form>
