@@ -5,13 +5,12 @@ use QCloud_WeApp_SDK\Mysql\Mysql as DB;
 use QCloud_WeApp_SDK\Model;
 
 class Tchreg extends CI_Controller {
-
   /**
    * 不是教师的用户
    * 根据姓名查询出不是教师的用户列表
    */
   public function index() {
-    Model\Login::check(function ($user) {
+    Model\xonLogin::check(function ($user) {
       // 获取参数
       $param = $_POST;
       // 处理数据
@@ -31,7 +30,7 @@ class Tchreg extends CI_Controller {
    * 有学校返回[学校]、没有学校返回[]
    */
   public function usersch() {
-    Model\Login::check(function ($user) {
+    Model\xonLogin::check(function ($user) {
       $unionId = $user['unionId'];
       $result = DB::select('xonUserGroup', ['*'], ['user_id' => $unionId, 'group_id' => Model\X5on::GROUP_ADMIN_VALUE]);
       // 检测是否：系统管理员
@@ -54,7 +53,7 @@ class Tchreg extends CI_Controller {
    * 根据提交的数据，注册相应的学校
    */
   public function usereg() {
-    Model\Login::check(function ($user) {
+    Model\xonLogin::check(function ($user) {
       // 获取参数
       $param = $_POST;
       // 准备数据

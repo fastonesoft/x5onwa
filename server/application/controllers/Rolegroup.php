@@ -6,12 +6,11 @@ use QCloud_WeApp_SDK\Model;
 
 class Rolegroup extends CI_Controller
 {
-
   /**
    * 权限分组
    */
   public function index() {
-    Model\Login::check(function ($user) {
+    Model\xonLogin::check(function ($user) {
       // 分组列表
       $result = DB::select('xonGroup', ['id', 'name'], '', 'and', 'order by id');
       // 返回信息
@@ -22,7 +21,7 @@ class Rolegroup extends CI_Controller
   }
 
   public function role() {
-    Model\Login::check(function ($user) {
+    Model\xonLogin::check(function ($user) {
       // 获取参数
       $param = $_POST;
       // 分组权限
@@ -41,7 +40,7 @@ class Rolegroup extends CI_Controller
   }
 
   public function update() {
-    Model\Login::check(function ($user) {
+    Model\xonLogin::check(function ($user) {
       // 获取参数
       $param = $_POST;
       $result = Model\xonRoleGroup::update($param);

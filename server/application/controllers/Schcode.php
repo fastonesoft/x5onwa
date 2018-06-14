@@ -8,7 +8,7 @@ use QCloud_WeApp_SDK\Model;
 
 class Schcode extends CI_Controller {
   public function index() {
-    Model\Login::check(function ($user) {
+    Model\xonLogin::check(function ($user) {
       // 获取参数
       $param = $_POST;
       if (count($param) == 5) {

@@ -5,7 +5,7 @@ use QCloud_WeApp_SDK\Model;
 
 class Login extends CI_Controller {
   public function index() {
-    Model\Login::login(function ($userinfor) {
+    Model\xonLogin::login(function ($userinfor) {
       $datainfor = $userinfor['userinfo'];
       // 记录用户
       Model\xonUser::store($datainfor);

@@ -3,10 +3,6 @@ var x5on = require('../x5on.js')
 
 Page({
   data: {
-    errorShow: false,
-    errorMessage: '错误提示',
-    errorArray: [1],
-
     roleItems: [],
     pickers: [],
     pIndex: -1,
@@ -30,8 +26,7 @@ Page({
     var that = this
     var index = e.detail.value
     var group_id = this.data.pickers[index].id
-    that.setData({ pIndex: index, group_id: group_id })
-
+    that.setData({ pIndex: index, group_id: group_id });
     // 不需要检测
     x5on.postForm({
       url: x5on.url.rolegrouprole,
