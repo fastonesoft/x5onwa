@@ -12,6 +12,7 @@ Page({
     radios: [],
     rIndex: 0,
     group_id: '',
+    teachs: [],
   },
 
   onLoad: function () {
@@ -65,10 +66,16 @@ Page({
     var group_id = this.data.pickers[index].id
     that.setData({ pIndex: index, group_id: group_id });
     // 刷新数据
-
+    x5on.postForm({
+      url: x5on.url.roledistgroupuser,
+      data: {group_id},
+      success: (res) => {
+        that.setData({ teachs: res.data })
+      }
+    })
   },
 
-  roledistSubmit: function (e) {
+  roledistUpdate: function (e) {
     var that = this
     var value = e.detail.value
     if (value.user_id && value.group_id) {
@@ -76,17 +83,36 @@ Page({
         url: x5on.url.roledistupdate,
         data: value,
         success: (res) => {
-          x5on.showSuccess('添加' + res.data + '个教师')
-          if (res.data && res.data === 1) {
+          x5on.showSuccess('添加' + res.data.num + '个教师')
+          if (res.data && res.data.num === 1) {
             // 添加成功，刷新数据
             var radios = that.data.radios
             radios.splice(that.data.rIndex, 1)
-            that.setData({ radios: radios })
+            that.setData({ radios: radios, teachs: res.data.data })
           }
         }
       })
     } else {
       x5on.showError(this, '教师选择、权限分组不得为空！')
     }    
+  },
+
+  roledistRemove: function (e) {
+    var that = this
+    var uid = e.currentTarget.dataset.uid
+    var index = e.currentTarget.dataset.index
+    x5on.postForm({
+      url: x5on.url.roledistdeleteuser,
+      data: {uid},
+      success: (res) => {
+        x5on.showSuccess('删除' + res.data + '个教师')
+        if (res.data && res.data === 1) {
+          // 添加成功，刷新数据
+          var teachs = that.data.teachs
+          teachs.splice(index, 1)
+          that.setData({ teachs: teachs })
+        }
+      }
+    })
   },
 })

@@ -658,6 +658,17 @@ INSERT INTO xonGrade VALUES ('32128402201707', replace(uuid(), '-', ''), '321284
 
 
 
+/**
+  视图：非管理用户查询
+ */
+CREATE VIEW xovUser
+AS
+  SELECT *
+  FROM xonUser a WHERE a.id NOT IN (
+    SELECT user_id
+    FROM xonUserGroup
+    WHERE user_id = a.id AND group_id = 99
+  );
 
 /**
   视图：用户权限
@@ -690,7 +701,14 @@ AS
   LEFT JOIN xonUser C
   ON A.user_id = C.id;
 
-
+/**
+  视图：查询组用户信息
+ */
+CREATE VIEW xovUserGroup
+AS
+  SELECT a.*, b.name as user_name, nick_name
+  FROM xonUserGroup a LEFT JOIN xonUser b
+  ON a.user_id = b.id;
 
 
 /*外键约束开启*/

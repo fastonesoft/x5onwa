@@ -19,17 +19,17 @@ class Roledist extends CI_Controller
       $name = $param["name"];
 
       $user_id = $user['unionId'];
-      $group_id = Model\X5on::GROUP_ADMIN_VALUE;
+      $group_id = Model\x5on::GROUP_ADMIN_VALUE;
       $res = DB::select('xonUserGroup', ['*'], compact('user_id', 'group_id'));
       if (count($res) === 1) {
         // 系统管理员
         // 可以对所有人，分组
-        $result = DB::select('xonUser', ['id', 'name', 'nick_name', '0 as checked'], compact('name'));
+        $result = DB::select('xovUser', ['id', 'name', 'nick_name', '0 as checked'], compact('name'));
       } else {
         // 学校管理员
         // 是否？
         //   是：只分配其所在学校
-        $group_id = Model\X5on::GROUP_SCHOOL_ADMIN_VALUE;
+        $group_id = Model\x5on::GROUP_SCHOOL_ADMIN_VALUE;
         $usergroup = DB::select('xonUserGroup', ['*'], compact('user_id', 'group_id'));
         // 管理员所在学校
         $school = DB::select('xovSchoolTeach', ['sch_id'], compact('user_id'));
@@ -56,16 +56,21 @@ class Roledist extends CI_Controller
       // 获取参数
       $param = $_POST;
       // 准备数据
-      $result = 0;
+      $num = 0;
       $user_id = $param['user_id'];
       $group_id = $param['group_id'];
       $uid = bin2hex(openssl_random_pseudo_bytes(16));
       $res = DB::row('xonUserGroup', ['*'], compact('user_id', 'group_id'));
       if ($res === NULL) {
-        $result++;
+        $num++;
         DB::insert('xonUserGroup', compact('uid', 'user_id', 'group_id'));
       }
-      // 返回信息
+      // 返回信息：
+      // 一、变更数目
+      // 二、刷新列表
+      $data = DB::select('xovUserGroup', ['uid', 'user_name', 'nick_name'], compact('group_id'));
+      $result = (object)['num' => $num, 'data' => $data];
+
       $this->json(['code' => 0, 'data' => $result]);
     }, function ($error) {
       $this->json($error);
@@ -81,11 +86,29 @@ class Roledist extends CI_Controller
       $param = $_POST;
       // 准备数据
       $group_id = $param['group_id'];
-      $result = DB::select('xovSchoolTeach', ['sch_id'], compact('user_id'));
+      $result = DB::select('xovUserGroup', ['uid', 'user_name', 'nick_name'], compact('group_id'));
+      $result = Model\x5on::addIndex($result);
       // 返回信息
       $this->json(['code' => 0, 'data' => $result]);
     }, function ($error) {
       $this->json($error);
     });
   }
+
+  /**
+   * 删除选中用户
+   */
+  public function deleteuser() {
+    Model\xonLogin::check(function ($user) {
+      // 获取参数
+      $param = $_POST;
+      $uid = $param['uid'];
+      $result = DB::delete('xonUserGroup', compact('uid'));
+      // 返回信息
+      $this->json(['code' => 0, 'data' => $result]);
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
+
 }

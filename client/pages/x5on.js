@@ -36,6 +36,8 @@ var doUrl = {
   // 权限分配
   roledist: `${host}/weapp/roledist`,
   roledistupdate: `${host}/weapp/roledist/update`,
+  roledistgroupuser: `${host}/weapp/roledist/groupuser`,
+  roledistdeleteuser: `${host}/weapp/roledist/deleteuser`,
 
   // 错误测试地址
   test: `${host}/weapp/data`

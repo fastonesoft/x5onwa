@@ -32,7 +32,7 @@ class Tchreg extends CI_Controller {
   public function usersch() {
     Model\xonLogin::check(function ($user) {
       $user_id = $user['unionId'];
-      $group_id = Model\X5on::GROUP_ADMIN_VALUE;
+      $group_id = Model\x5on::GROUP_ADMIN_VALUE;
       $result = DB::select('xonUserGroup', ['*'], compact('user_id', 'group_id'));
       // 检测是否：系统管理员
       if (count($result) === 1) {

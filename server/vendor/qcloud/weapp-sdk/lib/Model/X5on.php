@@ -2,7 +2,7 @@
 namespace QCloud_WeApp_SDK\Model;
 
 
-class X5on {
+class x5on {
   // 系统管理员组编号
   const GROUP_ADMIN_VALUE = 99;
   // 学校管理员
@@ -11,4 +11,12 @@ class X5on {
   const GROUP_TEACH_VALUE = 2;
   // 临时用户组编号
   const GROUP_TEMP_USER = 1;
+
+  public static function addIndex($arr) {
+    $index = 0;
+    foreach ($arr as $value) {
+      $value->index = $index++;
+    }
+    return $arr;
+  }
 }
