@@ -35,6 +35,7 @@ var doUrl = {
 
   // 权限分配
   roledist: `${host}/weapp/roledist`,
+  roledistgroup: `${host}/weapp/roledist/group`,
   roledistupdate: `${host}/weapp/roledist/update`,
   roledistgroupuser: `${host}/weapp/roledist/groupuser`,
   roledistdeleteuser: `${host}/weapp/roledist/deleteuser`,
@@ -102,8 +103,6 @@ var doLogin = function (options) {
             // 清除
             qcloud.clearSession();
             // 更新
-            console.log(loginResult)
-            //////////////////////////
             var loginParams = {
               code: loginResult.code,
               encryptedData: options.e.detail.encryptedData,

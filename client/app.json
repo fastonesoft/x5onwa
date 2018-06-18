@@ -7,6 +7,8 @@
     "pages/index/roleset",
     "pages/index/rolegroup",
     "pages/index/roledist",
+    "pages/index/userset",
+    "pages/index/userchilds",
     "pages/login/login",
     "pages/class/class",
     "pages/phone/phone"

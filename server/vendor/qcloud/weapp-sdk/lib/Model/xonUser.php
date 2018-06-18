@@ -21,7 +21,6 @@ class xonUser
       $uid = bin2hex(openssl_random_pseudo_bytes(16));
       $nick_name = $userinfor->nickName;
       $name = $nick_name;
-      $mobil = null;
       // 布尔型，直接设置数值
       $fixed = 0;
       $create_time = date('Y-m-d H:i:s');
@@ -29,7 +28,7 @@ class xonUser
 
       $result = DB::row('xonUser', ['*'], compact('id'));
       if ($result === NULL) {
-        DB::insert('xonUser', compact('id', 'uid', 'nick_name', 'name', 'mobil', 'fixed', 'create_time', 'last_visit_time'));
+        DB::insert('xonUser', compact('id', 'uid', 'nick_name', 'name', 'fixed', 'create_time', 'last_visit_time'));
       } else {
         DB::update(
           'xonUser',

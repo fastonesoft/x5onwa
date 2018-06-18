@@ -49,6 +49,20 @@ class Roledist extends CI_Controller
   }
 
   /**
+   * 请求部分用户组列表 >学生家长
+   */
+  public function group() {
+    Model\xonLogin::check(function ($user) {
+      $conditions = sprintf('id>%s', Model\x5on::GROUP_STUDENT_PARENT);
+      $result = DB::select('xonGroup', ['id', 'name'], $conditions, 'and', 'order by id');
+
+      $this->json(['code' => 0, 'data' => $result]);
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
+
+  /**
    * 添加用户进组
    */
   public function update() {

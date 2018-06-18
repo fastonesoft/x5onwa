@@ -58,20 +58,22 @@ CREATE TABLE xonRole (
 	FOREIGN KEY (type_id) REFERENCES xonType(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='权限列表';
 
-INSERT INTO xonRole VALUES (1, replace(uuid(), '-', ''), 'regstud', '新生报名', 1, 1);
-INSERT INTO xonRole VALUES (2, replace(uuid(), '-', ''), 'regexam', '报名审核', 1, 1);
-INSERT INTO xonRole VALUES (3, replace(uuid(), '-', ''), 'regconfirm', '确认审核', 1, 1);
-INSERT INTO xonRole VALUES (4, replace(uuid(), '-', ''), 'regcount', '报名统计', 1, 1);
+INSERT INTO xonRole VALUES (1, replace(uuid(), '-', ''), 'userset', '用户设置', 1, 1);
+INSERT INTO xonRole VALUES (2, replace(uuid(), '-', ''), 'userchilds', '用户学生', 1, 1);
+INSERT INTO xonRole VALUES (3, replace(uuid(), '-', ''), 'regstud', '新生报名', 1, 1);
+INSERT INTO xonRole VALUES (4, replace(uuid(), '-', ''), 'regexam', '报名审核', 1, 1);
+INSERT INTO xonRole VALUES (5, replace(uuid(), '-', ''), 'regconfirm', '确认审核', 1, 1);
+INSERT INTO xonRole VALUES (6, replace(uuid(), '-', ''), 'regcount', '报名统计', 1, 1);
 
 INSERT INTO xonRole VALUES (21, replace(uuid(), '-', ''), 'students', '学生名册', 1, 2);
 
-INSERT INTO xonRole VALUES (91, replace(uuid(), '-', ''), 'users', '用户列表', 1, 9);
-INSERT INTO xonRole VALUES (92, replace(uuid(), '-', ''), 'userset', '用户设置', 1, 9);
-INSERT INTO xonRole VALUES (93, replace(uuid(), '-', ''), 'roleset', '权限设置', 1, 9);
-INSERT INTO xonRole VALUES (94, replace(uuid(), '-', ''), 'rolegroup', '权限分组', 1, 9);
-INSERT INTO xonRole VALUES (95, replace(uuid(), '-', ''), 'roledist', '权限分配', 1, 9);
-INSERT INTO xonRole VALUES (96, replace(uuid(), '-', ''), 'schcode', '编码设置', 1, 9);
-INSERT INTO xonRole VALUES (97, replace(uuid(), '-', ''), 'tchreg', '教师注册', 1, 9);
+INSERT INTO xonRole VALUES (81, replace(uuid(), '-', ''), 'schcode', '编码设置', 1, 9);
+INSERT INTO xonRole VALUES (82, replace(uuid(), '-', ''), 'tchreg', '教师注册', 1, 9);
+
+
+INSERT INTO xonRole VALUES (91, replace(uuid(), '-', ''), 'roleset', '权限设置', 1, 9);
+INSERT INTO xonRole VALUES (92, replace(uuid(), '-', ''), 'rolegroup', '权限分组', 1, 9);
+INSERT INTO xonRole VALUES (93, replace(uuid(), '-', ''), 'roledist', '权限分配', 1, 9);
 
 
 CREATE TABLE xonGroup (
@@ -117,14 +119,14 @@ INSERT INTO xonGroupRole VALUES (99, 1, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (99, 2, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (99, 3, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (99, 4, replace(uuid(), '-', ''));
+INSERT INTO xonGroupRole VALUES (99, 5, replace(uuid(), '-', ''));
+INSERT INTO xonGroupRole VALUES (99, 6, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (99, 21, replace(uuid(), '-', ''));
+INSERT INTO xonGroupRole VALUES (99, 81, replace(uuid(), '-', ''));
+INSERT INTO xonGroupRole VALUES (99, 82, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (99, 91, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (99, 92, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (99, 93, replace(uuid(), '-', ''));
-INSERT INTO xonGroupRole VALUES (99, 94, replace(uuid(), '-', ''));
-INSERT INTO xonGroupRole VALUES (99, 95, replace(uuid(), '-', ''));
-INSERT INTO xonGroupRole VALUES (99, 96, replace(uuid(), '-', ''));
-INSERT INTO xonGroupRole VALUES (99, 97, replace(uuid(), '-', ''));
 
 
 CREATE TABLE xonUser (
@@ -132,7 +134,6 @@ CREATE TABLE xonUser (
   uid VARCHAR(36) NOT NULL,
   nick_name VARCHAR(36) NOT NULL,
   name VARCHAR(36) NOT NULL,
-  mobil VARCHAR(20),  /*绑定学生时，检测是否为空*/
   fixed BOOLEAN NOT NULL DEFAULT 0,
   create_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   last_visit_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -140,6 +141,31 @@ CREATE TABLE xonUser (
   UNIQUE KEY uid (uid)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户列表';
 
+CREATE TABLE xonUserKey (
+  id INT(11) NOT NULL,
+  uid VARCHAR(36) NOT NULL,
+  name VARCHAR(20) NOT NULL,
+  input_type VARCHAR(20) NOT NULL,
+  regex VARCHAR(200) NOT NULL,   /* 数据正则 */
+  required BOOLEAN NOT NULL,  /* 是否必填 */
+  fixed BOOLEAN NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY uid (uid),
+  UNIQUE KEY name (name)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户自定义字段';
+
+INSERT INTO xonUserKey VALUES (1, replace(uuid(), '-', ''), '手机号码', 'number', '^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[6-9])\d{8}$', 1, 0);
+INSERT INTO xonUserKey VALUES (2, replace(uuid(), '-', ''), '身份证号', 'idcard', '^\d{17}[0-9X]$', 1, 0);
+
+CREATE TABLE xonUserValue (
+  uid VARCHAR(36) NOT NULL,
+  user_id VARCHAR(36) NOT NULL,
+  key_id INT(11) NOT NULL,
+  value VARCHAR(200),
+  PRIMARY KEY (uid),
+  FOREIGN KEY (user_id) REFERENCES xonUser(id),
+  FOREIGN KEY (key_id) REFERENCES xonUserKey(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户自定义值';
 
 CREATE TABLE xonUserGroup (
   user_id VARCHAR(36) NOT NULL,
@@ -150,8 +176,6 @@ CREATE TABLE xonUserGroup (
   FOREIGN KEY (user_id) REFERENCES xonUser(id),
   FOREIGN KEY (group_id) REFERENCES xonGroup(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='分组用户';
-
-
 
 CREATE TABLE xonEduType (
   id INT(11) NOT NULL,
@@ -219,7 +243,6 @@ CREATE TABLE xonSchool (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学校列表';
 
 INSERT INTO xonSchool VALUES ('32128402', replace(uuid(), '-', ''), '02', '实验初中', '泰州市姜堰区实验初级中学', 2, '321284');
-INSERT INTO xonSchool VALUES ('32128401', replace(uuid(), '-', ''), '02', '励才实验', '泰州市姜堰区励才实验', 2, '321284');
 
 /**
   学校用户 -> 老师
@@ -542,7 +565,7 @@ CREATE TABLE xonGradeStudOut (
   可变属性记录表 - 定制表格
  */
 CREATE TABLE xonParentCustom (
-  id VARCHAR(15) NOT NULL,  /* 学校编号 + 5位流水号 => sch_id + code */
+  id VARCHAR(15) NOT NULL,  /* 学校编号 + 4位流水号 => sch_id + code */
   uid VARCHAR(36) NOT NULL,
   code VARCHAR(5) NOT NULL,
   name VARCHAR(20) NOT NULL,  /* 定制表格分类名称 */

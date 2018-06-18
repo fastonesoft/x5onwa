@@ -20,7 +20,7 @@ Page({
     x5on.check({
       showError: true,
       success: () => x5on.request({
-        url: x5on.url.rolegroup,
+        url: x5on.url.roledistgroup,
         success: function (result) {
           that.setData({ pickers: result.data })
         }
