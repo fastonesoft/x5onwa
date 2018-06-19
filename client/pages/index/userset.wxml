@@ -9,7 +9,7 @@
         <view class="weui-label">{{item.title}}</view>
       </view>
       <view class="weui-cell__bd">
-        <input class="weui-input" placeholder="{{item.place_holder}}" name="{{item.name}}" type="{{item.input_type}}" maxlength="{{item.max_length}}" bindblur="checkInputEx"/>
+        <input class="weui-input" placeholder="{{item.place_holder}}" name="{{item.name}}" type="{{item.input_type}}" maxlength="{{item.max_length}}" data-id="{{item.id}}" bindblur="checkInput"/>
       </view>
       <view class="weui-cell__ft" wx:if="{{item.error}}">
         <icon type="warn" size="23"></icon>

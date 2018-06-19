@@ -158,8 +158,8 @@ CREATE TABLE xonUserKey (
   UNIQUE KEY name (name)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户自定义字段';
 
-INSERT INTO xonUserKey VALUES (1, replace(uuid(), '-', ''), 'mobil', '手机号码', 'number', '请输入您的手机号', '11', '^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[6-9])\d{8}$', '手机号码有误！', 1, 0);
-INSERT INTO xonUserKey VALUES (2, replace(uuid(), '-', ''), 'idc', '身份证号', 'idcard', '请输入您的身份证号', '18', '^\d{17}[0-9X]$', '身份证号有误！', 1, 0);
+INSERT INTO xonUserKey VALUES (1, replace(uuid(), '-', ''), 'mobil', '手机号码', 'number', '请输入您的手机号', '11', '^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[6-9])\\d{8}$', '手机号码有误！', 1, 0);
+INSERT INTO xonUserKey VALUES (2, replace(uuid(), '-', ''), 'idc', '身份证号', 'idcard', '请输入您的身份证号', '18', '^\\d{17}[0-9X]$', '身份证号有误！', 1, 0);
 
 CREATE TABLE xonUserValue (
   uid VARCHAR(36) NOT NULL,

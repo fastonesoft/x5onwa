@@ -5,13 +5,11 @@ Page({
   data: {
     errorShow: false,
     errorMessage: '错误提示',
-    errorArray: [],
-
     userkeys: [],
   },
 
   checkInput: function (e) {
-    x5on.checkInput(e, this)
+    x5on.checkInputEx(e, this)
   },
 
   onLoad: function () {

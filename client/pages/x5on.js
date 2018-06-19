@@ -211,25 +211,28 @@ var doCheckInput = function (event, that) {
 };
 
 var doCheckInputEx = function (event, that) {
-  var reg = event.currentTarget.dataset.reg
-  var index = event.currentTarget.dataset.index
-  var message = event.currentTarget.dataset.message
-
+  var id = event.currentTarget.dataset.id
   var keys = that.data.userkeys
-  var reg = 
 
-  var value = event.detail.value
-  var patt = new RegExp(reg, 'g')
+  for (var i=0; i<keys.length; i++) {
+    var key = keys[i]
+    if (key.id === id) {
+      // 检测
+      var value = event.detail.value
+      var patt = new RegExp(key.regex, 'g')
+      key.error = !( key.required && patt.test(value) )
+      keys[i].error = key.error
 
-  var item = 'errorArray[' + index + ']'
-  var error = !patt.test(value)
-  that.setData({
-    [item]: error
-  })
-  // 无错退出
-  if (!error) return
-  // 出错提示
-  doShowError(that, message)
+      that.setData({ userkeys: keys })
+      console.log(keys)
+      // 出错
+      if (key.error) {
+        doShowError(that, key.message)
+      }
+      // 跳出
+      break
+    }
+  }
 };
 
 
@@ -280,7 +283,7 @@ var doPostForm = function (options) {
     data: options.data,
     method: 'POST',
     header: {
-      'Content-Type': 'application/x-www-form-urlencoded',
+      'content-type': 'application/x-www-form-urlencoded',
       'x-wx-skey': skey
     },
     success: function (res) {
