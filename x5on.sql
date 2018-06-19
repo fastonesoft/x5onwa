@@ -130,7 +130,7 @@ INSERT INTO xonGroupRole VALUES (99, 93, replace(uuid(), '-', ''));
 
 
 CREATE TABLE xonUser (
-  id VARCHAR(36) NOT NULL,  /*uniond*/
+  id VARCHAR(36) NOT NULL,  /*unionid*/
   uid VARCHAR(36) NOT NULL,
   nick_name VARCHAR(36) NOT NULL,
   name VARCHAR(36) NOT NULL,
@@ -145,6 +145,7 @@ CREATE TABLE xonUserKey (
   id INT(11) NOT NULL,
   uid VARCHAR(36) NOT NULL,
   name VARCHAR(20) NOT NULL,
+  title VARCHAR(20) NOT NULL,
   input_type VARCHAR(20) NOT NULL,
   regex VARCHAR(200) NOT NULL,   /* 数据正则 */
   required BOOLEAN NOT NULL,  /* 是否必填 */
@@ -154,8 +155,8 @@ CREATE TABLE xonUserKey (
   UNIQUE KEY name (name)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户自定义字段';
 
-INSERT INTO xonUserKey VALUES (1, replace(uuid(), '-', ''), '手机号码', 'number', '^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[6-9])\d{8}$', 1, 0);
-INSERT INTO xonUserKey VALUES (2, replace(uuid(), '-', ''), '身份证号', 'idcard', '^\d{17}[0-9X]$', 1, 0);
+INSERT INTO xonUserKey VALUES (1, replace(uuid(), '-', ''), 'mobil', '手机号码', 'number', '^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[6-9])\d{8}$', 1, 0);
+INSERT INTO xonUserKey VALUES (2, replace(uuid(), '-', ''), 'idc', '身份证号', 'idcard', '^\d{17}[0-9X]$', 1, 0);
 
 CREATE TABLE xonUserValue (
   uid VARCHAR(36) NOT NULL,
