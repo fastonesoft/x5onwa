@@ -40,6 +40,9 @@ var doUrl = {
   roledistgroupuser: `${host}/weapp/roledist/groupuser`,
   roledistdeleteuser: `${host}/weapp/roledist/deleteuser`,
 
+  // 用户设置
+  userset: `${host}/weapp/userset`,
+
   // 错误测试地址
   test: `${host}/weapp/data`
 };
@@ -207,6 +210,30 @@ var doCheckInput = function (event, that) {
   doShowError(that, message)
 };
 
+var doCheckInputEx = function (event, that) {
+  var reg = event.currentTarget.dataset.reg
+  var index = event.currentTarget.dataset.index
+  var message = event.currentTarget.dataset.message
+
+  var keys = that.data.userkeys
+  var reg = 
+
+  var value = event.detail.value
+  var patt = new RegExp(reg, 'g')
+
+  var item = 'errorArray[' + index + ']'
+  var error = !patt.test(value)
+  that.setData({
+    [item]: error
+  })
+  // 无错退出
+  if (!error) return
+  // 出错提示
+  doShowError(that, message)
+};
+
+
+
 /**
  * 表单提交
  * 页面数据准备：
@@ -283,6 +310,7 @@ module.exports = {
   check: doCheck,
   request: doRequest,
   checkInput: doCheckInput,
+  checkInputEx: doCheckInputEx,
   checkForm: doCheckForm,
   postForm: doPostForm,
   showError: doShowError,

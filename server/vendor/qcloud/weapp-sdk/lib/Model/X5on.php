@@ -20,4 +20,12 @@ class x5on {
     }
     return $arr;
   }
+
+  // 给数组添加出错标志
+  public static function addError($arr) {
+    foreach ($arr as $value) {
+      $value->error = true;
+    }
+    return $arr;
+  }
 }

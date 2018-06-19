@@ -5,10 +5,27 @@ Page({
   data: {
     errorShow: false,
     errorMessage: '错误提示',
-    errorArray: [0, 0, 0, 0, 0, 0, 0, 0]
+    errorArray: [],
+
+    userkeys: [],
   },
 
   checkInput: function (e) {
     x5on.checkInput(e, this)
+  },
+
+  onLoad: function () {
+    var that = this
+    x5on.check({
+      showError: true,
+      success: () => x5on.request({
+        url: x5on.url.userset,
+        success: function (result) {
+          var keys = result.data
+          console.log(result)
+          that.setData({ userkeys: keys })
+        }
+      })
+    })
   }
 })
