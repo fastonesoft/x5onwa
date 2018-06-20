@@ -13,9 +13,11 @@ class Userset extends CI_Controller {
     Model\xonLogin::check(function ($user) {
       // 查询没有禁止的
       $fixed = 0;
-      $result = DB::select('xonUserKey', ['*'], compact('fixed'));
-      // 添加出错标志
-      $result = Model\x5on::addError($result);
+      $keys = DB::select('xonUserKey', ['*', 'required as error'], compact('fixed'));
+      $user_id = $user['unionId'];
+      $values = DB::select('xonUserValue', ['*'], compact('user_id'));
+
+      $result = Model\xonUserset::merge($keys, $values);
       // 返回信息
       $this->json(['code' => 0, 'data' => $result]);
     }, function ($error) {

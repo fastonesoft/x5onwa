@@ -59,7 +59,7 @@ CREATE TABLE xonRole (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='权限列表';
 
 INSERT INTO xonRole VALUES (1, replace(uuid(), '-', ''), 'userset', '用户设置', 1, 1);
-INSERT INTO xonRole VALUES (2, replace(uuid(), '-', ''), 'userchilds', '用户学生', 1, 1);
+INSERT INTO xonRole VALUES (2, replace(uuid(), '-', ''), 'userchilds', '我的宝贝', 1, 1);
 INSERT INTO xonRole VALUES (3, replace(uuid(), '-', ''), 'regstud', '新生报名', 1, 1);
 INSERT INTO xonRole VALUES (4, replace(uuid(), '-', ''), 'regexam', '报名审核', 1, 1);
 INSERT INTO xonRole VALUES (5, replace(uuid(), '-', ''), 'regconfirm', '确认审核', 1, 1);

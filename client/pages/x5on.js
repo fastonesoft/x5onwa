@@ -210,26 +210,25 @@ var doCheckInput = function (event, that) {
   doShowError(that, message)
 };
 
+/**
+ * 输入检测
+ */
 var doCheckInputEx = function (event, that) {
-  var id = event.currentTarget.dataset.id
-  var keys = that.data.userkeys
-
+  var uid = event.currentTarget.dataset.uid
+  var keys = that.data.items
   for (var i=0; i<keys.length; i++) {
     var key = keys[i]
-    if (key.id === id) {
+    if (key.uid === uid) {
       // 检测
       var value = event.detail.value
-      var patt = new RegExp(key.regex, 'g')
-      key.error = !( key.required && patt.test(value) )
-      keys[i].error = key.error
-
-      that.setData({ userkeys: keys })
-      console.log(keys)
+      var patt = new RegExp(key.regex)
+      key.value = value
+      key.error = key.required && !patt.test(value)
+      // 更新
+      keys[i] = key
+      that.setData({ items: keys });
       // 出错
-      if (key.error) {
-        doShowError(that, key.message)
-      }
-      // 跳出
+      if (key.error) doShowError(that, key.message)
       break
     }
   }

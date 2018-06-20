@@ -3,13 +3,13 @@
 
 <view class="weui-cells__title">个人信息</view>
 <view class="weui-cells weui-cells_after-title">
-  <block wx:for="{{userkeys}}" wx:key="id">
+  <block wx:for="{{items}}" wx:key="id">
     <view class="weui-cell weui-cell_input">
       <view class="weui-cell__hd">
         <view class="weui-label">{{item.title}}</view>
       </view>
       <view class="weui-cell__bd">
-        <input class="weui-input" placeholder="{{item.place_holder}}" name="{{item.name}}" type="{{item.input_type}}" maxlength="{{item.max_length}}" data-id="{{item.id}}" bindblur="checkInput"/>
+        <input class="weui-input" placeholder="{{item.place_holder}}" name="{{item.name}}" type="{{item.input_type}}" maxlength="{{item.max_length}}" data-uid="{{item.uid}}" value="{{item.value}}" bindblur="checkInput"/>
       </view>
       <view class="weui-cell__ft" wx:if="{{item.error}}">
         <icon type="warn" size="23"></icon>

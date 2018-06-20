@@ -5,10 +5,12 @@ Page({
   data: {
     errorShow: false,
     errorMessage: '错误提示',
-    userkeys: [],
+    items: [],
   },
 
   checkInput: function (e) {
+    var value = e.detail.value
+    this.setData({ })
     x5on.checkInputEx(e, this)
   },
 
@@ -19,9 +21,7 @@ Page({
       success: () => x5on.request({
         url: x5on.url.userset,
         success: function (result) {
-          var keys = result.data
-          console.log(result)
-          that.setData({ userkeys: keys })
+          that.setData({ items: result.data })
         }
       })
     })
