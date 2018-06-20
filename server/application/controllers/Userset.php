@@ -46,11 +46,9 @@ class Userset extends CI_Controller {
       }
       // 添加：用户设置记录
       $checked = 1;
-      $name = Model\x5on::USER_SET_MYSELF;
+      $user_name = Model\x5on::USER_SET_MYSELF;
 
-      //var_dump($name);
-
-      $userset_id = Model\xonUserset::getIdByName($name);
+      $userset_id = Model\xonUserset::getIdByName($user_name);
       Model\xonUsersetdata::insert($user_id, $userset_id, $checked);
       // 返回信息
       $this->json(['code' => 0, 'data' => []]);
