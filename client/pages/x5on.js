@@ -42,6 +42,7 @@ var doUrl = {
 
   // 用户设置
   userset: `${host}/weapp/userset`,
+  usersetupdate: `${host}/weapp/userset/update`,
 
   // 错误测试地址
   test: `${host}/weapp/data`
@@ -221,7 +222,7 @@ var doCheckInputEx = function (event, that) {
     if (key.uid === uid) {
       // 检测
       var value = event.detail.value
-      var patt = new RegExp(key.regex)
+      var patt = new RegExp(key.regex_js)
       key.value = value
       key.error = key.required && !patt.test(value)
       // 更新
@@ -255,6 +256,21 @@ var doCheckForm = function (that, begin, end, success) {
     // 出错提示
     doShowError(that, '表单数据有误，请检查')
     return
+  }
+  // 成功回调
+  if (typeof success === 'function') success()
+};
+
+/**
+ * 表单提交
+ */
+var doCheckFormEx = function (that, success) {
+  var items = that.data.items;
+  for (var i=0; i<items.length; i++) {
+    if (items[i].error) {
+      doShowError(that, items[i].message)
+      return
+    }
   }
   // 成功回调
   if (typeof success === 'function') success()
@@ -314,6 +330,7 @@ module.exports = {
   checkInput: doCheckInput,
   checkInputEx: doCheckInputEx,
   checkForm: doCheckForm,
+  checkFormEx: doCheckFormEx,
   postForm: doPostForm,
   showError: doShowError,
   showSuccess: doSuccess,

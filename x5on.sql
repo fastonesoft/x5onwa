@@ -149,7 +149,8 @@ CREATE TABLE xonUserKey (
   input_type VARCHAR(20) NOT NULL,
   place_holder VARCHAR(20) NOT NULL,
   max_length INT(11) NOT NULL DEFAULT 200,
-  regex VARCHAR(200) NOT NULL,   /* 数据正则 */
+  regex_php VARCHAR(200) NOT NULL,   /* 数据正则 */
+  regex_js VARCHAR(200) NOT NULL,
   message VARCHAR(20) NOT NULL,
   required BOOLEAN NOT NULL,  /* 是否必填 */
   fixed BOOLEAN NOT NULL,
@@ -158,18 +159,43 @@ CREATE TABLE xonUserKey (
   UNIQUE KEY name (name)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户自定义字段';
 
-INSERT INTO xonUserKey VALUES (1, replace(uuid(), '-', ''), 'mobil', '手机号码', 'number', '请输入您的手机号', '11', '^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[6-9])\\d{8}$', '手机号码有误！', 1, 0);
-INSERT INTO xonUserKey VALUES (2, replace(uuid(), '-', ''), 'idc', '身份证号', 'idcard', '请输入您的身份证号', '18', '^\\d{17}[0-9X]$', '身份证号有误！', 1, 0);
+INSERT INTO xonUserKey VALUES (1, replace(uuid(), '-', ''), 'mobil', '手机号码', 'number', '请输入您的手机号', '11', '^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[6-9])\\d{8}$', '^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[6-9])\\d{8}$', '手机号码有误！', 1, 0);
+INSERT INTO xonUserKey VALUES (2, replace(uuid(), '-', ''), 'idc', '身份证号', 'idcard', '请输入您的身份证号', '18', '^\\d{17}[0-9X]$', '^\\d{17}[0-9X]$', '身份证号有误！', 1, 0);
 
-CREATE TABLE xonUserValue (
+CREATE TABLE xonUserKeyValue (
   uid VARCHAR(36) NOT NULL,
   user_id VARCHAR(36) NOT NULL,
   key_id INT(11) NOT NULL,
   value VARCHAR(200),
-  PRIMARY KEY (uid),
+  PRIMARY KEY (user_id, key_id),
+  UNIQUE KEY uid (uid),
   FOREIGN KEY (user_id) REFERENCES xonUser(id),
   FOREIGN KEY (key_id) REFERENCES xonUserKey(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户自定义值';
+
+CREATE TABLE xonUserSet (
+  id INT(11) NOT NULL,
+  uid VARCHAR(36) NOT NULL,
+  name VARCHAR(20) NOT NULL,
+  title VARCHAR(20) NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY uid (uid),
+  UNIQUE KEY name (name),
+  UNIQUE KEY title (title)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户记录表';
+
+INSERT INTO xonUserSet VALUES (1, replace(uuid(), '-', ''), 'user-set-self', '个人信息设置');
+
+CREATE TABLE xonUserSetData (
+  uid VARCHAR(36) NOT NULL,
+  user_id VARCHAR(36) NOT NULL,
+  userset_id INT(11) NOT NULL,
+  checked BOOLEAN NOT NULL DEFAULT 0,
+  PRIMARY KEY (user_id, userset_id),
+  UNIQUE KEY uid (uid),
+  FOREIGN KEY (user_id) REFERENCES xonUser(id),
+  FOREIGN KEY (userset_id) REFERENCES xonUserSet(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户记录值表';
 
 CREATE TABLE xonUserGroup (
   user_id VARCHAR(36) NOT NULL,

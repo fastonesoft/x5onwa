@@ -1,19 +1,35 @@
 <!--pages/index/userset.wxml-->
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
-<view class="weui-cells__title">个人信息</view>
-<view class="weui-cells weui-cells_after-title">
-  <block wx:for="{{items}}" wx:key="id">
-    <view class="weui-cell weui-cell_input">
-      <view class="weui-cell__hd">
-        <view class="weui-label">{{item.title}}</view>
+<form bindsubmit="usersetSubmit" wx:if="{{1}}">
+  <view class="weui-cells__title">信息修改</view>
+  <view class="weui-cells weui-cells_after-title">
+    <block wx:for="{{items}}" wx:key="id">
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">{{item.title}}</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" placeholder="{{item.place_holder}}" name="{{item.name}}" type="{{item.input_type}}" maxlength="{{item.max_length}}" data-uid="{{item.uid}}" value="{{item.value}}" bindblur="checkInput"/>
+        </view>
+        <view class="weui-cell__ft" wx:if="{{item.error}}">
+          <icon type="warn" size="23"></icon>
+        </view>
       </view>
-      <view class="weui-cell__bd">
-        <input class="weui-input" placeholder="{{item.place_holder}}" name="{{item.name}}" type="{{item.input_type}}" maxlength="{{item.max_length}}" data-uid="{{item.uid}}" value="{{item.value}}" bindblur="checkInput"/>
+    </block>
+  </view>
+  <view class="weui-btn-area">
+    <button type="primary" form-type="submit">提交</button>
+  </view>
+</form>
+<block wx:if="1">
+  <view class="weui-cells__title">个人信息</view>
+  <view class="weui-cells weui-cells_after-title">
+    <block wx:for="{{items}}" wx:key="id">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">{{item.title}}</view>
+        <view class="weui-cell__ft">{{item.value}}</view>
       </view>
-      <view class="weui-cell__ft" wx:if="{{item.error}}">
-        <icon type="warn" size="23"></icon>
-      </view>
-    </view>
-  </block>
-</view>
+    </block>
+  </view>
+</block>

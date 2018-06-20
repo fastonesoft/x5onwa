@@ -21,7 +21,20 @@ Page({
       success: () => x5on.request({
         url: x5on.url.userset,
         success: function (result) {
+          console.log(result)
           that.setData({ items: result.data })
+        }
+      })
+    })
+  },
+
+  usersetSubmit: function (e) {
+    x5on.checkFormEx(this, function () {
+      x5on.postForm({
+        url: x5on.url.usersetupdate,
+        data: e.detail.value,
+        success: (res) => {
+          console.log(res)
         }
       })
     })

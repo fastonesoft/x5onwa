@@ -2,7 +2,7 @@
 namespace QCloud_WeApp_SDK\Model;
 
 use Guzzle\Cache\NullCacheAdapter;
-use QCloud_WeApp_SDK\Mysql\Mysql as DB;
+use QCloud_WeApp_SDK\Mysql\Mysql as dbs;
 use QCloud_WeApp_SDK\Constants;
 use \Exception;
 
@@ -15,9 +15,8 @@ class xonUserset
    */
   public static function merge ($keys, $values) {
     foreach ($keys as $key) {
-      // 转换为js能识别的正则，去掉两头的/
-      $regex = $key->regex;
-      $key->regex = str_replace('/', '', $regex);
+      $regex = $key->regex_php;
+      unset($key->regex_php);
       foreach ($values as $value) {
         if ($key->id === $value->key_id) {
           $key->value = $value->value;
@@ -27,5 +26,23 @@ class xonUserset
       }
     }
     return $keys;
+  }
+
+  public static function getIdByName ($name) {
+    $userset = dbs::row('xonUserSet', ['*'], compact('name'));
+    $res = $userset !== NULL ? $userset->id : NULL;
+    return $res;
+  }
+
+  public static function insert () {
+
+  }
+
+  public static function update () {
+
+  }
+
+  public static function delete () {
+
   }
 }
