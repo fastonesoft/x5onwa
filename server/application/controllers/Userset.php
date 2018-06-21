@@ -11,13 +11,14 @@ class Userset extends CI_Controller {
    */
   public function index() {
     Model\xonLogin::check(function ($user) {
-      // 查询没有禁止的
-      $fixed = 0;
-      $keys = dbs::select('xonUserKey', ['*', 'required as error'], compact('fixed'));
+      // 查询用户列表
       $user_id = $user['unionId'];
-      $values = dbs::select('xonUserKeyValue', ['*'], compact('user_id'));
+      $data = Model\xonUserkey::getUserKeys($user_id, 0);
 
-      $result = Model\xonUserset::merge($keys, $values);
+      // 查询提交状态
+      $userset_name = Model\x5on::USER_SET_MYSELF;
+      $checked = Model\xonUsersetdata::getCheckedById($user_id, $userset_name);
+      $result = compact('data', 'checked');
       // 返回信息
       $this->json(['code' => 0, 'data' => $result]);
     }, function ($error) {
@@ -37,7 +38,7 @@ class Userset extends CI_Controller {
       // 遍历数据
       foreach ($param as $name => $value) {
         // 查询名称
-        $userkey = dbs::row('xonUserKey', ['*'], compact('name'));
+        $userkey = Model\xonUserkey::getRowByName($name);
         if ($userkey !== NULL) {
           // 获取编号
           $key_id = $userkey->id;
@@ -47,11 +48,10 @@ class Userset extends CI_Controller {
       // 添加：用户设置记录
       $checked = 1;
       $user_name = Model\x5on::USER_SET_MYSELF;
-
-      $userset_id = Model\xonUserset::getIdByName($user_name);
-      Model\xonUsersetdata::insert($user_id, $userset_id, $checked);
+      $userset_id = Model\xonUserset::getIdByUserSetName($user_name);
+      $result = Model\xonUsersetdata::insert($user_id, $userset_id, $checked);
       // 返回信息
-      $this->json(['code' => 0, 'data' => []]);
+      $this->json(['code' => 0, 'data' => $result]);
     }, function ($error) {
       $this->json($error);
     });

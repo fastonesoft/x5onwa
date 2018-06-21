@@ -6,12 +6,11 @@ Page({
     errorShow: false,
     errorMessage: '错误提示',
     items: [],
+    canModi: true,
   },
 
   checkInput: function (e) {
-    var value = e.detail.value
-    this.setData({ })
-    x5on.checkInputEx(e, this)
+    x5on.checkInputEx(e, this);
   },
 
   onLoad: function () {
@@ -21,20 +20,20 @@ Page({
       success: () => x5on.request({
         url: x5on.url.userset,
         success: function (result) {
-          console.log(result)
-          that.setData({ items: result.data })
+          that.setData({ items: result.data.data, canModi: ! result.data.checked })
         }
       })
     })
   },
 
   usersetSubmit: function (e) {
+    var that = this
     x5on.checkFormEx(this, function () {
       x5on.postForm({
         url: x5on.url.usersetupdate,
         data: e.detail.value,
         success: (res) => {
-          console.log(res)
+          that.setData({ canModi: false })
         }
       })
     })
