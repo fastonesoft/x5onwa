@@ -6,7 +6,6 @@ Page({
     errorShow: false,
     errorMessage: '错误提示',
     items: [],
-    canModi: true,
   },
 
   checkInput: function (e) {

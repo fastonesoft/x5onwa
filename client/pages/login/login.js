@@ -8,17 +8,18 @@ var x5on = require('../x5on.js')
 var app = getApp()
 Page({
   data: {
-
+    logged: true,
+    userinfor: null,
   },
 
 
-  onLoad: function () {
+  onShow: function () {
     var that = this;
     // 检测登录
     x5on.check({
       showError: false,
       success: function () {
-        var infor = session.get();
+        var infor = session.get()
         that.setData({
           logged: infor ? true : false,
           userinfor: infor ? infor.userinfo : null,
@@ -54,7 +55,7 @@ Page({
           logged: infor ? true : false,
           userinfor: infor ? infor.userinfo : null,
         })
-        that.onLoad();
+        that.onShow();
       },
       fail: function() {
         that.setData({

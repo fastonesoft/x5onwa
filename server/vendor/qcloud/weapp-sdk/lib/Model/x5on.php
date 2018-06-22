@@ -23,4 +23,14 @@ class x5on {
     }
     return $arr;
   }
+
+  public static function checkName($name) {
+    $code = 0;
+    $data = '';
+    switch ($name) {
+      case 'idc':
+        break;
+    }
+    return compact('code', 'data');
+  }
 }

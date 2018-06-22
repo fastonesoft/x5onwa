@@ -81,6 +81,8 @@ var doCheck = function (options) {
           },
         });
       } else {
+        // 登录清除
+        qcloud.clearSession();
         // 错误提示
         if (options.showError) util.showModel('授权失败', '请转到“登录”页面授权');
         if (typeof options.fail === 'function') options.fail();
@@ -104,8 +106,6 @@ var doLogin = function (options) {
         // 登录态已过期，需重新登录
         wx.login({
           success: function (loginResult) {
-            // 清除
-            qcloud.clearSession();
             // 更新
             var loginParams = {
               code: loginResult.code,
@@ -286,7 +286,7 @@ var doCheckFormEx = function (that, success) {
 var doPostForm = function (options) {
   // 提取session-skey
   var sessionkey = session.get()
-  var skey = sessionkey ? sessionkey.skey  : null;
+  var skey = sessionkey ? sessionkey.skey : null;
   if (!skey) {
     if (typeof options.fail === 'function') options.fail()
     util.showModel('数据提交', '请求数据出错，检查是否登录过期！')
@@ -306,12 +306,12 @@ var doPostForm = function (options) {
       var data = res.data;
       if (data && data.code === -1) {
         if (typeof options.fail === 'function') options.fail()
-        util.showModel('数据提交', '请求数据出错，检查是否登录过期！')
+        util.showModel('数据提交', data.data)
         // 退出
         return
       }
       // 没错误
-      if (typeof options.success === 'function') options.success(res.data)
+      if (typeof options.success === 'function') options.success(data)
     },
     fail: function (error) {
       if (typeof options.fail === 'function') options.fail()
