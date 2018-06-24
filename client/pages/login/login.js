@@ -10,6 +10,8 @@ Page({
   data: {
     logged: true,
     userinfor: null,
+    items: [],
+    childs: [],
   },
 
 
@@ -24,6 +26,23 @@ Page({
           logged: infor ? true : false,
           userinfor: infor ? infor.userinfo : null,
         })
+        if ( that.data.logged ) {
+          // 个人信息
+          x5on.request({
+            url: x5on.url.userset,
+            success: function (result) {
+              that.setData({ items: result.data.data, checked: result.data.checked })
+            }
+          });
+          // 孩子信息
+          x5on.request({
+            url: x5on.url.userset,
+            success: function (result) {
+              console.log(result.data)
+              that.setData({ childs: result.data.data })
+            }
+          });
+        }
       },
       fail: function () {
         // 登录失败 -> 清除数据
@@ -33,6 +52,15 @@ Page({
         })
       }
     });
+  },
+
+  inforClick: function () {
+    wx.navigateTo({
+      url: '/pages/index/userset',
+      success: () => {
+        // 
+      }
+    })
   },
 
   canScan: function () {

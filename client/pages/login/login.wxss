@@ -19,10 +19,9 @@ page {
 
 .userinfo {
   top: 30rpx;
-  position: fixed;
-
+  position: relative;  
   width: 100%;
-
+  
   border: none;
   display: flex;
   flex-flow: column wrap;
@@ -40,8 +39,4 @@ page {
 .userinfo-nickname {
   font-size: 40rpx;
   color: #E6A800;
-}
-
-.userinfo-button {
-  width: 260rpx;
 }

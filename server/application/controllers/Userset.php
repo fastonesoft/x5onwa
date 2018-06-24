@@ -37,6 +37,13 @@ class Userset extends CI_Controller {
 
       // 遍历数据
       foreach ($param as $name => $value) {
+        // 检测数据
+        $res = Model\x5on::checkName($name, $value);
+        if ($res !== NULL) {
+          $this->json(['code' => -1, 'data' => $res['message']]);
+          return;
+        }
+
         // 查询名称
         $userkey = Model\xonUserkey::getRowByName($name);
         if ($userkey !== NULL) {

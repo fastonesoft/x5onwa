@@ -4,25 +4,44 @@
   <image class="userinfor-bg" src="./loginbg.png"></image>
   <view class="userinfo">
     <image class="userinfo-avatar" src="{{logged ? userinfor.avatarUrl : './unlogin.png'}}"></image>
-    <view>
-      <button type="warn" class="userinfo-button" wx:if="{{!logged}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button>
+    <view style="margin: 0 auto; width: 50%; text-align: center;">
+      <view class="weui-btn-area" wx:if="{{!logged}}" style="margin-top: 0rpx;">
+        <button type="warn" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button>
+      </view>
       <text class="userinfo-nickname" wx:else>{{userinfor.nickName}}</text>
     </view>
   </view>
 </view>
-<view class="weui-cells__title">个人信息</view>
-<view class="weui-cells weui-cells_after-title">
-<navigator url="/pages/index/userset" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-    <view class="weui-cell__bd">完善个人信息</view>
-    <view class="weui-cell__ft">
-      <icon type="success_no_circle" size="20"></icon></view>
-  </navigator>
-</view>
-<view class="weui-cells__title">我的孩子</view>
-<view class="weui-cells weui-cells_after-title">
-  <view class="weui-cell">
-    <view class="weui-cell__bd">添加孩子资料</view>
-    <view class="weui-cell__ft weui-cell__ft_in-access">
-      <icon type="success_no_circle" size="20"></icon></view>
+<block wx:if="{{logged}}">
+  <view class="weui-cells__title">个人信息</view>
+  <view class="weui-cells weui-cells_after-title">
+    <view style="margin:0 auto; width: 50%; padding-bottom: 30rpx;" wx:if="{{!checked}}">
+      <view class="weui-btn-area">
+        <button type="primary" bindtap="inforClick">完善个人信息</button>
+      </view>
+    </view>
+
+    <block wx:for="{{items}}" wx:key="id" wx:if="{{checked}}">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">{{item.title}}</view>
+        <view class="weui-cell__ft">{{item.value}}</view>
+      </view>
+    </block>
   </view>
-</view>
+  <view class="weui-cells__title">我的孩子</view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell">
+      <view class="weui-cell__bd">姓名</view>
+      <view class="weui-cell__ft">石亮</view>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__bd">身份证号</view>
+      <view class="weui-cell__ft">321284200508150254</view>
+    </view>
+  </view>
+  <view style="margin:0 auto; width: 50%; padding-bottom: 30rpx;" wx:if="{{childs.length<2}}">
+    <view class="weui-btn-area">
+      <button type="primary" bindtap="inforClick">增加孩子</button>
+    </view>
+  </view>
+</block>

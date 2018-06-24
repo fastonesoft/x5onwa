@@ -43,6 +43,7 @@ var doUrl = {
   // 用户设置
   userset: `${host}/weapp/userset`,
   usersetupdate: `${host}/weapp/userset/update`,
+  
 
   // 错误测试地址
   test: `${host}/weapp/data`
