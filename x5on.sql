@@ -385,8 +385,8 @@ INSERT INTO xonYear VALUES (2013, replace(uuid(), '-', ''), 0);
 INSERT INTO xonYear VALUES (2014, replace(uuid(), '-', ''), 0);
 INSERT INTO xonYear VALUES (2015, replace(uuid(), '-', ''), 0);
 INSERT INTO xonYear VALUES (2016, replace(uuid(), '-', ''), 0);
-INSERT INTO xonYear VALUES (2017, replace(uuid(), '-', ''), 1);
-INSERT INTO xonYear VALUES (2018, replace(uuid(), '-', ''), 0);
+INSERT INTO xonYear VALUES (2017, replace(uuid(), '-', ''), 0);
+INSERT INTO xonYear VALUES (2018, replace(uuid(), '-', ''), 1);
 
 /**
   分级编号 定义规则：
