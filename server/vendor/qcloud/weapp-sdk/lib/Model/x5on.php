@@ -56,7 +56,7 @@ class x5on {
       return compact('error', 'message');
     }
     // 日期检测
-    $year = (int) substr($idc_birth, 0, 3);
+    $year = (int) substr($idc_birth, 0, 4);
     $month = (int) substr($idc_birth, 4, 2);
     $day = (int) substr($idc_birth, 6, 2);
     if ( ! checkdate($month, $day, $year) ) {
@@ -83,10 +83,12 @@ class x5on {
     return NULL;
   }
 
-  public static function checkName($name, $value) {
+  public static function check($name, $value, $id) {
     switch ($name) {
       case 'idc':
         return self::checkIdc($value);
+      case 'name':
+        return xonUser::checkRename($id, $value);
       default:
         return NULL;
     }

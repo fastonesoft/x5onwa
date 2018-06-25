@@ -159,8 +159,9 @@ CREATE TABLE xonUserKey (
   UNIQUE KEY name (name)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户自定义字段';
 
-INSERT INTO xonUserKey VALUES (1, replace(uuid(), '-', ''), 'mobil', '手机号码', 'number', '请输入您的手机号', '11', '/^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[6-9])\\d{8}$/', '^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[6-9])\\d{8}$', '手机号码有误！', 1, 0);
-INSERT INTO xonUserKey VALUES (2, replace(uuid(), '-', ''), 'idc', '身份证号', 'idcard', '请输入您的身份证号', '18', '/^\\d{17}[0-9X]$/', '^\\d{17}[0-9X]$', '身份证号有误！', 1, 0);
+INSERT INTO xonUserKey VALUES (1, replace(uuid(), '-', ''), 'name', '我的名字', 'text', '请输入您的姓名', '4', '/^[\\x{4e00}-\\x{9fa5}]{2,4}$/u', '^[\\u4e00-\\u9fa5]{2,4}$', '输入2-4个汉字', 1, 0);
+INSERT INTO xonUserKey VALUES (2, replace(uuid(), '-', ''), 'mobil', '手机号码', 'number', '请输入您的手机号', '11', '/^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[6-9])\\d{8}$/', '^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[6-9])\\d{8}$', '手机号码有误！', 1, 0);
+INSERT INTO xonUserKey VALUES (3, replace(uuid(), '-', ''), 'idc', '身份证号', 'idcard', '请输入您的身份证号', '18', '/^\\d{17}[0-9X]$/', '^\\d{17}[0-9X]$', '身份证号有误！', 1, 0);
 
 CREATE TABLE xonUserKeyValue (
   uid VARCHAR(36) NOT NULL,
@@ -287,45 +288,6 @@ CREATE TABLE xonSchoolTeach (
   FOREIGN KEY (user_id) REFERENCES xonUser(id),
   FOREIGN KEY (sch_id) REFERENCES xonSchool(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户注册的学校';
-
-
-CREATE TABLE xonChild (
-  id VARCHAR(20) NOT NULL,  /* 用身份证号 - 不可变更 */
-  uid VARCHAR(36) NOT NULL,
-  idc VARCHAR(20) NOT NULL,
-  name VARCHAR(20) NOT NULL,
-  PRIMARY KEY (id),
-  UNIQUE KEY uid (uid),
-  UNIQUE KEY idc (idc)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='孩子表';
-
-CREATE TABLE xonParentChilds (
-  uid VARCHAR(36) NOT NULL,
-  user_id VARCHAR(36) NOT NULL,
-  child_id VARCHAR(20) NOT NULL,
-  relation_id INT(11) NOT NULL,
-  pay_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  pay_day INT(11) NOT NULL DEFAULT 0,
-  PRIMARY KEY (uid),
-  UNIQUE KEY user_child (user_id, child_id),
-  UNIQUE KEY child_relation (child_id, relation_id),
-  FOREIGN KEY (user_id) REFERENCES xonUser(id),
-  FOREIGN KEY (child_id) REFERENCES xonChild(id),
-  FOREIGN KEY (relation_id) REFERENCES xonRelation(id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='家长孩子';
-
-CREATE TABLE xonRelation (
-  id INT(11) NOT NULL,
-  uid VARCHAR(36) NOT NULL,
-  name VARCHAR(20) NOT NULL,
-  PRIMARY KEY (id),
-  UNIQUE KEY uid (uid)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='关系表';
-
-INSERT INTO xonRelation VALUES (1, replace(uuid(), '-', ''), '爸爸');
-INSERT INTO xonRelation VALUES (2, replace(uuid(), '-', ''), '妈妈');
-INSERT INTO xonRelation VALUES (3, replace(uuid(), '-', ''), '亲戚');
-INSERT INTO xonRelation VALUES (4, replace(uuid(), '-', ''), '朋友');
 
 /**
   自定义编号
@@ -591,6 +553,51 @@ CREATE TABLE xonGradeStudOut (
   FOREIGN KEY (stud_out_id) REFERENCES xonStudOut(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='年级学生变更';
 
+
+
+
+
+/**
+  学生、家长相关表格
+ */
+CREATE TABLE xonChild (
+  id VARCHAR(20) NOT NULL,  /* 用身份证号 - 不可变更 */
+  uid VARCHAR(36) NOT NULL,
+  idc VARCHAR(20) NOT NULL,
+  name VARCHAR(20) NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY uid (uid),
+  UNIQUE KEY idc (idc)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='孩子表';
+
+CREATE TABLE xonRelation (
+  id INT(11) NOT NULL,
+  uid VARCHAR(36) NOT NULL,
+  name VARCHAR(20) NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY uid (uid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='关系表';
+
+INSERT INTO xonRelation VALUES (1, replace(uuid(), '-', ''), '爸爸');
+INSERT INTO xonRelation VALUES (2, replace(uuid(), '-', ''), '妈妈');
+INSERT INTO xonRelation VALUES (3, replace(uuid(), '-', ''), '亲戚');
+INSERT INTO xonRelation VALUES (4, replace(uuid(), '-', ''), '朋友');
+
+CREATE TABLE xonParentChilds (
+  uid VARCHAR(36) NOT NULL,
+  user_id VARCHAR(36) NOT NULL,
+  child_id VARCHAR(20) NOT NULL,
+  relation_id INT(11) NOT NULL,
+  pay_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  pay_day INT(11) NOT NULL DEFAULT 0,
+  PRIMARY KEY (uid),
+  UNIQUE KEY user_child (user_id, child_id),
+  UNIQUE KEY child_relation (child_id, relation_id),
+  FOREIGN KEY (user_id) REFERENCES xonUser(id),
+  FOREIGN KEY (child_id) REFERENCES xonChild(id),
+  FOREIGN KEY (relation_id) REFERENCES xonRelation(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='家长孩子';
+
 /**
   可变属性记录表 - 定制表格
  */
@@ -642,6 +649,10 @@ CREATE TABLE xonParentCustValue (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='定制表格数据';
 
 INSERT INTO xonParentCustValue VALUES (replace(uuid(), '-', ''), '32128402000101', 'o47ZhvzWPWSNS26vG_45Fuz5JMZk', '32102819790209301X');
+
+
+
+
 
 
 

@@ -38,7 +38,7 @@ class Userset extends CI_Controller {
       // 遍历数据
       foreach ($param as $name => $value) {
         // 检测数据
-        $res = Model\x5on::checkName($name, $value);
+        $res = Model\x5on::check($name, $value, $user_id);
         if ($res !== NULL) {
           $this->json(['code' => -1, 'data' => $res['message']]);
           return;
