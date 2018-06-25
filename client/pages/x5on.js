@@ -43,7 +43,13 @@ var doUrl = {
   // 用户设置
   userset: `${host}/weapp/userset`,
   usersetupdate: `${host}/weapp/userset/update`,
-  
+
+  // 用户孩子
+  userchild: `${host}/weapp/userchild`,
+  userchildupdate: `${host}/weapp/userchild/update`,
+
+  // 亲子关系
+  relation: `${host}/weapp/relation`,
 
   // 错误测试地址
   test: `${host}/weapp/data`

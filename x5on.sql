@@ -60,7 +60,7 @@ CREATE TABLE xonRole (
 
 INSERT INTO xonRole VALUES (1, replace(uuid(), '-', ''), 'userset', '用户设置', 1, 1);
 INSERT INTO xonRole VALUES (2, replace(uuid(), '-', ''), 'usereset', '用户重置', 1, 1);
-INSERT INTO xonRole VALUES (3, replace(uuid(), '-', ''), 'userchilds', '我的宝贝', 1, 1);
+INSERT INTO xonRole VALUES (3, replace(uuid(), '-', ''), 'userchilds', '我的孩子', 1, 1);
 INSERT INTO xonRole VALUES (4, replace(uuid(), '-', ''), 'regstud', '新生报名', 1, 1);
 INSERT INTO xonRole VALUES (5, replace(uuid(), '-', ''), 'regexam', '报名审核', 1, 1);
 INSERT INTO xonRole VALUES (6, replace(uuid(), '-', ''), 'regconfirm', '确认审核', 1, 1);
@@ -779,6 +779,15 @@ AS
   FROM xonUserGroup a LEFT JOIN xonUser b
   ON a.user_id = b.id;
 
+/**
+  视图：查询我的孩子
+ */
+ CREATE VIEW xovParentChilds
+ AS
+  SELECT a.*, c.idc, c.name as child_name, d.name as relation_name
+  FROM xonParentChilds a
+  LEFT JOIN xonChild c on a.child_id = c.id
+  LEFT JOIN xonRelation d on a.relation_id = d.id;
 
 /*外键约束开启*/
 SET FOREIGN_KEY_CHECKS = 1;
