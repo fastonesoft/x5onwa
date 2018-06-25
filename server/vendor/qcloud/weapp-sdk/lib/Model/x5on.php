@@ -24,40 +24,6 @@ class x5on {
     return $arr;
   }
 
-  public static function checkDay($year, $month, $day) {
-    // 非法数据类型检测
-    if ( ! is_numeric($year) || ! is_numeric($month) || ! is_numeric($day) ) {
-      $error = true;
-      $message = '日期有非法字符';
-      return compact('error', 'message');
-    }
-    switch ($month) {
-      case 1:
-      case 3:
-      case 5:
-      case 7:
-      case 8:
-      case 10:
-      case 12: $max_day = 31; break;
-      case 4:
-      case 6:
-      case 9:
-      case 11: $max_day = 30; break;
-      case 2: $max_day = $year % 400 == 0 || $year % 4 == 0 && $year % 100 != 0 ? 29 : 28; break;
-      default:
-        $error = true;
-        $message = '月设置有误';
-        return compact('error', 'message');
-    }
-    if ( $day < 1 || $day > $max_day ) {
-      $error = true;
-      $message = '日设置有误';
-      return compact('error', 'message');
-    }
-    // 没问题
-    return NULL;
-  }
-
   public static function checkIdc($idcard) {
     $idc = strtoupper($idcard);
     // 长度检测
@@ -90,9 +56,9 @@ class x5on {
       return compact('error', 'message');
     }
     // 日期检测
-    $year = date('Y', $idc_date);
-    $month = date('m', $idc_date);
-    $day = date('d', $idc_date);
+    $year = (int) substr($idc_birth, 0, 3);
+    $month = (int) substr($idc_birth, 4, 2);
+    $day = (int) substr($idc_birth, 6, 2);
     if ( ! checkdate($month, $day, $year) ) {
       $error = true;
       $message = '身份证出生日期验证出错';
