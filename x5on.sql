@@ -59,11 +59,12 @@ CREATE TABLE xonRole (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='权限列表';
 
 INSERT INTO xonRole VALUES (1, replace(uuid(), '-', ''), 'userset', '用户设置', 1, 1);
-INSERT INTO xonRole VALUES (2, replace(uuid(), '-', ''), 'userchilds', '我的宝贝', 1, 1);
-INSERT INTO xonRole VALUES (3, replace(uuid(), '-', ''), 'regstud', '新生报名', 1, 1);
-INSERT INTO xonRole VALUES (4, replace(uuid(), '-', ''), 'regexam', '报名审核', 1, 1);
-INSERT INTO xonRole VALUES (5, replace(uuid(), '-', ''), 'regconfirm', '确认审核', 1, 1);
-INSERT INTO xonRole VALUES (6, replace(uuid(), '-', ''), 'regcount', '报名统计', 1, 1);
+INSERT INTO xonRole VALUES (2, replace(uuid(), '-', ''), 'usereset', '用户重置', 1, 1);
+INSERT INTO xonRole VALUES (3, replace(uuid(), '-', ''), 'userchilds', '我的宝贝', 1, 1);
+INSERT INTO xonRole VALUES (4, replace(uuid(), '-', ''), 'regstud', '新生报名', 1, 1);
+INSERT INTO xonRole VALUES (5, replace(uuid(), '-', ''), 'regexam', '报名审核', 1, 1);
+INSERT INTO xonRole VALUES (6, replace(uuid(), '-', ''), 'regconfirm', '确认审核', 1, 1);
+INSERT INTO xonRole VALUES (7, replace(uuid(), '-', ''), 'regcount', '报名统计', 1, 1);
 
 INSERT INTO xonRole VALUES (21, replace(uuid(), '-', ''), 'students', '学生名册', 1, 2);
 
@@ -121,9 +122,13 @@ INSERT INTO xonGroupRole VALUES (99, 3, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (99, 4, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (99, 5, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (99, 6, replace(uuid(), '-', ''));
+INSERT INTO xonGroupRole VALUES (99, 7, replace(uuid(), '-', ''));
+
 INSERT INTO xonGroupRole VALUES (99, 21, replace(uuid(), '-', ''));
+
 INSERT INTO xonGroupRole VALUES (99, 81, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (99, 82, replace(uuid(), '-', ''));
+
 INSERT INTO xonGroupRole VALUES (99, 91, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (99, 92, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (99, 93, replace(uuid(), '-', ''));
