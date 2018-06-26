@@ -36,10 +36,10 @@ Page({
           });
           // 孩子信息
           x5on.request({
-            url: x5on.url.userset,
+            url: x5on.url.parentchilds,
             success: function (result) {
               console.log(result.data)
-              that.setData({ childs: result.data.data })
+              that.setData({ childs: result.data })
             }
           });
         }
@@ -62,7 +62,15 @@ Page({
       }
     })
   },
-
+  
+  childAdd: function() {
+    wx.navigateTo({
+      url: '/pages/index/userchilds',
+      success: () => {
+        // 
+      }
+    })
+  },
   canScan: function () {
     // 只允许从相机扫码
     wx.scanCode({
@@ -83,6 +91,7 @@ Page({
           logged: infor ? true : false,
           userinfor: infor ? infor.userinfo : null,
         })
+        // 不能改
         that.onShow();
       },
       fail: function() {

@@ -48,8 +48,9 @@ var doUrl = {
   userchild: `${host}/weapp/userchild`,
   userchildupdate: `${host}/weapp/child/update`,
 
-  // 亲子关系
+  // 称谓
   relation: `${host}/weapp/relation`,
+  // 亲子关系
   parentchilds: `${host}/weapp/parentchilds`,
 
   // 错误测试地址

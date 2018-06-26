@@ -11,9 +11,12 @@ Page({
     pickers: [],
     relation_id: 0,
     childs: [],
+
+    mychildShow: false,
+    userchildShow: false,
   },
 
-  onLoad: function (e) {
+  onShow: function (e) {
     var that = this
     x5on.check({
       showError: true,
@@ -29,7 +32,10 @@ Page({
         x5on.request({
           url: x5on.url.parentchilds,
           success: function (result) {
-            that.setData({ childs: result.data })
+            var childs = result.data
+            var canshow = childs.length > 0
+            var notmore = childs.length < 2
+            that.setData({ childs: result.data, mychildShow: canshow, userchildShow: notmore })
           }
         })
       }
@@ -55,9 +61,7 @@ Page({
           url: x5on.url.userchildupdate,
           data: e.detail.value,
           success: (res) => {
-console.log(res)
-            // 刷新孩子
-            that.setData({ childs: res.data })
+            that.setData({ childs: res.data });
           }
         })
       })

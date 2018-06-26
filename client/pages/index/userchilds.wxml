@@ -1,7 +1,7 @@
 <!--pages/index/userchilds.wxml-->
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
-<form bindsubmit="userchildSubmit" wx:if="{{childs.length<2}}">
+<form bindsubmit="userchildSubmit" wx:if="{{userchildShow}}">
   <view class="weui-cells__title">孩子信息</view>
   <view class="weui-cells weui-cells_after-title">
     <view class="weui-cell weui-cell_input">
@@ -47,7 +47,7 @@
   <input name="relation_id" hidden="true" value="{{relation_id}}"></input>
 </form>
 
-<block wx:if="{{childs.length>0}}" wx:for="{{childs}}" wx:key="uid">
+<block wx:if="{{mychildShow}}" wx:for="{{childs}}" wx:key="uid">
   <view class="weui-cells__title">我的孩子</view>
   <view class="weui-cells weui-cells_after-title">
     <view class="weui-cell">

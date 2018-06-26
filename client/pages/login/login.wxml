@@ -28,20 +28,30 @@
       </view>
     </block>
   </view>
-  <view class="weui-cells__title">我的孩子</view>
-  <view class="weui-cells weui-cells_after-title">
-    <view class="weui-cell">
-      <view class="weui-cell__bd">姓名</view>
-      <view class="weui-cell__ft">石亮</view>
+
+
+  <block wx:if="{{childs.length>0}}" wx:for="{{childs}}" wx:key="uid">
+    <view class="weui-cells__title">我的孩子</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">孩子姓名</view>
+        <view class="weui-cell__ft">{{item.child_name}}</view>
+      </view>
+      <view class="weui-cell">
+        <view class="weui-cell__bd">身份证号</view>
+        <view class="weui-cell__ft">{{item.idc}}</view>
+      </view>
+      <view class="weui-cell">
+        <view class="weui-cell__bd">亲子称谓</view>
+        <view class="weui-cell__ft">{{item.relation_name}}</view>
+      </view>
     </view>
-    <view class="weui-cell">
-      <view class="weui-cell__bd">身份证号</view>
-      <view class="weui-cell__ft">321284200508150254</view>
-    </view>
-  </view>
+  </block>
+
+
   <view style="margin:0 auto; width: 50%; padding-bottom: 30rpx;" wx:if="{{childs.length<2}}">
     <view class="weui-btn-area">
-      <button type="primary" bindtap="inforClick">增加孩子</button>
+      <button type="primary" bindtap="childAdd">增加孩子</button>
     </view>
   </view>
 </block>
