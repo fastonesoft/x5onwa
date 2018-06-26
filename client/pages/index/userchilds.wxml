@@ -1,34 +1,34 @@
 <!--pages/index/userchilds.wxml-->
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
-<form bindsubmit="userchildSubmit">
+<form bindsubmit="userchildSubmit" wx:if="{{childs.length<2}}">
   <view class="weui-cells__title">孩子信息</view>
   <view class="weui-cells weui-cells_after-title">
-      <view class="weui-cell weui-cell_input">
-        <view class="weui-cell__hd">
-          <view class="weui-label">孩子姓名</view>
-        </view>
-        <view class="weui-cell__bd">
-          <input class="weui-input" placeholder="请输入孩子姓名" name="name" type="text" maxlength="4" value="{{item.name}}" data-reg="^[\\u4e00-\\u9fa5]{2,4}$" data-index="0" data-message="姓名：2-4个汉字" bindblur="checkInput"/>
-        </view>
-        <view class="weui-cell__ft" wx:if="{{errorArray[0]}}">
-          <icon type="warn" size="23"></icon>
-        </view>
+    <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+        <view class="weui-label">孩子姓名</view>
       </view>
-            <view class="weui-cell weui-cell_input">
-        <view class="weui-cell__hd">
-          <view class="weui-label">身份证号</view>
-        </view>
-        <view class="weui-cell__bd">
-          <input class="weui-input" placeholder="请输入孩子身份证号" name="idc" type="number" maxlength="18" value="{{item.idc}}" data-reg="^\\d{17}[0-9X]$" data-index="1" data-message="身份证号有误" bindblur="checkInput"/>
-        </view>
-        <view class="weui-cell__ft" wx:if="{{errorArray[1]}}">
-          <icon type="warn" size="23"></icon>
-        </view>
+      <view class="weui-cell__bd">
+        <input class="weui-input" placeholder="请输入孩子姓名" name="name" type="text" maxlength="4" value="{{item.name}}" data-reg="^[\\u4e00-\\u9fa5]{2,4}$" data-index="0" data-message="姓名：2-4个汉字" bindblur="checkInput"/>
       </view>
+      <view class="weui-cell__ft" wx:if="{{errorArray[0]}}">
+        <icon type="warn" size="23"></icon>
+      </view>
+    </view>
+    <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+        <view class="weui-label">身份证号</view>
+      </view>
+      <view class="weui-cell__bd">
+        <input class="weui-input" placeholder="请输入孩子身份证号" name="idc" type="number" maxlength="18" value="{{item.idc}}" data-reg="^\\d{17}[0-9X]$" data-index="1" data-message="身份证号有误" bindblur="checkInput"/>
+      </view>
+      <view class="weui-cell__ft" wx:if="{{errorArray[1]}}">
+        <icon type="warn" size="23"></icon>
+      </view>
+    </view>
   </view>
 
-    <view class="weui-cells__title">亲子关系</view>
+  <view class="weui-cells__title">亲子关系</view>
   <view class="weui-cells weui-cells_after-title">
     <view class="weui-cell weui-cell_select">
       <view class="weui-cell__hd weui-cell__hd_in-select-after">
@@ -44,23 +44,25 @@
   <view class="weui-btn-area">
     <button type="primary" form-type="submit">提交</button>
   </view>
-    <input name="relation_id" hidden="true" value="{{relation_id}}"></input>
+  <input name="relation_id" hidden="true" value="{{relation_id}}"></input>
 </form>
 
+<block wx:if="{{childs.length>0}}">
   <view class="weui-cells__title">我的孩子</view>
   <view class="weui-cells weui-cells_after-title">
-  <block wx:for="{{childs}}" wx:key="uid">
-    <view class="weui-cell">
-      <view class="weui-cell__bd">孩子姓名</view>
-      <view class="weui-cell__ft">{{item.child_name}}</view>
-    </view>
-    <view class="weui-cell">
-      <view class="weui-cell__bd">身份证号</view>
-      <view class="weui-cell__ft">{{item.idc}}</view>
-    </view>
-        <view class="weui-cell">
-      <view class="weui-cell__bd">亲子称谓</view>
-      <view class="weui-cell__ft">{{item.relation_name}}</view>
-    </view>
+    <block wx:for="{{childs}}" wx:key="uid">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">孩子姓名</view>
+        <view class="weui-cell__ft">{{item.child_name}}</view>
+      </view>
+      <view class="weui-cell">
+        <view class="weui-cell__bd">身份证号</view>
+        <view class="weui-cell__ft">{{item.idc}}</view>
+      </view>
+      <view class="weui-cell">
+        <view class="weui-cell__bd">亲子称谓</view>
+        <view class="weui-cell__ft">{{item.relation_name}}</view>
+      </view>
     </block>
   </view>
+</block>

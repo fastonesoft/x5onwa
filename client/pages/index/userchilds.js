@@ -17,12 +17,22 @@ Page({
     var that = this
     x5on.check({
       showError: true,
-      success: () => x5on.request({
-        url: x5on.url.relation,
-        success: function (result) {
-          that.setData({ pickers: result.data })
-        }
-      })
+      success: () => {
+        // 关系
+        x5on.request({
+          url: x5on.url.relation,
+          success: function (result) {
+            that.setData({ pickers: result.data })
+          }
+        })
+        // 孩子
+        x5on.request({
+          url: x5on.url.parentchilds,
+          success: function (result) {
+            that.setData({ childs: result.data })
+          }
+        })
+      }
     })
   },
 
@@ -41,11 +51,17 @@ Page({
     var value = e.detail.value
     if (value.name && value.idc && value.relation_id) {
       x5on.checkForm(this, 0, 1, function () {
-        x5on.postForm({
+        x5on.postFormEx({
           url: x5on.url.schcode,
           data: e.detail.value,
           success: (res) => {
-            console.log(res)
+            // 刷新孩子
+            x5on.request({
+              url: x5on.url.parentchilds,
+              success: function (result) {
+                that.setData({ childs: result.data })
+              }
+            })
           }
         })
       })

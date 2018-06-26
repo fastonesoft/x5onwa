@@ -50,6 +50,7 @@ var doUrl = {
 
   // 亲子关系
   relation: `${host}/weapp/relation`,
+  parentchilds: `${host}/weapp/parentchilds`,
 
   // 错误测试地址
   test: `${host}/weapp/data`
@@ -328,6 +329,26 @@ var doPostForm = function (options) {
   })  
 };
 
+// 表单提交
+var doPostFormEx = function(options) {
+  qcloud.request({
+    url: options.url,
+    data: options.data,
+    method: 'POST',
+    header: { 'content-type': 'application/x-www-form-urlencoded' },
+    login: true,
+    success: function (result) {
+      // 请求成功
+      if (typeof options.success === 'function') options.success(result.data)
+    },
+    fail: function (error) {
+      if (typeof options.fail === 'function') options.fail()
+      var message = options.error || error.message
+      util.showModel('提交失败', message)
+    }
+  })
+};
+
 // 对外接口
 module.exports = {
   url: doUrl,
@@ -339,6 +360,7 @@ module.exports = {
   checkForm: doCheckForm,
   checkFormEx: doCheckFormEx,
   postForm: doPostForm,
+  postFormEx: doPostFormEx,
   showError: doShowError,
   showSuccess: doSuccess,
 }
