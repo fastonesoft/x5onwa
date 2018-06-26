@@ -47,22 +47,20 @@
   <input name="relation_id" hidden="true" value="{{relation_id}}"></input>
 </form>
 
-<block wx:if="{{childs.length>0}}">
+<block wx:if="{{childs.length>0}}" wx:for="{{childs}}" wx:key="uid">
   <view class="weui-cells__title">我的孩子</view>
   <view class="weui-cells weui-cells_after-title">
-    <block wx:for="{{childs}}" wx:key="uid">
-      <view class="weui-cell">
-        <view class="weui-cell__bd">孩子姓名</view>
-        <view class="weui-cell__ft">{{item.child_name}}</view>
-      </view>
-      <view class="weui-cell">
-        <view class="weui-cell__bd">身份证号</view>
-        <view class="weui-cell__ft">{{item.idc}}</view>
-      </view>
-      <view class="weui-cell">
-        <view class="weui-cell__bd">亲子称谓</view>
-        <view class="weui-cell__ft">{{item.relation_name}}</view>
-      </view>
-    </block>
+    <view class="weui-cell">
+      <view class="weui-cell__bd">孩子姓名</view>
+      <view class="weui-cell__ft">{{item.child_name}}</view>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__bd">身份证号</view>
+      <view class="weui-cell__ft">{{item.idc}}</view>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__bd">亲子称谓</view>
+      <view class="weui-cell__ft">{{item.relation_name}}</view>
+    </view>
   </view>
 </block>

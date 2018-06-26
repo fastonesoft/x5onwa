@@ -51,17 +51,13 @@ Page({
     var value = e.detail.value
     if (value.name && value.idc && value.relation_id) {
       x5on.checkForm(this, 0, 1, function () {
-        x5on.postFormEx({
-          url: x5on.url.schcode,
+        x5on.postForm({
+          url: x5on.url.userchildupdate,
           data: e.detail.value,
           success: (res) => {
+console.log(res)
             // 刷新孩子
-            x5on.request({
-              url: x5on.url.parentchilds,
-              success: function (result) {
-                that.setData({ childs: result.data })
-              }
-            })
+            that.setData({ childs: res.data })
           }
         })
       })

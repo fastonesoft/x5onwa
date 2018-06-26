@@ -46,7 +46,7 @@ var doUrl = {
 
   // 用户孩子
   userchild: `${host}/weapp/userchild`,
-  userchildupdate: `${host}/weapp/userchild/update`,
+  userchildupdate: `${host}/weapp/child/update`,
 
   // 亲子关系
   relation: `${host}/weapp/relation`,
