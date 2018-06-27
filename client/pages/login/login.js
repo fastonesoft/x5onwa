@@ -13,8 +13,7 @@ Page({
 
 
   onShow: function () {
-    var that = this;
-    console.log(this)
+    var that = this
     // 检测登录
     x5on.check({
       showError: false,
@@ -76,15 +75,6 @@ Page({
       }
     })
   },
-  canScan: function () {
-    // 只允许从相机扫码
-    wx.scanCode({
-      onlyFromCamera: true,
-      success: (res) => {
-        console.log(res)
-      }
-    })
-  },
 
   bindGetUserInfo: function (e) {
     var that = this;
@@ -98,6 +88,16 @@ Page({
         that.setData({ logged: false, notlogged: true, userinfor: null })
       }
     });
+  },
+
+  canScan: function () {
+    // 只允许从相机扫码
+    wx.scanCode({
+      onlyFromCamera: true,
+      success: (res) => {
+        console.log(res)
+      }
+    })
   },
 
   // 上传图片接口

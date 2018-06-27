@@ -100,6 +100,10 @@ class x5on {
     return NULL;
   }
 
+  public static function checkUserIdcUnique($idc) {
+
+  }
+
   public static function checkUser($name, $value, $id) {
     switch ($name) {
       case 'idc':
