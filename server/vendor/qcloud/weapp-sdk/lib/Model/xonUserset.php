@@ -24,8 +24,4 @@ class xonUserset
   public static function delete () {
 
   }
-
-  public static function checkIdcUnique ($idc) {
-    $userset = dbs::select('xonUserSet', ['*'], compact(''))
-  }
 }

@@ -63,7 +63,7 @@ Page({
           success: (res) => {
             var childs = res.data
             var mychildShow = childs.length > 0
-            var userchildShow = childs.length < 2
+            var userchildShow = false
             that.setData({ childs, mychildShow, userchildShow })
           }
         })

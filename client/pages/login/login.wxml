@@ -3,31 +3,31 @@
   <!-- 用户登录测试 -->
   <image class="userinfor-bg" src="./loginbg.png"></image>
   <view class="userinfo">
-  <block wx:if="{{logged}}">
-    <image class="userinfo-avatar" src="{{userinfor.avatarUrl}}"></image>
-    <view style="margin: 0 auto; width: 50%; text-align: center;">
-      <text class="userinfo-nickname">{{userinfor.nickName}}</text>
-    </view>
-  </block>
-  <block wx:if="{{notlogged}}">
-      <image class="userinfo-avatar" src="./unlogin.png"></image>
-    <view style="margin: 0 auto; width: 50%; text-align: center;">
-      <view class="weui-btn-area" style="margin-top: 0rpx;">
-        <button type="warn" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button>
+    <block wx:if="{{logged}}">
+      <image class="userinfo-avatar" src="{{userinfor.avatarUrl}}"></image>
+      <view style="margin: 0 auto; width: 50%; text-align: center;">
+        <text class="userinfo-nickname">{{userinfor.nickName}}</text>
       </view>
-    </view>
-  </block>
+    </block>
+    <block wx:if="{{notlogged}}">
+      <image class="userinfo-avatar" src="./unlogin.png"></image>
+      <view style="margin: 0 auto; width: 50%; text-align: center;">
+        <view class="weui-btn-area" style="margin-top: 0rpx;">
+          <button type="warn" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button>
+        </view>
+      </view>
+    </block>
   </view>
 </view>
 <block wx:if="{{logged}}">
   <view class="weui-cells__title">个人信息</view>
   <view class="weui-cells weui-cells_after-title">
     <block wx:if="{{notchecked}}">
-    <view style="margin:0 auto; width: 50%; padding-bottom: 30rpx;">
-      <view class="weui-btn-area">
-        <button type="primary" bindtap="inforClick">完善个人信息</button>
+      <view style="margin:0 auto; width: 50%; padding-bottom: 30rpx;">
+        <view class="weui-btn-area">
+          <button type="primary" bindtap="inforClick">完善个人信息</button>
+        </view>
       </view>
-    </view>
     </block>
     <block wx:for="{{items}}" wx:key="id" wx:if="{{inforchecked}}">
       <view class="weui-cell">
@@ -54,10 +54,9 @@
       </view>
     </view>
   </block>
-
-  <view style="margin:0 auto; width: 50%; padding-bottom: 30rpx;" wx:if="{{canaddChild}}">
-    <view class="weui-btn-area">
-      <button type="primary" bindtap="childAdd">填报孩子信息</button>
+    <view style="margin:0 auto; width: 50%; padding-bottom: 30rpx;" wx:if="{{canaddChild && inforchecked}}">
+      <view class="weui-btn-area">
+        <button type="primary" bindtap="childAdd">添加孩子信息</button>
+      </view>
     </view>
-  </view>
 </block>

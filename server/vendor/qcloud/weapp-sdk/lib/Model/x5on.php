@@ -69,7 +69,7 @@ class x5on {
     if ( $more_than ) {
       if ( $current_year - $year < $more_than ) {
         $error = true;
-        $message = '年龄不足要求';
+        $message = '年龄不符要求';
         return compact('error', 'message');
       }
     }
@@ -98,10 +98,6 @@ class x5on {
     }
     // 检验通过
     return NULL;
-  }
-
-  public static function checkUserIdcUnique($idc) {
-
   }
 
   public static function checkUser($name, $value, $id) {

@@ -1,7 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-use QCloud_WeApp_SDK\Mysql\Mysql as dbs;
 use QCloud_WeApp_SDK\Model;
 
 class Userset extends CI_Controller {
@@ -35,21 +34,26 @@ class Userset extends CI_Controller {
       $param = $_POST;
       $user_id = $user['unionId'];
 
-      // 遍历数据
       foreach ($param as $name => $value) {
-        // 检测数据
+        // 检测输入数据是否有误
         $res = Model\x5on::checkUser($name, $value, $user_id);
         if ($res !== NULL) {
           $this->json(['code' => -1, 'data' => $res['message']]);
           return;
         }
 
-        // 查询名称
+        // 根据名称获取userkey记录
         $userkey = Model\xonUserkey::getRowByName($name);
         if ($userkey !== NULL) {
           // 获取编号
           $key_id = $userkey->id;
-          Model\xonUserkeyvalue::insert($user_id, $key_id, $value);
+          $check_unique = $userkey->check_unique;
+          // 插入数据，并进行唯一检测
+          $res = Model\xonUserkeyvalue::insert($user_id, $key_id, $value, $check_unique);
+          if ( $res !== NULL ) {
+            $this->json(['code' => -1, 'data' => $res['message']]);
+            return;
+          }
         }
       }
       // 添加：用户设置记录

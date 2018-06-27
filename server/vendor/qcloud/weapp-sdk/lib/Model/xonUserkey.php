@@ -24,12 +24,6 @@ class xonUserkey
     return dbs::row('xonUserKey', ['*'], compact('name'));
   }
 
-  /**
-   * @param $user_id
-   * @param $fixed
-   * @return array
-   * @throws Exception
-   */
   public static function getUserKeys ($user_id, $fixed) {
     $keys = dbs::select('xonUserKey', ['*', 'required as error'], compact('fixed'));
     $values = dbs::select('xonUserKeyValue', ['*'], compact('user_id'));
