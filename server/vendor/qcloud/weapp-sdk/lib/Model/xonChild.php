@@ -8,15 +8,10 @@ use \Exception;
 
 class xonChild
 {
-  /**
-   * @param $id
-   * @param $idc
-   * @param $name
-   * @throws Exception
-   */
+
   public static function insert ($id, $idc, $name) {
     // 检测身份证
-    $res = x5on::checkIdc($idc);
+    $res = x5on::checkIdc($idc, 12, 18);
     // 没有问题
     if ( $res === NULL ) {
       $child = dbs::row('xonChild', ['*'], compact('id'));

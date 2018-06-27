@@ -8,38 +8,42 @@ var x5on = require('../x5on.js')
 var app = getApp()
 Page({
   data: {
-    logged: true,
-    userinfor: null,
-    items: [],
-    childs: [],
+
   },
 
 
   onShow: function () {
     var that = this;
+    console.log(this)
     // 检测登录
     x5on.check({
       showError: false,
       success: function () {
         var infor = session.get()
-        that.setData({
-          logged: infor ? true : false,
-          userinfor: infor ? infor.userinfo : null,
-        })
+        var userinfor = infor ? infor.userinfo : null
+        var logged = infor ? true : false
+        var notlogged = ! logged
+        that.setData({ logged, notlogged, userinfor })
+
         if ( that.data.logged ) {
           // 个人信息
           x5on.request({
             url: x5on.url.userset,
             success: function (result) {
-              that.setData({ items: result.data.data, checked: result.data.checked })
+              var items = result.data.data
+              var inforchecked = result.data.checked
+              var notchecked = ! inforchecked
+              that.setData({ items, inforchecked, notchecked })
             }
           });
           // 孩子信息
           x5on.request({
             url: x5on.url.parentchilds,
             success: function (result) {
-              console.log(result.data)
-              that.setData({ childs: result.data })
+              var childs = result.data
+              var mychildShow = childs.length > 0
+              var canaddChild = childs.length < 2
+              that.setData({ childs, mychildShow, canaddChild })
             }
           });
         }
@@ -48,6 +52,7 @@ Page({
         // 登录失败 -> 清除数据
         that.setData({
           logged: false,
+          notlogged: true,
           userinfor: null
         })
       }
@@ -85,20 +90,12 @@ Page({
     var that = this;
     x5on.login({
       e: e,
-      success: function () {
-        var infor = session.get();
-        that.setData({
-          logged: infor ? true : false,
-          userinfor: infor ? infor.userinfo : null,
-        })
+      success: function () {   
         // 不能改
         that.onShow();
       },
       fail: function() {
-        that.setData({
-          logged: false,
-          userinfor: null
-        })
+        that.setData({ logged: false, notlogged: true, userinfor: null })
       }
     });
   },

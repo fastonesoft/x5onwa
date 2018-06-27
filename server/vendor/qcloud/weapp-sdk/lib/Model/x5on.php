@@ -24,7 +24,7 @@ class x5on {
     return $arr;
   }
 
-  public static function checkIdc($idcard) {
+  public static function checkIdc($idcard, $more_than, $less_than) {
     $idc = strtoupper($idcard);
     // 长度检测
     if ( strlen($idc) != 18 ) {
@@ -64,6 +64,23 @@ class x5on {
       $message = '身份证出生日期验证出错';
       return compact('error', 'message');
     }
+    // 年龄检测
+    $current_year = (int) date('Y');
+    if ( $more_than ) {
+      if ( $current_year - $year < $more_than ) {
+        $error = true;
+        $message = '年龄不足要求';
+        return compact('error', 'message');
+      }
+    }
+    if ( $less_than ) {
+      if ( $current_year - $year > $less_than ) {
+        $error = true;
+        $message = '岁数已超标';
+        return compact('error', 'message');
+      }
+    }
+
     // 验证检测
     $idcard_base = substr($idc, 0, 17);
     $verify_code = substr($idc, 17, 1);
@@ -83,10 +100,10 @@ class x5on {
     return NULL;
   }
 
-  public static function check($name, $value, $id) {
+  public static function checkUser($name, $value, $id) {
     switch ($name) {
       case 'idc':
-        return self::checkIdc($value);
+        return self::checkIdc($value, 30, 0);
       case 'name':
         return xonUser::checkRename($id, $value);
       default:

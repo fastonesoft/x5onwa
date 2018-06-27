@@ -33,9 +33,9 @@ Page({
           url: x5on.url.parentchilds,
           success: function (result) {
             var childs = result.data
-            var canshow = childs.length > 0
-            var notmore = childs.length < 2
-            that.setData({ childs: result.data, mychildShow: canshow, userchildShow: notmore })
+            var mychildShow = childs.length > 0
+            var userchildShow = childs.length < 2
+            that.setData({ childs, mychildShow, userchildShow })
           }
         })
       }
@@ -61,7 +61,10 @@ Page({
           url: x5on.url.userchildupdate,
           data: e.detail.value,
           success: (res) => {
-            that.setData({ childs: res.data });
+            var childs = res.data
+            var mychildShow = childs.length > 0
+            var userchildShow = childs.length < 2
+            that.setData({ childs, mychildShow, userchildShow })
           }
         })
       })
