@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/login/login",
     "pages/index/index",
     "pages/index/regstud",
     "pages/index/schcode",
@@ -9,7 +10,6 @@
     "pages/index/roledist",
     "pages/index/userset",
     "pages/index/userchilds",
-    "pages/login/login",
     "pages/class/class",
     "pages/phone/phone"
   ],
@@ -22,6 +22,12 @@
   },
   "tabBar": {
     "list": [
+      {
+        "text": "登录",
+        "pagePath": "pages/login/login",
+        "iconPath": "images/tabs/login.png",
+        "selectedIconPath": "images/tabs/logins.png"
+      },
       {
         "text": "学校",
         "pagePath": "pages/index/index",
@@ -39,12 +45,7 @@
         "pagePath": "pages/class/class",
         "iconPath": "images/tabs/class.png",
         "selectedIconPath": "images/tabs/classs.png"
-      },      {
-        "text": "登录",
-        "pagePath": "pages/login/login",
-        "iconPath": "images/tabs/login.png",
-        "selectedIconPath": "images/tabs/logins.png"
-      }
+      }      
     ]
   }
 }
