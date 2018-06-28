@@ -19,6 +19,7 @@ class LoginService {
 
             return AuthAPI::login($code, $encryptedData, $iv);
         } catch (Exception $e) {
+          var_dump(111);
             return [
                 'loginState' => Constants::E_AUTH,
                 'error' => $e->getMessage()
@@ -28,7 +29,7 @@ class LoginService {
 
     public static function check() {
         try {
-            $skey = self::getHttpHeader(Constants::WX_HEADER_SKEY);
+            $skey = Util::getHttpHeader(Constants::WX_HEADER_SKEY);
 
             return AuthAPI::checkLogin($skey);
         } catch (Exception $e) {

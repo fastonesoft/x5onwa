@@ -20,6 +20,7 @@ class xonLogin
 
   public static function check ($role_name, $success, $fail) {
     $result = LoginService::check();
+
     if ($result['loginState'] === Constants::S_AUTH) {
       // 增加权限检测
       $user_id = $result['userinfo']['unionId'];
@@ -33,7 +34,7 @@ class xonLogin
       }
     } else {
       // 找找原因，不能使用result['error']
-      call_user_func($fail, ['code' => -1, 'data' => $result['error']]);
+      call_user_func($fail, ['code' => -1, 'data' => '登录检测出错']);
     }
   }
 

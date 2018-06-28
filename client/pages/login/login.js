@@ -41,6 +41,7 @@ Page({
           });
           // 孩子信息
           x5on.request({
+            showError: false,
             url: x5on.url.parentchilds,
             success: function (result) {
               var childs = result.data

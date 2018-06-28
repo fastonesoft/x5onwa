@@ -64,36 +64,30 @@ var doUrl = {
  * @param {Function} success    检测成功回调
  * @param {Function} fali       检测失败回调
  */
+
 var doCheck = function (options) {
-  // 检测缓存
-  var sessionkey = session.get()
-  if ( ! sessionkey ) {
-    if (options.showError) util.showModel('缓存过期', '请转到“登录”页面登录');
-    if (typeof options.fail === 'function') options.fail();
-    return
-  }
   // 查看是否授权
   wx.getSetting({
     success: function (res) {
       if (res.authSetting['scope.userInfo']) {
         // 检查登录是否过期
-        wx.checkSession({
-          success: function (res) {
-            // 执行回调
-            if (typeof options.success === 'function') options.success();
-          },
-          fail: function (res) {
-            console.log(111)
-            // 本地登录清除
-            qcloud.clearSession();
-            // 错误提示
-            if (options.showError) util.showModel('登录过期', '请转到“登录”页面登录');
-            if (typeof options.fail === 'function') options.fail();
-          },
-        });
+        const session = qcloud.Session.get()
+        if (session) {
+          qcloud.loginWithCode({
+            success: res => {
+              // 已登录
+              if (typeof options.success === 'function') options.success();
+            },
+            fail: err => {
+              if (typeof options.fail === 'function') options.fail();
+              if (options.showError) util.showModel('登录错误', err.message)
+            }
+          })
+        } else {
+          if (options.showError) util.showModel('缓存过期', '请转到“登录”页面登录');
+          if (typeof options.fail === 'function') options.fail();
+        }
       } else {
-        // 本地登录清除
-        qcloud.clearSession();
         // 错误提示
         if (options.showError) util.showModel('授权失败', '请转到“登录”页面授权');
         if (typeof options.fail === 'function') options.fail();
@@ -153,49 +147,31 @@ var doLogin11 = function (options) {
 
 var doLogin = function (options) {
   util.showBusy('正在登录')
-  const session = qcloud.Session.get()
-
-  if (session) {
-    qcloud.loginWithCode({
-      success: res => {
-        util.showSuccess('登录成功')
-        if (typeof options.success === 'function') options.success();
-      },
-      fail: err => {
-        console.error(err)
-        if (typeof options.fail === 'function') options.fail();
-        util.showModel('登录错误', err.message)
-      }
-    })
-  } else {
-    qcloud.login({
-      success: res => {
-        console.log(res)
-        if (typeof options.success === 'function') options.success();
-        util.showSuccess('登录成功')
-      },
-      fail: err => {
-        console.error(err)
-        if (typeof options.fail === 'function') options.fail();
-        util.showModel('登录错误', err.message)
-      }
-    })
-  }
+  qcloud.login({
+    success: res => {
+      if (typeof options.success === 'function') options.success();
+      util.showSuccess('登录成功')
+    },
+    fail: err => {
+      if (typeof options.fail === 'function') options.fail();
+      util.showModel('登录错误', err.message)
+    }
+  })
 };
 
 
-
-// 暂时用吧
+/** 变更 */
 var doRequest = function (options) {
-  util.showBusy('请求中...')
     qcloud.request({
       url: options.url,
       login: true,
-      success(result) {
+      success: function (result) {
+        console.log(result)
         // 请求成功
         if (typeof options.success === 'function') options.success(result.data)
       },
-      fail(error) {
+      fail: function (error) {
+        console.log(error)
         if (typeof options.fail === 'function') options.fail()
         util.showModel('请求失败', error.message);
       }
