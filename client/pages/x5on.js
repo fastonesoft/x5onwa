@@ -78,12 +78,13 @@ var doCheck = function (options) {
       if (res.authSetting['scope.userInfo']) {
         // 检查登录是否过期
         wx.checkSession({
-          success: function () {
+          success: function (res) {
             // 执行回调
             if (typeof options.success === 'function') options.success();
           },
-          fail: function () {
-            // 登录清除
+          fail: function (res) {
+            console.log(111)
+            // 本地登录清除
             qcloud.clearSession();
             // 错误提示
             if (options.showError) util.showModel('登录过期', '请转到“登录”页面登录');
@@ -91,7 +92,7 @@ var doCheck = function (options) {
           },
         });
       } else {
-        // 登录清除
+        // 本地登录清除
         qcloud.clearSession();
         // 错误提示
         if (options.showError) util.showModel('授权失败', '请转到“登录”页面授权');
@@ -107,7 +108,7 @@ var doCheck = function (options) {
  * @param {Function} success    登录成功回调
  * @param {Function} fail       登录失败回调
  */
-var doLogin = function (options) {
+var doLogin11 = function (options) {
   util.showBusy('正在登录')
   // 查看是否授权
   wx.getSetting({
@@ -122,7 +123,7 @@ var doLogin = function (options) {
               encryptedData: options.e.detail.encryptedData,
               iv: options.e.detail.iv,
             };
-            qcloud.requestLogin({
+            qcloud.login({
               loginParams,
               success: function () {
                 util.showSuccess('登录成功');
@@ -132,47 +133,101 @@ var doLogin = function (options) {
               fail: function (qcloudError) {
                 // 这里经常出错，提示OpenID为空，要尝试找出原因
                 console.log(qcloudError)
+                if (typeof options.fail === 'function') options.fail();
                 util.showModel('查询登录', '登录出错，请重试')
               }
             });
           },
           fail: function (loginError) {
+            if (typeof options.fail === 'function') options.fail();
             util.showModel('微信登录', '登录出错，请重试')
           }
         })
       } else {
+        if (typeof options.fail === 'function') options.fail();
         util.showModel('微信授权', '拒绝授权，有些操作将无法完成');
       }
     }
   });
 };
 
+var doLogin = function (options) {
+  util.showBusy('正在登录')
+  const session = qcloud.Session.get()
+
+  if (session) {
+    qcloud.loginWithCode({
+      success: res => {
+        util.showSuccess('登录成功')
+        if (typeof options.success === 'function') options.success();
+      },
+      fail: err => {
+        console.error(err)
+        if (typeof options.fail === 'function') options.fail();
+        util.showModel('登录错误', err.message)
+      }
+    })
+  } else {
+    qcloud.login({
+      success: res => {
+        console.log(res)
+        if (typeof options.success === 'function') options.success();
+        util.showSuccess('登录成功')
+      },
+      fail: err => {
+        console.error(err)
+        if (typeof options.fail === 'function') options.fail();
+        util.showModel('登录错误', err.message)
+      }
+    })
+  }
+};
+
+
+
+// 暂时用吧
+var doRequest = function (options) {
+  util.showBusy('请求中...')
+    qcloud.request({
+      url: options.url,
+      login: true,
+      success(result) {
+        // 请求成功
+        if (typeof options.success === 'function') options.success(result.data)
+      },
+      fail(error) {
+        if (typeof options.fail === 'function') options.fail()
+        util.showModel('请求失败', error.message);
+      }
+    })
+};
+
 /**
- * 数据查询
+ * 数据查询（还有些问题）
  * @param {Object} options 登录配置
  * @param {string} options.url 请求地址
  * @param {string} options.error 错误提示
  * @param {Function} options.success(result) 登录成功后的回调函数
  */
-var doRequest = function (options) {
+var doRequestEx = function (options) {
   // 提取session-skey
   var sessionkey = session.get();
   var skey = sessionkey ? sessionkey.skey : null;
   if ( ! skey ) {
-    if (typeof options.fail === 'function') options.fail()
-    util.showModel('数据查询', '请求数据出错，检查是否登录过期！')
+    if (typeof options.fail === 'function') options.fail()    
+    if (options.showError) util.showModel('数据查询', '请求数据出错，检查是否登录过期！')
     // 退出
     return
   }
   wx.request({
     url: options.url,
-    header: { 'X-WX-Skey': skey },
+    header: { 'x-wx-skey': skey },
     success: function (res) {
       // 错误检测
       var data = res.data;
       if (data && data.code === -1) {
-        if (typeof options.fail === 'function') options.fail()
-        util.showModel('数据查询', data.data)
+        if (typeof options.fail === 'function') options.fail()        
+        if (options.showError) util.showModel('数据查询', data.data)
         // 退出
         return
       }
@@ -182,7 +237,7 @@ var doRequest = function (options) {
     fail: function (error) {
       if (typeof options.fail === 'function') options.fail()
       var message = options.error || error.message
-      util.showModel('数据查询', message)
+      if (options.showError) util.showModel('数据查询', message)      
     }
   })
 };

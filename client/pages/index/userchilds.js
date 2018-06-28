@@ -55,7 +55,8 @@ Page({
   userchildSubmit: function (e) {
     var that = this
     var value = e.detail.value
-    if (value.name && value.idc && value.relation_id) {
+    if (value.name && value.idc && value.relation_id != '0') {
+      console.log(value)
       x5on.checkForm(this, 0, 1, function () {
         x5on.postForm({
           url: x5on.url.userchildupdate,

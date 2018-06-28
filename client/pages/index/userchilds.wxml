@@ -20,7 +20,7 @@
         <view class="weui-label">身份证号</view>
       </view>
       <view class="weui-cell__bd">
-        <input class="weui-input" placeholder="请输入孩子身份证号" name="idc" type="number" maxlength="18" value="{{item.idc}}" data-reg="^\\d{17}[0-9X]$" data-index="1" data-message="身份证号有误" bindblur="checkInput"/>
+        <input class="weui-input" placeholder="请输入孩子身份证号" name="idc" type="idcard" maxlength="18" value="{{item.idc}}" data-reg="^\\d{17}[0-9X]$" data-index="1" data-message="身份证号有误" bindblur="checkInput"/>
       </view>
       <view class="weui-cell__ft" wx:if="{{errorArray[1]}}">
         <icon type="warn" size="23"></icon>

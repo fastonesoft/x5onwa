@@ -27,12 +27,16 @@ Page({
         if ( that.data.logged ) {
           // 个人信息
           x5on.request({
+            showError: false,
             url: x5on.url.userset,
             success: function (result) {
               var items = result.data.data
               var inforchecked = result.data.checked
               var notchecked = ! inforchecked
               that.setData({ items, inforchecked, notchecked })
+            },
+            fail: function () {
+              that.setData({ logged: false, notlogged: true, userinfor: null })
             }
           });
           // 孩子信息
@@ -43,17 +47,16 @@ Page({
               var mychildShow = childs.length > 0
               var canaddChild = childs.length < 2
               that.setData({ childs, mychildShow, canaddChild })
+            },
+            fail: function () {
+              that.setData({ logged: false, notlogged: true, userinfor: null })
             }
           });
         }
       },
       fail: function () {
         // 登录失败 -> 清除数据
-        that.setData({
-          logged: false,
-          notlogged: true,
-          userinfor: null
-        })
+        that.setData({ logged: false, notlogged: true, userinfor: null })
       }
     });
   },
