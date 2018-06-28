@@ -15,7 +15,7 @@ class User extends CI_Controller {
             ]);
         } else {
             $this->json([
-                'code' => 1,
+                'code' => -1,
                 'data' => $result['error']
             ]);
         }
