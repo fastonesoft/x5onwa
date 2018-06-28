@@ -70,20 +70,22 @@ class AuthAPI {
     public static function checkLogin($skey) {
         $userinfo = User::findUserBySKey($skey);
         if ($userinfo === NULL) {
-            return [
-                'loginState' => Constants::E_AUTH,
-                'userinfo' => []
-            ];
+//            return [
+//                'loginState' => Constants::E_AUTH,
+//                'userinfo' => []
+//            ];
+          throw new Exception("没有找到登录信息");
         }
 
         $wxLoginExpires = Conf::getWxLoginExpires();
         $timeDifference = time() - strtotime($userinfo->last_visit_time);
-        
+
         if ($timeDifference > $wxLoginExpires) {
-            return [
-                'loginState' => Constants::E_AUTH,
-                'userinfo' => []
-            ];
+//            return [
+//                'loginState' => Constants::E_AUTH,
+//                'userinfo' => []
+//            ];
+          throw new Exception("登录状态已过期");
         } else {
             return [
                 'loginState' => Constants::S_AUTH,

@@ -19,7 +19,6 @@ class LoginService {
 
             return AuthAPI::login($code, $encryptedData, $iv);
         } catch (Exception $e) {
-          var_dump(111);
             return [
                 'loginState' => Constants::E_AUTH,
                 'error' => $e->getMessage()

@@ -10,12 +10,13 @@ var session = require('../vendor/wafer2-client-sdk/lib/session.js')
 var host = config.service.host;
 var doUrl = {
   host,
-  // 权限地址
-  role: `${host}/weapp/role`,
+  // 登录检测
+  user: `${host}/weapp/user`,
   // 登录地址
   login: `${host}/weapp/login`,
-  // TODO用户请求
-  user: `${host}/weapp/user`,
+  // 权限地址
+  role: `${host}/weapp/role`,
+
   // 编码地址
   schcode: `${host}/weapp/schcode`,
 
@@ -57,126 +58,63 @@ var doUrl = {
   test: `${host}/weapp/data`
 };
 
-
-/**
- * 登录检测
- * @param {Boolean}  showError  显示自定义提示
- * @param {Function} success    检测成功回调
- * @param {Function} fali       检测失败回调
- */
-
 var doCheck = function (options) {
-  // 查看是否授权
-  wx.getSetting({
-    success: function (res) {
-      if (res.authSetting['scope.userInfo']) {
-        // 检查登录是否过期
-        const session = qcloud.Session.get()
-        if (session) {
-          qcloud.loginWithCode({
-            success: res => {
-              // 已登录
-              if (typeof options.success === 'function') options.success();
-            },
-            fail: err => {
-              if (typeof options.fail === 'function') options.fail();
-              if (options.showError) util.showModel('登录错误', err.message)
-            }
-          })
-        } else {
-          if (options.showError) util.showModel('缓存过期', '请转到“登录”页面登录');
-          if (typeof options.fail === 'function') options.fail();
-        }
-      } else {
-        // 错误提示
-        if (options.showError) util.showModel('授权失败', '请转到“登录”页面授权');
-        if (typeof options.fail === 'function') options.fail();
-      }
-    }
-  });
-};
-
-/**
- * 程序登录
- * @param {Object} e open_type  传递参数
- * @param {Function} success    登录成功回调
- * @param {Function} fail       登录失败回调
- */
-var doLogin11 = function (options) {
-  util.showBusy('正在登录')
-  // 查看是否授权
-  wx.getSetting({
-    success: function (res) {
-      if (res.authSetting['scope.userInfo']) {
-        // 登录态已过期，需重新登录
-        wx.login({
-          success: function (loginResult) {
-            // 更新
-            var loginParams = {
-              code: loginResult.code,
-              encryptedData: options.e.detail.encryptedData,
-              iv: options.e.detail.iv,
-            };
-            qcloud.login({
-              loginParams,
-              success: function () {
-                util.showSuccess('登录成功');
-                // 登录成功
-                if (typeof options.success === 'function') options.success();
-              },
-              fail: function (qcloudError) {
-                // 这里经常出错，提示OpenID为空，要尝试找出原因
-                console.log(qcloudError)
-                if (typeof options.fail === 'function') options.fail();
-                util.showModel('查询登录', '登录出错，请重试')
-              }
-            });
-          },
-          fail: function (loginError) {
-            if (typeof options.fail === 'function') options.fail();
-            util.showModel('微信登录', '登录出错，请重试')
-          }
-        })
-      } else {
-        if (typeof options.fail === 'function') options.fail();
-        util.showModel('微信授权', '拒绝授权，有些操作将无法完成');
-      }
-    }
-  });
-};
-
-var doLogin = function (options) {
-  util.showBusy('正在登录')
-  qcloud.login({
-    success: res => {
-      if (typeof options.success === 'function') options.success();
-      util.showSuccess('登录成功')
+  qcloud.request({
+    url: doUrl.user,
+    login: true,
+    success: function (result) {
+      // 请求成功
+      if (typeof options.success === 'function') options.success(result.data)
     },
-    fail: err => {
-      if (typeof options.fail === 'function') options.fail();
-      util.showModel('登录错误', err.message)
+    fail: function (error) {
+      if (typeof options.fail === 'function') options.fail()
+      util.showModel('请求失败', error.message);
     }
   })
 };
 
-
-/** 变更 */
 var doRequest = function (options) {
-    qcloud.request({
-      url: options.url,
-      login: true,
-      success: function (result) {
-        console.log(result)
-        // 请求成功
-        if (typeof options.success === 'function') options.success(result.data)
+  qcloud.request({
+    url: options.url,
+    login: false,
+    success: function (result) {
+      // 请求成功
+      if (typeof options.success === 'function') options.success(result.data)
+    },
+    fail: function (error) {
+      if (typeof options.fail === 'function') options.fail()
+      util.showModel('请求失败', error.message);
+    }
+  })
+};
+
+var doLogin = function (options) {
+  util.showBusy('正在登录')
+  const session = qcloud.Session.get()
+  if (session) {
+    qcloud.loginWithCode({
+      success: res => {
+        if (typeof options.success === 'function') options.success();
       },
-      fail: function (error) {
-        console.log(error)
-        if (typeof options.fail === 'function') options.fail()
-        util.showModel('请求失败', error.message);
+      fail: err => {
+        if (typeof options.fail === 'function') options.fail();
+        util.showModel('登录错误', err.message)
       }
     })
+  } else {
+    qcloud.login({
+      success: res => {
+        if (typeof options.success === 'function') options.success();
+      },
+      fail: err => {
+        if (typeof options.fail === 'function') options.fail();
+        util.showModel('登录错误', err.message)
+      }
+    })
+  }
 };
+
+
 
 /**
  * 数据查询（还有些问题）

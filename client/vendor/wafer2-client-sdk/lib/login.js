@@ -146,7 +146,7 @@ function loginWithCode (opts) {
                     if (!res || !res.userinfo) {
                         return opts.fail(new Error(`登录失败(${data.error})：${data.message}`))
                     }
-    
+
                     // 成功地响应会话信息
                     Session.set(res)
                     opts.success(res.userinfo)

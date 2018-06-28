@@ -34,7 +34,7 @@ class xonLogin
       }
     } else {
       // 找找原因，不能使用result['error']
-      call_user_func($fail, ['code' => -1, 'data' => '登录检测出错']);
+      call_user_func($fail, ['code' => -1, 'data' => $result['error']]);
     }
   }
 
