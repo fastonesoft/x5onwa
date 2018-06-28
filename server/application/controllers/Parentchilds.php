@@ -4,8 +4,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 use QCloud_WeApp_SDK\Model;
 
 class Parentchilds extends CI_Controller {
+  const role_name = 'userchilds';
   public function index() {
-    Model\xonLogin::check(function ($user) {
+    Model\xonLogin::check(self::role_name, function ($user) {
       $user_id = $user['unionId'];
       // 正文内容
       $result = Model\xonParentChilds::mychilds($user_id);

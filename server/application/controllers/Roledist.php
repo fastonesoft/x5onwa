@@ -12,8 +12,9 @@ class Roledist extends CI_Controller
    * 系统管理员，查询所有用户
    * 学校管理员，查询所在学校用户
    */
+  const role_name = 'roledist';
   public function index() {
-    Model\xonLogin::check(function ($user) {
+    Model\xonLogin::check(self::role_name, function ($user) {
       // 获取参数
       $param = $_POST;
       $name = $param["name"];
@@ -52,8 +53,11 @@ class Roledist extends CI_Controller
    * 请求部分用户组列表 >学生家长
    */
   public function group() {
-    Model\xonLogin::check(function ($user) {
-      $conditions = sprintf('id>%s', Model\x5on::GROUP_STUDENT_PARENT);
+    Model\xonLogin::check(self::role_name, function ($user) {
+      $user_id = $user['unionId'];
+      $user_max_group_id = Model\xonUserGroup::getUserMaxGroupId($user_id);
+      $conditions = sprintf('id>%s and id<%s', Model\x5on::GROUP_STUDENT_PARENT, $user_max_group_id);
+var_dump($conditions);
       $result = DB::select('xonGroup', ['id', 'name'], $conditions, 'and', 'order by id');
 
       $this->json(['code' => 0, 'data' => $result]);
@@ -66,7 +70,7 @@ class Roledist extends CI_Controller
    * 添加用户进组
    */
   public function update() {
-    Model\xonLogin::check(function ($user) {
+    Model\xonLogin::check(self::role_name, function ($user) {
       // 获取参数
       $param = $_POST;
       // 准备数据
@@ -95,7 +99,7 @@ class Roledist extends CI_Controller
    * 获取当前组下用户列表
    */
   public function groupuser() {
-    Model\xonLogin::check(function ($user) {
+    Model\xonLogin::check(self::role_name, function ($user) {
       // 获取参数
       $param = $_POST;
       // 准备数据
@@ -113,7 +117,7 @@ class Roledist extends CI_Controller
    * 删除选中用户
    */
   public function deleteuser() {
-    Model\xonLogin::check(function ($user) {
+    Model\xonLogin::check(self::role_name, function ($user) {
       // 获取参数
       $param = $_POST;
       $uid = $param['uid'];

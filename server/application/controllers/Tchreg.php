@@ -9,8 +9,9 @@ class Tchreg extends CI_Controller {
    * 不是教师的用户
    * 根据姓名查询出不是教师的用户列表
    */
+  const role_name = 'tchreg';
   public function index() {
-    Model\xonLogin::check(function ($user) {
+    Model\xonLogin::check(self::role_name, function ($user) {
       // 获取参数
       $param = $_POST;
       // 处理数据
@@ -30,7 +31,7 @@ class Tchreg extends CI_Controller {
    * 有学校返回[学校]、没有学校返回[]
    */
   public function usersch() {
-    Model\xonLogin::check(function ($user) {
+    Model\xonLogin::check(self::role_name, function ($user) {
       $user_id = $user['unionId'];
       $group_id = Model\x5on::GROUP_ADMIN_VALUE;
       $result = DB::select('xonUserGroup', ['*'], compact('user_id', 'group_id'));
@@ -54,7 +55,7 @@ class Tchreg extends CI_Controller {
    * 根据提交的数据，注册相应的学校
    */
   public function usereg() {
-    Model\xonLogin::check(function ($user) {
+    Model\xonLogin::check(self::role_name, function ($user) {
       // 获取参数
       $param = $_POST;
       // 准备数据

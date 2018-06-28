@@ -66,7 +66,8 @@ var doUrl = {
  */
 var doCheck = function (options) {
   // 检测缓存
-  if (!session.get()) {
+  var sessionkey = session.get()
+  if ( ! sessionkey ) {
     if (options.showError) util.showModel('缓存过期', '请转到“登录”页面登录');
     if (typeof options.fail === 'function') options.fail();
     return
@@ -130,6 +131,7 @@ var doLogin = function (options) {
               },
               fail: function (qcloudError) {
                 // 这里经常出错，提示OpenID为空，要尝试找出原因
+                console.log(qcloudError)
                 util.showModel('查询登录', '登录出错，请重试')
               }
             });
@@ -153,17 +155,34 @@ var doLogin = function (options) {
  * @param {Function} options.success(result) 登录成功后的回调函数
  */
 var doRequest = function (options) {
-  qcloud.request({
+  // 提取session-skey
+  var sessionkey = session.get();
+  var skey = sessionkey ? sessionkey.skey : null;
+  if ( ! skey ) {
+    if (typeof options.fail === 'function') options.fail()
+    util.showModel('数据查询', '请求数据出错，检查是否登录过期！')
+    // 退出
+    return
+  }
+  wx.request({
     url: options.url,
-    login: true,
-    success: function (result) {
-      // 请求成功
-      if (typeof options.success === 'function') options.success(result.data)
+    header: { 'X-WX-Skey': skey },
+    success: function (res) {
+      // 错误检测
+      var data = res.data;
+      if (data && data.code === -1) {
+        if (typeof options.fail === 'function') options.fail()
+        util.showModel('数据查询', data.data)
+        // 退出
+        return
+      }
+      // 没错误
+      if (typeof options.success === 'function') options.success(data)
     },
     fail: function (error) {
       if (typeof options.fail === 'function') options.fail()
       var message = options.error || error.message
-      util.showModel('查询失败', message)
+      util.showModel('数据查询', message)
     }
   })
 };
@@ -294,9 +313,9 @@ var doCheckFormEx = function (that, success) {
  */
 var doPostForm = function (options) {
   // 提取session-skey
-  var sessionkey = session.get()
+  var sessionkey = session.get();
   var skey = sessionkey ? sessionkey.skey : null;
-  if (!skey) {
+  if ( ! skey ) {
     if (typeof options.fail === 'function') options.fail()
     util.showModel('数据提交', '请求数据出错，检查是否登录过期！')
     // 退出
@@ -330,26 +349,6 @@ var doPostForm = function (options) {
   })  
 };
 
-// 表单提交
-var doPostFormEx = function(options) {
-  qcloud.request({
-    url: options.url,
-    data: options.data,
-    method: 'POST',
-    header: { 'content-type': 'application/x-www-form-urlencoded' },
-    login: true,
-    success: function (result) {
-      // 请求成功
-      if (typeof options.success === 'function') options.success(result.data)
-    },
-    fail: function (error) {
-      if (typeof options.fail === 'function') options.fail()
-      var message = options.error || error.message
-      util.showModel('提交失败', message)
-    }
-  })
-};
-
 // 对外接口
 module.exports = {
   url: doUrl,
@@ -361,7 +360,6 @@ module.exports = {
   checkForm: doCheckForm,
   checkFormEx: doCheckFormEx,
   postForm: doPostForm,
-  postFormEx: doPostFormEx,
   showError: doShowError,
   showSuccess: doSuccess,
 }

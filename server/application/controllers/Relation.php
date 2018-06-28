@@ -4,8 +4,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 use QCloud_WeApp_SDK\Model;
 
 class Relation extends CI_Controller {
+  const role_name = 'userchilds';
   public function index() {
-    Model\xonLogin::check(function ($user) {
+    Model\xonLogin::check(self::role_name, function ($user) {
       // 正文内容
       $result = Model\xonRelation::selects();
       // 返回信息

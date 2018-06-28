@@ -745,9 +745,12 @@ AS
  */
 CREATE VIEW xovUserRole
 AS
-  SELECT DISTINCT user_id, role_id
-  FROM xonUserGroup c INNER JOIN xonGroupRole d
-  ON c.group_id = d.group_id;
+  SELECT a.*, b.name as role_name, title
+  FROM (
+    SELECT DISTINCT user_id, role_id
+    FROM xonUserGroup c INNER JOIN xonGroupRole d ON c.group_id = d.group_id
+  ) a LEFT JOIN xonRole b on a.role_id = b.id;
+
 
 /**
   视图：不是教师的用户
@@ -766,10 +769,9 @@ AS
 CREATE VIEW xovSchoolTeach
 AS
   SELECT user_id, C.name as user_name, nick_name, sch_id, B.name as sch_name
-  FROM xonSchoolTeach A LEFT JOIN xonSchool B
-  ON A.sch_id = B.id
-  LEFT JOIN xonUser C
-  ON A.user_id = C.id;
+  FROM xonSchoolTeach A
+  LEFT JOIN xonSchool B ON A.sch_id = B.id
+  LEFT JOIN xonUser C ON A.user_id = C.id;
 
 /**
   视图：查询组用户信息
@@ -777,8 +779,7 @@ AS
 CREATE VIEW xovUserGroup
 AS
   SELECT a.*, b.name as user_name, nick_name
-  FROM xonUserGroup a LEFT JOIN xonUser b
-  ON a.user_id = b.id;
+  FROM xonUserGroup a LEFT JOIN xonUser b ON a.user_id = b.id;
 
 /**
   视图：查询我的孩子

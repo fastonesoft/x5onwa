@@ -4,12 +4,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 use QCloud_WeApp_SDK\Model;
 
 class Userset extends CI_Controller {
-
   /**
    * 获取UserKey列表
    */
+  const role_name = 'userset';
   public function index() {
-    Model\xonLogin::check(function ($user) {
+    Model\xonLogin::check(self::role_name, function ($user) {
       // 查询用户列表
       $user_id = $user['unionId'];
       $data = Model\xonUserkey::getUserKeys($user_id, 0);
@@ -29,7 +29,7 @@ class Userset extends CI_Controller {
    * 提交修改UserKey
    */
   public function update() {
-    Model\xonLogin::check(function ($user) {
+    Model\xonLogin::check(self::role_name, function ($user) {
       // 获取参数
       $param = $_POST;
       $user_id = $user['unionId'];

@@ -18,17 +18,26 @@ class xonLogin
     }
   }
 
-  public static function check ($success, $fail) {
+  public static function check ($role_name, $success, $fail) {
     $result = LoginService::check();
     if ($result['loginState'] === Constants::S_AUTH) {
       // 增加权限检测
-      // 失败 call_user_func($fail, ['code' => -1, 'data' => []]);
-      call_user_func($success, $result['userinfo']);
+      $user_id = $result['userinfo']['unionId'];
+      $res = xonRole::check($user_id, $role_name);
+      if ( $res !== NULL ) {
+        // 没有权限
+        call_user_func($fail, ['code' => -1, 'data' => $res['message']]);
+      } else {
+        // 成功
+        call_user_func($success, $result['userinfo']);
+      }
     } else {
-      call_user_func($fail, ['code' => -1, 'data' => []]);
+      // 找找原因，不能使用result['error']
+      call_user_func($fail, ['code' => -1, 'data' => $result['error']]);
     }
   }
 
+  // 测试用的
   public static function nocheck ($success, $fail) {
     call_user_func($success, $result['userinfo']);
   }

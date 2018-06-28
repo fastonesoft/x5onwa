@@ -2,7 +2,7 @@
 namespace QCloud_WeApp_SDK\Model;
 
 use Guzzle\Cache\NullCacheAdapter;
-use QCloud_WeApp_SDK\Mysql\Mysql as DB;
+use QCloud_WeApp_SDK\Mysql\Mysql as dbs;
 use QCloud_WeApp_SDK\Constants;
 use \Exception;
 
@@ -18,9 +18,9 @@ class xonUserGroup
     $uid = bin2hex(openssl_random_pseudo_bytes(16));
 
     // 只要用户已经有权限组，不再添加
-    $res = DB::row('xonUserGroup', ['*'], compact('user_id'));
+    $res = dbs::row('xonUserGroup', ['*'], compact('user_id'));
     if ($res === NULL) {
-      DB::insert('xonUserGroup', compact('user_id', 'group_id', 'uid'));
+      dbs::insert('xonUserGroup', compact('user_id', 'group_id', 'uid'));
     }
   }
 
@@ -34,9 +34,14 @@ class xonUserGroup
     $uid = bin2hex(openssl_random_pseudo_bytes(16));
 
     // 如果用户已经进了该组，不再添加
-    $res = DB::row('xonUserGroup', ['*'], compact('user_id'), 'and', compact('group_id'));
+    $res = dbs::row('xonUserGroup', ['*'], compact('user_id'), 'and', compact('group_id'));
     if ($res === NULL) {
-      DB::insert('xonUserGroup', compact('user_id', 'group_id', 'uid'));
+      dbs::insert('xonUserGroup', compact('user_id', 'group_id', 'uid'));
     }
+  }
+
+  public static function getUserMaxGroupId ($user_id) {
+    $group = dbs::select('xovUserGroup', ['group_id'], compact('user_id'));
+    return empty($group) ? 0 : max(json_decode(json_encode($group), true));
   }
 }

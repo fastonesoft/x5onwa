@@ -24,7 +24,8 @@ Page({
             // 更新
             that.setData({ cores: result.data })
           },
-          fail: function () {
+          fail: function (error) {
+            console.log(error)
             that.setData({ cores: [] })
           }
         })

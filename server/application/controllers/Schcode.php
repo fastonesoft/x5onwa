@@ -7,8 +7,9 @@ use QCloud_WeApp_SDK\Mysql\Mysql as DB;
 use QCloud_WeApp_SDK\Model;
 
 class Schcode extends CI_Controller {
+  const role_name = 'schcode';
   public function index() {
-    Model\xonLogin::check(function ($user) {
+    Model\xonLogin::check(self::role_name, function ($user) {
       // 获取参数
       $param = $_POST;
       if (count($param) == 5) {

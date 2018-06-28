@@ -2,7 +2,7 @@
 namespace QCloud_WeApp_SDK\Model;
 
 use Guzzle\Cache\NullCacheAdapter;
-use QCloud_WeApp_SDK\Mysql\Mysql as DB;
+use QCloud_WeApp_SDK\Mysql\Mysql as dbs;
 use QCloud_WeApp_SDK\Constants;
 use \Exception;
 
@@ -48,13 +48,24 @@ class xonRole
       $uid = $k;
       $can_show = $v === 'true' ? 1 : 0;
       // 查询记录
-      $res = DB::row('xonRole', ['*'], compact('uid', 'can_show'));
+      $res = dbs::row('xonRole', ['*'], compact('uid', 'can_show'));
       if ($res === NULL) {
         // 更新记录
-        DB::update('xonRole', compact('can_show'), compact('uid'));
+        dbs::update('xonRole', compact('can_show'), compact('uid'));
         $result++;
       }
     }
     return $result;
+  }
+
+  // 权限检测
+  public static function check ($user_id, $role_name) {
+    $res = dbs::row('xovUserRole', ['*'], compact('user_id', 'role_name'));
+    if ( $res === NULL ) {
+      $error = true;
+      $message = '没有该功能操作权限';
+      return compact('error', 'message');
+    }
+    return NULL;
   }
 }

@@ -22,6 +22,7 @@ Page({
       success: () => x5on.request({
         url: x5on.url.roledistgroup,
         success: function (result) {
+          console.log(result)
           that.setData({ pickers: result.data })
         }
       })

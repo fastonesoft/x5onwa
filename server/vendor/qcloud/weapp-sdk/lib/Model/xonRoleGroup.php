@@ -2,7 +2,7 @@
 namespace QCloud_WeApp_SDK\Model;
 
 use Guzzle\Cache\NullCacheAdapter;
-use QCloud_WeApp_SDK\Mysql\Mysql as DB;
+use QCloud_WeApp_SDK\Mysql\Mysql as dbs;
 use QCloud_WeApp_SDK\Constants;
 use \Exception;
 
@@ -42,21 +42,20 @@ class xonRoleGroup
       // 对象截取
       $role_id = $k;
       $has_role = $v === 'true' ? 1 : 0;
-      $res = DB::row('xonGroupRole', ['*'], compact('group_id', 'role_id'));
+      $res = dbs::row('xonGroupRole', ['*'], compact('group_id', 'role_id'));
       // 有权限，没记录  => 添加
       if ($has_role && $res === NULL) {
         $result++;
         $uid = bin2hex(openssl_random_pseudo_bytes(16));
-        DB::insert('xonGroupRole', compact('group_id', 'role_id', 'uid'));
+        dbs::insert('xonGroupRole', compact('group_id', 'role_id', 'uid'));
       }
       // 没权限，有记录 => 删除
       if (!$has_role && $res !== NULL) {
         $result++;
         $uid = $res->uid;
-        DB::delete('xonGroupRole', compact('uid'));
+        dbs::delete('xonGroupRole', compact('uid'));
       }
     }
     return $result;
   }
-
 }
