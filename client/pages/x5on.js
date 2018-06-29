@@ -59,27 +59,58 @@ var doUrl = {
 };
 
 var doCheck = function (options) {
-  qcloud.request({
-    url: doUrl.user,
-    login: true,
-    success: function (result) {
-      // 请求成功
-      if (typeof options.success === 'function') options.success(result.data)
-    },
-    fail: function (error) {
-      if (typeof options.fail === 'function') options.fail()
-      util.showModel('请求失败', error.message);
-    }
-  })
+  const session = qcloud.Session.get()
+  if (session) {
+    // 查看是否授权
+    wx.getSetting({
+      success: function (res) {
+        if (res.authSetting['scope.userInfo']) {
+          // 检查登录是否过期
+          wx.checkSession({
+            success: function () {
+              // 执行回调
+              if (typeof options.success === 'function') options.success();
+            },
+            fail: function () {
+              // 错误提示
+              if (options.showError) util.showModel('登录过期', '请转到“登录”页面登录');
+              if (typeof options.fail === 'function') options.fail();
+            },
+          });
+        } else {
+          // 错误提示
+          if (options.showError) util.showModel('授权失败', '请转到“登录”页面授权');
+          if (typeof options.fail === 'function') options.fail();
+        }
+      }
+    });
+  } else {
+    if (options.showError) util.showModel('缓存过期', '请转到“登录”页面登录');
+    if (typeof options.fail === 'function') options.fail();
+  }
 };
-
+/**
+ * 关于错误代码
+ * -1    ：   系统级出错代码，与登录有关，由系统检测
+ *  0    ：   数据请求成功
+ *  1    ：   应用级出错代码，逻辑错误代码
+ *  X    ：   ...
+ */
 var doRequest = function (options) {
   qcloud.request({
     url: options.url,
     login: false,
     success: function (result) {
-      // 请求成功
-      if (typeof options.success === 'function') options.success(result.data)
+      // 检测code是否为0，
+      var data = result.data
+      if ( data.code === 0 ) {
+        // 为0，表示请求成功
+        if (typeof options.success === 'function') options.success(data)
+      } else {
+        // 不为0给出错误提示
+        if (typeof options.fail === 'function') options.fail()
+        util.showModel('请求失败', data.data);
+      }
     },
     fail: function (error) {
       if (typeof options.fail === 'function') options.fail()
@@ -89,7 +120,6 @@ var doRequest = function (options) {
 };
 
 var doLogin = function (options) {
-  util.showBusy('正在登录')
   const session = qcloud.Session.get()
   if (session) {
     qcloud.loginWithCode({
@@ -112,48 +142,6 @@ var doLogin = function (options) {
       }
     })
   }
-};
-
-
-
-/**
- * 数据查询（还有些问题）
- * @param {Object} options 登录配置
- * @param {string} options.url 请求地址
- * @param {string} options.error 错误提示
- * @param {Function} options.success(result) 登录成功后的回调函数
- */
-var doRequestEx = function (options) {
-  // 提取session-skey
-  var sessionkey = session.get();
-  var skey = sessionkey ? sessionkey.skey : null;
-  if ( ! skey ) {
-    if (typeof options.fail === 'function') options.fail()    
-    if (options.showError) util.showModel('数据查询', '请求数据出错，检查是否登录过期！')
-    // 退出
-    return
-  }
-  wx.request({
-    url: options.url,
-    header: { 'x-wx-skey': skey },
-    success: function (res) {
-      // 错误检测
-      var data = res.data;
-      if (data && data.code === -1) {
-        if (typeof options.fail === 'function') options.fail()        
-        if (options.showError) util.showModel('数据查询', data.data)
-        // 退出
-        return
-      }
-      // 没错误
-      if (typeof options.success === 'function') options.success(data)
-    },
-    fail: function (error) {
-      if (typeof options.fail === 'function') options.fail()
-      var message = options.error || error.message
-      if (options.showError) util.showModel('数据查询', message)      
-    }
-  })
 };
 
 /**

@@ -57,7 +57,7 @@ class Roledist extends CI_Controller
       $user_id = $user['unionId'];
       $user_max_group_id = Model\xonUserGroup::getUserMaxGroupId($user_id);
       $conditions = sprintf('id>%s and id<%s', Model\x5on::GROUP_STUDENT_PARENT, $user_max_group_id);
-var_dump($conditions);
+
       $result = DB::select('xonGroup', ['id', 'name'], $conditions, 'and', 'order by id');
 
       $this->json(['code' => 0, 'data' => $result]);

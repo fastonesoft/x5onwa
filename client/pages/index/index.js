@@ -25,7 +25,6 @@ Page({
             that.setData({ cores: result.data })
           },
           fail: function (error) {
-            console.log(error)
             that.setData({ cores: [] })
           }
         })

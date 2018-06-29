@@ -1,5 +1,4 @@
 //index.js
-var session = require('../../vendor/wafer2-client-sdk/lib/session.js')
 var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
 var util = require('../../utils/util.js')
@@ -11,45 +10,51 @@ Page({
 
   },
 
-
   onShow: function () {
     var that = this
-    var infor = session.get()
-    var userinfor = infor ? infor.userinfo : null
-    var logged = infor ? true : false
-    var notlogged = !logged
-    that.setData({ logged, notlogged, userinfor })
+    x5on.check({
+      success: function () {
+        const session = qcloud.Session.get()
+        var userinfor = session ? session.userinfo : null
+        var logged = session ? true : false
+        var notlogged = !logged
+        that.setData({ logged, notlogged, userinfor })
 
-    if (that.data.logged) {
-      // 个人信息
-      x5on.request({
-        showError: false,
-        url: x5on.url.userset,
-        success: function (result) {
-          var items = result.data.data
-          var inforchecked = result.data.checked
-          var notchecked = !inforchecked
-          that.setData({ items, inforchecked, notchecked })
-        },
-        fail: function () {
-          that.setData({ logged: false, notlogged: true, userinfor: null })
+        if (that.data.logged) {
+          // 个人信息
+          x5on.request({
+            showError: false,
+            url: x5on.url.userset,
+            success: function (result) {
+              var items = result.data.data
+              var inforchecked = result.data.checked
+              var notchecked = !inforchecked
+              that.setData({ items, inforchecked, notchecked })
+            },
+            fail: function () {
+              that.setData({ logged: false, notlogged: true, userinfor: null })
+            }
+          });
+          // 孩子信息
+          x5on.request({
+            showError: false,
+            url: x5on.url.parentchilds,
+            success: function (result) {
+              var childs = result.data
+              var mychildShow = childs.length > 0
+              var canaddChild = childs.length < 2
+              that.setData({ childs, mychildShow, canaddChild })
+            },
+            fail: function () {
+              that.setData({ logged: false, notlogged: true, userinfor: null })
+            }
+          });
         }
-      });
-      // 孩子信息
-      x5on.request({
-        showError: false,
-        url: x5on.url.parentchilds,
-        success: function (result) {
-          var childs = result.data
-          var mychildShow = childs.length > 0
-          var canaddChild = childs.length < 2
-          that.setData({ childs, mychildShow, canaddChild })
-        },
-        fail: function () {
-          that.setData({ logged: false, notlogged: true, userinfor: null })
-        }
-      });
-    }
+      },
+      fail: function () {
+        that.setData({ logged: false, notlogged: true, userinfor: null })
+      }
+    })    
   },
 
   inforClick: function () {

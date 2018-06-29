@@ -27,7 +27,7 @@ class xonLogin
       $res = xonRole::check($user_id, $role_name);
       if ( $res !== NULL ) {
         // 没有权限
-        call_user_func($fail, ['code' => -1, 'data' => $res['message']]);
+        call_user_func($fail, ['code' => 1, 'data' => $res['message']]);
       } else {
         // 成功
         call_user_func($success, $result['userinfo']);

@@ -1,23 +1,16 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-use \QCloud_WeApp_SDK\Auth\LoginService as LoginService;
-use QCloud_WeApp_SDK\Constants as Constants;
+use QCloud_WeApp_SDK\Model;
 
 class User extends CI_Controller {
-    public function index() {
-        $result = LoginService::check();
-
-        if ($result['loginState'] === Constants::S_AUTH) {
-            $this->json([
-                'code' => 0,
-                'data' => $result['userinfo']
-            ]);
-        } else {
-            $this->json([
-                'code' => -1,
-                'data' => $result['error']
-            ]);
-        }
-    }
+  const role_name = 'userset';
+  public function index() {
+    Model\xonLogin::check(self::role_name, function ($user) {
+      // 正文内容
+      $this->json(['code' => 0, 'data' => $user]);
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
 }

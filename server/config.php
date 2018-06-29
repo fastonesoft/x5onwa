@@ -25,7 +25,7 @@ $config = [
         'port' => 3306,
         'user' => 'root',
         'db'   => 'cAuth',
-        'pass' => 'wxdca8673d324d4384',
+        'pass' => 'stone.2.wx',
         'char' => 'utf8mb4'
     ],
 

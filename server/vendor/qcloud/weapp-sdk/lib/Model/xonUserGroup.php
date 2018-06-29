@@ -41,7 +41,7 @@ class xonUserGroup
   }
 
   public static function getUserMaxGroupId ($user_id) {
-    $group = dbs::select('xovUserGroup', ['group_id'], compact('user_id'));
-    return empty($group) ? 0 : max(json_decode(json_encode($group), true));
+    $group = dbs::row('xovUserGroup', ['group_id'], compact('user_id'), 'and', 'order by group_id desc limit 1');
+    return $group === null ? 0 : $group->group_id;
   }
 }
