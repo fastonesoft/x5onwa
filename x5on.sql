@@ -88,12 +88,12 @@ CREATE TABLE xonGroup (
 
 INSERT INTO xonGroup VALUES (1, replace(uuid(), '-', ''), '临时用户');
 INSERT INTO xonGroup VALUES (2, replace(uuid(), '-', ''), '学生家长');
-INSERT INTO xonGroup VALUES (3, replace(uuid(), '-', ''), '流量控制');
-INSERT INTO xonGroup VALUES (4, replace(uuid(), '-', ''), '科任老师');
-INSERT INTO xonGroup VALUES (5, replace(uuid(), '-', ''), '班级主管');
-INSERT INTO xonGroup VALUES (6, replace(uuid(), '-', ''), '学科主管');
-INSERT INTO xonGroup VALUES (7, replace(uuid(), '-', ''), '年级主管');
-INSERT INTO xonGroup VALUES (8, replace(uuid(), '-', ''), '学校管理');
+INSERT INTO xonGroup VALUES (3, replace(uuid(), '-', ''), '科任老师');
+INSERT INTO xonGroup VALUES (4, replace(uuid(), '-', ''), '班级主管');
+INSERT INTO xonGroup VALUES (5, replace(uuid(), '-', ''), '学科主管');
+INSERT INTO xonGroup VALUES (6, replace(uuid(), '-', ''), '年级主管');
+INSERT INTO xonGroup VALUES (7, replace(uuid(), '-', ''), '学校管理');
+INSERT INTO xonGroup VALUES (8, replace(uuid(), '-', ''), '流量控制');
 INSERT INTO xonGroup VALUES (9, replace(uuid(), '-', ''), '集团管理');
 INSERT INTO xonGroup VALUES (99, replace(uuid(), '-', ''), '系统管理');
 
@@ -486,17 +486,17 @@ CREATE TABLE xonStudType (
 INSERT INTO xonStudType VALUES (1, replace(uuid(), '-', ''), '应届生');
 INSERT INTO xonStudType VALUES (2, replace(uuid(), '-', ''), '往届生');
 
-/** 学籍办理信息 **/
+/** 学生来源 **/
 CREATE TABLE xonStudCome (
   id INT(11) NOT NULL,
   uid VARCHAR(36) NOT NULL,
   name VARCHAR(10) NOT NULL,
   name_display BOOLEAN NOT NULL,
-  stud_come_id INT(11) NOT NULL,
+  stud_type_id INT(11) NOT NULL,
   PRIMARY KEY (id),
   UNIQUE KEY uid (uid),
-  FOREIGN KEY (stud_come_id) REFERENCES xonStudCome(id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学籍办理信息';
+  FOREIGN KEY (stud_type_id) REFERENCES xonStudType(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学生来源';
 
 INSERT INTO xonStudCome VALUES (1, replace(uuid(), '-', ''), '正常', 0, 1);
 INSERT INTO xonStudCome VALUES (2, replace(uuid(), '-', ''), '休复', 1, 1);

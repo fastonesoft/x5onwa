@@ -25,7 +25,7 @@
     <block wx:if="{{notchecked}}">
       <view style="margin:0 auto; width: 50%; padding-bottom: 30rpx;">
         <view class="weui-btn-area">
-          <button type="primary" bindtap="inforClick">完善个人信息</button>
+          <button type="primary" bindtap="inforClick">完善信息</button>
         </view>
       </view>
     </block>

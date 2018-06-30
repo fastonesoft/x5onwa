@@ -54,7 +54,7 @@ Page({
       fail: function () {
         that.setData({ logged: false, notlogged: true, userinfor: null })
       }
-    })    
+    })
   },
 
   inforClick: function () {
@@ -81,7 +81,7 @@ Page({
       e: e,
       success: function () {   
         // 不能改
-        that.onShow();
+        that.onShow()
       },
       fail: function() {
         that.setData({ logged: false, notlogged: true, userinfor: null })
