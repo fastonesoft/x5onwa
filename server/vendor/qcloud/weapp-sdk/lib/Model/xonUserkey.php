@@ -6,7 +6,7 @@ use QCloud_WeApp_SDK\Mysql\Mysql as dbs;
 use QCloud_WeApp_SDK\Constants;
 use \Exception;
 
-class xonUserkey
+class xonUserKey
 {
   public static function insert () {
 

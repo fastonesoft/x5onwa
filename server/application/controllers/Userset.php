@@ -12,11 +12,11 @@ class Userset extends CI_Controller {
     Model\xonLogin::check(self::role_name, function ($user) {
       // 查询用户列表
       $user_id = $user['unionId'];
-      $data = Model\xonUserkey::getUserKeys($user_id, 0);
+      $data = Model\xonAppKey::getUserKeys($user_id, 0);
 
       // 查询提交状态
       $userset_name = Model\x5on::USER_SET_MYSELF;
-      $checked = Model\xonUsersetdata::getCheckedById($user_id, $userset_name);
+      $checked = Model\xonUserSetData::getCheckedById($user_id, $userset_name);
       $result = compact('data', 'checked');
       // 返回信息
       $this->json(['code' => 0, 'data' => $result]);
@@ -43,13 +43,13 @@ class Userset extends CI_Controller {
         }
 
         // 根据名称获取userkey记录
-        $userkey = Model\xonUserkey::getRowByName($name);
+        $userkey = Model\xonAppKey::getRowByName($name);
         if ($userkey !== NULL) {
           // 获取编号
           $key_id = $userkey->id;
           $check_unique = $userkey->check_unique;
           // 插入数据，并进行唯一检测
-          $res = Model\xonUserkeyvalue::insert($user_id, $key_id, $value, $check_unique);
+          $res = Model\xonAppKeyValue::insert($user_id, $key_id, $value, $check_unique);
           if ( $res !== NULL ) {
             $this->json(['code' => -1, 'data' => $res['message']]);
             return;
@@ -59,8 +59,8 @@ class Userset extends CI_Controller {
       // 添加：用户设置记录
       $checked = 1;
       $user_name = Model\x5on::USER_SET_MYSELF;
-      $userset_id = Model\xonUserset::getIdByUserSetName($user_name);
-      $result = Model\xonUsersetdata::insert($user_id, $userset_id, $checked);
+      $userset_id = Model\xonUserSet::getIdByUserSetName($user_name);
+      $result = Model\xonUserSetData::insert($user_id, $userset_id, $checked);
       // 返回信息
       $this->json(['code' => 0, 'data' => $result]);
     }, function ($error) {

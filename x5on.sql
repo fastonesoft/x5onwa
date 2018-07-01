@@ -146,7 +146,7 @@ CREATE TABLE xonUser (
   UNIQUE KEY uid (uid)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户列表';
 
-CREATE TABLE xonUserKey (
+CREATE TABLE xonAppKey (
   id INT(11) NOT NULL,
   uid VARCHAR(36) NOT NULL,
   name VARCHAR(20) NOT NULL,
@@ -165,11 +165,11 @@ CREATE TABLE xonUserKey (
   UNIQUE KEY name (name)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户自定义字段';
 
-INSERT INTO xonUserKey VALUES (1, replace(uuid(), '-', ''), 'name', '我的名字', 'text', '请输入您的姓名', '4', '/^[\\x{4e00}-\\x{9fa5}]{2,4}$/u', '^[\\u4e00-\\u9fa5]{2,4}$', '输入2-4个汉字', 1, 0, 0);
-INSERT INTO xonUserKey VALUES (2, replace(uuid(), '-', ''), 'mobil', '手机号码', 'number', '请输入您的手机号', '11', '/^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[6-9])\\d{8}$/', '^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[6-9])\\d{8}$', '手机号码有误！', 1, 1, 0);
-INSERT INTO xonUserKey VALUES (3, replace(uuid(), '-', ''), 'idc', '身份证号', 'idcard', '请输入您的身份证号', '18', '/^\\d{17}[0-9X]$/', '^\\d{17}[0-9X]$', '身份证号有误！', 1, 1, 0);
+INSERT INTO xonAppKey VALUES (1, replace(uuid(), '-', ''), 'name', '我的名字', 'text', '请输入您的姓名', '4', '/^[\\x{4e00}-\\x{9fa5}]{2,4}$/u', '^[\\u4e00-\\u9fa5]{2,4}$', '输入2-4个汉字', 1, 0, 0);
+INSERT INTO xonAppKey VALUES (2, replace(uuid(), '-', ''), 'mobil', '手机号码', 'number', '请输入您的手机号', '11', '/^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[6-9])\\d{8}$/', '^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[6-9])\\d{8}$', '手机号码有误！', 1, 1, 0);
+INSERT INTO xonAppKey VALUES (3, replace(uuid(), '-', ''), 'idc', '身份证号', 'idcard', '请输入您的身份证号', '18', '/^\\d{17}[0-9X]$/', '^\\d{17}[0-9X]$', '身份证号有误！', 1, 1, 0);
 
-CREATE TABLE xonUserKeyValue (
+CREATE TABLE xonAppKeyValue (
   uid VARCHAR(36) NOT NULL,
   user_id VARCHAR(36) NOT NULL,
   key_id INT(11) NOT NULL,
@@ -177,7 +177,7 @@ CREATE TABLE xonUserKeyValue (
   PRIMARY KEY (user_id, key_id),
   UNIQUE KEY uid (uid),
   FOREIGN KEY (user_id) REFERENCES xonUser(id),
-  FOREIGN KEY (key_id) REFERENCES xonUserKey(id)
+  FOREIGN KEY (key_id) REFERENCES xonAppKey(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户自定义值';
 
 CREATE TABLE xonUserSet (
@@ -298,15 +298,48 @@ CREATE TABLE xonSchoolTeach (
 /**
   自定义编号
  */
+
+CREATE TABLE xonSchoolCodeType (
+  id INT(11) NOT NULL,
+  uid VARCHAR(36) NOT NULL,
+  name VARCHAR(20) NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY uid (uid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='编码分类';
+
+INSERT INTO xonSchoolCodeType VALUES (1, replace(uuid(), '-', ''), '分段编码');
+INSERT INTO xonSchoolCodeType VALUES (2, replace(uuid(), '-', ''), '流水号编码');
+
 CREATE TABLE xonSchoolCode (
+  id VARCHAR(20) NOT NULL,
+  uid VARCHAR(36) NOT NULL,
+  name VARCHAR(20) NOT NULL,
+  fixed BOOLEAN NOT NULL,
+  type_id INT(11) NOT NULL,
+  sch_id VARCHAR(10) NOT NULL,
+  year_id INT(11) NOT NULL,
+  code VARCHAR(4) NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY uid (uid),
+  FOREIGN KEY (type_id) REFERENCES xonType(id),
+  FOREIGN KEY (sch_id) REFERENCES xonSchool(id)
+ ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='自定义编号';
+
+INSERT INTO xonSchoolCode VALUES ('3212840201', replace(uuid(), '-', ''), '实验初中2018报名编号', 0, 1, '32128402', '01');
+
+
+CREATE TABLE xonSchoolCodeValue (
   id VARCHAR(20) NOT NULL,  /* id = sch_id + code */
   uid VARCHAR(36) NOT NULL,
   sch_id VARCHAR(10) NOT NULL,
-  code VARCHAR(10) NOT NULL,
+  year_id INT(11) NOT NULL,
+  type_id INT(11) NOT NULL,
   PRIMARY KEY (id),
   UNIQUE KEY uid (uid),
-  FOREIGN KEY (sch_id) REFERENCES xonSchool(id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='自定义编号';
+  FOREIGN KEY (sch_id) REFERENCES xonSchool(id),
+  FOREIGN KEY (year_id) REFERENCES xonYear(id),
+  FOREIGN KEY (type_id) REFERENCES xonType(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='自定义编号数据';
 
 /**
   学生报名表
