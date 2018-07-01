@@ -6,7 +6,7 @@ use QCloud_WeApp_SDK\Mysql\Mysql as dbs;
 use QCloud_WeApp_SDK\Constants;
 use \Exception;
 
-class xonUserkeyvalue
+class xonUserKeyValue
 {
   public static function insert ($user_id, $key_id, $value, $check_unique) {
     $userkeyvalue = dbs::row('xonUserKeyValue', ['*'], compact('user_id', 'key_id'));
@@ -38,3 +38,5 @@ class xonUserkeyvalue
   }
 
 }
+
+

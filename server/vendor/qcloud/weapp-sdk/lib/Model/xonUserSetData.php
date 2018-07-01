@@ -6,7 +6,7 @@ use QCloud_WeApp_SDK\Mysql\Mysql as dbs;
 use QCloud_WeApp_SDK\Constants;
 use \Exception;
 
-class xonUsersetdata
+class xonUserSetData
 {
   public static function insert ($user_id, $userset_id, $checked) {
     $result = 0;
@@ -30,7 +30,7 @@ class xonUsersetdata
   }
 
   public static function getCheckedById ($user_id, $userset_name) {
-    $userset_id = xonUserset::getIdByUserSetName($userset_name);
+    $userset_id = xonUserSet::getIdByUserSetName($userset_name);
     $res = dbs::row('xonUserSetData', ['*'], compact('user_id', 'userset_id'));
 
     return $res !== NULL ? $res->checked : NULL;
