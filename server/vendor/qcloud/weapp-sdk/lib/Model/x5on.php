@@ -111,6 +111,10 @@ class x5on {
     }
   }
 
+  public static function getUid () {
+    return bin2hex(openssl_random_pseudo_bytes(16));
+  }
+
   public static function getHomeByIdcard($num) {
     $home_arr = array(
       '110000'=>'北京市',

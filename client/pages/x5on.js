@@ -23,6 +23,7 @@ var doUrl = {
   // 表单
   appform: `${host}/weapp/appform`,
   appformkey: `${host}/weapp/appformkey`,
+  appformkeyupdate: `${host}/weapp/appformkey/update`,
 
   // 教师注册
   tchreg: `${host}/weapp/tchreg`,
@@ -280,6 +281,7 @@ var doPostFormEx = function (options) {
     header: { 'content-type': 'application/x-www-form-urlencoded' },
     login: false,
     success: function (result) {
+      console.log(result)
       // 检测code是否为0，
       var data = result.data
       if (data.code === 0) {

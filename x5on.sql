@@ -354,11 +354,11 @@ INSERT INTO xonAppFormKey VALUES (2, replace(uuid(), '-', ''), 'paraTotal', '分
 INSERT INTO xonAppFormKey VALUES (3, replace(uuid(), '-', ''), 'paraBit', '段号位数', 'input', 'number', '每段编号位数', 1, '/^\\d{1}$/u', '^\\d{1}$', '输入1位数字', 1, 0, 0, 1, 2);
 INSERT INTO xonAppFormKey VALUES (4, replace(uuid(), '-', ''), 'paraOrd', '序号位数', 'input', 'number', '段内序号位数', 1, '/^\\d{1}$/u', '^\\d{1}$', '输入1位数字', 1, 0, 0, 1, 2);
 INSERT INTO xonAppFormKey VALUES (5, replace(uuid(), '-', ''), 'paraPrev', '编码前缀', 'input', 'number', '区分生成号码', 20, '/^[A-Z0-9]{4,20}$/u', '^[A-Z0-9]{4,20}$', '4-20位大写字符标识', 1, 0, 0, 1, 2018);
-INSERT INTO xonAppFormKey VALUES (6, replace(uuid(), '-', ''), 'paraSys', '学校前缀', 'check', 'number', '添加学校前缀', 0, '/^$/u', '^$', '是、否', 0, 0, 0, 1, 1);
+INSERT INTO xonAppFormKey VALUES (6, replace(uuid(), '-', ''), 'paraSys', '学校前缀', 'check', 'number', '添加学校前缀', 1, '/^\\d$/u', '^\\d$', '是、否', 0, 0, 0, 1, 1);
 INSERT INTO xonAppFormKey VALUES (7, replace(uuid(), '-', ''), 'howMany', '编码总数', 'input', 'number', '生成多少号码', 4, '/^\\d{4}$/u', '^\\d{4}$', '输入4位数字', 1, 0, 0, 2, 2000);
 INSERT INTO xonAppFormKey VALUES (8, replace(uuid(), '-', ''), 'orderBit', '编码位数', 'input', 'number', '流水号码位数', 1, '/^\\d{1}$/u', '^\\d{1}$', '输入1位数字', 1, 0, 0, 2, 4);
 INSERT INTO xonAppFormKey VALUES (9, replace(uuid(), '-', ''), 'orderPrev', '编码前缀', 'input', 'number', '区分生成号码', 20, '/^[A-Z0-9]{4,20}$/u', '^[A-Z0-9]{4,20}$', '4-20位大写字符标识', 1, 0, 0, 2, 2018);
-INSERT INTO xonAppFormKey VALUES (10, replace(uuid(), '-', ''), 'orderSys', '学校前缀', 'check', 'number', '添加学校前缀', 0, '/^$/u', '^$', '是、否', 0, 0, 0, 2, 1);
+INSERT INTO xonAppFormKey VALUES (10, replace(uuid(), '-', ''), 'orderSys', '学校前缀', 'check', 'number', '添加学校前缀', 1, '/^\\d$/u', '^\\d$', '是、否', 0, 0, 0, 2, 1);
 
 /**
   单一表单值数据

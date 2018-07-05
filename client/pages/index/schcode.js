@@ -30,7 +30,7 @@ Page({
         // 表单
         x5on.request({
           url: x5on.url.appform,
-          success: function (result) {            
+          success: function (result) {
             that.setData({ pickers: result.data })
           }
         })
@@ -40,6 +40,7 @@ Page({
 
   checkInput: function (e) {
     x5on.checkInputEx(e, this)
+    console.log(e)
   },
 
   scherChange: function (e) {
@@ -62,7 +63,7 @@ Page({
           success: function (result) {
             var items = result.data
             console.log(items)
-            that.setData({ items, form_name, form_show: true, pIndex })
+            that.setData({ items, form_name, form_show: true, pIndex, form_id })
           }
         })
       }
@@ -73,7 +74,7 @@ Page({
     x5on.checkFormEx(this, function () {
       console.log(e.detail.value)
       x5on.postFormEx({
-        url: x5on.url.schcode,
+        url: x5on.url.appformkeyupdate,
         data: e.detail.value,
         success: (res) => {
           console.log(res)

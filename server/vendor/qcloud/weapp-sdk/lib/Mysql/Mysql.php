@@ -96,31 +96,6 @@ class Mysql
         return $allResult === NULL ? [] : $allResult;
     }
 
-  public static function select1 ($tableName, $columns = ['*'], $conditions = '', $operator = 'and', $suffix = '') {
-    if (   gettype($tableName)  !== 'string'
-      || (gettype($conditions)!== 'array' && gettype($conditions) !== 'string')
-      || gettype($columns)    !== 'array'
-      || gettype($operator)   !== 'string'
-      || gettype($suffix)     !== 'string') {
-      throw new Exception(Constants::E_CALL_FUNCTION_PARAM);
-    }
-
-    list($condition, $execValues) = array_values(self::conditionProcess($conditions, $operator));
-
-    $column = implode(', ', $columns);
-    // 拼接 SQL 语句
-    $sql = "SELECT $column FROM `$tableName`";
-
-    // 如果有条件则拼接 WHERE 关键则
-    if ($condition) {
-      $sql .= " WHERE $condition";
-    }
-
-    // 拼接后缀
-    $sql .= " $suffix";
-var_dump($sql);
-  }
-
     /**
      * 查询单行数据
      * @param string        $tableName 数据库名

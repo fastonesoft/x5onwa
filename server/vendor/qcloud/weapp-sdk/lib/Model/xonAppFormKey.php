@@ -32,6 +32,21 @@ class xonAppFormKey
     return $res;
   }
 
+  public static function checkFormKeyValue($form_id, $name, $value) {
+    $value = $value === true ? 1 : $value;
+    $value = $value === false ? 0 : $value;
+    $res = dbs::row('xonAppFormKey', ['*'], compact('form_id', 'name'));
+    if ( $res === null ) {
+      throw new Exception("没有找到表单对应的键值");
+    } else {
+      $regex = $res->regex_php;
+      if ( ! preg_match($regex, $value) ) {
+        throw new Exception("键值输入不满足正则约束$name $value");
+      }
+      return $res->id;
+    }
+  }
+
   public static function getKeysByFormId($sch_id, $form_id) {
     $res = dbs::select('xonAppFormKey', ['*', 'required as error, default_value as value'], compact('form_id'));
     $values = dbs::select('xonAppFormValue', ['*'], compact('sch_id', 'form_id'));
