@@ -30,7 +30,7 @@ Page({
         // 表单
         x5on.request({
           url: x5on.url.appform,
-          success: function (result) {
+          success: function (result) {            
             that.setData({ pickers: result.data })
           }
         })
@@ -61,6 +61,7 @@ Page({
           url: x5on.url.appformkey,
           success: function (result) {
             var items = result.data
+            console.log(items)
             that.setData({ items, form_name, form_show: true, pIndex })
           }
         })

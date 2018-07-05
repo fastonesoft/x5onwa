@@ -28,7 +28,7 @@ Page({
   usersetSubmit: function (e) {
     var that = this
     x5on.checkFormEx(this, function () {
-      x5on.postForm({
+      x5on.postFormEx({
         url: x5on.url.usersetupdate,
         data: e.detail.value,
         success: (res) => {
