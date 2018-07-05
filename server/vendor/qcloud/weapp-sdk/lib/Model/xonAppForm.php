@@ -6,8 +6,9 @@ use QCloud_WeApp_SDK\Mysql\Mysql as dbs;
 use QCloud_WeApp_SDK\Constants;
 use \Exception;
 
-class xonZero
+class xonAppForm
 {
+
   public static function insert () {
 
   }
@@ -18,5 +19,10 @@ class xonZero
 
   public static function delete () {
 
+  }
+
+  public static function getFormsById($app_id) {
+    $res = dbs::select('xonAppForm', ['id', 'name'], compact('app_id'));
+    return $res;
   }
 }

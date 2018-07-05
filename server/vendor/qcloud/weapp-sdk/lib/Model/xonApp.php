@@ -6,7 +6,7 @@ use QCloud_WeApp_SDK\Mysql\Mysql as dbs;
 use QCloud_WeApp_SDK\Constants;
 use \Exception;
 
-class xonUserSet
+class xonApp
 {
 
   public static function insert () {
@@ -21,9 +21,8 @@ class xonUserSet
 
   }
 
-  public static function getIdByUserSetName ($name) {
-    $res = dbs::row('xonUserSet', ['*'], compact('name'));
+  public static function getIdByName($name) {
+    $res = dbs::row('xonApp', ['*'], compact('name'));
     return $res !== null ? $res->id : null;
   }
-
 }

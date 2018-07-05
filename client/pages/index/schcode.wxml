@@ -1,111 +1,65 @@
 <!--pages/index/schcode.wxml-->
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
-<form bindsubmit="paraSubmit">
-  <view class="weui-cells__title">分段编码</view>
+  <view class="weui-cells__title">学校设置</view>
   <view class="weui-cells weui-cells_after-title">
-    <view class="weui-cell weui-cell_input">
-      <view class="weui-cell__hd">
-        <view class="weui-label">编码总数</view>
+    <view class="weui-cell weui-cell_select">
+      <view class="weui-cell__hd weui-cell__hd_in-select-after">
+        <view class="weui-label">学校选择</view>
       </view>
       <view class="weui-cell__bd">
-        <input class="weui-input" placeholder="生成多少号码" name="howMany" value="2000" confirm-type="next" type="number" maxlength="4" data-reg="^[0-9]+$" data-index="0" data-message="编码总数有误！" bindblur="checkInput"/>
-      </view>
-      <view class="weui-cell__ft" wx:if="{{errorArray[0]}}">
-        <icon type="warn" size="23" color="#E64340"></icon>
-      </view>
-    </view>
-
-    <view class="weui-cell weui-cell_input">
-      <view class="weui-cell__hd">
-        <view class="weui-label">分段总数</view>
-      </view>
-      <view class="weui-cell__bd">
-        <input class="weui-input" placeholder="分段号码总数" name="paraTotal" value="36" confirm-type="next" type="number" maxlength="2" data-reg="^[0-9]+$" data-index="1" data-message="分段总数有误！" bindblur="checkInput"/>
-      </view>
-      <view class="weui-cell__ft" wx:if="{{errorArray[1]}}">
-        <icon type="warn" size="23" color="#E64340"></icon>
-      </view>
-    </view>
-    <view class="weui-cell weui-cell_input">
-      <view class="weui-cell__hd">
-        <view class="weui-label">段号位数</view>
-      </view>
-      <view class="weui-cell__bd">
-        <input class="weui-input" placeholder="每段编号位数" name="paraBit" value="2" confirm-type="next" type="number" maxlength="1" data-reg="^[0-9]+$" data-index="3" data-message="段号位数有误！" bindblur="checkInput"/>
-      </view>
-
-      <view class="weui-cell__ft" wx:if="{{errorArray[3]}}">
-        <icon type="warn" size="23" color="#E64340"></icon>
-      </view>
-    </view>    
-    <view class="weui-cell weui-cell_input">
-      <view class="weui-cell__hd">
-        <view class="weui-label">序号位数</view>
-      </view>
-      <view class="weui-cell__bd">
-        <input class="weui-input" placeholder="段内序号位数" name="paraOrd" value="2" confirm-type="next" type="number" maxlength="1" data-reg="^[0-9]+$" data-index="2" data-message="序号位数有误！" bindblur="checkInput"/>
-      </view>
-      <view class="weui-cell__ft" wx:if="{{errorArray[2]}}">
-        <icon type="warn" size="23" color="#E64340"></icon>
-      </view>
-    </view>
-    <view class="weui-cell weui-cell_input">
-      <view class="weui-cell__hd">
-        <view class="weui-label">编码前缀</view>
-      </view>
-      <view class="weui-cell__bd">
-        <input class="weui-input" placeholder="区分生成号码" name="paraPrev" value="2018" confirm-type="done" type="number" maxlength="6" data-reg="^[0-9]{4,6}$" data-index="4" data-message="编码前缀有误！" bindblur="checkInput"/>
-      </view>
-      <view class="weui-cell__ft" wx:if="{{errorArray[4]}}">
-        <icon type="warn" size="23" color="#E64340"></icon>
+        <picker bindchange="scherChange" value="{{sIndex}}" range="{{schers}}" range-key="sch_name" disabled="{{schers.length===0||schers.length===1}}">
+          <view class="weui-select weui-select_in-select-after">{{schers[sIndex].sch_name}}</view>
+        </picker>
       </view>
     </view>
   </view>
-  <view class="weui-btn-area">
-    <button type="primary" form-type="submit">生成分段号</button>
+
+<view class="weui-cells__title">表单设置</view>
+<view class="weui-cells weui-cells_after-title">
+  <view class="weui-cell weui-cell_select">
+    <view class="weui-cell__hd weui-cell__hd_in-select-after">
+      <view class="weui-label">表单选择</view>
+    </view>
+    <view class="weui-cell__bd">
+      <picker bindchange="pickerChange" value="{{pIndex}}" range="{{pickers}}" range-key="name">
+        <view class="weui-select weui-select_in-select-after">{{pickers[pIndex].name}}</view>
+      </picker>
+    </view>
   </view>
-</form>
+</view>
 
-
-<form bindsubmit="orderSubmit">
-  <view class="weui-cells__title">流水号编码</view>
+<form bindsubmit="codeSubmit" wx:if="{{form_show}}">
+  <view class="weui-cells__title">{{form_name}}</view>
   <view class="weui-cells weui-cells_after-title">
-    <view class="weui-cell weui-cell_input">
-      <view class="weui-cell__hd">
-        <view class="weui-label">编码总数</view>
-      </view>
-      <view class="weui-cell__bd">
-        <input class="weui-input" placeholder="生成多少号码" name="howMany" value="2000" confirm-type="next" type="number" maxlength="4" data-reg="^[0-9]+$" data-index="5" data-message="编码总数有误！" bindblur="checkInput"/>
-      </view>
-      <view class="weui-cell__ft" wx:if="{{errorArray[5]}}">
-        <icon type="warn" size="23" color="#E64340"></icon>
-      </view>
-    </view>
-    <view class="weui-cell weui-cell_input">
-      <view class="weui-cell__hd">
-        <view class="weui-label">编码位数</view>
-      </view>
-      <view class="weui-cell__bd">
-        <input class="weui-input" placeholder="流水号码位数" name="orderBit" value="4" confirm-type="next" type="number" maxlength="1" data-reg="^[0-9]+$" data-index="6" data-message="编码位数有误！" bindblur="checkInput"/>
-      </view>
-      <view class="weui-cell__ft" wx:if="{{errorArray[6]}}">
-        <icon type="warn" size="23" color="#E64340"></icon>
-      </view>
-    </view>
-    <view class="weui-cell weui-cell_input">
-      <view class="weui-cell__hd">
-        <view class="weui-label">编码前缀</view>
-      </view>
-      <view class="weui-cell__bd">
-        <input class="weui-input" placeholder="区分生成号码" name="orderPrev" value="2018" confirm-type="done" type="number" maxlength="6" data-reg="^[0-9]{4,6}$" data-index="7" data-message="编码前缀有误！" bindblur="checkInput"/>
-      </view>
-      <view class="weui-cell__ft" wx:if="{{errorArray[7]}}">
-        <icon type="warn" size="23" color="#E64340"></icon>
-      </view>
-    </view>    
+    <block wx:for="{{items}}" wx:key="id">
+      <block wx:if="{{item.view_type=='input'}}">
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">{{item.title}}</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" placeholder="{{item.place_holder}}" name="{{item.name}}" value="{{item.value}}" type="{{item.input_type}}" maxlength="{{item.max_length}}" data-uid="{{item.uid}}" bindblur="checkInput"/>
+          </view>
+          <view class="weui-cell__ft" wx:if="{{item.error}}">
+            <icon type="warn" size="23" color="#E64340"></icon>
+          </view>
+        </view>
+      </block>
+      <block wx:if="{{item.view_type=='check'}}">
+        <view class="weui-cell weui-cell_switch">
+          <view class="weui-cell__bd">{{item.title}}</view>
+          <view class="weui-cell__ft">
+            <switch name="{{item.name}}" checked />
+          </view>
+        </view>
+      </block>
+    </block>
   </view>
-  <view class="weui-btn-area">
-    <button type="primary" form-type="submit">生成流水号</button>
+  <view style="margin:0 auto; width: 50%; margin-bottom: 30rpx;">
+    <view class="weui-btn-area">
+      <button type="primary" form-type="submit">编号生成</button>
+    </view>
   </view>
+  <input name="sch_id" hidden="true" value="{{sch_id}}"></input>
 </form>

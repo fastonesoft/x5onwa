@@ -20,6 +20,10 @@ var doUrl = {
   // 编码地址
   schcode: `${host}/weapp/schcode`,
 
+  // 表单
+  appform: `${host}/weapp/appform`,
+  appformkey: `${host}/weapp/appformkey`,
+
   // 教师注册
   tchreg: `${host}/weapp/tchreg`,
   tchsch: `${host}/weapp/tchreg/usersch`,
@@ -268,43 +272,32 @@ var doCheckFormEx = function (that, success) {
  * @param {Function} 成功回调
  * @param {Function} 失败回调
  */
-var doPostForm = function (options) {
-  // 提取session-skey
-  var sessionkey = session.get();
-  var skey = sessionkey ? sessionkey.skey : null;
-  if ( ! skey ) {
-    if (typeof options.fail === 'function') options.fail()
-    util.showModel('数据提交', '请求数据出错，检查是否登录过期！')
-    // 退出
-    return
-  }
-  wx.request({
+var doPostFormEx = function (options) {
+  qcloud.request({
     url: options.url,
     data: options.data,
     method: 'POST',
-    header: {
-      'content-type': 'application/x-www-form-urlencoded',
-      'x-wx-skey': skey
-    },
-    success: function (res) {
-      // 错误检测
-      var data = res.data;
-      if (data && data.code === -1) {
+    header: { 'content-type': 'application/x-www-form-urlencoded' },
+    login: false,
+    success: function (result) {
+      // 检测code是否为0，
+      var data = result.data
+      if (data.code === 0) {
+        // 为0，表示请求成功
+        if (typeof options.success === 'function') options.success(data)
+      } else {
+        // 不为0给出错误提示
         if (typeof options.fail === 'function') options.fail()
-        util.showModel('数据提交', data.data)
-        // 退出
-        return
+        util.showModel('请求失败', data.data);
       }
-      // 没错误
-      if (typeof options.success === 'function') options.success(data)
     },
     fail: function (error) {
       if (typeof options.fail === 'function') options.fail()
-      var message = options.error || error.message
-      util.showModel('数据提交', message)
+      util.showModel('请求失败', error.message);
     }
-  })  
+  })
 };
+
 
 // 对外接口
 module.exports = {
@@ -316,7 +309,7 @@ module.exports = {
   checkInputEx: doCheckInputEx,
   checkForm: doCheckForm,
   checkFormEx: doCheckFormEx,
-  postForm: doPostForm,
+  postFormEx: doPostFormEx,
   showError: doShowError,
   showSuccess: doSuccess,
 }

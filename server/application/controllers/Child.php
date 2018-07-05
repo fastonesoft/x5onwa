@@ -29,13 +29,13 @@ class Child extends CI_Controller {
       // 注册学生，返回值不空，说明出错
       $result = Model\xonChild::insert($id, $idc, $name);
       if ( $result !== NULL ) {
-        return $this->json(['code' => -1, 'data' => $result['message']]);
+        return $this->json(['code' => 1, 'data' => $result['message']]);
       }
 
       // 注册关系
       $result = Model\xonParentChilds::myrelation($user_id, $idc, $relation_id);
       if ($result !== NULL) {
-        return $this->json(['code' => -1, 'data' => $result['message']]);
+        return $this->json(['code' => 1, 'data' => $result['message']]);
       }
 
       // 刷新孩子列表

@@ -27,7 +27,9 @@ class Mysql
             $dsn = "mysql:host=$_host;dbname=$_db;port=$_port;charset=$_char";
 
             try {
-                self::$conn = new PDO($dsn, $_user, $_pass);
+              self::$conn = new PDO($dsn, $_user, $_pass);
+              self::$conn->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+              self::$conn->setAttribute(PDO::ATTR_STRINGIFY_FETCHES, false);
             } catch (PDOException $e) {
                 throw new Exception(Constants::E_CONNECT_TO_DB . ': '. $e->getMessage());
             }
@@ -93,6 +95,31 @@ class Mysql
         $allResult = $query->fetchAll(PDO::FETCH_OBJ);
         return $allResult === NULL ? [] : $allResult;
     }
+
+  public static function select1 ($tableName, $columns = ['*'], $conditions = '', $operator = 'and', $suffix = '') {
+    if (   gettype($tableName)  !== 'string'
+      || (gettype($conditions)!== 'array' && gettype($conditions) !== 'string')
+      || gettype($columns)    !== 'array'
+      || gettype($operator)   !== 'string'
+      || gettype($suffix)     !== 'string') {
+      throw new Exception(Constants::E_CALL_FUNCTION_PARAM);
+    }
+
+    list($condition, $execValues) = array_values(self::conditionProcess($conditions, $operator));
+
+    $column = implode(', ', $columns);
+    // 拼接 SQL 语句
+    $sql = "SELECT $column FROM `$tableName`";
+
+    // 如果有条件则拼接 WHERE 关键则
+    if ($condition) {
+      $sql .= " WHERE $condition";
+    }
+
+    // 拼接后缀
+    $sql .= " $suffix";
+var_dump($sql);
+  }
 
     /**
      * 查询单行数据

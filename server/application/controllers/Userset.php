@@ -12,7 +12,7 @@ class Userset extends CI_Controller {
     Model\xonLogin::check(self::role_name, function ($user) {
       // 查询用户列表
       $user_id = $user['unionId'];
-      $data = Model\xonAppKey::getUserKeys($user_id, 0);
+      $data = Model\xonUserKey::getUserKeys($user_id, 0);
 
       // 查询提交状态
       $userset_name = Model\x5on::USER_SET_MYSELF;
@@ -43,13 +43,13 @@ class Userset extends CI_Controller {
         }
 
         // 根据名称获取userkey记录
-        $userkey = Model\xonAppKey::getRowByName($name);
+        $userkey = Model\xonUserKey::getRowByName($name);
         if ($userkey !== NULL) {
           // 获取编号
           $key_id = $userkey->id;
           $check_unique = $userkey->check_unique;
           // 插入数据，并进行唯一检测
-          $res = Model\xonAppKeyValue::insert($user_id, $key_id, $value, $check_unique);
+          $res = Model\xonUserKeyValue::insert($user_id, $key_id, $value, $check_unique);
           if ( $res !== NULL ) {
             $this->json(['code' => -1, 'data' => $res['message']]);
             return;

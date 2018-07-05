@@ -58,7 +58,7 @@ Page({
     if (value.name && value.idc && value.relation_id != '0') {
       console.log(value)
       x5on.checkForm(this, 0, 1, function () {
-        x5on.postForm({
+        x5on.postFormEx({
           url: x5on.url.userchildupdate,
           data: e.detail.value,
           success: (res) => {
