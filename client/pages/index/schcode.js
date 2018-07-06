@@ -10,7 +10,7 @@ Page({
     pickers: [],
     form_show: false,
     form_name: '',
-    sIndex: 0,
+    sIndex: -1,
     schers: [],
   },
 
@@ -40,32 +40,22 @@ Page({
 
   checkInput: function (e) {
     x5on.checkInputEx(e, this)
-    console.log(e)
   },
 
   scherChange: function (e) {
     var that = this
     var sIndex = e.detail.value
+    if (sIndex == -1) return
+
     var sch_id = this.data.schers[sIndex].sch_id
-    this.setData({ sIndex, sch_id })
-    // 检测是否创建
-    x5on.check({
-      success: () => {
-        x5on.postFormEx({
-          data: { sch_id },
-          url: x5on.url.schcode,
-          success: function (result) {
-            var sch_coded = result.data
-            that.setData({ sch_coded })
-          }
-        })
-      }
-    })
+    this.setData({ sIndex, sch_id, pIndex: -1, form_show: false })
   },
 
   pickerChange: function (e) {
     var that = this
     var pIndex = e.detail.value
+    if ( pIndex == -1 ) return
+
     var form_id = this.data.pickers[pIndex].id
     var form_name = this.data.pickers[pIndex].name
     var sch_id = this.data.sch_id
@@ -75,8 +65,9 @@ Page({
           data: { form_id, sch_id },
           url: x5on.url.appformkey,
           success: function (result) {
-            var items = result.data
-            that.setData({ items, form_name, form_show: true, pIndex, form_id })
+            var sch_coded = result.data.checked
+            var items = result.data.items
+            that.setData({ items, form_name, form_show: true, pIndex, form_id, sch_coded })
           }
         })
       }
@@ -84,13 +75,13 @@ Page({
   },
 
   codeSubmit: function (e) {
+    var that = this
     x5on.checkFormEx(this, function () {
-      console.log(e.detail.value)
       x5on.postFormEx({
         url: x5on.url.appformkeyupdate,
         data: e.detail.value,
         success: (res) => {
-          console.log(res)
+          that.setData({ sch_coded: true })
         }
       })
     })

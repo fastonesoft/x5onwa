@@ -13,13 +13,11 @@ class Schcode extends CI_Controller {
       try {
         $param = $_POST;
         $sch_id = $param['sch_id'];
-        $form_id = $param['form_id'];
 
         // 检测是否已经创建编码
-        $result = Model\xonSchoolSet::checkSet($sch_id, Model\x5on::SCHOOL_SET_CODE);
 
         // 正文内容
-        $this->json(['code' => 0, 'data' => $result]);
+        $this->json(['code' => 0, 'data' => []]);
       }
       catch (Exception $e) {
         // 出错拦截

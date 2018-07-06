@@ -25,4 +25,10 @@ class xonAppForm
     $res = dbs::select('xonAppForm', ['id', 'name'], compact('app_id'));
     return $res;
   }
+
+  public static function getFormNameById($form_id) {
+    $id = $form_id;
+    $res = dbs::row('xonAppForm', ['*'], compact('id'));
+    return $res === null ? null : $res->name;
+  }
 }

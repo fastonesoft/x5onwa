@@ -32,16 +32,9 @@ class xonSchoolSet
     }
   }
 
-  // 要能返回，设置了些什么
+  // 返回是否已设置
   public static function checkSchoolSet ($sch_id, $set_name) {
     $res = dbs::row('xonSchoolSet', ['*'], compact('sch_id', 'set_name'));
-    if ( $res === null ) {
-      $checked = false;
-      $formvalues = [];
-      return compact('checked', 'formvalues');
-    } else {
-      $checked = $res->checked;
-    }
-
+    return $res === null ? false : $res->checked;
   }
 }

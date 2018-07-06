@@ -48,23 +48,23 @@ class xonAppFormKey
   }
 
   public static function getKeysByFormId($sch_id, $form_id) {
-    $res = dbs::select('xonAppFormKey', ['*', 'required as error, default_value as value'], compact('form_id'));
+    $items = dbs::select('xonAppFormKey', ['*', 'default_value as value'], compact('form_id'));
     $values = dbs::select('xonAppFormValue', ['*'], compact('sch_id', 'form_id'));
 
     // 验证表单数据（包括缺省值）
-    foreach ($res as $key) {
+    foreach ($items as $key) {
       $regex = $key->regex_php;
       unset($key->regex_php);
       foreach ($values as $value) {
         if ($key->id === $value->key_id) {
           $key->value = $value->value ? $value->value : $key->value;
           $key->error = $key->required && ! preg_match($regex, $key->value);
-
           break;
         }
       }
     }
-    return $res;
+    $checked = xonSchoolSet::checkSchoolSet($sch_id, x5on::SCHOOL_SET_CODE);
+    return compact('checked', 'items');
   }
 
 }

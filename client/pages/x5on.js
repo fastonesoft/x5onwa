@@ -281,7 +281,6 @@ var doPostFormEx = function (options) {
     header: { 'content-type': 'application/x-www-form-urlencoded' },
     login: false,
     success: function (result) {
-      console.log(result)
       // 检测code是否为0，
       var data = result.data
       if (data.code === 0) {
