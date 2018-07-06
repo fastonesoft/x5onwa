@@ -22,6 +22,8 @@ class xonAppFormValue
   }
 
   public static function saveKeyValue ($sch_id, $form_id, $key_id, $value) {
+    $value = $value === 'true' ? 1 : $value;
+    $value = $value === 'false' ? 0 : $value;
     // 保存结果
     $res = dbs::row('xonAppFormValue', ['*'], compact('sch_id', 'form_id', 'key_id'));
     if ( $res === null ) {

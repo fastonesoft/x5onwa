@@ -26,16 +26,15 @@ class Appformkey extends CI_Controller {
 
         // 检测上传的值，是否满足要求
         foreach ($param as $key => $value) {
-          if ($key !== 'sch_id' or $key !== 'form_id') {
+          if ($key !== 'sch_id' and $key !== 'form_id') {
             // 检测
             $key_id = Model\xonAppFormKey::checkFormKeyValue($form_id, $key, $value);
             // 保存
             Model\xonAppFormValue::saveKeyValue($sch_id, $form_id, $key_id, $value);
           }
         }
-
         // 创建数据
-
+        Model\xonSchoolCode::saveSchoolCode($param);
         // 正文内容
         $this->json(['code' => 0, 'data' => []]);
       }

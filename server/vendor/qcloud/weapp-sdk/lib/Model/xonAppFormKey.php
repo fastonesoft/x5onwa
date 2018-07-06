@@ -33,11 +33,11 @@ class xonAppFormKey
   }
 
   public static function checkFormKeyValue($form_id, $name, $value) {
-    $value = $value === true ? 1 : $value;
-    $value = $value === false ? 0 : $value;
+    $value = $value === 'true' ? 1 : $value;
+    $value = $value === 'false' ? 0 : $value;
     $res = dbs::row('xonAppFormKey', ['*'], compact('form_id', 'name'));
     if ( $res === null ) {
-      throw new Exception("没有找到表单对应的键值");
+      throw new Exception("没有找到表单对应的键值$form_id $name");
     } else {
       $regex = $res->regex_php;
       if ( ! preg_match($regex, $value) ) {

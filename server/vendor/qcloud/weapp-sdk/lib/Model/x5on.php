@@ -15,6 +15,9 @@ class x5on {
   // 用户信息设置
   const USER_SET_MYSELF = 'user-set-myself';
 
+  // 学校设置信息
+  const SCHOOL_SET_CODE = 'school-set-code';
+
   // 给数组元素添加编号
   public static function addIndex($arr) {
     $index = 0;

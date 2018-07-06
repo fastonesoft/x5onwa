@@ -350,7 +350,7 @@ CREATE TABLE xonAppFormKey (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='表单字段';
 
 INSERT INTO xonAppFormKey VALUES (1, replace(uuid(), '-', ''), 'howMany', '编码总数', 'input', 'number', '生成多少号码', 4, '/^\\d{4}$/u', '^\\d{4}$', '输入4位数字', 1, 0, 0, 1, 2000);
-INSERT INTO xonAppFormKey VALUES (2, replace(uuid(), '-', ''), 'paraTotal', '分段总数', 'input', 'number', '分段号码总数', 2, '/^\\d{2}$/u', '^\\d{2}$', '输入2位数字', 1, 0, 0, 1, 50);
+INSERT INTO xonAppFormKey VALUES (2, replace(uuid(), '-', ''), 'paraTotal', '分段总数', 'input', 'number', '分段号码总数', 2, '/^\\d{2}$/u', '^\\d{2}$', '输入2位数字', 1, 0, 0, 1, 36);
 INSERT INTO xonAppFormKey VALUES (3, replace(uuid(), '-', ''), 'paraBit', '段号位数', 'input', 'number', '每段编号位数', 1, '/^\\d{1}$/u', '^\\d{1}$', '输入1位数字', 1, 0, 0, 1, 2);
 INSERT INTO xonAppFormKey VALUES (4, replace(uuid(), '-', ''), 'paraOrd', '序号位数', 'input', 'number', '段内序号位数', 1, '/^\\d{1}$/u', '^\\d{1}$', '输入1位数字', 1, 0, 0, 1, 2);
 INSERT INTO xonAppFormKey VALUES (5, replace(uuid(), '-', ''), 'paraPrev', '编码前缀', 'input', 'number', '区分生成号码', 20, '/^[A-Z0-9]{4,20}$/u', '^[A-Z0-9]{4,20}$', '4-20位大写字符标识', 1, 0, 0, 1, 2018);
@@ -376,9 +376,6 @@ CREATE TABLE xonAppFormValue (
   FOREIGN KEY (key_id) REFERENCES xonAppFormKey(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='单一表单值';
 
-
-
-
 CREATE TABLE xonSchoolCode (
   id VARCHAR(20) NOT NULL,  /* id = sch_id + code */
   uid VARCHAR(36) NOT NULL,
@@ -387,6 +384,18 @@ CREATE TABLE xonSchoolCode (
   UNIQUE KEY uid (uid),
   FOREIGN KEY (sch_id) REFERENCES xonSchool(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='自定义编号数据';
+
+CREATE TABLE xonSchoolSet (
+  uid VARCHAR(36) NOT NULL,
+  sch_id VARCHAR(20) NOT NULL,
+  form_id INT(11) NOT NULL,
+  set_name VARCHAR(20) NOT NULL,
+  checked BOOLEAN NOT NULL,
+  PRIMARY KEY (sch_id, set_name),
+  UNIQUE KEY uid (uid),
+  FOREIGN KEY (sch_id) REFERENCES xonSchool(id),
+  FOREIGN KEY (form_id) REFERENCES xonAppForm(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学校设置';
 
 /**
   学生报名表
