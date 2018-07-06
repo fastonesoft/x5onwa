@@ -44,9 +44,23 @@ Page({
   },
 
   scherChange: function (e) {
+    var that = this
     var sIndex = e.detail.value
     var sch_id = this.data.schers[sIndex].sch_id
     this.setData({ sIndex, sch_id })
+    // 检测是否创建
+    x5on.check({
+      success: () => {
+        x5on.postFormEx({
+          data: { sch_id },
+          url: x5on.url.schcode,
+          success: function (result) {
+            var sch_coded = result.data
+            that.setData({ sch_coded })
+          }
+        })
+      }
+    })
   },
 
   pickerChange: function (e) {
@@ -62,7 +76,6 @@ Page({
           url: x5on.url.appformkey,
           success: function (result) {
             var items = result.data
-            console.log(items)
             that.setData({ items, form_name, form_show: true, pIndex, form_id })
           }
         })

@@ -29,7 +29,7 @@
   </view>
 </view>
 
-<form bindsubmit="codeSubmit">
+<form bindsubmit="codeSubmit" wx:if="{{!sch_coded}}">
 <block wx:if="{{form_show}}">
   <view class="weui-cells__title">{{form_name}}</view>
   <view class="weui-cells weui-cells_after-title">
@@ -66,3 +66,18 @@
   <input name="sch_id" hidden="true" value="{{sch_id}}"></input>
   <input name="form_id" hidden="true" value="{{form_id}}"></input>
 </form>
+
+<block wx:if="{{sch_coded}}">
+  <view class="weui-cells__title">{{form_name}}</view>
+  <view class="weui-cells weui-cells_after-title">
+  <block wx:for="{{keys}}" wx:key="id">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">{{item.title}}</view>
+        <view class="weui-cell__ft">
+          <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.checked}}"></icon>
+          <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{item.checked}}"></icon>
+        </view>
+      </view>
+    </block>
+  </view>
+</block>
