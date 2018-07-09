@@ -1,6 +1,7 @@
 <?php
 namespace QCloud_WeApp_SDK\Model;
 
+use \QCloud_WeApp_SDK\Conf as Conf;
 
 class x5on {
   // 系统管理员组编号
@@ -18,6 +19,9 @@ class x5on {
   // 学校设置信息
   const SCHOOL_SET_CODE = 'school-set-code';
 
+  // 报名设置
+  const SCHOOL_STUD_REGED = 'school-stud-reged';
+
   // 给数组元素添加编号
   public static function addIndex($arr) {
     $index = 0;
@@ -25,6 +29,35 @@ class x5on {
       $value->index = $index++;
     }
     return $arr;
+  }
+
+  public static function getCurl ($url) {
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    $output = curl_exec($ch);
+    curl_close($ch);
+    return $output;
+  }
+
+  public static function getAccessToken () {
+    // 已经有了
+    $res = xonToken::getToken('access_token');
+    if ( $res !== null ) {
+      return $res;
+    }
+    $res = xonSys::getRowById('myinfor');
+    if ( $res === null ) {
+      throw new Exception("缺少必要的参数");
+    }
+    $uid = $res->uid;
+    $value = $res->value;
+    $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=$value&secret=$uid";
+    $output = self::getCurl($url);
+    $res = json_decode($output, true);
+    // 保存access
+    xonToken::saveToken('access_token', $res);
+    return $res["access_token"];
   }
 
   public static function checkIdc($idcard, $more_than, $less_than) {
@@ -102,6 +135,7 @@ class x5on {
     // 检验通过
     return NULL;
   }
+
 
   public static function checkUser($name, $value, $id) {
     switch ($name) {

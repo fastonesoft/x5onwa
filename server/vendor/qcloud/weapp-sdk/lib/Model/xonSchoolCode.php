@@ -62,6 +62,18 @@ class xonSchoolCode
     }
     // 添加已创建的数据标识到schoolset表
     $set_name = x5on::SCHOOL_SET_CODE;
-    xonSchoolSet::saveSchoolSet($sch_id, $form_id, $set_name, 1);
+    xonAppFormSet::saveSchoolSet($sch_id, $form_id, $set_name, 1);
+  }
+
+  public static function getSchoolCode ($sch_id) {
+    $res = dbs::select('xonSchoolCode', ['*'], compact('sch_id'), 'and', 'limit 1');
+    if ( count($res) === 1 ) {
+      // 删除记录
+      $id = $res[0]->id;
+      dbs::delete('xonSchoolCode', compact('id'));
+      return $id;
+    } else {
+      throw new Exception("编号不够，请联系学校管理");
+    }
   }
 }

@@ -27,7 +27,7 @@ class xonAppFormKey
       $regex = $key->regex_php;
       unset($key->regex_php);
       unset($key->default_value);
-      $key->error = ! preg_match($regex, $key->value);
+      $key->error = $key->required && ! preg_match($regex, $key->value);
     }
     return $res;
   }
@@ -37,11 +37,11 @@ class xonAppFormKey
     $value = $value === 'false' ? 0 : $value;
     $res = dbs::row('xonAppFormKey', ['*'], compact('form_id', 'name'));
     if ( $res === null ) {
-      throw new Exception("没有找到表单对应的键值$form_id $name");
+      throw new Exception("没有找到表单对应的键值");
     } else {
       $regex = $res->regex_php;
       if ( ! preg_match($regex, $value) ) {
-        throw new Exception("键值输入不满足正则约束$name $value");
+        throw new Exception("键值输入不满足正则约束");
       }
       return $res->id;
     }
@@ -63,7 +63,7 @@ class xonAppFormKey
         }
       }
     }
-    $checked = xonSchoolSet::checkSchoolSet($sch_id, x5on::SCHOOL_SET_CODE);
+    $checked = xonAppFormSet::checkSchoolSet($sch_id, x5on::SCHOOL_SET_CODE);
     return compact('checked', 'items');
   }
 

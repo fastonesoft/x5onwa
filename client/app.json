@@ -3,6 +3,7 @@
     "pages/login/login",
     "pages/index/index",
     "pages/index/regstud",
+    "pages/index/regexam",
     "pages/index/schcode",
     "pages/index/tchreg",
     "pages/index/roleset",

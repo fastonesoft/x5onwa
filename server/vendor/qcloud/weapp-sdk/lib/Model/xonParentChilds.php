@@ -21,7 +21,7 @@ class xonParentChilds
   }
 
   public static function mychilds ($user_id) {
-    return $res = dbs::select('xovParentChilds', ['uid', 'idc', 'child_name', 'relation_name'], compact('user_id'));
+    return $res = dbs::select('xovParentChilds', ['uid', 'idc', 'child_id', 'child_name', 'relation_name'], compact('user_id'));
   }
 
   public static function myrelation($user_id, $child_id, $relation_id) {

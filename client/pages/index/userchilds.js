@@ -48,6 +48,8 @@ Page({
 
   pickerChange: function (e) {
     var index = e.detail.value
+    if (index == -1) return
+
     var relation_id = this.data.pickers[index].id
     this.setData({ pIndex: index, relation_id: relation_id });
   },
@@ -56,7 +58,6 @@ Page({
     var that = this
     var value = e.detail.value
     if (value.name && value.idc && value.relation_id != '0') {
-      console.log(value)
       x5on.checkForm(this, 0, 1, function () {
         x5on.postFormEx({
           url: x5on.url.userchildupdate,

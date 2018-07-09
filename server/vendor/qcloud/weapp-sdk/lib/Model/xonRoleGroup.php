@@ -58,4 +58,13 @@ class xonRoleGroup
     }
     return $result;
   }
+
+  // 添加用户进组
+  public static function add ($user_id, $group_id) {
+    $res = dbs::row('xonUserGroup', ['*'], compact('user_id', 'group_id'));
+    if ( $res === null ) {
+      $uid = x5on::getUid();
+      dbs::insert('xonUserGroup', compact('user_id', 'group_id', 'uid'));
+    }
+  }
 }

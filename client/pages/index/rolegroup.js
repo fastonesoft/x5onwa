@@ -28,7 +28,7 @@ Page({
     var group_id = this.data.pickers[index].id
     that.setData({ pIndex: index, group_id: group_id });
     // 不需要检测
-    x5on.postForm({
+    x5on.postFormEx({
       url: x5on.url.rolegrouprole,
       data: {group_id, group_id},
       success: (res) => {

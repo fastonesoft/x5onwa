@@ -1,0 +1,36 @@
+<!--pages/index/regexam.wxml-->
+<view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
+
+    <view style="margin:0 auto; width: 50%; margin-bottom: 30rpx;">
+      <view class="weui-btn-area">
+        <button type="primary" bindtap="scanClick">识别报名学生</button>
+      </view>
+    </view>
+
+<block wx:if="{{infor_added}}">
+  <view class="weui-cells__title">报名信息</view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell">
+      <view class="weui-cell__bd">报名学校</view>
+      <view class="weui-cell__ft">{{sch_name}}</view>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__bd">报名学生</view>
+      <view class="weui-cell__ft">{{child_name}}</view>
+    </view>
+  </view>
+
+  <view class="weui-cells__title">报名表格 - {{form_name}}</view>
+  <view class="weui-cells weui-cells_after-title">
+    <block wx:for="{{user_forms}}" wx:key="id">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">{{item.title}}</view>
+        <view class="weui-cell__ft">{{item.value}}</view>
+      </view>
+    </block>
+  </view>
+  <view class="qrcode-area">
+    <image class="qrcode" src="{{imageurl}}"></image>
+    <view>石彧诚</view>
+  </view>
+</block>

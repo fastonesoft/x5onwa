@@ -59,8 +59,23 @@ var doUrl = {
   // 亲子关系
   parentchilds: `${host}/weapp/parentchilds`,
 
+  // 报名
+  regstudschools: `${host}/weapp/studreg`,
+  regstudreg: `${host}/weapp/studreg/regstud`,
+  regstudcheck: `${host}/weapp/studreg/regcheck`,
+  regstudcancel: `${host}/weapp/studreg/regcancel`,
+  // 二维码
+  regstudqrcode: `${host}/weapp/studreg/regqrcode/?id=`,
+
+  // 学校表格
+  schoolformkey: `${host}/weapp/schoolformkey`,
+  schoolformvalueupdate: `${host}/weapp/schoolformvalue/update`,
+
+
+
   // 错误测试地址
-  test: `${host}/weapp/data`
+  test: `${host}/weapp/data`,
+  imageurl: `${host}/weapp/data`,
 };
 
 var doCheck = function (options) {
@@ -118,7 +133,7 @@ var doRequest = function (options) {
       }
     },
     fail: function (error) {
-      if (typeof options.fail === 'function') options.fail()
+      if (typeof options.fail === 'function') options.fail(error)
       util.showModel('请求失败', error.message);
     }
   })

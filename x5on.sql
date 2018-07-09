@@ -31,6 +31,15 @@ CREATE TABLE cSessionInfo (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='会话管理用户信息';
 
 /*自定义*/
+CREATE TABLE xonSys (
+  id VARCHAR(20) NOT NULL,
+  uid VARCHAR(32) NOT NULL,
+  value VARCHAR(32) NOT NULL,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='设置';
+
+INSERT INTO xonSys VALUES ('myinfor', 'ba2a4a2108ef2ba65076bc825cae7e99', 'wxdca8673d324d4384');
+
 CREATE TABLE xonType (
 	id INT(11) NOT NULL,
 	uid VARCHAR(36) NOT NULL,
@@ -59,23 +68,21 @@ CREATE TABLE xonRole (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='权限列表';
 
 INSERT INTO xonRole VALUES (1, replace(uuid(), '-', ''), 'userset', '用户设置', 1, 1);
-INSERT INTO xonRole VALUES (2, replace(uuid(), '-', ''), 'usereset', '用户重置', 1, 1);
-INSERT INTO xonRole VALUES (3, replace(uuid(), '-', ''), 'userchilds', '我的孩子', 1, 1);
-INSERT INTO xonRole VALUES (4, replace(uuid(), '-', ''), 'regstud', '新生报名', 1, 1);
-INSERT INTO xonRole VALUES (5, replace(uuid(), '-', ''), 'regexam', '报名审核', 1, 1);
-INSERT INTO xonRole VALUES (6, replace(uuid(), '-', ''), 'regconfirm', '确认审核', 1, 1);
-INSERT INTO xonRole VALUES (7, replace(uuid(), '-', ''), 'regcount', '报名统计', 1, 1);
+INSERT INTO xonRole VALUES (2, replace(uuid(), '-', ''), 'userchilds', '我的孩子', 1, 1);
+INSERT INTO xonRole VALUES (3, replace(uuid(), '-', ''), 'regstud', '新生报名', 1, 1);
+INSERT INTO xonRole VALUES (4, replace(uuid(), '-', ''), 'regexam', '报名审核', 1, 1);
+INSERT INTO xonRole VALUES (5, replace(uuid(), '-', ''), 'regconfirm', '确认审核', 1, 1);
+INSERT INTO xonRole VALUES (6, replace(uuid(), '-', ''), 'regcount', '报名统计', 1, 1);
 
 INSERT INTO xonRole VALUES (21, replace(uuid(), '-', ''), 'students', '学生名册', 1, 2);
 
 INSERT INTO xonRole VALUES (81, replace(uuid(), '-', ''), 'schcode', '编码设置', 1, 9);
 INSERT INTO xonRole VALUES (82, replace(uuid(), '-', ''), 'tchreg', '教师注册', 1, 9);
-
+INSERT INTO xonRole VALUES (83, replace(uuid(), '-', ''), 'usereset', '用户重置', 1, 9);
 
 INSERT INTO xonRole VALUES (91, replace(uuid(), '-', ''), 'roleset', '权限设置', 1, 9);
 INSERT INTO xonRole VALUES (92, replace(uuid(), '-', ''), 'rolegroup', '权限分组', 1, 9);
 INSERT INTO xonRole VALUES (93, replace(uuid(), '-', ''), 'roledist', '权限分配', 1, 9);
-
 
 CREATE TABLE xonGroup (
 	id INT(11) NOT NULL,
@@ -112,6 +119,10 @@ CREATE TABLE xonGroupRole (
   新生报名
  */
 INSERT INTO xonGroupRole VALUES (1, 1, replace(uuid(), '-', ''));
+INSERT INTO xonGroupRole VALUES (1, 2, replace(uuid(), '-', ''));
+INSERT INTO xonGroupRole VALUES (2, 1, replace(uuid(), '-', ''));
+INSERT INTO xonGroupRole VALUES (2, 2, replace(uuid(), '-', ''));
+INSERT INTO xonGroupRole VALUES (2, 3, replace(uuid(), '-', ''));
 
 /**
   管理员组权限
@@ -122,12 +133,12 @@ INSERT INTO xonGroupRole VALUES (99, 3, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (99, 4, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (99, 5, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (99, 6, replace(uuid(), '-', ''));
-INSERT INTO xonGroupRole VALUES (99, 7, replace(uuid(), '-', ''));
 
 INSERT INTO xonGroupRole VALUES (99, 21, replace(uuid(), '-', ''));
 
 INSERT INTO xonGroupRole VALUES (99, 81, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (99, 82, replace(uuid(), '-', ''));
+INSERT INTO xonGroupRole VALUES (99, 83, replace(uuid(), '-', ''));
 
 INSERT INTO xonGroupRole VALUES (99, 91, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (99, 92, replace(uuid(), '-', ''));
@@ -312,6 +323,7 @@ CREATE TABLE xonApp (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='应用名称';
 
 INSERT INTO xonApp VALUES (1, replace(uuid(), '-', ''), 'schcode', '编码设置');
+INSERT INTO xonApp VALUES (2, replace(uuid(), '-', ''), 'regstud', '新生报名');
 
 CREATE TABLE xonAppForm (
   id INT(11) NOT NULL,
@@ -376,16 +388,7 @@ CREATE TABLE xonAppFormValue (
   FOREIGN KEY (key_id) REFERENCES xonAppFormKey(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='单一表单值';
 
-CREATE TABLE xonSchoolCode (
-  id VARCHAR(20) NOT NULL,  /* id = sch_id + code */
-  uid VARCHAR(36) NOT NULL,
-  sch_id VARCHAR(10) NOT NULL,
-  PRIMARY KEY (id),
-  UNIQUE KEY uid (uid),
-  FOREIGN KEY (sch_id) REFERENCES xonSchool(id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='自定义编号数据';
-
-CREATE TABLE xonSchoolSet (
+CREATE TABLE xonAppFormSet (
   uid VARCHAR(36) NOT NULL,
   sch_id VARCHAR(20) NOT NULL,
   form_id INT(11) NOT NULL,
@@ -395,26 +398,128 @@ CREATE TABLE xonSchoolSet (
   UNIQUE KEY uid (uid),
   FOREIGN KEY (sch_id) REFERENCES xonSchool(id),
   FOREIGN KEY (form_id) REFERENCES xonAppForm(id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学校设置';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='表单设置';
+
+/**
+  学校数据表
+ */
+CREATE TABLE xonSchoolForm (
+  id VARCHAR(32) NOT NULL,  /* sch_id + code(4) */
+  uid VARCHAR(36) NOT NULL,
+  name VARCHAR(20) NOT NULL,
+  code INT(11) NOT NULL,
+  app_id INT(11) NOT NULL,
+  sch_id VARCHAR(20) NOT NULL,
+  year_id INT(11) NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY uid (uid),
+  UNIQUE KEY sch_code (sch_id, code),
+  FOREIGN KEY (app_id) REFERENCES xonApp(id),
+  FOREIGN KEY (sch_id) REFERENCES xonSchool(id),
+  FOREIGN KEY (year_id) REFERENCES xonYear(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学校表单名称';
+
+INSERT INTO xonSchoolForm VALUES ('3212040220180001', replace(uuid(), '-', ''), '招生情况统计表（有房）', 1, 2, '32120402', 2018);
+INSERT INTO xonSchoolForm VALUES ('3212040220180002', replace(uuid(), '-', ''), '监护人情况统计表（无房）', 2, 2, '32120402', 2018);
+
+CREATE TABLE xonSchoolFormKey (
+  id VARCHAR(36) NOT NULL,  /* form_id + code(2) */
+  uid VARCHAR(36) NOT NULL,
+  name VARCHAR(20) NOT NULL,
+  title VARCHAR(20) NOT NULL,
+  view_type VARCHAR(20) NOT NULL,
+  input_type VARCHAR(20) NOT NULL,
+  place_holder VARCHAR(20) NOT NULL,
+  max_length INT(11) NOT NULL DEFAULT 200,
+  regex_php VARCHAR(200) NOT NULL,   /* 数据正则 */
+  regex_js VARCHAR(200) NOT NULL,
+  message VARCHAR(20) NOT NULL,
+  required BOOLEAN NOT NULL,  /* 是否必填 */
+  check_unique BOOLEAN NOT NULL,  /* 唯一检测 */
+  fixed BOOLEAN NOT NULL,
+  code INT(11) NOT NULL,
+  form_id VARCHAR(32) NOT NULL,
+  default_value VARCHAR(200) DEFAULT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY uid (uid),
+  UNIQUE KEY form_code (form_id, code),
+  UNIQUE KEY form_name (form_id, name),
+  FOREIGN KEY (form_id) REFERENCES xonSchoolForm(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学校表单字段';
+
+INSERT INTO xonSchoolFormKey VALUES ('321204022018000101', replace(uuid(), '-', ''), 'owner', '产权人姓名', 'input', 'text', '输入产权人姓名', 4, '/^[\\x{4e00}-\\x{9fa5}]{2,4}$/u', '^[\\u4e00-\\u9fa5]{2,4}$', '输入2-4个汉字', 1, 0, 0, 1, '3212040220180001', null);
+INSERT INTO xonSchoolFormKey VALUES ('321204022018000102', replace(uuid(), '-', ''), 'no', '产权证编号', 'input', 'number', '输入产权证号码', 20, '/^\\d+$/u', '^\\d+$', '产权证号码有误', 1, 0, 0, 2, '3212040220180001', null);
+INSERT INTO xonSchoolFormKey VALUES ('321204022018000103', replace(uuid(), '-', ''), 'idc', '产权人身份证', 'input', 'idcard', '输入产权人身份证号', 18, '/^\\d{17}[0-9X]$/u', '^\\d{17}[0-9X]$', '身份证号码有误', 1, 0, 0, 3, '3212040220180001', null);
+
+INSERT INTO xonSchoolFormKey VALUES ('321204022018000201', replace(uuid(), '-', ''), 'idc', '产权人身份证', 'input', 'idcard', '输入产权人身份证号', 18, '/^\\d{17}[0-9X]$/u', '^\\d{17}[0-9X]$', '身份证号码有误', 1, 0, 0, 1, '3212040220180002', null);
+INSERT INTO xonSchoolFormKey VALUES ('321204022018000202', replace(uuid(), '-', ''), 'htype', '产权证分类', 'picker', 'text', '产权证分类', 0, '/^\\d$/u', '^\\d$', '', 0, 0, 0, 2, '3212040220180002', '房产证#不动产证#集体土地使用证#契税发票');
+INSERT INTO xonSchoolFormKey VALUES ('321204022018000203', replace(uuid(), '-', ''), 'hhtype', '产权证分类', 'picker', 'text', '产权证分类', 0, '/^\\d$/u', '^\\d$', '', 0, 0, 0, 3, '3212040220180002', '房产证#不动产证#集体土地使用证#契税发票');
+
+CREATE TABLE xonSchoolFormValue (
+  uid VARCHAR(36) NOT NULL,
+  user_id VARCHAR(36) NOT NULL,
+  form_id VARCHAR(32) NOT NULL,
+  key_id VARCHAR(36) NOT NULL,
+  value VARCHAR(200),
+  PRIMARY KEY (user_id, form_id, key_id),
+  UNIQUE KEY uid (uid),
+  FOREIGN KEY (user_id) REFERENCES xonUser(id),
+  FOREIGN KEY (form_id) REFERENCES xonSchoolForm(id),
+  FOREIGN KEY (key_id) REFERENCES xonSchoolFormKey(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='多一表单值';
+
+
+CREATE TABLE xonSchoolFormSet (
+  uid VARCHAR(36) NOT NULL,
+  user_id VARCHAR(36) NOT NULL,
+  form_id VARCHAR (32) NOT NULL,
+  checked BOOLEAN NOT NULL,
+  PRIMARY KEY (user_id, form_id),
+  UNIQUE KEY uid (uid),
+  FOREIGN KEY (user_id) REFERENCES xonUser(id),
+  FOREIGN KEY (form_id) REFERENCES xonSchoolForm(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户表单设置';
+
+
+CREATE TABLE xonSchoolCode (
+  id VARCHAR(20) NOT NULL,  /* id = sch_id + code */
+  uid VARCHAR(36) NOT NULL,
+  sch_id VARCHAR(10) NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY uid (uid),
+  FOREIGN KEY (sch_id) REFERENCES xonSchool(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='自定义编号数据';
 
 /**
   学生报名表
   同种类型学校，只能报一所
  */
-CREATE TABLE xonStudRegSch (
+CREATE TABLE xonStudReg (
+  id VARCHAR(20) NOT NULL,  /*schoolcode id*/
+  uid VARCHAR(36) NOT NULL,
+  child_id VARCHAR(20) NOT NULL,
+  sch_id VARCHAR(10) NOT NULL,
+  user_id VARCHAR(36) NOT NULL,
+  edu_type_id INT(11) NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY uid (uid),
+  UNIQUE KEY child_edu_type (child_id, edu_type_id),
+  FOREIGN KEY (child_id) REFERENCES xonChild(id),
+  FOREIGN KEY (sch_id) REFERENCES xonSchool(id),
+  FOREIGN KEY (user_id) REFERENCES xonUser(id),
+  FOREIGN KEY (edu_type_id) REFERENCES xonEduType(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学生注册';
+
+CREATE TABLE xonStudent (
   id VARCHAR(20) NOT NULL,
   uid VARCHAR(36) NOT NULL,
-  code VARCHAR(10) NOT NULL,
-  stud_id VARCHAR(20) NOT NULL,
-  sch_id VARCHAR(10) NOT NULL,
-  sch_edu_type_id INT(11) NOT NULL,
-  PRIMARY KEY (uid),
-  UNIQUE KEY stud_edu_type (stud_id, sch_edu_type_id),
-  FOREIGN KEY (stud_id) REFERENCES xonChild(id),
-  FOREIGN KEY (sch_id) REFERENCES xonSchool(id),
-  FOREIGN KEY (sch_edu_type_id) REFERENCES xonEduType(id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学生学校';
-
+  child_id VARCHAR(20) NOT NULL,
+  year_id INT(11) NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY uid (uid),
+  FOREIGN KEY (child_id) REFERENCES xonChild(id),
+  FOREIGN KEY (year_id) REFERENCES xonYear(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='录取学生';
 
 /**
   学生与学校（学校、年度、级、年级、班级）关系表
@@ -816,6 +921,13 @@ INSERT INTO xonGrade VALUES ('32120402201608', replace(uuid(), '-', ''), '321204
 INSERT INTO xonGrade VALUES ('32120402201707', replace(uuid(), '-', ''), '321204022017', 2017, 7);
 
 
+CREATE TABLE xonToken (
+  id VARCHAR(20) NOT NULL,
+  access_token VARCHAR(1024) NOT NULL,
+  expires_in INT(11) NOT NULL,
+  create_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='请求参数';
 
 /**
   视图：非管理用户查询
@@ -879,6 +991,20 @@ AS
   FROM xonParentChilds a
   LEFT JOIN xonChild c on a.child_id = c.id
   LEFT JOIN xonRelation d on a.relation_id = d.id;
+
+CREATE VIEW xovStudReg
+AS
+  SELECT a.*, S.name as sch_name, C2.name as child_name
+  FROM xonStudReg a
+  LEFT JOIN xonSchool S on a.sch_id = S.id
+  LEFT JOIN xonChild C2 on a.child_id = C2.id;
+
+CREATE VIEW xovSchoolForm
+AS
+  SELECT a.*, xA.name as app_name, Year2.current_year
+  FROM xonSchoolForm a
+  LEFT JOIN xonApp xA on a.app_id = xA.id
+  LEFT JOIN xonYear Year2 on a.year_id = Year2.id;
 
 /*外键约束开启*/
 SET FOREIGN_KEY_CHECKS = 1;

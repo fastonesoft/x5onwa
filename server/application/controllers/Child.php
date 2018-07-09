@@ -38,6 +38,9 @@ class Child extends CI_Controller {
         return $this->json(['code' => 1, 'data' => $result['message']]);
       }
 
+      // 添加家长权限
+      Model\xonRoleGroup::add($user_id, Model\x5on::GROUP_STUDENT_PARENT);
+
       // 刷新孩子列表
       $result = Model\xonParentChilds::mychilds($user_id);
 

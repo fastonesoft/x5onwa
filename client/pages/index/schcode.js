@@ -23,8 +23,7 @@ Page({
           url: x5on.url.tchsch,
           success: function (result) {
             var data = result.data
-            var sch_id = data.length > 0 ? data[0].sch_id : ''
-            that.setData({ schers: result.data, sch_id })
+            that.setData({ schers: result.data })
           }
         })
         // 表单
@@ -43,7 +42,6 @@ Page({
   },
 
   scherChange: function (e) {
-    var that = this
     var sIndex = e.detail.value
     if (sIndex == -1) return
 
@@ -76,14 +74,18 @@ Page({
 
   codeSubmit: function (e) {
     var that = this
-    x5on.checkFormEx(this, function () {
-      x5on.postFormEx({
-        url: x5on.url.appformkeyupdate,
-        data: e.detail.value,
-        success: (res) => {
-          that.setData({ sch_coded: true })
-        }
+    if (e.detail.value.sch_id && e.detail.value.form_id) {
+      x5on.checkFormEx(this, function () {
+        x5on.postFormEx({
+          url: x5on.url.appformkeyupdate,
+          data: e.detail.value,
+          success: (res) => {
+            that.setData({ sch_coded: true })
+          }
+        })
       })
-    })
+    } else {
+      x5on.showError(this, '学校选择、表单设置不得为空')
+    }
   }
 })

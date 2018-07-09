@@ -40,7 +40,6 @@ class Appformkey extends CI_Controller {
         $this->json(['code' => 0, 'data' => []]);
       }
       catch (Exception $e) {
-        // 出错拦截
         $this->json(['code' => 1, 'data' =>  $e->getMessage()]);
       }
     }, function ($error) {
