@@ -65,7 +65,8 @@ var doUrl = {
   regstudcheck: `${host}/weapp/studreg/regcheck`,
   regstudcancel: `${host}/weapp/studreg/regcancel`,
   // 二维码
-  regstudqrcode: `${host}/weapp/studreg/regqrcode/?id=`,
+  regstudqrcode: `${host}/weapp/studreg/regqrcode`,
+
 
   // 学校表格
   schoolformkey: `${host}/weapp/schoolformkey`,
@@ -131,6 +132,21 @@ var doRequest = function (options) {
         if (typeof options.fail === 'function') options.fail()
         util.showModel('请求失败', data.data);
       }
+    },
+    fail: function (error) {
+      if (typeof options.fail === 'function') options.fail(error)
+      util.showModel('请求失败', error.message);
+    }
+  })
+};
+
+var doRequestImage = function (options) {
+  qcloud.request({
+    url: options.url,
+    login: false,
+    success: function (result) {
+      var data = result.data
+      if (typeof options.success === 'function') options.success(data)
     },
     fail: function (error) {
       if (typeof options.fail === 'function') options.fail(error)
@@ -321,6 +337,7 @@ module.exports = {
   login: doLogin,
   check: doCheck,
   request: doRequest,
+  loadimage: doRequestImage,
   checkInput: doCheckInput,
   checkInputEx: doCheckInputEx,
   checkForm: doCheckForm,

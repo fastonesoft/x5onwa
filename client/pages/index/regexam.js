@@ -18,7 +18,9 @@ Page({
         wx.scanCode({
           onlyFromCamera: true,
           success: (res) => {
-            console.log(res)
+            data = res.result
+            // 请求学生数据
+            
           }
         })
       }

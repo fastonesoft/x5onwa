@@ -60,6 +60,18 @@ class x5on {
     return $res["access_token"];
   }
 
+  public static function getQrcodeBase64 ($value) {
+    $margin = 2;
+    $errorLevel = 'H';
+    $matrixSize = 10;
+    // 字符串编码
+    ob_start();
+    QRcode::png($value, false, $errorLevel, $matrixSize, $margin);
+    $imageString = base64_encode(ob_get_contents());
+    ob_end_clean();
+    return $imageString;
+  }
+
   public static function checkIdc($idcard, $more_than, $less_than) {
     $idc = strtoupper($idcard);
     // 长度检测

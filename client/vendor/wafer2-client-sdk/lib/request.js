@@ -85,7 +85,7 @@ function request(options) {
 
             success: function (response) {
                 var data = response.data;
-                console.log(data)
+
                 var error, message;
                 if ((data && data.code === -1) || response.statusCode === 401) {
                     Session.clear();

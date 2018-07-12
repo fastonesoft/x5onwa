@@ -10,6 +10,15 @@ Page({
 
   onLoad: function (options) {
     var that = this
+
+    x5on.loadimage({
+      url: x5on.url.regstudqrcode,
+      success: function (result) {
+        var imageurl = 'data:image/png;base64,' + result
+        that.setData({ imageurl })
+      }
+    })
+
     x5on.check({
       success: () => {
         // 是否报名
@@ -31,9 +40,7 @@ Page({
             var infors = data.reged && data.forms
             var user_forms = data.reged && data.infor_added && data.user_forms
             var form_name = data.reged && data.infor_added && data.form_name
-            var imageurl = data.reged && data.infor_added && x5on.url.regstudqrcode + user_id
-            that.setData({ not_reg, sch_reged, not_added, infor_added, sch_id, sch_name, child_id, child_name, infors, user_forms, form_name, imageurl })
-            console.log(that.data)
+            that.setData({ not_reg, sch_reged, not_added, infor_added, sch_id, sch_name, child_id, child_name, infors, user_forms, form_name })
           }
         })
         // 学校
