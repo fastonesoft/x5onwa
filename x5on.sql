@@ -70,19 +70,19 @@ CREATE TABLE xonRole (
 INSERT INTO xonRole VALUES (1, replace(uuid(), '-', ''), 'userset', '用户设置', 1, 1);
 INSERT INTO xonRole VALUES (2, replace(uuid(), '-', ''), 'userchilds', '我的孩子', 1, 1);
 INSERT INTO xonRole VALUES (3, replace(uuid(), '-', ''), 'regstud', '新生报名', 1, 1);
-INSERT INTO xonRole VALUES (4, replace(uuid(), '-', ''), 'regexam', '报名审核', 1, 1);
-INSERT INTO xonRole VALUES (5, replace(uuid(), '-', ''), 'regconfirm', '确认审核', 1, 1);
-INSERT INTO xonRole VALUES (6, replace(uuid(), '-', ''), 'regcount', '报名统计', 1, 1);
+INSERT INTO xonRole VALUES (4, replace(uuid(), '-', ''), 'regexam', '报名审核', 0, 1);
+INSERT INTO xonRole VALUES (5, replace(uuid(), '-', ''), 'regconfirm', '确认审核', 0, 1);
 
-INSERT INTO xonRole VALUES (21, replace(uuid(), '-', ''), 'students', '学生名册', 1, 2);
+INSERT INTO xonRole VALUES (21, replace(uuid(), '-', ''), 'student', '学生信息', 0, 2);
+INSERT INTO xonRole VALUES (22, replace(uuid(), '-', ''), 'students', '学生名册', 0, 2);
 
-INSERT INTO xonRole VALUES (81, replace(uuid(), '-', ''), 'schcode', '编码设置', 1, 9);
-INSERT INTO xonRole VALUES (82, replace(uuid(), '-', ''), 'tchreg', '教师注册', 1, 9);
-INSERT INTO xonRole VALUES (83, replace(uuid(), '-', ''), 'usereset', '用户重置', 1, 9);
+INSERT INTO xonRole VALUES (81, replace(uuid(), '-', ''), 'schcode', '编码设置', 0, 9);
+INSERT INTO xonRole VALUES (82, replace(uuid(), '-', ''), 'tchreg', '教师注册', 0, 9);
+INSERT INTO xonRole VALUES (83, replace(uuid(), '-', ''), 'usereset', '用户重置', 0, 9);
 
-INSERT INTO xonRole VALUES (91, replace(uuid(), '-', ''), 'roleset', '权限设置', 1, 9);
-INSERT INTO xonRole VALUES (92, replace(uuid(), '-', ''), 'rolegroup', '权限分组', 1, 9);
-INSERT INTO xonRole VALUES (93, replace(uuid(), '-', ''), 'roledist', '权限分配', 1, 9);
+INSERT INTO xonRole VALUES (91, replace(uuid(), '-', ''), 'roleset', '权限设置', 0, 9);
+INSERT INTO xonRole VALUES (92, replace(uuid(), '-', ''), 'rolegroup', '权限分组', 0, 9);
+INSERT INTO xonRole VALUES (93, replace(uuid(), '-', ''), 'roledist', '权限分配', 0, 9);
 
 CREATE TABLE xonGroup (
 	id INT(11) NOT NULL,
@@ -123,7 +123,7 @@ INSERT INTO xonGroupRole VALUES (1, 2, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (2, 1, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (2, 2, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (2, 3, replace(uuid(), '-', ''));
-
+INSERT INTO xonGroupRole VALUES (2, 21, replace(uuid(), '-', ''));
 /**
   管理员组权限
  */
@@ -132,9 +132,9 @@ INSERT INTO xonGroupRole VALUES (99, 2, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (99, 3, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (99, 4, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (99, 5, replace(uuid(), '-', ''));
-INSERT INTO xonGroupRole VALUES (99, 6, replace(uuid(), '-', ''));
 
 INSERT INTO xonGroupRole VALUES (99, 21, replace(uuid(), '-', ''));
+INSERT INTO xonGroupRole VALUES (99, 22, replace(uuid(), '-', ''));
 
 INSERT INTO xonGroupRole VALUES (99, 81, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (99, 82, replace(uuid(), '-', ''));

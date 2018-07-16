@@ -1,3 +1,6 @@
 @import "./pages/weui.wxss";
 /*增加的删除图标*/
 .remove-icon {height:50rpx; width:50rpx; border: none; vertical-align: middle;}
+page {
+  background: #F6F6F6;
+}
