@@ -419,8 +419,8 @@ CREATE TABLE xonSchoolForm (
   FOREIGN KEY (year_id) REFERENCES xonYear(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学校表单名称';
 
-INSERT INTO xonSchoolForm VALUES ('3212040220180001', replace(uuid(), '-', ''), '招生情况统计表（有房）', 1, 2, '32120402', 2018);
-INSERT INTO xonSchoolForm VALUES ('3212040220180002', replace(uuid(), '-', ''), '监护人情况统计表（无房）', 2, 2, '32120402', 2018);
+INSERT INTO xonSchoolForm VALUES ('3212040220180001', replace(uuid(), '-', ''), '招生统计表（有房）', 1, 2, '32120402', 2018);
+INSERT INTO xonSchoolForm VALUES ('3212040220180002', replace(uuid(), '-', ''), '监护人统计（无房）', 2, 2, '32120402', 2018);
 
 CREATE TABLE xonSchoolFormKey (
   id VARCHAR(36) NOT NULL,  /* form_id + code(2) */
@@ -495,24 +495,20 @@ CREATE TABLE xonSchoolCode (
   同种类型学校，只能报一所
  */
 CREATE TABLE xonStudReg (
-  id VARCHAR(20) NOT NULL,  /*schoolcode id*/
   uid VARCHAR(36) NOT NULL,
   child_id VARCHAR(20) NOT NULL,
   sch_id VARCHAR(10) NOT NULL,
   user_id VARCHAR(36) NOT NULL,
   edu_type_id INT(11) NOT NULL,
-  PRIMARY KEY (id),
+  exam_user_id VARCHAR(36),
+  rexam_user_id VARCHAR(36),
+  PRIMARY KEY (child_id, edu_type_id),
   UNIQUE KEY uid (uid),
-  UNIQUE KEY child_edu_type (child_id, edu_type_id),
   FOREIGN KEY (child_id) REFERENCES xonChild(id),
   FOREIGN KEY (sch_id) REFERENCES xonSchool(id),
   FOREIGN KEY (user_id) REFERENCES xonUser(id),
   FOREIGN KEY (edu_type_id) REFERENCES xonEduType(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学生注册';
-
-CREATE TABLE xonStudExam (
-
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学生审核';
 
 CREATE TABLE xonStudent (
   id VARCHAR(20) NOT NULL,

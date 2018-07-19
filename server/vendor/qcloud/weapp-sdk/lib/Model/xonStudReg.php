@@ -37,9 +37,8 @@ class xonStudReg
 //      throw new Exception("系统繁忙，请稍候重试");
 //    }
     // 保存
-    $id = $child_id;
     $uid = x5on::getUid();
-    dbs::insert('xonStudReg', compact('id', 'uid', 'child_id', 'sch_id', 'user_id', 'edu_type_id'));
+    dbs::insert('xonStudReg', compact('uid', 'child_id', 'sch_id', 'user_id', 'edu_type_id'));
     // 读取学校报名表格
     $current_year = 1;
     $app_name = 'regstud';
@@ -92,8 +91,8 @@ class xonStudReg
   public static function regCancel ($user_id, $sch_id, $child_id) {
     $res = dbs::row('xonStudReg', ['*'], compact('user_id', 'sch_id', 'child_id'));
     if ( $res !== null ) {
-      $id = $res->id;
-      return dbs::delete('xonStudReg', compact('id'));
+      $uid = $res->uid;
+      return dbs::delete('xonStudReg', compact('uid'));
     } else {
       throw new Exception("传入参数有误，没有找到相关报名数据");
     }

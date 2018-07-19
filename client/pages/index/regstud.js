@@ -101,8 +101,8 @@ Page({
             success: function (result) {
               var not_reg = false
               var sch_reged = true
-              var infors = result.data
-              that.setData({ not_reg, sch_reged, infors })
+              var forms = result.data
+              that.setData({ not_reg, sch_reged, forms })
             }
           })
         }
