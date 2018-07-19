@@ -3,11 +3,11 @@
 
     <view style="margin:0 auto; width: 50%; margin-bottom: 30rpx;">
       <view class="weui-btn-area">
-        <button type="primary" bindtap="scanClick">识别报名学生</button>
+        <button type="primary" bindtap="scanClick">报名识别</button>
       </view>
     </view>
 
-<block wx:if="{{infor_added}}">
+<block wx:if="{{1}}">
   <view class="weui-cells__title">报名信息</view>
   <view class="weui-cells weui-cells_after-title">
     <view class="weui-cell">
@@ -30,7 +30,7 @@
     </block>
   </view>
   <view class="qrcode-area">
-    <image class="qrcode" src="{{imageurl}}"></image>
-    <view>石彧诚</view>
+    <image class="qrcode" src="{{qrcode_data}}"></image>
+    <view>{{child_name}}</view>
   </view>
 </block>

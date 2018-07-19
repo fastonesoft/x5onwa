@@ -31,11 +31,9 @@ class Data extends CI_Controller {
 
     // 增加权限检测
     $user_id = 'o47ZhvzWPWSNS26vG_45Fuz5JMZk';
-    $uid = Model\xonUser::getUidById($user_id);
-    $margin = 2;
-    $errorLevel = 'H';
-    $matrixSize = 10;
-    Model\QRcode::png($uid, false, $errorLevel, $matrixSize, $margin, false);
+    $result = Model\xonStudReg::regCheck($user_id);
+    // 正文内容
+    $this->json(['code' => 0, 'data' => $result]);
 }
 
 }

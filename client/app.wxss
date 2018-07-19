@@ -1,6 +1,15 @@
 @import "./pages/weui.wxss";
+page { background: #F6F6F6; }
+
+.qrcode-area {
+  display: flex;
+  margin-top: 50rpx;
+  align-items: center;
+  align-content: flex-start;
+  justify-content: center;
+  flex-flow: column wrap;
+  }
+.qrcode { width: 400rpx; height: 400rpx; }
+
 /*增加的删除图标*/
-.remove-icon {height:50rpx; width:50rpx; border: none; vertical-align: middle;}
-page {
-  background: #F6F6F6;
-}
+.remove-icon { height:50rpx; width:50rpx; border: none; vertical-align: middle; }

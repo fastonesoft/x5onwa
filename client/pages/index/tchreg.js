@@ -40,7 +40,7 @@ Page({
     x5on.check({
       showError: true,
       success: () => x5on.checkForm(that, 0, 0, function () {
-        x5on.postForm({
+        x5on.postFormEx({
           url: x5on.url.tchreg,
           data: e.detail.value,
           success: (result) => {
@@ -73,7 +73,7 @@ Page({
     var data = e.detail.value
     if (data.user_id && data.sch_id) {
       // 提交
-      x5on.postForm({
+      x5on.postFormEx({
         url: x5on.url.tchschreg,
         data: e.detail.value,
         success: (result) => {

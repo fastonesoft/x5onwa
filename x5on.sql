@@ -510,6 +510,10 @@ CREATE TABLE xonStudReg (
   FOREIGN KEY (edu_type_id) REFERENCES xonEduType(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学生注册';
 
+CREATE TABLE xonStudExam (
+
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学生审核';
+
 CREATE TABLE xonStudent (
   id VARCHAR(20) NOT NULL,
   uid VARCHAR(36) NOT NULL,

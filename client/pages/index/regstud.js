@@ -11,14 +11,6 @@ Page({
   onLoad: function (options) {
     var that = this
 
-    x5on.loadimage({
-      url: x5on.url.regstudqrcode,
-      success: function (result) {
-        var imageurl = 'data:image/png;base64,' + result
-        that.setData({ imageurl })
-      }
-    })
-
     x5on.check({
       success: () => {
         // 是否报名
@@ -28,19 +20,7 @@ Page({
         x5on.request({
           url: x5on.url.regstudcheck,
           success: function (result) {
-            var data = result.data
-            var not_reg = ! data.reged
-            var sch_reged = data.reged
-            var not_added = ! data.infor_added
-            var infor_added = data.infor_added 
-            var sch_id = data.reged && data.data.sch_id
-            var sch_name = data.reged && data.data.sch_name
-            var child_id = data.reged && data.data.child_id
-            var child_name = data.reged && data.data.child_name
-            var infors = data.reged && data.forms
-            var user_forms = data.reged && data.infor_added && data.user_forms
-            var form_name = data.reged && data.infor_added && data.form_name
-            that.setData({ not_reg, sch_reged, not_added, infor_added, sch_id, sch_name, child_id, child_name, infors, user_forms, form_name })
+              x5on.data(that, result.data)
           }
         })
         // 学校
@@ -92,8 +72,8 @@ Page({
     if (inforIndex == -1) return
 
     var form_show = true
-    var form_id = that.data.infors[inforIndex].id
-    var form_name = that.data.infors[inforIndex].name    
+    var form_id = that.data.forms[inforIndex].id
+    var form_name = that.data.forms[inforIndex].name    
     this.setData({ form_show, inforIndex, form_id, form_name })
     x5on.check({
       success: () => {
@@ -171,8 +151,7 @@ Page({
   },
 
   uploadSubmit: function (e) {
-    var that = this
-    console.log(e)
+    var that = this;
     x5on.checkFormEx(this, function () {
       x5on.postFormEx({
         data: e.detail.value,
@@ -181,8 +160,9 @@ Page({
           var infor_added = true
           var not_added = false
           var form_show = false
-          var user_forms = result.data
-          that.setData({ form_show, infor_added, not_added, user_forms })
+          var user_forms = result.data.user_forms
+          var qrcode_data = result.data.qrcode_data
+          that.setData({ form_show, infor_added, not_added, user_forms, qrcode_data })
           //
         }
       })

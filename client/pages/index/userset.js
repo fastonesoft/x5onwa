@@ -19,7 +19,9 @@ Page({
       success: () => x5on.request({
         url: x5on.url.userset,
         success: function (result) {
-          that.setData({ items: result.data.data, canModi: ! result.data.checked })
+          var checked = result.data.checked
+          var canModi = ! checked
+          that.setData({ items: result.data.data, canModi, checked })
         }
       })
     })

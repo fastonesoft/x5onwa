@@ -22,6 +22,7 @@
     <button type="primary" form-type="submit">提交</button>
   </view>
 </form>
+<block wx:if="{{checked}}">
 <view class="weui-cells__title">个人信息</view>
 <view class="weui-cells weui-cells_after-title">
   <block wx:for="{{items}}" wx:key="id">
@@ -31,3 +32,4 @@
     </view>
   </block>
 </view>
+</block>

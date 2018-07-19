@@ -23,10 +23,19 @@ class xonSchoolForm
 
   public static function getFormNameById ($id) {
     $res = dbs::row('xonSchoolForm', ['*'], compact('id'));
-    if ( $res === null ) {
-      throw new Exception("没有找到编码对应表单");
+    if ( $res !== null ) {
+      return $res->name;
     }
-    return $res->name;
+    throw new Exception("没有找到编码对应的表单名称");
+  }
+
+  public static function getFormById($id) {
+    $res = dbs::row('xonSchoolForm', ['*'], compact('id'));
+    if ( $res !== null ) {
+      return $res;
+    } else {
+      throw new Exception("没有找到编码对应的表单");
+    }
   }
 
 }

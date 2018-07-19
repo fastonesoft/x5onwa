@@ -50,28 +50,41 @@ class xonStudReg
   public static function regCheck ($user_id) {
     $data = dbs::row('xovStudReg', ['sch_id', 'sch_name', 'child_id', 'child_name'], compact('user_id'));
     if ( $data !== null ) {
-      $reged = true;
+      $sch_reged = true;
       // 读取学校报名表格
       $sch_id = $data->sch_id;
+      $sch_name = $data->sch_name;
+      $child_id = $data->child_id;
+      $child_name = $data->child_name;
       $current_year = 1;
       $app_name = 'regstud';
       $forms = dbs::select('xovSchoolForm', ['id', 'name'], compact('sch_id', 'app_name', 'current_year'));
       $form_setted = xonSchoolFormSet::checkSchoolFormSet($user_id);
       if ( $form_setted === null || $form_setted !== null && ! $form_setted->checked ) {
+        $not_reg = false;
+        $not_added = true;
         $infor_added = false;
-        return compact('reged', 'infor_added', 'data', 'forms');
+        return compact('not_reg', 'sch_reged', 'not_added', 'infor_added', 'sch_id', 'sch_name', 'child_id', 'child_name', 'forms');
       }
+      // 用户报名二维码
+      $form_setted_uid = $form_setted->uid;
+      $qrcode_data = x5on::getQrcodeBase64($form_setted_uid);
+      //
       $form_id = $form_setted->form_id;
       $infor_added = $form_setted->checked;
       // 取得form_name
       $form_name = xonSchoolForm::getFormNameById($form_id);
       // 查询用户已提交的表格数据
       $user_forms = xonSchoolFormKey::listKeysByFormId($user_id, $form_id);
-      return compact('reged', 'infor_added', 'data', 'form_name', 'forms', 'user_forms');
+      $not_reg = false;
+      $not_added = ! $infor_added;
+      return compact('not_reg', 'sch_reged', 'not_added', 'infor_added', 'sch_id', 'sch_name', 'child_id', 'child_name', 'forms', 'form_name', 'user_forms', 'qrcode_data');
     } else {
-      $reged = false;
+      $not_reg = true;
+      $sch_reged = false;
+      $not_added = true;
       $infor_added = false;
-      return compact('reged', 'infor_added');
+      return compact('not_reg', 'sch_reged', 'not_added', 'infor_added');
     }
   }
 

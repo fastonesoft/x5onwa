@@ -23,10 +23,11 @@ class Schoolformvalue extends CI_Controller {
           }
         }
         // 变更已提交状态
-        Model\xonSchoolFormSet::saveSchoolFormSet($user_id, $form_id, 1);
-
+        $uid = Model\xonSchoolFormSet::saveSchoolFormSet($user_id, $form_id, 1);
+        $qrcode_data = Model\x5on::getQrcodeBase64($uid);
         // 返回刷新数据
-        $result = Model\xonSchoolFormKey::listKeysByFormId($user_id, $form_id);
+        $user_forms = Model\xonSchoolFormKey::listKeysByFormId($user_id, $form_id);
+        $result = compact('user_forms', 'qrcode_data');
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {

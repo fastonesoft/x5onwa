@@ -64,8 +64,7 @@ var doUrl = {
   regstudreg: `${host}/weapp/studreg/regstud`,
   regstudcheck: `${host}/weapp/studreg/regcheck`,
   regstudcancel: `${host}/weapp/studreg/regcancel`,
-  // 二维码
-  regstudqrcode: `${host}/weapp/studreg/regqrcode`,
+
 
 
   // 学校表格
@@ -77,6 +76,12 @@ var doUrl = {
   // 错误测试地址
   test: `${host}/weapp/data`,
   imageurl: `${host}/weapp/data`,
+};
+
+var doData = function (that, data) {
+  for (var i in data) {
+    that.setData({ [i]: data[i] })
+  }
 };
 
 var doCheck = function (options) {
@@ -118,10 +123,12 @@ var doCheck = function (options) {
  *  X    ：   ...
  */
 var doRequest = function (options) {
+  util.showBusy('正在查询...')
   qcloud.request({
     url: options.url,
     login: false,
     success: function (result) {
+      wx.hideToast()
       // 检测code是否为0，
       var data = result.data
       if ( data.code === 0 ) {
@@ -134,6 +141,7 @@ var doRequest = function (options) {
       }
     },
     fail: function (error) {
+      wx.hideToast()
       if (typeof options.fail === 'function') options.fail(error)
       util.showModel('请求失败', error.message);
     }
@@ -334,6 +342,7 @@ var doPostFormEx = function (options) {
 // 对外接口
 module.exports = {
   url: doUrl,
+  data: doData,
   login: doLogin,
   check: doCheck,
   request: doRequest,

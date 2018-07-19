@@ -69,18 +69,4 @@ class Studreg extends CI_Controller {
     });
   }
 
-  public function regqrcode () {
-    Model\xonLogin::check(self::role_name, function ($user) {
-      try {
-        $user_id = $user['unionId'];
-        $uid = Model\xonUser::getUidById($user_id);
-        $imageString = Model\x5on::getQrcodeBase64($uid);
-        echo $imageString;
-      } catch (Exception $e) {
-        $this->json(['code' => 1, 'data' => $e->getMessage()]);
-      }
-    }, function ($error) {
-      $this->json($error);
-    });
-  }
 }
