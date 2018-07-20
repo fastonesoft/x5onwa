@@ -48,7 +48,17 @@ class xonSchoolFormSet
     if ( $res !== null ) {
       return $res;
     } else {
-      throw new Exception("无法识别的二维码信息");
+      throw new Exception("没有找到编号对应表单");
+    }
+  }
+
+  public static function cancelFormSet($uid) {
+    $res = dbs::row('xonSchoolFormSet', ['*'], compact('uid'));
+    if ( $res !== null ) {
+      $checked = 0;
+      dbs::update('xonSchoolFormSet', compact('checked'), compact('uid'));
+    } else {
+      throw new Exception("没有找到编号对应表单");
     }
   }
 }

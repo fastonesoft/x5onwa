@@ -67,7 +67,7 @@ var doUrl = {
 
   // 审核
   studexam: `${host}/weapp/studexam`,
-
+  studexampass: `${host}/weapp/studexam/pass`,
 
   // 学校表格
   schoolformkey: `${host}/weapp/schoolformkey`,
@@ -166,24 +166,29 @@ var doRequestImage = function (options) {
 };
 
 var doLogin = function (options) {
+  util.showBusy('正在登录...')
   const session = qcloud.Session.get()
   if (session) {
     qcloud.loginWithCode({
       success: res => {
-        if (typeof options.success === 'function') options.success();
+        wx.hideToast()
+        if (typeof options.success === 'function') options.success(res);
       },
       fail: err => {
-        if (typeof options.fail === 'function') options.fail();
+        wx.hideToast()
+        if (typeof options.fail === 'function') options.fail(err);
         util.showModel('登录错误', err.message)
       }
     })
   } else {
     qcloud.login({
       success: res => {
-        if (typeof options.success === 'function') options.success();
+        wx.hideToast()
+        if (typeof options.success === 'function') options.success(res);
       },
       fail: err => {
-        if (typeof options.fail === 'function') options.fail();
+        wx.hideToast()
+        if (typeof options.fail === 'function') options.fail(err);
         util.showModel('登录错误', err.message)
       }
     })

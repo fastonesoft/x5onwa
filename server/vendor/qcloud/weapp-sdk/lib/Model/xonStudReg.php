@@ -117,4 +117,47 @@ class xonStudReg
     }
   }
 
+  public static function setStudExamUser($uid, $exam_user_id) {
+    $res = dbs::row('xonStudReg', ['*'], compact('uid'));
+    if ( $res !== null ) {
+      if ( $res->exam_user_id !== null ) throw new Exception("已经通过审核，无须再审");
+      // 未审核，标识一下
+      dbs::update('xonStudReg', compact('exam_user_id'), compact('uid'));
+    } else {
+      throw new Exception("未找到编号对应报名记录");
+    }
+  }
+
+  public static function checkStudExamCancel ($uid) {
+    $res = dbs::row('xonStudReg', ['*'], compact('uid'));
+    if ( $res !== null ) {
+      if ( $res->exam_user_id !== null ) throw new Exception("已经通过审核，无法撤消");
+    } else {
+      throw new Exception("未找到编号对应报名记录");
+    }
+  }
+
+  public static function setStudRexamUser($uid, $rexam_user_id) {
+    $res = dbs::row('xonStudReg', ['*'], compact('uid'));
+    if ( $res !== null ) {
+      if ( $res->exam_user_id === null ) throw new Exception("未通过审核，无法确认");
+      if ( $res->rexam_user_id !== null ) throw new Exception("已经确认，不必重复操作");
+      dbs::update('xonStudReg', compact('rexam_user_id'), compact('uid'));
+    } else {
+      throw new Exception("未找到编号对应报名记录");
+    }
+  }
+
+
+  public static function delStudExamUser($uid) {
+    $res = dbs::row('xonStudReg', ['*'], compact('uid'));
+    if ( $res !== null ) {
+      if ( $res->rexam_user_id !== null ) throw new Exception("已经确认，不能撤消");
+      $exam_user_id = null;
+      dbs::update('xonStudReg', compact('exam_user_id'), compact('uid'));
+    } else {
+      throw new Exception("未找到编号对应报名记录");
+    }
+  }
+
 }

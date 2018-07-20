@@ -33,18 +33,15 @@ Page({
         var regged_stud_uid = that.data.regged_stud_uid
         var form_setted_uid = that.data.form_setted_uid
         x5on.postFormEx({
-          url: x5on.url.studexam,
+          url: x5on.url.studexampass,
           data: { regged_stud_uid, form_setted_uid },
           success: function (result) {
-
-
+            var data = result.data
+            x5on.data(that, data)
           }
         })
       }
     })
-
-    var passed = true
-    this.setData({ passed })
   },
 
   nextClick: function (e) {

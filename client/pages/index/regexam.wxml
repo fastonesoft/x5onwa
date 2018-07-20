@@ -34,7 +34,7 @@
   <view class="qrcode-area">
     <image class="qrcode" src="data:image/png;base64,{{qrcode_data}}"></image>
   </view>
-  <block wx:if="{{!passed}}">
+  <block wx:if="{{not_passed}}">
   <view class="x5ui-half-btn">
     <view class="weui-btn-area">
       <button type="primary" bindtap="passClick">审核通过</button>
@@ -42,7 +42,7 @@
   </view>
   <view class="x5ui-half-btn">
     <view class="weui-btn-area">
-      <button type="warn" bindtap="backClick">撤消</button>
+      <button type="warn" bindtap="cancelClick">撤消</button>
     </view>
   </view>
   </block>
