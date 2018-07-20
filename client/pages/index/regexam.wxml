@@ -1,13 +1,14 @@
 <!--pages/index/regexam.wxml-->
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
-    <view style="margin:0 auto; width: 50%; margin-bottom: 30rpx;">
-      <view class="weui-btn-area">
-        <button type="primary" bindtap="scanClick">报名识别</button>
-      </view>
+<block wx:if="{{not_scan}}">
+  <view style="margin:0 auto; width: 50%; margin-bottom: 30rpx;">
+    <view class="weui-btn-area">
+      <button type="primary" bindtap="scanClick">报名识别</button>
     </view>
-
-<block wx:if="{{1}}">
+  </view>
+</block>
+<block wx:if="{{can_show}}">
   <view class="weui-cells__title">报名信息</view>
   <view class="weui-cells weui-cells_after-title">
     <view class="weui-cell">
@@ -30,7 +31,16 @@
     </block>
   </view>
   <view class="qrcode-area">
-    <image class="qrcode" src="{{qrcode_data}}"></image>
-    <view>{{child_name}}</view>
+    <image class="qrcode" src="data:image/png;base64,{{qrcode_data}}"></image>
+  </view>
+  <view style="margin:0 auto; width: 50%; margin-bottom: 30rpx;">
+    <view class="weui-btn-area">
+      <button type="primary" bindtap="passClick">审核通过</button>
+    </view>
+  </view>
+  <view style="margin:0 auto; width: 50%; margin-bottom: 30rpx;">
+    <view class="weui-btn-area">
+      <button type="warn" bindtap="backClick">退回</button>
+    </view>
   </view>
 </block>

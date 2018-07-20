@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 use QCloud_WeApp_SDK\Model;
 
-class Regexam extends CI_Controller {
+class Studexam extends CI_Controller {
   const role_name = 'regexam';
   public function index() {
     Model\xonLogin::check(self::role_name, function ($user) {
@@ -11,7 +11,7 @@ class Regexam extends CI_Controller {
         // 检测审核人员是否注册学校
         $exam_user_id = $user['unionId'];
         $exam_user = Model\xovSchoolTeach::getUserSchool($exam_user_id);
-        $exam_sch_id =$exam_user->sch_id;
+        $exam_sch_id = $exam_user->sch_id;
 
         // 用户信息
         $param = $_POST;
@@ -22,21 +22,25 @@ class Regexam extends CI_Controller {
         $form_id = $form_setted->form_id;
         $form = Model\xonSchoolForm::getFormById($form_id);
         $sch_id = $form->sch_id;
+        $form_name = $form->name;
 
         if ( $exam_sch_id !== $sch_id ) {
           throw new Exception("用户信息与我校报名要求不符");
         }
 
+        // 用户报名记录
+        $regged_stud = Model\xovStudReg::getStudRegRow($user_id);
+        $sch_name = $regged_stud->sch_name;
+        $child_name = $regged_stud->child_name;
 
-        $studreg = Model\xonStudReg::getRegRow($user_id);
-        $qrcode_data = Model\x5on::getQrcodeBase64($studreg->uid);
+
+        // 返回原二维码
+        $qrcode_data = Model\x5on::getQrcodeBase64($uid);
         // 返回刷新数据
         $user_forms = Model\xonSchoolFormKey::listKeysByFormId($user_id, $form_id);
-        $result = compact('user_forms', 'qrcode_data');
-
-
-
-        $result = Model\xonSchoolFormKey::listKeysByFormId($user_id, $form_id);
+        // 开启标志
+        $can_show = true;
+        $result = compact('can_show', 'user_forms', 'qrcode_data', 'form_name', 'sch_name', 'child_name');
         // 正文内容
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {

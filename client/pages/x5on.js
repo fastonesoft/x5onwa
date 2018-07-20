@@ -65,6 +65,8 @@ var doUrl = {
   regstudcheck: `${host}/weapp/studreg/regcheck`,
   regstudcancel: `${host}/weapp/studreg/regcancel`,
 
+  // 审核
+  studexam: `${host}/weapp/studexam`,
 
 
   // 学校表格

@@ -124,6 +124,23 @@ INSERT INTO xonGroupRole VALUES (2, 1, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (2, 2, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (2, 3, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (2, 21, replace(uuid(), '-', ''));
+
+/**
+  学校管理员
+ */
+INSERT INTO xonGroupRole VALUES (7, 1, replace(uuid(), '-', ''));
+INSERT INTO xonGroupRole VALUES (7, 2, replace(uuid(), '-', ''));
+INSERT INTO xonGroupRole VALUES (7, 3, replace(uuid(), '-', ''));
+INSERT INTO xonGroupRole VALUES (7, 4, replace(uuid(), '-', ''));
+INSERT INTO xonGroupRole VALUES (7, 5, replace(uuid(), '-', ''));
+
+INSERT INTO xonGroupRole VALUES (7, 21, replace(uuid(), '-', ''));
+INSERT INTO xonGroupRole VALUES (7, 22, replace(uuid(), '-', ''));
+
+INSERT INTO xonGroupRole VALUES (7, 81, replace(uuid(), '-', ''));
+INSERT INTO xonGroupRole VALUES (7, 82, replace(uuid(), '-', ''));
+INSERT INTO xonGroupRole VALUES (7, 83, replace(uuid(), '-', ''));
+
 /**
   管理员组权限
  */
