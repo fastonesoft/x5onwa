@@ -47,7 +47,7 @@ class xonStudReg
 
   // 临时只能报一个
   public static function regCheck ($user_id) {
-    $data = dbs::row('xovStudReg', ['sch_id', 'sch_name', 'child_id', 'child_name'], compact('user_id'));
+    $data = dbs::row('xovStudReg', ['uid', 'sch_id', 'sch_name', 'child_id', 'child_name'], compact('user_id'));
     if ( $data !== null ) {
       $sch_reged = true;
       // 读取学校报名表格
@@ -97,4 +97,24 @@ class xonStudReg
       throw new Exception("传入参数有误，没有找到相关报名数据");
     }
   }
+
+  // 获取用户报名记录编号
+  public static function getRegRowByUserId($user_id) {
+    $res = dbs::row('xovStudReg', ['uid', 'sch_id', 'sch_name', 'child_id', 'child_name'], compact('user_id'));
+    if ( $res !== null ) {
+      return $res;
+    } else {
+      throw new Exception("未找到用户报名记录");
+    }
+  }
+
+  public static function getRegRowByUid($uid) {
+    $res = dbs::row('xovStudReg', ['uid', 'sch_id', 'sch_name', 'child_id', 'child_name'], compact('uid'));
+    if ( $res !== null ) {
+      return $res;
+    } else {
+      throw new Exception("未找到编号对应报名记录");
+    }
+  }
+
 }

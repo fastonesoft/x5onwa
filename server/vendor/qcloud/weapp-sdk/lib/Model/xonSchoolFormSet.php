@@ -23,12 +23,12 @@ class xonSchoolFormSet
 
   // 暂时只做 用户 检测，
   // 以后再做详细设置
-  public static function saveSchoolFormSet ($user_id, $form_id, $checked) {
+  public static function saveSchoolFormSetAndClear ($user_id, $form_id, $app_id, $checked) {
     // 消除用户填表数据，防止冲突
-    dbs::delete('xonSchoolFormSet', compact('user_id'));
+    dbs::delete('xonSchoolFormSet', compact('user_id', 'app_id'));
     // 插入新的用户数据
     $uid = x5on::getUid();
-    dbs::insert('xonSchoolFormSet', compact('uid', 'user_id', 'form_id', 'checked'));
+    dbs::insert('xonSchoolFormSet', compact('uid', 'user_id', 'form_id', 'app_id', 'checked'));
     return $uid;
   }
 

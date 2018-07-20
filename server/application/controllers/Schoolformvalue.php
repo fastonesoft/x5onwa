@@ -22,8 +22,10 @@ class Schoolformvalue extends CI_Controller {
             Model\xonSchoolFormValue::saveKeyValue($user_id, $form_id, $key_id, $value);
           }
         }
+        // app_id
+        $app_id = Model\xonApp::getIdByName('regstud');
         // 变更已提交状态
-        $uid = Model\xonSchoolFormSet::saveSchoolFormSet($user_id, $form_id, 1);
+        $uid = Model\xonSchoolFormSet::saveSchoolFormSetAndClear($user_id, $form_id, $app_id, 1);
         $qrcode_data = Model\x5on::getQrcodeBase64($uid);
         // 返回刷新数据
         $user_forms = Model\xonSchoolFormKey::listKeysByFormId($user_id, $form_id);

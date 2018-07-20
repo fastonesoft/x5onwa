@@ -127,7 +127,7 @@
   </form>
 </block>
 
-<block wx:if="{{infor_added}}">
+<block wx:if="{{infor_added && user_forms.length>0}}">
   <view class="weui-cells__title">报名表格 - {{form_name}}</view>
   <view class="weui-cells weui-cells_after-title">
     <block wx:for="{{user_forms}}" wx:key="id">
@@ -137,6 +137,8 @@
       </view>
     </block>
   </view>
+</block>
+<block wx:if="{{infor_added}}">
   <view class="qrcode-area">
     <image class="qrcode" src="data:image/png;base64,{{qrcode_data}}"></image>
     <view>{{child_name}}</view>

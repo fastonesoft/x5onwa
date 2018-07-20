@@ -16,6 +16,7 @@ class Regexam extends CI_Controller {
         // 用户信息
         $param = $_POST;
         $uid = $param['uid'];
+
         $form_setted = Model\xonSchoolFormSet::getFormSet($uid);
         $user_id = $form_setted->user_id;
         $form_id = $form_setted->form_id;
@@ -23,8 +24,17 @@ class Regexam extends CI_Controller {
         $sch_id = $form->sch_id;
 
         if ( $exam_sch_id !== $sch_id ) {
-          throw new Exception("用户报名信息与我校不符");
+          throw new Exception("用户信息与我校报名要求不符");
         }
+
+
+        $studreg = Model\xonStudReg::getRegRow($user_id);
+        $qrcode_data = Model\x5on::getQrcodeBase64($studreg->uid);
+        // 返回刷新数据
+        $user_forms = Model\xonSchoolFormKey::listKeysByFormId($user_id, $form_id);
+        $result = compact('user_forms', 'qrcode_data');
+
+
 
         $result = Model\xonSchoolFormKey::listKeysByFormId($user_id, $form_id);
         // 正文内容

@@ -421,6 +421,8 @@ CREATE TABLE xonSchoolForm (
 
 INSERT INTO xonSchoolForm VALUES ('3212040220180001', replace(uuid(), '-', ''), '招生统计表（有房）', 1, 2, '32120402', 2018);
 INSERT INTO xonSchoolForm VALUES ('3212040220180002', replace(uuid(), '-', ''), '监护人统计（无房）', 2, 2, '32120402', 2018);
+INSERT INTO xonSchoolForm VALUES ('3212040220180003', replace(uuid(), '-', ''), '领录取通知书', 3, 2, '32120402', 2018);
+
 
 CREATE TABLE xonSchoolFormKey (
   id VARCHAR(36) NOT NULL,  /* form_id + code(2) */
@@ -455,6 +457,10 @@ INSERT INTO xonSchoolFormKey VALUES ('321204022018000201', replace(uuid(), '-', 
 INSERT INTO xonSchoolFormKey VALUES ('321204022018000202', replace(uuid(), '-', ''), 'htype', '产权证分类', 'picker', 'text', '产权证分类', 0, '/^\\d$/u', '^\\d$', '', 0, 0, 0, 2, '3212040220180002', '房产证#不动产证#集体土地使用证#契税发票');
 INSERT INTO xonSchoolFormKey VALUES ('321204022018000203', replace(uuid(), '-', ''), 'hhtype', '产权证分类', 'picker', 'text', '产权证分类', 0, '/^\\d$/u', '^\\d$', '', 0, 0, 0, 3, '3212040220180002', '房产证#不动产证#集体土地使用证#契税发票');
 
+INSERT INTO xonSchoolFormKey VALUES ('321204022018000301', replace(uuid(), '-', ''), 'name', '配偶姓名', 'input', 'text', '输入配偶姓名', 4, '/^[\\x{4e00}-\\x{9fa5}]{2,4}$/u', '^[\\u4e00-\\u9fa5]{2,4}$', '输入2-4个汉字', 1, 0, 0, 1, '3212040220180003', null);
+INSERT INTO xonSchoolFormKey VALUES ('321204022018000302', replace(uuid(), '-', ''), 'mobil', '手机号码', 'input', 'number', '输入配偶手机号码', 11, '/^\\d{11}$/u', '^\\d{11}$', '输入11位手机号码', 1, 0, 0, 2, '3212040220180003', null);
+
+
 CREATE TABLE xonSchoolFormValue (
   uid VARCHAR(36) NOT NULL,
   user_id VARCHAR(36) NOT NULL,
@@ -473,11 +479,13 @@ CREATE TABLE xonSchoolFormSet (
   uid VARCHAR(36) NOT NULL,
   user_id VARCHAR(36) NOT NULL,
   form_id VARCHAR (32) NOT NULL,
+  app_id INT(11) NOT NULL,
   checked BOOLEAN NOT NULL,
   PRIMARY KEY (user_id, form_id),
   UNIQUE KEY uid (uid),
   FOREIGN KEY (user_id) REFERENCES xonUser(id),
-  FOREIGN KEY (form_id) REFERENCES xonSchoolForm(id)
+  FOREIGN KEY (form_id) REFERENCES xonSchoolForm(id),
+  FOREIGN KEY (app_id) REFERENCES xonApp(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户表单设置';
 
 

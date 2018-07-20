@@ -4,10 +4,6 @@ var x5on = require('../x5on.js')
 
 Page({
 
-  data: {
-  
-  },
-
   onLoad: function (options) {
     var that = this
 

@@ -60,6 +60,9 @@ class xonSchoolFormKey
   public static function listKeysByFormId($user_id, $form_id) {
     $items = dbs::select('xonSchoolFormKey', ['*', 'required as error'], compact('form_id'));
     $values = dbs::select('xonSchoolFormValue', ['*'], compact('user_id', 'form_id'));
+    if ( count($values) === 0 ) {
+      return $values;
+    }
     // 验证表单数据（包括缺省值）
     foreach ($items as $key) {
       $regex = $key->regex_php;
