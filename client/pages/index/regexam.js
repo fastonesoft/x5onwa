@@ -3,10 +3,6 @@ var x5on = require('../x5on.js')
 
 Page({
 
-  data: {
-    not_scan: true
-  },
-
   scanClick: function (e) {
     var that = this
     x5on.check({
@@ -14,13 +10,13 @@ Page({
         wx.scanCode({
           onlyFromCamera: true,
           success: (res) => {
-            that.setData({ not_scan: false })
             var uid = res.result
             x5on.postFormEx({
               url: x5on.url.studexam,
               data: {uid},
               success: function (result) {
                 var data = result.data
+                that.setData({ scanned: true })
                 x5on.data(that, data)
               }
             })
@@ -28,6 +24,39 @@ Page({
         })
       }
     })
+  },
+
+  passClick: function (e) {
+    var that = this
+    x5on.check({
+      success: () => {
+        var regged_stud_uid = that.data.regged_stud_uid
+        var form_setted_uid = that.data.form_setted_uid
+        x5on.postFormEx({
+          url: x5on.url.studexam,
+          data: { regged_stud_uid, form_setted_uid },
+          success: function (result) {
+
+
+          }
+        })
+      }
+    })
+
+    var passed = true
+    this.setData({ passed })
+  },
+
+  nextClick: function (e) {
+    var data = {}
+    data.sch_name = ''
+    data.child_name = ''
+    data.form_name = ''
+    data.user_forms = []
+    data.can_show = false
+    data.scanned = false
+    data.passed = false
+    x5on.data(this, data)
   }
 
 })

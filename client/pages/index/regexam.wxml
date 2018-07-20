@@ -1,14 +1,14 @@
 <!--pages/index/regexam.wxml-->
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
-<block wx:if="{{not_scan}}">
+<block wx:if="{{!scanned}}">
   <view style="margin:0 auto; width: 50%; margin-bottom: 30rpx;">
     <view class="weui-btn-area">
       <button type="primary" bindtap="scanClick">报名识别</button>
     </view>
   </view>
 </block>
-<block wx:if="{{can_show}}">
+<block wx:if="{{scanned}}">
   <view class="weui-cells__title">报名信息</view>
   <view class="weui-cells weui-cells_after-title">
     <view class="weui-cell">
@@ -30,17 +30,25 @@
       </view>
     </block>
   </view>
+
   <view class="qrcode-area">
     <image class="qrcode" src="data:image/png;base64,{{qrcode_data}}"></image>
   </view>
-  <view style="margin:0 auto; width: 50%; margin-bottom: 30rpx;">
+  <block wx:if="{{!passed}}">
+  <view class="x5ui-half-btn">
     <view class="weui-btn-area">
       <button type="primary" bindtap="passClick">审核通过</button>
     </view>
   </view>
-  <view style="margin:0 auto; width: 50%; margin-bottom: 30rpx;">
+  <view class="x5ui-half-btn">
     <view class="weui-btn-area">
-      <button type="warn" bindtap="backClick">退回</button>
+      <button type="warn" bindtap="backClick">撤消</button>
     </view>
   </view>
+  </block>
+  <block wx:if="{{passed}}">
+    <view class="weui-btn-area">
+      <button type="primary" bindtap="nextClick">下一个</button>
+    </view>
+  </block>
 </block>

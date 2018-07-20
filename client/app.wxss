@@ -10,6 +10,7 @@ page { background: #F6F6F6; }
   flex-flow: column wrap;
   }
 .qrcode { width: 400rpx; height: 400rpx; }
+.x5ui-half-btn { margin:0 auto; width: 50%; margin-bottom: 30rpx; }
 
 /*增加的删除图标*/
 .remove-icon { height:50rpx; width:50rpx; border: none; vertical-align: middle; }

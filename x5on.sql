@@ -438,7 +438,7 @@ CREATE TABLE xonSchoolForm (
 
 INSERT INTO xonSchoolForm VALUES ('3212040220180001', replace(uuid(), '-', ''), '招生统计表（有房）', 1, 2, '32120402', 2018);
 INSERT INTO xonSchoolForm VALUES ('3212040220180002', replace(uuid(), '-', ''), '监护人统计（无房）', 2, 2, '32120402', 2018);
-INSERT INTO xonSchoolForm VALUES ('3212040220180003', replace(uuid(), '-', ''), '领录取通知书', 3, 2, '32120402', 2018);
+INSERT INTO xonSchoolForm VALUES ('3212040220180003', replace(uuid(), '-', ''), '信息采集表', 3, 2, '32120402', 2018);
 
 
 CREATE TABLE xonSchoolFormKey (

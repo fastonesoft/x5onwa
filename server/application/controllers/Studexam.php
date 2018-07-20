@@ -23,24 +23,28 @@ class Studexam extends CI_Controller {
         $form = Model\xonSchoolForm::getFormById($form_id);
         $sch_id = $form->sch_id;
         $form_name = $form->name;
+        $form_setted_uid = $form_setted->uid;
 
         if ( $exam_sch_id !== $sch_id ) {
           throw new Exception("用户信息与我校报名要求不符");
+        }
+
+        if ( $exam_user_id === $user_id ) {
+          throw new Exception("不可以审核自己的报名信息");
         }
 
         // 用户报名记录
         $regged_stud = Model\xovStudReg::getStudRegRow($user_id);
         $sch_name = $regged_stud->sch_name;
         $child_name = $regged_stud->child_name;
-
+        $regged_stud_uid = $regged_stud->uid;
 
         // 返回原二维码
         $qrcode_data = Model\x5on::getQrcodeBase64($uid);
         // 返回刷新数据
         $user_forms = Model\xonSchoolFormKey::listKeysByFormId($user_id, $form_id);
         // 开启标志
-        $can_show = true;
-        $result = compact('can_show', 'user_forms', 'qrcode_data', 'form_name', 'sch_name', 'child_name');
+        $result = compact('form_setted_uid', 'regged_stud_uid', 'user_forms', 'qrcode_data', 'form_name', 'sch_name', 'child_name');
         // 正文内容
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
