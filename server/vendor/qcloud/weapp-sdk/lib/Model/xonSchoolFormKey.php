@@ -61,7 +61,7 @@ class xonSchoolFormKey
     $items = dbs::select('xonSchoolFormKey', ['*', 'required as error'], compact('form_id'));
     $values = dbs::select('xonSchoolFormValue', ['*'], compact('user_id', 'form_id'));
     if ( count($values) === 0 ) {
-      return $values;
+      return [];
     }
     // 验证表单数据（包括缺省值）
     foreach ($items as $key) {
@@ -70,7 +70,7 @@ class xonSchoolFormKey
       unset($key->regex_js);
       foreach ($values as $value) {
         if ($key->id === $value->key_id) {
-          $key->value = $value->value ? $value->value : $key->value;
+          $key->value = $value->value ? $value->value : null;
           $key->error = $key->required && ! preg_match($regex, $key->value);
           break;
         }

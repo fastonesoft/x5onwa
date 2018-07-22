@@ -13,11 +13,11 @@ Page({
             var uid = res.result
             x5on.postFormEx({
               url: x5on.url.studexam,
-              data: {uid},
+              data: { uid },
               success: function (result) {
                 var data = result.data
-                that.setData({ scanned: true })
-                x5on.data(that, data)
+                data.scanned = true
+                that.setData(data)
               }
             })
           }
@@ -37,7 +37,7 @@ Page({
           data: { regged_stud_uid, form_setted_uid },
           success: function (result) {
             var data = result.data
-            x5on.data(that, data)
+            that.setData(data)
           }
         })
       }
@@ -53,7 +53,7 @@ Page({
     data.can_show = false
     data.scanned = false
     data.passed = false
-    x5on.data(this, data)
+    this.setData(data)
   }
 
 })

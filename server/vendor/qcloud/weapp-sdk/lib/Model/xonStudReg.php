@@ -9,18 +9,6 @@ use \Exception;
 class xonStudReg
 {
 
-  public static function insert () {
-
-  }
-
-  public static function update () {
-
-  }
-
-  public static function delete () {
-
-  }
-
   public static function schools () {
     return dbs::select('xonSchool', ['id', 'name', 'edu_type_id']);
   }
@@ -30,15 +18,17 @@ class xonStudReg
     if ( $res !== null ) {
       throw new Exception("已经报名，同类学校只能报一个");
     }
-    // 取编号  =>   直接用学生stud_id作主键
-//    $id = xonSchoolCode::getSchoolCode($sch_id);
-//    $res = dbs::row('xonStudSchool', ['*'], compact('id'));
-//    if ( $res !== null ) {
-//      throw new Exception("系统繁忙，请稍候重试");
-//    }
+
     // 保存
     $uid = x5on::getUid();
     dbs::insert('xonStudReg', compact('uid', 'child_id', 'sch_id', 'user_id', 'edu_type_id'));
+
+    // 检测是否已经录取
+    $enter = xonStudent::checkStudentEnter($child_id, $sch_id);
+    if ($enter !== false) {
+      return $enter;
+    }
+
     // 读取学校报名表格
     $current_year = 1;
     $app_name = 'regstud';
@@ -55,6 +45,12 @@ class xonStudReg
       $sch_name = $data->sch_name;
       $child_id = $data->child_id;
       $child_name = $data->child_name;
+      // 检测是否已经录取
+      $enter = xonStudent::checkStudentEnter($child_id, $sch_id);
+      if ($enter !== false) {
+        return $enter;
+      }
+
       $current_year = 1;
       $app_name = 'regstud';
       $forms = dbs::select('xovSchoolForm', ['id', 'name'], compact('sch_id', 'app_name', 'current_year'));
@@ -83,7 +79,9 @@ class xonStudReg
       $sch_reged = false;
       $not_added = true;
       $infor_added = false;
-      return compact('not_reg', 'sch_reged', 'not_added', 'infor_added');
+      $schools = xonStudReg::schools();
+      $childs = xonParentChilds::mychilds($user_id);
+      return compact('not_reg', 'sch_reged', 'not_added', 'infor_added', 'schools', 'childs');
     }
   }
 
@@ -92,10 +90,20 @@ class xonStudReg
     $res = dbs::row('xonStudReg', ['*'], compact('user_id', 'sch_id', 'child_id'));
     if ( $res !== null ) {
       $uid = $res->uid;
-      return dbs::delete('xonStudReg', compact('uid'));
+      dbs::delete('xonStudReg', compact('uid'));
     } else {
       throw new Exception("传入参数有误，没有找到相关报名数据");
     }
+  }
+
+  public static function regCancelData($user_id) {
+    $not_reg = true;
+    $sch_reged = false;
+    $not_added = true;
+    $infor_added = false;
+    $schools = xonStudReg::schools();
+    $childs = xonParentChilds::mychilds($user_id);
+    return compact('not_reg', 'sch_reged', 'not_added', 'infor_added', 'schools', 'childs');
   }
 
   // 获取用户报名记录编号

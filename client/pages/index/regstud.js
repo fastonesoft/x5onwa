@@ -16,23 +16,7 @@ Page({
         x5on.request({
           url: x5on.url.regstudcheck,
           success: function (result) {
-              x5on.data(that, result.data)
-          }
-        })
-        // 学校
-        x5on.request({
-          url: x5on.url.regstudschools,
-          success: function (result) {
-            var data = result.data
-            that.setData({ schools: data })
-          }
-        })
-        // 孩子
-        x5on.request({
-          url: x5on.url.parentchilds,
-          success: function (result) {
-            var data = result.data
-            that.setData({ childs: data })
+            that.setData(result.data)
           }
         })
       }
@@ -45,7 +29,7 @@ Page({
 
   schoolChange: function (e) {
     var schIndex = e.detail.value
-    if (schIndex == -1) return
+    if (schIndex == -1 || this.data.schools.length == 0) return
 
     var sch_id = this.data.schools[schIndex].id
     var sch_name = this.data.schools[schIndex].name
@@ -55,17 +39,17 @@ Page({
 
   childChange: function (e) {
     var childIndex = e.detail.value
-    if (childIndex == -1) return
+    if (childIndex == -1 || this.data.childs.length == 0) return
 
     var child_id = this.data.childs[childIndex].child_id
     var child_name = this.data.childs[childIndex].child_name
     this.setData({ childIndex, child_id, child_name })
   },
 
-  inforChange: function (e) {
+  formChange: function (e) {
     var that = this
     var inforIndex = e.detail.value
-    if (inforIndex == -1) return
+    if (inforIndex == -1 || that.data.forms.length == 0) return
 
     var form_show = true
     var form_id = that.data.forms[inforIndex].id
@@ -95,10 +79,11 @@ Page({
             data: e.detail.value,
             url: x5on.url.regstudreg,
             success: function (result) {
-              var not_reg = false
-              var sch_reged = true
-              var forms = result.data
-              that.setData({ not_reg, sch_reged, forms })
+              var data = result.data
+              console.log(data)
+              data.not_reg = false
+              data.not_added = false
+              that.setData(data)
             }
           })
         }
@@ -115,15 +100,8 @@ Page({
         x5on.postFormEx({
           data: e.detail.value,
           url: x5on.url.regstudcancel,
-          success: function (result) {
-            var not_reg = true
-            var sch_reged = false
-            var form_show = false
-            var sch_id = ''
-            var child_id = ''
-            var schIndex = -1
-            var childIndex = -1
-            that.setData({ not_reg, sch_reged, form_show, sch_id, child_id, schIndex, childIndex })
+          success: function (result) {            
+            that.setData(result.data)
           }
         })
       }
@@ -133,7 +111,7 @@ Page({
   // 动态创建的picker脚本（只能创一个）
   dynamChange: function (e) {
     var dynamIndex = e.detail.value
-    if (dynamIndex == -1) return
+    if (dynamIndex == -1 || this.data.items.length == 0) return
 
     var uid = e.currentTarget.dataset.uid
     var items = this.data.items

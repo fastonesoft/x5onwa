@@ -5,15 +5,6 @@ use QCloud_WeApp_SDK\Model;
 
 class Studreg extends CI_Controller {
   const role_name = 'regstud';
-  public function index() {
-    Model\xonLogin::check(self::role_name, function ($user) {
-      $result = Model\xonStudReg::schools();
-      // 正文内容
-      $this->json(['code' => 0, 'data' => $result]);
-    }, function ($error) {
-      $this->json($error);
-    });
-  }
 
   public function regstud () {
     Model\xonLogin::check(self::role_name, function ($user) {
@@ -58,7 +49,8 @@ class Studreg extends CI_Controller {
         $param = $_POST;
         $sch_id = $param['sch_id'];
         $child_id = $param['child_id'];
-        $result = Model\xonStudReg::regCancel($user_id, $sch_id, $child_id);
+        Model\xonStudReg::regCancel($user_id, $sch_id, $child_id);
+        $result = Model\xonStudReg::regCancelData($user_id);
         // 正文内容
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {

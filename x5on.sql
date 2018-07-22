@@ -436,9 +436,9 @@ CREATE TABLE xonSchoolForm (
   FOREIGN KEY (year_id) REFERENCES xonYear(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学校表单名称';
 
-INSERT INTO xonSchoolForm VALUES ('3212040220180001', replace(uuid(), '-', ''), '招生统计表（有房）', 1, 2, '32120402', 2018);
-INSERT INTO xonSchoolForm VALUES ('3212040220180002', replace(uuid(), '-', ''), '监护人统计（无房）', 2, 2, '32120402', 2018);
-INSERT INTO xonSchoolForm VALUES ('3212040220180003', replace(uuid(), '-', ''), '信息采集表', 3, 2, '32120402', 2018);
+INSERT INTO xonSchoolForm VALUES ('3212040220180001', replace(uuid(), '-', ''), '信息采集表', 1, 2, '32120402', 2018);
+INSERT INTO xonSchoolForm VALUES ('3212040220180002', replace(uuid(), '-', ''), '招生统计表（有房）', 2, 2, '32120402', 2018);
+INSERT INTO xonSchoolForm VALUES ('3212040220180003', replace(uuid(), '-', ''), '监护人统计（无房）', 3, 2, '32120402', 2018);
 
 
 CREATE TABLE xonSchoolFormKey (
@@ -466,16 +466,16 @@ CREATE TABLE xonSchoolFormKey (
   FOREIGN KEY (form_id) REFERENCES xonSchoolForm(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学校表单字段';
 
-INSERT INTO xonSchoolFormKey VALUES ('321204022018000101', replace(uuid(), '-', ''), 'owner', '产权人姓名', 'input', 'text', '输入产权人姓名', 4, '/^[\\x{4e00}-\\x{9fa5}]{2,4}$/u', '^[\\u4e00-\\u9fa5]{2,4}$', '输入2-4个汉字', 1, 0, 0, 1, '3212040220180001', null);
-INSERT INTO xonSchoolFormKey VALUES ('321204022018000102', replace(uuid(), '-', ''), 'no', '产权证编号', 'input', 'number', '输入产权证号码', 20, '/^\\d+$/u', '^\\d+$', '产权证号码有误', 1, 0, 0, 2, '3212040220180001', null);
-INSERT INTO xonSchoolFormKey VALUES ('321204022018000103', replace(uuid(), '-', ''), 'idc', '产权人身份证', 'input', 'idcard', '输入产权人身份证号', 18, '/^\\d{17}[0-9X]$/u', '^\\d{17}[0-9X]$', '身份证号码有误', 1, 0, 0, 3, '3212040220180001', null);
+INSERT INTO xonSchoolFormKey VALUES ('321204022018000201', replace(uuid(), '-', ''), 'owner', '产权人姓名', 'input', 'text', '输入产权人姓名', 4, '/^[\\x{4e00}-\\x{9fa5}]{2,4}$/u', '^[\\u4e00-\\u9fa5]{2,4}$', '输入2-4个汉字', 1, 0, 0, 1, '3212040220180002', null);
+INSERT INTO xonSchoolFormKey VALUES ('321204022018000202', replace(uuid(), '-', ''), 'no', '产权证编号', 'input', 'number', '输入产权证号码', 20, '/^\\d+$/u', '^\\d+$', '产权证号码有误', 1, 0, 0, 2, '3212040220180002', null);
+INSERT INTO xonSchoolFormKey VALUES ('321204022018000203', replace(uuid(), '-', ''), 'idc', '产权人身份证', 'input', 'idcard', '输入产权人身份证号', 18, '/^\\d{17}[0-9X]$/u', '^\\d{17}[0-9X]$', '身份证号码有误', 1, 0, 0, 3, '3212040220180002', null);
 
-INSERT INTO xonSchoolFormKey VALUES ('321204022018000201', replace(uuid(), '-', ''), 'idc', '产权人身份证', 'input', 'idcard', '输入产权人身份证号', 18, '/^\\d{17}[0-9X]$/u', '^\\d{17}[0-9X]$', '身份证号码有误', 1, 0, 0, 1, '3212040220180002', null);
-INSERT INTO xonSchoolFormKey VALUES ('321204022018000202', replace(uuid(), '-', ''), 'htype', '产权证分类', 'picker', 'text', '产权证分类', 0, '/^\\d$/u', '^\\d$', '', 0, 0, 0, 2, '3212040220180002', '房产证#不动产证#集体土地使用证#契税发票');
-INSERT INTO xonSchoolFormKey VALUES ('321204022018000203', replace(uuid(), '-', ''), 'hhtype', '产权证分类', 'picker', 'text', '产权证分类', 0, '/^\\d$/u', '^\\d$', '', 0, 0, 0, 3, '3212040220180002', '房产证#不动产证#集体土地使用证#契税发票');
+INSERT INTO xonSchoolFormKey VALUES ('321204022018000301', replace(uuid(), '-', ''), 'idc', '产权人身份证', 'input', 'idcard', '输入产权人身份证号', 18, '/^\\d{17}[0-9X]$/u', '^\\d{17}[0-9X]$', '身份证号码有误', 1, 0, 0, 1, '3212040220180003', null);
+INSERT INTO xonSchoolFormKey VALUES ('321204022018000302', replace(uuid(), '-', ''), 'htype', '产权证分类', 'picker', 'text', '产权证分类', 0, '/^\\d$/u', '^\\d$', '', 0, 0, 0, 2, '3212040220180003', '房产证#不动产证#集体土地使用证#契税发票');
+INSERT INTO xonSchoolFormKey VALUES ('321204022018000303', replace(uuid(), '-', ''), 'hhtype', '产权证分类', 'picker', 'text', '产权证分类', 0, '/^\\d$/u', '^\\d$', '', 0, 0, 0, 3, '3212040220180003', '房产证#不动产证#集体土地使用证#契税发票');
 
-INSERT INTO xonSchoolFormKey VALUES ('321204022018000301', replace(uuid(), '-', ''), 'name', '配偶姓名', 'input', 'text', '输入配偶姓名', 4, '/^[\\x{4e00}-\\x{9fa5}]{2,4}$/u', '^[\\u4e00-\\u9fa5]{2,4}$', '输入2-4个汉字', 1, 0, 0, 1, '3212040220180003', null);
-INSERT INTO xonSchoolFormKey VALUES ('321204022018000302', replace(uuid(), '-', ''), 'mobil', '手机号码', 'input', 'number', '输入配偶手机号码', 11, '/^\\d{11}$/u', '^\\d{11}$', '输入11位手机号码', 1, 0, 0, 2, '3212040220180003', null);
+INSERT INTO xonSchoolFormKey VALUES ('321204022018000101', replace(uuid(), '-', ''), 'name', '配偶姓名', 'input', 'text', '输入配偶姓名', 4, '/^[\\x{4e00}-\\x{9fa5}]{2,4}$/u', '^[\\u4e00-\\u9fa5]{2,4}$', '输入2-4个汉字', 1, 0, 0, 1, '3212040220180001', null);
+INSERT INTO xonSchoolFormKey VALUES ('321204022018000102', replace(uuid(), '-', ''), 'mobil', '手机号码', 'input', 'number', '输入配偶手机号码', 11, '/^\\d{11}$/u', '^\\d{11}$', '输入11位手机号码', 1, 0, 0, 2, '3212040220180001', null);
 
 
 CREATE TABLE xonSchoolFormValue (
@@ -536,14 +536,15 @@ CREATE TABLE xonStudReg (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学生注册';
 
 CREATE TABLE xonStudent (
-  id VARCHAR(20) NOT NULL,
+  id VARCHAR(20) NOT NULL COMMENT '学生录取编号',
   uid VARCHAR(36) NOT NULL,
   child_id VARCHAR(20) NOT NULL,
-  year_id INT(11) NOT NULL,
+  step_id VARCHAR(16) NOT NULL,
+  come_year INT(11) NOT NULL,
   PRIMARY KEY (id),
   UNIQUE KEY uid (uid),
   FOREIGN KEY (child_id) REFERENCES xonChild(id),
-  FOREIGN KEY (year_id) REFERENCES xonYear(id)
+  FOREIGN KEY (step_id) REFERENCES xonStep(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='录取学生';
 
 /**
@@ -559,6 +560,7 @@ CREATE TABLE xonYear (
   UNIQUE KEY uid (uid)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='年度';
 
+/**
 INSERT INTO xonYear VALUES (2004, replace(uuid(), '-', ''), 0);
 INSERT INTO xonYear VALUES (2005, replace(uuid(), '-', ''), 0);
 INSERT INTO xonYear VALUES (2006, replace(uuid(), '-', ''), 0);
@@ -571,6 +573,8 @@ INSERT INTO xonYear VALUES (2012, replace(uuid(), '-', ''), 0);
 INSERT INTO xonYear VALUES (2013, replace(uuid(), '-', ''), 0);
 INSERT INTO xonYear VALUES (2014, replace(uuid(), '-', ''), 0);
 INSERT INTO xonYear VALUES (2015, replace(uuid(), '-', ''), 0);
+ */
+
 INSERT INTO xonYear VALUES (2016, replace(uuid(), '-', ''), 0);
 INSERT INTO xonYear VALUES (2017, replace(uuid(), '-', ''), 0);
 INSERT INTO xonYear VALUES (2018, replace(uuid(), '-', ''), 1);
@@ -890,7 +894,8 @@ CREATE TABLE xonError (
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='错误输出检测';
 
-/*分级数据*/
+/*
+分级数据
 INSERT INTO xonStep VALUES ('321204022004', replace(uuid(), '-', ''), '2004级', '32120402', 1);
 INSERT INTO xonStep VALUES ('321204022005', replace(uuid(), '-', ''), '2005级', '32120402', 1);
 INSERT INTO xonStep VALUES ('321204022006', replace(uuid(), '-', ''), '2006级', '32120402', 1);
@@ -903,11 +908,13 @@ INSERT INTO xonStep VALUES ('321204022012', replace(uuid(), '-', ''), '2012级',
 INSERT INTO xonStep VALUES ('321204022013', replace(uuid(), '-', ''), '2013级', '32120402', 1);
 INSERT INTO xonStep VALUES ('321204022014', replace(uuid(), '-', ''), '2014级', '32120402', 1);
 INSERT INTO xonStep VALUES ('321204022015', replace(uuid(), '-', ''), '2015级', '32120402', 0);
+*/
 INSERT INTO xonStep VALUES ('321204022016', replace(uuid(), '-', ''), '2016级', '32120402', 0);
 INSERT INTO xonStep VALUES ('321204022017', replace(uuid(), '-', ''), '2017级', '32120402', 0);
 INSERT INTO xonStep VALUES ('321204022018', replace(uuid(), '-', ''), '2018级', '32120402', 0);
 
-/*年级数据*/
+/*
+年级数据
 INSERT INTO xonGrade VALUES ('32120402200409', replace(uuid(), '-', ''), '321204022004', 2006, 9);
 INSERT INTO xonGrade VALUES ('32120402200508', replace(uuid(), '-', ''), '321204022005', 2006, 8);
 INSERT INTO xonGrade VALUES ('32120402200509', replace(uuid(), '-', ''), '321204022005', 2007, 9);
@@ -941,9 +948,14 @@ INSERT INTO xonGrade VALUES ('32120402201409', replace(uuid(), '-', ''), '321204
 INSERT INTO xonGrade VALUES ('32120402201507', replace(uuid(), '-', ''), '321204022015', 2015, 7);
 INSERT INTO xonGrade VALUES ('32120402201508', replace(uuid(), '-', ''), '321204022015', 2016, 8);
 INSERT INTO xonGrade VALUES ('32120402201509', replace(uuid(), '-', ''), '321204022015', 2017, 9);
+*/
+
 INSERT INTO xonGrade VALUES ('32120402201607', replace(uuid(), '-', ''), '321204022016', 2016, 7);
 INSERT INTO xonGrade VALUES ('32120402201608', replace(uuid(), '-', ''), '321204022016', 2017, 8);
+INSERT INTO xonGrade VALUES ('32120402201609', replace(uuid(), '-', ''), '321204022016', 2018, 9);
 INSERT INTO xonGrade VALUES ('32120402201707', replace(uuid(), '-', ''), '321204022017', 2017, 7);
+INSERT INTO xonGrade VALUES ('32120402201708', replace(uuid(), '-', ''), '321204022017', 2018, 8);
+INSERT INTO xonGrade VALUES ('32120402201807', replace(uuid(), '-', ''), '321204022018', 2018, 7);
 
 
 CREATE TABLE xonToken (
@@ -1030,6 +1042,14 @@ AS
   FROM xonSchoolForm a
   LEFT JOIN xonApp xA on a.app_id = xA.id
   LEFT JOIN xonYear Year2 on a.year_id = Year2.id;
+
+CREATE VIEW xovStudent
+AS
+  SELECT a.*, C2.name as child_name, S.name as step_name, S2.id as sch_id, S2.name as sch_name
+  FROM xonStudent a
+  LEFT JOIN xonChild C2 on a.child_id = C2.id
+  LEFT JOIN xonStep S on a.step_id = S.id
+  LEFT JOIN xonSchool S2 on S.sch_id = S2.id;
 
 /*外键约束开启*/
 SET FOREIGN_KEY_CHECKS = 1;

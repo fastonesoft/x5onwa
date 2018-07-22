@@ -60,7 +60,6 @@ var doUrl = {
   parentchilds: `${host}/weapp/parentchilds`,
 
   // 报名
-  regstudschools: `${host}/weapp/studreg`,
   regstudreg: `${host}/weapp/studreg/regstud`,
   regstudcheck: `${host}/weapp/studreg/regcheck`,
   regstudcancel: `${host}/weapp/studreg/regcancel`,
