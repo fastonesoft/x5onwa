@@ -100,7 +100,7 @@
           <view class="weui-cell weui-cell_switch">
             <view class="weui-cell__bd">{{item.title}}</view>
             <view class="weui-cell__ft">
-              <switch name="{{item.name}}" checked />
+              <switch name="{{item.name}}" checked="{{item.value==='1'?true:false}}" />
             </view>
           </view>
         </block>
@@ -133,7 +133,10 @@
     <block wx:for="{{user_forms}}" wx:key="id">
       <view class="weui-cell">
         <view class="weui-cell__bd">{{item.title}}</view>
-        <view class="weui-cell__ft">{{item.value}}</view>
+        <view class="weui-cell__ft">
+          <view wx:if="{{item.view_type!=='check'}}">{{item.value}}</view>
+          <icon wx:elif="{{item.value==='1'}}" class="weui-icon-radio" type="success_no_circle" size="20"></icon>
+        </view>
       </view>
     </block>
   </view>
@@ -154,6 +157,10 @@
       <view class="weui-cell">
         <view class="weui-cell__bd">录取学校</view>
         <view class="weui-cell__ft">{{sch_name}}</view>
+      </view>
+      <view class="weui-cell">
+        <view class="weui-cell__bd">录取年级</view>
+        <view class="weui-cell__ft">{{step_name}}</view>
       </view>
       <view class="weui-cell">
         <view class="weui-cell__bd">录取编号</view>

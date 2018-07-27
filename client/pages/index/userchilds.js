@@ -34,7 +34,7 @@ Page({
           success: function (result) {
             var childs = result.data
             var mychildShow = childs.length > 0
-            var userchildShow = childs.length < 2
+            var userchildShow = childs.length < 1
             that.setData({ childs, mychildShow, userchildShow })
           }
         })

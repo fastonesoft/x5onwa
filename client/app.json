@@ -4,6 +4,7 @@
     "pages/index/index",
     "pages/index/regstud",
     "pages/index/regexam",
+    "pages/index/regconfirm",
     "pages/index/schcode",
     "pages/index/tchreg",
     "pages/index/roleset",

@@ -38,7 +38,7 @@ class Userset extends CI_Controller {
         // 检测输入数据是否有误
         $res = Model\x5on::checkUser($name, $value, $user_id);
         if ($res !== NULL) {
-          $this->json(['code' => -1, 'data' => $res['message']]);
+          $this->json(['code' => 1, 'data' => $res['message']]);
           return;
         }
 
@@ -51,7 +51,7 @@ class Userset extends CI_Controller {
           // 插入数据，并进行唯一检测
           $res = Model\xonUserKeyValue::insert($user_id, $key_id, $value, $check_unique);
           if ( $res !== NULL ) {
-            $this->json(['code' => -1, 'data' => $res['message']]);
+            $this->json(['code' => 1, 'data' => $res['message']]);
             return;
           }
         }

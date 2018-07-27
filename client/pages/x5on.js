@@ -67,6 +67,10 @@ var doUrl = {
   // 审核
   studexam: `${host}/weapp/studexam`,
   studexampass: `${host}/weapp/studexam/pass`,
+  studexamcancel: `${host}/weapp/studexam/cancel`,
+  studconfirm: `${host}/weapp/studconfirm`,
+  studconfirmpass: `${host}/weapp/studconfirm/pass`,
+  studconfirmcancel: `${host}/weapp/studconfirm/cancel`,
 
   // 学校表格
   schoolformkey: `${host}/weapp/schoolformkey`,

@@ -48,7 +48,7 @@ class xonSchoolFormKey
       }
       foreach ($values as $value) {
         if ($key->id === $value->key_id) {
-          $key->value = $value->value ? $value->value : $key->value;
+          $key->value = $value->value !== null ? $value->value : $key->value;
           $key->error = $key->required && ! preg_match($regex, $key->value);
           break;
         }
@@ -70,7 +70,7 @@ class xonSchoolFormKey
       unset($key->regex_js);
       foreach ($values as $value) {
         if ($key->id === $value->key_id) {
-          $key->value = $value->value ? $value->value : null;
+          $key->value = $value->value !== null ? $value->value : $key->default_value;
           $key->error = $key->required && ! preg_match($regex, $key->value);
           break;
         }
@@ -96,7 +96,7 @@ class xonSchoolFormKey
         throw new Exception("键值输入不满足正则约束");
       }
 
-      if ( strpos($res->name, 'idcard') ) {
+      if ( strpos($res->name, 'idcard') !== false ) {
         // 检测身份证30+
         $idc_result = x5on::checkIdc($value, 30, 0);
         if ( $idc_result !== null ) {

@@ -34,7 +34,7 @@ Page({
         url: x5on.url.usersetupdate,
         data: e.detail.value,
         success: (res) => {
-          that.setData({ canModi: false })
+          that.setData({ canModi: false, checked: true })
         }
       })
     })

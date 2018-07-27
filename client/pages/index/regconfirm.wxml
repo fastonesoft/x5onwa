@@ -1,14 +1,14 @@
 <!--pages/index/regexam.wxml-->
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
-<block wx:if="{{!scanned}}">
+<block wx:if="{{!passed}}">
   <view class="x5ui-half-btn">
     <view class="weui-btn-area">
       <button type="primary" bindtap="scanClick">报名识别</button>
     </view>
   </view>
 </block>
-<block wx:if="{{scanned}}">
+<block wx:if="{{passed}}">
   <view class="weui-cells__title">报名信息</view>
   <view class="weui-cells weui-cells_after-title">
     <view class="weui-cell">
@@ -34,26 +34,18 @@
     </block>
   </view>
 
-  <view class="qrcode-area">
-    <image class="qrcode" src="data:image/png;base64,{{qrcode_data}}"></image>
-  </view>
-  <block wx:if="{{not_passed}}">
-  <view class="x5ui-column">
-    <view class="x5ui-half-btn">
-      <view class="weui-btn-area">
-        <button type="primary" bindtap="passClick">审核通过</button>
+  <block wx:if="{{not_confirmed}}">
+    <view class="x5ui-column">
+      <view class="x5ui-half-btn">
+        <view class="weui-btn-area">
+          <button type="primary" bindtap="passClick">确认审核</button>
+        </view>
       </view>
-    </view>
-    <view class="x5ui-half-btn">
-      <view class="weui-btn-area">
-        <button type="warn" bindtap="cancelClick">撤消</button>
+      <view class="x5ui-half-btn">
+        <view class="weui-btn-area">
+          <button type="warn" bindtap="cancelClick">退回重审</button>
+        </view>
       </view>
-    </view>
-  </view>
-  </block>
-  <block wx:if="{{passed}}">
-    <view class="weui-btn-area">
-      <button type="primary" bindtap="nextClick">下一个</button>
     </view>
   </block>
 </block>

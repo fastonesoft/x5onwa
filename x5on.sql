@@ -123,8 +123,19 @@ INSERT INTO xonGroupRole VALUES (1, 2, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (2, 1, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (2, 2, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (2, 3, replace(uuid(), '-', ''));
-INSERT INTO xonGroupRole VALUES (2, 21, replace(uuid(), '-', ''));
 
+/**
+  学科主管、年级主管
+ */
+INSERT INTO xonGroupRole VALUES (5, 1, replace(uuid(), '-', ''));
+INSERT INTO xonGroupRole VALUES (5, 2, replace(uuid(), '-', ''));
+INSERT INTO xonGroupRole VALUES (5, 3, replace(uuid(), '-', ''));
+INSERT INTO xonGroupRole VALUES (5, 4, replace(uuid(), '-', ''));
+
+INSERT INTO xonGroupRole VALUES (6, 1, replace(uuid(), '-', ''));
+INSERT INTO xonGroupRole VALUES (6, 2, replace(uuid(), '-', ''));
+INSERT INTO xonGroupRole VALUES (6, 3, replace(uuid(), '-', ''));
+INSERT INTO xonGroupRole VALUES (6, 5, replace(uuid(), '-', ''));
 /**
   学校管理员
  */
@@ -133,9 +144,6 @@ INSERT INTO xonGroupRole VALUES (7, 2, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (7, 3, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (7, 4, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (7, 5, replace(uuid(), '-', ''));
-
-INSERT INTO xonGroupRole VALUES (7, 21, replace(uuid(), '-', ''));
-INSERT INTO xonGroupRole VALUES (7, 22, replace(uuid(), '-', ''));
 
 INSERT INTO xonGroupRole VALUES (7, 81, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (7, 82, replace(uuid(), '-', ''));
@@ -195,7 +203,6 @@ CREATE TABLE xonUserKey (
 
 INSERT INTO xonUserKey VALUES (1, replace(uuid(), '-', ''), 'name', '我的名字', 'text', '请输入您的姓名', '4', '/^[\\x{4e00}-\\x{9fa5}]{2,4}$/u', '^[\\u4e00-\\u9fa5]{2,4}$', '输入2-4个汉字', 1, 0, 0);
 INSERT INTO xonUserKey VALUES (2, replace(uuid(), '-', ''), 'mobil', '手机号码', 'number', '请输入您的手机号', '11', '/^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[6-9])\\d{8}$/', '^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[6-9])\\d{8}$', '手机号码有误！', 1, 1, 0);
-INSERT INTO xonUserKey VALUES (3, replace(uuid(), '-', ''), 'idc', '身份证号', 'idcard', '请输入您的身份证号', '18', '/^\\d{17}[0-9X]$/', '^\\d{17}[0-9X]$', '身份证号有误！', 1, 1, 0);
 
 CREATE TABLE xonUserKeyValue (
   uid VARCHAR(36) NOT NULL,
@@ -308,7 +315,6 @@ CREATE TABLE xonSchool (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学校列表';
 
 INSERT INTO xonSchool VALUES ('32120402', replace(uuid(), '-', ''), '02', '实验初中', '泰州市姜堰区实验初级中学', 2, '321204');
-INSERT INTO xonSchool VALUES ('32120401', replace(uuid(), '-', ''), '01', '励才实验', '泰州市姜堰区励才实验学校', 2, '321204');
 
 /**
   学校用户 -> 老师
@@ -466,16 +472,34 @@ CREATE TABLE xonSchoolFormKey (
   FOREIGN KEY (form_id) REFERENCES xonSchoolForm(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学校表单字段';
 
-INSERT INTO xonSchoolFormKey VALUES ('321204022018000201', replace(uuid(), '-', ''), 'owner', '产权人姓名', 'input', 'text', '输入产权人姓名', 4, '/^[\\x{4e00}-\\x{9fa5}]{2,4}$/u', '^[\\u4e00-\\u9fa5]{2,4}$', '输入2-4个汉字', 1, 0, 0, 1, '3212040220180002', null);
-INSERT INTO xonSchoolFormKey VALUES ('321204022018000202', replace(uuid(), '-', ''), 'no', '产权证编号', 'input', 'number', '输入产权证号码', 20, '/^\\d+$/u', '^\\d+$', '产权证号码有误', 1, 0, 0, 2, '3212040220180002', null);
-INSERT INTO xonSchoolFormKey VALUES ('321204022018000203', replace(uuid(), '-', ''), 'idc', '产权人身份证', 'input', 'idcard', '输入产权人身份证号', 18, '/^\\d{17}[0-9X]$/u', '^\\d{17}[0-9X]$', '身份证号码有误', 1, 0, 0, 3, '3212040220180002', null);
-
-INSERT INTO xonSchoolFormKey VALUES ('321204022018000301', replace(uuid(), '-', ''), 'idc', '产权人身份证', 'input', 'idcard', '输入产权人身份证号', 18, '/^\\d{17}[0-9X]$/u', '^\\d{17}[0-9X]$', '身份证号码有误', 1, 0, 0, 1, '3212040220180003', null);
-INSERT INTO xonSchoolFormKey VALUES ('321204022018000302', replace(uuid(), '-', ''), 'htype', '产权证分类', 'picker', 'text', '产权证分类', 0, '/^\\d$/u', '^\\d$', '', 0, 0, 0, 2, '3212040220180003', '房产证#不动产证#集体土地使用证#契税发票');
-INSERT INTO xonSchoolFormKey VALUES ('321204022018000303', replace(uuid(), '-', ''), 'hhtype', '产权证分类', 'picker', 'text', '产权证分类', 0, '/^\\d$/u', '^\\d$', '', 0, 0, 0, 3, '3212040220180003', '房产证#不动产证#集体土地使用证#契税发票');
-
 INSERT INTO xonSchoolFormKey VALUES ('321204022018000101', replace(uuid(), '-', ''), 'name', '配偶姓名', 'input', 'text', '输入配偶姓名', 4, '/^[\\x{4e00}-\\x{9fa5}]{2,4}$/u', '^[\\u4e00-\\u9fa5]{2,4}$', '输入2-4个汉字', 1, 0, 0, 1, '3212040220180001', null);
-INSERT INTO xonSchoolFormKey VALUES ('321204022018000102', replace(uuid(), '-', ''), 'mobil', '手机号码', 'input', 'number', '输入配偶手机号码', 11, '/^\\d{11}$/u', '^\\d{11}$', '输入11位手机号码', 1, 0, 0, 2, '3212040220180001', null);
+INSERT INTO xonSchoolFormKey VALUES ('321204022018000102', replace(uuid(), '-', ''), 'mobil', '手机号码', 'input', 'number', '输入配偶手机号码', 11, '/^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[6-9])\\d{8}$/u', '^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[6-9])\\d{8}$', '输入11位手机号码', 1, 0, 0, 2, '3212040220180001', null);
+INSERT INTO xonSchoolFormKey VALUES ('321204022018000103', replace(uuid(), '-', ''), 'hhtype', '是否特长生', 'check', 'text', '是否择校生', 0, '/^\\d$/u', '^\\d$', '', 0, 0, 0, 3, '3212040220180001', 1);
+INSERT INTO xonSchoolFormKey VALUES ('321204022018000104', replace(uuid(), '-', ''), 'zhrep', '报名智慧班', 'check', 'text', '是否报名智慧班', 0, '/^\\d$/u', '^\\d$', '', 0, 0, 0, 4, '3212040220180001', 1);
+
+INSERT INTO xonSchoolFormKey VALUES ('321204022018000201', replace(uuid(), '-', ''), 'owner', '产权人姓名', 'input', 'text', '输入产权人姓名', 4, '/^[\\x{4e00}-\\x{9fa5}]{2,4}$/u', '^[\\u4e00-\\u9fa5]{2,4}$', '输入2-4个汉字', 1, 0, 0, 1, '3212040220180002', null);
+INSERT INTO xonSchoolFormKey VALUES ('321204022018000202', replace(uuid(), '-', ''), 'idcard', '产权人身份证', 'input', 'idcard', '输入产权人身份证号', 18, '/^\\d{17}[0-9X]$/u', '^\\d{17}[0-9X]$', '身份证号码有误', 1, 0, 0, 2, '3212040220180002', null);
+INSERT INTO xonSchoolFormKey VALUES ('321204022018000203', replace(uuid(), '-', ''), 'htype', '产权证分类', 'picker', 'text', '产权证分类', 0, '/^\\d$/u', '^\\d$', '', 0, 0, 0, 3, '3212040220180002', '房产证#不动产证#集体土地使用证#契税发票');
+INSERT INTO xonSchoolFormKey VALUES ('321204022018000204', replace(uuid(), '-', ''), 'no', '产权证编号', 'input', 'number', '输入产权证号码', 20, '/^\\d+$|^[\\x{4e00}-\\x{9fa5}]+$/u', '^\\d+$|^[\\u4e00-\\u9fa5]+$', '数字编号 或 汉字描述', 1, 0, 0, 4, '3212040220180002', null);
+INSERT INTO xonSchoolFormKey VALUES ('321204022018000205', replace(uuid(), '-', ''), 'name1', '父亲姓名', 'input', 'text', '输入父亲姓名', 20, '/^[\\x{4e00}-\\x{9fa5}]{2,4}$/u', '^[\\u4e00-\\u9fa5]{2,4}$', '输入2-4个汉字', 1, 0, 0, 5, '3212040220180002', null);
+INSERT INTO xonSchoolFormKey VALUES ('321204022018000206', replace(uuid(), '-', ''), 'mobil1', '父亲电话', 'input', 'number', '输入父亲手机号码', 11, '/^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[6-9])\\d{8}$/u', '^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[6-9])\\d{8}$', '输入11位数字号码', 1, 0, 0, 6, '3212040220180002', null);
+INSERT INTO xonSchoolFormKey VALUES ('321204022018000207', replace(uuid(), '-', ''), 'name2', '母亲姓名', 'input', 'text', '输入母亲姓名', 4, '/^[\\x{4e00}-\\x{9fa5}]{2,4}$/u', '^^[\\u4e00-\\u9fa5]{2,4}$', '输入2-4个汉字', 1, 0, 0, 7, '3212040220180002', null);
+INSERT INTO xonSchoolFormKey VALUES ('321204022018000208', replace(uuid(), '-', ''), 'mobil2', '母亲电话', 'input', 'number', '输入母亲手机号码', 11, '/^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[6-9])\\d{8}$/u', '^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[6-9])\\d{8}$', '输入11位数字号码', 1, 0, 0, 8, '3212040220180002', null);
+INSERT INTO xonSchoolFormKey VALUES ('321204022018000209', replace(uuid(), '-', ''), 'address', '家庭住址', 'input', 'text', '输入家庭住址', 20, '/^[a-zA-Z0-9\-#\\x{4e00}-\\x{9fa5}]{8,}$/u', '^[a-zA-Z0-9\-#\\u4e00-\\u9fa5]{8,}$', '至少8个汉字', 1, 0, 0, 9, '3212040220180002', null);
+
+
+INSERT INTO xonSchoolFormKey VALUES ('321204022018000301', replace(uuid(), '-', ''), 'owner', '产权人姓名', 'input', 'text', '输入产权人姓名', 4, '/^[\\x{4e00}-\\x{9fa5}]{2,4}$/u', '^[\\u4e00-\\u9fa5]{2,4}$', '输入2-4个汉字', 1, 0, 0, 1, '3212040220180003', null);
+INSERT INTO xonSchoolFormKey VALUES ('321204022018000302', replace(uuid(), '-', ''), 'idcard', '产权人身份证', 'input', 'idcard', '输入产权人身份证号', 18, '/^\\d{17}[0-9X]$/u', '^\\d{17}[0-9X]$', '身份证号码有误', 1, 0, 0, 2, '3212040220180003', null);
+INSERT INTO xonSchoolFormKey VALUES ('321204022018000303', replace(uuid(), '-', ''), 'htype', '产权证分类', 'picker', 'text', '产权证分类', 0, '/^\\d$/u', '^\\d$', '', 0, 0, 0, 3, '3212040220180003', '房产证#不动产证#集体土地使用证#契税发票');
+INSERT INTO xonSchoolFormKey VALUES ('321204022018000304', replace(uuid(), '-', ''), 'no', '产权证编号', 'input', 'number', '输入产权证号码', 20, '/^\\d+$|^[\\x{4e00}-\\x{9fa5}]+$/u', '^\\d+$|^[\\u4e00-\\u9fa5]+$', '数字编号 或 汉字描述', 1, 0, 0, 4, '3212040220180003', null);
+INSERT INTO xonSchoolFormKey VALUES ('321204022018000305', replace(uuid(), '-', ''), 'name1', '父亲姓名', 'input', 'text', '输入父亲姓名', 4, '/^[\\x{4e00}-\\x{9fa5}]{2,4}$/u', '^[\\u4e00-\\u9fa5]{2,4}$', '输入2-4个汉字', 1, 0, 0, 5, '3212040220180003', null);
+INSERT INTO xonSchoolFormKey VALUES ('321204022018000306', replace(uuid(), '-', ''), 'mobil1', '父亲电话', 'input', 'number', '输入父亲手机号码', 11, '/^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[6-9])\\d{8}$/u', '^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[6-9])\\d{8}$', '输入11位数字号码', 1, 0, 0, 6, '3212040220180003', null);
+INSERT INTO xonSchoolFormKey VALUES ('321204022018000307', replace(uuid(), '-', ''), 'idcard1', '父亲身份证号', 'input', 'idcard', '输入父亲身份证号', 18, '/^\\d{17}[0-9X]$/u', '^\\d{17}[0-9X]$', '身份证号码有误', 1, 0, 0, 7, '3212040220180003', null);
+INSERT INTO xonSchoolFormKey VALUES ('321204022018000308', replace(uuid(), '-', ''), 'name2', '母亲姓名', 'input', 'text', '输入母亲姓名', 4, '/^[\\x{4e00}-\\x{9fa5}]{2,4}$/u', '^^[\\u4e00-\\u9fa5]{2,4}$', '输入2-4个汉字', 1, 0, 0, 8, '3212040220180003', null);
+INSERT INTO xonSchoolFormKey VALUES ('321204022018000309', replace(uuid(), '-', ''), 'mobil2', '母亲电话', 'input', 'number', '输入母亲手机号码', 11, '/^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[6-9])\\d{8}$/u', '^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[6-9])\\d{8}$', '输入11位数字号码', 1, 0, 0, 9, '3212040220180003', null);
+INSERT INTO xonSchoolFormKey VALUES ('321204022018000310', replace(uuid(), '-', ''), 'idcard2', '母亲身份证号', 'input', 'idcard', '输入母亲身份证号', 18, '/^\\d{17}[0-9X]$/u', '^\\d{17}[0-9X]$', '身份证号码有误', 1, 0, 0, 10, '3212040220180003', null);
+INSERT INTO xonSchoolFormKey VALUES ('321204022018000311', replace(uuid(), '-', ''), 'address', '家庭住址', 'input', 'text', '输入家庭住址', 20, '/^[a-zA-Z0-9\-#\\x{4e00}-\\x{9fa5}]{8,}$/u', '^[a-zA-Z0-9\-#\\u4e00-\\u9fa5]{8,}$', '至少8个汉字', 1, 0, 0, 11, '3212040220180003', null);
+
 
 
 CREATE TABLE xonSchoolFormValue (
@@ -526,7 +550,7 @@ CREATE TABLE xonStudReg (
   user_id VARCHAR(36) NOT NULL,
   edu_type_id INT(11) NOT NULL,
   exam_user_id VARCHAR(36),
-  rexam_user_id VARCHAR(36),
+  confirm_user_id VARCHAR(36),
   PRIMARY KEY (child_id, edu_type_id),
   UNIQUE KEY uid (uid),
   FOREIGN KEY (child_id) REFERENCES xonChild(id),
@@ -1049,7 +1073,8 @@ AS
   FROM xonStudent a
   LEFT JOIN xonChild C2 on a.child_id = C2.id
   LEFT JOIN xonStep S on a.step_id = S.id
-  LEFT JOIN xonSchool S2 on S.sch_id = S2.id;
+  LEFT JOIN xonSchool S2 on S.sch_id = S2.id
+  ORDER BY a.id;
 
 /*外键约束开启*/
 SET FOREIGN_KEY_CHECKS = 1;

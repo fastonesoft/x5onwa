@@ -12,11 +12,10 @@ Page({
           success: (res) => {
             var uid = res.result
             x5on.postFormEx({
-              url: x5on.url.studexam,
+              url: x5on.url.studconfirm,
               data: { uid },
               success: function (result) {
                 var data = result.data
-                data.scanned = true
                 that.setData(data)
               }
             })
@@ -33,7 +32,7 @@ Page({
         var regged_stud_uid = that.data.regged_stud_uid
         var form_setted_uid = that.data.form_setted_uid
         x5on.postFormEx({
-          url: x5on.url.studexampass,
+          url: x5on.url.studconfirmpass,
           data: { regged_stud_uid, form_setted_uid },
           success: function (result) {
             var data = result.data
@@ -49,10 +48,9 @@ Page({
     x5on.check({
       success: () => {
         var regged_stud_uid = that.data.regged_stud_uid
-        var form_setted_uid = that.data.form_setted_uid
         x5on.postFormEx({
-          url: x5on.url.studexamcancel,
-          data: { regged_stud_uid, form_setted_uid },
+          url: x5on.url.studconfirmcancel,
+          data: { regged_stud_uid },
           success: function (result) {
             var data = result.data
             that.setData(data)
@@ -60,18 +58,5 @@ Page({
         })
       }
     })
-  },
-
-  nextClick: function (e) {
-    var data = {}
-    data.sch_name = ''
-    data.child_name = ''
-    data.form_name = ''
-    data.user_forms = []
-    data.can_show = false
-    data.scanned = false
-    data.passed = false
-    this.setData(data)
   }
-
 })
