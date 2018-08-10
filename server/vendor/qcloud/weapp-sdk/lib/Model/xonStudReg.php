@@ -32,7 +32,12 @@ class xonStudReg
     // 读取学校报名表格
     $current_year = 1;
     $app_name = 'regstud';
-    return dbs::select('xovSchoolForm', ['id', 'name'], compact('sch_id', 'app_name', 'current_year'));
+
+    $sch_reged = true;
+    $not_reg = false;
+    $not_added = true;
+    $forms = dbs::select('xovSchoolForm', ['id', 'name'], compact('sch_id', 'app_name', 'current_year'));
+    return compact('not_reg', 'not_added', 'sch_reged', 'forms');
   }
 
   // 临时只能报一个

@@ -38,5 +38,10 @@ Page({
         }
       })
     })
+  },
+
+  returnClick: function (e) {
+    wx.navigateBack()
   }
+
 })

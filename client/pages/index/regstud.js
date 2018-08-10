@@ -80,11 +80,8 @@ Page({
             url: x5on.url.regstudreg,
             success: function (result) {
               var data = result.data
-              data.not_reg = false
-              data.sch_reged = true
-              data.not_added = true
-              that.setData(data)
               console.log(data)
+              that.setData(data)
             }
           })
         }

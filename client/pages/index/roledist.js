@@ -39,7 +39,7 @@ Page({
     x5on.check({
       showError: true,
       success: () => x5on.checkForm(that, 0, 0, function () {
-        x5on.postForm({
+        x5on.postFormEx({
           url: x5on.url.roledist,
           data: e.detail.value,
           success: (result) => {
@@ -67,7 +67,7 @@ Page({
     var group_id = this.data.pickers[index].id
     that.setData({ pIndex: index, group_id: group_id });
     // 刷新数据
-    x5on.postForm({
+    x5on.postFormEx({
       url: x5on.url.roledistgroupuser,
       data: {group_id},
       success: (res) => {
@@ -80,7 +80,7 @@ Page({
     var that = this
     var value = e.detail.value
     if (value.user_id && value.group_id) {
-      x5on.postForm({
+      x5on.postFormEx({
         url: x5on.url.roledistupdate,
         data: value,
         success: (res) => {
@@ -102,7 +102,7 @@ Page({
     var that = this
     var uid = e.currentTarget.dataset.uid
     var index = e.currentTarget.dataset.index
-    x5on.postForm({
+    x5on.postFormEx({
       url: x5on.url.roledistdeleteuser,
       data: {uid},
       success: (res) => {

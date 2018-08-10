@@ -99,27 +99,29 @@ var doCheck = function (options) {
           // 检查登录是否过期
           wx.checkSession({
             success: function () {
-              // 执行回调
-              if (typeof options.success === 'function') options.success();
+              // 执行回调，返回用户信息
+              if (typeof options.success === 'function') options.success(session.userinfo);
             },
             fail: function () {
-              // 错误提示
-              if (options.showError) util.showModel('登录过期', '请转到“登录”页面登录');
               if (typeof options.fail === 'function') options.fail();
+              if (options.dontshow) return
+              util.showModel('登录过期', '请转到“登录”页面登录');
             },
           });
         } else {
-          // 错误提示
-          if (options.showError) util.showModel('授权失败', '请转到“登录”页面授权');
           if (typeof options.fail === 'function') options.fail();
+          if (options.dontshow) return
+          util.showModel('授权失败', '请转到“登录”页面授权');
         }
       }
     });
   } else {
-    if (options.showError) util.showModel('缓存过期', '请转到“登录”页面登录');
     if (typeof options.fail === 'function') options.fail();
+    if (options.dontshow) return
+    util.showModel('缓存过期', '请转到“登录”页面登录');
   }
 };
+
 /**
  * 关于错误代码
  * -1    ：   系统级出错代码，与登录有关，由系统检测
@@ -142,13 +144,15 @@ var doRequest = function (options) {
       } else {
         // 不为0给出错误提示
         if (typeof options.fail === 'function') options.fail()
-        util.showModel('请求失败', data.data);
+        if (options.dontshow) return
+        util.showModel('加载失败', data.data);
       }
     },
     fail: function (error) {
       wx.hideToast()
-      if (typeof options.fail === 'function') options.fail(error)
-      util.showModel('请求失败', error.message);
+      if (typeof options.fail === 'function') options.fail()
+      if (options.dontshow) return
+      util.showModel('请求失败', '确认网络是否畅通');
     }
   })
 };
@@ -163,7 +167,7 @@ var doRequestImage = function (options) {
     },
     fail: function (error) {
       if (typeof options.fail === 'function') options.fail(error)
-      util.showModel('请求失败', error.message);
+      util.showModel('请求失败', '确认网络是否畅通');
     }
   })
 };
@@ -361,6 +365,7 @@ module.exports = {
   checkInputEx: doCheckInputEx,
   checkForm: doCheckForm,
   checkFormEx: doCheckFormEx,
+  postForm: doPostFormEx,
   postFormEx: doPostFormEx,
   showError: doShowError,
   showSuccess: doSuccess,

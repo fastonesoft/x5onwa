@@ -1,10 +1,10 @@
 
 /*这句只能在测试阶段使用，运行阶段删除*/
-DROP DATABASE IF EXISTS cAuth;
-CREATE DATABASE IF NOT EXISTS cAuth DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-USE cAuth;
+DROP DATABASE IF EXISTS cAuth2;
+CREATE DATABASE IF NOT EXISTS cAuth2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+USE cAuth2;
 
-SET NAMES utf8;
+SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
 /*系统表*/
@@ -69,7 +69,7 @@ CREATE TABLE xonRole (
 
 INSERT INTO xonRole VALUES (1, replace(uuid(), '-', ''), 'userset', '用户设置', 1, 1);
 INSERT INTO xonRole VALUES (2, replace(uuid(), '-', ''), 'userchilds', '我的孩子', 1, 1);
-INSERT INTO xonRole VALUES (3, replace(uuid(), '-', ''), 'regstud', '新生报名', 1, 1);
+INSERT INTO xonRole VALUES (3, replace(uuid(), '-', ''), 'regstud', '新生注册', 1, 1);
 INSERT INTO xonRole VALUES (4, replace(uuid(), '-', ''), 'regexam', '报名审核', 0, 1);
 INSERT INTO xonRole VALUES (5, replace(uuid(), '-', ''), 'regconfirm', '确认审核', 0, 1);
 
@@ -474,24 +474,24 @@ CREATE TABLE xonSchoolFormKey (
 
 INSERT INTO xonSchoolFormKey VALUES ('321204022018000101', replace(uuid(), '-', ''), 'name', '配偶姓名', 'input', 'text', '输入配偶姓名', 4, '/^[\\x{4e00}-\\x{9fa5}]{2,4}$/u', '^[\\u4e00-\\u9fa5]{2,4}$', '输入2-4个汉字', 1, 0, 0, 1, '3212040220180001', null);
 INSERT INTO xonSchoolFormKey VALUES ('321204022018000102', replace(uuid(), '-', ''), 'mobil', '手机号码', 'input', 'number', '输入配偶手机号码', 11, '/^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[6-9])\\d{8}$/u', '^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[6-9])\\d{8}$', '输入11位手机号码', 1, 0, 0, 2, '3212040220180001', null);
-INSERT INTO xonSchoolFormKey VALUES ('321204022018000103', replace(uuid(), '-', ''), 'hhtype', '是否特长生', 'check', 'text', '是否择校生', 0, '/^\\d$/u', '^\\d$', '', 0, 0, 0, 3, '3212040220180001', 1);
-INSERT INTO xonSchoolFormKey VALUES ('321204022018000104', replace(uuid(), '-', ''), 'zhrep', '报名智慧班', 'check', 'text', '是否报名智慧班', 0, '/^\\d$/u', '^\\d$', '', 0, 0, 0, 4, '3212040220180001', 1);
+INSERT INTO xonSchoolFormKey VALUES ('321204022018000103', replace(uuid(), '-', ''), 'address', '家庭住址', 'input', 'text', '输入家庭住址', 30, '/^[a-zA-Z0-9\-#\\x{4e00}-\\x{9fa5}]{8,}$/u', '^[a-zA-Z0-9\-#\\u4e00-\\u9fa5]{8,}$', '至少8个汉字', 1, 0, 0, 3, '3212040220180001', null);
+INSERT INTO xonSchoolFormKey VALUES ('321204022018000104', replace(uuid(), '-', ''), 'hhtype', '是否特长生', 'check', 'text', '是否择校生', 0, '/^\\d$/u', '^\\d$', '', 0, 0, 0, 4, '3212040220180001', 1);
 
 INSERT INTO xonSchoolFormKey VALUES ('321204022018000201', replace(uuid(), '-', ''), 'owner', '产权人姓名', 'input', 'text', '输入产权人姓名', 4, '/^[\\x{4e00}-\\x{9fa5}]{2,4}$/u', '^[\\u4e00-\\u9fa5]{2,4}$', '输入2-4个汉字', 1, 0, 0, 1, '3212040220180002', null);
 INSERT INTO xonSchoolFormKey VALUES ('321204022018000202', replace(uuid(), '-', ''), 'idcard', '产权人身份证', 'input', 'idcard', '输入产权人身份证号', 18, '/^\\d{17}[0-9X]$/u', '^\\d{17}[0-9X]$', '身份证号码有误', 1, 0, 0, 2, '3212040220180002', null);
 INSERT INTO xonSchoolFormKey VALUES ('321204022018000203', replace(uuid(), '-', ''), 'htype', '产权证分类', 'picker', 'text', '产权证分类', 0, '/^\\d$/u', '^\\d$', '', 0, 0, 0, 3, '3212040220180002', '房产证#不动产证#集体土地使用证#契税发票');
-INSERT INTO xonSchoolFormKey VALUES ('321204022018000204', replace(uuid(), '-', ''), 'no', '产权证编号', 'input', 'number', '输入产权证号码', 20, '/^\\d+$|^[\\x{4e00}-\\x{9fa5}]+$/u', '^\\d+$|^[\\u4e00-\\u9fa5]+$', '数字编号 或 汉字描述', 1, 0, 0, 4, '3212040220180002', null);
+INSERT INTO xonSchoolFormKey VALUES ('321204022018000204', replace(uuid(), '-', ''), 'no', '产权证编号', 'input', 'text', '输入产权证号码', 20, '/^\\d+$|^[\\x{4e00}-\\x{9fa5}]+$/u', '^\\d+$|^[\\u4e00-\\u9fa5]+$', '数字编号 或 汉字描述', 1, 0, 0, 4, '3212040220180002', null);
 INSERT INTO xonSchoolFormKey VALUES ('321204022018000205', replace(uuid(), '-', ''), 'name1', '父亲姓名', 'input', 'text', '输入父亲姓名', 20, '/^[\\x{4e00}-\\x{9fa5}]{2,4}$/u', '^[\\u4e00-\\u9fa5]{2,4}$', '输入2-4个汉字', 1, 0, 0, 5, '3212040220180002', null);
 INSERT INTO xonSchoolFormKey VALUES ('321204022018000206', replace(uuid(), '-', ''), 'mobil1', '父亲电话', 'input', 'number', '输入父亲手机号码', 11, '/^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[6-9])\\d{8}$/u', '^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[6-9])\\d{8}$', '输入11位数字号码', 1, 0, 0, 6, '3212040220180002', null);
 INSERT INTO xonSchoolFormKey VALUES ('321204022018000207', replace(uuid(), '-', ''), 'name2', '母亲姓名', 'input', 'text', '输入母亲姓名', 4, '/^[\\x{4e00}-\\x{9fa5}]{2,4}$/u', '^^[\\u4e00-\\u9fa5]{2,4}$', '输入2-4个汉字', 1, 0, 0, 7, '3212040220180002', null);
 INSERT INTO xonSchoolFormKey VALUES ('321204022018000208', replace(uuid(), '-', ''), 'mobil2', '母亲电话', 'input', 'number', '输入母亲手机号码', 11, '/^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[6-9])\\d{8}$/u', '^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[6-9])\\d{8}$', '输入11位数字号码', 1, 0, 0, 8, '3212040220180002', null);
-INSERT INTO xonSchoolFormKey VALUES ('321204022018000209', replace(uuid(), '-', ''), 'address', '家庭住址', 'input', 'text', '输入家庭住址', 20, '/^[a-zA-Z0-9\-#\\x{4e00}-\\x{9fa5}]{8,}$/u', '^[a-zA-Z0-9\-#\\u4e00-\\u9fa5]{8,}$', '至少8个汉字', 1, 0, 0, 9, '3212040220180002', null);
+INSERT INTO xonSchoolFormKey VALUES ('321204022018000209', replace(uuid(), '-', ''), 'address', '家庭住址', 'input', 'text', '输入家庭住址', 30, '/^[a-zA-Z0-9\-#\\x{4e00}-\\x{9fa5}]{8,}$/u', '^[a-zA-Z0-9\-#\\u4e00-\\u9fa5]{8,}$', '至少8个汉字', 1, 0, 0, 9, '3212040220180002', null);
 
 
 INSERT INTO xonSchoolFormKey VALUES ('321204022018000301', replace(uuid(), '-', ''), 'owner', '产权人姓名', 'input', 'text', '输入产权人姓名', 4, '/^[\\x{4e00}-\\x{9fa5}]{2,4}$/u', '^[\\u4e00-\\u9fa5]{2,4}$', '输入2-4个汉字', 1, 0, 0, 1, '3212040220180003', null);
 INSERT INTO xonSchoolFormKey VALUES ('321204022018000302', replace(uuid(), '-', ''), 'idcard', '产权人身份证', 'input', 'idcard', '输入产权人身份证号', 18, '/^\\d{17}[0-9X]$/u', '^\\d{17}[0-9X]$', '身份证号码有误', 1, 0, 0, 2, '3212040220180003', null);
 INSERT INTO xonSchoolFormKey VALUES ('321204022018000303', replace(uuid(), '-', ''), 'htype', '产权证分类', 'picker', 'text', '产权证分类', 0, '/^\\d$/u', '^\\d$', '', 0, 0, 0, 3, '3212040220180003', '房产证#不动产证#集体土地使用证#契税发票');
-INSERT INTO xonSchoolFormKey VALUES ('321204022018000304', replace(uuid(), '-', ''), 'no', '产权证编号', 'input', 'number', '输入产权证号码', 20, '/^\\d+$|^[\\x{4e00}-\\x{9fa5}]+$/u', '^\\d+$|^[\\u4e00-\\u9fa5]+$', '数字编号 或 汉字描述', 1, 0, 0, 4, '3212040220180003', null);
+INSERT INTO xonSchoolFormKey VALUES ('321204022018000304', replace(uuid(), '-', ''), 'no', '产权证编号', 'input', 'text', '输入产权证号码', 20, '/^\\d+$|^[\\x{4e00}-\\x{9fa5}]+$/u', '^\\d+$|^[\\u4e00-\\u9fa5]+$', '数字编号 或 汉字描述', 1, 0, 0, 4, '3212040220180003', null);
 INSERT INTO xonSchoolFormKey VALUES ('321204022018000305', replace(uuid(), '-', ''), 'name1', '父亲姓名', 'input', 'text', '输入父亲姓名', 4, '/^[\\x{4e00}-\\x{9fa5}]{2,4}$/u', '^[\\u4e00-\\u9fa5]{2,4}$', '输入2-4个汉字', 1, 0, 0, 5, '3212040220180003', null);
 INSERT INTO xonSchoolFormKey VALUES ('321204022018000306', replace(uuid(), '-', ''), 'mobil1', '父亲电话', 'input', 'number', '输入父亲手机号码', 11, '/^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[6-9])\\d{8}$/u', '^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[6-9])\\d{8}$', '输入11位数字号码', 1, 0, 0, 6, '3212040220180003', null);
 INSERT INTO xonSchoolFormKey VALUES ('321204022018000307', replace(uuid(), '-', ''), 'idcard1', '父亲身份证号', 'input', 'idcard', '输入父亲身份证号', 18, '/^\\d{17}[0-9X]$/u', '^\\d{17}[0-9X]$', '身份证号码有误', 1, 0, 0, 7, '3212040220180003', null);
@@ -571,6 +571,8 @@ CREATE TABLE xonStudent (
   FOREIGN KEY (step_id) REFERENCES xonStep(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='录取学生';
 
+
+
 /**
   学生与学校（学校、年度、级、年级、班级）关系表
   存在外键引用的，尽量使用数值型作主键
@@ -602,6 +604,109 @@ INSERT INTO xonYear VALUES (2015, replace(uuid(), '-', ''), 0);
 INSERT INTO xonYear VALUES (2016, replace(uuid(), '-', ''), 0);
 INSERT INTO xonYear VALUES (2017, replace(uuid(), '-', ''), 0);
 INSERT INTO xonYear VALUES (2018, replace(uuid(), '-', ''), 1);
+
+
+
+
+/**
+  学生、家长相关表格
+ */
+CREATE TABLE xonChild (
+  id VARCHAR(20) NOT NULL,  /* 用身份证号 - 不可变更 */
+  uid VARCHAR(36) NOT NULL,
+  idc VARCHAR(20) NOT NULL,
+  name VARCHAR(20) NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY uid (uid),
+  UNIQUE KEY idc (idc)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='孩子表';
+
+
+
+CREATE TABLE xonRelation (
+  id INT(11) NOT NULL,
+  uid VARCHAR(36) NOT NULL,
+  name VARCHAR(20) NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY uid (uid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='关系表';
+
+INSERT INTO xonRelation VALUES (1, replace(uuid(), '-', ''), '爸爸');
+INSERT INTO xonRelation VALUES (2, replace(uuid(), '-', ''), '妈妈');
+INSERT INTO xonRelation VALUES (3, replace(uuid(), '-', ''), '亲戚');
+INSERT INTO xonRelation VALUES (4, replace(uuid(), '-', ''), '朋友');
+
+CREATE TABLE xonParentChilds (
+  uid VARCHAR(36) NOT NULL,
+  user_id VARCHAR(36) NOT NULL,
+  child_id VARCHAR(20) NOT NULL,
+  relation_id INT(11) NOT NULL,
+  pay_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  pay_day INT(11) NOT NULL DEFAULT 0,
+  PRIMARY KEY (uid),
+  UNIQUE KEY user_child (user_id, child_id),
+  UNIQUE KEY child_relation (child_id, relation_id),
+  FOREIGN KEY (user_id) REFERENCES xonUser(id),
+  FOREIGN KEY (child_id) REFERENCES xonChild(id),
+  FOREIGN KEY (relation_id) REFERENCES xonRelation(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='家长孩子';
+
+/**
+  可变属性记录表 - 定制表格
+ */
+CREATE TABLE xonParentCustom (
+  id VARCHAR(15) NOT NULL,  /* 学校编号 + 4位流水号 => sch_id + code */
+  uid VARCHAR(36) NOT NULL,
+  code VARCHAR(5) NOT NULL,
+  name VARCHAR(20) NOT NULL,  /* 定制表格分类名称 */
+  type_id INT(11) NOT NULL,
+  sch_id VARCHAR(10) NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY uid (uid),
+  FOREIGN KEY (type_id) REFERENCES xonType(id),
+  FOREIGN KEY (sch_id) REFERENCES xonSchool(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='定制表格名称';
+
+INSERT INTO xonParentCustom VALUES ('321204020001', replace(uuid(), '-', ''), '0001', '报名信息', 1, '32120402');
+
+/**
+  可变属性记录表 - 定制字段
+ */
+CREATE TABLE xonParentCustProp (
+  id VARCHAR(20) NOT NULL,  /* 定制表格编号 + 流水号 => custom_id + code */
+  uid VARCHAR(36) NOT NULL,
+  code VARCHAR(2) NOT NULL,
+  name VARCHAR(20) NOT NULL,
+  data_required BOOLEAN NOT NULL,  /* 是否必填 */
+  data_regex VARCHAR(200) NOT NULL,   /* 数据正则 */
+  custom_id VARCHAR(15) NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY uid (uid),
+  FOREIGN KEY (custom_id) REFERENCES xonParentCustom(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='定制表格字段';
+
+INSERT INTO xonParentCustProp VALUES ('32120402000101', replace(uuid(), '-', ''), '01', '身份证号', 1, '', '321204020001');
+
+
+/**
+  可变属性记录表 - 定制表格数据
+ */
+CREATE TABLE xonParentCustValue (
+  uid VARCHAR(36) NOT NULL,
+  prop_id VARCHAR(20) NOT NULL,
+  user_id VARCHAR(36) NOT NULL,
+  value VARCHAR(200) NOT NULL,
+  PRIMARY KEY (uid),
+  FOREIGN KEY (prop_id) REFERENCES xonParentCustProp(id),
+  FOREIGN KEY (user_id) REFERENCES xonUser(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='定制表格数据';
+
+INSERT INTO xonParentCustValue VALUES (replace(uuid(), '-', ''), '32120402000101', 'o47ZhvzWPWSNS26vG_45Fuz5JMZk', '32102819790209301X');
+
+
+
+
+
 
 /**
   分级编号 定义规则：
@@ -772,18 +877,17 @@ INSERT INTO xonStudOut VALUES (99, replace(uuid(), '-', ''), '临时', 1, 0);
 
 /** 年级学生，报名审核的时候根据家长登记的学生信息，满足条件添加 **/
 CREATE TABLE xonGradeStud (
-  id VARCHAR(22) NOT NULL,  /* 年级编号grade_id + 重编的序号4 */
   uid VARCHAR(36) NOT NULL,
   grade_id VARCHAR(18) NOT NULL,
   cls_id VARCHAR(20) NOT NULL,
-  stud_id VARCHAR(20) NOT NULL,
+  stud_id VARCHAR(20) NOT NULL,   /* 录取编号 */
   stud_type_id INT(11) NOT NULL,  /* 学籍状态：应届生、往届生 */
   stud_come_id INT(11) NOT NULL,  /* 学籍办理信息 */
   in_sch BOOLEAN NOT NULL,
   auth_stud BOOLEAN NOT NULL,  /* 是否指标生 */
   same_group VARCHAR(36),  /* 同组标志 */
   stud_code VARCHAR(36),  /* 学籍号，应届生有，往届生无 */
-  PRIMARY KEY (id),
+  PRIMARY KEY (grade_id, stud_id),
   UNIQUE KEY uid (uid),
   FOREIGN KEY (grade_id) REFERENCES xonGrade(id),
   FOREIGN KEY (cls_id) REFERENCES xonClass(id),
@@ -792,131 +896,94 @@ CREATE TABLE xonGradeStud (
   FOREIGN KEY (stud_come_id) REFERENCES xonStudCome(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='年级学生';
 
-/** 年级学生变更 **/
-CREATE TABLE xonGradeStudOut (
-  uid VARCHAR(36) NOT NULL,
-  grade_stud_id VARCHAR(22) NOT NULL,
-  stud_out_id INT(11) NOT NULL,
-  begin_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,  /* 手续开启时间 */
-  end_time INT(11) NOT NULL DEFAULT 0,  /* 多长时间到期提醒 */
-  done BOOLEAN NOT NULL DEFAULT 0,
-  memo VARCHAR(36) DEFAULT NULL,
-  PRIMARY KEY (uid),
-  FOREIGN KEY (grade_stud_id) REFERENCES xonGradeStud(id),
-  FOREIGN KEY (stud_out_id) REFERENCES xonStudOut(id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='年级学生变更';
 
 
-
-
-
-/**
-  学生、家长相关表格
- */
-CREATE TABLE xonChild (
-  id VARCHAR(20) NOT NULL,  /* 用身份证号 - 不可变更 */
-  uid VARCHAR(36) NOT NULL,
-  idc VARCHAR(20) NOT NULL,
-  name VARCHAR(20) NOT NULL,
-  PRIMARY KEY (id),
-  UNIQUE KEY uid (uid),
-  UNIQUE KEY idc (idc)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='孩子表';
-
-CREATE TABLE xonRelation (
+CREATE TABLE xonKaoType (
   id INT(11) NOT NULL,
   uid VARCHAR(36) NOT NULL,
   name VARCHAR(20) NOT NULL,
   PRIMARY KEY (id),
   UNIQUE KEY uid (uid)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='关系表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='考试分类';
 
-INSERT INTO xonRelation VALUES (1, replace(uuid(), '-', ''), '爸爸');
-INSERT INTO xonRelation VALUES (2, replace(uuid(), '-', ''), '妈妈');
-INSERT INTO xonRelation VALUES (3, replace(uuid(), '-', ''), '亲戚');
-INSERT INTO xonRelation VALUES (4, replace(uuid(), '-', ''), '朋友');
+INSERT INTO xonKaoType VALUES (1, replace(uuid(), '-', ''), '测试');
+INSERT INTO xonKaoType VALUES (2, replace(uuid(), '-', ''), '月考');
+INSERT INTO xonKaoType VALUES (3, replace(uuid(), '-', ''), '统考');
+INSERT INTO xonKaoType VALUES (4, replace(uuid(), '-', ''), '调研');
+INSERT INTO xonKaoType VALUES (5, replace(uuid(), '-', ''), '中考');
+INSERT INTO xonKaoType VALUES (6, replace(uuid(), '-', ''), '高考');
 
-CREATE TABLE xonParentChilds (
+CREATE TABLE xonTerm (
+  id INT(11) NOT NULL,
   uid VARCHAR(36) NOT NULL,
-  user_id VARCHAR(36) NOT NULL,
-  child_id VARCHAR(20) NOT NULL,
-  relation_id INT(11) NOT NULL,
-  pay_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  pay_day INT(11) NOT NULL DEFAULT 0,
-  PRIMARY KEY (uid),
-  UNIQUE KEY user_child (user_id, child_id),
-  UNIQUE KEY child_relation (child_id, relation_id),
-  FOREIGN KEY (user_id) REFERENCES xonUser(id),
-  FOREIGN KEY (child_id) REFERENCES xonChild(id),
-  FOREIGN KEY (relation_id) REFERENCES xonRelation(id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='家长孩子';
-
-/**
-  可变属性记录表 - 定制表格
- */
-CREATE TABLE xonParentCustom (
-  id VARCHAR(15) NOT NULL,  /* 学校编号 + 4位流水号 => sch_id + code */
-  uid VARCHAR(36) NOT NULL,
-  code VARCHAR(5) NOT NULL,
-  name VARCHAR(20) NOT NULL,  /* 定制表格分类名称 */
-  type_id INT(11) NOT NULL,
-  sch_id VARCHAR(10) NOT NULL,
-  PRIMARY KEY (id),
-  UNIQUE KEY uid (uid),
-  FOREIGN KEY (type_id) REFERENCES xonType(id),
-  FOREIGN KEY (sch_id) REFERENCES xonSchool(id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='定制表格名称';
-
-INSERT INTO xonParentCustom VALUES ('321204020001', replace(uuid(), '-', ''), '0001', '报名信息', 1, '32120402');
-
-/**
-  可变属性记录表 - 定制字段
- */
-CREATE TABLE xonParentCustProp (
-  id VARCHAR(20) NOT NULL,  /* 定制表格编号 + 流水号 => custom_id + code */
-  uid VARCHAR(36) NOT NULL,
-  code VARCHAR(2) NOT NULL,
   name VARCHAR(20) NOT NULL,
-  data_required BOOLEAN NOT NULL,  /* 是否必填 */
-  data_regex VARCHAR(200) NOT NULL,   /* 数据正则 */
-  custom_id VARCHAR(15) NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY uid (uid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学期设置';
+
+INSERT INTO xonTerm VALUES (1, replace(uuid(), '-', ''), '第一学期');
+INSERT INTO xonTerm VALUES (2, replace(uuid(), '-', ''), '第二学期');
+
+CREATE TABLE xonKao (
+  id VARCHAR(20) NOT NULL,
+  uid VARCHAR(36) NOT NULL,
+  name VARCHAR(20) NOT NULL,
+  grade_id VARCHAR(18) NOT NULL,
+  term_id INT(11) NOT NULL,
+  type_id INT(11) NOT NULL,
+  code INT(11) NOT NULL,
+  summed BOOLEAN NOT NULL,
   PRIMARY KEY (id),
   UNIQUE KEY uid (uid),
-  FOREIGN KEY (custom_id) REFERENCES xonParentCustom(id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='定制表格字段';
+  FOREIGN KEY (grade_id) REFERENCES xonGrade(id),
+  FOREIGN KEY (term_id) REFERENCES xonTerm(id),
+  FOREIGN KEY (type_id) REFERENCES xonKaoType(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='考试安排';
 
-INSERT INTO xonParentCustProp VALUES ('32120402000101', replace(uuid(), '-', ''), '01', '身份证号', 1, '', '321204020001');
+INSERT INTO xonKao VALUES ('3212040220160901', replace(uuid(), '-', ''), '分班', '32120402201609', 1, 1, 1, 0);
+INSERT INTO xonKao VALUES ('3212040220170801', replace(uuid(), '-', ''), '分班', '32120402201708', 1, 1, 1, 0);
+INSERT INTO xonKao VALUES ('3212040220180701', replace(uuid(), '-', ''), '分班', '32120402201807', 1, 1, 1, 0);
 
 
-/**
-  可变属性记录表 - 定制表格数据
- */
-CREATE TABLE xonParentCustValue (
+CREATE TABLE xonKaoStud (
+  id VARCHAR(28) NOT NULL,  /* kao_id + kao_room + kao_seat */
   uid VARCHAR(36) NOT NULL,
-  prop_id VARCHAR(20) NOT NULL,
-  user_id VARCHAR(36) NOT NULL,
-  value VARCHAR(200) NOT NULL,
-  PRIMARY KEY (uid),
-  FOREIGN KEY (prop_id) REFERENCES xonParentCustProp(id),
-  FOREIGN KEY (user_id) REFERENCES xonUser(id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='定制表格数据';
+  kao_id VARCHAR(20) NOT NULL,
+  stud_id VARCHAR(20) NOT NULL,
+  kao_room VARCHAR(4) NOT NULL,
+  kao_seat VARCHAR(4) NOT NULL,
+  kao_num VARCHAR(20) NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY uid (uid),
+  FOREIGN KEY (kao_id) REFERENCES xonKao(id),
+  FOREIGN KEY (stud_id) REFERENCES xonStudent(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='考试学生';
 
-INSERT INTO xonParentCustValue VALUES (replace(uuid(), '-', ''), '32120402000101', 'o47ZhvzWPWSNS26vG_45Fuz5JMZk', '32102819790209301X');
+CREATE TABLE xonKaoSub (
+  id VARCHAR(20) NOT NULL,
+  uid VARCHAR(36) NOT NULL,
+  kao_id VARCHAR(20) NOT NULL,
+  sub_id INT(11) NOT NULL,
+  max_value INT(11) NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY uid (uid),
+  FOREIGN KEY (kao_id) REFERENCES xonKao(id),
+  FOREIGN KEY (sub_id) REFERENCES xonSub(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='考试学科';
 
+CREATE TABLE xonKaoScore (
+  uid VARCHAR(36) NOT NULL,
+  kao_stud_id VARCHAR(28) NOT NULL,
+  sub_id INT(11) NOT NULL,
+  value DECIMAL(10,1) NOT NULL,
+  cls_order DECIMAL(10,1) NOT NULL DEFAULT 0.0,
+  grd_order DECIMAL(10,1) NOT NULL DEFAULT 0.0,
+  PRIMARY KEY (kao_stud_id, sub_id),
+  UNIQUE KEY uid (uid),
+  FOREIGN KEY (sub_id) REFERENCES xonSub(id),
+  FOREIGN KEY (kao_stud_id) REFERENCES xonKaoStud(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='考试成绩';
 
-
-
-
-
-
-/**
-  临时错误存放，调试用
- */
-CREATE TABLE xonError (
-  id INT(11) NOT NULL AUTO_INCREMENT,
-  message VARCHAR(2048),
-  PRIMARY KEY (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='错误输出检测';
 
 /*
 分级数据

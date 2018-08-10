@@ -63,4 +63,9 @@
       <view class="weui-cell__ft">{{item.relation_name}}</view>
     </view>
   </view>
+  <view class="x5ui-half-btn">
+    <view class="weui-btn-area">
+      <button type="primary" bindtap="returnClick">返回</button>
+    </view>
+  </view>
 </block>

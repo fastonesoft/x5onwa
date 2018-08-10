@@ -15,7 +15,6 @@ Page({
     var that = this
     // 检测登录
     x5on.check({
-      showError: true,
       success: () => {
         // 执行查询
         x5on.request({

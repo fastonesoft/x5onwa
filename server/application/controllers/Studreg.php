@@ -14,8 +14,8 @@ class Studreg extends CI_Controller {
         $sch_id = $param['sch_id'];
         $child_id = $param['child_id'];
         $edu_type_id = $param['edu_type_id'];
-        $forms = Model\xonStudReg::regStud($user_id, $child_id, $sch_id, $edu_type_id);
-        $result = compact('forms');
+        $result = Model\xonStudReg::regStud($user_id, $child_id, $sch_id, $edu_type_id);
+
         // 正文内容
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {

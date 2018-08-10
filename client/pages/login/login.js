@@ -6,43 +6,23 @@ var x5on = require('../x5on.js')
 
 var app = getApp()
 Page({
-  data: {
-
-  },
 
   onShow: function () {
     var that = this
     x5on.check({
-      success: function () {
-        const session = qcloud.Session.get()
-        var userinfor = session ? session.userinfo : null
-        var logged = session ? true : false
-        var notlogged = !logged
-        // 未登录，即出
-        if (notlogged) return
+      dontshow: true,
+      success: function (userinfor) {
+        var logged = true
+        var notlogged = false
         // 个人信息
         x5on.request({
-          showError: false,
+          dontshow: true,
           url: x5on.url.userset,
           success: function (result) {
             var items = result.data.data
             var inforchecked = result.data.checked
             var notchecked = !inforchecked
             that.setData({ items, inforchecked, notchecked, logged, notlogged, userinfor })
-          },
-          fail: function () {
-            that.setData({ logged: false, notlogged: true, userinfor: null })
-          }
-        });
-        // 孩子信息
-        x5on.request({
-          showError: false,
-          url: x5on.url.parentchilds,
-          success: function (result) {
-            var childs = result.data
-            var mychildShow = childs.length > 0
-            var canaddChild = childs.length < 1
-            that.setData({ childs, mychildShow, canaddChild })
           },
           fail: function () {
             that.setData({ logged: false, notlogged: true, userinfor: null })
@@ -85,16 +65,6 @@ Page({
         that.setData({ logged: false, notlogged: true, userinfor: null })
       }
     });
-  },
-
-  canScan: function () {
-    // 只允许从相机扫码
-    wx.scanCode({
-      onlyFromCamera: true,
-      success: (res) => {
-        console.log(res)
-      }
-    })
   },
 
   // 上传图片接口

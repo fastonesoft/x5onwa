@@ -39,7 +39,7 @@ Page({
 
   rolegroupSubmit: function (e) {
     // 不需要检测
-    x5on.postForm({
+    x5on.postFormEx({
       url: x5on.url.rolegroupupdate,
       data: e.detail.value,
       success: (res) => {
