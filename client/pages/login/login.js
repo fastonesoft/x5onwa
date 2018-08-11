@@ -8,7 +8,7 @@ var app = getApp()
 Page({
 
   onShow: function () {
-    var that = this
+    var that = this    
     x5on.check({
       dontshow: true,
       success: function (userinfor) {

@@ -145,7 +145,12 @@ var doRequest = function (options) {
         // 不为0给出错误提示
         if (typeof options.fail === 'function') options.fail()
         if (options.dontshow) return
-        util.showModel('加载失败', data.data);
+        // 用页面错误提示
+        if (options.that) {
+          doShowError(options.that, data.data)
+        } else {
+          util.showModel('加载失败', data.data);
+        }
       }
     },
     fail: function (error) {
@@ -342,7 +347,12 @@ var doPostFormEx = function (options) {
       } else {
         // 不为0给出错误提示
         if (typeof options.fail === 'function') options.fail()
-        util.showModel('请求失败', data.data);
+        // 用页面错误提示
+        if (options.that) {
+          doShowError(options.that, data.data)
+        } else {
+          util.showModel('请求失败', data.data);
+        }
       }
     },
     fail: function (error) {

@@ -984,6 +984,11 @@ CREATE TABLE xonKaoScore (
   FOREIGN KEY (kao_stud_id) REFERENCES xonKaoStud(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='考试成绩';
 
+CREATE TABLE xonStudMove (
+  kao_stud_id VARCHAR(28) NOT NULL,
+  request_user_id VARCHAR(36) NOT NULL,
+  cls_id VARCHAR(20) NOT NULL,
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学生调动';
 
 /*
 分级数据
