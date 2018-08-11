@@ -13,7 +13,7 @@
         <input class="weui-input" placeholder="输入老师姓名" name="name" confirm-type="done" type="text" maxlength="4" data-reg="^[\\u4e00-\\u9fa5]{2,4}$" data-index="0" data-message="教师姓名有误！" bindblur="checkInput"/>
       </view>
       <view class="weui-cell__ft">
-        <button type="primary" form-type="submit">查询</button>
+        <button type="normal" form-type="submit">查询</button>
       </view>
     </view>
   </view>
