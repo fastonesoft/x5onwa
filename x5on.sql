@@ -81,9 +81,11 @@ INSERT INTO xonRole VALUES (22, replace(uuid(), '-', ''), 'students', '学生名
 INSERT INTO xonRole VALUES (41, replace(uuid(), '-', ''), 'mystud', '我的学生', 0, 4);
 INSERT INTO xonRole VALUES (42, replace(uuid(), '-', ''), 'myclass', '我的班级', 0, 4);
 INSERT INTO xonRole VALUES (43, replace(uuid(), '-', ''), 'myadjust', '分班调整', 0, 4);
-INSERT INTO xonRole VALUES (44, replace(uuid(), '-', ''), 'mydivision', '班级分管', 0, 4);
-INSERT INTO xonRole VALUES (45, replace(uuid(), '-', ''), 'mytuning', '分班微调', 0, 4);
-INSERT INTO xonRole VALUES (46, replace(uuid(), '-', ''), 'mysameset', '同班设置', 0, 4);
+INSERT INTO xonRole VALUES (44, replace(uuid(), '-', ''), 'myexchange', '交换名单', 0, 4);
+INSERT INTO xonRole VALUES (45, replace(uuid(), '-', ''), 'mydivision', '班级分管', 0, 4);
+INSERT INTO xonRole VALUES (46, replace(uuid(), '-', ''), 'mytuning', '分班微调', 0, 4);
+INSERT INTO xonRole VALUES (47, replace(uuid(), '-', ''), 'mysameset', '同班设置', 0, 4);
+INSERT INTO xonRole VALUES (48, replace(uuid(), '-', ''), 'myrename', '班号变更', 0, 4);
 
 
 INSERT INTO xonRole VALUES (81, replace(uuid(), '-', ''), 'schcode', '编码设置', 0, 9);
@@ -177,6 +179,8 @@ INSERT INTO xonGroupRole VALUES (99, 43, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (99, 44, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (99, 45, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (99, 46, replace(uuid(), '-', ''));
+INSERT INTO xonGroupRole VALUES (99, 47, replace(uuid(), '-', ''));
+INSERT INTO xonGroupRole VALUES (99, 48, replace(uuid(), '-', ''));
 
 
 INSERT INTO xonGroupRole VALUES (99, 81, replace(uuid(), '-', ''));

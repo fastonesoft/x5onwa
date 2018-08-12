@@ -14,6 +14,8 @@
     "pages/index/userset",
     "pages/index/userchilds",
 
+    "pages/index/myrename",
+    "pages/index/myexchange",
     "pages/index/mysameset",
     "pages/index/mytuning",
     "pages/index/mydivision",

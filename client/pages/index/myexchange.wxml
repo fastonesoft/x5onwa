@@ -1,0 +1,55 @@
+<!--pages/index/myexchange.wxml-->
+<view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
+
+<block wx:if="{{1}}">
+  <view class="weui-cells__title">扫码设置</view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_switch">
+      <view class="weui-cell__bd">同性调动</view>
+      <view class="weui-cell__ft">
+        <switch name="{{item.uid}}" checked="true"/>
+      </view>
+    </view>
+  </view>
+
+      <view class="x5ui-half-btn">
+        <view class="weui-btn-area">
+          <button type="primary" form-type="submit">学生识别</button>
+        </view>
+      </view>
+
+</block>
+
+
+<block wx:if="{{1}}">
+<view class="weui-panel weui-panel_access" wx:if="{{1}}">
+  <view class="weui-panel__hd">调动列表</view>
+  <view class="weui-panel__bd">
+    <view class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+        <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+            <image class="weui-media-box__thumb" src="../../images/head/teachm.png" />
+        </view>
+        <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+            <view class="weui-media-box__title">学生男</view>
+            <view class="weui-media-box__desc">性别：男，原班级：11班</view>
+            <view class="weui-media-box__desc">总分：333</view>
+        </view>
+    </view>
+    <view class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+        <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+            <image class="weui-media-box__thumb" src="../../images/head/teachw.png" />
+        </view>
+        <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+            <view class="weui-media-box__title">学生女</view>
+            <view class="weui-media-box__desc">菩萨顶霸</view>
+        </view>
+    </view>     
+  </view>
+</view>
+
+      <view class="x5ui-half-btn">
+        <view class="weui-btn-area">
+          <button type="primary" form-type="submit">关闭</button>
+        </view>
+      </view>
+</block>
