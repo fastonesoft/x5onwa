@@ -106,9 +106,9 @@ CREATE TABLE xonGroup (
 INSERT INTO xonGroup VALUES (1, replace(uuid(), '-', ''), '临时用户');
 INSERT INTO xonGroup VALUES (2, replace(uuid(), '-', ''), '学生家长');
 INSERT INTO xonGroup VALUES (3, replace(uuid(), '-', ''), '科任老师');
-INSERT INTO xonGroup VALUES (4, replace(uuid(), '-', ''), '班级主管');
-INSERT INTO xonGroup VALUES (5, replace(uuid(), '-', ''), '学科主管');
-INSERT INTO xonGroup VALUES (6, replace(uuid(), '-', ''), '年级主管');
+INSERT INTO xonGroup VALUES (4, replace(uuid(), '-', ''), '班主任');
+INSERT INTO xonGroup VALUES (5, replace(uuid(), '-', ''), '年管会');
+INSERT INTO xonGroup VALUES (6, replace(uuid(), '-', ''), '教学处');
 INSERT INTO xonGroup VALUES (7, replace(uuid(), '-', ''), '学校管理');
 INSERT INTO xonGroup VALUES (8, replace(uuid(), '-', ''), '集团管理');
 INSERT INTO xonGroup VALUES (9, replace(uuid(), '-', ''), '流量控制');
@@ -1250,6 +1250,20 @@ AS
   LEFT JOIN xonStep S on a.step_id = S.id
   LEFT JOIN xonSchool S2 on S.sch_id = S2.id
   ORDER BY a.id;
+
+
+
+/**
+  当前年级
+ */
+
+CREATE VIEW xovGradeCurrent
+AS
+  SELECT A.*, E.name
+  FROM xonGrade A
+  INNER JOIN xonYear B ON A.year_id = B.id
+  INNER JOIN xonEdu E ON A.edu_id = E.id
+  WHERE B.current_year = 1;
 
 /*外键约束开启*/
 SET FOREIGN_KEY_CHECKS = 1;

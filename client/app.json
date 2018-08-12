@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/login/login",
+
     "pages/index/index",
     "pages/index/regstud",
     "pages/index/regexam",
@@ -12,6 +13,14 @@
     "pages/index/roledist",
     "pages/index/userset",
     "pages/index/userchilds",
+
+    "pages/index/mysameset",
+    "pages/index/mytuning",
+    "pages/index/mydivision",
+    "pages/index/myadjust",
+    "pages/index/myclass",
+    "pages/index/mystud",
+
     "pages/class/class",
     "pages/phone/phone"
   ],

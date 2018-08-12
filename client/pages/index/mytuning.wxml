@@ -1,0 +1,81 @@
+<!--pages/index/mytuning.wxml-->
+<view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
+
+  <view class="weui-cells__title">年级设置</view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_select">
+      <view class="weui-cell__hd weui-cell__hd_in-select-after">
+        <view class="weui-label">年级选择</view>
+      </view>
+      <view class="weui-cell__bd">
+        <picker bindchange="gradeChange" value="{{gradeIndex}}" range="{{grades}}" range-key="grade_name" disabled="{{grades.length===0}}">
+          <view class="weui-select weui-select_in-select-after">{{grades[gradeIndex].grade_name}}</view>
+        </picker>
+      </view>
+    </view>
+  </view>
+
+  <view class="weui-cells__title">班级设置</view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_select">
+      <view class="weui-cell__hd weui-cell__hd_in-select-after">
+        <view class="weui-label">目标班级</view>
+      </view>
+      <view class="weui-cell__bd">
+        <picker bindchange="classChange" value="{{classIndex}}" range="{{classes}}" range-key="cls_name" disabled="{{classes.length===0}}">
+          <view class="weui-select weui-select_in-select-after">{{classes[classIndex].cls_name}}</view>
+        </picker>
+      </view>
+    </view>
+  </view>
+
+  <view class="weui-cells__title">调动学生查询</view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_input weui-cell_vcode">
+      <view class="weui-cell__hd">
+        <view class="weui-label">学生姓名</view>
+      </view>
+      <view class="weui-cell__bd">
+        <input class="weui-input" placeholder="输入学生姓名" name="name" confirm-type="done" type="text" maxlength="4" data-reg="^[\\u4e00-\\u9fa5]{2,4}$" data-index="0" data-message="学生姓名有误！" bindblur="checkInput"/>
+      </view>
+      <view class="weui-cell__ft">
+        <button type="normal" form-type="submit">查询</button>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{1}}">
+    <view class="weui-cells__title">调动学生选择</view>
+    <view class="weui-cells weui-cells_after-title">
+      <radio-group name="user_id" bindchange="radioChange">
+        <label class="weui-cell weui-check__label" wx:for="{{radios}}" wx:key="id">
+          <radio class="weui-check" value="{{item.id}}" checked="{{item.checked}}"/>
+          <view class="weui-cell__bd">{{item.name}}（{{item.nick_name}}）</view>
+          <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+            <icon class="weui-icon-radio" type="success_no_circle" size="16"></icon>
+          </view>
+        </label>
+      </radio-group>
+    </view>
+  </view>
+
+  <view wx:if="{{1}}">
+    <view class="weui-cells__title">交换学生选择</view>
+    <view class="weui-cells weui-cells_after-title">
+      <radio-group name="user_id" bindchange="radioChange">
+        <label class="weui-cell weui-check__label" wx:for="{{radios}}" wx:key="id">
+          <radio class="weui-check" value="{{item.id}}" checked="{{item.checked}}"/>
+          <view class="weui-cell__bd">{{item.name}}（{{item.nick_name}}）</view>
+          <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+            <icon class="weui-icon-radio" type="success_no_circle" size="16"></icon>
+          </view>
+        </label>
+      </radio-group>
+    </view>
+  </view>
+
+  <view class="x5ui-half-btn">
+    <view class="weui-btn-area">
+      <button type="primary" form-type="submit">提交调动</button>
+    </view>
+  </view>
