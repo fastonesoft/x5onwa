@@ -29,7 +29,7 @@
     </view>
   </view>
 
-  <view class="weui-cells__title">调动学生查询</view>
+  <view class="weui-cells__title">调动查询</view>
   <view class="weui-cells weui-cells_after-title">
     <view class="weui-cell weui-cell_input weui-cell_vcode">
       <view class="weui-cell__hd">
@@ -45,7 +45,7 @@
   </view>
 
   <view wx:if="{{1}}">
-    <view class="weui-cells__title">调动学生选择</view>
+    <view class="weui-cells__title">调动学生</view>
     <view class="weui-cells weui-cells_after-title">
       <radio-group name="user_id" bindchange="radioChange">
         <label class="weui-cell weui-check__label" wx:for="{{radios}}" wx:key="id">
@@ -60,7 +60,7 @@
   </view>
 
   <view wx:if="{{1}}">
-    <view class="weui-cells__title">交换学生选择</view>
+    <view class="weui-cells__title">交换学生</view>
     <view class="weui-cells weui-cells_after-title">
       <radio-group name="user_id" bindchange="radioChange">
         <label class="weui-cell weui-check__label" wx:for="{{radios}}" wx:key="id">
