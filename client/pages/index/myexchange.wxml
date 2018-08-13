@@ -25,7 +25,7 @@
 <view class="weui-panel weui-panel_access" wx:if="{{1}}">
   <view class="weui-panel__hd">调动列表</view>
   <view class="weui-panel__bd">
-    <view class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+    <navigator url="mydivision?uid=sdd" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
         <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
             <image class="weui-media-box__thumb" src="../../images/head/teachm.png" />
         </view>
@@ -34,16 +34,7 @@
             <view class="weui-media-box__desc">性别：男，原班级：11班</view>
             <view class="weui-media-box__desc">总分：333</view>
         </view>
-    </view>
-    <view class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
-        <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-            <image class="weui-media-box__thumb" src="../../images/head/teachw.png" />
-        </view>
-        <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-            <view class="weui-media-box__title">学生女</view>
-            <view class="weui-media-box__desc">菩萨顶霸</view>
-        </view>
-    </view>     
+    </navigator>
   </view>
 </view>
 

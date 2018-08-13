@@ -1269,5 +1269,14 @@ AS
   INNER JOIN xonEdu E ON A.edu_id = E.id
   WHERE B.current_year = 1;
 
+/**
+  班级列表
+ */
+CREATE VIEW xovClass
+AS
+  SELECT A.*, concat(B.name, '（', A.num, '）班') as cls_name
+  FROM xonClass A
+  LEFT JOIN xovGradeCurrent B ON A.grade_id = B.id;
+
 /*外键约束开启*/
 SET FOREIGN_KEY_CHECKS = 1;

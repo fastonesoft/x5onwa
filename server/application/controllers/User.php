@@ -5,6 +5,8 @@ use QCloud_WeApp_SDK\Model;
 
 class User extends CI_Controller {
   const role_name = 'userset';
+
+
   public function index() {
     Model\xonLogin::check(self::role_name, function ($user) {
       // 正文内容

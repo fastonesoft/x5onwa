@@ -77,6 +77,12 @@ var doUrl = {
   schoolformvalueupdate: `${host}/weapp/schoolformvalue/update`,
 
 
+  // 同班设置
+  mysameset: `${host}/weapp/mysameset`,
+  mysamesetclass: `${host}/weapp/mysameset/classes`,
+  mysamesetclassstudent: `${host}/weapp/mysameset/students`,
+
+
 
   // 错误测试地址
   test: `${host}/weapp/data`,
@@ -157,7 +163,7 @@ var doRequest = function (options) {
       wx.hideToast()
       if (typeof options.fail === 'function') options.fail()
       if (options.dontshow) return
-      util.showModel('请求失败', '确认网络是否畅通');
+      util.showModel('请求失败', '请确认登录是否过期，网络是否畅通');
     }
   })
 };
