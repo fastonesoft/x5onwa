@@ -80,7 +80,8 @@ var doUrl = {
   // 同班设置
   mysameset: `${host}/weapp/mysameset`,
   mysamesetclass: `${host}/weapp/mysameset/classes`,
-  mysamesetclassstudent: `${host}/weapp/mysameset/students`,
+  mysamesetstudent: `${host}/weapp/mysameset/students`,
+  mysamesetstudentupdate: `${host}/weapp/mysameset/update`,
 
 
 

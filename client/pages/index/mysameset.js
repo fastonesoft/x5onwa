@@ -42,16 +42,28 @@ Page({
   classChange: function (e) {
     var that = this
     var classIndex = e.detail.value
+    if (classIndex == -1) return
     that.setData({ classIndex })
 
     // 学生列表
     var cls_id = this.data.classes[classIndex].id
     x5on.postForm({
-      url: x5on.url.mysamesetclassstudent,
+      url: x5on.url.mysamesetstudent,
       data: { cls_id },
       success: function (result) {
         var students = result.data
         that.setData({ students })
+      }
+    })
+  },
+
+  samesetSubmit: function (e) {
+    var that = this
+    x5on.postForm({
+      url: x5on.url.mysamesetstudentupdate,
+      data: e.detail.value,
+      success: function (result) {
+        x5on.showSuccess('更新' + result.data + '条记录')
       }
     })
   },

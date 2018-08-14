@@ -34,9 +34,9 @@
   <view class="weui-cells weui-cells_after-title">
   <block wx:for="{{students}}" wx:key="uid">
     <view class="weui-cell weui-cell_switch">
-      <view class="weui-cell__bd">{{item.title}}</view>
+      <view class="weui-cell__bd">{{item.stud_name}}({{item.stud_sex}})</view>
       <view class="weui-cell__ft">
-        <switch name="{{item.uid}}" checked="{{item.can_show}}"/>
+        <switch name="{{item.uid}}" checked="{{item.same_group}}"/>
       </view>
     </view>
   </block>

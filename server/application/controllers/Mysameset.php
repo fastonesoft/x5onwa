@@ -45,7 +45,23 @@ class Mysameset extends CI_Controller {
 
       $param = $_POST;
       $cls_id = $param['cls_id'];
-      $result = Model\xovClass::getRows($cls_id);
+      $result = Model\xovGradeStud::getRowsByClsId($cls_id);
+
+      // 正文内容
+      $this->json(['code' => 0, 'data' => $result]);
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
+
+  /**
+   * 提交同班设置
+   */
+  public function update() {
+    Model\xonLogin::check(self::role_name, function ($user) {
+
+      $param = $_POST;
+      $result = Model\xovGradeStud::updateSameGroup($param);
 
       // 正文内容
       $this->json(['code' => 0, 'data' => $result]);

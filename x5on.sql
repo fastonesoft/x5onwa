@@ -907,18 +907,16 @@ CREATE TABLE xonGradeStud (
   grade_id VARCHAR(18) NOT NULL,
   cls_id VARCHAR(20) NOT NULL,
   stud_id VARCHAR(20) NOT NULL,   /* 录取编号 */
-  stud_type_id INT(11) NOT NULL,  /* 学籍状态：应届生、往届生 */
   stud_come_id INT(11) NOT NULL,  /* 学籍办理信息 */
-  in_sch BOOLEAN NOT NULL,
   auth_stud BOOLEAN NOT NULL,  /* 是否指标生 */
-  same_group VARCHAR(36),  /* 同组标志 */
+  in_sch BOOLEAN NOT NULL,
+  same_group BOOLEAN NOT NULL DEFAULT 0,  /* 同组标志 */
   stud_code VARCHAR(36),  /* 学籍号，应届生有，往届生无 */
   PRIMARY KEY (grade_id, stud_id),
   UNIQUE KEY uid (uid),
   FOREIGN KEY (grade_id) REFERENCES xonGrade(id),
   FOREIGN KEY (cls_id) REFERENCES xonClass(id),
   FOREIGN KEY (stud_id) REFERENCES xonStudent(id),
-  FOREIGN KEY (stud_type_id) REFERENCES xonStudType(id),
   FOREIGN KEY (stud_come_id) REFERENCES xonStudCome(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='年级学生';
 
@@ -1246,14 +1244,6 @@ AS
   LEFT JOIN xonApp xA on a.app_id = xA.id
   LEFT JOIN xonYear Year2 on a.year_id = Year2.id;
 
-CREATE VIEW xovStudent
-AS
-  SELECT a.*, C2.name as child_name, S.name as step_name, S2.id as sch_id, S2.name as sch_name
-  FROM xonStudent a
-  LEFT JOIN xonChild C2 on a.child_id = C2.id
-  LEFT JOIN xonStep S on a.step_id = S.id
-  LEFT JOIN xonSchool S2 on S.sch_id = S2.id
-  ORDER BY a.id;
 
 
 
@@ -1277,6 +1267,56 @@ AS
   SELECT A.*, concat(B.name, '（', A.num, '）班') as cls_name
   FROM xonClass A
   LEFT JOIN xovGradeCurrent B ON A.grade_id = B.id;
+
+
+
+/**
+  孩子性别
+ */
+CREATE VIEW xovChild
+AS
+  SELECT A.*, case
+    when CHAR_LENGTH(idc) = 10 and SUBSTRING(idc, 2, 1) = '1' then '男'
+    when CHAR_LENGTH(idc) = 10 and SUBSTRING(idc, 2, 1) = '2' then '女'
+    when CHAR_LENGTH(idc) = 18 and CONVERT(SUBSTRING(idc, 17, 1), UNSIGNED INTEGER) % 2 = 1 then '男'
+    when CHAR_LENGTH(idc) = 18 and CONVERT(SUBSTRING(idc, 17, 1), UNSIGNED INTEGER) % 2 = 0 then '女'
+    else '男' end as child_sex
+  FROM xonChild A;
+
+/**
+  学校学生
+ */
+CREATE VIEW xovStudent
+AS
+  SELECT A.*, C2.name as stud_name, C2.child_sex AS stud_sex, S.name AS step_name, S2.name AS sch_name
+  FROM xonStudent A
+  LEFT JOIN xovChild C2 ON A.child_id = C2.id
+  LEFT JOIN xonStep S ON A.step_id = S.id
+  LEFT JOIN xonSchool S2 ON S.sch_id = S2.id;
+
+/**
+  年级
+ */
+
+CREATE VIEW xovGrade
+AS
+  SELECT A.*, E.name
+  FROM xonGrade A
+  INNER JOIN xonYear B ON A.year_id = B.id
+  INNER JOIN xonEdu E ON A.edu_id = E.id;
+
+/**
+  班级学生
+ */
+CREATE VIEW xovGradeStud
+AS
+  SELECT A.*, S.stud_name, S.stud_sex, step_name, sch_name, C.name AS come_name, C2.cls_name
+  FROM xonGradeStud A
+  LEFT JOIN xovStudent S ON A.stud_id = S.id
+  LEFT JOIN xonStudCome C ON A.stud_come_id = C.id
+  LEFT JOIN xovClass C2 ON A.cls_id = C2.id;
+
+
 
 /*外键约束开启*/
 SET FOREIGN_KEY_CHECKS = 1;
