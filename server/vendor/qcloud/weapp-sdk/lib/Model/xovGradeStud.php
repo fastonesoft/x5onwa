@@ -17,6 +17,13 @@ class xovGradeStud
     return dbs::select('xovGradeStud', ['uid', 'stud_name', 'stud_sex', 'same_group'], compact('cls_id'));
   }
 
+  public static function getRowsByStudName ($stud_name) {
+    /**
+     * TODO xovGradeStud => 变换成带成绩的查询
+     */
+    return dbs::select('xovGradeStud', ['uid', 'stud_name', 'stud_sex', 'same_group', 'cls_name'], compact('stud_name'));
+  }
+
   public static function updateSameGroup ($param) {
     // 计数
     $result = 0;

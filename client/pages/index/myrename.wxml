@@ -9,23 +9,23 @@
         <view class="weui-label">年级选择</view>
       </view>
       <view class="weui-cell__bd">
-        <picker bindchange="gradeChange" value="{{gradeIndex}}" range="{{grades}}" range-key="grade_name" disabled="{{grades.length===0}}">
-          <view class="weui-select weui-select_in-select-after">{{grades[gradeIndex].grade_name}}</view>
+        <picker bindchange="gradeChange" value="{{gradeIndex}}" range="{{grades}}" range-key="name" disabled="{{grades.length===0}}">
+          <view class="weui-select weui-select_in-select-after">{{grades[gradeIndex].name}}</view>
         </picker>
       </view>
     </view>
   </view>
 
-<block wx:if="{{1}}">
+<block wx:if="{{classes.length>0}}">
   <view class="weui-cells__title">班级列表</view>
   <view class="weui-cells weui-cells_after-title">
-    <block wx:for="{{items}}" wx:key="id">
+    <block wx:for="{{classes}}" wx:key="id">
         <view class="weui-cell weui-cell_input">
           <view class="weui-cell__hd">
-            <view class="weui-label">{{item.title}}</view>
+            <view class="weui-label">{{item.cls_order}}</view>
           </view>
           <view class="weui-cell__bd">
-            <input class="weui-input" placeholder="{{item.place_holder}}" name="{{item.name}}" value="{{item.value}}" type="{{item.input_type}}" maxlength="{{item.max_length}}" data-uid="{{item.uid}}" bindblur="checkInput"/>
+        <input class="weui-input" placeholder="输入班级号码" name="{{item.uid}}" type="number" maxlength="2" data-reg="^[\\d]{1,2}$" data-index="0" data-message="班级号码有误！" bindblur="checkInput" value="{{item.num}}"/>
           </view>
           <view class="weui-cell__ft" wx:if="{{item.error}}">
             <icon type="warn" size="23" color="#E64340"></icon>
