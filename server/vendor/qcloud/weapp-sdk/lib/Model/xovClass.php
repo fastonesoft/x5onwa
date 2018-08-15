@@ -8,13 +8,12 @@ use \Exception;
 
 class xovClass
 {
-
-  public static function getRows4Sameset ($grade_id) {
-    return dbs::select('xovClass', ['id', 'cls_name'], compact('grade_id'));
+  public static function getRows4Tuning ($grade_id) {
+    return dbs::select('xovClass', ['id', 'cls_name'], compact('grade_id'), 'and', 'order by num');
   }
 
-  public static function getRows4Tuning ($grade_id) {
-    return dbs::select('xovClass', ['id', 'cls_name'], compact('grade_id'));
+  public static function getRows4Sameset ($grade_id) {
+    return dbs::select('xovClass', ['id', 'cls_name'], compact('grade_id'), 'and', 'order by num');
   }
 
   public static function getRows4Rename ($grade_id) {

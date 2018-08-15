@@ -1264,7 +1264,7 @@ AS
  */
 CREATE VIEW xovClass
 AS
-  SELECT A.*, concat(B.name, '（', A.num, '）班') as cls_name, concat('序号：', substring(A.id, length(A.id) - 1, 2)) as cls_order
+  SELECT A.*, concat(B.name, '（', A.num, '）班') as cls_name, concat('序号：', right(A.id, 2)) as cls_order
   FROM xonClass A
   LEFT JOIN xovGradeCurrent B ON A.grade_id = B.id;
 
