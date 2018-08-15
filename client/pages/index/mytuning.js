@@ -55,8 +55,6 @@ Page({
 
   findSubmit: function (e) {
     var that = this
-    console.log(e.detail.value)
-
     x5on.checkForm(that, 0, 0, function () {
       x5on.postFormEx({
         url: x5on.url.mytuningstudmoves,

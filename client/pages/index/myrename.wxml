@@ -16,16 +16,16 @@
     </view>
   </view>
 
-<block wx:if="{{classes.length>0}}">
+<form bindsubmit="myrenameSubmit" wx:if="{{items.length>0}}">
   <view class="weui-cells__title">班级列表</view>
   <view class="weui-cells weui-cells_after-title">
-    <block wx:for="{{classes}}" wx:key="id">
+    <block wx:for="{{items}}" wx:key="id">
         <view class="weui-cell weui-cell_input">
           <view class="weui-cell__hd">
             <view class="weui-label">{{item.cls_order}}</view>
           </view>
           <view class="weui-cell__bd">
-        <input class="weui-input" placeholder="输入班级号码" name="{{item.uid}}" type="number" maxlength="2" data-reg="^[\\d]{1,2}$" data-index="0" data-message="班级号码有误！" bindblur="checkInput" value="{{item.num}}"/>
+        <input class="weui-input" placeholder="输入班级号码" name="{{item.uid}}" type="number" maxlength="2" data-reg="^[\\d]{1,2}$" data-index="{{item.num}}" data-message="班级号码有误！" bindblur="checkInput" value="{{item.num}}"/>
           </view>
           <view class="weui-cell__ft" wx:if="{{item.error}}">
             <icon type="warn" size="23" color="#E64340"></icon>
@@ -33,4 +33,10 @@
         </view>
     </block>
   </view>
-</block>
+
+  <view class="x5ui-half-btn">
+    <view class="weui-btn-area">
+      <button type="primary" form-type="submit">提交变更</button>
+    </view>
+  </view>
+</form>

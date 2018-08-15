@@ -9,8 +9,12 @@ class User extends CI_Controller {
 
   public function index() {
     Model\xonLogin::check(self::role_name, function ($user) {
-      // 正文内容
-      $this->json(['code' => 0, 'data' => $user]);
+      try {
+        // 正文
+        $this->json(['code' => 0, 'data' => $user]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
     }, function ($error) {
       $this->json($error);
     });

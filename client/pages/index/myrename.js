@@ -22,8 +22,7 @@ Page({
   gradeChange: function (e) {
     var that = this
     var gradeIndex = e.detail.value
-    var classIndex = -1
-    that.setData({ gradeIndex, classIndex })
+    that.setData({ gradeIndex })
 
     // 班级列表
     var grade_id = this.data.grades[gradeIndex].id
@@ -31,14 +30,26 @@ Page({
       url: x5on.url.myrenameclass,
       data: { grade_id },
       success: function (result) {
-        var classes = result.data
-        that.setData({ classes })
+        var items = result.data
+        items.forEach(function (item) {
+          item.error = false
+        })
+        that.setData({ items })
+
+        console.log(items)
       }
     })
   },
 
   checkInput: function (e) {
     x5on.checkInput(e, this)
+  },
+
+  myrenameSubmit: function (e) {
+    var that = this
+    console.log(e)
+
+
   },
 
 })

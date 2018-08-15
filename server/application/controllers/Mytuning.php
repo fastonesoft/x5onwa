@@ -11,11 +11,14 @@ class Mytuning extends CI_Controller {
    */
   public function index() {
     Model\xonLogin::check(self::role_name, function ($user) {
-      $grades = Model\xovGradeCurrent::getRows();
-      $result = compact('grades');
+      try {
+        $grades = Model\xovGradeCurrent::getRows();
+        $result = compact('grades');
 
-      // 正文内容
-      $this->json(['code' => 0, 'data' => $result]);
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
     }, function ($error) {
       $this->json($error);
     });
@@ -26,13 +29,15 @@ class Mytuning extends CI_Controller {
    */
   public function classes() {
     Model\xonLogin::check(self::role_name, function ($user) {
+      try {
+        $param = $_POST;
+        $grade_id = $param['grade_id'];
+        $result = Model\xovClass::getRows4Tuning($grade_id);
 
-      $param = $_POST;
-      $grade_id = $param['grade_id'];
-      $result = Model\xovClass::getRows4Tuning($grade_id);
-
-      // 正文内容
-      $this->json(['code' => 0, 'data' => $result]);
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
     }, function ($error) {
       $this->json($error);
     });
@@ -43,13 +48,15 @@ class Mytuning extends CI_Controller {
    */
   public function studmoves() {
     Model\xonLogin::check(self::role_name, function ($user) {
+      try {
+        $param = $_POST;
+        $stud_name = $param['name'];
+        $result = Model\xovGradeStud::getRowsByStudName($stud_name);
 
-      $param = $_POST;
-      $stud_name = $param['name'];
-      $result = Model\xovGradeStud::getRowsByStudName($stud_name);
-
-      // 正文内容
-      $this->json(['code' => 0, 'data' => $result]);
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
     }, function ($error) {
       $this->json($error);
     });

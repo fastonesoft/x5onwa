@@ -11,11 +11,14 @@ class Myrename extends CI_Controller {
    */
   public function index() {
     Model\xonLogin::check(self::role_name, function ($user) {
-      $grades = Model\xovGradeCurrent::getRows();
-      $result = compact('grades');
+      try {
+        $grades = Model\xovGradeCurrent::getRows();
+        $result = compact('grades');
 
-      // 正文内容
-      $this->json(['code' => 0, 'data' => $result]);
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
     }, function ($error) {
       $this->json($error);
     });
@@ -26,13 +29,15 @@ class Myrename extends CI_Controller {
    */
   public function classes() {
     Model\xonLogin::check(self::role_name, function ($user) {
+      try {
+        $param = $_POST;
+        $grade_id = $param['grade_id'];
+        $result = Model\xovClass::getRows4Rename($grade_id);
 
-      $param = $_POST;
-      $grade_id = $param['grade_id'];
-      $result = Model\xovClass::getRows4Rename($grade_id);
-
-      // 正文内容
-      $this->json(['code' => 0, 'data' => $result]);
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
     }, function ($error) {
       $this->json($error);
     });

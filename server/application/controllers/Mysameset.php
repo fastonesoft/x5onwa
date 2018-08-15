@@ -11,10 +11,14 @@ class Mysameset extends CI_Controller {
    */
   public function index() {
     Model\xonLogin::check(self::role_name, function ($user) {
-      $grades = Model\xovGradeCurrent::getRows();
-      $result = compact('grades');
-      // 正文内容
-      $this->json(['code' => 0, 'data' => $result]);
+      try {
+        $grades = Model\xovGradeCurrent::getRows();
+        $result = compact('grades');
+
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
     }, function ($error) {
       $this->json($error);
     });
@@ -25,13 +29,15 @@ class Mysameset extends CI_Controller {
    */
   public function classes() {
     Model\xonLogin::check(self::role_name, function ($user) {
+      try {
+        $param = $_POST;
+        $grade_id = $param['grade_id'];
+        $result = Model\xovClass::getRows4Sameset($grade_id);
 
-      $param = $_POST;
-      $grade_id = $param['grade_id'];
-      $result = Model\xovClass::getRows4Sameset($grade_id);
-
-      // 正文内容
-      $this->json(['code' => 0, 'data' => $result]);
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
     }, function ($error) {
       $this->json($error);
     });
@@ -42,13 +48,15 @@ class Mysameset extends CI_Controller {
    */
   public function students() {
     Model\xonLogin::check(self::role_name, function ($user) {
+      try {
+        $param = $_POST;
+        $cls_id = $param['cls_id'];
+        $result = Model\xovGradeStud::getRowsByClsId($cls_id);
 
-      $param = $_POST;
-      $cls_id = $param['cls_id'];
-      $result = Model\xovGradeStud::getRowsByClsId($cls_id);
-
-      // 正文内容
-      $this->json(['code' => 0, 'data' => $result]);
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
     }, function ($error) {
       $this->json($error);
     });
@@ -59,12 +67,14 @@ class Mysameset extends CI_Controller {
    */
   public function update() {
     Model\xonLogin::check(self::role_name, function ($user) {
+      try {
+        $param = $_POST;
+        $result = Model\xovGradeStud::updateSameGroup($param);
 
-      $param = $_POST;
-      $result = Model\xovGradeStud::updateSameGroup($param);
-
-      // 正文内容
-      $this->json(['code' => 0, 'data' => $result]);
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
     }, function ($error) {
       $this->json($error);
     });
