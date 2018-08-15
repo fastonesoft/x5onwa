@@ -17,6 +17,6 @@ class xovClass
   }
 
   public static function getRows4Rename ($grade_id) {
-    return dbs::select('xovClass', ['uid', 'num', 'cls_order'], compact('grade_id'));
+    return dbs::select('xovClass', ['uid', 'num as value', 'cls_order'], compact('grade_id'));
   }
 }

@@ -5,7 +5,7 @@ Page({
 
   data: {
     grades: [],
-    classes: [],
+    items: [],
   },
 
   onLoad: function (options) {
@@ -35,21 +35,32 @@ Page({
           item.error = false
         })
         that.setData({ items })
-
-        console.log(items)
       }
     })
   },
 
-  checkInput: function (e) {
-    x5on.checkInput(e, this)
+  checkInput: function (event) {
+    var that = this
+    var data = this.data.items
+    var reg = /\d{1,2}/
+    var message = '班级号码输入有误'
+    x5on.checkInputReg({
+      event, that, data, reg, message, success: function (items) {
+        that.setData({ items })
+    }})  
   },
 
   myrenameSubmit: function (e) {
     var that = this
-    console.log(e)
-
-
+    x5on.checkFormReg(that, '班级号码输入有误', function () {
+      x5on.postFormEx({
+        url: x5on.url.myrenameupdate,
+        data: e.detail.value,
+        success: (result) => {
+          x5on.showSuccess('更新' + result.data + '条记录')
+        }
+      })
+    })
   },
 
 })

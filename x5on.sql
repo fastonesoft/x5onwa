@@ -848,6 +848,7 @@ INSERT INTO xonSub VALUES (12, replace(uuid(), '-', ''), '体育', '体');
 INSERT INTO xonSub VALUES (13, replace(uuid(), '-', ''), '信息', '信');
 INSERT INTO xonSub VALUES (14, replace(uuid(), '-', ''), '听力', '听');
 INSERT INTO xonSub VALUES (15, replace(uuid(), '-', ''), '口语', '口');
+INSERT INTO xonSub VALUES (99, replace(uuid(), '-', ''), '总分', '总');
 
 
 
@@ -957,6 +958,7 @@ CREATE TABLE xonKao (
   type_id INT(11) NOT NULL,
   code INT(11) NOT NULL,
   summed BOOLEAN NOT NULL,
+  to_division BOOLEAN NOT NULL,   /* 分班成绩依据 */
   PRIMARY KEY (id),
   UNIQUE KEY uid (uid),
   FOREIGN KEY (grade_id) REFERENCES xonGrade(id),
@@ -964,9 +966,9 @@ CREATE TABLE xonKao (
   FOREIGN KEY (type_id) REFERENCES xonKaoType(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='考试安排';
 
-INSERT INTO xonKao VALUES ('3212040220160901', replace(uuid(), '-', ''), '分班', '32120402201609', 1, 1, 1, 0);
-INSERT INTO xonKao VALUES ('3212040220170801', replace(uuid(), '-', ''), '分班', '32120402201708', 1, 1, 1, 0);
-INSERT INTO xonKao VALUES ('3212040220180701', replace(uuid(), '-', ''), '分班', '32120402201807', 1, 1, 1, 0);
+INSERT INTO xonKao VALUES ('3212040220160901', replace(uuid(), '-', ''), '分班', '32120402201609', 1, 1, 1, 0, 1);
+INSERT INTO xonKao VALUES ('3212040220170801', replace(uuid(), '-', ''), '分班', '32120402201708', 1, 1, 1, 0, 1);
+INSERT INTO xonKao VALUES ('3212040220180701', replace(uuid(), '-', ''), '分班', '32120402201807', 1, 1, 1, 0, 1);
 
 
 CREATE TABLE xonKaoStud (
@@ -983,17 +985,32 @@ CREATE TABLE xonKaoStud (
   FOREIGN KEY (stud_id) REFERENCES xonStudent(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='考试学生';
 
+
+
 CREATE TABLE xonKaoSub (
-  id VARCHAR(20) NOT NULL,
   uid VARCHAR(36) NOT NULL,
   kao_id VARCHAR(20) NOT NULL,
   sub_id INT(11) NOT NULL,
   max_value INT(11) NOT NULL,
-  PRIMARY KEY (id),
+  PRIMARY KEY (kao_id, sub_id),
   UNIQUE KEY uid (uid),
   FOREIGN KEY (kao_id) REFERENCES xonKao(id),
   FOREIGN KEY (sub_id) REFERENCES xonSub(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='考试学科';
+
+INSERT INTO xonKaoSub VALUES (replace(uuid(), '-', ''), '3212040220160901', 1, 150);
+INSERT INTO xonKaoSub VALUES (replace(uuid(), '-', ''), '3212040220160901', 2, 150);
+INSERT INTO xonKaoSub VALUES (replace(uuid(), '-', ''), '3212040220160901', 3, 150);
+INSERT INTO xonKaoSub VALUES (replace(uuid(), '-', ''), '3212040220160901', 4, 100);
+
+INSERT INTO xonKaoSub VALUES (replace(uuid(), '-', ''), '3212040220170801', 1, 150);
+INSERT INTO xonKaoSub VALUES (replace(uuid(), '-', ''), '3212040220170801', 2, 150);
+INSERT INTO xonKaoSub VALUES (replace(uuid(), '-', ''), '3212040220170801', 3, 150);
+
+INSERT INTO xonKaoSub VALUES (replace(uuid(), '-', ''), '3212040220180701', 1, 150);
+INSERT INTO xonKaoSub VALUES (replace(uuid(), '-', ''), '3212040220180701', 2, 150);
+INSERT INTO xonKaoSub VALUES (replace(uuid(), '-', ''), '3212040220180701', 3, 150);
+
 
 CREATE TABLE xonKaoScore (
   uid VARCHAR(36) NOT NULL,
@@ -1008,6 +1025,9 @@ CREATE TABLE xonKaoScore (
   FOREIGN KEY (kao_stud_id) REFERENCES xonKaoStud(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='考试成绩';
 
+INSERT INTO xonKaoScore VALUES (replace(uuid(), '-', ''), 'kaostudid', subid, value);
+
+
 CREATE TABLE xonStudMove (
   kao_stud_id VARCHAR(28) NOT NULL,
   request_user_id VARCHAR(36) NOT NULL,
@@ -1018,61 +1038,12 @@ CREATE TABLE xonStudMove (
   FOREIGN KEY (cls_id) REFERENCES xonClass(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学生调动';
 
-/*
-分级数据
-INSERT INTO xonStep VALUES ('321204022004', replace(uuid(), '-', ''), '2004级', '32120402', 1);
-INSERT INTO xonStep VALUES ('321204022005', replace(uuid(), '-', ''), '2005级', '32120402', 1);
-INSERT INTO xonStep VALUES ('321204022006', replace(uuid(), '-', ''), '2006级', '32120402', 1);
-INSERT INTO xonStep VALUES ('321204022007', replace(uuid(), '-', ''), '2007级', '32120402', 1);
-INSERT INTO xonStep VALUES ('321204022008', replace(uuid(), '-', ''), '2008级', '32120402', 1);
-INSERT INTO xonStep VALUES ('321204022009', replace(uuid(), '-', ''), '2009级', '32120402', 1);
-INSERT INTO xonStep VALUES ('321204022010', replace(uuid(), '-', ''), '2010级', '32120402', 1);
-INSERT INTO xonStep VALUES ('321204022011', replace(uuid(), '-', ''), '2011级', '32120402', 1);
-INSERT INTO xonStep VALUES ('321204022012', replace(uuid(), '-', ''), '2012级', '32120402', 1);
-INSERT INTO xonStep VALUES ('321204022013', replace(uuid(), '-', ''), '2013级', '32120402', 1);
-INSERT INTO xonStep VALUES ('321204022014', replace(uuid(), '-', ''), '2014级', '32120402', 1);
-INSERT INTO xonStep VALUES ('321204022015', replace(uuid(), '-', ''), '2015级', '32120402', 0);
-*/
+
 INSERT INTO xonStep VALUES ('321204022016', replace(uuid(), '-', ''), '2016级', '32120402', 0);
 INSERT INTO xonStep VALUES ('321204022017', replace(uuid(), '-', ''), '2017级', '32120402', 0);
 INSERT INTO xonStep VALUES ('321204022018', replace(uuid(), '-', ''), '2018级', '32120402', 0);
 
-/*
-年级数据
-INSERT INTO xonGrade VALUES ('32120402200409', replace(uuid(), '-', ''), '321204022004', 2006, 9);
-INSERT INTO xonGrade VALUES ('32120402200508', replace(uuid(), '-', ''), '321204022005', 2006, 8);
-INSERT INTO xonGrade VALUES ('32120402200509', replace(uuid(), '-', ''), '321204022005', 2007, 9);
-INSERT INTO xonGrade VALUES ('32120402200607', replace(uuid(), '-', ''), '321204022006', 2006, 7);
-INSERT INTO xonGrade VALUES ('32120402200608', replace(uuid(), '-', ''), '321204022006', 2007, 8);
-INSERT INTO xonGrade VALUES ('32120402200609', replace(uuid(), '-', ''), '321204022006', 2008, 9);
-INSERT INTO xonGrade VALUES ('32120402200707', replace(uuid(), '-', ''), '321204022007', 2007, 7);
-INSERT INTO xonGrade VALUES ('32120402200708', replace(uuid(), '-', ''), '321204022007', 2008, 8);
-INSERT INTO xonGrade VALUES ('32120402200709', replace(uuid(), '-', ''), '321204022007', 2009, 9);
-INSERT INTO xonGrade VALUES ('32120402200807', replace(uuid(), '-', ''), '321204022008', 2008, 7);
-INSERT INTO xonGrade VALUES ('32120402200808', replace(uuid(), '-', ''), '321204022008', 2009, 8);
-INSERT INTO xonGrade VALUES ('32120402200809', replace(uuid(), '-', ''), '321204022008', 2010, 9);
-INSERT INTO xonGrade VALUES ('32120402200907', replace(uuid(), '-', ''), '321204022009', 2009, 7);
-INSERT INTO xonGrade VALUES ('32120402200908', replace(uuid(), '-', ''), '321204022009', 2010, 8);
-INSERT INTO xonGrade VALUES ('32120402200909', replace(uuid(), '-', ''), '321204022009', 2011, 9);
-INSERT INTO xonGrade VALUES ('32120402201007', replace(uuid(), '-', ''), '321204022010', 2010, 7);
-INSERT INTO xonGrade VALUES ('32120402201008', replace(uuid(), '-', ''), '321204022010', 2011, 8);
-INSERT INTO xonGrade VALUES ('32120402201009', replace(uuid(), '-', ''), '321204022010', 2012, 9);
-INSERT INTO xonGrade VALUES ('32120402201107', replace(uuid(), '-', ''), '321204022011', 2011, 7);
-INSERT INTO xonGrade VALUES ('32120402201108', replace(uuid(), '-', ''), '321204022011', 2012, 8);
-INSERT INTO xonGrade VALUES ('32120402201109', replace(uuid(), '-', ''), '321204022011', 2013, 9);
-INSERT INTO xonGrade VALUES ('32120402201207', replace(uuid(), '-', ''), '321204022012', 2012, 7);
-INSERT INTO xonGrade VALUES ('32120402201208', replace(uuid(), '-', ''), '321204022012', 2013, 8);
-INSERT INTO xonGrade VALUES ('32120402201209', replace(uuid(), '-', ''), '321204022012', 2014, 9);
-INSERT INTO xonGrade VALUES ('32120402201307', replace(uuid(), '-', ''), '321204022013', 2013, 7);
-INSERT INTO xonGrade VALUES ('32120402201308', replace(uuid(), '-', ''), '321204022013', 2014, 8);
-INSERT INTO xonGrade VALUES ('32120402201309', replace(uuid(), '-', ''), '321204022013', 2015, 9);
-INSERT INTO xonGrade VALUES ('32120402201407', replace(uuid(), '-', ''), '321204022014', 2014, 7);
-INSERT INTO xonGrade VALUES ('32120402201408', replace(uuid(), '-', ''), '321204022014', 2015, 8);
-INSERT INTO xonGrade VALUES ('32120402201409', replace(uuid(), '-', ''), '321204022014', 2016, 9);
-INSERT INTO xonGrade VALUES ('32120402201507', replace(uuid(), '-', ''), '321204022015', 2015, 7);
-INSERT INTO xonGrade VALUES ('32120402201508', replace(uuid(), '-', ''), '321204022015', 2016, 8);
-INSERT INTO xonGrade VALUES ('32120402201509', replace(uuid(), '-', ''), '321204022015', 2017, 9);
-*/
+
 
 INSERT INTO xonGrade VALUES ('32120402201607', replace(uuid(), '-', ''), '321204022016', 2016, 7);
 INSERT INTO xonGrade VALUES ('32120402201608', replace(uuid(), '-', ''), '321204022016', 2017, 8);

@@ -25,7 +25,7 @@
             <view class="weui-label">{{item.cls_order}}</view>
           </view>
           <view class="weui-cell__bd">
-        <input class="weui-input" placeholder="输入班级号码" name="{{item.uid}}" type="number" maxlength="2" data-reg="^[\\d]{1,2}$" data-index="{{item.num}}" data-message="班级号码有误！" bindblur="checkInput" value="{{item.num}}"/>
+        <input class="weui-input" placeholder="输入班级号码" name="{{item.uid}}" type="number" maxlength="2" data-uid="{{item.uid}}" value="{{item.value}}" bindblur="checkInput"/>
           </view>
           <view class="weui-cell__ft" wx:if="{{item.error}}">
             <icon type="warn" size="23" color="#E64340"></icon>

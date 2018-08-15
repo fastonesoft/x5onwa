@@ -43,5 +43,23 @@ class Myrename extends CI_Controller {
     });
   }
 
+  /**
+   * 变更班级序号
+   */
+  public function update() {
+    Model\xonLogin::check(self::role_name, function ($user) {
+      try {
+        $param = $_POST;
+        $result = Model\xonClass::update($param);
+
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
+
 
 }

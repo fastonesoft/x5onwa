@@ -92,6 +92,7 @@ var doUrl = {
   // 班号变更
   myrename: `${host}/weapp/myrename`,
   myrenameclass: `${host}/weapp/myrename/classes`,
+  myrenameupdate: `${host}/weapp/myrename/update`,
 
   // 错误测试地址
   test: `${host}/weapp/data`,
@@ -298,6 +299,36 @@ var doCheckInputEx = function (event, that) {
   }
 };
 
+/**
+ * 数组方式数据检测
+ */
+var doCheckInputReg = function (options) {
+  var uid = options.event.currentTarget.dataset.uid
+  var value = options.event.detail.value
+  var patt = new RegExp(options.reg)
+
+  var data = options.data
+  data.forEach(function (item) {
+    if (item.uid === uid) {
+      item.value = value
+      item.error = !patt.test(value)
+      if (item.error) doShowError(options.that, options.message)
+    }
+  })
+  if (typeof options.success === 'function') options.success(data)
+}
+
+var doCheckFormReg = function (that, message, success) {
+  var items = that.data.items;
+  for (var i = 0; i < items.length; i++) {
+    if (items[i].error) {
+      doShowError(that, message)
+      return
+    }
+  }
+  // 成功回调
+  if (typeof success === 'function') success()
+}
 
 
 /**
@@ -388,8 +419,10 @@ module.exports = {
   loadimage: doRequestImage,
   checkInput: doCheckInput,
   checkInputEx: doCheckInputEx,
+  checkInputReg: doCheckInputReg,
   checkForm: doCheckForm,
   checkFormEx: doCheckFormEx,
+  checkFormReg: doCheckFormReg,
   postForm: doPostFormEx,
   postFormEx: doPostFormEx,
   showError: doShowError,
