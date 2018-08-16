@@ -61,5 +61,4 @@ class Myrename extends CI_Controller {
     });
   }
 
-
 }

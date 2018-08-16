@@ -4,10 +4,13 @@ var x5on = require('../x5on.js')
 Page({
   
   data: {
+    errorMessage: '错误提示',
+    errorArray: [1],
+
     grades: [],
     classes: [],
     studmoves: [],
-    studchanges: []
+    studchanges: [],
   },
 
   onLoad: function (options) {
@@ -67,5 +70,64 @@ Page({
     })
   },
 
+  studmoveChange: function (e) {
+    var that = this
+    var studmoves = this.data.studmoves
+
+    for (var index=0; index<studmoves.length; index++) {
+      var item = studmoves[index]
+      item.checked = item.uid === e.detail.value
+      if (item.checked) {
+        var cls_id = item.cls_id
+        var classes = that.data.classes
+        var classIndex = that.data.classIndex
+        var localcls_id = classes[classIndex].id
+        if ( cls_id === localcls_id ) {
+          var studchanges = []
+          that.setData({ studchanges })
+          return
+        }
+        var data = { value: item.value, cls_id: localcls_id }
+        // 查询用于交换的本班学生
+        x5on.postFormEx({
+          url: x5on.url.mytuningstudchanges,
+          data: data,
+          success: result => {
+            var studchanges = result.data
+            that.setData({ studchanges })
+          }
+        })
+        // break 不能跳出
+      }
+    }
+    that.setData({ studmoves })
+  },
+
+  studchangeChange: function (e) {
+    var that = this
+    var studchanges = that.data.studchanges
+    studchanges.forEach(function (item) {
+      item.checked = item.uid === e.detail.value
+    })
+    that.setData({ studchanges })
+  },
+
+  mytuningSubmit: function (e) {
+    var that = this
+    var data = e.detail.value
+    if (!data.movestud_uid || !data.changestud_uid) {
+      x5on.showError(this, '选择调动、交换的学生')
+      return
+    }
+    x5on.postFormEx({
+      url: x5on.url.mytuningexchange,
+      data: data,
+      success: result => {
+        var studmoves = []
+        var studchanges = []
+        that.setData({ studmoves, studchanges })
+      }
+    })
+  },
 
 })

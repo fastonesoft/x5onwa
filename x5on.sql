@@ -1287,6 +1287,35 @@ AS
   LEFT JOIN xonStudCome C ON A.stud_come_id = C.id
   LEFT JOIN xovClass C2 ON A.cls_id = C2.id;
 
+/**
+  分班考试
+ */
+CREATE VIEW xovKaoDivision
+AS
+  SELECT *
+  FROM xonKao
+  WHERE to_division = 1;
+
+/**
+  分班考试学生
+ */
+CREATE VIEW xovGradeDivisionStud
+AS
+  SELECT X.*, Y.sub_id, sub_name, sub_shortname, value
+  FROM
+  (
+    SELECT A.*
+    FROM xovGradeStud A
+    INNER JOIN xovGradeCurrent B ON A.grade_id = B.id
+  ) X
+  INNER JOIN (
+    SELECT C.*, S.sub_id, B.name AS sub_name, B.name_short AS sub_shortname, S.value, to_division
+    FROM xonKaoStud C
+    INNER JOIN xonKaoScore S ON C.id = S.kao_stud_id
+    INNER JOIN xonSub B ON S.sub_id = B.id
+    INNER JOIN xovKaoDivision D ON C.kao_id = D.id
+  ) Y
+  ON X.stud_id = Y.stud_id;
 
 
 /*外键约束开启*/

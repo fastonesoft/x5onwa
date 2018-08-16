@@ -88,6 +88,7 @@ var doUrl = {
   mytuningclass: `${host}/weapp/mytuning/classes`,
   mytuningstudmoves: `${host}/weapp/mytuning/studmoves`,
   mytuningstudchanges: `${host}/weapp/mytuning/studchanges`,
+  mytuningexchange: `${host}/weapp/mytuning/exchange`,
 
   // 班号变更
   myrename: `${host}/weapp/myrename`,
@@ -157,7 +158,9 @@ var doRequest = function (options) {
       if ( data.code === 0 ) {
         // 为0，表示请求成功
         if (typeof options.success === 'function') options.success(data)
-      } else {
+        return
+      } 
+      if ( data.code === 1 ) {
         // 不为0给出错误提示
         if (typeof options.fail === 'function') options.fail()
         if (options.dontshow) return
@@ -167,7 +170,9 @@ var doRequest = function (options) {
         } else {
           util.showModel('加载失败', data.data);
         }
+        return
       }
+      util.showModel('加载出错', result);
     },
     fail: function (error) {
       wx.hideToast()
@@ -390,7 +395,9 @@ var doPostFormEx = function (options) {
       if (data.code === 0) {
         // 为0，表示请求成功
         if (typeof options.success === 'function') options.success(data)
-      } else {
+        return
+      } 
+      if (data.code === 1) {
         // 不为0给出错误提示
         if (typeof options.fail === 'function') options.fail()
         // 用页面错误提示
@@ -399,7 +406,9 @@ var doPostFormEx = function (options) {
         } else {
           util.showModel('请求失败', data.data);
         }
+        return
       }
+      util.showModel('请求出错', result);
     },
     fail: function (error) {
       if (typeof options.fail === 'function') options.fail()
