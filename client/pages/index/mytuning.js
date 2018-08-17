@@ -154,6 +154,7 @@ Page({
         var studmoves = []
         var studchanges = []
         that.setData({ studmoves, studchanges })
+        x5on.showSuccess('调动' + result.data + '个学生')
       }
     })
   },

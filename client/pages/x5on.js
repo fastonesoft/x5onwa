@@ -83,6 +83,11 @@ var doUrl = {
   mysamesetstudent: `${host}/weapp/mysameset/students`,
   mysamesetstudentupdate: `${host}/weapp/mysameset/update`,
 
+  // 班号变更
+  myrename: `${host}/weapp/myrename`,
+  myrenameclass: `${host}/weapp/myrename/classes`,
+  myrenameupdate: `${host}/weapp/myrename/update`,
+
   // 分班微调
   mytuning: `${host}/weapp/mytuning`,
   mytuningclass: `${host}/weapp/mytuning/classes`,
@@ -90,10 +95,11 @@ var doUrl = {
   mytuningstudchanges: `${host}/weapp/mytuning/studchanges`,
   mytuningexchange: `${host}/weapp/mytuning/exchange`,
 
-  // 班号变更
-  myrename: `${host}/weapp/myrename`,
-  myrenameclass: `${host}/weapp/myrename/classes`,
-  myrenameupdate: `${host}/weapp/myrename/update`,
+  // 班级分管
+  mydivision: `${host}/weapp/mydivision`,
+  mydivisionclass: `${host}/weapp/mydivision/classes`,
+
+
 
   // 错误测试地址
   test: `${host}/weapp/data`,

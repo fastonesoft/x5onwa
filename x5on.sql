@@ -798,6 +798,21 @@ CREATE TABLE xonClassGroup (
   FOREIGN KEY (grade_group_id) REFERENCES xonGradeGroup(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='分组对应班级';
 
+/**
+  年级分管班级用户列表
+ */
+CREATE TABLE xonGradeDivision (
+  uid VARCHAR(36) NOT NULL,
+  grade_id VARCHAR(18) NOT NULL,
+  cls_id VARCHAR(20) NOT NULL,
+  user_id VARCHAR(36) NOT NULL,
+  PRIMARY KEY (grade_id, cls_id),
+  UNIQUE KEY uid (uid),
+  FOREIGN KEY (grade_id) REFERENCES xonGrade(id),
+  FOREIGN KEY (cls_id) REFERENCES xonClass(id),
+  FOREIGN KEY (user_id) REFERENCES xonUser(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='年级班级分管用户';
+
 /** 年级教师 **/
 CREATE TABLE xonGradeUser (
   uid VARCHAR(36) NOT NULL,

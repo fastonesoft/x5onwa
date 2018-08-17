@@ -92,7 +92,7 @@ class Mytuning extends CI_Controller {
    */
   public function exchange() {
     Model\xonLogin::check(self::role_name, function ($user) {
-//      try {
+      try {
         $param = $_POST;
 
         $movestud_uid = $param['movestud_uid'];
@@ -100,9 +100,9 @@ class Mytuning extends CI_Controller {
         $result = Model\xonGradeStud::exchange($movestud_uid, $changestud_uids);
 
         $this->json(['code' => 0, 'data' => $result]);
-//      } catch (Exception $e) {
-//        $this->json(['code' => 1, 'data' => $e->getMessage()]);
-//      }
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
     }, function ($error) {
       $this->json($error);
     });

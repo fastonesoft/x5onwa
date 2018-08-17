@@ -52,9 +52,10 @@
     <radio-group name="movestud_uid" bindchange="studmoveChange">
       <label class="weui-cell weui-check__label" wx:for="{{studmoves}}" wx:key="uid">
         <radio class="weui-check" value="{{item.uid}}" checked="{{item.checked}}"/>
-        <view class="weui-cell__bd">{{item.cls_name}} - {{item.stud_name}} {{item.stud_sex}} {{item.value}}</view>
-        <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
-          <icon class="weui-icon-radio" type="success" size="23"></icon>
+        <view class="weui-cell__bd">{{item.cls_name}} {{item.stud_name}} {{item.stud_sex}} {{item.value}}</view>
+        <view class="weui-cell__ft weui-cell__ft_in-radio">
+          <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.checked}}"></icon>
+          <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{item.checked}}"></icon>
         </view>
       </label>
     </radio-group>
@@ -70,7 +71,7 @@
                   <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.checked}}"></icon>
                   <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{item.checked}}"></icon>
               </view>
-              <view class="weui-cell__bd">{{item.cls_name}} - {{item.stud_name}} {{item.stud_sex}} {{item.value}}</view>
+              <view class="weui-cell__bd">{{item.cls_name}} {{item.stud_name}} {{item.stud_sex}} {{item.value}}</view>
           </label>
       </checkbox-group>
     </view>
