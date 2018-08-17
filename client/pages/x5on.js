@@ -98,6 +98,7 @@ var doUrl = {
   // 班级分管
   mydivision: `${host}/weapp/mydivision`,
   mydivisionclass: `${host}/weapp/mydivision/classes`,
+  mydivisionteachs: `${host}/weapp/mydivision/teachs`,
 
 
 

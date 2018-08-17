@@ -56,4 +56,40 @@ Page({
     that.setData({ classes })
   },
 
+  checkInput: function (e) {
+    x5on.checkInput(e, this)
+  },
+
+  findSubmit: function (e) {
+    var that = this;
+    x5on.checkForm(that, 0, 0, function () {
+      x5on.postFormEx({
+        url: x5on.url.mydivisionteachs,
+        data: e.detail.value,
+        success: (result) => {
+          
+          var teaches = result.data
+          that.setData({ teaches })
+          if (teaches.length === 0) {
+              x5on.showError(that, '没有找到你说的老师！')
+          } 
+        }
+      })
+    })
+  },
+
+  teachChange: function (e) {
+    var that = this
+    var teaches = that.data.teaches
+
+    console.log(e.detail.value)
+    console.log(teaches)
+
+    for (var index=0; index<teaches.length; index++) {
+      var item = teaches[index]
+      item.checked = item.user_id === e.detail.value
+    }
+    that.setData({ teaches })
+  },
+
 })

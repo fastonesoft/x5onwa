@@ -1332,6 +1332,16 @@ AS
   ) Y
   ON X.stud_id = Y.stud_id;
 
+/**
+  年级分管教师班级查询
+ */
+
+CREATE VIEW xovGradeDivisionUser
+AS
+  SELECT A.*, cls_name, User2.name as user_name
+  FROM xonGradeDivision A
+  LEFT JOIN xovClass G ON A.cls_id = G.id
+  LEFT JOIN xonUser User2 on A.user_id = User2.id;
 
 /*外键约束开启*/
 SET FOREIGN_KEY_CHECKS = 1;

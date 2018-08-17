@@ -39,5 +39,22 @@ class Mydivision extends CI_Controller {
     });
   }
 
+  public function teachs() {
+    Model\xonLogin::check(self::role_name, function ($user) {
+      try {
+        $param = $_POST;
+        $user_name = $param["user_name"];
+
+        $result = Model\xonGradeDivision::getSchoolTeach($user_name);
+
+        // 正文
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
 
 }

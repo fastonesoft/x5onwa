@@ -8,7 +8,8 @@ use \Exception;
 
 class xonGradeDivision
 {
-
-
+  public static function getSchoolTeach ($user_name) {
+    return dbs::select('xovSchoolTeach', ['*'], compact('user_name'));
+  }
 
 }
