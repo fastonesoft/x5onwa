@@ -15,10 +15,10 @@ class xovGradeDivisionStud
     return dbs::select('xovGradeDivisionStud', ['*'], compact('stud_id', 'sub_id', 'same_group'));
   }
 
-  public static function getStudSumByName ($stud_name) {
+  public static function getStudSumByName ($grade_id, $stud_name) {
     $sub_id = 99;
     $same_group = 0;
-    return dbs::select('xovGradeDivisionStud', ['*'], compact('stud_name', 'sub_id', 'same_group'));
+    return dbs::select('xovGradeDivisionStud', ['*'], compact('grade_id', 'stud_name', 'sub_id', 'same_group'));
   }
 
   public static function getStudSumByValue ($cls_id, $value, $section) {

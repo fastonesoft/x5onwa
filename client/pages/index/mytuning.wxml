@@ -37,7 +37,7 @@
         <view class="weui-label">学生姓名</view>
       </view>
       <view class="weui-cell__bd">
-        <input class="weui-input" placeholder="输入学生姓名" name="name" confirm-type="done" type="text" maxlength="4" data-reg="^[\\u4e00-\\u9fa5]{2,4}$" data-index="0" data-message="学生姓名有误！" bindblur="checkInput"/>
+        <input class="weui-input" placeholder="输入学生姓名" name="stud_name" confirm-type="done" type="text" maxlength="4" data-reg="^[\\u4e00-\\u9fa5]{2,4}$" data-index="0" data-message="学生姓名有误！" bindblur="checkInput"/>
       </view>
       <view class="weui-cell__ft">
         <button type="normal" form-type="submit">查询</button>
@@ -46,34 +46,33 @@
   </view>
 </form>
 
-<form bindsubmit="mytuningSubmit">
-  <view wx:if="{{studmoves.length>0}}">
-    <view class="weui-cells__title">调动学生</view>
-    <view class="weui-cells weui-cells_after-title">
-      <radio-group name="movestud_uid" bindchange="studmoveChange">
-        <label class="weui-cell weui-check__label" wx:for="{{studmoves}}" wx:key="uid">
-          <radio class="weui-check" value="{{item.uid}}" checked="{{item.checked}}"/>
-          <view class="weui-cell__bd">{{item.stud_name}} {{item.stud_sex}} {{item.value}} {{item.cls_name}}</view>
-          <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
-            <icon class="weui-icon-radio" type="success" size="20"></icon>
-          </view>
-        </label>
-      </radio-group>
-    </view>
+<form bindsubmit="mytuningSubmit" wx:if="{{studmoves.length>0}}">
+  <view class="weui-cells__title">调动学生</view>
+  <view class="weui-cells weui-cells_after-title">
+    <radio-group name="movestud_uid" bindchange="studmoveChange">
+      <label class="weui-cell weui-check__label" wx:for="{{studmoves}}" wx:key="uid">
+        <radio class="weui-check" value="{{item.uid}}" checked="{{item.checked}}"/>
+        <view class="weui-cell__bd">{{item.cls_name}} - {{item.stud_name}} {{item.stud_sex}} {{item.value}}</view>
+        <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+          <icon class="weui-icon-radio" type="success" size="23"></icon>
+        </view>
+      </label>
+    </radio-group>
   </view>
 
-  <view wx:if="{{studchanges.length>0}}">
+  <block wx:if="{{studchanges.length>0}}">
     <view class="weui-cells__title">交换学生</view>
     <view class="weui-cells weui-cells_after-title">
-      <radio-group name="changestud_uid" bindchange="studchangeChange">
-        <label class="weui-cell weui-check__label" wx:for="{{studchanges}}" wx:key="uid">
-          <radio class="weui-check" value="{{item.uid}}" checked="{{item.checked}}"/>
-          <view class="weui-cell__bd">{{item.stud_name}} {{item.stud_sex}} {{item.value}} {{item.cls_name}}</view>
-          <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
-            <icon class="weui-icon-radio" type="success" size="20"></icon>
-          </view>
-        </label>
-      </radio-group>
+      <checkbox-group name="changestud_uids" bindchange="studchangeChange">
+          <label class="weui-cell weui-check__label" wx:for="{{studchanges}}" wx:key="uid">
+              <checkbox class="weui-check" value="{{item.uid}}" checked="{{item.checked}}"/>
+              <view class="weui-cell__hd weui-check__hd_in-checkbox">
+                  <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.checked}}"></icon>
+                  <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{item.checked}}"></icon>
+              </view>
+              <view class="weui-cell__bd">{{item.cls_name}} - {{item.stud_name}} {{item.stud_sex}} {{item.value}}</view>
+          </label>
+      </checkbox-group>
     </view>
 
     <view class="x5ui-half-btn">
@@ -81,6 +80,6 @@
         <button type="primary" form-type="submit">提交调动</button>
       </view>
     </view>
-  </view>
+  </block>
 
 </form>

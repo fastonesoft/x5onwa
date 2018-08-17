@@ -50,8 +50,9 @@ class Mytuning extends CI_Controller {
     Model\xonLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
-        $stud_name = $param['name'];
-        $result = Model\xovGradeDivisionStud::getStudSumByName($stud_name);
+        $grade_id = $param['grade_id'];
+        $stud_name = $param['stud_name'];
+        $result = Model\xovGradeDivisionStud::getStudSumByName($grade_id, $stud_name);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -95,8 +96,8 @@ class Mytuning extends CI_Controller {
         $param = $_POST;
 
         $movestud_uid = $param['movestud_uid'];
-        $changestud_uid = $param['changestud_uid'];
-        $result = Model\xonGradeStud::exchange($movestud_uid, $changestud_uid);
+        $changestud_uids = $param['changestud_uids'];
+        $result = Model\xonGradeStud::exchange($movestud_uid, $changestud_uids);
 
         $this->json(['code' => 0, 'data' => $result]);
 //      } catch (Exception $e) {

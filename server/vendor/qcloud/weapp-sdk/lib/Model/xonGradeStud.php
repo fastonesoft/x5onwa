@@ -9,7 +9,7 @@ use \Exception;
 class xonGradeStud
 {
 
-  public static function exchange ($movestud_uid, $changestud_uid) {
+  public static function exchange ($movestud_uid, $changestud_uids) {
     $uid = $movestud_uid;
     $movestud = dbs::row('xonGradeStud', ['*'], compact('uid'));
     $uid = $changestud_uid;
