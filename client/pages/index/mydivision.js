@@ -90,8 +90,6 @@ Page({
   },
 
   mydivisionSubmit: function (e) {
-    console.log(e)
-
     var that = this
     var data = e.detail.value
     if (!data.user_id || data.cls_ids.length==0) {
@@ -121,9 +119,7 @@ Page({
       url: x5on.url.mydivisionupdate,
       data: data,
       success: result => {
-        var studmoves = []
-        var studchanges = []
-        that.setData({ studmoves, studchanges })
+
         x5on.showSuccess('调动' + result.data + '个学生')
       }
     })
