@@ -82,14 +82,51 @@ Page({
     var that = this
     var teaches = that.data.teaches
 
-    console.log(e.detail.value)
-    console.log(teaches)
-
     for (var index=0; index<teaches.length; index++) {
       var item = teaches[index]
       item.checked = item.user_id === e.detail.value
     }
     that.setData({ teaches })
   },
+
+  mydivisionSubmit: function (e) {
+    console.log(e)
+
+    var that = this
+    var data = e.detail.value
+    if (!data.user_id || data.cls_ids.length==0) {
+      x5on.showError(that, '教师、班级未做选择')
+      return
+    }
+    var teaches = this.data.teaches
+    var classes = this.data.classes
+    teaches.forEach(function (item, index) {
+      if (item.user_id == data.user_id) {
+        teaches.splice(index, 1)
+      }
+    })
+    for (var index = classes.length - 1; index >= 0; index--) {
+      var has = false
+      var item = classes[index]
+      for (var i=0; i < data.cls_ids.length; i++) {
+        if (item.id == data.cls_ids[i]) {
+          has = true
+          break
+        }
+      }
+      if (has) classes.splice(index, 1)
+    }
+    that.setData({ teaches, classes })
+    x5on.postFormEx({
+      url: x5on.url.mydivisionupdate,
+      data: data,
+      success: result => {
+        var studmoves = []
+        var studchanges = []
+        that.setData({ studmoves, studchanges })
+        x5on.showSuccess('调动' + result.data + '个学生')
+      }
+    })
+  }
 
 })

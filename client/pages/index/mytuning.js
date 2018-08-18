@@ -146,7 +146,7 @@ Page({
       x5on.showError(that, '选择调动、交换的学生')
       return
     }
-    console.log(data)
+
     x5on.postFormEx({
       url: x5on.url.mytuningexchange,
       data: data,

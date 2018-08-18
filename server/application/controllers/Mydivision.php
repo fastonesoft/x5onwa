@@ -27,7 +27,7 @@ class Mydivision extends CI_Controller {
       try {
         $param = $_POST;
         $grade_id = $param['grade_id'];
-        $result = Model\xovClass::getRows4Tuning($grade_id);
+        $result = Model\xovClass::getRows4Division($grade_id);
 
         // 正文
         $this->json(['code' => 0, 'data' => $result]);
@@ -44,9 +44,28 @@ class Mydivision extends CI_Controller {
       try {
         $param = $_POST;
         $user_name = $param["user_name"];
+        $division_user_id = $user['unionId'];
+        $sch_id = Model\xovSchoolTeach::getUserSchoolId($division_user_id);
 
-        $result = Model\xonGradeDivision::getSchoolTeach($user_name);
+        $result = Model\xonGradeDivision::getSchoolTeach($sch_id, $user_name);
+        // 正文
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
 
+  public function update() {
+    Model\xonLogin::check(self::role_name, function ($user) {
+      try {
+        $param = $_POST;
+
+        $user_id = $param['user_id'];
+        $cls_ids = $param['cls_ids'];
+//
         // 正文
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {

@@ -18,4 +18,13 @@ class xovSchoolTeach
     }
   }
 
+  public static function getUserSchoolId ($user_id) {
+    $res = dbs::row('xovSchoolTeach', ['*'], compact('user_id'));
+    if ( $res !== null ) {
+      return $res->sch_id;
+    } else {
+      throw new Exception("未注册学校");
+    }
+  }
+
 }
