@@ -103,6 +103,9 @@ var doUrl = {
   mydivisionedclass: `${host}/weapp/mydivision/classed`,
   mydivisionedremove: `${host}/weapp/mydivision/remove`,
 
+  // 分班调整
+  myadjust: `${host}/weapp/myadjust`,
+  myadjustclass: `${host}/weapp/myadjust/classes`,
 
 
 

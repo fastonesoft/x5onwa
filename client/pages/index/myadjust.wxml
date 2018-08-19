@@ -1,19 +1,19 @@
 <!--pages/index/myadjust.wxml-->
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
-  <view class="weui-cells__title">分管班级</view>
-  <view class="weui-cells weui-cells_after-title">
-    <view class="weui-cell weui-cell_select">
-      <view class="weui-cell__hd weui-cell__hd_in-select-after">
-        <view class="weui-label">班级选择</view>
-      </view>
-      <view class="weui-cell__bd">
-        <picker bindchange="classChange" value="{{classIndex}}" range="{{classes}}" range-key="cls_name" disabled="{{classes.length===0}}">
-          <view class="weui-select weui-select_in-select-after">{{classes[classIndex].cls_name}}</view>
-        </picker>
-      </view>
+<view class="weui-cells__title">年级设置</view>
+<view class="weui-cells weui-cells_after-title">
+  <view class="weui-cell weui-cell_select">
+    <view class="weui-cell__hd weui-cell__hd_in-select-after">
+      <view class="weui-label">年级选择</view>
+    </view>
+    <view class="weui-cell__bd">
+      <picker bindchange="gradeChange" value="{{gradeIndex}}" range="{{grades}}" range-key="name" disabled="{{grades.length===0}}">
+        <view class="weui-select weui-select_in-select-after">{{grades[gradeIndex].name}}</view>
+      </picker>
     </view>
   </view>
+</view>
 
   <view class="weui-cells__title">调动查询</view>
   <view class="weui-cells weui-cells_after-title">
@@ -42,6 +42,20 @@
           </view>
         </label>
       </radio-group>
+    </view>
+  </view>
+
+  <view class="weui-cells__title">分管班级</view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_select">
+      <view class="weui-cell__hd weui-cell__hd_in-select-after">
+        <view class="weui-label">班级选择</view>
+      </view>
+      <view class="weui-cell__bd">
+        <picker bindchange="classChange" value="{{classIndex}}" range="{{classes}}" range-key="cls_name" disabled="{{classes.length===0}}">
+          <view class="weui-select weui-select_in-select-after">{{classes[classIndex].cls_name}}</view>
+        </picker>
+      </view>
     </view>
   </view>
 
