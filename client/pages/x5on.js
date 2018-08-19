@@ -100,6 +100,8 @@ var doUrl = {
   mydivisionclass: `${host}/weapp/mydivision/classes`,
   mydivisionteachs: `${host}/weapp/mydivision/teachs`,
   mydivisionupdate: `${host}/weapp/mydivision/update`,
+  mydivisionedclass: `${host}/weapp/mydivision/classed`,
+  mydivisionedremove: `${host}/weapp/mydivision/remove`,
 
 
 

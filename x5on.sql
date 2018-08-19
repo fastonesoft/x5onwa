@@ -1254,6 +1254,23 @@ AS
   FROM xonClass A
   LEFT JOIN xovGradeCurrent B ON A.grade_id = B.id;
 
+/**
+  未分管的班级列表
+ */
+CREATE VIEW xovClassNotDivision
+AS
+  SELECT A.*
+  FROM xovClass A
+  WHERE A.id NOT IN (
+    SELECT cls_id FROM xonGradeDivision
+  );
+
+CREATE VIEW xovClassDivisioned
+AS
+  SELECT A.*, cls_order, cls_name, User2.name as user_name
+  FROM xonGradeDivision A
+  LEFT JOIN xovClass C ON C.id = A.cls_id
+  LEFT JOIN xonUser User2 on A.user_id = User2.id;
 
 
 /**

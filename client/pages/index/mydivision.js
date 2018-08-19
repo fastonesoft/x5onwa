@@ -27,7 +27,6 @@ Page({
     if (gradeIndex == -1) return
 
     that.setData({ gradeIndex })
-
     // 班级列表
     var grade_id = this.data.grades[gradeIndex].id
     x5on.postForm({
@@ -36,6 +35,14 @@ Page({
       success: function (result) {
         var classes = result.data
         that.setData({ classes })
+      }
+    })
+    x5on.postForm({
+      url: x5on.url.mydivisionedclass,
+      data: { grade_id },
+      success: function (result) {
+        var classed = result.data
+        that.setData({ classed })
       }
     })
   },
@@ -119,8 +126,28 @@ Page({
       url: x5on.url.mydivisionupdate,
       data: data,
       success: result => {
+        var classed = result.data
+        that.setData({ classed })
+      }
+    })
+  },
 
-        x5on.showSuccess('调动' + result.data + '个学生')
+  mydivisionRemove: function (e) {
+    var that = this
+    var classed = that.data.classed
+    var uid = e.currentTarget.dataset.uid
+    classed.forEach(function (item, index) {
+      if (item.uid == uid) {
+        classed.splice(index, 1)
+      }
+    })
+    that.setData({ classed })
+    x5on.postFormEx({
+      url: x5on.url.mydivisionedremove,
+      data: {uid},
+      success: result => {
+        var classes = result.data
+        that.setData({ classes })
       }
     })
   }
