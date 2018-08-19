@@ -1333,7 +1333,7 @@ AS
  */
 CREATE VIEW xovGradeDivisionStud
 AS
-  SELECT X.*, Y.sub_id, sub_name, sub_shortname, value
+  SELECT X.*, Y.sub_id, sub_name, sub_shortname, value, kao_room, kao_seat, kao_num
   FROM
   (
     SELECT A.*
