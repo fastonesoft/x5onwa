@@ -106,7 +106,7 @@ var doUrl = {
   // 分班调整
   myadjust: `${host}/weapp/myadjust`,
   myadjustclass: `${host}/weapp/myadjust/classes`,
-
+  myadjuststudent: `${host}/weapp/myadjust/student`,
 
 
   // 错误测试地址

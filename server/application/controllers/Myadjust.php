@@ -40,4 +40,23 @@ class Myadjust extends CI_Controller {
       $this->json($error);
     });
   }
+
+  public function student() {
+    Model\xonLogin::check(self::role_name, function ($user) {
+      try {
+        $param = $_POST;
+        $grade_id = $param['grade_id'];
+        $stud_name = $param['stud_name'];
+        $result = Model\xovGradeDivisionStud::getStudSumByName($grade_id, $stud_name);
+
+
+        // 正文
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
 }

@@ -117,7 +117,7 @@ Page({
             that.setData({ studchanges })
           }
         })
-        // break 不能跳出
+        // break 不能跳出，要清除原先的真
       }
     }
     that.setData({ studmoves })

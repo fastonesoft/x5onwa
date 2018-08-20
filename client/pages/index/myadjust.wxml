@@ -15,6 +15,7 @@
   </view>
 </view>
 
+<form bindsubmit="findSubmit">
   <view class="weui-cells__title">调动查询</view>
   <view class="weui-cells weui-cells_after-title">
     <view class="weui-cell weui-cell_input weui-cell_vcode">
@@ -22,23 +23,26 @@
         <view class="weui-label">学生姓名</view>
       </view>
       <view class="weui-cell__bd">
-        <input class="weui-input" placeholder="输入学生姓名" name="name" confirm-type="done" type="text" maxlength="4" data-reg="^[\\u4e00-\\u9fa5]{2,4}$" data-index="0" data-message="学生姓名有误！" bindblur="checkInput"/>
+        <input class="weui-input" placeholder="输入学生姓名" name="stud_name" confirm-type="done" type="text" maxlength="4" data-reg="^[\\u4e00-\\u9fa5]{2,4}$" data-index="0" data-message="学生姓名有误！" bindblur="checkInput"/>
       </view>
       <view class="weui-cell__ft">
         <button type="normal" form-type="submit">查询</button>
       </view>
     </view>
   </view>
+</form>
 
-  <view wx:if="{{1}}">
+<form bindsubmit="findSubmit">
+  <view wx:if="{{students.length>0}}">
     <view class="weui-cells__title">学生选择</view>
     <view class="weui-cells weui-cells_after-title">
-      <radio-group name="user_id" bindchange="radioChange">
-        <label class="weui-cell weui-check__label" wx:for="{{radios}}" wx:key="id">
-          <radio class="weui-check" value="{{item.id}}" checked="{{item.checked}}"/>
-          <view class="weui-cell__bd">{{item.name}}（{{item.nick_name}}）</view>
-          <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
-            <icon class="weui-icon-radio" type="success_no_circle" size="16"></icon>
+      <radio-group name="user_id" bindchange="studentChange">
+        <label class="weui-cell weui-check__label" wx:for="{{students}}" wx:key="uid">
+          <radio class="weui-check" value="{{item.uid}}" checked="{{item.checked}}"/>
+          <view class="weui-cell__bd">{{item.cls_name}} {{item.stud_name}} {{item.stud_sex}} {{item.value}}</view>
+          <view class="weui-cell__ft weui-cell__ft_in-radio">
+            <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.checked}}"></icon>
+            <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{item.checked}}"></icon>
           </view>
         </label>
       </radio-group>
@@ -64,7 +68,7 @@
       <button type="primary" form-type="submit">申请调动</button>
     </view>
   </view>
-
+</form>
 
 <view class="weui-panel weui-panel_access">
   <view class="weui-panel__hd">调动列表</view>

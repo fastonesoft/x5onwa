@@ -25,6 +25,6 @@ class xovClass
   }
 
   public static function getRows4Divisioned ($grade_id) {
-    return dbs::select('xovClassDivisioned', ['uid', 'cls_name', 'cls_order', 'user_name'], compact('grade_id'));
+    return dbs::select('xovClassDivisioned', ['uid', 'cls_name', 'cls_order', 'user_name', 'nick_name'], compact('grade_id'));
   }
 }

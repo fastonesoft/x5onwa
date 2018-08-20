@@ -73,8 +73,7 @@ Page({
       x5on.postFormEx({
         url: x5on.url.mydivisionteachs,
         data: e.detail.value,
-        success: (result) => {
-          
+        success: (result) => {          
           var teaches = result.data
           that.setData({ teaches })
           if (teaches.length === 0) {
