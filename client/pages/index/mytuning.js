@@ -11,8 +11,6 @@ Page({
     classes: [],
     studmoves: [],
     studchanges: [],
-    gradeIndex: -1,
-    classIndex: -1,
   },
 
   onLoad: function (options) {
@@ -28,12 +26,10 @@ Page({
 
   gradeChange: function (e) {
     var that = this
-    var gradeIndex = e.detail.value
-    if (gradeIndex == -1) return
-
-    var classIndex = -1
     var studmoves = []
     var studchanges = []
+    var classIndex = -1
+    var gradeIndex = e.detail.value
     that.setData({ gradeIndex, classIndex, studmoves, studchanges })
 
     // 班级列表
@@ -49,13 +45,10 @@ Page({
   },
 
   classChange: function (e) {
-    var that = this
-    var classIndex = e.detail.value
-    if (classIndex == -1) return
-
     var studmoves = []
     var studchanges = []
-    that.setData({ classIndex, studmoves, studchanges })
+    var classIndex = e.detail.value
+    this.setData({ classIndex, studmoves, studchanges })
   },
 
   checkInput: function (e) {
@@ -68,7 +61,7 @@ Page({
     var classes = this.data.classes
     var gradeIndex = this.data.gradeIndex
     var classIndex = this.data.classIndex
-    if (gradeIndex === -1 || classIndex === -1) {
+    if (!gradeIndex || !classIndex || classIndex == -1 || gradeIndex == -1) {
       x5on.showError(that, '年级选择、目标班级不得为空')
       return
     }
@@ -93,10 +86,10 @@ Page({
   studmoveChange: function (e) {
     var that = this
     var studmoves = this.data.studmoves
-
     for (var index=0; index<studmoves.length; index++) {
       var item = studmoves[index]
       item.checked = item.uid === e.detail.value
+      console.log(item)
       if (item.checked) {
         var cls_id = item.cls_id
         var classes = that.data.classes

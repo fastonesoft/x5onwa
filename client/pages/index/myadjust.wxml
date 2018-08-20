@@ -62,12 +62,13 @@
       </view>
     </view>
   </view>
-
-  <view class="x5ui-half-btn">
-    <view class="weui-btn-area">
-      <button type="primary" form-type="submit">申请调动</button>
+  <block wx:if="{{students.length>0}}">
+    <view class="x5ui-half-btn">
+      <view class="weui-btn-area">
+        <button type="primary" form-type="submit">申请调动</button>
+      </view>
     </view>
-  </view>
+  </block>
 </form>
 
 <view class="weui-panel weui-panel_access">

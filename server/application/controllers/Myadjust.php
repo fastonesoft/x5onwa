@@ -28,6 +28,7 @@ class Myadjust extends CI_Controller {
         $param = $_POST;
         $user_id = $user['unionId'];
         $grade_id = $param['grade_id'];
+
         $classes = Model\xovGradeDivisionUser::getRowsByUserId($user_id, $grade_id);
         $result = compact('classes');
 

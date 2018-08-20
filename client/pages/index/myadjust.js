@@ -6,8 +6,9 @@ Page({
   data: {
     errorMessage: '错误提示',
     errorArray: [1],
-    
-    gradeIndex: -1,
+
+    grades: [],
+    classes: [],
   },
 
   onLoad: function (options) {
@@ -23,8 +24,20 @@ Page({
 
   gradeChange: function (e) {
     var that = this
+    var grades = that.data.grades
     var gradeIndex = e.detail.value
     that.setData({ gradeIndex })
+
+    // 分管班级列表
+    var grade_id = grades[gradeIndex].id
+    x5on.postFormEx({
+      url: x5on.url.myadjustclass,
+      data: { grade_id },
+      success: (result) => {
+        var classes = result.data.classes
+        that.setData({ classes })
+      }
+    })
   },
 
   checkInput: function (e) {
@@ -35,7 +48,7 @@ Page({
     var that = this
     var grades = this.data.grades
     var gradeIndex = this.data.gradeIndex
-    if (gradeIndex == -1) {
+    if (!gradeIndex) {
       x5on.showError(that, '没有选择年级！')
       return
     }
@@ -56,6 +69,20 @@ Page({
       })
     })
 
+  },
+
+  classChange: function (e) {
+    var classIndex = e.detail.value
+    this.setData({ classIndex })
+  },
+
+  studentChange: function (e) {
+    var students = this.data.students
+    for (var index = 0; index < students.length; index++) {
+      var item = students[index]
+      item.checked = item.uid === e.detail.value
+    }
+    this.setData({ students })
   },
 
 })

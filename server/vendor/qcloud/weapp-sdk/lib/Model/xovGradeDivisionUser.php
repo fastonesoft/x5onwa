@@ -10,7 +10,7 @@ class xovGradeDivisionUser
 {
 
   public static function getRowsByUserId ($user_id, $grade_id) {
-    return dbs::select('xovGradeDivisionUser', ['uid', 'grd_id', 'cls_id', 'cls_name'], compact('user_id', 'grade_id'));
+    return dbs::select('xovGradeDivisionUser', ['uid', 'grade_id', 'cls_id', 'cls_name'], compact('user_id', 'grade_id'));
   }
 
 }
