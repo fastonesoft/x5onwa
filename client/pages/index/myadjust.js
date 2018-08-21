@@ -24,11 +24,13 @@ Page({
 
   gradeChange: function (e) {
     var that = this
-    var grades = that.data.grades
+    var students = []
+    var classIndex = -1
     var gradeIndex = e.detail.value
-    that.setData({ gradeIndex })
+    that.setData({ gradeIndex, classIndex, students })
 
     // 分管班级列表
+    var grades = that.data.grades
     var grade_id = grades[gradeIndex].id
     x5on.postFormEx({
       url: x5on.url.myadjustclass,
@@ -84,5 +86,26 @@ Page({
     }
     this.setData({ students })
   },
+
+  studmoveSubmit: function (e) {
+    var that = this
+    var classIndex = this.data.classIndex
+    var kao_stud_id = e.detail.value.kao_stud_id
+    if (!classIndex || classIndex == -1 || !kao_stud_id) {
+      x5on.showError(that, '目标班级、调动学生必须设置！')
+      return
+    }
+    var cls_id = this.data.classes[classIndex].cls_id
+    x5on.postFormEx({
+      url: x5on.url.myadjuststudmove,
+      data: { kao_stud_id, cls_id },
+      success: (result) => {
+        var students = []
+
+        that.setData({ studmoves, studchanges })
+        x5on.showSuccess('调动' + result.data + '个学生')
+      }
+    })
+  }
 
 })

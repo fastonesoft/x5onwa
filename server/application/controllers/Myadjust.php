@@ -28,7 +28,7 @@ class Myadjust extends CI_Controller {
         $user_id = $user['unionId'];
         $grade_id = $param['grade_id'];
 
-        $classes = Model\xovGradeDivisionUser::getRowsByUserId($user_id, $grade_id);
+        $classes = Model\xovClass::getRows4UserDivisioned($user_id, $grade_id);
         $result = compact('classes');
 
         $this->json(['code' => 0, 'data' => $result]);
@@ -46,7 +46,25 @@ class Myadjust extends CI_Controller {
         $param = $_POST;
         $grade_id = $param['grade_id'];
         $stud_name = $param['stud_name'];
-        $result = Model\xovGradeDivisionStud::getStudSumByName($grade_id, $stud_name);
+        $result = Model\xovGradeDivisionStud::getStudSumNotMovedByName($grade_id, $stud_name);
+
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
+
+  public function studmove() {
+    Model\xonLogin::check(self::role_name, function ($user) {
+      try {
+        $param = $_POST;
+        $grade_id = $param['grade_id'];
+        $stud_name = $param['stud_name'];
+
+        $result = '';
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {

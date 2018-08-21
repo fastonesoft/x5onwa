@@ -1046,6 +1046,7 @@ CREATE TABLE xonStudMove (
   kao_stud_id VARCHAR(28) NOT NULL,
   request_user_id VARCHAR(36) NOT NULL,
   request_cls_id VARCHAR(20) NOT NULL,
+  success BOOLEAN NOT NULL,
   PRIMARY KEY (kao_stud_id),
   FOREIGN KEY (kao_stud_id) REFERENCES xonKaoStud(id),
   FOREIGN KEY (request_user_id) REFERENCES xonUser(id),
@@ -1056,7 +1057,6 @@ CREATE TABLE xonStudMove (
 INSERT INTO xonStep VALUES ('321204022016', replace(uuid(), '-', ''), '2016级', '32120402', 0);
 INSERT INTO xonStep VALUES ('321204022017', replace(uuid(), '-', ''), '2017级', '32120402', 0);
 INSERT INTO xonStep VALUES ('321204022018', replace(uuid(), '-', ''), '2018级', '32120402', 0);
-
 
 
 INSERT INTO xonGrade VALUES ('32120402201607', replace(uuid(), '-', ''), '321204022016', 2016, 7);
@@ -1312,7 +1312,7 @@ AS
  */
 CREATE VIEW xovGradeStud
 AS
-  SELECT A.*, S.stud_name, S.stud_sex, step_name, sch_name, C.name AS come_name, C2.cls_name
+  SELECT A.*, S.stud_name, S.stud_sex, step_name, sch_name, C.name AS come_name, C2.cls_name, C2.cls_order
   FROM xonGradeStud A
   LEFT JOIN xovStudent S ON A.stud_id = S.id
   LEFT JOIN xonStudCome C ON A.stud_come_id = C.id
@@ -1359,9 +1359,18 @@ AS
     select kao_stud_id
     from xonStudMove
   );
-/**
 
+
+/**
+  调动学生信息
  */
+create view xovStudMove
+AS
+SELECT x.*,
+FROM xovStudMove x
+LEFT JOIN xovClass c ON x.request_cls_id = c.id
+
+
 
 /**
   分班考试学生，在调动列表中
@@ -1372,16 +1381,7 @@ AS
   from xovGradeDivisionStud a
   INNER JOIN xonStudMove b ON a.kao_stud_id = b.kao_stud_id;
 
-/**
-  年级分管教师班级查询
- */
 
-CREATE VIEW xovGradeDivisionUser
-AS
-  SELECT A.*, cls_name, User2.name as user_name
-  FROM xonGradeDivision A
-  LEFT JOIN xovClass G ON A.cls_id = G.id
-  LEFT JOIN xonUser User2 on A.user_id = User2.id;
 
 /*外键约束开启*/
 SET FOREIGN_KEY_CHECKS = 1;

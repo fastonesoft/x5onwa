@@ -107,6 +107,7 @@ var doUrl = {
   myadjust: `${host}/weapp/myadjust`,
   myadjustclass: `${host}/weapp/myadjust/classes`,
   myadjuststudent: `${host}/weapp/myadjust/student`,
+  myadjuststudmove: `${host}/weapp/myadjust/studmove`,
 
 
   // 错误测试地址
