@@ -28,4 +28,16 @@ class xovGradeDivisionStud
     return dbs::select('xovGradeDivisionStud', ['*'], "cls_id = $cls_id and sub_id = $sub_id and value between $begin and $end and same_group = 0");
   }
 
+  public static function getStudSumNotMovedByName ($grade_id, $stud_name) {
+    $sub_id = 99;
+    $same_group = 0;
+    return dbs::select('xovGradeDivisionStudNotMoved', ['*'], compact('grade_id', 'stud_name', 'sub_id', 'same_group'));
+  }
+
+  public static function getStudSumMovedByUserId ($user_id) {
+    $sub_id = 99;
+    $same_group = 0;
+    return dbs::select('xovGradeDivisionStudMoved', ['*'], compact('user_id'));
+  }
+
 }

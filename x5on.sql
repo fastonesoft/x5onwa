@@ -973,7 +973,7 @@ CREATE TABLE xonKao (
   type_id INT(11) NOT NULL,
   code INT(11) NOT NULL,
   summed BOOLEAN NOT NULL,
-  to_division BOOLEAN NOT NULL,   /* 分班成绩依据 */
+  to_division BOOLEAN NOT NULL,   /* 分班成绩依据，一个grade_id只能有一个 */
   PRIMARY KEY (id),
   UNIQUE KEY uid (uid),
   FOREIGN KEY (grade_id) REFERENCES xonGrade(id),
@@ -1040,17 +1040,16 @@ CREATE TABLE xonKaoScore (
   FOREIGN KEY (kao_stud_id) REFERENCES xonKaoStud(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='考试成绩';
 
-INSERT INTO xonKaoScore VALUES (replace(uuid(), '-', ''), 'kaostudid', subid, value);
 
 
 CREATE TABLE xonStudMove (
   kao_stud_id VARCHAR(28) NOT NULL,
   request_user_id VARCHAR(36) NOT NULL,
-  cls_id VARCHAR(20) NOT NULL,
+  request_cls_id VARCHAR(20) NOT NULL,
   PRIMARY KEY (kao_stud_id),
   FOREIGN KEY (kao_stud_id) REFERENCES xonKaoStud(id),
   FOREIGN KEY (request_user_id) REFERENCES xonUser(id),
-  FOREIGN KEY (cls_id) REFERENCES xonClass(id)
+  FOREIGN KEY (request_cls_id) REFERENCES xonClass(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学生调动';
 
 
@@ -1333,7 +1332,7 @@ AS
  */
 CREATE VIEW xovGradeDivisionStud
 AS
-  SELECT X.*, Y.sub_id, sub_name, sub_shortname, value, kao_room, kao_seat, kao_num
+  SELECT X.*, Y.sub_id, sub_name, sub_shortname, value, Y.id as kao_stud_id, kao_room, kao_seat, kao_num
   FROM
   (
     SELECT A.*
@@ -1348,6 +1347,30 @@ AS
     INNER JOIN xovKaoDivision D ON C.kao_id = D.id
   ) Y
   ON X.stud_id = Y.stud_id;
+
+/**
+  分班考试学生，不在调动列表中
+ */
+CREATE VIEW xovGradeDivisionStudNotMoved
+AS
+  SELECT a.*
+  FROM xovGradeDivisionStud a
+  WHERE a.kao_stud_id not in (
+    select kao_stud_id
+    from xonStudMove
+  );
+/**
+
+ */
+
+/**
+  分班考试学生，在调动列表中
+ */
+create view xovGradeDivisionStudMoved
+AS
+  select a.*, b.request_user_id
+  from xovGradeDivisionStud a
+  INNER JOIN xonStudMove b ON a.kao_stud_id = b.kao_stud_id;
 
 /**
   年级分管教师班级查询

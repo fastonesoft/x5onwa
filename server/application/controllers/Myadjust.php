@@ -12,7 +12,6 @@ class Myadjust extends CI_Controller {
         $grades = Model\xovGradeCurrent::getRows();
         $result = compact('grades');
 
-        // 正文
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
         $this->json(['code' => 1, 'data' => $e->getMessage()]);
@@ -32,7 +31,6 @@ class Myadjust extends CI_Controller {
         $classes = Model\xovGradeDivisionUser::getRowsByUserId($user_id, $grade_id);
         $result = compact('classes');
 
-        // 正文
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
         $this->json(['code' => 1, 'data' => $e->getMessage()]);
@@ -50,8 +48,6 @@ class Myadjust extends CI_Controller {
         $stud_name = $param['stud_name'];
         $result = Model\xovGradeDivisionStud::getStudSumByName($grade_id, $stud_name);
 
-
-        // 正文
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
         $this->json(['code' => 1, 'data' => $e->getMessage()]);

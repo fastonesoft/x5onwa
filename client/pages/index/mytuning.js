@@ -89,7 +89,6 @@ Page({
     for (var index=0; index<studmoves.length; index++) {
       var item = studmoves[index]
       item.checked = item.uid === e.detail.value
-      console.log(item)
       if (item.checked) {
         var cls_id = item.cls_id
         var classes = that.data.classes
@@ -98,7 +97,8 @@ Page({
         if ( cls_id === localcls_id ) {
           var studchanges = []
           that.setData({ studchanges })
-          return
+          continue
+          // 同班，跳过下面代码，继续更新checked
         }
         var data = { value: item.value, cls_id: localcls_id }
         // 查询用于交换的本班学生
