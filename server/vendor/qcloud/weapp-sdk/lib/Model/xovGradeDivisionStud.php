@@ -21,11 +21,16 @@ class xovGradeDivisionStud
     return dbs::select('xovGradeDivisionStud', ['*'], compact('grade_id', 'stud_name', 'sub_id', 'same_group'));
   }
 
-  public static function getStudSumByValue ($cls_id, $value, $section) {
+  public static function getStudSumByValue ($cls_id, $value, $all, $section) {
     $sub_id = 99;
-    $end = $value + $section;
-    $begin = $value - $section;
-    return dbs::select('xovGradeDivisionStud', ['*'], "cls_id = $cls_id and sub_id = $sub_id and value between $begin and $end and same_group = 0");
+    if ($all === 'true') {
+      $same_group = 0;
+      return dbs::select('xovGradeDivisionStud', ['*'], compact('cls_id', 'sub_id', 'same_group'));
+    } else {
+      $end = $value + $section;
+      $begin = $value - $section;
+      return dbs::select('xovGradeDivisionStud', ['*'], "cls_id = $cls_id and sub_id = $sub_id and value between $begin and $end and same_group = 0");
+    }
   }
 
   public static function getStudSumNotMovedByName ($grade_id, $stud_name) {

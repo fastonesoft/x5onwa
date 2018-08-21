@@ -11,6 +11,8 @@ Page({
     classes: [],
     studmoves: [],
     studchanges: [],
+    all: false,
+    cls_stud_uid: '',
   },
 
   onLoad: function (options) {
@@ -74,13 +76,20 @@ Page({
         success: result => {
           var studmoves = result.data
           var studchanges = []
-          that.setData({ studmoves, studchanges })
+          var cls_stud_uid = ''
+          that.setData({ studmoves, studchanges, cls_stud_uid })
           if (studmoves.length === 0) {
             x5on.showError(that, '没有找到你要的学生！')
           }
         }
       })
     })
+  },
+
+  switchtap: function (e) {
+    var all = ! this.data.all
+    var studchanges = []
+    this.setData({ all, studchanges })
   },
 
   studmoveChange: function (e) {
@@ -96,11 +105,16 @@ Page({
         var localcls_id = classes[classIndex].id
         if ( cls_id === localcls_id ) {
           var studchanges = []
-          that.setData({ studchanges })
+          var cls_stud_uid = item.uid
+          that.setData({ studchanges, cls_stud_uid })
           continue
           // 同班，跳过下面代码，继续更新checked
+        } else {
+          var cls_stud_uid = ''
+          that.setData({ cls_stud_uid })
         }
-        var data = { value: item.value, cls_id: localcls_id }
+        var all = this.data.all
+        var data = { value: item.value, cls_id: localcls_id, all }
         // 查询用于交换的本班学生
         x5on.postFormEx({
           url: x5on.url.mytuningstudchanges,
@@ -148,6 +162,22 @@ Page({
         var studchanges = []
         that.setData({ studmoves, studchanges })
         x5on.showSuccess('调动' + result.data + '个学生')
+      }
+    })
+  },
+
+  localtap: function (e) {
+    var that = this
+    var cls_stud_uid = this.data.cls_stud_uid
+    x5on.postFormEx({
+      url: x5on.url.mytuninglocal,
+      data: { cls_stud_uid },
+      success: result => {
+        cls_stud_uid = ''
+        var studmoves = []
+        var studchanges = []
+        that.setData({ cls_stud_uid, studmoves, studchanges })
+        x5on.showSuccess('标识' + result.data + '个学生')
       }
     })
   },

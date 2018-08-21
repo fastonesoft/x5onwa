@@ -71,12 +71,14 @@ class Mytuning extends CI_Controller {
       try {
         $param = $_POST;
 
-        $cls_id = $param['cls_id'];
+        $all = $param['all'];
         $value = $param['value'];
+        $cls_id = $param['cls_id'];
+
         /**
-         * TODO: section
+         * TODO: section , to add load section
          */
-        $result = Model\xovGradeDivisionStud::getStudSumByValue($cls_id, $value, 10);
+        $result = Model\xovGradeDivisionStud::getStudSumByValue($cls_id, $value, $all, 10);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -98,6 +100,22 @@ class Mytuning extends CI_Controller {
         $movestud_uid = $param['movestud_uid'];
         $changestud_uids = $param['changestud_uids'];
         $result = Model\xonGradeStud::exchange($movestud_uid, $changestud_uids);
+
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
+
+  public function local() {
+    Model\xonLogin::check(self::role_name, function ($user) {
+      try {
+        $param = $_POST;
+        $cls_stud_uid = $param['cls_stud_uid'];
+        $result = Model\xonGradeStud::local($cls_stud_uid);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {

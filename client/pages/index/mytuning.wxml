@@ -52,13 +52,32 @@
     <radio-group name="movestud_uid" bindchange="studmoveChange">
       <label class="weui-cell weui-check__label" wx:for="{{studmoves}}" wx:key="uid">
         <radio class="weui-check" value="{{item.uid}}" checked="{{item.checked}}"/>
-        <view class="weui-cell__bd">{{item.cls_name}} {{item.stud_name}} {{item.stud_sex}} {{item.value}}</view>
+        <view class="weui-cell__bd">{{item.cls_name}}，{{item.stud_name}} {{item.stud_sex}} {{item.value}}</view>
         <view class="weui-cell__ft weui-cell__ft_in-radio">
           <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.checked}}"></icon>
           <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{item.checked}}"></icon>
         </view>
       </label>
     </radio-group>
+  </view>
+
+<block wx:if="{{cls_stud_uid.length !== 0}}">
+    <view class="x5ui-half-btn">
+      <view class="weui-btn-area">
+        <button type="primary" bindtap="localtap">本班标识</button>
+      </view>
+    </view>
+</block>
+
+
+  <view class="weui-cells__title">交换范围</view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_switch">
+      <view class="weui-cell__bd">显示全部</view>
+      <view class="weui-cell__ft">
+        <switch checked="{{all}}" bindtap="switchtap"/>
+      </view>
+    </view>
   </view>
 
   <block wx:if="{{studchanges.length>0}}">
@@ -71,7 +90,7 @@
                   <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.checked}}"></icon>
                   <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{item.checked}}"></icon>
               </view>
-              <view class="weui-cell__bd">{{item.cls_name}} {{item.stud_name}} {{item.stud_sex}} {{item.value}}</view>
+              <view class="weui-cell__bd">{{item.cls_name}}，{{item.stud_name}} {{item.stud_sex}} {{item.value}}</view>
           </label>
       </checkbox-group>
     </view>
@@ -82,5 +101,5 @@
       </view>
     </view>
   </block>
-
 </form>
+

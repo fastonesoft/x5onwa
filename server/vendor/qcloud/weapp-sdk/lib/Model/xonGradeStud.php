@@ -32,7 +32,14 @@ class xonGradeStud
 
     // 返回调动人数
     return count($uids) + 1;
+  }
 
+  public static function local ($uid) {
+    $res = dbs::row('xonGradeStud', ['*'], compact('uid'));
+    if ( $res !== null ) {
+      $same_group = 1;
+      return dbs::update('xonGradeStud', compact('same_group'), compact('uid'));
+    }
   }
 
 }

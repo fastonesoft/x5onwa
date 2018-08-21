@@ -94,6 +94,8 @@ var doUrl = {
   mytuningstudmoves: `${host}/weapp/mytuning/studmoves`,
   mytuningstudchanges: `${host}/weapp/mytuning/studchanges`,
   mytuningexchange: `${host}/weapp/mytuning/exchange`,
+  mytuninglocal: `${host}/weapp/mytuning/local`,
+
 
   // 班级分管
   mydivision: `${host}/weapp/mydivision`,
