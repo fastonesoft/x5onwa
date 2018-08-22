@@ -62,9 +62,16 @@
   </view>
 
   <block wx:if="{{students.length>0 && classIndex>=0}}">
-    <view class="x5ui-half-btn">
-      <view class="weui-btn-area">
-        <button type="primary" form-type="submit">申请调动</button>
+    <view class="x5ui-column">
+      <view class="x5ui-half-btn" wx:if="{{cls_stud_uid.length==0}}">
+        <view class="weui-btn-area">
+          <button type="primary" form-type="submit">申请调动</button>
+        </view>
+      </view>
+      <view class="x5ui-half-btn" wx:if="{{cls_stud_uid.length>0}}">
+        <view class="weui-btn-area">
+          <button type="primary" bindtap="localtap">本班标识</button>
+        </view>
       </view>
     </view>
   </block>
@@ -97,11 +104,6 @@
   </view>
 </view>
 
-  <view class="x5ui-half-btn">
-    <view class="weui-btn-area">
-      <button type="primary" form-type="submit">学生识别</button>
-    </view>
-  </view>
 
 
 <view class="weui-panel weui-panel_access">

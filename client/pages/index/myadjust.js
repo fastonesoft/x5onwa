@@ -9,6 +9,7 @@ Page({
 
     grades: [],
     classes: [],
+    cls_stud_uid: '',
   },
 
   onLoad: function (options) {
@@ -49,9 +50,11 @@ Page({
   findSubmit: function (e) {
     var that = this
     var grades = this.data.grades
+    var classes = this.data.classes
     var gradeIndex = this.data.gradeIndex
-    if (!gradeIndex) {
-      x5on.showError(that, '没有选择年级！')
+    var classIndex = this.data.classIndex
+    if (!gradeIndex || !classIndex || classIndex == -1 || gradeIndex == -1) {
+      x5on.showError(that, '年级选择、目标班级不得为空')
       return
     }
 
@@ -79,10 +82,31 @@ Page({
   },
 
   studentChange: function (e) {
+    var that = this
     var students = this.data.students
     for (var index = 0; index < students.length; index++) {
       var item = students[index]
       item.checked = item.uid === e.detail.value
+      if (item.checked) {
+        var cls_id = item.cls_id
+        var classes = that.data.classes
+        var classIndex = that.data.classIndex
+        var localcls_id = classes[classIndex].id
+        console.log(classes)
+        if (cls_id === localcls_id) {
+          var cls_stud_uid = item.uid
+          that.setData({ cls_stud_uid })
+    
+          console.log(111)
+                continue
+          // 同班，跳过下面代码，继续更新checked
+
+        } else {
+          var cls_stud_uid = ''
+          that.setData({ cls_stud_uid })
+          console.log(222)
+        }
+      }
     }
     this.setData({ students })
   },
@@ -106,6 +130,22 @@ Page({
         x5on.showSuccess('调动' + result.data + '个学生')
       }
     })
-  }
+  },
+
+  localtap: function (e) {
+    var that = this
+    var cls_stud_uid = this.data.cls_stud_uid
+    x5on.postFormEx({
+      url: x5on.url.mytuninglocal,
+      data: { cls_stud_uid },
+      success: result => {
+        cls_stud_uid = ''
+        var studmoves = []
+        var studchanges = []
+        that.setData({ cls_stud_uid, studmoves, studchanges })
+        x5on.showSuccess('标识' + result.data + '个学生')
+      }
+    })
+  },
 
 })
