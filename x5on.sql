@@ -1046,13 +1046,13 @@ CREATE TABLE xonStudMove (
   kao_stud_id VARCHAR(28) NOT NULL,
   request_user_id VARCHAR(36) NOT NULL,
   request_cls_id VARCHAR(20) NOT NULL,
+  exchange_kao_stud_id VARCHAR(28) DEFAULT NULL,
   success BOOLEAN NOT NULL,
   PRIMARY KEY (kao_stud_id),
   FOREIGN KEY (kao_stud_id) REFERENCES xonKaoStud(id),
   FOREIGN KEY (request_user_id) REFERENCES xonUser(id),
   FOREIGN KEY (request_cls_id) REFERENCES xonClass(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学生调动';
-
 
 INSERT INTO xonStep VALUES ('321204022016', replace(uuid(), '-', ''), '2016级', '32120402', 0);
 INSERT INTO xonStep VALUES ('321204022017', replace(uuid(), '-', ''), '2017级', '32120402', 0);
@@ -1379,7 +1379,15 @@ create view xovGradeDivisionStudMoved
 AS
   select a.*, b.request_user_id
   from xovGradeDivisionStud a
-  INNER JOIN xonStudMove b ON a.kao_stud_id = b.kao_stud_id;
+  INNER JOIN xonStudMove b ON a.kao_stud_id = b.kao_stud_id
+  where exchange_kao_stud_id is null;
+
+create view xovGradeDivisionStudExchange
+as
+  select a.*, b.request_user_id, exchange_kao_stud_id
+  from xovGradeDivisionStud a
+  INNER JOIN xonStudMove b ON a.kao_stud_id = b.kao_stud_id
+  where exchange_kao_stud_id is not null;
 
 
 
