@@ -129,14 +129,17 @@ Page({
   localtap: function (e) {
     var that = this
     var cls_stud_uid = this.data.cls_stud_uid
+    if (cls_stud_uid.length == 0) {
+      x5on.showError(that, '不是同班学生选择，无法提交')
+      return
+    }
     x5on.postFormEx({
       url: x5on.url.mytuninglocal,
       data: { cls_stud_uid },
       success: result => {
         cls_stud_uid = ''
-        var studmoves = []
-        var studchanges = []
-        that.setData({ cls_stud_uid, studmoves, studchanges })
+        var students = []
+        that.setData({ cls_stud_uid, students })
         x5on.showSuccess('标识' + result.data + '个学生')
       }
     })
