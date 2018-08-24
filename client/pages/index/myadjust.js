@@ -84,9 +84,10 @@ Page({
   studentChange: function (e) {
     var that = this
     var students = this.data.students
+
     for (var index = 0; index < students.length; index++) {
       var item = students[index]
-      item.checked = item.grade_stud_uid === e.detail.value
+      item.checked = item.uid === e.detail.value
       if (item.checked) {
         var cls_id = item.cls_id
         var classes = that.data.classes
@@ -94,7 +95,7 @@ Page({
         var localcls_id = classes[classIndex].cls_id
 
         if (cls_id === localcls_id) {
-          var grade_stud_uid = item.grade_stud_uid
+          var grade_stud_uid = item.uid
           that.setData({ grade_stud_uid })
         } else {
           var grade_stud_uid = ''
@@ -119,7 +120,7 @@ Page({
       data: { grade_stud_uid, cls_id },
       success: (result) => {
         var students = []
-        that.setData({ studmoves, studchanges })
+        that.setData({ students })
         x5on.showSuccess('调动' + result.data + '个学生')
       }
     })

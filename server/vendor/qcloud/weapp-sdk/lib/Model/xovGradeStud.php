@@ -17,6 +17,7 @@ class xovGradeStud
     return dbs::select('xovGradeStud', ['uid', 'stud_name', 'stud_sex', 'same_group'], compact('cls_id'));
   }
 
+
   public static function updateSameGroup ($param) {
     // 计数
     $result = 0;
