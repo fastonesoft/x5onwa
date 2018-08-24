@@ -91,20 +91,14 @@ Page({
         var cls_id = item.cls_id
         var classes = that.data.classes
         var classIndex = that.data.classIndex
-        var localcls_id = classes[classIndex].id
-        console.log(classes)
+        var localcls_id = classes[classIndex].cls_id
+
         if (cls_id === localcls_id) {
           var cls_stud_uid = item.uid
           that.setData({ cls_stud_uid })
-    
-          console.log(111)
-                continue
-          // 同班，跳过下面代码，继续更新checked
-
         } else {
           var cls_stud_uid = ''
           that.setData({ cls_stud_uid })
-          console.log(222)
         }
       }
     }

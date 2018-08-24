@@ -1266,7 +1266,7 @@ AS
 
 CREATE VIEW xovClassDivisioned
 AS
-  SELECT A.*, cls_order, cls_name, User2.name as user_name, nick_name
+  SELECT A.*, cls_id, cls_order, cls_name, User2.name as user_name, nick_name
   FROM xonGradeDivision A
   LEFT JOIN xovClass C ON C.id = A.cls_id
   LEFT JOIN xonUser User2 on A.user_id = User2.id;

@@ -36,7 +36,7 @@ class xovGradeDivisionStud
   public static function getStudSumNotMovedByName ($grade_id, $stud_name) {
     $sub_id = 99;
     $same_group = 0;
-    return dbs::select('xovGradeDivisionStudNotMoved', ['kao_stud_id', 'uid', 'cls_order', 'stud_name', 'stud_sex', 'value'], compact('grade_id', 'stud_name', 'sub_id', 'same_group'));
+    return dbs::select('xovGradeDivisionStudNotMoved', ['kao_stud_id', 'uid', 'cls_id', 'cls_order', 'stud_name', 'stud_sex', 'value'], compact('grade_id', 'stud_name', 'sub_id', 'same_group'));
   }
 
   public static function getStudSumMovedByUserId ($user_id) {
