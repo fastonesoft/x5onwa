@@ -9,7 +9,7 @@ Page({
 
     grades: [],
     classes: [],
-    cls_stud_uid: '',
+    grade_stud_uid: '',
   },
 
   onLoad: function (options) {
@@ -86,7 +86,7 @@ Page({
     var students = this.data.students
     for (var index = 0; index < students.length; index++) {
       var item = students[index]
-      item.checked = item.uid === e.detail.value
+      item.checked = item.grade_stud_uid === e.detail.value
       if (item.checked) {
         var cls_id = item.cls_id
         var classes = that.data.classes
@@ -94,11 +94,11 @@ Page({
         var localcls_id = classes[classIndex].cls_id
 
         if (cls_id === localcls_id) {
-          var cls_stud_uid = item.uid
-          that.setData({ cls_stud_uid })
+          var grade_stud_uid = item.grade_stud_uid
+          that.setData({ grade_stud_uid })
         } else {
-          var cls_stud_uid = ''
-          that.setData({ cls_stud_uid })
+          var grade_stud_uid = ''
+          that.setData({ grade_stud_uid })
         }
       }
     }
@@ -108,18 +108,17 @@ Page({
   studmoveSubmit: function (e) {
     var that = this
     var classIndex = this.data.classIndex
-    var kao_stud_id = e.detail.value.kao_stud_id
-    if (!classIndex || classIndex == -1 || !kao_stud_id) {
+    var grade_stud_uid = e.detail.value.grade_stud_uid
+    if (!classIndex || classIndex == -1 || !grade_stud_uid) {
       x5on.showError(that, '目标班级、调动学生必须设置！')
       return
     }
     var cls_id = this.data.classes[classIndex].cls_id
     x5on.postFormEx({
       url: x5on.url.myadjuststudmove,
-      data: { kao_stud_id, cls_id },
+      data: { grade_stud_uid, cls_id },
       success: (result) => {
         var students = []
-
         that.setData({ studmoves, studchanges })
         x5on.showSuccess('调动' + result.data + '个学生')
       }
@@ -128,18 +127,18 @@ Page({
 
   localtap: function (e) {
     var that = this
-    var cls_stud_uid = this.data.cls_stud_uid
-    if (cls_stud_uid.length == 0) {
+    var grade_stud_uid = this.data.grade_stud_uid
+    if (grade_stud_uid.length == 0) {
       x5on.showError(that, '不是同班学生选择，无法提交')
       return
     }
     x5on.postFormEx({
-      url: x5on.url.mytuninglocal,
-      data: { cls_stud_uid },
+      url: x5on.url.myadjuststudlocal,
+      data: { grade_stud_uid },
       success: result => {
-        cls_stud_uid = ''
+        grade_stud_uid = ''
         var students = []
-        that.setData({ cls_stud_uid, students })
+        that.setData({ grade_stud_uid, students })
         x5on.showSuccess('标识' + result.data + '个学生')
       }
     })

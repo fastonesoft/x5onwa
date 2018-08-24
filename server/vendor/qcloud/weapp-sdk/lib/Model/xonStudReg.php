@@ -59,6 +59,7 @@ class xonStudReg
       $current_year = 1;
       $app_name = 'regstud';
       $forms = dbs::select('xovSchoolForm', ['id', 'name'], compact('sch_id', 'app_name', 'current_year'));
+
       $form_setted = xonSchoolFormSet::checkSchoolFormSet($user_id);
       if ( $form_setted === null || $form_setted !== null && ! $form_setted->checked ) {
         $not_reg = false;

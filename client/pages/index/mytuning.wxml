@@ -61,7 +61,7 @@
     </radio-group>
   </view>
 
-<block wx:if="{{cls_stud_uid.length !== 0}}">
+<block wx:if="{{grade_stud_uid.length !== 0}}">
     <view class="x5ui-half-btn">
       <view class="weui-btn-area">
         <button type="primary" bindtap="localtap">本班标识</button>

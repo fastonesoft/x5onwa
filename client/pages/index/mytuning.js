@@ -12,7 +12,7 @@ Page({
     studmoves: [],
     studchanges: [],
     all: false,
-    cls_stud_uid: '',
+    grade_stud_uid: '',
   },
 
   onLoad: function (options) {
@@ -76,8 +76,8 @@ Page({
         success: result => {
           var studmoves = result.data
           var studchanges = []
-          var cls_stud_uid = ''
-          that.setData({ studmoves, studchanges, cls_stud_uid })
+          var grade_stud_uid = ''
+          that.setData({ studmoves, studchanges, grade_stud_uid })
           if (studmoves.length === 0) {
             x5on.showError(that, '没有找到你要的学生！')
           }
@@ -105,13 +105,13 @@ Page({
         var localcls_id = classes[classIndex].id
         if ( cls_id === localcls_id ) {
           var studchanges = []
-          var cls_stud_uid = item.uid
-          that.setData({ studchanges, cls_stud_uid })
+          var grade_stud_uid = item.uid
+          that.setData({ studchanges, grade_stud_uid })
           continue
           // 同班，跳过下面代码，继续更新checked
         } else {
-          var cls_stud_uid = ''
-          that.setData({ cls_stud_uid })
+          var grade_stud_uid = ''
+          that.setData({ grade_stud_uid })
         }
         var all = this.data.all
         var data = { value: item.value, cls_id: localcls_id, all }
@@ -168,15 +168,15 @@ Page({
 
   localtap: function (e) {
     var that = this
-    var cls_stud_uid = this.data.cls_stud_uid
+    var grade_stud_uid = this.data.grade_stud_uid
     x5on.postFormEx({
       url: x5on.url.mytuninglocal,
-      data: { cls_stud_uid },
+      data: { grade_stud_uid },
       success: result => {
-        cls_stud_uid = ''
+        grade_stud_uid = ''
         var studmoves = []
         var studchanges = []
-        that.setData({ cls_stud_uid, studmoves, studchanges })
+        that.setData({ grade_stud_uid, studmoves, studchanges })
         x5on.showSuccess('标识' + result.data + '个学生')
       }
     })

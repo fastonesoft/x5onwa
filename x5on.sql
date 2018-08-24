@@ -1290,7 +1290,7 @@ AS
  */
 CREATE VIEW xovStudent
 AS
-  SELECT A.*, C2.name as stud_name, C2.child_sex AS stud_sex, S.name AS step_name, S2.name AS sch_name
+  SELECT A.*, C2.name as stud_name, C2.child_sex AS stud_sex, S.name AS step_name, S2.name AS sch_name, sch_id
   FROM xonStudent A
   LEFT JOIN xovChild C2 ON A.child_id = C2.id
   LEFT JOIN xonStep S ON A.step_id = S.id

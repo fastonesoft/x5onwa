@@ -61,10 +61,27 @@ class Myadjust extends CI_Controller {
     Model\xonLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
-        $grade_id = $param['grade_id'];
-        $stud_name = $param['stud_name'];
+        $cls_id = $param['cls_id'];
+        $grade_stud_uid = $param['grade_stud_uid'];
+
 
         $result = '';
+
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
+
+  public function local() {
+    Model\xonLogin::check(self::role_name, function ($user) {
+      try {
+        $param = $_POST;
+        $grade_stud_uid = $param['grade_stud_uid'];
+        $result = Model\xonGradeStud::local($grade_stud_uid);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {

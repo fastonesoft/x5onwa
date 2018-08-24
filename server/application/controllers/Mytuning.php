@@ -114,8 +114,8 @@ class Mytuning extends CI_Controller {
     Model\xonLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
-        $cls_stud_uid = $param['cls_stud_uid'];
-        $result = Model\xonGradeStud::local($cls_stud_uid);
+        $grade_stud_uid = $param['grade_stud_uid'];
+        $result = Model\xonGradeStud::local($grade_stud_uid);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
