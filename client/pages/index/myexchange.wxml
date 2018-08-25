@@ -40,7 +40,7 @@
 
       <view class="x5ui-half-btn">
         <view class="weui-btn-area">
-          <button type="primary" form-type="submit">关闭</button>
+          <button type="primary" form-type="submit">返回</button>
         </view>
       </view>
 </block>

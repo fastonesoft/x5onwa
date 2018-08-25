@@ -33,16 +33,13 @@ class xovGradeDivisionStud
     }
   }
 
+  // 班级分管调动学生查询
+  // 以后可以考虑将 same_group 放入到视图当中进行过滤
+
   public static function getStudSumNotMovedByName ($grade_id, $stud_name) {
     $sub_id = 99;
     $same_group = 0;
     return dbs::select('xovGradeDivisionStudNotMoved', ['kao_stud_id', 'uid', 'cls_id', 'cls_order', 'stud_name', 'stud_sex', 'value'], compact('grade_id', 'stud_name', 'sub_id', 'same_group'));
-  }
-
-  public static function getStudSumMovedByClassId ($cls_id) {
-    $sub_id = 99;
-    $same_group = 0;
-    return dbs::select('xovGradeDivisionStudMoving', ['kao_stud_id', 'uid', 'cls_id', 'cls_order', 'stud_name', 'stud_sex', 'kao_room', 'value'], compact('cls_id', 'sub_id', 'same_group'));
   }
 
   public static function getStudSumNotMovedByUid ($uid) {
@@ -50,6 +47,19 @@ class xovGradeDivisionStud
     $same_group = 0;
     return dbs::row('xovGradeDivisionStudNotMoved', ['*'], compact('uid', 'sub_id', 'same_group'));
   }
+
+  // 显示查询
+
+  public static function getStudSumMovingByRequestClassId ($request_cls_id) {
+    $sub_id = 99;
+    return dbs::select('xovGradeDivisionStudMoving', ['kao_stud_id', 'uid', 'cls_id', 'cls_order', 'stud_name', 'stud_sex', 'kao_room', 'value'], compact('request_cls_id', 'sub_id'));
+  }
+
+  public static function getStudSumMovedSuccessByRequestClassId ($request_cls_id) {
+    $sub_id = 99;
+    return dbs::select('xovGradeDivisionStudSuccess', ['kao_stud_id', 'uid', 'cls_id', 'cls_order', 'stud_name', 'stud_sex', 'kao_room', 'value'], compact('request_cls_id', 'sub_id'));
+  }
+
 
 
 }

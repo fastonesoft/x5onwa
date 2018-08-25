@@ -112,7 +112,9 @@ var doUrl = {
   myadjuststudmove: `${host}/weapp/myadjust/studmove`,
   myadjuststudremove: `${host}/weapp/myadjust/studremove`,
   myadjuststudlocal: `${host}/weapp/myadjust/studlocal`,
+  myadjustclassmove: `${host}/weapp/myadjust/classmove`,
   myadjustclassmoved: `${host}/weapp/myadjust/classmoved`,
+  myadjustclassmoving: `${host}/weapp/myadjust/classmoving`,
 
 
 

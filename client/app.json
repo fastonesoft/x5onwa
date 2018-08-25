@@ -16,6 +16,7 @@
 
     "pages/index/myrename",
     "pages/index/myexchange",
+    "pages/index/myexqrcode",
     "pages/index/mysameset",
     "pages/index/mytuning",
     "pages/index/mydivision",

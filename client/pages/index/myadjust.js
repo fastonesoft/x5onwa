@@ -79,18 +79,20 @@ Page({
   classChange: function (e) {
     var that = this
     var classIndex = e.detail.value
-    this.setData({ classIndex })
+    var students = []
+    this.setData({ classIndex, students })
     if (!classIndex || classIndex == -1) {
       x5on.showError(that, '目标班级、调动学生必须设置！')
       return
     }
     var cls_id = this.data.classes[classIndex].cls_id
     x5on.postFormEx({
-      url: x5on.url.myadjustclassmoved,
+      url: x5on.url.myadjustclassmove,
       data: { cls_id },
       success: (result) => {
-        var studmoves = result.data
-        that.setData({ studmoves })
+        var studmoves = result.data.studmoves
+        var studmoveds = result.data.studmoveds
+        that.setData({ studmoves, studmoveds })
       }
     })
 
@@ -135,8 +137,8 @@ Page({
       data: { grade_stud_uid, cls_id },
       success: (result) => {
         var students = []
-        that.setData({ students })
-        x5on.showSuccess('调动' + result.data + '个学生')
+        var studmoves = result.data
+        that.setData({ students, studmoves })
       }
     })
   },
@@ -162,17 +164,27 @@ Page({
 
   myadjustRemove: function (e) {
     var that = this
+    var studmoves = this.data.studmoves
     var kao_stud_id = e.currentTarget.dataset.uid
-    console.log(kao_stud_id)
     x5on.postFormEx({
       url: x5on.url.myadjuststudremove,
       data: { kao_stud_id },
       success: result => {
-        var students = []
-        that.setData({ students })
+        studmoves.forEach(function (item, index) {
+          if (item.kao_stud_id == kao_stud_id) {
+            studmoves.splice(index, 1)
+          }
+        })
+        that.setData({ studmoves })
         x5on.showSuccess('删除' + result.data + '个调动')
       }
     })
   },
 
+  showexchange: function (e) {
+    var kao_stud_id = e.currentTarget.dataset.kao_stud_id
+    wx.navigateTo({
+      url: '/pages/index/myexqrcode?kao_stud_id=' + kao_stud_id,
+    })
+  },
 })

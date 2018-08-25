@@ -1377,17 +1377,17 @@ LEFT JOIN xovClass c ON x.request_cls_id = c.id
  */
 create view xovGradeDivisionStudMoving
 AS
-  select a.*, b.request_user_id, b.request_cls_id
+  select a.*, b.request_user_id, b.request_cls_id, success
   from xovGradeDivisionStud a
   INNER JOIN xonStudMove b ON a.kao_stud_id = b.kao_stud_id
-  where exchange_kao_stud_id is null;
+  where success = 0 and exchange_kao_stud_id is null;
 
-create view xovGradeDivisionStudExchange
+create view xovGradeDivisionStudSuccess
 as
-  select a.*, b.request_user_id, exchange_kao_stud_id
+  select a.*, b.request_user_id, b.request_cls_id, success
   from xovGradeDivisionStud a
   INNER JOIN xonStudMove b ON a.kao_stud_id = b.kao_stud_id
-  where exchange_kao_stud_id is not null;
+  where success = 1;
 
 
 

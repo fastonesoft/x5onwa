@@ -65,7 +65,8 @@ class Myadjust extends CI_Controller {
 
         $cls_id = $param['cls_id'];
         $grade_stud_uid = $param['grade_stud_uid'];
-        $result = Model\xonStudMove::addStud($user_id, $grade_stud_uid, $cls_id);
+        Model\xonStudMove::addStud($user_id, $grade_stud_uid, $cls_id);
+        $result = Model\xovGradeDivisionStud::getStudSumMovingByRequestClassId($cls_id);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -95,12 +96,14 @@ class Myadjust extends CI_Controller {
   /**
    * 本班调动中的学生
    */
-  public function classmoved() {
+  public function classmove() {
     Model\xonLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
         $cls_id = $param['cls_id'];
-        $result = Model\xovGradeDivisionStud::getStudSumMovedByClassId($cls_id);
+        $studmoves = Model\xovGradeDivisionStud::getStudSumMovingByRequestClassId($cls_id);
+        $studmoveds = Model\xovGradeDivisionStud::getStudSumMovedSuccessByRequestClassId($cls_id);
+        $result = compact('studmoves', 'studmoveds');
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -110,6 +113,41 @@ class Myadjust extends CI_Controller {
       $this->json($error);
     });
   }
+
+  public function classmoving() {
+    Model\xonLogin::check(self::role_name, function ($user) {
+      try {
+        $param = $_POST;
+        $cls_id = $param['cls_id'];
+        $result = Model\xovGradeDivisionStud::getStudSumMovingByRequestClassId($cls_id);
+
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
+
+  public function classmoved() {
+    Model\xonLogin::check(self::role_name, function ($user) {
+      try {
+        $param = $_POST;
+        $cls_id = $param['cls_id'];
+        $result = Model\xovGradeDivisionStud::getStudSumMovedSuccessByRequestClassId($cls_id);
+
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
+
+
+
 
   public function studremove() {
     Model\xonLogin::check(self::role_name, function ($user) {

@@ -1,0 +1,26 @@
+<!--pages/index/myexqrcode.wxml-->
+
+<block wx:if="{{checked}}">
+  <view class="weui-cells__title">个人信息</view>
+  <view class="weui-cells weui-cells_after-title">
+    <block wx:for="{{items}}" wx:key="id">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">{{item.title}}</view>
+        <view class="weui-cell__ft">{{item.value}}</view>
+      </view>
+    </block>
+  </view>
+</block>
+
+<block wx:if="{{infor_added}}">
+  <view class="qrcode-area">
+    <image class="qrcode" src="data:image/png;base64,{{qrcode_data}}"></image>
+    <view>{{child_name}}</view>
+  </view>
+</block>
+
+<view class="x5ui-half-btn">
+  <view class="weui-btn-area">
+    <button type="primary" bindtap="returnClick">返回</button>
+  </view>
+</view>
