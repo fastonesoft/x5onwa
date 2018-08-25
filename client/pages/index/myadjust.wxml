@@ -81,7 +81,7 @@
   <view class="weui-panel__hd">调动列表</view>
   <view class="weui-panel__bd">
     <block wx:for="{{studmoves}}" wx:key="uid">
-      <navigator url="myclass" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+      <navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
           <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
               <image class="weui-media-box__thumb" src="../../images/head/{{item.stud_sex}}.png" />
           </view>
@@ -91,7 +91,7 @@
               <view class="weui-media-box__desc">总分：{{item.value}}</view>
           </view>
           <view class="weui-media-box__ft weui-media-box__ft_in-appmsg">
-            <image src="../../images/remove.png" class="remove-icon" data-uid="{{item.uid}}" bindtap="mydivisionRemove"></image>
+            <image src="../../images/remove.png" class="remove-icon" data-uid="{{item.kao_stud_id}}" bindtap="myadjustRemove"></image>
           </view>
       </navigator>
     </block> 

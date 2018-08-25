@@ -42,7 +42,7 @@ class xovGradeDivisionStud
   public static function getStudSumMovedByClassId ($cls_id) {
     $sub_id = 99;
     $same_group = 0;
-    return dbs::select('xovGradeDivisionStudMoved', ['kao_stud_id', 'uid', 'cls_id', 'cls_order', 'stud_name', 'stud_sex', 'kao_room', 'value'], compact('cls_id', 'sub_id', 'same_group'));
+    return dbs::select('xovGradeDivisionStudMoving', ['kao_stud_id', 'uid', 'cls_id', 'cls_order', 'stud_name', 'stud_sex', 'kao_room', 'value'], compact('cls_id', 'sub_id', 'same_group'));
   }
 
   public static function getStudSumNotMovedByUid ($uid) {
@@ -51,10 +51,5 @@ class xovGradeDivisionStud
     return dbs::row('xovGradeDivisionStudNotMoved', ['*'], compact('uid', 'sub_id', 'same_group'));
   }
 
-  public static function getStudSumMovedByUserId ($user_id) {
-    $sub_id = 99;
-    $same_group = 0;
-    return dbs::select('xovGradeDivisionStudMoved', ['*'], compact('user_id'));
-  }
 
 }

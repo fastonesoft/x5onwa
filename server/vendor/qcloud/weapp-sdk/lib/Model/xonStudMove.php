@@ -19,11 +19,14 @@ class xonStudMove
 
       // 先插入调动列表
       $count = dbs::insert('xonStudMove', compact('kao_stud_id', 'request_cls_id', 'exchange_kao_stud_id', 'request_user_id', 'success'));
-      // 再设置调动状态
-      $same_group = 1;
-      $uid = $grade_stud_uid;
-      dbs::update('xonGradeStud', compact('same_group'), compact('uid'));
       return $count;
+    }
+  }
+
+  public static function removeStud ($kao_stud_id) {
+    $res = dbs::row('xonStudMove', ['*'], compact('kao_stud_id'));
+    if ( $res !== null ) {
+      return dbs::delete('xonStudMove', compact('kao_stud_id'));
     }
   }
 

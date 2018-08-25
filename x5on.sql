@@ -1375,9 +1375,9 @@ LEFT JOIN xovClass c ON x.request_cls_id = c.id
 /**
   分班考试学生，在调动列表中
  */
-create view xovGradeDivisionStudMoved
+create view xovGradeDivisionStudMoving
 AS
-  select a.*, b.request_user_id
+  select a.*, b.request_user_id, b.request_cls_id
   from xovGradeDivisionStud a
   INNER JOIN xonStudMove b ON a.kao_stud_id = b.kao_stud_id
   where exchange_kao_stud_id is null;

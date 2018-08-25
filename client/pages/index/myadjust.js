@@ -160,4 +160,19 @@ Page({
     })
   },
 
+  myadjustRemove: function (e) {
+    var that = this
+    var kao_stud_id = e.currentTarget.dataset.uid
+    console.log(kao_stud_id)
+    x5on.postFormEx({
+      url: x5on.url.myadjuststudremove,
+      data: { kao_stud_id },
+      success: result => {
+        var students = []
+        that.setData({ students })
+        x5on.showSuccess('删除' + result.data + '个调动')
+      }
+    })
+  },
+
 })
