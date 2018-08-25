@@ -77,8 +77,23 @@ Page({
   },
 
   classChange: function (e) {
+    var that = this
     var classIndex = e.detail.value
     this.setData({ classIndex })
+    if (!classIndex || classIndex == -1) {
+      x5on.showError(that, '目标班级、调动学生必须设置！')
+      return
+    }
+    var cls_id = this.data.classes[classIndex].cls_id
+    x5on.postFormEx({
+      url: x5on.url.myadjustclassmoved,
+      data: { cls_id },
+      success: (result) => {
+        var studmoves = result.data
+        that.setData({ studmoves })
+      }
+    })
+
   },
 
   studentChange: function (e) {

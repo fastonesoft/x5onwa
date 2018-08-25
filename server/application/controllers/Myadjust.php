@@ -91,4 +91,23 @@ class Myadjust extends CI_Controller {
       $this->json($error);
     });
   }
+
+  /**
+   * 本班调动中的学生
+   */
+  public function classmoved() {
+    Model\xonLogin::check(self::role_name, function ($user) {
+      try {
+        $param = $_POST;
+        $cls_id = $param['cls_id'];
+        $result = Model\xovGradeDivisionStud::getStudSumMovedByClassId($cls_id);
+
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
 }
