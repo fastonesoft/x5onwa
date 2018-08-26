@@ -61,7 +61,7 @@
     </radio-group>
   </view>
 
-  <block wx:if="{{students.length>0 && classIndex>=0}}">
+  <block wx:if="{{btn_show}}">
     <view class="x5ui-column">
       <view class="x5ui-half-btn" wx:if="{{grade_stud_uid.length==0}}">
         <view class="weui-btn-area">

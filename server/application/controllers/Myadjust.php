@@ -186,10 +186,11 @@ class Myadjust extends CI_Controller {
         $param = $_POST;
         $move_grade_stud_uid = $param['move_grade_stud_uid'];
         $exchange_grade_stud_uid = $param['exchange_grade_stud_uid'];
+        $request_cls_id = Model\xonStudMove::exchangeStud($move_grade_stud_uid, $exchange_grade_stud_uid);
 
-        $movestud = Model\xovGradeDivisionStud::getStudSumMovingByGradeStudUid($move_kao_stud_id);
-        $exchangestud = Model\xovGradeDivisionStud::getStudSumExchangingByGradeStudUid($exchange_kao_stud_id);
-
+        $studmoves = Model\xovGradeDivisionStud::getStudSumMovingByRequestClassId($request_cls_id);
+        $studmoveds = Model\xovGradeDivisionStud::getStudSumMovedSuccessByRequestClassId($request_cls_id);
+        $result = compact('studmoves', 'studmoveds');
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {

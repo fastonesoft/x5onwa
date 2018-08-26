@@ -57,6 +57,8 @@ Page({
       x5on.showError(that, '年级选择、目标班级不得为空')
       return
     }
+    var btn_show = false
+    that.setData({ btn_show })
 
     var grade_id = grades[gradeIndex].id
     var stud_name = e.detail.value.stud_name
@@ -101,7 +103,9 @@ Page({
   studentChange: function (e) {
     var that = this
     var students = this.data.students
-
+    var btn_show = true
+    that.setData({ btn_show })
+    
     for (var index = 0; index < students.length; index++) {
       var item = students[index]
       item.checked = item.uid === e.detail.value

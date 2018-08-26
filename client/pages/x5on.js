@@ -111,11 +111,15 @@ var doUrl = {
   myadjuststudent: `${host}/weapp/myadjust/student`,
   myadjuststudmove: `${host}/weapp/myadjust/studmove`,
   myadjuststudremove: `${host}/weapp/myadjust/studremove`,
+  myadjuststudexchange: `${host}/weapp/myadjust/studexchange`,
+
   myadjuststudlocal: `${host}/weapp/myadjust/studlocal`,
   myadjustclassmove: `${host}/weapp/myadjust/classmove`,
   myadjustclassmoved: `${host}/weapp/myadjust/classmoved`,
   myadjustclassmoving: `${host}/weapp/myadjust/classmoving`,
   myadjustexqrcode: `${host}/weapp/myadjust/exqrcode`,
+
+  
 
   // 错误测试地址
   test: `${host}/weapp/data`,
