@@ -150,8 +150,8 @@ class Myadjust extends CI_Controller {
     Model\xonLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
-        $kao_stud_id = $param['kao_stud_id'];
-        $result = Model\xonStudMove::removeStud($kao_stud_id);
+        $grade_stud_uid = $param['grade_stud_uid'];
+        $result = Model\xonStudMove::removeStud($grade_stud_uid);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -166,9 +166,9 @@ class Myadjust extends CI_Controller {
     Model\xonLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
-        $kao_stud_id = $param['kao_stud_id'];
-        $student = Model\xovGradeDivisionStud::getStudSumMovingByKaoStudId($kao_stud_id);
-        $qrcode_data = Model\x5on::getQrcodeBase64($kao_stud_id);
+        $grade_stud_uid = $param['grade_stud_uid'];
+        $student = Model\xovGradeDivisionStud::getStudSumMovingByGradeStudUid($grade_stud_uid);
+        $qrcode_data = Model\x5on::getQrcodeBase64($grade_stud_uid);
         $result = compact('student', 'qrcode_data');
 
         $this->json(['code' => 0, 'data' => $result]);
@@ -184,14 +184,12 @@ class Myadjust extends CI_Controller {
     Model\xonLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
-        $move_kao_stud_id = $param['move_kao_stud_id'];
-        $exchange_kao_stud_id = $param['exchange_kao_stud_id'];
+        $move_grade_stud_uid = $param['move_grade_stud_uid'];
+        $exchange_grade_stud_uid = $param['exchange_grade_stud_uid'];
 
-        $movestud = Model\xovGradeDivisionStud::getStudSumMovingByKaoStudId($move_kao_stud_id);
-        $exchangestud = Model\xovGradeDivisionStud::getStudSumExchangingByKaoStudId($exchange_kao_stud_id);
+        $movestud = Model\xovGradeDivisionStud::getStudSumMovingByGradeStudUid($move_kao_stud_id);
+        $exchangestud = Model\xovGradeDivisionStud::getStudSumExchangingByGradeStudUid($exchange_kao_stud_id);
 
-        $qrcode_data = Model\x5on::getQrcodeBase64($kao_stud_id);
-        $result = compact('student', 'qrcode_data');
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {

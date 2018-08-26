@@ -1,4 +1,5 @@
 <!--pages/index/myexqrcode.wxml-->
+<view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
 <block wx:if="{{student.length>0}}">
   <view class="weui-cells__title">学生信息</view>

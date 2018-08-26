@@ -165,13 +165,13 @@ Page({
   myadjustRemove: function (e) {
     var that = this
     var studmoves = this.data.studmoves
-    var kao_stud_id = e.currentTarget.dataset.uid
+    var grade_stud_uid = e.currentTarget.dataset.uid
     x5on.postFormEx({
       url: x5on.url.myadjuststudremove,
-      data: { kao_stud_id },
+      data: { grade_stud_uid },
       success: result => {
         studmoves.forEach(function (item, index) {
-          if (item.kao_stud_id == kao_stud_id) {
+          if (item.uid == grade_stud_uid) {
             studmoves.splice(index, 1)
           }
         })
@@ -182,9 +182,9 @@ Page({
   },
 
   showexchange: function (e) {
-    var kao_stud_id = e.currentTarget.dataset.kao_stud_id
+    var uid = e.currentTarget.dataset.uid
     wx.navigateTo({
-      url: '/pages/index/myexqrcode?kao_stud_id=' + kao_stud_id,
+      url: '/pages/index/myexqrcode?uid=' + uid,
     })
   },
 })

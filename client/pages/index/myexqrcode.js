@@ -5,11 +5,11 @@ Page({
 
   onLoad: function (options) {
     var that = this
-    var kao_stud_id = options.kao_stud_id
-    that.setData({ kao_stud_id })
+    var grade_stud_uid = options.uid
+    that.setData({ grade_stud_uid })
     x5on.postForm({
       url: x5on.url.myadjustexqrcode,
-      data: { kao_stud_id },
+      data: { grade_stud_uid },
       success: (result) => {
         that.setData(result.data)
       }
@@ -29,11 +29,11 @@ Page({
     wx.scanCode({
       onlyFromCamera: true,
       success: (res) => {
-        var exchange_kao_stud_id = res.result
-        var move_kao_stud_id = that.data.kao_stud_id
+        var exchange_grade_stud_uid = res.result
+        var move_grade_stud_uid = that.data.grade_stud_uid
         x5on.postForm({
           url: x5on.url.studexam,
-          data: { move_kao_stud_id, exchange_kao_stud_id },
+          data: { move_grade_stud_uid, exchange_grade_stud_uid },
           success: function (result) {
             var data = result.data
 

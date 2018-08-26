@@ -55,14 +55,14 @@ class xovGradeDivisionStud
     return dbs::select('xovGradeDivisionStudMoving', ['kao_stud_id', 'uid', 'cls_id', 'cls_order', 'stud_name', 'stud_sex', 'kao_room', 'value'], compact('request_cls_id', 'sub_id'));
   }
 
-  public static function getStudSumMovingByKaoStudId ($kao_stud_id) {
+  public static function getStudSumMovingByGradeStudUid ($uid) {
     $sub_id = 99;
-    return dbs::select('xovGradeDivisionStudMoving', ['kao_stud_id', 'uid', 'cls_id', 'cls_order', 'stud_name', 'stud_sex', 'kao_room', 'value'], compact('kao_stud_id', 'sub_id'));
+    return dbs::select('xovGradeDivisionStudMoving', ['kao_stud_id', 'uid', 'cls_id', 'cls_order', 'stud_name', 'stud_sex', 'kao_room', 'value'], compact('uid', 'sub_id'));
   }
 
-  public static function getStudSumExchangingByKaoStudId ($kao_stud_id) {
+  public static function getStudSumExchangingByGradeStudUid ($uid) {
     $sub_id = 99;
-    return dbs::select('xovGradeDivisionStudExchanging', ['kao_stud_id', 'uid', 'cls_id', 'cls_order', 'stud_name', 'stud_sex', 'kao_room', 'value', 'exchange_kao_stud_id'], compact('kao_stud_id', 'sub_id'));
+    return dbs::select('xovGradeDivisionStudExchanging', ['kao_stud_id', 'uid', 'cls_id', 'cls_order', 'stud_name', 'stud_sex', 'kao_room', 'value', 'exchange_kao_stud_id'], compact('uid', 'sub_id'));
   }
 
   public static function getStudSumMovedSuccessByRequestClassId ($request_cls_id) {

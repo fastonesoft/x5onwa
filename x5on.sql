@@ -1043,13 +1043,12 @@ CREATE TABLE xonKaoScore (
 
 
 CREATE TABLE xonStudMove (
-  kao_stud_id VARCHAR(28) NOT NULL,
+  grade_stud_uid VARCHAR(36) NOT NULL,
   request_user_id VARCHAR(36) NOT NULL,
   request_cls_id VARCHAR(20) NOT NULL,
-  exchange_kao_stud_id VARCHAR(28) DEFAULT NULL,
+  exchange_grade_stud_uid VARCHAR(36) DEFAULT NULL,
   success BOOLEAN NOT NULL,
-  PRIMARY KEY (kao_stud_id),
-  FOREIGN KEY (kao_stud_id) REFERENCES xonKaoStud(id),
+  PRIMARY KEY (grade_stud_uid),
   FOREIGN KEY (request_user_id) REFERENCES xonUser(id),
   FOREIGN KEY (request_cls_id) REFERENCES xonClass(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学生调动';
@@ -1351,12 +1350,13 @@ AS
 /**
   分班考试学生，不在调动列表中
  */
+
 CREATE VIEW xovGradeDivisionStudNotMoved
 AS
   SELECT a.*
   FROM xovGradeDivisionStud a
-  WHERE a.kao_stud_id not in (
-    select kao_stud_id
+  WHERE a.uid not in (
+    select grade_stud_uid
     from xonStudMove
   );
 
@@ -1375,27 +1375,28 @@ LEFT JOIN xovClass c ON x.request_cls_id = c.id
 /**
   分班考试学生，在调动列表中
  */
+
 create view xovGradeDivisionStudExchanging
 AS
-  select a.*, b.request_user_id, b.request_cls_id, b.exchange_kao_stud_id, success
+  select a.*, b.request_user_id, b.request_cls_id, b.exchange_grade_stud_uid, success
   from xovGradeDivisionStud a
-  INNER JOIN xonStudMove b ON a.kao_stud_id = b.kao_stud_id
-  where success = 0 and exchange_kao_stud_id is not null;
+  INNER JOIN xonStudMove b ON a.uid = b.grade_stud_uid
+  where success = 0 and exchange_grade_stud_uid is not null;
 
 
 create view xovGradeDivisionStudMoving
 AS
   select a.*, b.request_user_id, b.request_cls_id, success
   from xovGradeDivisionStud a
-  INNER JOIN xonStudMove b ON a.kao_stud_id = b.kao_stud_id
-  where success = 0 and exchange_kao_stud_id is null;
+  INNER JOIN xonStudMove b ON a.uid = b.grade_stud_uid
+  where success = 0 and exchange_grade_stud_uid is null;
 
 
 create view xovGradeDivisionStudSuccess
 as
   select a.*, b.request_user_id, b.request_cls_id, success
   from xovGradeDivisionStud a
-  INNER JOIN xonStudMove b ON a.kao_stud_id = b.kao_stud_id
+  INNER JOIN xonStudMove b ON a.uid = b.grade_stud_uid
   where success = 1;
 
 
