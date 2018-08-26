@@ -55,6 +55,11 @@ class xovGradeDivisionStud
     return dbs::select('xovGradeDivisionStudMoving', ['kao_stud_id', 'uid', 'cls_id', 'cls_order', 'stud_name', 'stud_sex', 'kao_room', 'value'], compact('request_cls_id', 'sub_id'));
   }
 
+  public static function getStudSumMovingByKaoStudId ($kao_stud_id) {
+    $sub_id = 99;
+    return dbs::select('xovGradeDivisionStudMoving', ['kao_stud_id', 'uid', 'cls_id', 'cls_order', 'stud_name', 'stud_sex', 'kao_room', 'value'], compact('kao_stud_id', 'sub_id'));
+  }
+
   public static function getStudSumMovedSuccessByRequestClassId ($request_cls_id) {
     $sub_id = 99;
     return dbs::select('xovGradeDivisionStudSuccess', ['kao_stud_id', 'uid', 'cls_id', 'cls_order', 'stud_name', 'stud_sex', 'kao_room', 'value'], compact('request_cls_id', 'sub_id'));

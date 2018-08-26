@@ -1,26 +1,33 @@
 <!--pages/index/myexqrcode.wxml-->
 
-<block wx:if="{{checked}}">
-  <view class="weui-cells__title">个人信息</view>
+<block wx:if="{{student.length>0}}">
+  <view class="weui-cells__title">学生信息</view>
   <view class="weui-cells weui-cells_after-title">
-    <block wx:for="{{items}}" wx:key="id">
+    <block wx:for="{{student}}" wx:key="kao_stud_id">
       <view class="weui-cell">
-        <view class="weui-cell__bd">{{item.title}}</view>
+        <view class="weui-cell__bd">分班条号</view>
+        <view class="weui-cell__ft">{{item.cls_order}}</view>
+      </view>
+      <view class="weui-cell">
+        <view class="weui-cell__bd">调动学生</view>
+        <view class="weui-cell__ft">{{item.stud_name}}</view>
+      </view>
+      <view class="weui-cell">
+        <view class="weui-cell__bd">原始班级</view>
+        <view class="weui-cell__ft">{{item.kao_room}}</view>
+      </view>
+      <view class="weui-cell">
+        <view class="weui-cell__bd">总分</view>
         <view class="weui-cell__ft">{{item.value}}</view>
       </view>
     </block>
   </view>
 </block>
 
-<block wx:if="{{infor_added}}">
-  <view class="qrcode-area">
-    <image class="qrcode" src="data:image/png;base64,{{qrcode_data}}"></image>
-    <view>{{child_name}}</view>
-  </view>
-</block>
+<view class="qrcode-area">
+  <image class="qrcode" src="data:image/png;base64,{{qrcode_data}}"></image>
+</view>
 
-<view class="x5ui-half-btn">
-  <view class="weui-btn-area">
-    <button type="primary" bindtap="returnClick">返回</button>
-  </view>
+<view class="weui-btn-area">
+  <button type="primary" bindtap="returnClick">识别交换学生</button>
 </view>

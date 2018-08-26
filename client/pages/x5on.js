@@ -115,9 +115,7 @@ var doUrl = {
   myadjustclassmove: `${host}/weapp/myadjust/classmove`,
   myadjustclassmoved: `${host}/weapp/myadjust/classmoved`,
   myadjustclassmoving: `${host}/weapp/myadjust/classmoving`,
-
-
-
+  myadjustexqrcode: `${host}/weapp/myadjust/exqrcode`,
 
   // 错误测试地址
   test: `${host}/weapp/data`,

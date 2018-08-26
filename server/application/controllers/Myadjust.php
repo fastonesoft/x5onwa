@@ -146,15 +146,30 @@ class Myadjust extends CI_Controller {
     });
   }
 
-
-
-
   public function studremove() {
     Model\xonLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
         $kao_stud_id = $param['kao_stud_id'];
         $result = Model\xonStudMove::removeStud($kao_stud_id);
+
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
+
+  public function exqrcode() {
+    Model\xonLogin::check(self::role_name, function ($user) {
+      try {
+        $param = $_POST;
+        $kao_stud_id = $param['kao_stud_id'];
+        $student = Model\xovGradeDivisionStud::getStudSumMovingByKaoStudId($kao_stud_id);
+        $qrcode_data = Model\x5on::getQrcodeBase64($kao_stud_id);
+        $result = compact('student', 'qrcode_data');
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
