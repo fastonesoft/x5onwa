@@ -13,6 +13,10 @@
         <view class="weui-cell__ft">{{item.stud_name}}</view>
       </view>
       <view class="weui-cell">
+        <view class="weui-cell__bd">学生性别</view>
+        <view class="weui-cell__ft">{{item.stud_sex}}</view>
+      </view>
+      <view class="weui-cell">
         <view class="weui-cell__bd">原始班级</view>
         <view class="weui-cell__ft">{{item.kao_room}}</view>
       </view>
@@ -29,5 +33,5 @@
 </view>
 
 <view class="weui-btn-area">
-  <button type="primary" bindtap="returnClick">识别交换学生</button>
+  <button type="primary" bindtap="scanClick">识别交换学生</button>
 </view>
