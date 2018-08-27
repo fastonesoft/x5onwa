@@ -52,26 +52,32 @@ class xovGradeDivisionStud
 
   public static function getStudSumMovingByUid ($uid) {
     $sub_id = 99;
-    return dbs::row('xovGradeDivisionStudMoving', ['*'], compact('uid', 'sub_id'));
+    $res = dbs::row('xovGradeDivisionStudMoving', ['*'], compact('uid', 'sub_id'));
+    if ( $res === null ) {
+      throw new Exception('没有找到编号对应的调动学生');
+    }
+    return $res;
   }
 
-  public static function getStudSumNotMovedByValue ($cls_id, $value, $section, $godown, $samesex, $stud_sex) {
+  public static function getStudSumNotMovedByValue ($cls_id, $value, $section, $godown, $samesex, $stud_sex_num) {
     $sub_id = 99;
     $same_group = 0;
     $begin = $value;
     $end = $value;
 
     if ( $godown === 'true' ) {
-      $begin += $section / 2;
-      $end -= $section / 2;
+      $begin -= $section / 2;
+      $end += $section / 2;
     } else {
       $end += $section;
     }
 
     if ( $samesex === 'true' ) {
-      return dbs::select('xovGradeDivisionStudNotMoved', ['*'], "cls_id = '$cls_id' and sub_id = $sub_id and value between $begin and $end and same_group = 0 and stud_sex = '$stud_sex'");
+      $condi = "cls_id = $cls_id and sub_id = $sub_id and value between $begin and $end and same_group = 0 and stud_sex_num = $stud_sex_num";
+      return dbs::select('xovGradeDivisionStudNotMoved', ['uid', 'cls_id', 'cls_order', 'stud_name', 'stud_sex', 'value'], $condi, 'and', 'order by value desc');
     } else {
-      return dbs::select('xovGradeDivisionStudNotMoved', ['*'], "cls_id = '$cls_id' and sub_id = $sub_id and value between $begin and $end and same_group = 0");
+      $condi = "cls_id = $cls_id and sub_id = $sub_id and value between $begin and $end and same_group = 0";
+      return dbs::select('xovGradeDivisionStudNotMoved', ['uid', 'cls_id', 'cls_order', 'stud_name', 'stud_sex', 'value'], $condi, 'and', 'order by value desc');
     }
   }
 

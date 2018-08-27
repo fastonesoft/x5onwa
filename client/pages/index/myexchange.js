@@ -30,6 +30,10 @@ console.log(e)
             var students = result.data
             that.setData({ students })
 
+          },
+          fail: function (error) {
+            var students = []
+            that.setData({ students })
           }
         })
       }
@@ -47,18 +51,7 @@ console.log(e)
       var item = students[index]
       item.checked = item.uid === e.detail.value
       if (item.checked) {
-        var cls_id = item.cls_id
-        var classes = that.data.classes
-        var classIndex = that.data.classIndex
-        var localcls_id = classes[classIndex].cls_id
 
-        if (cls_id === localcls_id) {
-          var grade_stud_uid = item.uid
-          that.setData({ grade_stud_uid })
-        } else {
-          var grade_stud_uid = ''
-          that.setData({ grade_stud_uid })
-        }
       }
     }
     this.setData({ students })

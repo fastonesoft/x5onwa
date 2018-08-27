@@ -1275,7 +1275,7 @@ AS
 
 CREATE VIEW xovClassDivisioned
 AS
-  SELECT A.*, cls_id, cls_order, cls_name, User2.name as user_name, nick_name
+  SELECT A.*, cls_order, cls_name, User2.name as user_name, nick_name
   FROM xonGradeDivision A
   LEFT JOIN xovClass C ON C.id = A.cls_id
   LEFT JOIN xonUser User2 on A.user_id = User2.id;
@@ -1297,9 +1297,13 @@ AS
 /**
   学校学生
  */
+
 CREATE VIEW xovStudent
 AS
-  SELECT A.*, C2.name as stud_name, C2.child_sex AS stud_sex, S.name AS step_name, S2.name AS sch_name, sch_id
+  SELECT A.*, C2.name as stud_name, C2.child_sex AS stud_sex, case
+    when C2.child_sex = '男' then 1
+    when C2.child_sex = '女' then 0
+    end as stud_sex_num, S.name AS step_name, S2.name AS sch_name, sch_id
   FROM xonStudent A
   LEFT JOIN xovChild C2 ON A.child_id = C2.id
   LEFT JOIN xonStep S ON A.step_id = S.id
@@ -1321,7 +1325,7 @@ AS
  */
 CREATE VIEW xovGradeStud
 AS
-  SELECT A.*, S.stud_name, S.stud_sex, step_name, sch_name, C.name AS come_name, C2.cls_name, C2.cls_order
+  SELECT A.*, S.stud_name, S.stud_sex, S.stud_sex_num, step_name, sch_name, C.name AS come_name, C2.cls_name, C2.cls_order
   FROM xonGradeStud A
   LEFT JOIN xovStudent S ON A.stud_id = S.id
   LEFT JOIN xonStudCome C ON A.stud_come_id = C.id
@@ -1339,6 +1343,7 @@ AS
 /**
   分班考试学生
  */
+
 CREATE VIEW xovGradeDivisionStud
 AS
   SELECT X.*, Y.sub_id, sub_name, sub_shortname, value, Y.id as kao_stud_id, kao_room, kao_seat, kao_num
@@ -1369,16 +1374,6 @@ AS
     select grade_stud_uid
     from xonStudMove
   );
-
-
-/**
-  调动学生信息
- */
-create view xovStudMove
-AS
-SELECT x.*,
-FROM xovStudMove x
-LEFT JOIN xovClass c ON x.request_cls_id = c.id
 
 
 

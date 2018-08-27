@@ -89,7 +89,7 @@ class Mysql
 
         // 拼接后缀
         $sql .= " $suffix";
-
+var_dump($sql);
         // 执行 SQL 语句
         $query = self::raw($sql, $execValues);
         $allResult = $query->fetchAll(PDO::FETCH_OBJ);

@@ -215,7 +215,7 @@ class Myadjust extends CI_Controller {
         Model\xovClass::checkClassIdMyDivision($user_id, $grade_stud->grade_id, $grade_stud->cls_id);
         // 查询交换学生数据
         $section = Model\xonDivisionSet::getSectionByGradeId($grade_stud->grade_id);
-        $result = Model\xovGradeDivisionStud::getStudSumNotMovedByValue($grade_stud->request_cls_id, $grade_stud->value, $section, $godown, $samesex, $grade_stud->stud_sex);
+        $result = Model\xovGradeDivisionStud::getStudSumNotMovedByValue($grade_stud->request_cls_id, $grade_stud->value, $section, $godown, $samesex, $grade_stud->stud_sex_num);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
