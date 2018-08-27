@@ -42,4 +42,12 @@ class xonGradeStud
     }
   }
 
+  public static function getRowByUid($uid) {
+    $res = dbs::row('xonGradeStud', ['*'], compact('uid'));
+    if ( $res === null ) {
+      throw new Exception('没有找到编号对应年级学生！');
+    }
+    return $res;
+  }
+
 }

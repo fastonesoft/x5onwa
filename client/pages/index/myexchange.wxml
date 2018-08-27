@@ -1,42 +1,47 @@
 <!--pages/index/myexchange.wxml-->
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
-<block wx:if="{{1}}">
+<form bindsubmit="scanSubmit">
   <view class="weui-cells__title">扫码设置</view>
   <view class="weui-cells weui-cells_after-title">
     <view class="weui-cell weui-cell_switch">
       <view class="weui-cell__bd">同性调动</view>
       <view class="weui-cell__ft">
-        <switch name="{{item.uid}}" checked="true"/>
+        <switch name="samesex" checked="{{samesex}}"/>
+      </view>
+    </view>
+    <view class="weui-cell weui-cell_switch">
+      <view class="weui-cell__bd">向下浮动</view>
+      <view class="weui-cell__ft">
+        <switch name="godown" checked="{{godown}}"/>
       </view>
     </view>
   </view>
 
-      <view class="x5ui-half-btn">
-        <view class="weui-btn-area">
-          <button type="primary" form-type="submit">学生识别</button>
-        </view>
-      </view>
-
-</block>
-
-
-<block wx:if="{{1}}">
-<view class="weui-panel weui-panel_access" wx:if="{{1}}">
-  <view class="weui-panel__hd">调动列表</view>
-  <view class="weui-panel__bd">
-    <navigator url="mydivision?uid=sdd" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
-        <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-            <image class="weui-media-box__thumb" src="../../images/head/teachm.png" />
-        </view>
-        <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-            <view class="weui-media-box__title">学生男</view>
-            <view class="weui-media-box__desc">性别：男，原班级：11班</view>
-            <view class="weui-media-box__desc">总分：333</view>
-        </view>
-    </navigator>
+  <view class="x5ui-half-btn">
+    <view class="weui-btn-area">
+      <button type="primary" form-type="submit">学生识别</button>
+    </view>
   </view>
-</view>
+</form>
+
+
+<block wx:if="{{students.length>0}}">
+
+  <view class="weui-cells__title">交换列表</view>
+  <view class="weui-cells weui-cells_after-title">
+    <radio-group name="grade_stud_uid" bindchange="studentChange">
+      <label class="weui-cell weui-check__label" wx:for="{{students}}" wx:key="uid">
+        <radio class="weui-check" value="{{item.uid}}" checked="{{item.checked}}"/>
+        <view class="weui-cell__bd">{{item.cls_order}}，{{item.stud_name}} {{item.stud_sex}} {{item.value}}</view>
+        <view class="weui-cell__ft weui-cell__ft_in-radio">
+          <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.checked}}"></icon>
+          <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{item.checked}}"></icon>
+        </view>
+      </label>
+    </radio-group>
+  </view>
+
 
       <view class="x5ui-half-btn">
         <view class="weui-btn-area">

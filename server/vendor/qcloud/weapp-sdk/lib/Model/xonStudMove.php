@@ -55,4 +55,12 @@ class xonStudMove
     return $res_cls_id;
   }
 
+  public static function getRowByUid ($grade_stud_uid) {
+    $res = dbs::row('xonStudMove', ['*'], compact('grade_stud_uid'));
+    if ( $res === null ) {
+      throw new Exception('没有找到编号对应调动学生！');
+    }
+    return $res;
+  }
+
 }

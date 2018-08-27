@@ -9,6 +9,8 @@ use \Exception;
 class xovGradeDivisionStud
 {
 
+  // 管理员身份调动学生查询
+
   public static function getStudSumById ($stud_id) {
     $sub_id = 99;
     $same_group = 0;
@@ -48,7 +50,32 @@ class xovGradeDivisionStud
     return dbs::row('xovGradeDivisionStudNotMoved', ['*'], compact('uid', 'sub_id', 'same_group'));
   }
 
-  // 显示查询
+  public static function getStudSumMovingByUid ($uid) {
+    $sub_id = 99;
+    return dbs::row('xovGradeDivisionStudMoving', ['*'], compact('uid', 'sub_id'));
+  }
+
+  public static function getStudSumNotMovedByValue ($cls_id, $value, $section, $godown, $samesex, $stud_sex) {
+    $sub_id = 99;
+    $same_group = 0;
+    $begin = $value;
+    $end = $value;
+
+    if ( $godown === 'true' ) {
+      $begin += $section / 2;
+      $end -= $section / 2;
+    } else {
+      $end += $section;
+    }
+
+    if ( $samesex === 'true' ) {
+      return dbs::select('xovGradeDivisionStudNotMoved', ['*'], "cls_id = '$cls_id' and sub_id = $sub_id and value between $begin and $end and same_group = 0 and stud_sex = '$stud_sex'");
+    } else {
+      return dbs::select('xovGradeDivisionStudNotMoved', ['*'], "cls_id = '$cls_id' and sub_id = $sub_id and value between $begin and $end and same_group = 0");
+    }
+  }
+
+  // 调动中、调动结束的学生查询
 
   public static function getStudSumMovingByRequestClassId ($request_cls_id) {
     $sub_id = 99;
@@ -69,6 +96,7 @@ class xovGradeDivisionStud
     $sub_id = 99;
     return dbs::select('xovGradeDivisionStudSuccess', ['kao_stud_id', 'uid', 'cls_id', 'cls_order', 'stud_name', 'stud_sex', 'kao_room', 'value'], compact('request_cls_id', 'sub_id'));
   }
+
 
 
 

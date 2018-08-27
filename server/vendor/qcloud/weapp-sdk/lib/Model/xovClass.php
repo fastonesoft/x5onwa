@@ -31,4 +31,12 @@ class xovClass
   public static function getRows4UserDivisioned ($user_id, $grade_id) {
     return dbs::select('xovClassDivisioned', ['uid', 'cls_id', 'cls_name', 'cls_order', 'user_name', 'nick_name'], compact('user_id', 'grade_id'));
   }
+
+  public static function checkClassIdMyDivision ($user_id, $grade_id, $cls_id) {
+    $cls_ids = dbs::select('xovClassDivisioned', ['cls_id'], compact('user_id', 'grade_id'));
+    $cls_idstr = json_encode($cls_ids);
+    if ( ! strpos($cls_idstr, $cls_id) ) {
+      throw new Exception('调动学生班级不在分管列表');
+    }
+  }
 }

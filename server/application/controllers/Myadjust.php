@@ -201,5 +201,30 @@ class Myadjust extends CI_Controller {
     });
   }
 
+  public function scanmove() {
+    Model\xonLogin::check(self::role_name, function ($user) {
+      try {
+        $param = $_POST;
+        $move_grade_stud_uid = $param['move_grade_stud_uid'];
+        $godown = $param['godown'];
+        $samesex = $param['samesex'];
+        $user_id = $user['unionId'];
+        // 调动学生的原始资料
+        $grade_stud = Model\xovGradeDivisionStud::getStudSumMovingByUid($move_grade_stud_uid);
+        // 是否在分管班级列表
+        Model\xovClass::checkClassIdMyDivision($user_id, $grade_stud->grade_id, $grade_stud->cls_id);
+        // 查询交换学生数据
+        $section = Model\xonDivisionSet::getSectionByGradeId($grade_stud->grade_id);
+        $result = Model\xovGradeDivisionStud::getStudSumNotMovedByValue($grade_stud->request_cls_id, $grade_stud->value, $section, $godown, $samesex, $grade_stud->stud_sex);
+
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
+
 
 }

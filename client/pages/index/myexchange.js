@@ -1,66 +1,68 @@
 // pages/index/myexchange.js
+var x5on = require('../x5on.js')
+
 Page({
 
-  /**
-   * 页面的初始数据
-   */
   data: {
-  
+    godown: false,
+    samesex: true,
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
   
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
+  scanSubmit: function (e) {
+    var that = this
+    var godown = e.detail.value.godown
+    var samesex = e.detail.value.samesex
+
+console.log(e)
+
+    wx.scanCode({
+      onlyFromCamera: true,
+      success: (res) => {
+        var move_grade_stud_uid = res.result
+        x5on.postForm({
+          url: x5on.url.myadjuststudscanmove,
+          data: { move_grade_stud_uid, godown, samesex },
+          success: function (result) {
+            var students = result.data
+            that.setData({ students })
+
+          }
+        })
+      }
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
+
+  studentChange: function (e) {
+    var that = this
+    var students = this.data.students
+    var btn_show = true
+    that.setData({ btn_show })
+
+    for (var index = 0; index < students.length; index++) {
+      var item = students[index]
+      item.checked = item.uid === e.detail.value
+      if (item.checked) {
+        var cls_id = item.cls_id
+        var classes = that.data.classes
+        var classIndex = that.data.classIndex
+        var localcls_id = classes[classIndex].cls_id
+
+        if (cls_id === localcls_id) {
+          var grade_stud_uid = item.uid
+          that.setData({ grade_stud_uid })
+        } else {
+          var grade_stud_uid = ''
+          that.setData({ grade_stud_uid })
+        }
+      }
+    }
+    this.setData({ students })
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  }
 })

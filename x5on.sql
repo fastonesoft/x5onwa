@@ -1041,7 +1041,6 @@ CREATE TABLE xonKaoScore (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='考试成绩';
 
 
-
 CREATE TABLE xonStudMove (
   grade_stud_uid VARCHAR(36) NOT NULL,
   request_user_id VARCHAR(36) NOT NULL,
@@ -1052,6 +1051,17 @@ CREATE TABLE xonStudMove (
   FOREIGN KEY (request_user_id) REFERENCES xonUser(id),
   FOREIGN KEY (request_cls_id) REFERENCES xonClass(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学生调动';
+
+CREATE TABLE xonDivisionSet (
+  grade_id VARCHAR(18) NOT NULL,
+  section INT(11) not null,
+  finished BOOLEAN NOT NULL,
+  PRIMARY KEY (grade_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='年级调动设置';
+
+INSERT INTO xonDivisionSet VALUES ('32120402201609', 10, 0);
+INSERT INTO xonDivisionSet VALUES ('32120402201708', 10, 0);
+INSERT INTO xonDivisionSet VALUES ('32120402201807', 10, 0);
 
 INSERT INTO xonStep VALUES ('321204022016', replace(uuid(), '-', ''), '2016级', '32120402', 0);
 INSERT INTO xonStep VALUES ('321204022017', replace(uuid(), '-', ''), '2017级', '32120402', 0);
