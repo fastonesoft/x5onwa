@@ -89,7 +89,12 @@ Page({
   switchtap: function (e) {
     var all = ! this.data.all
     var studchanges = []
-    this.setData({ all, studchanges })
+    var studmoves = this.data.studmoves
+    for (var i = 0; i < studmoves.length; i++) {
+      var item = studmoves[i]
+      item.checked = false
+    }
+    this.setData({ all, studmoves, studchanges })
   },
 
   studmoveChange: function (e) {
@@ -114,7 +119,8 @@ Page({
           that.setData({ grade_stud_uid })
         }
         var all = this.data.all
-        var data = { value: item.value, cls_id: localcls_id, all }
+        var stud_sex_num = item.stud_sex_num
+        var data = { value: item.value, cls_id: localcls_id, all, stud_sex_num }
         // 查询用于交换的本班学生
         x5on.postFormEx({
           url: x5on.url.mytuningstudchanges,

@@ -33,9 +33,10 @@ class xonStudMove
 
   public static function exchangeStud ($move_grade_stud_uid, $exchange_grade_stud_uid) {
     $grade_stud_uid = $move_grade_stud_uid;
-    $move = dbs::row('xonStudMove', ['*'], compact('grade_stud_uid'));
+    $success = 0;
+    $move = dbs::row('xonStudMove', ['*'], compact('grade_stud_uid', 'success'));
     $grade_stud_uid = $exchange_grade_stud_uid;
-    $exchange = dbs::row('xonStudMove', ['*'], compact('grade_stud_uid'));
+    $exchange = dbs::row('xonStudMove', ['*'], compact('grade_stud_uid', 'success'));
 
     if ( $move === null || $exchange === null ) throw new Exception('学生识别码有误！');
     if ( $exchange->exchange_grade_stud_uid !== $move->grade_stud_uid ) throw new Exception('交换学生码不匹配！');

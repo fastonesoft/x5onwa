@@ -21,4 +21,12 @@ class xonClass
     return $result;
   }
 
+  public static function getGradeIdByClassId($id) {
+    $res = dbs::row('xonClass', ['*'], compact('cls_id'));
+    if ( $res === null ) {
+      throw new Exception('没有找到对应班级编号！');
+    }
+    return $res->grade_id;
+  }
+
 }

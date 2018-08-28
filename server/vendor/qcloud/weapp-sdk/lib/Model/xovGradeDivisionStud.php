@@ -23,15 +23,15 @@ class xovGradeDivisionStud
     return dbs::select('xovGradeDivisionStud', ['*'], compact('grade_id', 'stud_name', 'sub_id', 'same_group'));
   }
 
-  public static function getStudSumByValue ($cls_id, $value, $all, $section) {
+  public static function getStudSumByValue ($cls_id, $value, $all, $section, $stud_sex_num) {
     $sub_id = 99;
     if ($all === 'true') {
       $same_group = 0;
-      return dbs::select('xovGradeDivisionStud', ['*'], compact('cls_id', 'sub_id', 'same_group'));
+      return dbs::select('xovGradeDivisionStud', ['*'], compact('cls_id', 'sub_id', 'same_group'), 'and', 'order by stud_sex_num, value desc');
     } else {
       $end = $value + $section;
       $begin = $value - $section;
-      return dbs::select('xovGradeDivisionStud', ['*'], "cls_id = $cls_id and sub_id = $sub_id and value between $begin and $end and same_group = 0");
+      return dbs::select('xovGradeDivisionStud', ['*'], "cls_id = $cls_id and sub_id = $sub_id and value between $begin and $end and same_group = 0 and stud_sex_num = $stud_sex_num", 'and', 'order by stud_sex_num desc, value limit 5');
     }
   }
 
