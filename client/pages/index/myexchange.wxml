@@ -18,16 +18,12 @@
     </view>
   </view>
 
-  <view class="x5ui-half-btn">
-    <view class="weui-btn-area">
-      <button type="primary" form-type="submit">学生识别</button>
-    </view>
+  <view class="weui-btn-area">
+    <button type="primary" form-type="submit">调动学生识别</button>
   </view>
 </form>
 
-
-<block wx:if="{{students.length>0}}">
-
+<form bindsubmit="exchangeSubmit" wx:if="{{students.length>0}}">
   <view class="weui-cells__title">交换列表</view>
   <view class="weui-cells weui-cells_after-title">
     <radio-group name="grade_stud_uid" bindchange="studentChange">
@@ -41,11 +37,13 @@
       </label>
     </radio-group>
   </view>
+  <view class="weui-btn-area">
+    <button type="primary" form-type="submit">确认交换</button>
+  </view>
+</form>
 
-
-      <view class="x5ui-half-btn">
-        <view class="weui-btn-area">
-          <button type="primary" form-type="submit">返回</button>
-        </view>
-      </view>
+<block wx:if="{{btn_show}}">
+  <view class="qrcode-area">
+    <image class="qrcode" src="data:image/png;base64,{{qrcode_data}}"></image>
+  </view>
 </block>

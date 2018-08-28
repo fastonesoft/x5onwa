@@ -25,8 +25,13 @@ Page({
     wx.scanCode({
       onlyFromCamera: true,
       success: (res) => {
+        console.log(res)
         var exchange_grade_stud_uid = res.result
         var move_grade_stud_uid = that.data.grade_stud_uid
+
+        console.log(exchange_grade_stud_uid)
+        console.log(move_grade_stud_uid)
+
         x5on.postForm({
           url: x5on.url.myadjuststudexchange,
           data: { move_grade_stud_uid, exchange_grade_stud_uid },

@@ -27,11 +27,10 @@
       </view>
     </block>
   </view>
+  <view class="qrcode-area">
+    <image class="qrcode" src="data:image/png;base64,{{qrcode_data}}"></image>
+  </view>
 </block>
-
-<view class="qrcode-area">
-  <image class="qrcode" src="data:image/png;base64,{{qrcode_data}}"></image>
-</view>
 
 <view class="weui-btn-area">
   <button type="primary" bindtap="scanClick">识别交换学生</button>

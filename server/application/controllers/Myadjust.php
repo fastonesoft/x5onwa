@@ -180,6 +180,7 @@ class Myadjust extends CI_Controller {
     });
   }
 
+  // 识别交换学生二维码 -> 完成交换
   public function studexchange() {
     Model\xonLogin::check(self::role_name, function ($user) {
       try {
@@ -201,6 +202,7 @@ class Myadjust extends CI_Controller {
     });
   }
 
+  // 识别调动学生
   public function scanmove() {
     Model\xonLogin::check(self::role_name, function ($user) {
       try {
@@ -226,5 +228,25 @@ class Myadjust extends CI_Controller {
     });
   }
 
+  // 读取交换学生二维码
+  public function studqrcode() {
+    Model\xonLogin::check(self::role_name, function ($user) {
+      try {
+        $param = $_POST;
+        $user_id = $user['unionId'];
+        $grade_stud_uid = $param['grade_stud_uid'];
+        $exchange_grade_stud_uid = $param['exchange_grade_stud_uid'];
+        $grade_stud = Model\xovGradeDivisionStud::getStudSumMovingByUid($exchange_grade_stud_uid);
+        Model\xonStudMove::addStudExchange($user_id, $grade_stud_uid, $grade_stud->cls_id, $exchange_grade_stud_uid);
 
+        $result = Model\x5on::getQrcodeBase64($grade_stud_uid);
+
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
 }

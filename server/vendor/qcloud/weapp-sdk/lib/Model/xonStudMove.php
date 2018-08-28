@@ -12,7 +12,14 @@ class xonStudMove
   public static function addStud ($request_user_id, $grade_stud_uid, $request_cls_id) {
     $success = 0;
     $exchange_grade_stud_uid = null;
-    // 先插入调动列表
+
+    $count = dbs::insert('xonStudMove', compact('grade_stud_uid', 'request_cls_id', 'exchange_grade_stud_uid', 'request_user_id', 'success'));
+    return $count;
+  }
+
+  public static function addStudExchange ($request_user_id, $grade_stud_uid, $request_cls_id, $exchange_grade_stud_uid) {
+    $success = 0;
+
     $count = dbs::insert('xonStudMove', compact('grade_stud_uid', 'request_cls_id', 'exchange_grade_stud_uid', 'request_user_id', 'success'));
     return $count;
   }

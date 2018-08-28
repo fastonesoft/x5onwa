@@ -74,10 +74,10 @@ class xovGradeDivisionStud
 
     if ( $samesex === 'true' ) {
       $condi = "cls_id = $cls_id and sub_id = $sub_id and value between $begin and $end and same_group = 0 and stud_sex_num = $stud_sex_num";
-      return dbs::select('xovGradeDivisionStudNotMoved', ['uid', 'cls_id', 'cls_order', 'stud_name', 'stud_sex', 'value'], $condi, 'and', 'order by value desc');
+      return dbs::select('xovGradeDivisionStudNotMoved', ['uid', 'cls_id', 'cls_order', 'stud_name', 'stud_sex', 'value'], $condi, 'and', 'order by value limit 5');
     } else {
-      $condi = "cls_id = $cls_id and sub_id = $sub_id and value between $begin and $end and same_group = 0";
-      return dbs::select('xovGradeDivisionStudNotMoved', ['uid', 'cls_id', 'cls_order', 'stud_name', 'stud_sex', 'value'], $condi, 'and', 'order by value desc');
+      $condi = "cls_id = $cls_id and sub_id = $sub_id and value between $begin and $end and same_group = 0 and stud_sex_num = !$stud_sex_num";
+      return dbs::select('xovGradeDivisionStudNotMoved', ['uid', 'cls_id', 'cls_order', 'stud_name', 'stud_sex', 'value'], $condi, 'and', 'order by value limit 5');
     }
   }
 
