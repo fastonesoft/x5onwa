@@ -117,9 +117,15 @@ var doUrl = {
   myadjuststudexchange: `${host}/weapp/myadjust/studexchange`,
   // 自主调动
   myadjuststudexchangeself: `${host}/weapp/myadjust/studexchangeself`,
-  // 添加交换学生记录，并展示码
-  myadjuststudqrcode: `${host}/weapp/myadjust/studqrcode`,
+  // 添加交换学生记录
+  myadjustaddexchange: `${host}/weapp/myadjust/addexchange`,
+  // 显示查询交换学生信息
+  myadjustqueryexchange: `${host}/weapp/myadjust/queryexchange`,
+  // 交换学生列表
+  myadjustexchangelist: `${host}/weapp/myadjust/exchangelist`,
 
+  
+  
   myadjuststudlocal: `${host}/weapp/myadjust/studlocal`,
   myadjustclassmove: `${host}/weapp/myadjust/classmove`,
   myadjustclassmoved: `${host}/weapp/myadjust/classmoved`,

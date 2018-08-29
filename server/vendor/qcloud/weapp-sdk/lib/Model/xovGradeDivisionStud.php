@@ -99,9 +99,14 @@ class xovGradeDivisionStud
     return dbs::row('xovGradeDivisionStudMoving', ['uid', 'grade_id', 'cls_id', 'cls_order', 'stud_name', 'stud_sex', 'stud_sex_num', 'kao_room', 'value', 'request_cls_id'], compact('uid', 'sub_id'));
   }
 
+  public static function getStudSumExchangingByUserId ($request_user_id) {
+    $sub_id = 99;
+    return dbs::select('xovGradeDivisionStudExchanging', ['uid', 'grade_id', 'cls_id', 'cls_order', 'stud_name', 'stud_sex', 'stud_sex_num', 'kao_room', 'value', 'exchange_grade_stud_uid'], compact('request_user_id', 'sub_id'));
+  }
+
   public static function getStudSumExchangingByGradeStudUid ($uid) {
     $sub_id = 99;
-    return dbs::select('xovGradeDivisionStudExchanging', ['uid', 'grade_id', 'cls_id', 'cls_order', 'stud_name', 'stud_sex', 'stud_sex_num', 'kao_room', 'value'], compact('uid', 'sub_id'));
+    return dbs::row('xovGradeDivisionStudExchanging', ['uid', 'grade_id', 'cls_id', 'cls_order', 'stud_name', 'stud_sex', 'stud_sex_num', 'kao_room', 'value', 'exchange_grade_stud_uid'], compact('uid', 'sub_id'));
   }
 
 }

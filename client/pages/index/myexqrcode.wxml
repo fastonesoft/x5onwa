@@ -4,7 +4,7 @@
 <block wx:if="{{student.length>0}}">
   <view class="weui-cells__title">学生信息</view>
   <view class="weui-cells weui-cells_after-title">
-    <block wx:for="{{student}}" wx:key="kao_stud_id">
+    <block wx:for="{{student}}" wx:key="uid">
       <view class="weui-cell">
         <view class="weui-cell__bd">分班条号</view>
         <view class="weui-cell__ft">{{item.cls_order}}</view>

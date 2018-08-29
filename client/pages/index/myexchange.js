@@ -3,11 +3,22 @@ var x5on = require('../x5on.js')
 
 Page({
 
+  onLoad: function (e) {
+    var that = this
+    x5on.request({
+      url: x5on.url.myadjustexchangelist,
+      success: function (result) {
+        var exchangelists = result.data
+        that.setData({ exchangelists })
+      }
+    })
+  },
+
   scanSubmit: function (e) {
     var that = this
-    var students = []
+    var exchangestuds = []
     var btn_show = false
-    that.setData({ btn_show, students })
+    that.setData({ btn_show, exchangestuds })
 
     wx.scanCode({
       onlyFromCamera: true,
@@ -19,8 +30,8 @@ Page({
           url: x5on.url.myadjuststudscanmove,
           data: { move_grade_stud_uid },
           success: function (result) {
-            var students = result.data
-            that.setData({ students })
+            var exchangestuds = result.data
+            that.setData({ exchangestuds })
           }
         })
       }
@@ -29,14 +40,14 @@ Page({
 
   studentChange: function (e) {
     var that = this
-    var students = this.data.students
+    var exchangestuds = this.data.exchangestuds
 
-    for (var index = 0; index < students.length; index++) {
-      var item = students[index]
+    for (var index = 0; index < exchangestuds.length; index++) {
+      var item = exchangestuds[index]
       var grade_stud_uid = e.detail.value
       item.checked = item.uid === e.detail.value
     }
-    this.setData({ students })
+    this.setData({ exchangestuds })
   },
 
   exchangeSubmit: function (e) {
@@ -44,13 +55,29 @@ Page({
     var grade_stud_uid = e.detail.value.grade_stud_uid
     var exchange_grade_stud_uid = this.data.move_grade_stud_uid
     x5on.postForm({
-      url: x5on.url.myadjuststudqrcode,
+      url: x5on.url.myadjustaddexchange,
       data: { grade_stud_uid, exchange_grade_stud_uid },
       success: function (result) {
+        var exchangestuds = []
+        var exchangelists = result.data
+        that.setData({ exchangelists, exchangestuds })
+      }
+    })
+  },
+
+  showexchangestud: function (e) {
+    var that = this
+    var grade_stud_uid = e.currentTarget.dataset.uid
+    x5on.postForm({
+      url: x5on.url.myadjustqueryexchange,
+      data: { grade_stud_uid },
+      success: function (result) {
+        var data = result.data
         var btn_show = true
-        var qrcode_data = result.data
-        var students = []
-        that.setData({ btn_show, qrcode_data, students })
+        var movestud = data.movestud
+        var exchangestud = data.exchangestud
+        var qrcode_data = data.qrcode_data
+        that.setData({ btn_show, movestud, exchangestud, qrcode_data })
       }
     })
   },

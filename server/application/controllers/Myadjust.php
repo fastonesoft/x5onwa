@@ -280,8 +280,8 @@ class Myadjust extends CI_Controller {
     });
   }
 
-  // 添加交换学生记录，并显示二维码
-  public function studqrcode() {
+  // 添加交换学生记录，返回交换学生列表
+  public function addexchange() {
     Model\xonLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
@@ -291,7 +291,8 @@ class Myadjust extends CI_Controller {
         $move_stud = Model\xovGradeDivisionStud::getStudSumMovingByUid($exchange_grade_stud_uid);
         Model\xonStudMove::addStudExchange($user_id, $grade_stud_uid, $move_stud->cls_id, $exchange_grade_stud_uid);
 
-        $result = Model\x5on::getQrcodeBase64($grade_stud_uid);
+        // 返回交换学生列表，以请求用户为单位
+        $result = Model\xovGradeDivisionStud::getStudSumExchangingByUserId($user_id);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -301,4 +302,46 @@ class Myadjust extends CI_Controller {
       $this->json($error);
     });
   }
+
+  // 查询交换学生信息 并 与之匹配的调动学生信息
+  public function queryexchange() {
+    Model\xonLogin::check(self::role_name, function ($user) {
+      try {
+        $param = $_POST;
+        $grade_stud_uid = $param['grade_stud_uid'];
+        $exchangestud = Model\xovGradeDivisionStud::getStudSumExchangingByGradeStudUid($grade_stud_uid);
+        $move_stud_id = $exchangestud->exchange_grade_stud_uid;
+        $movestud = Model\xovGradeDivisionStud::getStudSumMovingByGradeStudUid($move_stud_id);
+
+        $qrcode_data = Model\x5on::getQrcodeBase64($grade_stud_uid);
+
+        $movestud = [$movestud];
+        $exchangestud = [$exchangestud];
+        $result = compact('exchangestud', 'movestud', 'qrcode_data');
+
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
+
+  // 查询交换学生列表
+  public function exchangelist() {
+    Model\xonLogin::check(self::role_name, function ($user) {
+      try {
+        $user_id = $user['unionId'];
+        $result = Model\xovGradeDivisionStud::getStudSumExchangingByUserId($user_id);
+
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
+
 }
