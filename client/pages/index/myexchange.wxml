@@ -89,7 +89,7 @@
               <view class="weui-media-box__desc">原班：{{item.kao_room}} 班，总分：{{item.value}}</view>
           </view>
           <view class="weui-media-box__ft weui-media-box__ft_in-appmsg">
-            <image src="../../images/remove.png" class="remove-icon" data-uid="{{item.uid}}" bindtap="myexchangeRemove"></image>
+            <image src="../../images/remove.png" class="remove-icon" data-uid="{{item.uid}}" bindtap="liststudRemove"></image>
           </view>
       </view>
     </block> 

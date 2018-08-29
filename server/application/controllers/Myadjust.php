@@ -259,6 +259,8 @@ class Myadjust extends CI_Controller {
         $param = $_POST;
         $move_grade_stud_uid = $param['move_grade_stud_uid'];
         $user_id = $user['unionId'];
+        // 检测是否已经存在交换、调动请求
+        Model\xonStudMove::checkExchange($move_grade_stud_uid);
         // 调动学生的原始资料
         $move = Model\xovGradeDivisionStud::getStudSumMovingByUid($move_grade_stud_uid);
         // 是否在分管班级列表
@@ -290,6 +292,8 @@ class Myadjust extends CI_Controller {
         $grade_stud_uid = $param['grade_stud_uid'];
         $exchange_grade_stud_uid = $param['exchange_grade_stud_uid'];
         $move_stud = Model\xovGradeDivisionStud::getStudSumMovingByUid($exchange_grade_stud_uid);
+        // 检测是否已经存在交换、调动请求
+        Model\xonStudMove::checkExchange($exchange_grade_stud_uid);
         Model\xonStudMove::addStudExchange($user_id, $grade_stud_uid, $move_stud->cls_id, $exchange_grade_stud_uid);
 
         // 返回交换学生列表，以请求用户为单位
@@ -333,6 +337,27 @@ class Myadjust extends CI_Controller {
   public function exchangelist() {
     Model\xonLogin::check(self::role_name, function ($user) {
       try {
+        $user_id = $user['unionId'];
+        $result = Model\xovGradeDivisionStud::getStudSumExchangingByUserId($user_id);
+
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
+
+  // 删除交换列表学生
+  public function removeliststud() {
+    Model\xonLogin::check(self::role_name, function ($user) {
+      try {
+        $param = $_POST;
+        $grade_stud_uid = $param['grade_stud_uid'];
+        // 删除指定学生
+        Model\xonStudMove::removeStud($grade_stud_uid);
+        // 更新交换列表
         $user_id = $user['unionId'];
         $result = Model\xovGradeDivisionStud::getStudSumExchangingByUserId($user_id);
 

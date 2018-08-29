@@ -123,6 +123,7 @@ var doUrl = {
   myadjustqueryexchange: `${host}/weapp/myadjust/queryexchange`,
   // 交换学生列表
   myadjustexchangelist: `${host}/weapp/myadjust/exchangelist`,
+  myadjustremoveliststud: `${host}/weapp/myadjust/removeliststud`,
 
   
   

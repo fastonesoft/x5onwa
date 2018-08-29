@@ -16,9 +16,12 @@ Page({
 
   scanSubmit: function (e) {
     var that = this
-    var exchangestuds = []
     var btn_show = false
-    that.setData({ btn_show, exchangestuds })
+    var qrcode_data = ''
+    var movestud = []
+    var exchangestud = []
+    var exchangestuds = []
+    that.setData({ btn_show, qrcode_data, movestud, exchangestud, exchangestuds })
 
     wx.scanCode({
       onlyFromCamera: true,
@@ -78,6 +81,24 @@ Page({
         var exchangestud = data.exchangestud
         var qrcode_data = data.qrcode_data
         that.setData({ btn_show, movestud, exchangestud, qrcode_data })
+      }
+    })
+  },
+
+  liststudRemove: function (e) {
+    var that = this
+    var grade_stud_uid = e.currentTarget.dataset.uid
+    x5on.postForm({
+      url: x5on.url.myadjustremoveliststud,
+      data: { grade_stud_uid },
+      success: function (result) {
+        var btn_show = false
+        var qrcode_data = ''
+        var movestud = []
+        var exchangestud = []
+        var exchangestuds = []
+        var exchangelists = result.data
+        that.setData({ btn_show, qrcode_data, movestud, exchangestud, exchangelists })
       }
     })
   },

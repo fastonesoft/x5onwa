@@ -31,6 +31,13 @@ class xonStudMove
     }
   }
 
+  public static function checkExchange ($exchange_grade_stud_uid) {
+    $res = dbs::select('xonStudMove', ['*'], compact('exchange_grade_stud_uid'));
+    if ( count($res) > 0 ) {
+      throw new Exception('同一调动学生不可多次请求交换！');
+    }
+  }
+
   public static function exchangeStud ($move_grade_stud_uid, $exchange_grade_stud_uid) {
     $success = 0;
     $grade_stud_uid = $move_grade_stud_uid;
