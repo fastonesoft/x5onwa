@@ -27,6 +27,21 @@
 </form>
 
 <block wx:if="{{btn_show}}">
+  <block wx:if="{{movestud.length>0}}">
+    <view class="weui-cells__title">调动学生信息</view>
+    <view class="weui-cells weui-cells_after-title">
+      <block wx:for="{{movestud}}" wx:key="uid">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">分班条号</view>
+          <view class="weui-cell__ft">{{item.cls_order}}</view>
+        </view>
+        <view class="weui-cell">
+          <view class="weui-cell__bd">调动学生</view>
+          <view class="weui-cell__ft">{{item.stud_name}}</view>
+        </view>
+      </block>
+    </view>
+  </block>
   <view class="qrcode-area">
     <image class="qrcode" src="data:image/png;base64,{{qrcode_data}}"></image>
   </view>
@@ -53,21 +68,6 @@
         <view class="weui-cell">
           <view class="weui-cell__bd">总分</view>
           <view class="weui-cell__ft">{{item.value}}</view>
-        </view>
-      </block>
-    </view>
-  </block>
-  <block wx:if="{{movestud.length>0}}">
-    <view class="weui-cells__title">调动学生信息</view>
-    <view class="weui-cells weui-cells_after-title">
-      <block wx:for="{{movestud}}" wx:key="uid">
-        <view class="weui-cell">
-          <view class="weui-cell__bd">分班条号</view>
-          <view class="weui-cell__ft">{{item.cls_order}}</view>
-        </view>
-        <view class="weui-cell">
-          <view class="weui-cell__bd">调动学生</view>
-          <view class="weui-cell__ft">{{item.stud_name}}</view>
         </view>
       </block>
     </view>

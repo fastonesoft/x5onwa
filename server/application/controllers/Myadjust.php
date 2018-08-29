@@ -260,16 +260,17 @@ class Myadjust extends CI_Controller {
         $move_grade_stud_uid = $param['move_grade_stud_uid'];
         $user_id = $user['unionId'];
         // 调动学生的原始资料
-        $grade_stud = Model\xovGradeDivisionStud::getStudSumMovingByUid($move_grade_stud_uid);
+        $move = Model\xovGradeDivisionStud::getStudSumMovingByUid($move_grade_stud_uid);
         // 是否在分管班级列表
-        Model\xovClass::checkClassIdMyDivision($user_id, $grade_stud->grade_id, $grade_stud->cls_id);
+        Model\xovClass::checkClassIdMyDivision($user_id, $move->grade_id, $move->cls_id);
         // 查询交换学生数据
-        $grade_id = $grade_stud->grade_id;
+        $grade_id = $move->grade_id;
         $godown = Model\xonDivisionSet::getGodownByGradeId($grade_id);
         $samesex = Model\xonDivisionSet::getSamesexByGradeId($grade_id);
         $section = Model\xonDivisionSet::getSectionByGradeId($grade_id);
         $limit_num = Model\xonDivisionSet::getLimitnumByGradeId($grade_id);
-        $result = Model\xovGradeDivisionStud::getStudSumNotMovedByValue($grade_stud->request_cls_id, $grade_stud->value, $section, $godown, $samesex, $grade_stud->stud_sex_num, $limit_num);
+
+        $result = Model\xovGradeDivisionStud::getStudSumNotMovedByValue($move->request_cls_id, $move->value, $section, $godown, $samesex, $move->stud_sex_num, $limit_num);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
