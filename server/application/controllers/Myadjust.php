@@ -162,14 +162,33 @@ class Myadjust extends CI_Controller {
     });
   }
 
-  public function exqrcode() {
+  // 调动申请的学生二维码
+  public function movingqrcode() {
     Model\xonLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
+        $user_id = $user['unionId'];
         $grade_stud_uid = $param['grade_stud_uid'];
         $student = Model\xovGradeDivisionStud::getStudSumMovingByGradeStudUid($grade_stud_uid);
         $qrcode_data = Model\x5on::getQrcodeBase64($grade_stud_uid);
-        $result = compact('student', 'qrcode_data');
+        // 查找是否本人分管班级学生
+        $exchangestuds = [];
+        $value = $student->value;
+        $cls_id = $student->cls_id;
+        $request_cls_id = $student->request_cls_id;
+        $grade_id = $student->grade_id;
+        $stud_sex_num = $student->stud_sex_num;
+        $class_in_mydivision = Model\xovClass::classIdMyDivision($user_id, $grade_id, $cls_id);
+        if ( $class_in_mydivision ) {
+          // 查询交换学生数据
+          $godown = Model\xonDivisionSet::getGodownByGradeId($grade_id);
+          $samesex = Model\xonDivisionSet::getSamesexByGradeId($grade_id);
+          $section = Model\xonDivisionSet::getSectionByGradeId($grade_id);
+          $limit_num = Model\xonDivisionSet::getLimitnumByGradeId($grade_id);
+          $exchangestuds = Model\xovGradeDivisionStud::getStudSumNotMovedByValue($request_cls_id, $value, $section, $godown, $samesex, $stud_sex_num, $limit_num);
+        }
+        $student = [$student];
+        $result = compact('student', 'qrcode_data', 'exchangestuds', 'class_in_mydivision');
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -202,22 +221,27 @@ class Myadjust extends CI_Controller {
     });
   }
 
-  // 识别调动学生
-  public function scanmove() {
+  // 本人分管的学生调动 与 交换
+  // 与 二维码识别不同，增加自主添加学生studmove记录
+  public function studexchangeself() {
     Model\xonLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
-        $move_grade_stud_uid = $param['move_grade_stud_uid'];
-        $godown = $param['godown'];
-        $samesex = $param['samesex'];
         $user_id = $user['unionId'];
-        // 调动学生的原始资料
-        $grade_stud = Model\xovGradeDivisionStud::getStudSumMovingByUid($move_grade_stud_uid);
-        // 是否在分管班级列表
-        Model\xovClass::checkClassIdMyDivision($user_id, $grade_stud->grade_id, $grade_stud->cls_id);
-        // 查询交换学生数据
-        $section = Model\xonDivisionSet::getSectionByGradeId($grade_stud->grade_id);
-        $result = Model\xovGradeDivisionStud::getStudSumNotMovedByValue($grade_stud->request_cls_id, $grade_stud->value, $section, $godown, $samesex, $grade_stud->stud_sex_num);
+        $move_grade_stud_uid = $param['move_grade_stud_uid'];
+        $exchange_grade_stud_uid = $param['exchange_grade_stud_uid'];
+
+        $move = Model\xovGradeDivisionStud::getStudSumMovingByGradeStudUid($move_grade_stud_uid);
+        $request_cls_id = $move->request_cls_id;
+        $exchange_request_cls_id = $move->cls_id;
+        // 添加交换学生进调动表
+        Model\xonStudMove::addStudExchange($user_id, $exchange_grade_stud_uid, $exchange_request_cls_id, $move_grade_stud_uid);
+        // 完成交换
+        Model\xonStudMove::exchangeStud($move_grade_stud_uid, $exchange_grade_stud_uid);
+        // 返回数据
+        $studmoves = Model\xovGradeDivisionStud::getStudSumMovingByRequestClassId($request_cls_id);
+        $studmoveds = Model\xovGradeDivisionStud::getStudSumMovedSuccessByRequestClassId($request_cls_id);
+        $result = compact('studmoves', 'studmoveds');
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -228,7 +252,35 @@ class Myadjust extends CI_Controller {
     });
   }
 
-  // 读取交换学生二维码
+  // 识别调动学生，查询交换学生列表
+  public function scanmove() {
+    Model\xonLogin::check(self::role_name, function ($user) {
+      try {
+        $param = $_POST;
+        $move_grade_stud_uid = $param['move_grade_stud_uid'];
+        $user_id = $user['unionId'];
+        // 调动学生的原始资料
+        $grade_stud = Model\xovGradeDivisionStud::getStudSumMovingByUid($move_grade_stud_uid);
+        // 是否在分管班级列表
+        Model\xovClass::checkClassIdMyDivision($user_id, $grade_stud->grade_id, $grade_stud->cls_id);
+        // 查询交换学生数据
+        $grade_id = $grade_stud->grade_id;
+        $godown = Model\xonDivisionSet::getGodownByGradeId($grade_id);
+        $samesex = Model\xonDivisionSet::getSamesexByGradeId($grade_id);
+        $section = Model\xonDivisionSet::getSectionByGradeId($grade_id);
+        $limit_num = Model\xonDivisionSet::getLimitnumByGradeId($grade_id);
+        $result = Model\xovGradeDivisionStud::getStudSumNotMovedByValue($grade_stud->request_cls_id, $grade_stud->value, $section, $godown, $samesex, $grade_stud->stud_sex_num, $limit_num);
+
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
+
+  // 添加交换学生记录，并显示二维码
   public function studqrcode() {
     Model\xonLogin::check(self::role_name, function ($user) {
       try {
@@ -236,8 +288,8 @@ class Myadjust extends CI_Controller {
         $user_id = $user['unionId'];
         $grade_stud_uid = $param['grade_stud_uid'];
         $exchange_grade_stud_uid = $param['exchange_grade_stud_uid'];
-        $grade_stud = Model\xovGradeDivisionStud::getStudSumMovingByUid($exchange_grade_stud_uid);
-        Model\xonStudMove::addStudExchange($user_id, $grade_stud_uid, $grade_stud->cls_id, $exchange_grade_stud_uid);
+        $move_stud = Model\xovGradeDivisionStud::getStudSumMovingByUid($exchange_grade_stud_uid);
+        Model\xonStudMove::addStudExchange($user_id, $grade_stud_uid, $move_stud->cls_id, $exchange_grade_stud_uid);
 
         $result = Model\x5on::getQrcodeBase64($grade_stud_uid);
 

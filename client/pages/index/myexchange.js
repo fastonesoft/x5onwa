@@ -3,22 +3,10 @@ var x5on = require('../x5on.js')
 
 Page({
 
-  data: {
-    godown: false,
-    samesex: true,
-    btn_show: false,
-  },
-
-  onLoad: function (options) {
-  
-  },
-
   scanSubmit: function (e) {
     var that = this
-    var godown = e.detail.value.godown
-    var samesex = e.detail.value.samesex
-    var btn_show = false
     var students = []
+    var btn_show = false
     that.setData({ btn_show, students })
 
     wx.scanCode({
@@ -29,7 +17,7 @@ Page({
 
         x5on.postForm({
           url: x5on.url.myadjuststudscanmove,
-          data: { move_grade_stud_uid, godown, samesex },
+          data: { move_grade_stud_uid },
           success: function (result) {
             var students = result.data
             that.setData({ students })
@@ -38,7 +26,6 @@ Page({
       }
     })
   },
-
 
   studentChange: function (e) {
     var that = this

@@ -111,15 +111,20 @@ var doUrl = {
   myadjuststudent: `${host}/weapp/myadjust/student`,
   myadjuststudmove: `${host}/weapp/myadjust/studmove`,
   myadjuststudremove: `${host}/weapp/myadjust/studremove`,
+  // 识别调动学生，并返回交换学生
   myadjuststudscanmove: `${host}/weapp/myadjust/scanmove`,
+  // 扫二维码调动
   myadjuststudexchange: `${host}/weapp/myadjust/studexchange`,
+  // 自主调动
+  myadjuststudexchangeself: `${host}/weapp/myadjust/studexchangeself`,
+  // 添加交换学生记录，并展示码
   myadjuststudqrcode: `${host}/weapp/myadjust/studqrcode`,
 
   myadjuststudlocal: `${host}/weapp/myadjust/studlocal`,
   myadjustclassmove: `${host}/weapp/myadjust/classmove`,
   myadjustclassmoved: `${host}/weapp/myadjust/classmoved`,
   myadjustclassmoving: `${host}/weapp/myadjust/classmoving`,
-  myadjustexqrcode: `${host}/weapp/myadjust/exqrcode`,
+  myadjustmovingqrcode: `${host}/weapp/myadjust/movingqrcode`,
 
   
 

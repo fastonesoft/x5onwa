@@ -105,7 +105,7 @@
       <block wx:for="{{studmoveds}}" wx:key="uid">
         <view class="weui-media-box weui-media-box_appmsg">
             <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-                <image class="weui-media-box__thumb" src="../../images/head/{{item.stud_sex}}.png" />
+                <icon type="success" size="60"></icon>
             </view>
             <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
                 <view class="weui-media-box__title">{{item.stud_name}}</view>

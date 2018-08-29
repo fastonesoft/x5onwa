@@ -1,0 +1,17 @@
+<!--pages/index/mydivisionset.wxml-->
+
+  <view class="weui-cells__title">扫码设置</view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_switch">
+      <view class="weui-cell__bd">同性调动</view>
+      <view class="weui-cell__ft">
+        <switch name="samesex" checked="{{samesex}}"/>
+      </view>
+    </view>
+    <view class="weui-cell weui-cell_switch">
+      <view class="weui-cell__bd">向下浮动</view>
+      <view class="weui-cell__ft">
+        <switch name="godown" checked="{{godown}}"/>
+      </view>
+    </view>
+  </view>

@@ -1057,12 +1057,13 @@ CREATE TABLE xonDivisionSet (
   section INT(11) not null,
   godown BOOLEAN NOT NULL,
   samesex BOOLEAN NOT NULL,
+  limit_num INT(11) NOT NULL,
   PRIMARY KEY (grade_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='年级调动设置';
 
-INSERT INTO xonDivisionSet VALUES ('32120402201609', 5, 0, 1);
-INSERT INTO xonDivisionSet VALUES ('32120402201708', 5, 0, 1);
-INSERT INTO xonDivisionSet VALUES ('32120402201807', 5, 0, 1);
+INSERT INTO xonDivisionSet VALUES ('32120402201609', 5, 0, 1, 1);
+INSERT INTO xonDivisionSet VALUES ('32120402201708', 5, 0, 1, 1);
+INSERT INTO xonDivisionSet VALUES ('32120402201807', 5, 0, 1, 1);
 
 INSERT INTO xonStep VALUES ('321204022016', replace(uuid(), '-', ''), '2016级', '32120402', 0);
 INSERT INTO xonStep VALUES ('321204022017', replace(uuid(), '-', ''), '2017级', '32120402', 0);

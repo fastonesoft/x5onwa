@@ -59,25 +59,26 @@ class xovGradeDivisionStud
     return $res;
   }
 
-  public static function getStudSumNotMovedByValue ($cls_id, $value, $section, $godown, $samesex, $stud_sex_num) {
+  public static function getStudSumNotMovedByValue ($cls_id, $value, $section, $godown, $samesex, $stud_sex_num, $limit_num) {
     $sub_id = 99;
     $same_group = 0;
     $begin = $value;
     $end = $value;
+    $orderby = 'asc';
 
-    if ( $godown === 'true' ) {
-      $begin -= $section / 2;
-      $end += $section / 2;
+    if ( $godown ) {
+      $orderby = 'desc';
+      $begin -= $section;
     } else {
       $end += $section;
     }
 
-    if ( $samesex === 'true' ) {
+    if ( $samesex ) {
       $condi = "cls_id = $cls_id and sub_id = $sub_id and value between $begin and $end and same_group = 0 and stud_sex_num = $stud_sex_num";
-      return dbs::select('xovGradeDivisionStudNotMoved', ['uid', 'cls_id', 'cls_order', 'stud_name', 'stud_sex', 'value'], $condi, 'and', 'order by value limit 5');
+      return dbs::select('xovGradeDivisionStudNotMoved', ['uid', 'cls_id', 'cls_order', 'stud_name', 'stud_sex', 'value'], $condi, 'and', "order by value $orderby limit $limit_num");
     } else {
       $condi = "cls_id = $cls_id and sub_id = $sub_id and value between $begin and $end and same_group = 0 and stud_sex_num = !$stud_sex_num";
-      return dbs::select('xovGradeDivisionStudNotMoved', ['uid', 'cls_id', 'cls_order', 'stud_name', 'stud_sex', 'value'], $condi, 'and', 'order by value limit 5');
+      return dbs::select('xovGradeDivisionStudNotMoved', ['uid', 'cls_id', 'cls_order', 'stud_name', 'stud_sex', 'value'], $condi, 'and', "order by value $orderby limit $limit_num");
     }
   }
 
@@ -85,25 +86,22 @@ class xovGradeDivisionStud
 
   public static function getStudSumMovingByRequestClassId ($request_cls_id) {
     $sub_id = 99;
-    return dbs::select('xovGradeDivisionStudMoving', ['kao_stud_id', 'uid', 'cls_id', 'cls_order', 'stud_name', 'stud_sex', 'kao_room', 'value'], compact('request_cls_id', 'sub_id'));
-  }
-
-  public static function getStudSumMovingByGradeStudUid ($uid) {
-    $sub_id = 99;
-    return dbs::select('xovGradeDivisionStudMoving', ['kao_stud_id', 'uid', 'cls_id', 'cls_order', 'stud_name', 'stud_sex', 'kao_room', 'value'], compact('uid', 'sub_id'));
-  }
-
-  public static function getStudSumExchangingByGradeStudUid ($uid) {
-    $sub_id = 99;
-    return dbs::select('xovGradeDivisionStudExchanging', ['kao_stud_id', 'uid', 'cls_id', 'cls_order', 'stud_name', 'stud_sex', 'kao_room', 'value', 'exchange_kao_stud_id'], compact('uid', 'sub_id'));
+    return dbs::select('xovGradeDivisionStudMoving', ['uid', 'grade_id', 'cls_id', 'cls_order', 'stud_name', 'stud_sex', 'stud_sex_num', 'kao_room', 'value'], compact('request_cls_id', 'sub_id'));
   }
 
   public static function getStudSumMovedSuccessByRequestClassId ($request_cls_id) {
     $sub_id = 99;
-    return dbs::select('xovGradeDivisionStudSuccess', ['kao_stud_id', 'uid', 'cls_id', 'cls_order', 'stud_name', 'stud_sex', 'kao_room', 'value'], compact('request_cls_id', 'sub_id'));
+    return dbs::select('xovGradeDivisionStudSuccess', ['uid', 'grade_id', 'cls_id', 'cls_order', 'stud_name', 'stud_sex', 'stud_sex_num', 'kao_room', 'value'], compact('request_cls_id', 'sub_id'));
   }
 
+  public static function getStudSumMovingByGradeStudUid ($uid) {
+    $sub_id = 99;
+    return dbs::row('xovGradeDivisionStudMoving', ['uid', 'grade_id', 'cls_id', 'cls_order', 'stud_name', 'stud_sex', 'stud_sex_num', 'kao_room', 'value', 'request_cls_id'], compact('uid', 'sub_id'));
+  }
 
-
+  public static function getStudSumExchangingByGradeStudUid ($uid) {
+    $sub_id = 99;
+    return dbs::select('xovGradeDivisionStudExchanging', ['uid', 'grade_id', 'cls_id', 'cls_order', 'stud_name', 'stud_sex', 'stud_sex_num', 'kao_room', 'value'], compact('uid', 'sub_id'));
+  }
 
 }

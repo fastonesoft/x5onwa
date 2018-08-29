@@ -32,14 +32,16 @@ class xonStudMove
   }
 
   public static function exchangeStud ($move_grade_stud_uid, $exchange_grade_stud_uid) {
-    $grade_stud_uid = $move_grade_stud_uid;
     $success = 0;
+    $grade_stud_uid = $move_grade_stud_uid;
     $move = dbs::row('xonStudMove', ['*'], compact('grade_stud_uid', 'success'));
+    if ( $move === null ) throw new Exception('没有找到调动学生记录！');
+
     $grade_stud_uid = $exchange_grade_stud_uid;
     $exchange = dbs::row('xonStudMove', ['*'], compact('grade_stud_uid', 'success'));
+    if ( $exchange === null ) throw new Exception('没有找到交换学生记录！');
 
-    if ( $move === null || $exchange === null ) throw new Exception('学生识别码有误！');
-    if ( $exchange->exchange_grade_stud_uid !== $move->grade_stud_uid ) throw new Exception('交换学生码不匹配！');
+    if ( $exchange->exchange_grade_stud_uid !== $move->grade_stud_uid ) throw new Exception('调动、交换学生不匹配！');
     // 怎么交换？
     // 1、交换学生班级信息
     // 2、设置调动学生标志信息

@@ -39,4 +39,10 @@ class xovClass
       throw new Exception('调动学生班级不在分管列表');
     }
   }
+
+  public static function classIdMyDivision ($user_id, $grade_id, $cls_id) {
+    $cls_ids = dbs::select('xovClassDivisioned', ['cls_id'], compact('user_id', 'grade_id'));
+    $cls_idstr = json_encode($cls_ids);
+    return strpos($cls_idstr, $cls_id) === false ?  0 : 1;
+  }
 }

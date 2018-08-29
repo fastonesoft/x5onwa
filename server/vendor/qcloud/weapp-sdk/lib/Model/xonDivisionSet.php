@@ -21,12 +21,28 @@ class xonDivisionSet
     return $res->section;
   }
 
-  public static function getFinishedByGradeId($grade_id) {
+  public static function getGodownByGradeId($grade_id) {
     $res = self::getRowByGradeId($grade_id);
     if ( $res === null ) {
       throw new Exception('当前年级没有分班设置');
     }
-    return $res->finished;
+    return $res->godown;
+  }
+
+  public static function getSamesexByGradeId($grade_id) {
+    $res = self::getRowByGradeId($grade_id);
+    if ( $res === null ) {
+      throw new Exception('当前年级没有分班设置');
+    }
+    return $res->samesex;
+  }
+
+  public static function getLimitnumByGradeId($grade_id) {
+    $res = self::getRowByGradeId($grade_id);
+    if ( $res === null ) {
+      throw new Exception('当前年级没有分班设置');
+    }
+    return $res->limit_num;
   }
 
 }

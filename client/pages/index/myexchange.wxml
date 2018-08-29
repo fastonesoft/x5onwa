@@ -2,22 +2,6 @@
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
 <form bindsubmit="scanSubmit">
-  <view class="weui-cells__title">扫码设置</view>
-  <view class="weui-cells weui-cells_after-title">
-    <view class="weui-cell weui-cell_switch">
-      <view class="weui-cell__bd">同性调动</view>
-      <view class="weui-cell__ft">
-        <switch name="samesex" checked="{{samesex}}"/>
-      </view>
-    </view>
-    <view class="weui-cell weui-cell_switch">
-      <view class="weui-cell__bd">向下浮动</view>
-      <view class="weui-cell__ft">
-        <switch name="godown" checked="{{godown}}"/>
-      </view>
-    </view>
-  </view>
-
   <view class="weui-btn-area">
     <button type="primary" form-type="submit">调动学生识别</button>
   </view>
@@ -47,3 +31,24 @@
     <image class="qrcode" src="data:image/png;base64,{{qrcode_data}}"></image>
   </view>
 </block>
+
+<view class="weui-panel weui-panel_access" wx:if="{{studexchanges.length>0}}">
+  <view class="weui-panel__hd">调动列表</view>
+  <view class="weui-panel__bd">
+    <block wx:for="{{studexchanges}}" wx:key="uid">
+      <view class="weui-media-box weui-media-box_appmsg">
+          <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+              <image class="weui-media-box__thumb" src="../../images/head/{{item.stud_sex}}.png" />
+          </view>
+          <view class="weui-media-box__bd weui-media-box__bd_in-appmsg" data-uid="{{item.uid}}" bindtap="showexchange">
+              <view class="weui-media-box__title">{{item.stud_name}}</view>
+              <view class="weui-media-box__desc">性别：{{item.stud_sex}}，{{item.cls_order}}</view>
+              <view class="weui-media-box__desc">原班：{{item.kao_room}} 班，总分：{{item.value}}</view>
+          </view>
+          <view class="weui-media-box__ft weui-media-box__ft_in-appmsg">
+            <image src="../../images/remove.png" class="remove-icon" data-uid="{{item.uid}}" bindtap="myexchangeRemove"></image>
+          </view>
+      </view>
+    </block> 
+  </view>
+</view>
