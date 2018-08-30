@@ -1,48 +1,66 @@
 <!--pages/index/mydivisionset.wxml-->
 
-  <view class="weui-cells__title">扫码设置</view>
+<view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
+
+  <view class="weui-cells__title">年级设置</view>
   <view class="weui-cells weui-cells_after-title">
-    <view class="weui-cell weui-cell_switch">
-      <view class="weui-cell__bd"></view>
-      <view class="weui-cell__ft">
-        <switch name="samesex" checked="{{section}}"/>
+    <view class="weui-cell weui-cell_select">
+      <view class="weui-cell__hd weui-cell__hd_in-select-after">
+        <view class="weui-label">年级选择</view>
+      </view>
+      <view class="weui-cell__bd">
+        <picker bindchange="gradeChange" value="{{gradeIndex}}" range="{{grades}}" range-key="name" disabled="{{grades.length===0}}">
+          <view class="weui-select weui-select_in-select-after">{{grades[gradeIndex].name}}</view>
+        </picker>
       </view>
     </view>
+  </view>
 
+<form bindsubmit="mydivisionsetSubmit" wx:if="{{sets.section}}">
+    <view class="weui-cells__title">调动设置</view>
+    <view class="weui-cells weui-cells_after-title">
       <view class="weui-cell weui-cell_input">
         <view class="weui-cell__hd">
           <view class="weui-label">调动分差</view>
         </view>
         <view class="weui-cell__bd">
-          <input class="weui-input" placeholder="请输入调动分差" name="samesex" type="number" maxlength="2" value="samesex" bindblur="checkInput"/>
+          <input class="weui-input" placeholder="请输入调动分差" name="section" type="number" maxlength="2" data-reg="^\\d{1,2}$" data-index="0" data-message="调动分差输入有误！" value="{{sets.section}}" bindblur="checkInput"/>
         </view>
-        <view class="weui-cell__ft" wx:if="{{item.error}}">
+        <view class="weui-cell__ft" wx:if="{{errorArray[0]}}">
           <icon type="warn" size="23"></icon>
         </view>
       </view>
-
-    <view class="weui-cell weui-cell_switch">
-      <view class="weui-cell__bd">显示个数</view>
-      <view class="weui-cell__ft">
-        <switch name="limit_num" checked="{{limit_num}}"/>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">显示个数</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" placeholder="请输入显示个数" name="limit_num" type="number" maxlength="1" data-reg="^\\d{1}$" data-index="1" data-message="显示个数输入有误！" value="{{sets.limit_num}}" bindblur="checkInput"/>
+        </view>
+        <view class="weui-cell__ft" wx:if="{{errorArray[1]}}">
+          <icon type="warn" size="23"></icon>
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_switch">
+        <view class="weui-cell__bd">同性调动</view>
+        <view class="weui-cell__ft">
+          <switch name="samesex" checked="{{sets.samesex}}"/>
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_switch">
+        <view class="weui-cell__bd">向下浮动</view>
+        <view class="weui-cell__ft">
+          <switch name="godown" checked="{{sets.godown}}"/>
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_switch">
+        <view class="weui-cell__bd">是否完成</view>
+        <view class="weui-cell__ft">
+          <switch name="finished" checked="{{sets.finished}}"/>
+        </view>
       </view>
     </view>
-    <view class="weui-cell weui-cell_switch">
-      <view class="weui-cell__bd">向下浮动</view>
-      <view class="weui-cell__ft">
-        <switch name="godown" checked="{{godown}}"/>
-      </view>
+    <view class="weui-btn-area">
+      <button type="primary" form-type="submit">提交设置</button>
     </view>
-    <view class="weui-cell weui-cell_switch">
-      <view class="weui-cell__bd">同性调动</view>
-      <view class="weui-cell__ft">
-        <switch name="samesex" checked="{{samesex}}"/>
-      </view>
-    </view>
-    <view class="weui-cell weui-cell_switch">
-      <view class="weui-cell__bd">是否结束</view>
-      <view class="weui-cell__ft">
-        <switch name="finished" checked="{{finished}}"/>
-      </view>
-    </view>
-  </view>
+</form>

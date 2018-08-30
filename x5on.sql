@@ -86,6 +86,7 @@ INSERT INTO xonRole VALUES (45, replace(uuid(), '-', ''), 'mydivision', '班级�
 INSERT INTO xonRole VALUES (46, replace(uuid(), '-', ''), 'mytuning', '分班微调', 0, 4);
 INSERT INTO xonRole VALUES (47, replace(uuid(), '-', ''), 'mysameset', '同班设置', 0, 4);
 INSERT INTO xonRole VALUES (48, replace(uuid(), '-', ''), 'myrename', '班号变更', 0, 4);
+INSERT INTO xonRole VALUES (49, replace(uuid(), '-', ''), 'mydivisionset', '调动设置', 0, 4);
 
 
 INSERT INTO xonRole VALUES (81, replace(uuid(), '-', ''), 'schcode', '编码设置', 0, 9);
@@ -1055,15 +1056,16 @@ CREATE TABLE xonStudMove (
 CREATE TABLE xonDivisionSet (
   grade_id VARCHAR(18) NOT NULL,
   section INT(11) not null,
+  limit_num INT(11) NOT NULL,
   godown BOOLEAN NOT NULL,
   samesex BOOLEAN NOT NULL,
-  limit_num INT(11) NOT NULL,
+  finished BOOLEAN NOT NULL,
   PRIMARY KEY (grade_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='年级调动设置';
 
-INSERT INTO xonDivisionSet VALUES ('32120402201609', 5, 0, 1, 1);
-INSERT INTO xonDivisionSet VALUES ('32120402201708', 5, 0, 1, 1);
-INSERT INTO xonDivisionSet VALUES ('32120402201807', 5, 0, 1, 1);
+INSERT INTO xonDivisionSet VALUES ('32120402201609', 5, 1, 0, 1, 0);
+INSERT INTO xonDivisionSet VALUES ('32120402201708', 5, 1, 0, 1, 0);
+INSERT INTO xonDivisionSet VALUES ('32120402201807', 5, 1, 0, 1, 0);
 
 INSERT INTO xonStep VALUES ('321204022016', replace(uuid(), '-', ''), '2016级', '32120402', 0);
 INSERT INTO xonStep VALUES ('321204022017', replace(uuid(), '-', ''), '2017级', '32120402', 0);
@@ -1325,9 +1327,10 @@ AS
 /**
   班级学生
  */
+
 CREATE VIEW xovGradeStud
 AS
-  SELECT A.*, S.stud_name, S.stud_sex, S.stud_sex_num, step_name, sch_name, C.name AS come_name, C2.cls_name, C2.cls_order
+  SELECT A.*, S.stud_name, S.stud_sex, S.stud_sex_num, step_name, sch_name, C.name AS come_name, C2.num as cls_num, C2.cls_name, C2.cls_order
   FROM xonGradeStud A
   LEFT JOIN xovStudent S ON A.stud_id = S.id
   LEFT JOIN xonStudCome C ON A.stud_come_id = C.id

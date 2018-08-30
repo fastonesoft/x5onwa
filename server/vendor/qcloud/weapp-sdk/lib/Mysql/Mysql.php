@@ -136,7 +136,7 @@ class Mysql
 
         // 拼接 SQL 语句
         $sql = "UPDATE `$tableName` SET $processedUpdates";
-        
+
         // 如果有条件则拼接 WHERE 关键则
         if ($condition) {
             $sql .= " WHERE $condition";

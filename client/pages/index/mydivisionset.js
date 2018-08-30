@@ -1,66 +1,59 @@
 // pages/index/mydivisionset.js
+var x5on = require('../x5on.js')
+
 Page({
 
-  /**
-   * 页面的初始数据
-   */
   data: {
-  
+    errorArray: [0, 0],
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-  
+  onLoad: function (e) {
+    var that = this
+    x5on.request({
+      url: x5on.url.mydivisionset,
+      success: function (result) {
+        // 年级列表
+        that.setData(result.data)
+      }
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
+  gradeChange: function (e) {
+    var that = this
+    var gradeIndex = e.detail.value
+    that.setData({ gradeIndex })
+
+    var grades = that.data.grades
+    var grade_id = grades[gradeIndex].id
+    x5on.postFormEx({
+      url: x5on.url.mydivisionsetdata,
+      data: { grade_id },
+      success: (result) => {
+        var sets = result.data
+        that.setData({ sets })
+      }
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
+  checkInput: function (e) {
+    x5on.checkInput(e, this);
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
+  mydivisionsetSubmit: function (e) {
+    var that = this
+    var grades = this.data.grades
+    var gradeIndex = this.data.gradeIndex
+    var data = e.detail.value
+    data.grade_id = grades[gradeIndex].id
+
+    x5on.postFormEx({
+      url: x5on.url.mydivisionsetupdate,
+      data: data,
+      success: (result) => {
+        var sets = {}
+        that.setData({ sets })
+      }
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  }
 })

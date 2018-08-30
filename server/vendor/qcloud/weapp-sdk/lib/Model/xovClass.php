@@ -45,4 +45,9 @@ class xovClass
     $cls_idstr = json_encode($cls_ids);
     return strpos($cls_idstr, $cls_id) === false ?  0 : 1;
   }
+
+  public static function getRows4Print ($grade_id) {
+    return dbs::select('xovClass', ['id', 'num', 'cls_name', 'cls_order'], compact('grade_id'), 'and', 'order by num');
+  }
+
 }

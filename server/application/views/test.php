@@ -1,27 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
-use QCloud_WeApp_SDK\Model;
-
-try {
-  $grade_id = $_GET['id'];
-  $finished = Model\xonDivisionSet::getFinishedByGradeId($grade_id);
-
-  if ( ! $finished ) exit('分班未结束');
-
-  $grade_studs = Model\xovGradeDivisionStud::getStudSumRowsByGradeId($grade_id);
-
-  echo $grade_studs;
-
-} catch (Exception $e) {
-  exit($e->getMessage());
-}
-
 ?><!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>分班学生名册</title>
+  <title>腾讯云微信小程序服务器 Demo - PHP</title>
   <style type="text/css">
 
     ::selection { background-color: #E13300; color: white; }
@@ -60,7 +43,7 @@ try {
       margin: 20px 0 0 0;
     }
 
-    .container {
+    #container {
       margin: 10px;
       padding: 10px 20px;
       border: 1px solid #D0D0D0;
@@ -69,35 +52,9 @@ try {
   </style>
 </head>
 <body>
-<div class="container">
-  <h1 style="text-align: center">分班学生名册（新）</h1>
-  <table border="1">
-    <tr>
-      <th>序号</th>
-      <th>新班</th>
-      <th>姓名</th>
-      <th>性别</th>
-      <th>原班</th>
-    </tr>
-    <?php
-      $count = 0;
-      foreach ($grade_studs as $stud) {
-        $count++;
-
-    ?>
-    <tr>
-      <td><?php echo $count ?></td>
-      <td><?php echo $stud->cls_num ?></td>
-      <td><?php echo $stud->stud_name ?></td>
-      <td><?php echo $stud->stud_sex ?></td>
-      <td><?php echo $stud->kao_room ?></td>
-    </tr>
-
-    <?php
-
-    }
-    ?>
-  </table>
-</div>
+<div id="container">
+  <h1>腾讯云微信小程序服务端 Demo - PHP</h1>
+  <p>{grade_id}</p>
+ </div>
 </body>
 </html>

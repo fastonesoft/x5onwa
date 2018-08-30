@@ -124,16 +124,17 @@ var doUrl = {
   // 交换学生列表
   myadjustexchangelist: `${host}/weapp/myadjust/exchangelist`,
   myadjustremoveliststud: `${host}/weapp/myadjust/removeliststud`,
-
-  
-  
+ 
   myadjuststudlocal: `${host}/weapp/myadjust/studlocal`,
   myadjustclassmove: `${host}/weapp/myadjust/classmove`,
   myadjustclassmoved: `${host}/weapp/myadjust/classmoved`,
   myadjustclassmoving: `${host}/weapp/myadjust/classmoving`,
   myadjustmovingqrcode: `${host}/weapp/myadjust/movingqrcode`,
 
-  
+  // 调动设置
+  mydivisionset: `${host}/weapp/mydivisionset`,
+  mydivisionsetdata: `${host}/weapp/mydivisionset/data`,
+  mydivisionsetupdate: `${host}/weapp/mydivisionset/update`,
 
   // 错误测试地址
   test: `${host}/weapp/data`,
