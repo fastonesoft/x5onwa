@@ -1267,6 +1267,16 @@ AS
   LEFT JOIN xovGradeCurrent B ON A.grade_id = B.id;
 
 /**
+  分班考试
+ */
+CREATE VIEW xovKaoDivision
+AS
+  SELECT *
+  FROM xonKao
+  WHERE to_division = 1;
+
+
+/**
   未分管的班级列表
  */
 CREATE VIEW xovClassNotDivision
@@ -1286,6 +1296,17 @@ AS
 
 
 /**
+  年级
+ */
+
+CREATE VIEW xovGrade
+AS
+  SELECT A.*, E.name
+  FROM xonGrade A
+  INNER JOIN xonYear B ON A.year_id = B.id
+  INNER JOIN xonEdu E ON A.edu_id = E.id;
+
+/**
   孩子性别
  */
 CREATE VIEW xovChild
@@ -1298,6 +1319,8 @@ AS
     else '男' end as child_sex
   FROM xonChild A;
 
+
+
 /**
   学校学生
  */
@@ -1307,22 +1330,14 @@ AS
   SELECT A.*, C2.name as stud_name, C2.child_sex AS stud_sex, case
     when C2.child_sex = '男' then 1
     when C2.child_sex = '女' then 0
-    end as stud_sex_num, S.name AS step_name, S2.name AS sch_name, sch_id
+    end as stud_sex_num, S.name AS step_name, S2.name AS sch_name, sch_id, C2.idc as stud_idc
   FROM xonStudent A
   LEFT JOIN xovChild C2 ON A.child_id = C2.id
   LEFT JOIN xonStep S ON A.step_id = S.id
   LEFT JOIN xonSchool S2 ON S.sch_id = S2.id;
 
-/**
-  年级
- */
 
-CREATE VIEW xovGrade
-AS
-  SELECT A.*, E.name
-  FROM xonGrade A
-  INNER JOIN xonYear B ON A.year_id = B.id
-  INNER JOIN xonEdu E ON A.edu_id = E.id;
+
 
 /**
   班级学生
@@ -1330,20 +1345,12 @@ AS
 
 CREATE VIEW xovGradeStud
 AS
-  SELECT A.*, S.stud_name, S.stud_sex, S.stud_sex_num, step_name, sch_name, C.name AS come_name, C2.num as cls_num, C2.cls_name, C2.cls_order
+  SELECT A.*, S.stud_idc, S.stud_name, S.stud_sex, S.stud_sex_num, step_name, sch_name, C.name AS come_name, C2.num as cls_num, C2.cls_name, C2.cls_order
   FROM xonGradeStud A
   LEFT JOIN xovStudent S ON A.stud_id = S.id
   LEFT JOIN xonStudCome C ON A.stud_come_id = C.id
   LEFT JOIN xovClass C2 ON A.cls_id = C2.id;
 
-/**
-  分班考试
- */
-CREATE VIEW xovKaoDivision
-AS
-  SELECT *
-  FROM xonKao
-  WHERE to_division = 1;
 
 /**
   分班考试学生

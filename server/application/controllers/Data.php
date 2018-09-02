@@ -78,6 +78,8 @@ try {
       <th>姓名</th>
       <th>性别</th>
       <th>原班</th>
+      <th>身份证号</th>
+      <th>调动标志</th>
     </tr>
     <?php
       $count = 0;
@@ -90,7 +92,9 @@ try {
       <td><?php echo $stud->cls_num ?></td>
       <td><?php echo $stud->stud_name ?></td>
       <td><?php echo $stud->stud_sex ?></td>
-      <td><?php echo $stud->kao_room ?></td>
+      <td><?php echo $stud->kao_num ?></td>
+      <td><?php echo $stud->stud_idc ?></td>
+      <td><?php echo $stud->same_group ?></td>
     </tr>
 
     <?php

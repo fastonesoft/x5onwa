@@ -16,19 +16,18 @@ Page({
 
   scanSubmit: function (e) {
     var that = this
-    var btn_show = false
-    var qrcode_data = ''
-    var movestud = []
-    var exchangestud = []
-    var exchangestuds = []
-    that.setData({ btn_show, qrcode_data, movestud, exchangestud, exchangestuds })
-
     wx.scanCode({
       onlyFromCamera: true,
       success: (res) => {
+        var btn_show = false
+        var qrcode_data = ''
+        var movestud = []
+        var exchangestud = []
+        var exchangestuds = []
+        that.setData({ btn_show, qrcode_data, movestud, exchangestud, exchangestuds })
+
         var move_grade_stud_uid = res.result
         that.setData({ move_grade_stud_uid })
-
         x5on.postForm({
           url: x5on.url.myadjuststudscanmove,
           data: { move_grade_stud_uid },
