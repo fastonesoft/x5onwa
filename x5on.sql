@@ -1230,7 +1230,7 @@ AS
 
 CREATE VIEW xovStudReg
 AS
-  SELECT a.*, S.name as sch_name, C2.name as child_name
+  SELECT a.*, S.name as sch_name, C2.name as child_name, C2.idc as child_idc
   FROM xonStudReg a
   LEFT JOIN xonSchool S on a.sch_id = S.id
   LEFT JOIN xonChild C2 on a.child_id = C2.id;
