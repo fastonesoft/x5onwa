@@ -16,6 +16,17 @@ class Studreg extends CI_Controller {
         $edu_type_id = $param['edu_type_id'];
         $result = Model\xonStudReg::regStud($user_id, $child_id, $sch_id, $edu_type_id);
 
+
+        // todo: 将以下内容做一些调整
+
+        // 检测是否已经录取
+        $enter = xonStudent::checkStudentEnter($child_id, $sch_id);
+        if ($enter !== false) {
+          return $enter;
+        }
+
+        Model\xovSchoolForm::getStudRegSchoolForm($sch_id);
+
         // 正文内容
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {

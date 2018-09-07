@@ -12,15 +12,12 @@ class xonStudent
     $res = dbs::row('xovStudent', ['*'], compact('child_id', 'sch_id'));
     if ($res !== null) {
       $entered = true;
-      $sch_reged = true;
-      $not_reg = false;
-      $not_added = false;
       $sch_name = $res->sch_name;
       $step_name = $res->step_name;
-      $child_name = $res->child_name;
-      $enter_code = $res->id;
-      $enter_kao = substr($enter_code, -4);
-      return compact('entered', 'sch_reged', 'not_reg', 'not_added', 'sch_name', 'step_name', 'child_name', 'enter_code', 'enter_kao');
+      $stud_name = $res->stud_name;
+      $stud_id = $res->id;
+      $enter_id = substr($stud_id, -4);
+      return compact('entered', 'sch_name', 'step_name', 'stud_name', 'stud_id', 'enter_id');
     } else {
       return false;
     }

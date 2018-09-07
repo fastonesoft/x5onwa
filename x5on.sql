@@ -1417,6 +1417,24 @@ as
   where success = 1;
 
 
+  /**
+  查询学生注册信息
+   */
+
+create view xovChildSchoolForm
+AS
+  select a.*, form_id, key_id, value
+  from xovChild a
+  inner join xonParentChilds c on a.id = c.child_id
+  INNER join xonSchoolFormValue v on v.user_id = c.user_id;
+
+create view xovChildSchoolFormNotChecked
+AS
+SELECT aa.*, dd.name FROM `xonSchoolFormValue` aa
+inner join xonParentChilds cc on aa.user_id = cc.user_id
+INNER join xovChild dd on cc.child_id = dd.id
+WHERE concat(aa.user_id,aa.form_id) not in (SELECT concat(user_id,form_id) from xonSchoolFormSet);
+
 
 /*外键约束开启*/
 SET FOREIGN_KEY_CHECKS = 1;

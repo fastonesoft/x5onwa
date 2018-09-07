@@ -50,7 +50,7 @@
     </view>
     <view class="weui-cell">
       <view class="weui-cell__bd">报名学生</view>
-      <view class="weui-cell__ft">{{child_name}}</view>
+      <view class="weui-cell__ft">{{stud_name}}</view>
     </view>
   </view>
   <form bindsubmit="cancelSubmit" wx:if="{{not_added}}">
@@ -152,7 +152,7 @@
   <view class="weui-cells weui-cells_after-title">
       <view class="weui-cell">
         <view class="weui-cell__bd">学生姓名</view>
-        <view class="weui-cell__ft">{{child_name}}</view>
+        <view class="weui-cell__ft">{{stud_name}}</view>
       </view>
       <view class="weui-cell">
         <view class="weui-cell__bd">录取学校</view>
@@ -164,11 +164,11 @@
       </view>
       <view class="weui-cell">
         <view class="weui-cell__bd">录取编号</view>
-        <view class="weui-cell__ft">{{enter_code}}</view>
+        <view class="weui-cell__ft">{{enter_kao}}</view>
       </view>
       <view class="weui-cell">
-        <view class="weui-cell__bd">测试号码</view>
-        <view class="weui-cell__ft">{{enter_kao}}</view>
+        <view class="weui-cell__bd">学生序号</view>
+        <view class="weui-cell__ft">{{enter_code}}</view>
       </view>
   </view>
 </block>

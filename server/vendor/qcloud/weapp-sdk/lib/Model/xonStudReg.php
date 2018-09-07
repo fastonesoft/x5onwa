@@ -16,28 +16,11 @@ class xonStudReg
   public static function regStud ($user_id, $child_id, $sch_id, $edu_type_id) {
     $res = dbs::row('xonStudReg', ['*'], compact('child_id', 'edu_type_id'));
     if ( $res !== null ) {
-      throw new Exception("已经报名，同类学校只能报一个");
+      throw new Exception("同类学校只能报一个");
     }
-
     // 保存
     $uid = x5on::getUid();
     dbs::insert('xonStudReg', compact('uid', 'child_id', 'sch_id', 'user_id', 'edu_type_id'));
-
-    // 检测是否已经录取
-    $enter = xonStudent::checkStudentEnter($child_id, $sch_id);
-    if ($enter !== false) {
-      return $enter;
-    }
-
-    // 读取学校报名表格
-    $current_year = 1;
-    $app_name = 'regstud';
-
-    $sch_reged = true;
-    $not_reg = false;
-    $not_added = true;
-    $forms = dbs::select('xovSchoolForm', ['id', 'name'], compact('sch_id', 'app_name', 'current_year'));
-    return compact('not_reg', 'not_added', 'sch_reged', 'forms');
   }
 
   // 临时只能报一个
