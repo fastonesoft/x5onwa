@@ -5,7 +5,7 @@
  * @param {Object} messages 验证字段的提示信息
  * 
  */
-class x5onValid {
+class x5valid {
   constructor(rules = {}, messages = {}) {
     Object.assign(this, {
       data: {},
@@ -261,58 +261,49 @@ class x5onValid {
    * 判断身份证号是否正确
    */
   idcard(value) {
-    let valid = /^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/.test(value)
-    if (valid) {
-      // 格式检测
-      $idc_birth = substr($idc, 6, 8);
-      $idc_date = strtotime($idc_birth);
-      if (!$idc_date) {
-        $error = true;
-        $message = '身份证出生日期格式错误';
-        return compact('error', 'message');
-      }
-      // 日期检测
-      $year = (int) substr($idc_birth, 0, 4);
-      $month = (int) substr($idc_birth, 4, 2);
-      $day = (int) substr($idc_birth, 6, 2);
-      if (!checkdate($month, $day, $year)) {
-        $error = true;
-        $message = '身份证出生日期验证出错';
-        return compact('error', 'message');
-      }
-      // 年龄检测
-      $current_year = (int) date('Y');
-      if ($more_than) {
-        if ($current_year - $year < $more_than) {
-          $error = true;
-          $message = '年龄不符要求';
-          return compact('error', 'message');
-        }
-      }
-      if ($less_than) {
-        if ($current_year - $year > $less_than) {
-          $error = true;
-          $message = '岁数已超标';
-          return compact('error', 'message');
-        }
-      }
-
-      // 验证检测
-      $idcard_base = substr($idc, 0, 17);
-      $verify_code = substr($idc, 17, 1);
-      $factor = array(7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2);
-      $verify_code_list = array('1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2');
-      $total = 0;
-      for ($i = 0; $i < 17; $i++) {
-        $total += substr($idcard_base, $i, 1) * $factor[$i];
-      }
-      $mod = $total % 11;
-      if ($verify_code != $verify_code_list[$mod]) {
-        $error = true;
-        $message = '身份证号校验出错';
-        return compact('error', 'message');
-      }
+    let passed = /^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/.test(value)
+    if (!passed) return false
+    // 验证检测
+    var verify = value.substr(17, 1)
+    var idchar = value.split('')
+    var factor = array(7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2);
+    var verify_list = array('1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2');
+    var total = 0;
+    for (var i = 0; i < 17; i++) {
+      total += idchar[i] * factor[i];
     }
+    var mod = total % 11;
+    if (verify !== verify_list[mod]) return false
+
+    // 日期格式
+    var y = value.substr(6, 4)
+    var m = value.substr(10, 2)
+    var d = value.substr(12, 2)
+    // 日期检测
+    var big = array(1, 3, 5, 7, 8, 10, 12)
+    var small = array(4, 6, 9, 11)
+    if (big.indexOf(m) > -1 && d > 31) return false
+    if (small.indexOf(m) > -1 && d > 30) return false
+    // 闰年二月
+    if (y % 400 == 0 || y % 4 == 0 && y % 100 != 0) {
+      if (m == 2 && d > 29) return false
+    } else {
+      if (m == 2 && d > 28) return false
+    }
+  }
+
+  idcardrange(value, min, max) {
+    var pass = idcard(value)
+    if (!pass) return false
+    // 日期格式
+    var y = value.substr(6, 4)
+    var m = value.substr(10, 2)
+    var d = value.substr(12, 2)
+    // 年龄
+    var now = new Date();
+    var now_year = now.getFullYear()
+    // 出界
+    if (now_year - y < min || now_year - y > max) return false
   }
 
   /**
@@ -443,6 +434,7 @@ class x5onValid {
   checkForm(data) {
     this.__initData()
 
+
     for (let param in this.rules) {
       this.setView(param)
       this.checkParam(param, this.rules[param], data)
@@ -473,4 +465,4 @@ class x5onValid {
   }
 }
 
-export default x5onValid
+export default x5valid

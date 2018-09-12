@@ -1,4 +1,5 @@
 <!--pages/index/mystud.wxml-->
+<view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
   <view class="weui-cells__title">班级设置</view>
   <view class="weui-cells weui-cells_after-title">
@@ -29,3 +30,20 @@
     </block>
   </view>
 </block>
+
+<form bindsubmit="findSubmit">
+  <view class="weui-cells__title">教师查询</view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_input weui-cell_vcode">
+      <view class="weui-cell__hd">
+        <view class="weui-label">教师姓名</view>
+      </view>
+      <view class="weui-cell__bd">
+        <input class="weui-input" placeholder="输入老师姓名" name="name" confirm-type="done" value="dadf" type="text" maxlength="40"/>
+      </view>
+      <view class="weui-cell__ft">
+        <button type="normal" form-type="submit">查询</button>
+      </view>
+    </view>
+  </view>
+</form>
