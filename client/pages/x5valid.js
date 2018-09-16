@@ -47,6 +47,7 @@ class x5valid {
         number: '请输入有效的数字。',
         digits: '只能输入数字。',
         idcard: '请输入18位的有效身份证。',
+        idcardrange: this.formatTpl('年龄不在 {0} 到 {1} 之间。'),
         equalTo: this.formatTpl('输入值必须和 {0} 相同。'),
         contains: this.formatTpl('输入值必须包含 {0}。'),
         minlength: this.formatTpl('最少要输入 {0} 个字符。'),
@@ -126,6 +127,12 @@ class x5valid {
        */
       idcard(value) {
         return that.optional(value) || that.idcard(value)
+      },
+      /**
+       * 验证身份证号码
+       */
+      idcardrange(value, param) {
+        return that.optional(value) || that.idcardrange(value, param[0], param[1])
       },
       /**
        * 验证两个输入框的内容是否相同
@@ -261,39 +268,45 @@ class x5valid {
    * 判断身份证号是否正确
    */
   idcard(value) {
+    // 18位身份证格式
     let passed = /^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/.test(value)
     if (!passed) return false
+    // 日期格式
+    var y = value.substr(6, 4)
+    var m = value.substr(10, 2)
+    var d = value.substr(12, 2)
+    // 日期检测
+    var big = ['01', '03', '05', '07', '08', '10', '12']
+    var small = ['04', '06', '09', '11']
+    var two = ['02']
+    // 月份判断
+    if (big.indexOf(m) === -1 && small.indexOf(m) === -1 && two.indexOf(m) === -1) return false
+    // 天数判断
+    if (big.indexOf(m) > -1 && d > 31) return false
+    if (small.indexOf(m) > -1 && d > 30) return false
+    // 闰年二月
+    if (y % 400 == 0 || y % 4 == 0 && y % 100 != 0) {
+      if (two.indexOf(m) > -1 && d > 29) return false
+    } else {
+      if (two.indexOf(m) > -1 && d > 28) return false
+    }
     // 验证检测
     var verify = value.substr(17, 1)
     var idchar = value.split('')
-    var factor = array(7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2);
-    var verify_list = array('1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2');
+    var factor = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2]
+    var verify_list = ['1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2']
     var total = 0;
     for (var i = 0; i < 17; i++) {
       total += idchar[i] * factor[i];
     }
     var mod = total % 11;
     if (verify !== verify_list[mod]) return false
-
-    // 日期格式
-    var y = value.substr(6, 4)
-    var m = value.substr(10, 2)
-    var d = value.substr(12, 2)
-    // 日期检测
-    var big = array(1, 3, 5, 7, 8, 10, 12)
-    var small = array(4, 6, 9, 11)
-    if (big.indexOf(m) > -1 && d > 31) return false
-    if (small.indexOf(m) > -1 && d > 30) return false
-    // 闰年二月
-    if (y % 400 == 0 || y % 4 == 0 && y % 100 != 0) {
-      if (m == 2 && d > 29) return false
-    } else {
-      if (m == 2 && d > 28) return false
-    }
+    // 结果
+    return true
   }
 
   idcardrange(value, min, max) {
-    var pass = idcard(value)
+    var pass = this.idcard(value)
     if (!pass) return false
     // 日期格式
     var y = value.substr(6, 4)
@@ -304,6 +317,8 @@ class x5valid {
     var now_year = now.getFullYear()
     // 出界
     if (now_year - y < min || now_year - y > max) return false
+    // 结果
+    return true
   }
 
   /**
@@ -363,7 +378,9 @@ class x5valid {
     this.data = data
 
     // 缓存字段对应的值
-    const value = data[param] !== null && data[param] !== undefined ? data[param] : ''
+    // 表单值
+    const values = data.detail.value
+    const value = values[param] !== null && values[param] !== undefined ? values[param] : ''
 
     // 遍历某个指定字段的所有规则，依次验证规则，否则缓存错误信息
     for (let method in rules) {
@@ -402,12 +419,12 @@ class x5valid {
    */
   setView(param) {
     this.form[param] = {
-      $name: param,
-      $valid: true,
-      $invalid: false,
-      $error: {},
-      $success: {},
-      $viewValue: ``,
+      name: param,
+      valid: true,
+      invalid: false,
+      error: {},
+      success: {},
+      viewValue: ``,
     }
   }
 
@@ -420,11 +437,11 @@ class x5valid {
    */
   setValue(param, method, result, value) {
     const params = this.form[param]
-    params.$valid = result
-    params.$invalid = !result
-    params.$error[method] = !result
-    params.$success[method] = result
-    params.$viewValue = value
+    params.valid = result
+    params.invalid = !result
+    params.error[method] = !result
+    params.success[method] = result
+    params.viewValue = value
   }
 
   /**
