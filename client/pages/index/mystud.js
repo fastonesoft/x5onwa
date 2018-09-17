@@ -13,10 +13,12 @@ Page({
       name: {
         required: true,
         idcard: true,
+        idcardrange: [0, 30]
       },
       name1: {
         required: true,
-        tel: true,
+        dateISO: true,
+        date: true,
       }
     })
   },

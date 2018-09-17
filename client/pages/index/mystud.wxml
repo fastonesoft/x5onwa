@@ -50,7 +50,7 @@
         <view class="weui-label">教师姓名</view>
       </view>
       <view class="weui-cell__bd">
-        <input class="weui-input" placeholder="输入老师姓名" name="name1" confirm-type="done" value="222" type="text" maxlength="40"/>
+        <input class="weui-input" placeholder="输入老师姓名" name="name1" confirm-type="done" value="2005-08-15" type="text" maxlength="40"/>
       </view>
       <view class="weui-cell__ft">
         <icon type="warn" size="23" color="#E64340" wx:if="{{form['name1'].invalid}}"></icon>

@@ -43,9 +43,9 @@ class x5valid {
         tel: '请输入11位的手机号码。',
         url: '请输入有效的网址。',
         date: '请输入有效的日期。',
-        dateISO: '请输入有效的日期（ISO），例如：2009-06-23，1998/01/22。',
+        dateISO: '请输入有效的日期，例如：2005-08-15。',
         number: '请输入有效的数字。',
-        digits: '只能输入数字。',
+        digits: '请输入有效的非负整数。',
         idcard: '请输入18位的有效身份证。',
         idcardrange: this.formatTpl('年龄不在 {0} 到 {1} 之间。'),
         equalTo: this.formatTpl('输入值必须和 {0} 相同。'),
@@ -108,7 +108,7 @@ class x5valid {
        * 验证ISO类型的日期格式
        */
       dateISO(value) {
-        return that.optional(value) || /^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])$/.test(value)
+        return that.optional(value) || /^\d{4}[\-](0?[1-9]|1[012])[\-](0?[1-9]|[12][0-9]|3[01])$/.test(value)
       },
       /**
        * 验证十进制数字
