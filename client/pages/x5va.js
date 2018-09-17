@@ -5,7 +5,7 @@
  * @param {Object} messages 验证字段的提示信息
  * 
  */
-class x5valid {
+class x5va {
   constructor(rules = {}, messages = {}) {
     Object.assign(this, {
       data: {},
@@ -42,10 +42,10 @@ class x5valid {
         email: '请输入有效的电子邮件地址。',
         tel: '请输入11位的手机号码。',
         url: '请输入有效的网址。',
-        date: '请输入有效的日期。',
-        dateISO: '请输入有效的日期，例如：2005-08-15。',
+        date: '请输入有效的日期，例如：2005-08-15。',
         number: '请输入有效的数字。',
         digits: '请输入有效的非负整数。',
+        chinese: '请输入有效的中文字符。',
         idcard: '请输入18位的有效身份证。',
         idcardrange: this.formatTpl('年龄不在 {0} 到 {1} 之间。'),
         equalTo: this.formatTpl('输入值必须和 {0} 相同。'),
@@ -99,16 +99,10 @@ class x5valid {
         return that.optional(value) || /^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})).?)(?::\d{2,5})?(?:[/?#]\S*)?$/i.test(value)
       },
       /**
-       * 验证日期格式
-       */
-      date(value) {
-        return that.optional(value) || !/Invalid|NaN/.test(new Date(value).toString())
-      },
-      /**
        * 验证ISO类型的日期格式
        */
-      dateISO(value) {
-        return that.optional(value) || /^\d{4}[\-](0?[1-9]|1[012])[\-](0?[1-9]|[12][0-9]|3[01])$/.test(value)
+      date(value) {
+        return that.optional(value) || that.date(value)
       },
       /**
        * 验证十进制数字
@@ -121,6 +115,12 @@ class x5valid {
        */
       digits(value) {
         return that.optional(value) || /^\d+$/.test(value)
+      },
+      /**
+       * 验证中文
+       */
+      chinese(value) {
+        return that.optional(value) || /^[\u4e00-\u9fa5]+$/.test(value)
       },
       /**
        * 验证身份证号码
@@ -263,18 +263,17 @@ class x5valid {
   optional(value) {
     return !this.methods.required(value) && 'dependency-mismatch'
   }
-
   /**
-   * 判断身份证号是否正确
+   * 日期格式判断
    */
-  idcard(value) {
-    // 18位身份证格式
-    let passed = /^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/.test(value)
+  datecheck(value) {
+    let passed = /^\d{8}$/.test(value)
     if (!passed) return false
+
     // 日期格式
-    var y = value.substr(6, 4)
-    var m = value.substr(10, 2)
-    var d = value.substr(12, 2)
+    var y = value.substr(0, 4)
+    var m = value.substr(4, 2)
+    var d = value.substr(6, 2)
     // 日期检测
     var big = ['01', '03', '05', '07', '08', '10', '12']
     var small = ['04', '06', '09', '11']
@@ -290,6 +289,30 @@ class x5valid {
     } else {
       if (two.indexOf(m) > -1 && d > 28) return false
     }
+    return true
+  }
+  /**
+   * 日期检测
+   */
+  date(value) {
+    // 日期格式
+    let passed = /^\d{4}[\-](0[1-9]|1[012])[\-]([1-9]|[12][0-9]|3[01])$/.test(value)
+    if (!passed) return false
+    let dat = value.replace(/\-/g, '')
+    return this.datecheck(dat)
+  }
+
+  /**
+   * 判断身份证号是否正确
+   */
+
+  idcard(value) {
+    // 18位身份证格式
+    let passed = /^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/.test(value)
+    if (!passed) return false
+    // 日期判断
+    let dat = value.substr(6, 8)
+    if (!this.datecheck(dat)) return false
     // 验证检测
     var verify = value.substr(17, 1)
     var idchar = value.split('')
@@ -482,4 +505,4 @@ class x5valid {
   }
 }
 
-export default x5valid
+export default x5va
