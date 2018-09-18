@@ -39,9 +39,7 @@ class x5va {
     this.defaults = {
       messages: {
         required: '这是必填字段。',
-        email: '请输入有效的电子邮件地址。',
         tel: '请输入11位的手机号码。',
-        url: '请输入有效的网址。',
         date: '请输入有效的日期，例如：2005-08-15。',
         number: '请输入有效的数字。',
         digits: '请输入有效的非负整数。',
@@ -81,22 +79,10 @@ class x5va {
         return value.length > 0
       },
       /**
-       * 验证电子邮箱格式
-       */
-      email(value) {
-        return that.optional(value) || /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test(value)
-      },
-      /**
        * 验证手机格式
        */
       tel(value) {
         return that.optional(value) || /^1[34578]\d{9}$/.test(value)
-      },
-      /**
-       * 验证URL格式
-       */
-      url(value) {
-        return that.optional(value) || /^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})).?)(?::\d{2,5})?(?:[/?#]\S*)?$/i.test(value)
       },
       /**
        * 验证ISO类型的日期格式
@@ -264,7 +250,7 @@ class x5va {
     return !this.methods.required(value) && 'dependency-mismatch'
   }
   /**
-   * 日期格式判断
+   * 判断日期是否合法20050815
    */
   datecheck(value) {
     let passed = /^\d{8}$/.test(value)
@@ -292,20 +278,19 @@ class x5va {
     return true
   }
   /**
-   * 日期检测
+   * 日期检测2005-08-15
    */
   date(value) {
     // 日期格式
     let passed = /^\d{4}[\-](0[1-9]|1[012])[\-]([1-9]|[12][0-9]|3[01])$/.test(value)
     if (!passed) return false
+    // 日期判断
     let dat = value.replace(/\-/g, '')
     return this.datecheck(dat)
   }
-
   /**
    * 判断身份证号是否正确
    */
-
   idcard(value) {
     // 18位身份证格式
     let passed = /^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/.test(value)

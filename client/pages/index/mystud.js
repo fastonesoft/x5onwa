@@ -5,10 +5,16 @@ import x5va from '../x5va.js'
 Page({
 
   data: {
-  
+    dd: [{name:'name1'}, {name:'name2'}]
   },
 
   onLoad: function (options) {
+    var dd = this.data.dd
+
+    console.log(dd)
+    dd[0].invalid = true
+    dd[1].invalid = true
+    this.setData({dd})
 
   },
 
@@ -20,8 +26,7 @@ Page({
       },
       name1: {
         required: true,
-        chinese: true,
-        rangelength: [2, 4],
+        date: true,
       }
     })
     var that = this
