@@ -1,12 +1,9 @@
 // pages/index/roledist.js
 var x5on = require('../x5on.js')
+import x5va from '../x5va.js'
 
 Page({
   data: {
-    errorShow: false,
-    errorMessage: '错误提示',
-    errorArray: [1],
-
     picker: [],
     pIndex: -1,
     radios: [],
@@ -16,39 +13,36 @@ Page({
   },
 
   onLoad: function () {
-    var that = this
-    x5on.check({
-      showError: true,
-      success: () => x5on.request({
-        url: x5on.url.roledistgroup,
-        success: function (result) {
-          console.log(result)
-          that.setData({ pickers: result.data })
-        }
-      })
+    this.x5va = new x5va({
+      name: {
+        required: true,
+        chinese: true,
+        rangelength: [2, 4],
+      }
     })
-  },
-
-  checkInput: function (e) {
-    x5on.checkInput(e, this)
+    var that = this
+    x5on.request({
+      url: x5on.url.roledistgroup,
+      success: function (result) {
+        that.setData({ pickers: result.data })
+      }
+    })
   },
 
   findSubmit: function (e) {
     var that = this;
-    // 检测登录
-    x5on.check({
-      showError: true,
-      success: () => x5on.checkForm(that, 0, 0, function () {
-        x5on.postFormEx({
-          url: x5on.url.roledist,
-          data: e.detail.value,
-          success: (result) => {
-            var data = result.data
-            data.length === 0 ? x5on.showError(that, '没有找到你说的老师！') : that.setData({ radios: result.data })
-          }
-        })
+    that.x5va.checkForm(e, function () {
+      x5on.postFormEx({
+        url: x5on.url.roledist,
+        data: e.detail.value,
+        success: (result) => {
+          var data = result.data
+          data.length === 0 ? x5on.showError(that, '没有找到你说的老师！') : that.setData({ radios: result.data })
+        }
       })
-    });
+    }, function (error) {
+      x5on.showError(that, '教师姓名：' + error)
+    })
   },
 
   radioChange: function (e) {
@@ -111,7 +105,7 @@ Page({
           // 添加成功，刷新数据
           var teachs = that.data.teachs
           teachs.splice(index, 1)
-          that.setData({ teachs: teachs })
+          that.setData({ teachs })
         }
       }
     })

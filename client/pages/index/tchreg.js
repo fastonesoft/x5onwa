@@ -21,16 +21,13 @@ Page({
       }
     })
     var that = this
-    x5on.check({
-      showError: true,
-      success: () => x5on.request({
-        url: x5on.url.tchsch,
-        success: function (result) {
-          var data = result.data
-          var sch_id = data.length > 0 ? data[0].sch_id : ''
-          that.setData({ pickers: data, sch_id: sch_id })          
-        }
-      })
+    x5on.request({
+      url: x5on.url.tchsch,
+      success: function (result) {
+        var data = result.data
+        var sch_id = data.length > 0 ? data[0].sch_id : ''
+        that.setData({ pickers: data, sch_id: sch_id })
+      }
     })
   },
 
