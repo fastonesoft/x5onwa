@@ -38,7 +38,7 @@ class x5va {
   __initDefaults() {
     this.defaults = {
       messages: {
-        required: '这是必填字段。',
+        required: '必填字段。',
         tel: '请输入11位的手机号码。',
         date: '请输入有效的日期，例如：2005-08-15。',
         number: '请输入有效的数字。',
@@ -54,6 +54,7 @@ class x5va {
         min: this.formatTpl('请输入不小于 {0} 的数值。'),
         max: this.formatTpl('请输入不大于 {0} 的数值。'),
         range: this.formatTpl('请输入范围在 {0} 到 {1} 之间的数值。'),
+        custom: '请输入满足条件的有效数据。',
       }
     }
   }
@@ -75,7 +76,6 @@ class x5va {
         } else if (typeof value === 'boolean') {
           return !0
         }
-
         return value.length > 0
       },
       /**
@@ -168,6 +168,12 @@ class x5va {
       range(value, param) {
         return that.optional(value) || (value >= param[0] && value <= param[1])
       },
+      /**
+       * 自定义正则验证
+       */
+      custom(value, param) {
+        return that.optional(value) || that.custom(value, param)
+      }
     }
   }
 
@@ -329,6 +335,11 @@ class x5va {
     return true
   }
 
+  custom(value, param) {
+    let patt = new RegExp(param, 'g')
+    return patt.test(value)
+  }
+
   /**
    * 获取自定义字段的提示信息
    * @param {String} param 字段名
@@ -381,7 +392,6 @@ class x5va {
    * @param {Object} data 需要验证的数据对象
    */
   checkParam(param, rules, data) {
-
     // 缓存数据对象
     this.data = data
 
@@ -456,16 +466,19 @@ class x5va {
    * 验证所有字段的规则，返回验证是否通过
    * @param {Object} data 需要验证数据对象
    */
-  checkForm(data) {
+  checkForm(data, success, fail) {
     this.__initData()
-
-
     for (let param in this.rules) {
       this.setView(param)
       this.checkParam(param, this.rules[param], data)
     }
-
-    return this.valid()
+    let passed = this.valid()
+    // 成功，执行
+    if (passed) success() 
+    else {
+      let error = this.errorList[0]
+      fail(error.msg)
+    }
   }
 
   /**

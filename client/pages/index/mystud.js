@@ -9,12 +9,6 @@ Page({
   },
 
   onLoad: function (options) {
-    var dd = this.data.dd
-
-    console.log(dd)
-    dd[0].invalid = true
-    dd[1].invalid = true
-    this.setData({dd})
 
   },
 
@@ -26,7 +20,7 @@ Page({
       },
       name1: {
         required: true,
-        date: true,
+        custom: '^\\d{3}-\\d{2}-\\d{2}$'
       }
     })
     var that = this

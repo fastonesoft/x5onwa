@@ -1,13 +1,10 @@
 // pages/index/tchreg.js
 var x5on = require('../x5on.js')
+import x5va from '../x5va.js'
 
 Page({
 
   data: {
-    errorShow: false,
-    errorMessage: '错误提示',
-    errorArray: [1],
-
     radios: [],
     pickers: [],
     sch_id: '',
@@ -16,6 +13,13 @@ Page({
   },
 
   onLoad: function () {
+    this.x5va = new x5va({
+      name: {
+        required: true,
+        chinese: true,
+        rangelength: [2, 4],
+      }
+    })
     var that = this
     x5on.check({
       showError: true,
@@ -30,26 +34,21 @@ Page({
     })
   },
 
-  checkInput: function (e) {
-    x5on.checkInput(e, this)
-  },
-
   findSubmit: function (e) {
-    var that = this;
-    // 检测登录
-    x5on.check({
-      showError: true,
-      success: () => x5on.checkForm(that, 0, 0, function () {
-        x5on.postFormEx({
-          url: x5on.url.tchreg,
-          data: e.detail.value,
-          success: (result) => {
-            var data = result.data
-            data.length === 0 ? x5on.showError(that, '没有找到你说的老师！') : that.setData({ radios: result.data })
-          }
-        })
+    var that = this
+    // 检测输入
+    that.x5va.checkForm(e, function () {
+      x5on.postFormEx({
+        url: x5on.url.tchreg,
+        data: e.detail.value,
+        success: (result) => {
+          var radios = result.data
+          radios.length === 0 ? x5on.showError(that, '没有找到你说的老师！') : that.setData({ radios })
+        }
       })
-    });
+    }, function (error) {
+      x5on.showError(that, '教师姓名：' + error)
+    })
   },
 
   radioChange: function (e) {
@@ -80,11 +79,11 @@ Page({
           // 数据提交成功，清除已添加的教师
           var radios = this.data.radios
           radios.splice(this.data.rIndex, 1)
-          that.setData({ radios: radios })
+          that.setData({ radios })
         }
       })
     } else {
-      x5on.showError(this, '教师姓名、注册学校不得为空！')
+      x5on.showError(that, '教师姓名、注册学校不得为空！')
     }
   }
 

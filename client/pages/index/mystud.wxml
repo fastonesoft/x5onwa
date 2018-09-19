@@ -35,19 +35,31 @@
   <view class="weui-cells__title">教师查询</view>
   <view class="weui-cells weui-cells_after-title">
 
-  <block wx:for="{{dd}}" wx:key="name">
+
     <view class="weui-cell weui-cell_input weui-cell_vcode">
       <view class="weui-cell__hd">
         <view class="weui-label">教师姓名</view>
       </view>
       <view class="weui-cell__bd">
-        <input class="weui-input" placeholder="输入老师姓名" name="{{item}}" confirm-type="done" value="321284200508150254" type="text" maxlength="40"/>
+        <input class="weui-input" placeholder="输入老师姓名" name="name" confirm-type="done" value="321284200508150254" type="text" maxlength="40"/>
       </view>
       <view class="weui-cell__ft">
-        <icon type="warn" size="23" color="#E64340" wx:if="{{item.invalid}}"></icon>
+        <icon type="warn" size="23" color="#E64340" wx:if="{{form['name'].invalid}}"></icon>
       </view>
     </view>
-</block>
+
+    <view class="weui-cell weui-cell_input weui-cell_vcode">
+      <view class="weui-cell__hd">
+        <view class="weui-label">教师姓名</view>
+      </view>
+      <view class="weui-cell__bd">
+        <input class="weui-input" placeholder="输入老师姓名" name="name1" confirm-type="done" value="200-01-02" type="text" maxlength="40"/>
+      </view>
+      <view class="weui-cell__ft">
+        <icon type="warn" size="23" color="#E64340" wx:if="{{form['name1'].invalid}}"></icon>
+      </view>
+    </view>
+
   </view>
     <view class="x5ui-half-btn">
       <view class="weui-btn-area">
