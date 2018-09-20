@@ -1,12 +1,9 @@
 // pages/index/userchilds.js
 var x5on = require('../x5on.js')
+import x5va from '../x5va.js'
 
 Page({
   data: {
-    errorShow: false,
-    errorMessage: '错误提示',
-    errorArray: [1, 1],
-
     pIndex: -1,
     pickers: [],
     relation_id: 0,
@@ -16,34 +13,36 @@ Page({
     userchildShow: false,
   },
 
-  onShow: function (e) {
-    var that = this
-    x5on.check({
-      showError: true,
-      success: () => {
-        // 关系
-        x5on.request({
-          url: x5on.url.relation,
-          success: function (result) {
-            that.setData({ pickers: result.data })
-          }
-        })
-        // 孩子
-        x5on.request({
-          url: x5on.url.parentchilds,
-          success: function (result) {
-            var childs = result.data
-            var mychildShow = childs.length > 0
-            var userchildShow = childs.length < 1
-            that.setData({ childs, mychildShow, userchildShow })
-          }
-        })
+  onLoad: function (e) {
+    this.x5va = new x5va({
+      name: {
+        required: true,
+        chinese: true,
+        rangelength: [2, 4],
+      },
+      idc: {
+        required: true,
+        digits: true,
+        idcard: true,
+        idcardrange: [7, 16],
       }
     })
-  },
-
-  checkInput: function (e) {
-    x5on.checkInput(e, this)
+    var that = this
+    x5on.request({
+      url: x5on.url.relation,
+      success: function (result) {
+        that.setData({ pickers: result.data })
+      }
+    })
+    x5on.request({
+      url: x5on.url.parentchilds,
+      success: function (result) {
+        var childs = result.data
+        var mychildShow = childs.length > 0
+        var userchildShow = childs.length < 1
+        that.setData({ childs, mychildShow, userchildShow })
+      }
+    })
   },
 
   pickerChange: function (e) {

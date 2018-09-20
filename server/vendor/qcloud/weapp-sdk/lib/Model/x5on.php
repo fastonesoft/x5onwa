@@ -2,6 +2,7 @@
 namespace QCloud_WeApp_SDK\Model;
 
 use \QCloud_WeApp_SDK\Conf as Conf;
+use \Exception;
 
 class x5on {
   // 系统管理员组编号
@@ -76,56 +77,42 @@ class x5on {
     $idc = strtoupper($idcard);
     // 长度检测
     if ( strlen($idc) != 18 ) {
-      $error = true;
-      $message = '身份证长度必须18位';
-      return compact('error', 'message');
+      throw new Exception('身份证长度必须18位');
     }
     // 字符检测
     $idc_num = str_replace('X', '', $idc);
     if ( ! is_numeric($idc_num) ) {
-      $error = true;
-      $message = '身份证号有非法字符';
-      return compact('error', 'message');
+      throw new Exception('身份证号有非法字符');
     }
     // 地区检测
     $idc_addr = substr($idc, 0, 2);
     $idc_addrs = '11x12x13x14x15x21x22x23x31x32x33x34x35x36x37x41x42x43x44x45x46x50x51x52x53x54x61x62x63x64x65x71x81x82';
     if ( ! strpos($idc_addrs, $idc_addr) ) {
-      $error = true;
-      $message = '身份证地区标识有误';
-      return compact('error', 'message');
+      throw new Exception('身份证地区标识有误');
     }
     // 格式检测
     $idc_birth = substr($idc, 6, 8);
     $idc_date = strtotime($idc_birth);
     if ( ! $idc_date ) {
-      $error = true;
-      $message = '身份证出生日期格式错误';
-      return compact('error', 'message');
+      throw new Exception('身份证出生日期格式错误');
     }
     // 日期检测
     $year = (int) substr($idc_birth, 0, 4);
     $month = (int) substr($idc_birth, 4, 2);
     $day = (int) substr($idc_birth, 6, 2);
     if ( ! checkdate($month, $day, $year) ) {
-      $error = true;
-      $message = '身份证出生日期验证出错';
-      return compact('error', 'message');
+      throw new Exception('身份证出生日期验证出错');
     }
     // 年龄检测
     $current_year = (int) date('Y');
     if ( $more_than ) {
       if ( $current_year - $year < $more_than ) {
-        $error = true;
-        $message = '年龄不符要求';
-        return compact('error', 'message');
+        throw new Exception('年龄不符要求');
       }
     }
     if ( $less_than ) {
       if ( $current_year - $year > $less_than ) {
-        $error = true;
-        $message = '岁数已超标';
-        return compact('error', 'message');
+        throw new Exception('岁数已超标');
       }
     }
 
@@ -140,9 +127,7 @@ class x5on {
     }
     $mod = $total % 11;
     if ( $verify_code != $verify_code_list[$mod] ){
-      $error = true;
-      $message = '身份证号校验出错';
-      return compact('error', 'message');
+      throw new Exception('身份证号校验出错');
     }
     // 检验通过
     return NULL;
