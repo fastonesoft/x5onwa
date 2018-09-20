@@ -25,6 +25,10 @@ Page({
         digits: true,
         idcard: true,
         idcardrange: [7, 16],
+      },
+      relation_id: {
+        required: true,
+        digits: true,
       }
     })
     var that = this
@@ -45,6 +49,16 @@ Page({
     })
   },
 
+  inputCheck: function (e) {
+    let that = this
+    that.x5va.checkInput(e, function (error) {
+      x5on.showError(that, error)
+    }, function (form) {
+      console.log(form)
+      that.setData({ form })
+    })
+  },
+
   pickerChange: function (e) {
     var index = e.detail.value
     if (index == -1) return
@@ -55,23 +69,22 @@ Page({
 
   userchildSubmit: function (e) {
     var that = this
-    var value = e.detail.value
-    if (value.name && value.idc && value.relation_id != '0') {
-      x5on.checkForm(this, 0, 1, function () {
-        x5on.postFormEx({
-          url: x5on.url.userchildupdate,
-          data: e.detail.value,
-          success: (res) => {
-            var childs = res.data
-            var mychildShow = childs.length > 0
-            var userchildShow = false
-            that.setData({ childs, mychildShow, userchildShow })
-          }
-        })
+    console.log(that.x5va)
+    that.x5va.checkForm(e, function () {
+      x5on.postFormEx({
+        url: x5on.url.userchildupdate,
+        data: e.detail.value,
+        success: (res) => {
+          var childs = res.data
+          var mychildShow = childs.length > 0
+          var userchildShow = false
+          that.setData({ childs, mychildShow, userchildShow })
+        }
       })
-    } else {
-      x5on.showError(that, '孩子信息、亲子关系不得为空！')
-    }
+    }, function (error, form) {
+      x5on.showError(that, error)
+      that.setData({ form })
+    })
   },
 
   returnClick: function (e) {

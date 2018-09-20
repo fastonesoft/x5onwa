@@ -377,7 +377,12 @@ class x5va {
    */
   formatTplAndAdd(param, rule, value) {
     let msg = this.defaultMessage(param, rule)
-
+    // 存在，则，退出
+    let exist = false
+    this.errorList.forEach(function (item) {
+      if (item.param === param) exist = true
+    })
+    if (exist) return
     this.errorList.push({
       param: param,
       msg: msg,
@@ -394,7 +399,6 @@ class x5va {
   checkParam(param, rules, data) {
     // 缓存数据对象
     this.data = data
-
     // 缓存字段对应的值
     // 表单值
     const values = data.detail.value
@@ -402,26 +406,20 @@ class x5va {
 
     // 遍历某个指定字段的所有规则，依次验证规则，否则缓存错误信息
     for (let method in rules) {
-
       // 判断验证方法是否存在
       if (this.isValidMethod(method)) {
-
         // 缓存规则的属性及值
         const rule = {
           method: method,
           parameters: rules[method]
         }
-
         // 调用验证方法
         const result = this.methods[method](value, rule.parameters)
-
         // 若result返回值为dependency-mismatch，则说明该字段的值为空或非必填字段
         if (result === 'dependency-mismatch') {
           continue
         }
-
         this.setValue(param, method, result, value)
-
         // 判断是否通过验证，否则缓存错误信息，跳出循环
         if (!result) {
           this.formatTplAndAdd(param, rule, value)
@@ -468,7 +466,9 @@ class x5va {
    */
   checkForm(data, success, fail) {
     this.__initData()
+    console.log(this.rules)
     for (let param in this.rules) {
+      console.log(param)
       this.setView(param)
       this.checkParam(param, this.rules[param], data)
     }
@@ -477,8 +477,31 @@ class x5va {
     if (passed) success() 
     else {
       let error = this.errorList[0]
+      fail(error.msg, this.form)
+    }
+  }
+
+  /**
+   * 验证失去焦点时的动作
+   * @param {Object} data 焦点控件 e
+   * 控件要提供 data-name 参数，值 为控件的 name
+   */
+  checkInput(data, fail, complete) {
+    // 不能初始化，防止冲掉其它控件信息
+    // this.__initData()
+    let name = data.currentTarget.dataset.name
+    // 验证
+    this.setView(name)
+    this.checkParam(name, this.rules[name], data)
+    let passed = this.valid()
+    // 失败，给出错误信息
+    if (!passed) {
+      let error = this.errorList[0]
       fail(error.msg)
     }
+    // 不管成功与否，都向外提供表单验证结果
+    console.log(this)
+    complete(this.form)
   }
 
   /**
