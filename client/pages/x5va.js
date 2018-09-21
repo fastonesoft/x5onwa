@@ -33,6 +33,13 @@ class x5va {
   }
 
   /**
+   * 初始化错误
+   */
+  __initError() {
+    this.errorList = []
+  }
+
+  /**
    * 初始化默认提示信息
    */
   __initDefaults() {
@@ -403,7 +410,6 @@ class x5va {
     // 表单值
     const values = data.detail.value
     const value = values[param] !== null && values[param] !== undefined ? values[param] : ''
-
     // 遍历某个指定字段的所有规则，依次验证规则，否则缓存错误信息
     for (let method in rules) {
       // 判断验证方法是否存在
@@ -427,6 +433,29 @@ class x5va {
         }
       }
     }
+  }
+
+  checkInputParam(param, rules, value) {
+    let result = true
+    for (let method in rules) {
+      if (this.isValidMethod(method)) {
+        const rule = {
+          method: method,
+          parameters: rules[method]
+        }
+        const res = this.methods[method](value, rule.parameters)
+        result = result && res
+        if (res === 'dependency-mismatch') {
+          continue
+        }
+        this.setValue(param, method, result, value)
+        if (!res) {
+          this.formatTplAndAdd(param, rule, value)
+          break
+        }
+      }
+    }
+    return result
   }
 
   /**
@@ -464,21 +493,23 @@ class x5va {
    * 验证所有字段的规则，返回验证是否通过
    * @param {Object} data 需要验证数据对象
    */
-  checkForm(data, success, fail) {
+  checkForm(data, success, fail, complete) {
     this.__initData()
-    console.log(this.rules)
     for (let param in this.rules) {
-      console.log(param)
       this.setView(param)
       this.checkParam(param, this.rules[param], data)
     }
     let passed = this.valid()
     // 成功，执行
-    if (passed) success() 
+    if (passed) {
+      if (typeof success === 'function') success()
+    }
     else {
       let error = this.errorList[0]
-      fail(error.msg, this.form)
+      if (typeof fail === 'function') fail(error.msg)
     }
+    // 结束信息输出
+    if (typeof complete === 'function') complete(this.form)
   }
 
   /**
@@ -487,21 +518,19 @@ class x5va {
    * 控件要提供 data-name 参数，值 为控件的 name
    */
   checkInput(data, fail, complete) {
-    // 不能初始化，防止冲掉其它控件信息
-    // this.__initData()
+    this.__initError()
     let name = data.currentTarget.dataset.name
+    let value = data.detail.value
     // 验证
     this.setView(name)
-    this.checkParam(name, this.rules[name], data)
-    let passed = this.valid()
+    let passed = this.checkInputParam(name, this.rules[name], value)
     // 失败，给出错误信息
     if (!passed) {
       let error = this.errorList[0]
-      fail(error.msg)
+      if (typeof fail === 'function') fail(error.msg)
     }
     // 不管成功与否，都向外提供表单验证结果
-    console.log(this)
-    complete(this.form)
+    if (typeof complete === 'function') complete(this.form)
   }
 
   /**

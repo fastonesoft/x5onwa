@@ -5,8 +5,7 @@ import x5va from '../x5va.js'
 Page({
   data: {
     pIndex: -1,
-    pickers: [],
-    relation_id: 0,
+    relations: [],
     childs: [],
 
     mychildShow: false,
@@ -26,7 +25,7 @@ Page({
         idcard: true,
         idcardrange: [7, 16],
       },
-      relation_id: {
+      relation: {
         required: true,
         digits: true,
       }
@@ -35,7 +34,7 @@ Page({
     x5on.request({
       url: x5on.url.relation,
       success: function (result) {
-        that.setData({ pickers: result.data })
+        that.setData({ relations: result.data })
       }
     })
     x5on.request({
@@ -54,7 +53,6 @@ Page({
     that.x5va.checkInput(e, function (error) {
       x5on.showError(that, error)
     }, function (form) {
-      console.log(form)
       that.setData({ form })
     })
   },
@@ -63,17 +61,18 @@ Page({
     var index = e.detail.value
     if (index == -1) return
 
-    var relation_id = this.data.pickers[index].id
-    this.setData({ pIndex: index, relation_id: relation_id });
+    var relation_id = this.data.relations[index].id
+    this.setData({ pIndex: index, relation_id });
   },
 
   userchildSubmit: function (e) {
     var that = this
-    console.log(that.x5va)
     that.x5va.checkForm(e, function () {
+      let value = e.detail.value
+      value.relation_id = that.data.relation_id
       x5on.postFormEx({
         url: x5on.url.userchildupdate,
-        data: e.detail.value,
+        data: value,
         success: (res) => {
           var childs = res.data
           var mychildShow = childs.length > 0
@@ -83,6 +82,7 @@ Page({
       })
     }, function (error, form) {
       x5on.showError(that, error)
+    }, function (form) {
       that.setData({ form })
     })
   },

@@ -11,7 +11,7 @@
       <view class="weui-cell__bd">
         <input class="weui-input" placeholder="请输入孩子姓名" name="name" type="text" maxlength="4" data-name="name" bindblur="inputCheck"/>
       </view>
-      <view class="weui-cell__ft" wx:if="{{form['name'].invalid}}">
+      <view class="weui-cell__ft" wx:if="{{form.name.invalid}}">
         <icon type="warn" size="23"></icon>
       </view>
     </view>
@@ -22,7 +22,7 @@
       <view class="weui-cell__bd">
         <input class="weui-input" placeholder="请输入孩子身份证号" name="idc" type="idcard" maxlength="18" data-name="idc" bindblur="inputCheck"/>
       </view>
-      <view class="weui-cell__ft" wx:if="{{form['idc'].invalid}}">
+      <view class="weui-cell__ft" wx:if="{{form.idc.invalid}}">
         <icon type="warn" size="23"></icon>
       </view>
     </view>
@@ -35,8 +35,8 @@
         <view class="weui-label">亲子称谓</view>
       </view>
       <view class="weui-cell__bd">
-        <picker name="relation_id" bindchange="pickerChange" value="{{pIndex}}" range="{{pickers}}" range-key="name">
-          <view class="weui-select weui-select_in-select-after">{{pickers[pIndex].name}}</view>
+        <picker name="relation" bindchange="pickerChange" value="{{pIndex}}" range="{{relations}}" range-key="name">
+          <view class="weui-select weui-select_in-select-after">{{relations[pIndex].name}}</view>
         </picker>
       </view>
     </view>

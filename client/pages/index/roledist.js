@@ -29,6 +29,16 @@ Page({
     })
   },
 
+  inputCheck: function (e) {
+    let that = this
+    console.log(e)
+    that.x5va.checkInput(e, function (error) {
+      x5on.showError(that, error)
+    }, function (form) {
+      that.setData({ form })
+    })
+  },
+
   findSubmit: function (e) {
     var that = this;
     that.x5va.checkForm(e, function () {
