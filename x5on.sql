@@ -296,6 +296,22 @@ INSERT INTO xonEduType VALUES (1, replace(uuid(), '-', ''), '小学');
 INSERT INTO xonEduType VALUES (2, replace(uuid(), '-', ''), '初中');
 INSERT INTO xonEduType VALUES (3, replace(uuid(), '-', ''), '高中');
 
+create table xonEduTypeCondition (
+  uid varchar(36) not null,
+  edu_type_id int(11) not null,
+  code int(11) not null,
+  min int(11) not null,
+  max int(11) not null,
+  current boolean not null,
+  primary key (edu_type_id, code),
+  unique key uid (uid),
+  foreign key (edu_type_id) references xonEduType(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学制类型条件';
+
+INSERT INTO xonEduTypeCondition VALUES (replace(uuid(), '-', ''), 1, 1, 7, 13, 1);
+INSERT INTO xonEduTypeCondition VALUES (replace(uuid(), '-', ''), 2, 1, 12, 16, 1);
+INSERT INTO xonEduTypeCondition VALUES (replace(uuid(), '-', ''), 3, 1, 15, 18, 1);
+
 CREATE TABLE xonEdu (
   id INT(11) NOT NULL,
   uid VARCHAR(36) NOT NULL,

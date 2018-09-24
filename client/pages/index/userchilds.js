@@ -21,7 +21,6 @@ Page({
       },
       idc: {
         required: true,
-        digits: true,
         idcard: true,
         idcardrange: [7, 16],
       },

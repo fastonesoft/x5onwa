@@ -159,16 +159,19 @@
         <view class="weui-cell__ft">{{sch_name}}</view>
       </view>
       <view class="weui-cell">
-        <view class="weui-cell__bd">录取年级</view>
+        <view class="weui-cell__bd">学生年级</view>
         <view class="weui-cell__ft">{{step_name}}</view>
       </view>
       <view class="weui-cell">
         <view class="weui-cell__bd">录取编号</view>
-        <view class="weui-cell__ft">{{enter_kao}}</view>
+        <view class="weui-cell__ft">{{enter_id}}</view>
       </view>
       <view class="weui-cell">
-        <view class="weui-cell__bd">学生序号</view>
-        <view class="weui-cell__ft">{{enter_code}}</view>
+        <view class="weui-cell__bd">学生编号</view>
+        <view class="weui-cell__ft">{{stud_id}}</view>
       </view>
+  </view>
+  <view class="weui-btn-area">
+    <button type="primary" bindtap="returnClick">返回</button>
   </view>
 </block>
