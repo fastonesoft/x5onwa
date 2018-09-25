@@ -4,14 +4,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 use QCloud_WeApp_SDK\Model;
 
 try {
+
+  Model\xonStudReg::$tableName = 'xonstudreg';
+
+  $res1 =  Model\xonStudReg::className();
+  var_dump($res1);
+
+  Model\xonAppForm11::$tableName = 'xonAppForm11';
+
+  $res2 =  Model\xonAppForm11::className();
+  var_dump($res2);
+
   $grade_id = $_GET['id'];
   $finished = Model\xonDivisionSet::getFinishedByGradeId($grade_id);
+
+
 
   if ( ! $finished ) exit('分班未结束');
 
   $grade_studs = Model\xovGradeDivisionStud::getStudSumRowsByGradeId($grade_id);
 
   echo $grade_studs;
+
 
 } catch (Exception $e) {
   exit($e->getMessage());

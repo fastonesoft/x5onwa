@@ -690,8 +690,6 @@ CREATE TABLE xonParentChilds (
   user_id VARCHAR(36) NOT NULL,
   child_id VARCHAR(20) NOT NULL,
   relation_id INT(11) NOT NULL,
-  pay_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  pay_day INT(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (uid),
   UNIQUE KEY user_child (user_id, child_id),
   UNIQUE KEY child_relation (child_id, relation_id),
@@ -699,61 +697,6 @@ CREATE TABLE xonParentChilds (
   FOREIGN KEY (child_id) REFERENCES xonChild(id),
   FOREIGN KEY (relation_id) REFERENCES xonRelation(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='家长孩子';
-
-/**
-  可变属性记录表 - 定制表格
- */
-CREATE TABLE xonParentCustom (
-  id VARCHAR(15) NOT NULL,  /* 学校编号 + 4位流水号 => sch_id + code */
-  uid VARCHAR(36) NOT NULL,
-  code VARCHAR(5) NOT NULL,
-  name VARCHAR(20) NOT NULL,  /* 定制表格分类名称 */
-  type_id INT(11) NOT NULL,
-  sch_id VARCHAR(10) NOT NULL,
-  PRIMARY KEY (id),
-  UNIQUE KEY uid (uid),
-  FOREIGN KEY (type_id) REFERENCES xonType(id),
-  FOREIGN KEY (sch_id) REFERENCES xonSchool(id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='定制表格名称';
-
-INSERT INTO xonParentCustom VALUES ('321204020001', replace(uuid(), '-', ''), '0001', '报名信息', 1, '32120402');
-
-/**
-  可变属性记录表 - 定制字段
- */
-CREATE TABLE xonParentCustProp (
-  id VARCHAR(20) NOT NULL,  /* 定制表格编号 + 流水号 => custom_id + code */
-  uid VARCHAR(36) NOT NULL,
-  code VARCHAR(2) NOT NULL,
-  name VARCHAR(20) NOT NULL,
-  data_required BOOLEAN NOT NULL,  /* 是否必填 */
-  data_regex VARCHAR(200) NOT NULL,   /* 数据正则 */
-  custom_id VARCHAR(15) NOT NULL,
-  PRIMARY KEY (id),
-  UNIQUE KEY uid (uid),
-  FOREIGN KEY (custom_id) REFERENCES xonParentCustom(id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='定制表格字段';
-
-INSERT INTO xonParentCustProp VALUES ('32120402000101', replace(uuid(), '-', ''), '01', '身份证号', 1, '', '321204020001');
-
-
-/**
-  可变属性记录表 - 定制表格数据
- */
-CREATE TABLE xonParentCustValue (
-  uid VARCHAR(36) NOT NULL,
-  prop_id VARCHAR(20) NOT NULL,
-  user_id VARCHAR(36) NOT NULL,
-  value VARCHAR(200) NOT NULL,
-  PRIMARY KEY (uid),
-  FOREIGN KEY (prop_id) REFERENCES xonParentCustProp(id),
-  FOREIGN KEY (user_id) REFERENCES xonUser(id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='定制表格数据';
-
-INSERT INTO xonParentCustValue VALUES (replace(uuid(), '-', ''), '32120402000101', 'o47ZhvzWPWSNS26vG_45Fuz5JMZk', '32102819790209301X');
-
-
-
 
 
 
