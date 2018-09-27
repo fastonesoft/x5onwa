@@ -6,20 +6,10 @@ use QCloud_WeApp_SDK\Mysql\Mysql as dbs;
 use QCloud_WeApp_SDK\Constants;
 use \Exception;
 
-class xonApp
+class xonApp extends cAppinfo
 {
-
-  public static function insert () {
-
-  }
-
-  public static function update () {
-
-  }
-
-  public static function delete () {
-
-  }
+  protected static $tableName = 'xonApp';
+  protected static $tableTitle = '应用名称';
 
   public static function getIdByName($name) {
     $res = dbs::row('xonApp', ['*'], compact('name'));

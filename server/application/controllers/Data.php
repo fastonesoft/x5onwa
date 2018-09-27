@@ -5,13 +5,6 @@ use QCloud_WeApp_SDK\Model;
 
 try {
 
-  $res1 =  Model\xonStudReg::getRows();
-  var_dump($res1);
-
-  $res1 =  Model\cAppinfo::getRows();
-  var_dump($res1);
-
-
   $grade_id = $_GET['id'];
   $finished = Model\xonDivisionSet::getFinishedByGradeId($grade_id);
 
