@@ -6,20 +6,10 @@ use QCloud_WeApp_SDK\Mysql\Mysql as dbs;
 use QCloud_WeApp_SDK\Constants;
 use \Exception;
 
-class xonAppFormSet
+class xonAppFormSet extends cAppinfo
 {
-
-  public static function insert () {
-
-  }
-
-  public static function update () {
-
-  }
-
-  public static function delete () {
-
-  }
+  protected static $tableName = 'xonAppFormSet';
+  protected static $tableTitle = '系统表单设置';
 
   public static function saveSchoolSet ($sch_id, $form_id, $set_name, $checked) {
     $res = dbs::row('xonAppFormSet', ['*'], compact('sch_id', 'set_name'));

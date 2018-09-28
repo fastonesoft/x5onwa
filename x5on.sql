@@ -458,7 +458,7 @@ CREATE TABLE xonAppFormValue (
   FOREIGN KEY (sch_id) REFERENCES xonSchool(id),
   FOREIGN KEY (form_id) REFERENCES xonAppForm(id),
   FOREIGN KEY (key_id) REFERENCES xonAppFormKey(id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='单一表单值';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='表单值';
 
 CREATE TABLE xonAppFormSet (
   uid VARCHAR(36) NOT NULL,

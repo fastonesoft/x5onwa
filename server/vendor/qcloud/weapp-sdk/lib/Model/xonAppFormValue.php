@@ -6,20 +6,10 @@ use QCloud_WeApp_SDK\Mysql\Mysql as dbs;
 use QCloud_WeApp_SDK\Constants;
 use \Exception;
 
-class xonAppFormValue
+class xonAppFormValue extends cAppinfo
 {
-
-  public static function insert () {
-
-  }
-
-  public static function update () {
-
-  }
-
-  public static function delete () {
-
-  }
+  protected static $tableName = 'xonAppFormValue';
+  protected static $tableTitle = '系统表单值';
 
   public static function saveKeyValue ($sch_id, $form_id, $key_id, $value) {
     $value = $value === 'true' ? 1 : $value;

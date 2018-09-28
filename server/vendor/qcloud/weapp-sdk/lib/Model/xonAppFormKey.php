@@ -6,20 +6,10 @@ use QCloud_WeApp_SDK\Mysql\Mysql as dbs;
 use QCloud_WeApp_SDK\Constants;
 use \Exception;
 
-class xonAppFormKey
+class xonAppFormKey extends cAppinfo
 {
-
-  public static function insert () {
-
-  }
-
-  public static function update () {
-
-  }
-
-  public static function delete () {
-
-  }
+  protected static $tableName = 'xonAppFormKey';
+  protected static $tableTitle = '系统表单字段';
 
   public static function getDefaultKeysByFormId($form_id) {
     $res = dbs::select('xonAppFormKey', ['*', 'default_value as value'], compact('form_id'));
