@@ -1409,5 +1409,16 @@ INNER join xovChild dd on cc.child_id = dd.id
 WHERE concat(aa.user_id,aa.form_id) not in (SELECT concat(user_id,form_id) from xonSchoolFormSet);
 
 
+/**
+  存储过程
+ */
+CREATE DEFINER=`root`@`localhost` PROCEDURE `proAppFormKey`(IN `pro_name` VARCHAR(10))
+SELECT * from xonAppFormKey where name like concat('%',pro_name,'%');
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `proAppFormKeyTitle`(IN `pro_title` VARCHAR(10))
+SELECT * from xonAppFormKey where title like concat('%',pro_title,'%');
+
+
+
 /*外键约束开启*/
 SET FOREIGN_KEY_CHECKS = 1;
