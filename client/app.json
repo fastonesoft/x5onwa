@@ -13,6 +13,8 @@
     "pages/index/roledist",
     "pages/index/userset",
     "pages/index/userchilds",
+    "pages/index/student",
+    "pages/index/students",     
 
     "pages/index/myrename",
     "pages/index/myexchange",

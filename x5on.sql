@@ -1134,6 +1134,9 @@ CREATE TABLE xonToken (
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='请求参数';
 
+/**
+  作为查询基类用，不得删除
+ */
 create view vAppinfo
 as select * from cAppinfo;
 
@@ -1412,13 +1415,12 @@ WHERE concat(aa.user_id,aa.form_id) not in (SELECT concat(user_id,form_id) from 
 /**
   存储过程
  */
-CREATE DEFINER=`root`@`localhost` PROCEDURE `proAppFormKey`(in `field_name` VARCHAR(10), IN `pro_name` VARCHAR(4))
-SELECT * from xonAppFormKey where `field_name` like concat('%',pro_name,'%');
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `proAppFormKeyTitle`(IN `pro_title` VARCHAR(10))
-SELECT * from xonAppFormKey where title like concat('%',pro_title,'%');
-
-
+/**
+  年级学生查询
+ */
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pvGradeStud_Name`(IN `p_name` VARCHAR(4)) NOT DETERMINISTIC CONTAINS SQL SQL SECURITY DEFINER
+SELECT * from xovGradeStud where stud_name like concat('%',p_name,'%')
 
 /*外键约束开启*/
 SET FOREIGN_KEY_CHECKS = 1;
