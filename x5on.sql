@@ -1412,8 +1412,8 @@ WHERE concat(aa.user_id,aa.form_id) not in (SELECT concat(user_id,form_id) from 
 /**
   存储过程
  */
-CREATE DEFINER=`root`@`localhost` PROCEDURE `proAppFormKey`(IN `pro_name` VARCHAR(10))
-SELECT * from xonAppFormKey where name like concat('%',pro_name,'%');
+CREATE DEFINER=`root`@`localhost` PROCEDURE `proAppFormKey`(in `field_name` VARCHAR(10), IN `pro_name` VARCHAR(4))
+SELECT * from xonAppFormKey where `field_name` like concat('%',pro_name,'%');
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `proAppFormKeyTitle`(IN `pro_title` VARCHAR(10))
 SELECT * from xonAppFormKey where title like concat('%',pro_title,'%');
