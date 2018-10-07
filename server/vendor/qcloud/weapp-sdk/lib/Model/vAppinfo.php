@@ -13,18 +13,31 @@ class vAppinfo
 
   /**
    * 查询多行数据
-   * @param array           $columns      查询列名数组
-   * @param string          $conditions   查询条件
-   * @param string          $suffix       查询后缀 order, limit 等
+   * @param array             $columns      查询列名数组
+   * @param array             $conditions   查询条件
+   * @param string            $suffix       查询后缀 order, limit 等
    * @return array
    * @throws Exception
    */
-  public static function select ($columns = ['*'], $conditions = '', $suffix = '') {
+  public static function select ($columns = ['*'], $conditions, $suffix = '') {
+    if ( gettype($columns) !== 'array' || gettype($conditions) !== 'array' ) {
+      throw new Exception(Constants::E_CALL_FUNCTION_PARAM);
+    }
     return dbs::select(static::$tableName, $columns, $conditions, 'and', $suffix);
   }
 
-  public static function row ($columns = ['*'], $conditions = '', $suffix = '') {
+  public static function row ($columns = ['*'], $conditions, $suffix = '') {
+    if ( gettype($columns) !== 'array' || gettype($conditions) !== 'array' ) {
+      throw new Exception(Constants::E_CALL_FUNCTION_PARAM);
+    }
     return dbs::row(static::$tableName, $columns, $conditions, 'and', $suffix);
+  }
+
+  public static function like ($columns = ['*'], $conditions, $likes, $suffix = '', $opt = 'and', $like_opt = 'or') {
+    if ( gettype($columns) !== 'array' || gettype($conditions) !== 'array' || gettype($likes) !== 'array' ) {
+      throw new Exception(Constants::E_CALL_FUNCTION_PARAM);
+    }
+    return dbs::like(static::$tableName, $columns, $conditions, $likes, $suffix, $opt, $like_opt);
   }
 
   /**
@@ -41,6 +54,14 @@ class vAppinfo
 
   public static function getsColumnsBy ($columns, $conditions) {
     return static::select($columns, $conditions);
+  }
+
+  public static function getsByNum ($conditions, $suffix = '') {
+    return static::select(['*'], $conditions, $suffix);
+  }
+
+  public static function getsColumnsByNum ($columns, $conditions, $suffix = '') {
+    return static::select($columns, $conditions, $suffix);
   }
 
   public static function getById ($id) {

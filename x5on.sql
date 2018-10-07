@@ -1412,15 +1412,5 @@ INNER join xovChild dd on cc.child_id = dd.id
 WHERE concat(aa.user_id,aa.form_id) not in (SELECT concat(user_id,form_id) from xonSchoolFormSet);
 
 
-/**
-  存储过程
- */
-
-/**
-  年级学生查询
- */
-CREATE DEFINER=`root`@`localhost` PROCEDURE `pvGradeStud_Name`(IN `p_name` VARCHAR(4)) NOT DETERMINISTIC CONTAINS SQL SQL SECURITY DEFINER
-SELECT * from xovGradeStud where stud_name like concat('%',p_name,'%')
-
 /*外键约束开启*/
 SET FOREIGN_KEY_CHECKS = 1;

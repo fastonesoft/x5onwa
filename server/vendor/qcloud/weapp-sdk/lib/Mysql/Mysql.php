@@ -68,7 +68,7 @@ class Mysql
      * @return array
      */
     public static function select ($tableName, $columns = ['*'], $conditions = '', $operator = 'and', $suffix = '') {
-        if (   gettype($tableName)  !== 'string'
+        if (gettype($tableName)  !== 'string'
             || (gettype($conditions)!== 'array' && gettype($conditions) !== 'string')
             || gettype($columns)    !== 'array'
             || gettype($operator)   !== 'string'
@@ -96,6 +96,65 @@ class Mysql
         return $allResult === NULL ? [] : $allResult;
     }
 
+  private static function likeProcess ($conditions, $operator = 'or') {
+    if (gettype($conditions) !== 'array') {
+      throw new Exception(Constants::E_CALL_FUNCTION_PARAM);
+    }
+    $condition = '';
+    $execValues = [];
+
+    $cdt = [];
+    foreach ($conditions as $key => $value) {
+      if (gettype($value) === 'number') {
+        array_push($cdt, $value);
+      } else {
+        array_push($cdt, $key . ' like :' . $key);
+        $execValues[$key] = $value;
+      }
+    }
+    $condition = implode(' ' . $operator . ' ', $cdt);
+    // 如果是or，则要加()，要是and，则不要加
+    if ($condition && $operator === 'or') {
+      $condition = '(' . $condition .')';
+    }
+    return [$condition, self::prepare($execValues)];
+  }
+
+  public static function like ($tableName, $columns = ['*'], $conditions, $likes, $suffix = '', $opt = 'and', $likes_opt = 'or') {
+    if (gettype($tableName) !== 'string'
+      || gettype($columns) !== 'array'
+      || gettype($conditions) !== 'array'
+      || gettype($likes) !== 'array'
+      || gettype($suffix) !== 'string'
+      || gettype($opt) !== 'string'
+      || gettype($likes_opt) !== 'string')
+    {
+      throw new Exception(Constants::E_CALL_FUNCTION_PARAM);
+    }
+    // 处理条件
+    list($condition, $execValues) = array_values(self::conditionProcess($conditions, $opt));
+    // 处理模糊条件
+    list($like, $execLikesValues) = array_values(self::likeProcess($likes, $likes_opt));
+    // 查询字段列表串
+    $column = implode(', ', $columns);
+    // 拼接 SQL 语句
+    $sql = "SELECT $column FROM `$tableName`";
+    // 如果有条件则拼接 WHERE
+    if ($condition && $like) {
+      $sql .= " WHERE $condition AND $like";
+    } elseif ($condition) {
+      $sql .= " WHERE $condition";
+    } elseif ($like) {
+      $sql .= " WHERE $like";
+    }
+    // 拼接后缀
+    $sql .= " $suffix";
+    var_dump($sql);
+    // 执行 SQL 语句
+    $query = self::raw($sql, array_merge($execValues, $execLikesValues));
+    $allResult = $query->fetchAll(PDO::FETCH_OBJ);
+    return $allResult === NULL ? [] : $allResult;
+  }
     /**
      * 查询单行数据
      * @param string        $tableName 数据库名
@@ -120,7 +179,7 @@ class Mysql
      * @return number 受影响的行数
      */
     public static function update ($tableName, $updates, $conditions = '', $operator = 'and', $suffix = '') {
-        if (   gettype($tableName)  !== 'string'
+        if (gettype($tableName)  !== 'string'
             || gettype($updates)    !== 'array'
             || (gettype($conditions)!== 'array' && gettype($conditions) !== 'string')
             || gettype($operator)   !== 'string'
@@ -159,7 +218,7 @@ class Mysql
      * @return number 受影响的行数
      */
     public static function delete ($tableName, $conditions, $operator = 'and', $suffix = '') {
-        if (   gettype($tableName)  !== 'string'
+        if (gettype($tableName)  !== 'string'
             || ($conditions && gettype($conditions)!== 'array' && gettype($conditions) !== 'string') 
             || gettype($operator)   !== 'string'
             || gettype($suffix)     !== 'string') {
@@ -185,7 +244,7 @@ class Mysql
     public static function raw ($sql, $execValues = []) {
         $query = self::getInstance()->prepare($sql);
         $result = $query->execute($execValues);
-        
+
         if ($result) {
             return $query;
         } else {

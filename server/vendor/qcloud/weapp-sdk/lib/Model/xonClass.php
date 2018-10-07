@@ -6,8 +6,10 @@ use QCloud_WeApp_SDK\Mysql\Mysql as dbs;
 use QCloud_WeApp_SDK\Constants;
 use \Exception;
 
-class xonClass
+class xonClass extends vAppinfo
 {
+  protected static $tableName = 'xonClass';
+  protected static $tableTitle = '班级';
 
   public static function update ($param) {
     $result = 0;
