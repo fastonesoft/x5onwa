@@ -30,7 +30,7 @@ page {
 .userinfo-avatar {
   width: 220rpx;
   height: 220rpx;
-  border: 15rpx solid #FFF;
+  border: 12rpx solid #FFF;
   border-radius: 50%;
   margin-bottom: 10rpx;
 }

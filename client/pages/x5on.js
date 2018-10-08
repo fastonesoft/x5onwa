@@ -136,6 +136,15 @@ var doUrl = {
   mydivisionsetdata: `${host}/weapp/mydivisionset/data`,
   mydivisionsetupdate: `${host}/weapp/mydivisionset/update`,
 
+  // 学生学籍
+  students: `${host}/weapp/students`,
+  studentsgrade: `${host}/weapp/students/grade`,
+  studentsclass: `${host}/weapp/students/class`,
+  studentsquery: `${host}/weapp/students/query`,
+  studentsadd: `${host}/weapp/students/add`,
+
+
+
   // 错误测试地址
   test: `${host}/weapp/data`,
   imageurl: `${host}/weapp/data`,

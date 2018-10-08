@@ -19,24 +19,15 @@ class vAppinfo
    * @return array
    * @throws Exception
    */
-  public static function select ($columns = ['*'], $conditions, $suffix = '') {
-    if ( gettype($columns) !== 'array' || gettype($conditions) !== 'array' ) {
-      throw new Exception(Constants::E_CALL_FUNCTION_PARAM);
-    }
+  public static function select ($columns = ['*'], $conditions = '', $suffix = '') {
     return dbs::select(static::$tableName, $columns, $conditions, 'and', $suffix);
   }
 
-  public static function row ($columns = ['*'], $conditions, $suffix = '') {
-    if ( gettype($columns) !== 'array' || gettype($conditions) !== 'array' ) {
-      throw new Exception(Constants::E_CALL_FUNCTION_PARAM);
-    }
+  public static function row ($columns = ['*'], $conditions = '', $suffix = '') {
     return dbs::row(static::$tableName, $columns, $conditions, 'and', $suffix);
   }
 
-  public static function like ($columns = ['*'], $conditions, $likes, $suffix = '', $opt = 'and', $like_opt = 'or') {
-    if ( gettype($columns) !== 'array' || gettype($conditions) !== 'array' || gettype($likes) !== 'array' ) {
-      throw new Exception(Constants::E_CALL_FUNCTION_PARAM);
-    }
+  public static function like ($columns = ['*'], $conditions = '', $likes = '', $suffix = '', $opt = 'and', $like_opt = 'or') {
     return dbs::like(static::$tableName, $columns, $conditions, $likes, $suffix, $opt, $like_opt);
   }
 
@@ -64,12 +55,20 @@ class vAppinfo
     return static::select($columns, $conditions, $suffix);
   }
 
+  public static function getBy ($conditions) {
+    return static::row(['*'], $conditions);
+  }
+
   public static function getById ($id) {
     return static::row(['*'], compact('id'));
   }
 
   public static function getByUid ($uid) {
     return static::row(['*'], compact('uid'));
+  }
+
+  public static function getColumnsBy ($columns, $conditions) {
+    return static::row($columns, $conditions);
   }
 
   public static function getColumnsById ($columns, $id) {

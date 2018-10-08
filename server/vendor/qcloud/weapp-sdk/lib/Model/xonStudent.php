@@ -6,10 +6,13 @@ use QCloud_WeApp_SDK\Mysql\Mysql as dbs;
 use QCloud_WeApp_SDK\Constants;
 use \Exception;
 
-class xonStudent
+class xonStudent extends cAppinfo
 {
+  protected static $tableName = 'xonStudent';
+  protected static $tableTitle = '录取学生';
+
   public static function checkStudentEnter ($child_id, $sch_id) {
-    $res = dbs::row('xovStudent', ['*'], compact('child_id', 'sch_id'));
+    $res = self::getBy(compact('child_id', 'sch_id'));
     if ($res !== null) {
       $entered = true;
       $sch_name = $res->sch_name;

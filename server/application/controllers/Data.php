@@ -5,6 +5,7 @@ use QCloud_WeApp_SDK\Model;
 
 try {
 
+
   $grade_id = $_GET['id'];
   $finished = Model\xonDivisionSet::getFinishedByGradeId($grade_id);
 
