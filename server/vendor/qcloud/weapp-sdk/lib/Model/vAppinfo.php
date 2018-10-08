@@ -27,10 +27,6 @@ class vAppinfo
     return dbs::row(static::$tableName, $columns, $conditions, 'and', $suffix);
   }
 
-  public static function like ($columns = ['*'], $conditions = '', $likes = '', $suffix = '', $opt = 'and', $like_opt = 'or') {
-    return dbs::like(static::$tableName, $columns, $conditions, $likes, $suffix, $opt, $like_opt);
-  }
-
   /**
    * 详细的查询功能
    */
@@ -137,6 +133,26 @@ class vAppinfo
       throw new Exception(static::$tableTitle . '：没有找到序列号对应记录字段');
     }
     return $res;
+  }
+
+  /**
+   * 模糊查询
+   */
+
+  public static function like ($columns = ['*'], $conditions = '', $likes = '', $suffix = '', $opt = 'and', $like_opt = 'or') {
+    return dbs::like(static::$tableName, $columns, $conditions, $likes, $suffix, $opt, $like_opt);
+  }
+
+  public static function likes ($likes) {
+    return static::like(['*'], '', $likes);
+  }
+
+  public static function likesBy ($conditions, $likes) {
+    return static::like(['*'], $conditions, $likes);
+  }
+
+  public static function likesByor ($conditons, $likes) {
+    return static::like(['*'], $conditons, $likes, '', 'and', 'or');
   }
 
 }
