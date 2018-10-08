@@ -139,7 +139,7 @@ var doUrl = {
   // 学生学籍
   students: `${host}/weapp/students`,
   studentsgrade: `${host}/weapp/students/grade`,
-  studentsclass: `${host}/weapp/students/class`,
+  studentsclass: `${host}/weapp/students/classes`,
   studentsquery: `${host}/weapp/students/query`,
   studentsadd: `${host}/weapp/students/add`,
 
