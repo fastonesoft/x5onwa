@@ -149,6 +149,10 @@ class x5on {
     return bin2hex(openssl_random_pseudo_bytes(16));
   }
 
+  public static function getLike ($like) {
+    return '%' . $like . '%';
+  }
+
   public static function getHomeByIdcard($num) {
     $home_arr = array(
       '110000'=>'北京市',

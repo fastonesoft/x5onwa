@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 use QCloud_WeApp_SDK\Model;
 
-class Students extends CI_Controller {
+class Gradestud extends CI_Controller {
   const role_name = 'students';
 
   public function index() {
@@ -52,9 +52,16 @@ class Students extends CI_Controller {
     Model\xonLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
-        $stud_name = '%' . $param['stud_name'] . '%';
+        $grade_id = $param['grade_id'];
+        $cls_id = $param['cls_id'];
+        $stud_name = Model\x5on::getLike($param['stud_name']);
 
-        $result = Model\xovStudent::like();
+        if ($grade_id && $cls_id) {
+          $result = Model\xovStudent::likes(compact('grade_id', 'cls_id'), compact('stud_name'));
+        }
+
+        $result = Model\xovStudent::likes(compact('stud_name'));
+
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
         $this->json(['code' => 1, 'data' => $e->getMessage()]);

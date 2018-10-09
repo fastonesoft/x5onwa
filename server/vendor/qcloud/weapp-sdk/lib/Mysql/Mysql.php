@@ -120,19 +120,18 @@ class Mysql
     return [$condition, self::prepare($execValues)];
   }
 
-  public static function like ($tableName, $columns = ['*'], $conditions, $likes, $suffix = '', $opt = 'and', $likes_opt = 'or') {
+  public static function like ($tableName, $columns = ['*'], $conditions, $likes, $suffix = '', $likes_opt = 'or') {
     if (gettype($tableName) !== 'string'
       || gettype($columns) !== 'array'
       || gettype($conditions) !== 'array' && gettype($conditions) !== 'string'
       || gettype($likes) !== 'array' && gettype($likes) !== 'string'
       || gettype($suffix) !== 'string'
-      || gettype($opt) !== 'string'
       || gettype($likes_opt) !== 'string')
     {
       throw new Exception(Constants::E_CALL_FUNCTION_PARAM);
     }
     // 处理条件
-    list($condition, $execValues) = array_values(self::conditionProcess($conditions, $opt));
+    list($condition, $execValues) = array_values(self::conditionProcess($conditions, 'and'));
     // 处理模糊条件
     list($like, $execLikesValues) = array_values(self::likeProcess($likes, $likes_opt));
     // 查询字段列表串
@@ -155,6 +154,7 @@ class Mysql
     $allResult = $query->fetchAll(PDO::FETCH_OBJ);
     return $allResult === NULL ? [] : $allResult;
   }
+
   /**
    * 查询单行数据
    * @param string        $tableName 数据库名
