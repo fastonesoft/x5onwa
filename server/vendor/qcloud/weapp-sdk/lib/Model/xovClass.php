@@ -6,8 +6,11 @@ use QCloud_WeApp_SDK\Mysql\Mysql as dbs;
 use QCloud_WeApp_SDK\Constants;
 use \Exception;
 
-class xovClass
+class xovClass extends vAppinfo
 {
+  protected static $tableName = 'xovClass';
+  protected static $tableTitle = '班级列表';
+
   public static function getRows4Sameset ($grade_id) {
     return dbs::select('xovClass', ['id', 'cls_name'], compact('grade_id'), 'and', 'order by num');
   }

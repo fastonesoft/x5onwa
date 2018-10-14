@@ -2,6 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 use QCloud_WeApp_SDK\Model;
+use \QCloud_WeApp_SDK\Mvv;
 
 class Gradestud extends CI_Controller {
   const role_name = 'students';
@@ -22,7 +23,7 @@ class Gradestud extends CI_Controller {
   public function grade() {
     Model\xonLogin::check(self::role_name, function ($user) {
       try {
-        $result = Model\xovGradeCurrent::gets();
+        $result = Mvv\mvvGradeStud::grades();
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
         $this->json(['code' => 1, 'data' => $e->getMessage()]);
@@ -38,7 +39,7 @@ class Gradestud extends CI_Controller {
         $param = $_POST;
         $grade_id = $param['grade_id'];
 
-        $result = Model\xonClass::getsBy(compact('grade_id'));
+        $result = Mvv\mvvGradeStud::classes($grade_id);
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
         $this->json(['code' => 1, 'data' => $e->getMessage()]);
@@ -56,12 +57,8 @@ class Gradestud extends CI_Controller {
         $cls_id = $param['cls_id'];
         $stud_name = Model\x5on::getLike($param['stud_name']);
 
-        if ($grade_id && $cls_id) {
-          $result = Model\xovStudent::likes(compact('grade_id', 'cls_id'), compact('stud_name'));
-        }
-
-        $result = Model\xovStudent::likes(compact('stud_name'));
-
+        // 当前年度
+        $result = Mvv\mvvGradeStud::query($grade_id, $cls_id, $stud_name);
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
         $this->json(['code' => 1, 'data' => $e->getMessage()]);
@@ -70,4 +67,5 @@ class Gradestud extends CI_Controller {
       $this->json($error);
     });
   }
+
 }

@@ -28,7 +28,7 @@ class vAppinfo
   }
 
   /**
-   * 详细的查询功能
+   * 详细的查询功能，不提示
    */
 
   public static function gets () {
@@ -76,7 +76,7 @@ class vAppinfo
   }
 
   /**
-   * 数据查询检测
+   * 数据查询检测，自定义提示信息
    */
 
   public static function checksCustom ($message) {
@@ -135,6 +135,7 @@ class vAppinfo
     return $res;
   }
 
+  // 检测数据，默认提示
   public static function checks () {
     return static::checksCustom('没有找到数据集合');
   }

@@ -148,7 +148,6 @@ class Mysql
     }
     // 拼接后缀
     $sql .= " $suffix";
-    var_dump($sql);
     // 执行 SQL 语句
     $query = self::raw($sql, array_merge($execValues, $execLikesValues));
     $allResult = $query->fetchAll(PDO::FETCH_OBJ);

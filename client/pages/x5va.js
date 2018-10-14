@@ -502,14 +502,12 @@ class x5va {
     let passed = this.valid()
     // 成功，执行
     if (passed) {
-      if (typeof success === 'function') success()
+      if (typeof success === 'function') success(this.form)
     }
     else {
       let error = this.errorList[0]
       if (typeof fail === 'function') fail(error.msg)
     }
-    // 结束信息输出
-    if (typeof complete === 'function') complete(this.form)
   }
 
   /**

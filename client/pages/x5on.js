@@ -137,11 +137,11 @@ var doUrl = {
   mydivisionsetupdate: `${host}/weapp/mydivisionset/update`,
 
   // 学生学籍
-  students: `${host}/weapp/students`,
-  studentsgrade: `${host}/weapp/students/grade`,
-  studentsclass: `${host}/weapp/students/classes`,
-  studentsquery: `${host}/weapp/students/query`,
-  studentsadd: `${host}/weapp/students/add`,
+  gradestud: `${host}/weapp/gradestud`,
+  gradestudgrade: `${host}/weapp/gradestud/grade`,
+  gradestudclass: `${host}/weapp/gradestud/classes`,
+  gradestudquery: `${host}/weapp/gradestud/query`,
+  gradestudadd: `${host}/weapp/gradestud/add`,
 
 
 

@@ -838,73 +838,63 @@ INSERT INTO xonSub VALUES (99, replace(uuid(), '-', ''), '总分', '总');
 
 
 
-/** 学籍状态 **/
+/** 学籍来源 **/
 CREATE TABLE xonStudType (
   id INT(11) NOT NULL,
   uid VARCHAR(36) NOT NULL,
   name VARCHAR(10) NOT NULL,
   PRIMARY KEY (id),
   UNIQUE KEY uid (uid)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学籍状态';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学籍来源';
 
 INSERT INTO xonStudType VALUES (1, replace(uuid(), '-', ''), '应届生');
 INSERT INTO xonStudType VALUES (2, replace(uuid(), '-', ''), '往届生');
 
-/** 学生来源 **/
-CREATE TABLE xonStudCome (
+CREATE TABLE xonStudStatus (
   id INT(11) NOT NULL,
   uid VARCHAR(36) NOT NULL,
   name VARCHAR(10) NOT NULL,
-  name_display BOOLEAN NOT NULL,
-  stud_type_id INT(11) NOT NULL,
-  PRIMARY KEY (id),
-  UNIQUE KEY uid (uid),
-  FOREIGN KEY (stud_type_id) REFERENCES xonStudType(id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学生来源';
-
-INSERT INTO xonStudCome VALUES (1, replace(uuid(), '-', ''), '正常', 0, 1);
-INSERT INTO xonStudCome VALUES (2, replace(uuid(), '-', ''), '休复', 1, 1);
-INSERT INTO xonStudCome VALUES (3, replace(uuid(), '-', ''), '转入', 1, 1);
-INSERT INTO xonStudCome VALUES (4, replace(uuid(), '-', ''), '跨省', 1, 1);
-INSERT INTO xonStudCome VALUES (5, replace(uuid(), '-', ''), '借读', 1, 1);
-INSERT INTO xonStudCome VALUES (6, replace(uuid(), '-', ''), '重读', 1, 2);
-
-/** 学籍变更信息 **/
-CREATE TABLE xonStudOut (
-  id INT(11) NOT NULL,
-  uid VARCHAR(36) NOT NULL,
-  name VARCHAR(10) NOT NULL,
+  come_go BOOLEAN NOT NULL,  /* 进、出学校 true:come; false:go */
   can_return BOOLEAN NOT NULL,  /* 可以直接回原年级 */
   down_return BOOLEAN NOT NULL,  /* 降级回校 */
   PRIMARY KEY (id),
   UNIQUE KEY uid (uid)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学籍变更信息';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学籍状态';
 
-INSERT INTO xonStudOut VALUES (1, replace(uuid(), '-', ''), '休学', 0, 1);
-INSERT INTO xonStudOut VALUES (2, replace(uuid(), '-', ''), '转出', 0, 0);
-INSERT INTO xonStudOut VALUES (3, replace(uuid(), '-', ''), '死亡', 0, 0);
-INSERT INTO xonStudOut VALUES (11, replace(uuid(), '-', ''), '外借', 1, 0);
-INSERT INTO xonStudOut VALUES (12, replace(uuid(), '-', ''), '流生', 1, 0);
-INSERT INTO xonStudOut VALUES (99, replace(uuid(), '-', ''), '临时', 1, 0);
+INSERT INTO xonStudStatus VALUES (1, replace(uuid(), '-', ''), '正常', 1, 0, 0);
+INSERT INTO xonStudStatus VALUES (2, replace(uuid(), '-', ''), '复学', 1, 0, 0);
+INSERT INTO xonStudStatus VALUES (3, replace(uuid(), '-', ''), '转入', 1, 0, 0);
+INSERT INTO xonStudStatus VALUES (4, replace(uuid(), '-', ''), '跨省', 1, 0, 0);
+INSERT INTO xonStudStatus VALUES (5, replace(uuid(), '-', ''), '借读', 1, 0, 0);
+INSERT INTO xonStudStatus VALUES (6, replace(uuid(), '-', ''), '重读', 1, 0, 0);
+INSERT INTO xonStudStatus VALUES (21, replace(uuid(), '-', ''), '休学', 0, 1, 1);
+INSERT INTO xonStudStatus VALUES (31, replace(uuid(), '-', ''), '离校', 0, 0, 0);
+INSERT INTO xonStudStatus VALUES (99, replace(uuid(), '-', ''), '临时', 0, 1, 0);
+
+
 
 /** 年级学生，报名审核的时候根据家长登记的学生信息，满足条件添加 **/
 CREATE TABLE xonGradeStud (
   uid VARCHAR(36) NOT NULL,
   grade_id VARCHAR(18) NOT NULL,
   cls_id VARCHAR(20) NOT NULL,
+  year_id INT(11) NOT NULL,   /* 年度编号 */
   stud_id VARCHAR(20) NOT NULL,   /* 录取编号 */
-  stud_come_id INT(11) NOT NULL,  /* 学籍办理信息 */
+  stud_type_id INT(11) NOT NULL,  /* 学生来源：应、往届生 */
+  stud_status_id INT(11) NOT NULL,  /* 学籍状态 */
   auth_stud BOOLEAN NOT NULL,  /* 是否指标生 */
   in_sch BOOLEAN NOT NULL,
-  same_group BOOLEAN NOT NULL DEFAULT 0,  /* 同组标志 */
+  same_group BOOLEAN NOT NULL,  /* 同组标志 */
   stud_code VARCHAR(36),  /* 学籍号，应届生有，往届生无 */
-  PRIMARY KEY (grade_id, stud_id),
+  PRIMARY KEY (year_id, stud_id),
   UNIQUE KEY uid (uid),
   FOREIGN KEY (grade_id) REFERENCES xonGrade(id),
   FOREIGN KEY (cls_id) REFERENCES xonClass(id),
+  FOREIGN KEY (year_id) REFERENCES xonYear(id),
   FOREIGN KEY (stud_id) REFERENCES xonStudent(id),
-  FOREIGN KEY (stud_come_id) REFERENCES xonStudCome(id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='年级学生';
+  FOREIGN KEY (stud_type_id) REFERENCES xonStudType(id),
+  FOREIGN KEY (stud_status_id) REFERENCES xonStudStatus(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='年度学生';
 
 
 
@@ -1321,10 +1311,12 @@ AS
 
 CREATE VIEW xovGradeStud
 AS
-  SELECT A.*, S.stud_idc, S.stud_name, S.stud_sex, S.stud_sex_num, step_name, sch_name, C.name AS come_name, C2.num as cls_num, C2.cls_name, C2.cls_order
+  SELECT A.*, S.stud_idc, S.stud_name, S.stud_sex, S.stud_sex_num, step_name, sch_name, t.name as type_name, C.name AS status_name, C2.num as cls_num, C2.cls_name, C2.cls_order, y.current_year
   FROM xonGradeStud A
   LEFT JOIN xovStudent S ON A.stud_id = S.id
-  LEFT JOIN xonStudCome C ON A.stud_come_id = C.id
+  left join xonStudType t on A.stud_type_id = t.id
+  LEFT JOIN xonStudStatus C ON A.stud_status_id = C.id
+  left join xonYear y on A.year_id = y.id
   LEFT JOIN xovClass C2 ON A.cls_id = C2.id;
 
 

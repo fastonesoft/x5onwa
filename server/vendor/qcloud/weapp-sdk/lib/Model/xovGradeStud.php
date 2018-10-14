@@ -6,12 +6,11 @@ use QCloud_WeApp_SDK\Mysql\Mysql as dbs;
 use QCloud_WeApp_SDK\Constants;
 use \Exception;
 
-class xovGradeStud
+class xovGradeStud extends vAppinfo
 {
+  protected static $tableName = 'xovGradeStud';
+  protected static $tableTitle = '年度学生';
 
-  public static function getRowsByGradeId ($grade_id) {
-    return dbs::select('xovGradeStud', ['*'], compact('grade_id'));
-  }
 
   public static function getRowsByClsId ($cls_id) {
     return dbs::select('xovGradeStud', ['uid', 'stud_name', 'stud_sex', 'same_group'], compact('cls_id'));
