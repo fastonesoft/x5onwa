@@ -49,6 +49,24 @@ class Gradestud extends CI_Controller {
     });
   }
 
+  public function studcls() {
+    Model\xonLogin::check(self::role_name, function ($user) {
+      try {
+        $param = $_POST;
+        $grade_id = $param['grade_id'];
+        $cls_id = $param['cls_id'];
+
+        // 当前年度
+        $result = Mvv\mvvGradeStud::studcls($grade_id, $cls_id);
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
+
   public function query() {
     Model\xonLogin::check(self::role_name, function ($user) {
       try {

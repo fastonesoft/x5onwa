@@ -20,6 +20,14 @@ class mvvGradeStud
     return xovClass::getsBy(compact('grade_id'));
   }
 
+  public static function studcls ($grade_id, $cls_id) {
+    if ($grade_id && $cls_id) {
+      return xovGradeStud::getsBy(compact('grade_id', 'cls_id'));
+    } else {
+      return [];
+    }
+  }
+
   public static function query ($grade_id, $cls_id, $stud_name) {
     if ($grade_id && $cls_id) {
       return xovGradeStud::likesBy(compact('grade_id', 'cls_id'), compact('stud_name'));

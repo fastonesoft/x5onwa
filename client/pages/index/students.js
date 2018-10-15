@@ -40,9 +40,26 @@ Page({
 
   classChange: function (e) {
     var that = this
-    var students = []
+    var grades = that.data.grades
+    var classes = that.data.classes
     var classIndex = e.detail.value
-    that.setData({ classIndex, students })
+    that.setData({ classIndex })
+
+
+
+
+    var gradeIndex = that.data.gradeIndex
+    var cls_id = classIndex && classIndex != -1 ? classes[classIndex].id : ''
+    var grade_id = gradeIndex && gradeIndex != -1 ? grades[gradeIndex].id : ''
+    x5on.postFormEx({
+      url: x5on.url.gradestudcls,
+      data: { grade_id, cls_id },
+      success: (result) => {
+        var students = result.data
+        that.setData({ students })
+      }
+    })
+
   },
 
   findSubmit: function (e) {
@@ -62,8 +79,6 @@ Page({
       var cls_id = classIndex && classIndex != -1 ? classes[classIndex].id : ''
       var grade_id = gradeIndex && gradeIndex != -1 ? grades[gradeIndex].id : ''
 
-      var cls_id = cls_id
-      var grade_id = grade_id
       var stud_name = form.stud_name.viewValue
       x5on.postFormEx({
         url: x5on.url.gradestudquery,
