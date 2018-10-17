@@ -46,39 +46,29 @@
   </view>
 </form>
 
-<view class="students-button-area">
+<view class="students-button-area" wx:if="{{comeshow}}">
   <button class="weui-btn mini-btn" type="primary" size="mini">转入</button>
   <button class="weui-btn mini-btn" type="primary" size="mini">重读</button>
   <button class="weui-btn mini-btn" type="primary" size="mini">复学</button>
-  <button class="weui-btn mini-btn" type="primary" size="mini">调动</button>
+  <button class="weui-btn mini-btn" type="primary" size="mini">借读</button>
   <button class="weui-btn mini-btn" type="primary" size="mini">跳级</button>
-  <view></view>
-  <button class="weui-btn mini-btn" type="warn" size="mini">休学</button>
-  <button class="weui-btn mini-btn" type="warn" size="mini">离校</button>
-  <button class="weui-btn mini-btn" type="warn" size="mini">转出</button>
 </view>
 
 <form wx:if="{{students.length>0}}">
-  <view class="weui-cells__title">班级学生</view>
+  <view class="weui-cells__title" wx:if="{{!comeshow}}">学生列表</view>
   <view class="weui-cells weui-cells_after-title">
     <radio-group name="stud_name" bindchange="studentsChange">
       <label class="weui-cell weui-check__label" wx:for="{{students}}" wx:key="stud_id">
         <radio class="weui-check" value="{{item.stud_id}}" checked="{{item.checked}}"/>
         <view class="weui-cell__bd">{{item.cls_name}} - {{item.stud_name}}({{item.stud_sex}})
-        <icon class="weui-icon-checkbox_circle" type="waiting" size="23" wx:if="{{item.stud_status_id==21}}"></icon>
-        <icon class="weui-icon-checkbox_circle" type="info" size="23" color="#FFBE00" wx:if="{{item.stud_status_id==31}}"></icon>
         </view>
         <view class="weui-cell__ft weui-cell__ft_in-radio">
-          <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.checked}}"></icon>
-          <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{item.checked}}"></icon>
+          <icon class="weui-icon-checkbox_circle" type="waiting" size="23"></icon>
+          <icon class="weui-icon-checkbox_circle" type="info" size="23" color="#FFBE00"></icon>
+          <icon class="weui-icon-checkbox_circle" type="warn" size="23"></icon>
         </view>
       </label>
     </radio-group>
-  </view>
-  <view class="students-icon-area">
-    <icon type="waiting" size="23"></icon>休学
-    <icon type="info" size="23" color="#FFBE00"></icon>离校
-    <icon type="warn" size="23"></icon>转学
   </view>
 </form>
 

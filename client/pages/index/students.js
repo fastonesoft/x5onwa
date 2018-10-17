@@ -5,6 +5,8 @@ import x5va from '../x5va.js'
 Page({
 
   data: {
+    grades: [],
+    classes: [],
     students: [],
   },
 
@@ -24,7 +26,8 @@ Page({
     var students = []
     var classIndex = -1
     var gradeIndex = e.detail.value
-    that.setData({ gradeIndex, classIndex, students })
+    var comeshow = false
+    that.setData({ gradeIndex, classIndex, students, comeshow })
     //
     var grades = that.data.grades
     var grade_id = grades[gradeIndex].id
@@ -40,17 +43,16 @@ Page({
 
   classChange: function (e) {
     var that = this
-    var grades = that.data.grades
     var classes = that.data.classes
     var classIndex = e.detail.value
-    that.setData({ classIndex })
+    if (classes.length==0 || classIndex==-1) return
+    var comeshow = true
+    that.setData({ classIndex, comeshow })
 
-
-
-
+    var grades = that.data.grades
     var gradeIndex = that.data.gradeIndex
-    var cls_id = classIndex && classIndex != -1 ? classes[classIndex].id : ''
-    var grade_id = gradeIndex && gradeIndex != -1 ? grades[gradeIndex].id : ''
+    var cls_id = classes[classIndex].id
+    var grade_id = grades[gradeIndex].id
     x5on.postFormEx({
       url: x5on.url.gradestudcls,
       data: { grade_id, cls_id },
