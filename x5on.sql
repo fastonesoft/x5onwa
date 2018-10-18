@@ -897,7 +897,6 @@ CREATE TABLE xonGradeStud (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='年度学生';
 
 
-
 CREATE TABLE xonKaoType (
   id INT(11) NOT NULL,
   uid VARCHAR(36) NOT NULL,
@@ -1402,6 +1401,38 @@ SELECT aa.*, dd.name FROM `xonSchoolFormValue` aa
 inner join xonParentChilds cc on aa.user_id = cc.user_id
 INNER join xovChild dd on cc.child_id = dd.id
 WHERE concat(aa.user_id,aa.form_id) not in (SELECT concat(user_id,form_id) from xonSchoolFormSet);
+
+/**
+  增加的
+ */
+
+CREATE TABLE xonGradeStudChange (
+  uid VARCHAR(36) not null,
+  year_id int(11) not null,
+  grade_id varchar(18) not null,
+  stud_id varchar(20) not null,
+  stud_status_id int(11) not null,
+  change_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  isdone boolean not null,
+  primary key (year_id, stud_status_id, stud_id),
+  unique key uid (uid),
+  FOREIGN key (year_id) REFERENCES xonYear(id),
+  FOREIGN key (grade_id) REFERENCES xonGrade(id),
+  FOREIGN key (stud_id) REFERENCES xonStudent(id),
+  FOREIGN key (stud_status_id) REFERENCES xonStudStatus(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='年度学生调动';
+
+
+create view xovGradeStudChange
+AS
+  select gg.*, current_year, G.name as grade_name, S.name as status_name, stud_name, stud_idc
+  from xonGradeStudChange gg
+  left join xonYear Year2 ON gg.year_id = Year2.id
+  LEFT join xovGrade G ON gg.grade_id = G.id
+  left join xonStudStatus S ON gg.stud_status_id = S.id
+  left join xovStudent Student ON gg.stud_id = Student.id;
+
+
 
 
 /*外键约束开启*/
