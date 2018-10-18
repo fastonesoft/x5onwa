@@ -1406,6 +1406,47 @@ WHERE concat(aa.user_id,aa.form_id) not in (SELECT concat(user_id,form_id) from 
   增加的
  */
 
+
+CREATE TABLE xonStudStatus (
+  id INT(11) NOT NULL,
+  uid VARCHAR(36) NOT NULL,
+  name VARCHAR(10) NOT NULL,
+  come_go BOOLEAN NOT NULL,  /* 进、出学校 true:come; false:go */
+  can_return BOOLEAN NOT NULL,  /* 可以直接回原年级 */
+  down_return BOOLEAN NOT NULL,  /* 降级回校 */
+  PRIMARY KEY (id),
+  UNIQUE KEY uid (uid),
+  unique key name (name)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学籍状态';
+
+INSERT INTO xonStudStatus VALUES (1, replace(uuid(), '-', ''), '正常', 1, 0, 0);
+INSERT INTO xonStudStatus VALUES (2, replace(uuid(), '-', ''), '复学', 1, 0, 0);
+INSERT INTO xonStudStatus VALUES (3, replace(uuid(), '-', ''), '转入', 1, 0, 0);
+INSERT INTO xonStudStatus VALUES (4, replace(uuid(), '-', ''), '跨省', 1, 0, 0);
+INSERT INTO xonStudStatus VALUES (5, replace(uuid(), '-', ''), '借读', 1, 0, 0);
+INSERT INTO xonStudStatus VALUES (6, replace(uuid(), '-', ''), '重读', 1, 0, 0);
+INSERT INTO xonStudStatus VALUES (21, replace(uuid(), '-', ''), '休学', 0, 1, 1);
+INSERT INTO xonStudStatus VALUES (31, replace(uuid(), '-', ''), '离校', 0, 0, 0);
+INSERT INTO xonStudStatus VALUES (99, replace(uuid(), '-', ''), '临时', 0, 1, 0);
+
+create table xonStudStatusType (
+  id INT(11) NOT NULL,
+  uid VARCHAR(36) NOT NULL,
+  name VARCHAR(10) NOT NULL,
+  need_exam boolean not null,
+  primary key (id),
+  unique key uid (uid),
+  unique key name (name)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学籍状态分类';
+
+INSERT INTO xonStudStatusType VALUES (1, replace(uuid(), '-', ''), '添加', 0);
+INSERT INTO xonStudStatusType VALUES (2, replace(uuid(), '-', ''), '调动', 0);
+INSERT INTO xonStudStatusType VALUES (3, replace(uuid(), '-', ''), '转进', 1);
+INSERT INTO xonStudStatusType VALUES (4, replace(uuid(), '-', ''), '复学', 1);
+INSERT INTO xonStudStatusType VALUES (5, replace(uuid(), '-', ''), '重读', 1);
+INSERT INTO xonStudStatusType VALUES (6, replace(uuid(), '-', ''), '跳级', 1);
+INSERT INTO xonStudStatusType VALUES (1, replace(uuid(), '-', ''), '正常添加', 0);
+
 CREATE TABLE xonGradeStudChange (
   uid VARCHAR(36) not null,
   year_id int(11) not null,
@@ -1413,7 +1454,8 @@ CREATE TABLE xonGradeStudChange (
   stud_id varchar(20) not null,
   stud_status_id int(11) not null,
   change_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  isdone boolean not null,
+  has_done boolean not null,
+  memo varchar(200),   /* 调动学校、年级、原因等描述 */
   primary key (year_id, stud_status_id, stud_id),
   unique key uid (uid),
   FOREIGN key (year_id) REFERENCES xonYear(id),
