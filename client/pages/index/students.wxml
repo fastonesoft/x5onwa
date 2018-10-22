@@ -47,11 +47,25 @@
 </form>
 
 <view class="students-button-area" wx:if="{{comeshow}}">
+  <button class="weui-btn mini-btn" type="primary" size="mini">添加</button>
   <button class="weui-btn mini-btn" type="primary" size="mini">转入</button>
   <button class="weui-btn mini-btn" type="primary" size="mini">重读</button>
   <button class="weui-btn mini-btn" type="primary" size="mini">复学</button>
   <button class="weui-btn mini-btn" type="primary" size="mini">借读</button>
   <button class="weui-btn mini-btn" type="primary" size="mini">跳级</button>
+
+
+  <image class="student_images" src="/images/index/stud_normal.png"></image>
+  <image class="student_images" src="/images/index/stud_come.png"></image>
+  <image class="student_images" src="/images/index/stud_move.png"></image>
+  <image class="student_images" src="/images/index/stud_jump.png"></image>
+  <image class="student_images" src="/images/index/stud_return.png"></image>
+  <image class="student_images" src="/images/index/stud_repetition.png"></image>
+  <image class="student_images" src="/images/index/stud_read.png"></image>
+  <image class="student_images" src="/images/index/stud_down.png"></image>
+  <image class="student_images" src="/images/index/stud_out.png"></image>
+  <image class="student_images" src="/images/index/stud_leave.png"></image>
+
 </view>
 
 <form wx:if="{{students.length>0}}">

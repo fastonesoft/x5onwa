@@ -16,3 +16,4 @@ page { background: #F6F6F6; }
 
 /*增加的删除图标*/
 .remove-icon { height:50rpx; width:50rpx; border: none; vertical-align: middle; }
+.student_images { width: 50rpx; height: 50rpx; border: none; }
