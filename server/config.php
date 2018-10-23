@@ -7,13 +7,13 @@ $config = [
     'rootPath' => '',
 
     // 微信小程序 AppID
-    'appId' => '',
+    'appId' => 'wxdca8673d324d4384',
 
     // 微信小程序 AppSecret
     'appSecret' => '',
 
     // 使用腾讯云代理登录
-    'useQcloudLogin' => true,
+    'useQcloudLogin' => false,
 
     /**
      * MySQL 配置，用来存储 session 和用户信息
