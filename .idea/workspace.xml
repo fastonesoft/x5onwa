@@ -1,27 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8f210c66-306d-4d22-91cd-f74b6d63f018" name="Default" comment="start students 3">
-      <change afterPath="$PROJECT_DIR$/client/images/index/role.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/images/index/role@disabled.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/application/controllers/Userchild.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/vendor/qcloud/weapp-sdk/lib/Model/xonChilds.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/vendor/qcloud/weapp-sdk/lib/Model/xonTmp.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/x5onwa.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/x5onwa.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/app.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/app.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/client/app.wxss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/pages/index/students.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/index/students.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/pages/index/students.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/index/students.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/pages/index/students.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/index/students.wxss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/pages/x5on.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/pages/x5on.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/application/controllers/Gradestud.php" beforeDir="false" afterPath="$PROJECT_DIR$/server/application/controllers/Gradestud.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/server/config.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/install_qcloud_sdk.php" beforeDir="false" afterPath="$PROJECT_DIR$/server/install_qcloud_sdk.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/vendor/qcloud/weapp-sdk/lib/Conf.php" beforeDir="false" afterPath="$PROJECT_DIR$/server/vendor/qcloud/weapp-sdk/lib/Conf.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/vendor/qcloud/weapp-sdk/lib/Model/xonLogin.php" beforeDir="false" afterPath="$PROJECT_DIR$/server/vendor/qcloud/weapp-sdk/lib/Model/xonLogin.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/vendor/qcloud/weapp-sdk/lib/Mvv/mvvGradeStud.php" beforeDir="false" afterPath="$PROJECT_DIR$/server/vendor/qcloud/weapp-sdk/lib/Mvv/mvvGradeStud.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/x5on.sql" beforeDir="false" afterPath="$PROJECT_DIR$/x5on.sql" afterDir="false" />
+    <list default="true" id="8f210c66-306d-4d22-91cd-f74b6d63f018" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/client/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/config.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -49,11 +30,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="x5on.sql" pinned="false" current-in-tab="true">
+      <file leaf-file-name="x5on.sql" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/x5on.sql">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="103">
-              <caret line="479" column="27" lean-forward="true" selection-start-line="479" selection-start-column="27" selection-end-line="479" selection-end-column="27" />
+              <caret line="479" column="27" selection-start-line="479" selection-start-column="27" selection-end-line="479" selection-end-column="27" />
             </state>
           </provider>
         </entry>
@@ -61,47 +42,11 @@
       <file leaf-file-name="Gradestud.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server/application/controllers/Gradestud.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2225">
-              <caret line="90" selection-start-line="90" selection-end-line="102" selection-end-column="7" />
+            <state relative-caret-position="200">
+              <caret line="97" column="15" lean-forward="true" selection-start-line="97" selection-start-column="15" selection-end-line="97" selection-end-column="15" />
               <folding>
                 <element signature="e#71#98#0#PHP" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="install_qcloud_sdk.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/install_qcloud_sdk.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="18" column="48" selection-start-line="18" selection-start-column="48" selection-end-line="18" selection-end-column="48" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Conf.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/Youtuyun/Conf.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="25">
-              <caret line="13" column="27" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="27" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Youtu.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/Youtuyun/Youtu.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3275">
-              <caret line="131" column="26" selection-start-line="131" selection-start-column="26" selection-end-line="131" selection-end-column="26" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Auth.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/Youtuyun/Auth.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="350">
-              <caret line="14" column="43" selection-start-line="14" selection-start-column="35" selection-end-line="14" selection-end-column="43" />
             </state>
           </provider>
         </entry>
@@ -110,17 +55,22 @@
         <entry file="file://$PROJECT_DIR$/server/application/controllers/Youtu.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="250">
-              <caret line="10" column="24" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
+              <caret line="10" column="39" selection-start-line="10" selection-start-column="35" selection-end-line="10" selection-end-column="39" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/index.php">
+      <file leaf-file-name="welcome_message.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/application/views/welcome_message.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="275">
-              <caret line="11" column="2" selection-start-line="11" selection-start-column="2" selection-end-line="11" selection-end-column="2" />
-            </state>
+            <state relative-caret-position="-884" />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/server/application/views/test.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1050" />
           </provider>
         </entry>
       </file>
@@ -293,7 +243,8 @@
               <item name="x5onwa" type="b2602c69:ProjectViewProjectNode" />
               <item name="x5onwa" type="462c0819:PsiDirectoryNode" />
               <item name="server" type="462c0819:PsiDirectoryNode" />
-              <item name="Youtuyun" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="x5onwa" type="b2602c69:ProjectViewProjectNode" />
@@ -360,13 +311,7 @@
       <workItem from="1540720461341" duration="29376000" />
       <workItem from="1541811341991" duration="5000" />
       <workItem from="1542034961268" duration="1947000" />
-    </task>
-    <task id="LOCAL-00011" summary="stud exam">
-      <created>1531443834746</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1531443834746</updated>
+      <workItem from="1542116478520" duration="1668000" />
     </task>
     <task id="LOCAL-00012" summary="stud exam">
       <created>1531635717376</created>
@@ -704,11 +649,18 @@
       <option name="project" value="LOCAL" />
       <updated>1540219047571</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="start students 4">
+      <created>1542116583169</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1542116583170</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="678045000" />
+    <option name="totallyTimeSpent" value="679713000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -723,7 +675,7 @@
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25642964" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2602118" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3289256" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50073206" side_tool="true" weight="0.3289256" />
@@ -752,7 +704,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="start myadjust" />
     <MESSAGE value="start myadjust modi" />
     <MESSAGE value="start myadjust modi 2" />
     <MESSAGE value="start myadjust ui 3" />
@@ -777,7 +728,8 @@
     <MESSAGE value="start students 1" />
     <MESSAGE value="start students 2" />
     <MESSAGE value="start students 3" />
-    <option name="LAST_COMMIT_MESSAGE" value="start students 3" />
+    <MESSAGE value="start students 4" />
+    <option name="LAST_COMMIT_MESSAGE" value="start students 4" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -785,20 +737,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/server/Youtuyun/Auth.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="14" column="43" selection-start-line="14" selection-start-column="35" selection-end-line="14" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/application/controllers/Youtu.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="10" column="24" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/server/index.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="275">
@@ -936,13 +874,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/application/controllers/Data.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="13" column="32" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/server/vendor/qcloud/weapp-sdk/lib/Model/QRcode.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5900">
@@ -1016,13 +947,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/config.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/stubs/standard/basic.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1550">
@@ -1058,47 +982,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/index.php">
+    <entry file="file://$PROJECT_DIR$/server/config.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="275">
-          <caret line="11" column="2" selection-start-line="11" selection-start-column="2" selection-end-line="11" selection-end-column="2" />
+          <caret line="25" column="25" lean-forward="true" selection-start-line="25" selection-start-column="25" selection-end-line="25" selection-end-column="25" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/application/controllers/Youtu.php">
+    <entry file="file://$PROJECT_DIR$/x5on.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="10" column="24" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/Youtuyun/Auth.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="14" column="43" selection-start-line="14" selection-start-column="35" selection-end-line="14" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/Youtuyun/Youtu.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3275">
-          <caret line="131" column="26" selection-start-line="131" selection-start-column="26" selection-end-line="131" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/application/controllers/Gradestud.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2225">
-          <caret line="90" selection-start-line="90" selection-end-line="102" selection-end-column="7" />
-          <folding>
-            <element signature="e#71#98#0#PHP" expanded="true" />
-          </folding>
+        <state relative-caret-position="103">
+          <caret line="479" column="27" selection-start-line="479" selection-start-column="27" selection-end-line="479" selection-end-column="27" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/server/install_qcloud_sdk.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
+        <state relative-caret-position="25">
           <caret line="18" column="48" selection-start-line="18" selection-start-column="48" selection-end-line="18" selection-end-column="48" />
         </state>
       </provider>
@@ -1110,11 +1010,59 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/x5on.sql">
+    <entry file="file://$PROJECT_DIR$/server/Youtuyun/Youtu.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="103">
-          <caret line="479" column="27" lean-forward="true" selection-start-line="479" selection-start-column="27" selection-end-line="479" selection-end-column="27" />
+        <state relative-caret-position="25">
+          <caret line="131" column="26" selection-start-line="131" selection-start-column="26" selection-end-line="131" selection-end-column="26" />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/Youtuyun/Auth.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="25">
+          <caret line="14" column="43" selection-start-line="14" selection-start-column="35" selection-end-line="14" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="11" column="2" selection-start-line="11" selection-start-column="2" selection-end-line="11" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/application/controllers/Data.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="325">
+          <caret line="13" column="32" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/application/controllers/Gradestud.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="97" column="15" lean-forward="true" selection-start-line="97" selection-start-column="15" selection-end-line="97" selection-end-column="15" />
+          <folding>
+            <element signature="e#71#98#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/application/controllers/Youtu.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="10" column="39" selection-start-line="10" selection-start-column="35" selection-end-line="10" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/application/views/welcome_message.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-884" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/application/views/test.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1050" />
       </provider>
     </entry>
   </component>
