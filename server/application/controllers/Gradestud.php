@@ -71,12 +71,32 @@ class Gradestud extends CI_Controller {
     Model\xonLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
-        $grade_id = $param['grade_id'];
         $cls_id = $param['cls_id'];
+        $grade_id = $param['grade_id'];
         $stud_name = Model\x5on::getLike($param['stud_name']);
 
         // 当前年度
         $result = Mvv\mvvGradeStud::query($grade_id, $cls_id, $stud_name);
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
+
+  public function add() {
+    Model\xonLogin::check(self::role_name, function ($user) {
+      try {
+        $param = $_POST;
+        $cls_id = $param['cls_id'];
+        $grade_id = $param['grade_id'];
+        $stud_idc = $param['stud_idc'];
+        $stud_name = $param['stud_name'];
+
+        // 当前年度
+        $result = Mvv\mvvGradeStud::add($grade_id, $cls_id, $stud_name, $stud_idc);
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
         $this->json(['code' => 1, 'data' => $e->getMessage()]);

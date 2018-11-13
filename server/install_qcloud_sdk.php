@@ -4,8 +4,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 // 加载 SDK
 require_once './vendor/autoload.php';
 require_once './config.php';
+// youtu.qq.com
+require './Youtuyun/include.php';
 
 use \QCloud_WeApp_SDK\Conf as Conf;
+/**
+ * open.youtu.qq.com
+ * 配置信息
+ */
+use Youtuyun\Conf as YoutuConf;
+
+$appid = '10154864';
+$secretId = 'AKIDOgolX7iw6B9xa5hYOAuUu8A1hBTTC7vc';
+$secretKey = 'lNrAJLDznUzIRQDsIanaAapsjOskyJh0';
+$userid = '2347632';
+YoutuConf::setAppInfo($appid, $secretId, $secretKey, $userid, YoutuConf::API_YOUTU_END_POINT );
+
+
 
 // 系统判断
 if (PHP_OS === 'WINNT') {

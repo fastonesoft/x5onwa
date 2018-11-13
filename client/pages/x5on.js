@@ -147,7 +147,7 @@ var doUrl = {
 
 
   // 错误测试地址
-  test: `${host}/weapp/data`,
+  test: `${host}/weapp/youtu`,
   imageurl: `${host}/weapp/data`,
 };
 

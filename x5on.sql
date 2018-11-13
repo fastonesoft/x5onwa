@@ -391,7 +391,7 @@ CREATE TABLE xonApp (
   title VARCHAR(20) NOT NULL,
   PRIMARY KEY (id),
   UNIQUE KEY uid (uid),
-  UNIQUE KEY name (name)
+  UNIQUE KEY name (title)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='应用名称';
 
 INSERT INTO xonApp VALUES ('schcode', replace(uuid(), '-', ''), '编码设置');
@@ -1413,6 +1413,7 @@ CREATE TABLE xonStudStatus (
   name VARCHAR(20) NOT NULL,  /* 办理手续的文件名称 */
   title varchar(10) not null,
   need_exam BOOLEAN NOT NULL,  /* 需要审核 */
+
   PRIMARY KEY (id),
   UNIQUE KEY uid (uid),
   unique key title (title)
@@ -1426,7 +1427,8 @@ INSERT INTO xonStudStatus VALUES (5, replace(uuid(), '-', ''), 'stud_come', '跨
 INSERT INTO xonStudStatus VALUES (6, replace(uuid(), '-', ''), 'stud_come', '跨省', 1);
 INSERT INTO xonStudStatus VALUES (7, replace(uuid(), '-', ''), 'stud_jump', '跳级', 1);
 INSERT INTO xonStudStatus VALUES (8, replace(uuid(), '-', ''), 'stud_return', '复学', 1);
-INSERT INTO xonStudStatus VALUES (11, replace(uuid(), '-', ''), 'stud_repetition', '重读', 1);
+INSERT INTO xonStudStatus VALUES (9, replace(uuid(), '-', ''), 'stud_repetition', '重读', 1);
+
 INSERT INTO xonStudStatus VALUES (21, replace(uuid(), '-', ''), 'stud_down', '休学', 1);
 INSERT INTO xonStudStatus VALUES (31, replace(uuid(), '-', ''), 'stud_leave', '转学', 1);
 INSERT INTO xonStudStatus VALUES (51, replace(uuid(), '-', ''), 'stud_out', '离校', 0);

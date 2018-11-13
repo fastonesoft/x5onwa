@@ -14,8 +14,10 @@
     "pages/index/userset",
     "pages/index/userchilds",
     "pages/index/student",
-    "pages/index/students",     
-
+    "pages/index/students",
+    
+    "pages/index/stud_add",
+    
     "pages/index/myrename",
     "pages/index/myexchange",
     "pages/index/myexqrcode",

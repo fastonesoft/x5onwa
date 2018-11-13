@@ -27,7 +27,7 @@ class Conf {
     private static $AppSecret = '';
     
     // 微信小程序 AppSecret
-    private static $UseQcloudLogin = true;
+    private static $UseQcloudLogin = false;
     
     // 数据库配置信息
     private static $Mysql = [

@@ -4,7 +4,8 @@
 
 // 此处主机域名修改成腾讯云解决方案分配的域名
 //var host = 'https://337857583.x5on.cn';
-var host = 'https://tt4op0pg.qcloud.la';
+var host = 'https://www.x5on.cn';
+// var host = 'https://tt4op0pg.qcloud.la';
 
 var config = {
 

@@ -46,25 +46,18 @@
   </view>
 </form>
 
-<view class="students-button-area" wx:if="{{comeshow}}">
-  <button class="weui-btn mini-btn" type="primary" size="mini">添加</button>
-  <button class="weui-btn mini-btn" type="primary" size="mini">转入</button>
-  <button class="weui-btn mini-btn" type="primary" size="mini">重读</button>
-  <button class="weui-btn mini-btn" type="primary" size="mini">复学</button>
-  <button class="weui-btn mini-btn" type="primary" size="mini">借读</button>
-  <button class="weui-btn mini-btn" type="primary" size="mini">跳级</button>
+<view class="students-images-area" wx:if="{{comeshow}}">
 
-
-  <image class="students_images" src="/images/index/stud_normal.png"></image>
-  <image class="students_images" src="/images/index/stud_come.png"></image>
-  <image class="students_images" src="/images/index/stud_move.png"></image>
-  <image class="students_images" src="/images/index/stud_jump.png"></image>
-  <image class="students_images" src="/images/index/stud_return.png"></image>
-  <image class="students_images" src="/images/index/stud_repetition.png"></image>
-  <image class="students_images" src="/images/index/stud_read.png"></image>
-  <image class="students_images" src="/images/index/stud_down.png"></image>
-  <image class="students_images" src="/images/index/stud_out.png"></image>
-  <image class="students_images" src="/images/index/stud_leave.png"></image>
+  <image class="students_images" src="/images/index/stud_add.png" data-itemid="stud_add" bindtap="itemClick"></image>
+  <image class="students_images" src="/images/index/stud_come.png" data-itemid="stud_come" bindtap="itemClick"></image>
+  <image class="students_images" src="/images/index/stud_move.png" data-itemid="stud_move" bindtap="itemClick"></image>
+  <image class="students_images" src="/images/index/stud_jump.png" data-itemid="stud_jump" bindtap="itemClick"></image>
+  <image class="students_images" src="/images/index/stud_return.png" data-itemid="stud_return" bindtap="itemClick"></image>
+  <image class="students_images" src="/images/index/stud_repetition.png" data-itemid="stud_repetition" bindtap="itemClick"></image>
+  <image class="students_images" src="/images/index/stud_read.png" data-itemid="stud_read" bindtap="itemClick"></image>
+  <image class="students_images" src="/images/index/stud_down.png" data-itemid="stud_down" bindtap="itemClick"></image>
+  <image class="students_images" src="/images/index/stud_out.png" data-itemid="stud_out" bindtap="itemClick"></image>
+  <image class="students_images" src="/images/index/stud_leave.png" data-itemid="stud_leave" bindtap="itemClick"></image>
 
 </view>
 
@@ -74,13 +67,17 @@
     <radio-group name="stud_name" bindchange="studentsChange">
       <label class="weui-cell weui-check__label" wx:for="{{students}}" wx:key="stud_id">
         <radio class="weui-check" value="{{item.stud_id}}" checked="{{item.checked}}"/>
-        <view class="weui-cell__bd">{{item.cls_name}} - {{item.stud_name}}({{item.stud_sex}})
+        <view class="weui-cell__bd">
+
+                          {{item.cls_name}} - {{item.stud_name}}({{item.stud_sex}})
+                          
+    
         </view>
         <view class="weui-cell__ft weui-cell__ft_in-radio">
-          <icon class="weui-icon-checkbox_circle" type="waiting" size="23"></icon>
-          <icon class="weui-icon-checkbox_circle" type="info" size="23" color="#FFBE00"></icon>
-          <icon class="weui-icon-checkbox_circle" type="warn" size="23"></icon>
-        </view>
+        <image class="students_images" src="/images/index/stud_return.png"></image>
+  <image class="students_images" src="/images/index/stud_repetition.png"></image>
+  <image class="students_images" src="/images/index/stud_read.png"></image>
+    </view>
       </label>
     </radio-group>
   </view>

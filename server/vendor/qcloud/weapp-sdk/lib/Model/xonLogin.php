@@ -33,7 +33,7 @@ class xonLogin
         call_user_func($success, $result['userinfo']);
       }
     } else {
-      // 找找原因，不能使用result['error']
+      //
       call_user_func($fail, ['code' => -1, 'data' => $result['error']]);
     }
   }

@@ -1,3 +1,3 @@
 /* pages/index/students.wxss */
-.students-button-area { padding: 0 20rpx 15rpx; }
-.students-button-area button { margin-right: 15rpx; }
+.students-images-area { padding: 20rpx; }
+.students-images-area .students_images { width: 100rpx; height: 100rpx; margin-bottom: 15rpx; }
