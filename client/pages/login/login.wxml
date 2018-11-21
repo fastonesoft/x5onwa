@@ -20,7 +20,6 @@
   </view>
 </view>
 <block wx:if="{{logged}}">
-  <view class="weui-cells__title">个人信息</view>
   <view class="weui-cells weui-cells_after-title">
     <block wx:if="{{notchecked}}">
       <view style="margin:0 auto; width: 50%; padding-bottom: 30rpx;">
