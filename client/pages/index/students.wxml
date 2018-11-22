@@ -55,9 +55,7 @@
   <image class="students_images" src="/images/index/stud_return.png" data-itemid="stud_return" bindtap="itemClick"></image>
   <image class="students_images" src="/images/index/stud_repetition.png" data-itemid="stud_repetition" bindtap="itemClick"></image>
   <image class="students_images" src="/images/index/stud_read.png" data-itemid="stud_read" bindtap="itemClick"></image>
-  <image class="students_images" src="/images/index/stud_down.png" data-itemid="stud_down" bindtap="itemClick"></image>
-  <image class="students_images" src="/images/index/stud_out.png" data-itemid="stud_out" bindtap="itemClick"></image>
-  <image class="students_images" src="/images/index/stud_leave.png" data-itemid="stud_leave" bindtap="itemClick"></image>
+
 
 </view>
 

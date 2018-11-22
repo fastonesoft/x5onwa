@@ -16,10 +16,21 @@ class mvvGradeStud
     return xovGradeCurrent::gets();
   }
 
+  /**
+   * 根据年级查询班级列表
+   * @param $grade_id           年级编号
+   * @return array
+   */
   public static function classes ($grade_id) {
     return xovClass::getsBy(compact('grade_id'));
   }
 
+  /**
+   * 根据年级、班级查询学生
+   * @param $grade_id           年级编号
+   * @param $cls_id             班级编号
+   * @return array
+   */
   public static function studcls ($grade_id, $cls_id) {
     if ($grade_id && $cls_id) {
       return xovGradeStud::getsBy(compact('grade_id', 'cls_id'));
@@ -28,6 +39,13 @@ class mvvGradeStud
     }
   }
 
+  /**
+   * 根据年级、班级、学生姓名部分模糊查询
+   * @param $grade_id           年级编号
+   * @param $cls_id             班级编号
+   * @param $stud_name          学生姓名
+   * @return array
+   */
   public static function query ($grade_id, $cls_id, $stud_name) {
     if ($grade_id && $cls_id) {
       return xovGradeStud::likesBy(compact('grade_id', 'cls_id'), compact('stud_name'));
@@ -43,6 +61,7 @@ class mvvGradeStud
    * 学生直接添加（没有任何手续）
    */
   public static function add ($grade_id, $cls_id, $stud_name, $stud_idc) {
+
 
   }
 

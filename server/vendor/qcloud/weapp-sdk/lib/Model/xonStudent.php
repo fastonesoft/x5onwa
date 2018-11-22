@@ -26,4 +26,14 @@ class xonStudent extends cAppinfo
     }
   }
 
+  public static function getMaxId() {
+
+  }
+
+  public static function addStudent ($child_id, $step_id, $come_date) {
+    // 补足参数：id uid
+    $id = ;
+    $uid = x5on::getUid();
+  }
+
 }

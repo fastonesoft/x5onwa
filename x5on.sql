@@ -613,7 +613,7 @@ CREATE TABLE xonStudent (
   uid VARCHAR(36) NOT NULL,
   child_id VARCHAR(20) NOT NULL,
   step_id VARCHAR(16) NOT NULL,
-  come_year INT(11) NOT NULL,
+  come_date DATE NOT NULL,
   PRIMARY KEY (id),
   UNIQUE KEY uid (uid),
   FOREIGN KEY (child_id) REFERENCES xonChild(id),

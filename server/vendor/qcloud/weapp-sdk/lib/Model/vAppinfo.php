@@ -27,6 +27,23 @@ class vAppinfo
     return dbs::row(static::$tableName, $columns, $conditions, 'and', $suffix);
   }
 
+  public static function maxid ($countLength) {
+    // 执行 SQL 语句
+    $query = self::raw("SELECT max(id) FROM static::$tableName");
+    $allResult = $query->fetchAll(PDO::FETCH_OBJ);
+    // 非空，返回：prev 为前缀，value 为流水号
+    if ($allResult !== null) {
+      $res = $allResult[0];
+      $id = $res->id;
+      $len = strlen($id);
+      $prev = substr($id, 0, $len-$countLength);
+      $value = substr($id, $len-$countLength-1, $countLength);
+      return compact('prev', 'value');
+    } else {
+      return null;
+    }
+  }
+
   /**
    * 详细的查询功能，不提示
    */
