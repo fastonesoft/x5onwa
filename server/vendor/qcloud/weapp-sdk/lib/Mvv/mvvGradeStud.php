@@ -62,8 +62,7 @@ class mvvGradeStud
    * 学生直接添加（没有任何手续）
    */
   public static function add ($grade_id, $cls_id, $stud_name, $stud_idc) {
-    xonStudent::addStudent('asdfasdf', '321204022016', '2016-09-01');
-    return 0;
+    return xonStudent::addStudent('asdfasdf', '321204022017', '2016-09-01');
   }
 
 }

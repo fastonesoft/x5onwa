@@ -16,6 +16,10 @@ Page({
         required: true,
         idcard: true,
         idcardrange: [7, 18],
+      },
+      come_date: {
+        required: true,
+        date: true,
       }
     })
     that.x5va.checkForm(e, function (form) {
@@ -35,7 +39,7 @@ Page({
         url: x5on.url.gradestudadd,
         data: { grade_id, cls_id, stud_idc, stud_name },
         success: (result) => {
-          console.log('asdfasdf')
+          console.log(result.data)
         }
       })
 

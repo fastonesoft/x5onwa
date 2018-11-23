@@ -20,6 +20,14 @@
         <input class="weui-input" placeholder="输入学生身份证号" name="stud_idc" type="idcard" maxlength="18" />
       </view>
     </view>
+      <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+        <view class="weui-label">添加日期</view>
+      </view>
+      <view class="weui-cell__bd">
+        <input class="weui-input" placeholder="输入添加日期" name="come_date" type="number" maxlength="10" />
+      </view>
+    </view>
   </view>
 
   <view class="weui-btn-area">
