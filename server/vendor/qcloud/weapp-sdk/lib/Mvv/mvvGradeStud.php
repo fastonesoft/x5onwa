@@ -3,6 +3,7 @@ namespace QCloud_WeApp_SDK\Mvv;
 
 use Guzzle\Cache\NullCacheAdapter;
 use QCloud_WeApp_SDK\Model\x5on;
+use QCloud_WeApp_SDK\Model\xonStudent;
 use QCloud_WeApp_SDK\Model\xovClass;
 use QCloud_WeApp_SDK\Model\xovGradeCurrent;
 use QCloud_WeApp_SDK\Model\xovGradeStud;
@@ -61,8 +62,8 @@ class mvvGradeStud
    * 学生直接添加（没有任何手续）
    */
   public static function add ($grade_id, $cls_id, $stud_name, $stud_idc) {
-
-
+    xonStudent::addStudent('asdfasdf', '321204022016', '2016-09-01');
+    return 0;
   }
 
 }

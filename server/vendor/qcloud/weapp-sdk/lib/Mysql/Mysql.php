@@ -69,7 +69,7 @@ class Mysql
    */
   public static function select ($tableName, $columns = ['*'], $conditions = '', $operator = 'and', $suffix = '') {
     if (gettype($tableName)  !== 'string'
-      || gettype($conditions)!== 'array' && gettype($conditions) !== 'string'
+      || gettype($conditions) !== 'array' && gettype($conditions) !== 'string'
       || gettype($columns)    !== 'array'
       || gettype($operator)   !== 'string'
       || gettype($suffix)     !== 'string') {
@@ -94,6 +94,36 @@ class Mysql
     $query = self::raw($sql, $execValues);
     $allResult = $query->fetchAll(PDO::FETCH_OBJ);
     return $allResult === NULL ? [] : $allResult;
+  }
+
+  /**
+   * @param $tableName
+   * @param $funcName                     MAX,MIN...
+   * @param $fieldName
+   * @param string $conditions
+   * @return null||value                  返回：空值||函数值
+   * @throws Exception
+   */
+  public static function func ($tableName, $funcName, $fieldName, $conditions = '') {
+    if (gettype($tableName)  !== 'string'
+      || gettype($conditions) !== 'array' && gettype($conditions) !== 'string') {
+      throw new Exception(Constants::E_CALL_FUNCTION_PARAM);
+    }
+
+    list($condition, $execValues) = array_values(self::conditionProcess($conditions, $operator));
+
+    // 拼接 SQL 语句
+    $sql = "SELECT $funcName ( $fieldName ) as value FROM `$tableName`";
+
+    // 如果有条件则拼接 WHERE 关键则
+    if ($condition) {
+      $sql .= " WHERE $condition";
+    }
+
+    // 执行 SQL 语句
+    $query = self::raw($sql, $execValues);
+    $allResult = $query->fetchAll(PDO::FETCH_OBJ);
+    return $allResult === NULL ? NULL : $allResult[0]->value;
   }
 
   private static function likeProcess ($conditions, $operator = 'or') {
