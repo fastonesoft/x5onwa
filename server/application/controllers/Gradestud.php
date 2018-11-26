@@ -94,9 +94,10 @@ class Gradestud extends CI_Controller {
         $grade_id = $param['grade_id'];
         $stud_idc = $param['stud_idc'];
         $stud_name = $param['stud_name'];
+        $come_date = $param['come_date'];
 
         // 当前年度
-        $result = Mvv\mvvGradeStud::add($grade_id, $cls_id, $stud_name, $stud_idc);
+        $result = Mvv\mvvGradeStud::add($grade_id, $cls_id, $stud_name, $stud_idc, $come_date);
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
         $this->json(['code' => 1, 'data' => $e->getMessage()]);

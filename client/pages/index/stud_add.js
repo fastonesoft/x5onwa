@@ -15,7 +15,7 @@ Page({
       stud_idc: {
         required: true,
         idcard: true,
-        idcardrange: [7, 18],
+        idcardrange: [7, 19],
       },
       come_date: {
         required: true,
@@ -34,10 +34,11 @@ Page({
       var cls_id = classes[classIndex].id
       var stud_idc = form.stud_idc.viewValue
       var stud_name = form.stud_name.viewValue
+      var come_date = form.come_date.viewValue
 
       x5on.postFormEx({
         url: x5on.url.gradestudadd,
-        data: { grade_id, cls_id, stud_idc, stud_name },
+        data: { grade_id, cls_id, stud_idc, stud_name, come_date },
         success: (result) => {
           console.log(result.data)
         }

@@ -265,10 +265,9 @@ class x5va {
   /**
    * 判断日期是否合法20050815
    */
-  datecheck(value) {
+  datechecked(value) {
     let passed = /^\d{8}$/.test(value)
     if (!passed) return false
-
     // 日期格式
     var y = value.substr(0, 4)
     var m = value.substr(4, 2)
@@ -295,11 +294,12 @@ class x5va {
    */
   date(value) {
     // 日期格式
-    let passed = /^\d{4}[\-](0[1-9]|1[012])[\-]([1-9]|[12][0-9]|3[01])$/.test(value)
+    let passed = /^\d{4}[\-](0[1-9]|1[012])[\-](0[1-9]|[12][0-9]|3[01])$/.test(value)
     if (!passed) return false
     // 日期判断
     let dat = value.replace(/\-/g, '')
-    return this.datecheck(dat)
+
+    return this.datechecked(dat)
   }
   /**
    * 判断身份证号是否正确
@@ -310,7 +310,7 @@ class x5va {
     if (!passed) return false
     // 日期判断
     let dat = value.substr(6, 8)
-    if (!this.datecheck(dat)) return false
+    if (!this.datechecked(dat)) return false
     // 验证检测
     var verify = value.substr(17, 1)
     var idchar = value.split('')

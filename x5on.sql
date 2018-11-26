@@ -616,6 +616,7 @@ CREATE TABLE xonStudent (
   come_date DATE NOT NULL,
   PRIMARY KEY (id),
   UNIQUE KEY uid (uid),
+  UNIQUE KEY child_id (child_id),
   FOREIGN KEY (child_id) REFERENCES xonChild(id),
   FOREIGN KEY (step_id) REFERENCES xonStep(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='录取学生';

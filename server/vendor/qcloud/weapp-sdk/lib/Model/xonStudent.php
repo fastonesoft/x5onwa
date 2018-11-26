@@ -26,25 +26,21 @@ class xonStudent extends cAppinfo
     }
   }
 
-  public static function addStudent ($child_id, $step_id, $come_date) {
-    // 补足参数：id uid
-    $max = self::max('child_id', compact('step_id'));
-
-    if ($max !== null) {
-      $countLength = 4;
-
-      $id = $max;
-      $len = strlen($id);
-      $prev = substr($id, 0, $len-$countLength);
-      $value = substr($id, $len-$countLength, $countLength);
-      $uid = x5on::getUid();
-
-      return compact('prev', 'value');
+  public static function add ($child_id, $step_id, $come_date) {
+    // 流水号宽度
+    $sn_width = 4;
+    // 读取最大编号
+    $max = self::max('id', compact('step_id'));
+    if ($max === null) {
+      $sn = 0;
     } else {
-      return null;
+      $sn = (int)substr($max, - $sn_width);
     }
-
-
+    $sn++;
+    $id = $step_id . substr('0000' . $sn, -$sn_width);
+    $uid = x5on::getUid();
+    // 添加
+    return self::insert(compact('id', 'uid', 'child_id', 'step_id', 'come_date'));
   }
 
 }
