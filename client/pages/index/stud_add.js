@@ -20,9 +20,16 @@ Page({
       come_date: {
         required: true,
         date: true,
+      },
+      stud_type: {
+        required: true,
+      },
+      stud_status: {
+        required: true,
       }
     })
     that.x5va.checkForm(e, function (form) {
+      console.log(form)
       var pages = getCurrentPages();
       var currPage = pages[pages.length - 1];
       var prevPage = pages[pages.length - 2];

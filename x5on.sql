@@ -846,7 +846,7 @@ CREATE TABLE xonStudType (
   name VARCHAR(10) NOT NULL,
   PRIMARY KEY (id),
   UNIQUE KEY uid (uid)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学籍来源';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学生来源';
 
 INSERT INTO xonStudType VALUES (1, replace(uuid(), '-', ''), '应届生');
 INSERT INTO xonStudType VALUES (2, replace(uuid(), '-', ''), '往届生');

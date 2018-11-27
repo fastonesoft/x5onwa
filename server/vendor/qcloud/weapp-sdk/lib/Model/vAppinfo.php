@@ -43,6 +43,10 @@ class vAppinfo
     return static::select();
   }
 
+  public static function getsColumns ($columns) {
+    return static::select($columns);
+  }
+
   public static function getsBy ($conditions) {
     return static::select(['*'], $conditions);
   }

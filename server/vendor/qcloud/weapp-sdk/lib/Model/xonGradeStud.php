@@ -6,8 +6,22 @@ use QCloud_WeApp_SDK\Mysql\Mysql as dbs;
 use QCloud_WeApp_SDK\Constants;
 use \Exception;
 
-class xonGradeStud
+class xonGradeStud extends cAppinfo
 {
+  protected static $tableName = 'xonGradeStud';
+  protected static $tableTitle = '年度学生';
+
+  public static function add ($grade_id, $cls_id, $year_id, $stud_id) {
+    
+  }
+
+
+
+
+
+  /**
+   * todo 老的要改造的一些方法  要移到 --> mvv 里面
+   */
 
   public static function exchange ($movestud_uid, $changestud_uids) {
     $uid = $movestud_uid;

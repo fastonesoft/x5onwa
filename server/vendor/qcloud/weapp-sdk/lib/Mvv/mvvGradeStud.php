@@ -6,6 +6,7 @@ use QCloud_WeApp_SDK\Model\x5on;
 use QCloud_WeApp_SDK\Model\xonChild;
 use QCloud_WeApp_SDK\Model\xonGrade;
 use QCloud_WeApp_SDK\Model\xonStudent;
+use QCloud_WeApp_SDK\Model\xonStudType;
 use QCloud_WeApp_SDK\Model\xovClass;
 use QCloud_WeApp_SDK\Model\xovGradeCurrent;
 use QCloud_WeApp_SDK\Model\xovGradeStud;
@@ -70,6 +71,12 @@ class mvvGradeStud
     $grade = xonGrade::getById($grade_id);
     $step_id = $grade->step_id;
     return xonStudent::add($stud_idc, $step_id, $come_date);
+    // todo 添加年度学生
+
+  }
+
+  public static function type () {
+    return xonStudType::getsColumns(compact('id', ));
   }
 
 }

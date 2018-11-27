@@ -20,12 +20,38 @@
         <input class="weui-input" placeholder="输入学生身份证号" name="stud_idc" type="idcard" maxlength="18" />
       </view>
     </view>
-      <view class="weui-cell weui-cell_input">
+    <view class="weui-cell weui-cell_input">
       <view class="weui-cell__hd">
-        <view class="weui-label">添加日期</view>
+        <view class="weui-label">进校时间</view>
       </view>
       <view class="weui-cell__bd">
-        <input class="weui-input" placeholder="输入添加日期" name="come_date" type="number" maxlength="10" />
+        <input class="weui-input" placeholder="输入进校时间" name="come_date" type="number" maxlength="10" />
+      </view>
+    </view>
+    <view class="weui-cell weui-cell_select">
+      <view class="weui-cell__hd weui-cell__hd_in-select-after">
+        <view class="weui-label">学生来源</view>
+      </view>
+      <view class="weui-cell__bd">
+        <picker bindchange="gradeChange" name="stud_type" value="0" range="{{grades}}" range-key="name" disabled="{{!grades || grades.length===0}}">
+          <view class="weui-select weui-select_in-select-after">{{grades[gradeIndex].name}}</view>
+        </picker>
+      </view>
+    </view>
+    <view class="weui-cell weui-cell_select">
+      <view class="weui-cell__hd weui-cell__hd_in-select-after">
+        <view class="weui-label">学籍状态</view>
+      </view>
+      <view class="weui-cell__bd">
+        <picker bindchange="gradeChange" name="stud_status" value="0" range="{{grades}}" range-key="name" disabled="{{!grades || grades.length===0}}">
+          <view class="weui-select weui-select_in-select-after">{{grades[gradeIndex].name}}</view>
+        </picker>
+      </view>
+    </view>
+    <view class="weui-cell weui-cell_switch">
+      <view class="weui-cell__bd">是否指标生</view>
+      <view class="weui-cell__ft">
+        <switch name="auth_stud" checked="true" />
       </view>
     </view>
   </view>
