@@ -15,7 +15,7 @@ Page({
       stud_idc: {
         required: true,
         idcard: true,
-        idcardrange: [7, 19],
+        idcardrange: [7, 18],
       },
       come_date: {
         required: true,
@@ -29,7 +29,6 @@ Page({
       }
     })
     that.x5va.checkForm(e, function (form) {
-      console.log(form)
       var pages = getCurrentPages();
       var currPage = pages[pages.length - 1];
       var prevPage = pages[pages.length - 2];
@@ -42,10 +41,12 @@ Page({
       var stud_idc = form.stud_idc.viewValue
       var stud_name = form.stud_name.viewValue
       var come_date = form.come_date.viewValue
+      var stud_type = form.stud_type.viewValue
+      var stud_status = form.stud_status.viewValue
 
       x5on.postFormEx({
         url: x5on.url.gradestudadd,
-        data: { grade_id, cls_id, stud_idc, stud_name, come_date },
+        data: { grade_id, cls_id, stud_idc, stud_name, come_date, stud_type, stud_status },
         success: (result) => {
           console.log(result.data)
         }
