@@ -81,8 +81,7 @@ class mvvGradeStud
     return xonStudType::getsColumns(compact('id', 'name'));
   }
 
-  public static function status () {
-    $in_sch = 1;
+  public static function status ($in_sch) {
     return xonStudStatus::getsColumnsBy(compact('id', 'name'), compact('in_sch'));
   }
 
