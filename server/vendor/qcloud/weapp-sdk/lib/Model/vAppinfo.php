@@ -115,6 +115,14 @@ class vAppinfo
     return $res;
   }
 
+  public static function checkByCustom ($conditions, $message) {
+    $res = static::getBy($conditions);
+    if ( $res === null ) {
+      throw new Exception(static::$tableTitle . '：' . $message);
+    }
+    return $res;
+  }
+
   public static function checkByIdCustom ($id, $message) {
     $res = static::getById($id);
     if ( $res === null ) {
@@ -156,6 +164,9 @@ class vAppinfo
   }
   public static function checksColumnsBy ($columns, $conditions) {
     return static::checksColumnsByCustom($columns, $conditions, '没有找到条件对应字段');
+  }
+  public static function checkBy ($conditions) {
+    return static::checkByCustom($conditions, '没有找到条件对应记录');
   }
   public static function checkById ($id) {
     return static::checkByIdCustom($id, '没有找到编号对应记录');

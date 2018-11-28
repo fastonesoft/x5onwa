@@ -1438,17 +1438,19 @@ INSERT INTO xonStudTrans VALUES (99, replace(uuid(), '-', ''), 'stud_out', '临�
 
 CREATE TABLE xonGradeStudChange (
   uid VARCHAR(36) not null,
-  year_id int(11) not null,
+  year_id int(11) not null,    /* 当前年度 */
   grade_id varchar(18) not null,
+  cls_id varchar(20) not null,
   stud_id varchar(20) not null,
   stud_status_id int(11) not null,
-  change_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  change_date DATE NOT NULL,
   has_done boolean not null,
   memo varchar(200),   /* 调动学校、年级、原因等描述 */
   primary key (year_id, stud_status_id, stud_id),
   unique key uid (uid),
   FOREIGN key (year_id) REFERENCES xonYear(id),
   FOREIGN key (grade_id) REFERENCES xonGrade(id),
+  FOREIGN KEY (cls_id) REFERENCES xonClass(id),
   FOREIGN key (stud_id) REFERENCES xonStudent(id),
   FOREIGN key (stud_status_id) REFERENCES xonStudStatus(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='年度学生调动';
