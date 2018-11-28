@@ -10,12 +10,4 @@ class xonGradeStudChange extends cAppinfo
 {
   protected static $tableName = 'xonGradeStudChange';
   protected static $tableTitle = '年度学生调动';
-
-  public static function add ($grade_id, $cls_id, $stud_id, $stud_status_id, $change_date, $memo) {
-    $has_done = 0;
-    $year_id = xonYear::currentYearId();
-    $uid = x5on::getUid();
-    return self::insert(compact('uid', 'year_id', 'grade_id', 'cls_id', 'stud_id', 'stud_status_id', 'change_date', 'has_done', 'memo'));
-  }
-
 }

@@ -10,10 +10,4 @@ class xonYear extends cAppinfo
 {
   protected static $tableName = 'xonYear';
   protected static $tableTitle = '年度';
-
-  public static function currentYearId () {
-    $current_year = 1;
-    $res = self::checkBy(compact('current_year'));
-    return $res->id;
-  }
 }
