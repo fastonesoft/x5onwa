@@ -1415,7 +1415,6 @@ CREATE TABLE xonStudTrans (
   title varchar(10) not null,
   need_exam BOOLEAN NOT NULL,  /* 需要审核 */
   stud_status_id int(11) not null,
-
   PRIMARY KEY (id),
   UNIQUE KEY uid (uid),
   unique key title (title),
