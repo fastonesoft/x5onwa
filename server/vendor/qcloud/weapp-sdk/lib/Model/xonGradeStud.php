@@ -11,9 +11,7 @@ class xonGradeStud extends cAppinfo
   protected static $tableName = 'xonGradeStud';
   protected static $tableTitle = '年度学生';
 
-  public static function add ($grade_id, $cls_id, $year_id, $stud_id) {
-    
-  }
+
 
 
 

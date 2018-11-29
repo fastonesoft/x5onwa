@@ -16,13 +16,13 @@ use QCloud_WeApp_SDK\Mysql\Mysql as dbs;
 use QCloud_WeApp_SDK\Constants;
 use \Exception;
 
-class mvvGradeStudChange
+class mvvGradeStudIn
 {
-  public static function add ($grade_id, $cls_id, $stud_id, $stud_status_id, $change_date, $memo) {
+  public static function add ($to_grade_id, $to_cls_id, $stud_id, $stud_status_id, $change_date, $from_grade_id, $from_cls_id, $memo) {
     $has_done = 0;
     $year_id = mvvYear::currentYearId();
     $uid = x5on::getUid();
-    return xonGradeStudChange::insert(compact('uid', 'year_id', 'grade_id', 'cls_id', 'stud_id', 'stud_status_id', 'change_date', 'has_done', 'memo'));
+    return xonGradeStudChange::insert(compact('uid', 'year_id', 'to_grade_id', 'to_cls_id', 'stud_id', 'stud_status_id', 'change_date', 'has_done', 'from_grade_id', 'from_cls_id', 'memo'));
   }
 
   public static function done ($change_uid) {

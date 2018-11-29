@@ -1436,30 +1436,52 @@ INSERT INTO xonStudTrans VALUES (11, replace(uuid(), '-', ''), 'stud_leave', '�
 INSERT INTO xonStudTrans VALUES (12, replace(uuid(), '-', ''), 'stud_out', '离校', 0, 8);
 INSERT INTO xonStudTrans VALUES (99, replace(uuid(), '-', ''), 'stud_out', '临时', 0, 99);
 
-CREATE TABLE xonGradeStudChange (
+CREATE TABLE xonGradeStudIn (
+  id varchar(10) not null,    /* year_id+stud_status_id+流水号  */
   uid VARCHAR(36) not null,
   year_id int(11) not null,    /* 当前年度 */
-  grade_id varchar(18) not null,
-  cls_id varchar(20) not null,
+  to_grade_id varchar(18) not null,
+  to_cls_id varchar(20) not null,
   stud_id varchar(20) not null,
   stud_status_id int(11) not null,
   change_date DATE NOT NULL,
   has_done boolean not null,
+  from_grade_id varchar(18),
+  from_cls_id varchar(20),
   memo varchar(200),   /* 调动学校、年级、原因等描述 */
   primary key (year_id, stud_status_id, stud_id),
   unique key uid (uid),
   FOREIGN key (year_id) REFERENCES xonYear(id),
-  FOREIGN key (grade_id) REFERENCES xonGrade(id),
-  FOREIGN KEY (cls_id) REFERENCES xonClass(id),
+  FOREIGN key (to_grade_id) REFERENCES xonGrade(id),
+  FOREIGN KEY (to_cls_id) REFERENCES xonClass(id),
   FOREIGN key (stud_id) REFERENCES xonStudent(id),
   FOREIGN key (stud_status_id) REFERENCES xonStudStatus(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='年度学生调动';
 
+CREATE TABLE xonGradeOut (
+  id varchar(10) not null,  /* 流水号 */
+  uid varchar(36) not null,
+  year_id int(11) not null,
+  from_grade_id varchar(18) not null,
+  from_cls_id varchar(20) not null,
+  stud_id varchar(20) not null,
+  stud_status_id int(11) not null,
+  change_date DATE NOT NULL,
+  has_done boolean not null,
+  memo varchar(200),
+  primary key (year_id, stud_status_id, stud_id),
+  unique key uid (uid),
+  FOREIGN key (year_id) REFERENCES xonYear(id),
+  FOREIGN key (from_grade_id) REFERENCES xonGrade(id),
+  FOREIGN KEY (from_cls_id) REFERENCES xonClass(id),
+  FOREIGN key (stud_id) REFERENCES xonStudent(id),
+  FOREIGN key (stud_status_id) REFERENCES xonStudStatus(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='年度学生离校';
 
-create view xovGradeStudChange
+create view xovGradeStudIn
 AS
   select gg.*, current_year, G.name as grade_name, S.name as status_name, S.title as status_title, stud_name, stud_idc
-  from xonGradeStudChange gg
+  from xonGradeStudIn gg
   left join xonYear Year2 ON gg.year_id = Year2.id
   LEFT join xovGrade G ON gg.grade_id = G.id
   left join xonStudStatus S ON gg.stud_status_id = S.id

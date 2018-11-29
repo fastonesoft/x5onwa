@@ -6,7 +6,7 @@ use QCloud_WeApp_SDK\Mysql\Mysql as dbs;
 use QCloud_WeApp_SDK\Constants;
 use \Exception;
 
-class xonGradeStudChange extends cAppinfo
+class xonGradeStudIn extends cAppinfo
 {
   protected static $tableName = 'xonGradeStudChange';
   protected static $tableTitle = '年度学生调动';

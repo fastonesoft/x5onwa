@@ -77,6 +77,8 @@ class mvvGradeStud
 
   }
 
+
+
   public static function type () {
     return xonStudType::getsColumns(compact('id', 'name'));
   }
