@@ -4,6 +4,25 @@ import x5va from '../x5va.js'
 
 Page({
 
+  onLoad: function (e) {
+    var that = this
+    x5on.request({
+      url: x5on.url.gradestudtype,
+      success: function (result) {
+        var types = result.data
+        that.setData({ types })
+      }
+    })
+
+    x5on.request({
+      url: x5on.url.gradestudstatus,
+      success: function (result) {
+        var status = result.data
+        that.setData({ status })
+      }
+    })
+  },
+
   studaddSubmit: function (e) {
     var that = this
     that.x5va = new x5va({

@@ -111,9 +111,24 @@ class Gradestud extends CI_Controller {
     Model\xonLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
+        // 学生来源
+        $result = Mvv\mvvGradeStud::type();
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
 
-        // 当前年度
-        $result = Mvv\mvvGradeStud::add($grade_id, $cls_id, $stud_name, $stud_idc, $come_date);
+  public function status() {
+    Model\xonLogin::check(self::role_name, function ($user) {
+      try {
+        $param = $_POST;
+        // 学籍状态
+        $in_sch = 1;
+        $result = Mvv\mvvGradeStud::status($in_sch);
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
         $this->json(['code' => 1, 'data' => $e->getMessage()]);

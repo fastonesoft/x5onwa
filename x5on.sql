@@ -884,7 +884,6 @@ CREATE TABLE xonGradeStud (
   stud_type_id INT(11) NOT NULL,  /* 学生来源：应、往届生 */
   stud_status_id INT(11) NOT NULL,  /* 学籍状态 */
   auth_stud BOOLEAN NOT NULL,  /* 是否指标生 */
-  in_sch BOOLEAN NOT NULL,
   same_group BOOLEAN NOT NULL,  /* 同组标志 */
   stud_code VARCHAR(36),  /* 学籍号，应届生有，往届生无 */
   PRIMARY KEY (year_id, stud_id),
@@ -1457,7 +1456,7 @@ CREATE TABLE xonGradeStudIn (
   FOREIGN key (stud_status_id) REFERENCES xonStudStatus(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='年度学生调动';
 
-CREATE TABLE xonGradeOut (
+CREATE TABLE xonGradeStudOut (
   id varchar(10) not null,  /* 流水号 */
   uid varchar(36) not null,
   year_id int(11) not null,
@@ -1479,10 +1478,10 @@ CREATE TABLE xonGradeOut (
 
 create view xovGradeStudIn
 AS
-  select gg.*, current_year, G.name as grade_name, S.name as status_name, S.title as status_title, stud_name, stud_idc
+  select gg.*, current_year, G.name as grade_name, S.name as status_name, stud_name, stud_idc
   from xonGradeStudIn gg
   left join xonYear Year2 ON gg.year_id = Year2.id
-  LEFT join xovGrade G ON gg.grade_id = G.id
+  LEFT join xovGrade G ON gg.to_grade_id = G.id
   left join xonStudStatus S ON gg.stud_status_id = S.id
   left join xovStudent Student ON gg.stud_id = Student.id;
 

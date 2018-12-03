@@ -33,8 +33,8 @@
         <view class="weui-label">学生来源</view>
       </view>
       <view class="weui-cell__bd">
-        <picker bindchange="gradeChange" name="stud_type" value="0" range="{{grades}}" range-key="name" disabled="{{!grades || grades.length===0}}">
-          <view class="weui-select weui-select_in-select-after">{{grades[gradeIndex].name}}</view>
+        <picker bindchange="gradeChange" name="stud_type" value="0" range="{{types}}" range-key="name" disabled="{{!types || types.length===0}}">
+          <view class="weui-select weui-select_in-select-after">{{types[typeIndex].name}}</view>
         </picker>
       </view>
     </view>
@@ -43,8 +43,8 @@
         <view class="weui-label">学籍状态</view>
       </view>
       <view class="weui-cell__bd">
-        <picker bindchange="gradeChange" name="stud_status" value="0" range="{{grades}}" range-key="name" disabled="{{!grades || grades.length===0}}">
-          <view class="weui-select weui-select_in-select-after">{{grades[gradeIndex].name}}</view>
+        <picker bindchange="gradeChange" name="stud_status" value="0" range="{{status}}" range-key="name" disabled="{{!status || status.length===0}}">
+          <view class="weui-select weui-select_in-select-after">{{status[statuIndex].name}}</view>
         </picker>
       </view>
     </view>

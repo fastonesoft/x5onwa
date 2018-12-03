@@ -77,14 +77,16 @@ class mvvGradeStud
 
   }
 
-
-
   public static function type () {
-    return xonStudType::getsColumns(compact('id', 'name'));
+    $res =  xonStudType::getsColumns(compact('id', 'name'));
+    var_dump($res);
+    return $res;
   }
 
   public static function status ($in_sch) {
-    return xonStudStatus::getsColumnsBy(compact('id', 'name'), compact('in_sch'));
+    $res = xonStudStatus::getsColumnsBy(compact('id', 'name'), compact('in_sch'));
+    var_dump($res);
+    return $res;
   }
 
 }
