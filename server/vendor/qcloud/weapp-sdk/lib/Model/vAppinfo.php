@@ -181,6 +181,94 @@ class vAppinfo
     return static::checkColumnsByUidCustom($columns, $uid, '没有找到序列号对应记录字段');
   }
 
+
+  /**
+   * 数据查询检测，自定义提示信息
+   */
+
+  public static function existsCustom ($message) {
+    $res = static::gets();
+    if ( count($res) !== 0 ) {
+      throw new Exception(static::$tableTitle . '：' . $message);
+    }
+  }
+
+  public static function existsByCustom ($conditions, $message) {
+    $res = static::getsBy($conditions);
+    if ( count($res) !== 0 ) {
+      throw new Exception(static::$tableTitle . '：' . $message);
+    }
+  }
+
+  public static function existsColumnsByCustom ($columns, $conditions, $message) {
+    $res = static::getsColumnsBy($columns, $conditions);
+    if ( count($res) !== 0 ) {
+      throw new Exception(static::$tableTitle . '：' . $message);
+    }
+  }
+
+  public static function existByCustom ($conditions, $message) {
+    $res = static::getBy($conditions);
+    if ( $res !== null ) {
+      throw new Exception(static::$tableTitle . '：' . $message);
+    }
+  }
+
+  public static function existByIdCustom ($id, $message) {
+    $res = static::getById($id);
+    if ( $res !== null ) {
+      throw new Exception(static::$tableTitle . '：' . $message);
+    }
+  }
+
+  public static function existByUidCustom ($uid, $message) {
+    $res = static::getByUid($uid);
+    if ( $res !== null ) {
+      throw new Exception(static::$tableTitle . '：' . $message);
+    }
+  }
+
+  public static function existColumnsByIdCustom ($columns, $id, $message) {
+    $res = static::getColumnsById($columns, $id);
+    if ( $res !== null ) {
+      throw new Exception(static::$tableTitle . '：' . $message);
+    }
+  }
+
+  public static function existColumnsByUidCustom ($columns, $uid, $message) {
+    $res = static::getColumnsByUid($columns, $uid);
+    if ( $res !== null ) {
+      throw new Exception(static::$tableTitle . '：' . $message);
+    }
+  }
+
+
+  // 检测数据，默认提示
+  public static function exists () {
+    static::existsCustom('数据集合已存在');
+  }
+  public static function existsBy ($conditions) {
+    static::existsByCustom($conditions, '条件对应数据已存在');
+  }
+  public static function existsColumnsBy ($columns, $conditions) {
+    static::existsColumnsByCustom($columns, $conditions, '条件对应字段已存在');
+  }
+  public static function existBy ($conditions) {
+    static::existByCustom($conditions, '条件对应记录已存在');
+  }
+  public static function existById ($id) {
+    static::existByIdCustom($id, '编号对应记录已存在');
+  }
+  public static function existByUid ($uid) {
+    static::existByUidCustom($uid, '序列号对应记录已存在');
+  }
+  public static function existColumnsById ($columns, $id) {
+    static::existColumnsByIdCustom($columns, $id, '编号对应记录字段已存在');
+  }
+  public static function existColumnsByUid ($columns, $uid) {
+    static::existColumnsByUidCustom($columns, $uid, '序列号对应记录字段已存在');
+  }
+
   /**
    * 模糊查询
    */

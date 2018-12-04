@@ -1,18 +1,16 @@
 <?php
 namespace QCloud_WeApp_SDK\Mvv;
 
-use Guzzle\Cache\NullCacheAdapter;
 use QCloud_WeApp_SDK\Model\x5on;
 use QCloud_WeApp_SDK\Model\xonChild;
 use QCloud_WeApp_SDK\Model\xonGrade;
+use QCloud_WeApp_SDK\Model\xonGradeStud;
 use QCloud_WeApp_SDK\Model\xonStudent;
 use QCloud_WeApp_SDK\Model\xonStudStatus;
 use QCloud_WeApp_SDK\Model\xonStudType;
 use QCloud_WeApp_SDK\Model\xovClass;
 use QCloud_WeApp_SDK\Model\xovGradeCurrent;
 use QCloud_WeApp_SDK\Model\xovGradeStud;
-use QCloud_WeApp_SDK\Mysql\Mysql as dbs;
-use QCloud_WeApp_SDK\Constants;
 use \Exception;
 
 class mvvGradeStud
@@ -62,18 +60,16 @@ class mvvGradeStud
     }
   }
 
-  /**
-   * 学生直接添加（没有任何手续）
-   */
-  public static function add ($grade_id, $cls_id, $stud_name, $stud_idc, $come_date) {
+  public static function addNoExam ($grade_id, $cls_id, $stud_name, $stud_idc, $stud_type_id, $stud_status_id, $stud_auth, $come_date) {
     // 添加孩子表
-    mvvChild::add($stud_idc, $stud_name);
-    // 通过grade_id找出step_id
+    xonChild::add($stud_idc, $stud_name);
+    // 通过grade_id找出step_id，并添加录取学生表
     $grade = xonGrade::getById($grade_id);
     $step_id = $grade->step_id;
-    return mvvStudent::add($stud_idc, $step_id, $come_date);
-    // todo 添加年度学生审核表
-
+    $stud_id = xonStudent::add($stud_idc, $step_id, $come_date);
+    // 添加年度学生
+    $grade_stud_uid = xonGradeStud::add($grade_id, $cls_id, $stud_id, $stud_type_id, $stud_status_id, $stud_auth);
+    return xovGradeStud::getByUid($grade_stud_uid);
   }
 
   public static function type () {

@@ -73,7 +73,8 @@ class Gradestud extends CI_Controller {
         $param = $_POST;
         $cls_id = $param['cls_id'];
         $grade_id = $param['grade_id'];
-        $stud_name = Model\x5on::getLike($param['stud_name']);
+        $stud_name = $param['stud_name'];
+        $stud_name = Model\x5on::getLike($stud_name);
 
         // 当前年度
         $result = Mvv\mvvGradeStud::query($grade_id, $cls_id, $stud_name);
@@ -95,9 +96,12 @@ class Gradestud extends CI_Controller {
         $stud_idc = $param['stud_idc'];
         $stud_name = $param['stud_name'];
         $come_date = $param['come_date'];
+        $stud_type_id = $param['stud_type_id'];
+        $stud_status_id = $param['stud_status_id'];
+        $stud_auth = $param['stud_auth'];
 
         // 当前年度
-        $result = Mvv\mvvGradeStud::add($grade_id, $cls_id, $stud_name, $stud_idc, $come_date);
+        $result = Mvv\mvvGradeStud::addNoExam($grade_id, $cls_id, $stud_name, $stud_idc, $stud_type_id, $stud_status_id, $stud_auth, $come_date);
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
         $this->json(['code' => 1, 'data' => $e->getMessage()]);

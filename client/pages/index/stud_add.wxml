@@ -51,7 +51,7 @@
     <view class="weui-cell weui-cell_switch">
       <view class="weui-cell__bd">是否指标生</view>
       <view class="weui-cell__ft">
-        <switch name="auth_stud" checked="true" />
+        <switch name="stud_auth" checked="true" />
       </view>
     </view>
   </view>

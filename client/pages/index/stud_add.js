@@ -57,6 +57,9 @@ Page({
       },
       stud_status: {
         required: true,
+      },
+      stud_auth: {
+        required: true,
       }
     })
     that.x5va.checkForm(e, function (form) {
@@ -74,12 +77,15 @@ Page({
       var come_date = form.come_date.viewValue
       var stud_type = form.stud_type.viewValue
       var stud_status = form.stud_status.viewValue
-
-      console.log(stud_type)
+      var stud_auth = form.stud_auth.viewValue
+      var types = that.data.types
+      var status = that.data.status
+      var stud_type_id = types[stud_type].id
+      var stud_status_id = status[stud_status].id
 
       x5on.postFormEx({
         url: x5on.url.gradestudadd,
-        data: { grade_id, cls_id, stud_idc, stud_name, come_date, stud_type, stud_status },
+        data: { grade_id, cls_id, stud_idc, stud_name, come_date, stud_type_id, stud_status_id, stud_auth },
         success: (result) => {
           console.log(result.data)
         }

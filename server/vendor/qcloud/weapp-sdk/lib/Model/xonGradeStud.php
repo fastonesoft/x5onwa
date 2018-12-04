@@ -1,17 +1,24 @@
 <?php
 namespace QCloud_WeApp_SDK\Model;
 
-use Guzzle\Cache\NullCacheAdapter;
-use QCloud_WeApp_SDK\Mysql\Mysql as dbs;
-use QCloud_WeApp_SDK\Constants;
-use \Exception;
-
 class xonGradeStud extends cAppinfo
 {
   protected static $tableName = 'xonGradeStud';
   protected static $tableTitle = '年度学生';
 
-
+  public static function add ($grade_id, $cls_id, $stud_id, $stud_type_id, $stud_status_id, $stud_auth) {
+    $grade = xonGrade::checkById($grade_id);
+    $year_id = $grade->year_id;
+    // 检测重复
+    xonGradeStud::existBy(compact('year_id', 'stud_id'));
+    // 无重复数据，添加
+    $uid = x5on::getUid();
+    $same_group = 0;
+    $stud_code = null;
+    $stud_auth = $stud_auth === 'true' ? 1 : 0;
+    self::insert(compact('uid', 'grade_id', 'cls_id', 'year_id', 'stud_id', 'stud_type_id', 'stud_status_id', 'stud_auth', 'same_group', 'stud_code'));
+    return $uid;
+  }
 
 
 

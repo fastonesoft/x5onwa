@@ -885,7 +885,7 @@ CREATE TABLE xonGradeStud (
   stud_id VARCHAR(20) NOT NULL,   /* 录取编号 */
   stud_type_id INT(11) NOT NULL,  /* 学生来源：应、往届生 */
   stud_status_id INT(11) NOT NULL,  /* 学籍状态 */
-  auth_stud BOOLEAN NOT NULL,  /* 是否指标生 */
+  stud_auth BOOLEAN NOT NULL,  /* 是否指标生 */
   same_group BOOLEAN NOT NULL,  /* 同组标志 */
   stud_code VARCHAR(36),  /* 学籍号，应届生有，往届生无 */
   PRIMARY KEY (year_id, stud_id),
