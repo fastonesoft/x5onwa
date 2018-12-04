@@ -612,12 +612,14 @@ CREATE TABLE xonStudent (
   id VARCHAR(20) NOT NULL COMMENT '学生录取编号',
   uid VARCHAR(36) NOT NULL,
   child_id VARCHAR(20) NOT NULL,
+  sch_id VARCHAR(10) NOT NULL,
   step_id VARCHAR(16) NOT NULL,
   come_date DATE NOT NULL,
   PRIMARY KEY (id),
   UNIQUE KEY uid (uid),
-  UNIQUE KEY child_id (child_id),
+  UNIQUE KEY child_sch (child_id, sch_id),
   FOREIGN KEY (child_id) REFERENCES xonChild(id),
+  FOREIGN KEY (sch_id) REFERENCES xonSchool(id),
   FOREIGN KEY (step_id) REFERENCES xonStep(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='录取学生';
 

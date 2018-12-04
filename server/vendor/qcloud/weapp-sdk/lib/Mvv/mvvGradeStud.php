@@ -67,26 +67,21 @@ class mvvGradeStud
    */
   public static function add ($grade_id, $cls_id, $stud_name, $stud_idc, $come_date) {
     // 添加孩子表
-    xonChild::add($stud_idc, $stud_name);
+    mvvChild::add($stud_idc, $stud_name);
     // 通过grade_id找出step_id
     $grade = xonGrade::getById($grade_id);
     $step_id = $grade->step_id;
-    return xonStudent::add($stud_idc, $step_id, $come_date);
+    return mvvStudent::add($stud_idc, $step_id, $come_date);
     // todo 添加年度学生审核表
-
 
   }
 
   public static function type () {
-    $res =  xonStudType::getsColumns(compact('id', 'name'));
-    var_dump($res);
-    return $res;
+    return xonStudType::getsColumns(['id', 'name']);
   }
 
   public static function status ($in_sch) {
-    $res = xonStudStatus::getsColumnsBy(compact('id', 'name'), compact('in_sch'));
-    var_dump($res);
-    return $res;
+    return xonStudStatus::getsColumnsBy(['id', 'name'], compact('in_sch'));
   }
 
 }

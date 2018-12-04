@@ -23,6 +23,18 @@ Page({
     })
   },
 
+  typeChange: function (e) {
+    var that = this
+    var typeIndex = e.detail.value
+    that.setData({ typeIndex })
+  },
+
+  statuChange: function (e) {
+    var that = this
+    var statuIndex = e.detail.value
+    that.setData({ statuIndex })
+  },
+
   studaddSubmit: function (e) {
     var that = this
     that.x5va = new x5va({
@@ -62,6 +74,8 @@ Page({
       var come_date = form.come_date.viewValue
       var stud_type = form.stud_type.viewValue
       var stud_status = form.stud_status.viewValue
+
+      console.log(stud_type)
 
       x5on.postFormEx({
         url: x5on.url.gradestudadd,

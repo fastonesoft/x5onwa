@@ -1,6 +1,7 @@
 <?php
 namespace QCloud_WeApp_SDK\Mvv;
 
+use QCloud_WeApp_SDK\Model\x5on;
 use QCloud_WeApp_SDK\Model\xonChild;
 
 class mvvChild
