@@ -98,7 +98,7 @@ Page({
   itemClick: function (event) {
     var itemid = event.currentTarget.dataset.itemid;
     console.log(itemid)
-    // 检测是否拥有权限    
+    // 检测是否拥有权限
     wx.navigateTo({
       url: itemid,
       success: () => {

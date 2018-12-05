@@ -4,6 +4,11 @@ import x5va from '../x5va.js'
 
 Page({
 
+  data: {
+    stud_type: -1,
+    stud_status: -1,
+  },
+
   onLoad: function (e) {
     var that = this
     x5on.request({
@@ -25,14 +30,14 @@ Page({
 
   typeChange: function (e) {
     var that = this
-    var typeIndex = e.detail.value
-    that.setData({ typeIndex })
+    var stud_type = e.detail.value
+    that.setData({ stud_type })
   },
 
   statuChange: function (e) {
     var that = this
-    var statuIndex = e.detail.value
-    that.setData({ statuIndex })
+    var stud_status = e.detail.value
+    that.setData({ stud_status })
   },
 
   studaddSubmit: function (e) {
@@ -54,9 +59,11 @@ Page({
       },
       stud_type: {
         required: true,
+        min: 0,
       },
       stud_status: {
         required: true,
+        min: 0,
       },
       stud_auth: {
         required: true,
