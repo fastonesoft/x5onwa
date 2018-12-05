@@ -57,7 +57,7 @@ class Gradestud extends CI_Controller {
         $cls_id = $param['cls_id'];
 
         // 当前年度
-        $result = Mvv\mvvGradeStud::studcls($grade_id, $cls_id);
+        $result = Mvv\mvvGradeStud::studCls($grade_id, $cls_id);
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
         $this->json(['code' => 1, 'data' => $e->getMessage()]);
@@ -78,6 +78,23 @@ class Gradestud extends CI_Controller {
 
         // 当前年度
         $result = Mvv\mvvGradeStud::query($grade_id, $cls_id, $stud_name);
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
+
+  public function uid() {
+    Model\xonLogin::check(self::role_name, function ($user) {
+      try {
+        $param = $_POST;
+        $uid = $param['uid'];
+
+        // 当前年度
+        $result = Mvv\mvvGradeStud::studByUid($uid);
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
         $this->json(['code' => 1, 'data' => $e->getMessage()]);

@@ -141,6 +141,7 @@ var doUrl = {
   gradestudgrade: `${host}/weapp/gradestud/grade`,
   gradestudclass: `${host}/weapp/gradestud/classes`,
   gradestudcls: `${host}/weapp/gradestud/studcls`,
+  gradestuduid: `${host}/weapp/gradestud/uid`,
   gradestudquery: `${host}/weapp/gradestud/query`,
   gradestudadd: `${host}/weapp/gradestud/add`,
   gradestudtype: `${host}/weapp/gradestud/type`,

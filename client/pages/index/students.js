@@ -95,6 +95,25 @@ Page({
     })
   },
 
+  studentsChange: function (e) {
+    var that = this
+    var uid = e.detail.value
+    var students = this.data.students
+    for (var i = 0; i < students.length; i++) {
+      var item = students[i]
+      item.checked = item.uid === uid
+    }
+    this.setData({ students })
+    console.log(uid)
+    // 跳转信息查询
+    wx.navigateTo({
+      url: 'student?uid=' + uid,
+      success: () => {
+
+      }
+    })
+  },
+
   itemClick: function (event) {
     var itemid = event.currentTarget.dataset.itemid;
     console.log(itemid)

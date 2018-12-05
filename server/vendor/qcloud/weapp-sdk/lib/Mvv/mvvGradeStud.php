@@ -34,11 +34,24 @@ class mvvGradeStud
    * @param $cls_id             班级编号
    * @return array
    */
-  public static function studcls ($grade_id, $cls_id) {
+  public static function studCls ($grade_id, $cls_id) {
     if ($grade_id && $cls_id) {
       return xovGradeStud::getsBy(compact('grade_id', 'cls_id'));
     } else {
       return [];
+    }
+  }
+
+  /**
+   * 根据学生序号查询学生信息
+   * @param $uid                学生序号
+   * @return array
+   */
+  public static function studByUid ($uid) {
+    if ($uid) {
+      return xovGradeStud::getBy(compact('uid'));
+    } else {
+      return null;
     }
   }
 

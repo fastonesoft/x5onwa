@@ -63,19 +63,16 @@
   <view class="weui-cells__title" wx:if="{{!comeshow}}">学生列表</view>
   <view class="weui-cells weui-cells_after-title">
     <radio-group name="stud_name" bindchange="studentsChange">
-      <label class="weui-cell weui-check__label" wx:for="{{students}}" wx:key="stud_id">
-        <radio class="weui-check" value="{{item.stud_id}}" checked="{{item.checked}}"/>
+      <label class="weui-cell weui-check__label" wx:for="{{students}}" wx:key="uid">
+        <radio class="weui-check" value="{{item.uid}}" checked="{{item.checked}}"/>
         <view class="weui-cell__bd">
-
-                          {{item.cls_name}} - {{item.stud_name}}({{item.stud_sex}})
-                          
-    
+          {{item.cls_name}} - {{item.stud_name}}({{item.stud_sex}})
         </view>
         <view class="weui-cell__ft weui-cell__ft_in-radio">
-        <image class="students_images" src="/images/index/stud_return.png"></image>
-  <image class="students_images" src="/images/index/stud_repetition.png"></image>
-  <image class="students_images" src="/images/index/stud_read.png"></image>
-    </view>
+          <image class="students_images" src="/images/index/stud_return.png"></image>
+            <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.checked}}"></icon>
+          <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{item.checked}}"></icon>
+        </view>
       </label>
     </radio-group>
   </view>
