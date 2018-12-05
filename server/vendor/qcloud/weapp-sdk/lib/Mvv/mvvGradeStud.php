@@ -68,8 +68,8 @@ class mvvGradeStud
     $step_id = $grade->step_id;
     $stud_id = xonStudent::add($stud_idc, $step_id, $come_date);
     // 添加年度学生
-    $grade_stud_uid = xonGradeStud::add($grade_id, $cls_id, $stud_id, $stud_type_id, $stud_status_id, $stud_auth);
-    return xovGradeStud::getByUid($grade_stud_uid);
+    $uid = xonGradeStud::add($grade_id, $cls_id, $stud_id, $stud_type_id, $stud_status_id, $stud_auth);
+    return xovGradeStud::getsBy(compact('uid'));
   }
 
   public static function type () {

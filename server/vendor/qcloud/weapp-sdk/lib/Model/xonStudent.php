@@ -14,7 +14,7 @@ class xonStudent extends cAppinfo
     // 检查学生身份证记录是否存在
     // 已经存在，不添加，直接返回
     $res = self::getBy(compact('child_id', 'sch_id'));
-    if ($res !== null) return 0;
+    if ($res !== null) return $res->id;
 
     // 不存在，则添加
     // 流水号宽度

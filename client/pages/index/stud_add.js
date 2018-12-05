@@ -87,12 +87,12 @@ Page({
         url: x5on.url.gradestudadd,
         data: { grade_id, cls_id, stud_idc, stud_name, come_date, stud_type_id, stud_status_id, stud_auth },
         success: (result) => {
-          console.log(result.data)
+          var students = result.data
+          prevPage.setData({ students })
+          //
+          wx.navigateBack()
         }
       })
-
- 
-
     }, function (error) {
       x5on.showError(that, error)
     })
