@@ -1200,28 +1200,6 @@ AS
 
 
 /**
-  当前年级
- */
-
-CREATE VIEW xovGradeCurrent
-AS
-  SELECT A.*, E.name, xET.name as edu_type_name
-  FROM xonGrade A
-  INNER JOIN xonYear B ON A.year_id = B.id
-  INNER JOIN xonEdu E ON A.edu_id = E.id
-  INNER JOIN xonEduType xET ON E.edu_type_id = xET.id
-  WHERE B.current_year = 1;
-
-/**
-  班级列表
- */
-CREATE VIEW xovClass
-AS
-  SELECT A.*, concat(B.name, '（', A.num, '）班') as cls_name, concat('条号：', right(A.id, 2)) as cls_order, edu_type_name, B.name as grade_name
-  FROM xonClass A
-  LEFT JOIN xovGrade B ON A.grade_id = B.id;
-
-/**
   分班考试
  */
 CREATE VIEW xovKaoDivision
@@ -1249,18 +1227,6 @@ AS
   LEFT JOIN xovClass C ON C.id = A.cls_id
   LEFT JOIN xonUser User2 on A.user_id = User2.id;
 
-
-/**
-  年级
- */
-
-CREATE VIEW xovGrade
-AS
-  SELECT A.*, E.name, xET.name as edu_type_name
-  FROM xonGrade A
-  INNER JOIN xonYear B ON A.year_id = B.id
-  INNER JOIN xonEdu E ON A.edu_id = E.id
-  INNER JOIN xonEduType xET ON E.edu_type_id = xET.id;
 
 /**
   孩子性别
@@ -1294,19 +1260,48 @@ AS
 
 
 
+/**
+  年级
+ */
+CREATE VIEW xovGrade
+AS
+  SELECT A.*, E.name as grade_name, xET.name as edu_type_name, current_year, S.graduated
+  FROM xonGrade A
+  INNER JOIN xonYear B ON A.year_id = B.id
+  INNER JOIN xonEdu E ON A.edu_id = E.id
+  INNER JOIN xonEduType xET ON E.edu_type_id = xET.id
+  inner join xonStep S on A.step_id = S.id;
+
+/**
+  当前年级
+ */
+
+CREATE VIEW xovGradeCurrent
+AS
+  SELECT *
+  FROM xovGrade A
+  WHERE current_year = 1;
+
+/**
+  班级列表
+ */
+CREATE VIEW xovClass
+AS
+  SELECT A.*, concat(B.grade_name, '（', A.num, '）班') as cls_name, concat('条号：', right(A.id, 2)) as cls_order
+  FROM xonClass A
+  left join xovGrade B on A.grade_id = B.id;
 
 /**
   班级学生
  */
-
 CREATE VIEW xovGradeStud
 AS
-  SELECT A.*, S.stud_idc, S.stud_name, S.stud_sex, S.stud_sex_num, edu_type_name, step_name, sch_name, grade_name, t.name as type_name, C.name AS status_name, C2.num as cls_num, C2.cls_name, C2.cls_order, y.current_year
+  SELECT A.*, S.stud_idc, S.stud_name, S.stud_sex, S.stud_sex_num, edu_type_name, step_name, sch_name, grade_name, t.name as type_name, C.name AS status_name, C2.num as cls_num, C2.cls_name, C2.cls_order, gg.current_year, gg.graduated
   FROM xonGradeStud A
   LEFT JOIN xovStudent S ON A.stud_id = S.id
   left join xonStudType t on A.stud_type_id = t.id
   LEFT JOIN xonStudStatus C ON A.stud_status_id = C.id
-  left join xonYear y on A.year_id = y.id
+  left join xovGrade gg on A.grade_id = gg.id
   LEFT JOIN xovClass C2 ON A.cls_id = C2.id;
 
 

@@ -13,10 +13,11 @@ class xonGradeStud extends cAppinfo
     xonGradeStud::existBy(compact('year_id', 'stud_id'));
     // 无重复数据，添加
     $uid = x5on::getUid();
+    $stud_auth = $stud_auth === 'true' ? 1 : 0;
     $same_group = 0;
     $stud_code = null;
-    $stud_auth = $stud_auth === 'true' ? 1 : 0;
-    self::insert(compact('uid', 'grade_id', 'cls_id', 'year_id', 'stud_id', 'stud_type_id', 'stud_status_id', 'stud_auth', 'same_group', 'stud_code'));
+    $stud_diploma = null;
+    self::insert(compact('uid', 'grade_id', 'cls_id', 'year_id', 'stud_id', 'stud_type_id', 'stud_status_id', 'stud_auth', 'same_group', 'stud_code', 'stud_diploma'));
     return $uid;
   }
 

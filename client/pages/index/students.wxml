@@ -8,8 +8,8 @@
         <view class="weui-label">年级选择</view>
       </view>
       <view class="weui-cell__bd">
-        <picker bindchange="gradeChange" value="{{gradeIndex}}" range="{{grades}}" range-key="name" disabled="{{!grades || grades.length===0}}">
-          <view class="weui-select weui-select_in-select-after">{{grades[gradeIndex].name}}</view>
+        <picker bindchange="gradeChange" value="{{gradeIndex}}" range="{{grades}}" range-key="grade_name" disabled="{{!grades || grades.length===0}}">
+          <view class="weui-select weui-select_in-select-after">{{grades[gradeIndex].grade_name}}</view>
         </picker>
       </view>
     </view>
