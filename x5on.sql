@@ -287,30 +287,16 @@ CREATE TABLE xonEduType (
   id INT(11) NOT NULL,
   uid VARCHAR(36) NOT NULL,
   name VARCHAR(20) NOT NULL,
+  min int(11) not null,
+  max int(11) not null,
   PRIMARY KEY (id),
   UNIQUE KEY uid (uid),
   UNIQUE KEY name (name)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学制类型';
 
-INSERT INTO xonEduType VALUES (1, replace(uuid(), '-', ''), '小学');
-INSERT INTO xonEduType VALUES (2, replace(uuid(), '-', ''), '初中');
-INSERT INTO xonEduType VALUES (3, replace(uuid(), '-', ''), '高中');
-
-create table xonEduTypeCondition (
-  uid varchar(36) not null,
-  edu_type_id int(11) not null,
-  code int(11) not null,
-  min int(11) not null,
-  max int(11) not null,
-  current boolean not null,
-  primary key (edu_type_id, code),
-  unique key uid (uid),
-  foreign key (edu_type_id) references xonEduType(id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学制类型条件';
-
-INSERT INTO xonEduTypeCondition VALUES (replace(uuid(), '-', ''), 1, 1, 7, 13, 1);
-INSERT INTO xonEduTypeCondition VALUES (replace(uuid(), '-', ''), 2, 1, 12, 16, 1);
-INSERT INTO xonEduTypeCondition VALUES (replace(uuid(), '-', ''), 3, 1, 15, 18, 1);
+INSERT INTO xonEduType VALUES (1, replace(uuid(), '-', ''), '小学', 7, 13);
+INSERT INTO xonEduType VALUES (2, replace(uuid(), '-', ''), '初中', 12, 16);
+INSERT INTO xonEduType VALUES (3, replace(uuid(), '-', ''), '高中', 15, 18);
 
 CREATE TABLE xonEdu (
   id INT(11) NOT NULL,
@@ -617,7 +603,7 @@ CREATE TABLE xonStudent (
   come_date DATE NOT NULL,
   PRIMARY KEY (id),
   UNIQUE KEY uid (uid),
-  UNIQUE KEY child_sch (child_id, sch_id),
+  UNIQUE KEY child_sch (child_id, sch_id),     /* 不得调换，防止重复 */
   FOREIGN KEY (child_id) REFERENCES xonChild(id),
   FOREIGN KEY (sch_id) REFERENCES xonSchool(id),
   FOREIGN KEY (step_id) REFERENCES xonStep(id)
@@ -888,6 +874,7 @@ CREATE TABLE xonGradeStud (
   stud_auth BOOLEAN NOT NULL,  /* 是否指标生 */
   same_group BOOLEAN NOT NULL,  /* 同组标志 */
   stud_code VARCHAR(36),  /* 学籍号，应届生有，往届生无 */
+  stud_diploma varchar(36),   /* 毕业证书号码 */
   PRIMARY KEY (year_id, stud_id),
   UNIQUE KEY uid (uid),
   FOREIGN KEY (grade_id) REFERENCES xonGrade(id),
@@ -1218,10 +1205,11 @@ AS
 
 CREATE VIEW xovGradeCurrent
 AS
-  SELECT A.*, E.name
+  SELECT A.*, E.name, xET.name as edu_type_name
   FROM xonGrade A
   INNER JOIN xonYear B ON A.year_id = B.id
   INNER JOIN xonEdu E ON A.edu_id = E.id
+  INNER JOIN xonEduType xET ON E.edu_type_id = xET.id
   WHERE B.current_year = 1;
 
 /**
@@ -1229,9 +1217,9 @@ AS
  */
 CREATE VIEW xovClass
 AS
-  SELECT A.*, concat(B.name, '（', A.num, '）班') as cls_name, concat('条号：', right(A.id, 2)) as cls_order
+  SELECT A.*, concat(B.name, '（', A.num, '）班') as cls_name, concat('条号：', right(A.id, 2)) as cls_order, edu_type_name, B.name as grade_name
   FROM xonClass A
-  LEFT JOIN xovGradeCurrent B ON A.grade_id = B.id;
+  LEFT JOIN xovGrade B ON A.grade_id = B.id;
 
 /**
   分班考试
@@ -1268,10 +1256,11 @@ AS
 
 CREATE VIEW xovGrade
 AS
-  SELECT A.*, E.name
+  SELECT A.*, E.name, xET.name as edu_type_name
   FROM xonGrade A
   INNER JOIN xonYear B ON A.year_id = B.id
-  INNER JOIN xonEdu E ON A.edu_id = E.id;
+  INNER JOIN xonEdu E ON A.edu_id = E.id
+  INNER JOIN xonEduType xET ON E.edu_type_id = xET.id;
 
 /**
   孩子性别
@@ -1312,7 +1301,7 @@ AS
 
 CREATE VIEW xovGradeStud
 AS
-  SELECT A.*, S.stud_idc, S.stud_name, S.stud_sex, S.stud_sex_num, step_name, sch_name, t.name as type_name, C.name AS status_name, C2.num as cls_num, C2.cls_name, C2.cls_order, y.current_year
+  SELECT A.*, S.stud_idc, S.stud_name, S.stud_sex, S.stud_sex_num, edu_type_name, step_name, sch_name, grade_name, t.name as type_name, C.name AS status_name, C2.num as cls_num, C2.cls_name, C2.cls_order, y.current_year
   FROM xonGradeStud A
   LEFT JOIN xovStudent S ON A.stud_id = S.id
   left join xonStudType t on A.stud_type_id = t.id
@@ -1487,6 +1476,12 @@ AS
   left join xonStudStatus S ON gg.stud_status_id = S.id
   left join xovStudent Student ON gg.stud_id = Student.id;
 
+
+create view xovSchool
+AS
+  select ss.*, xET.name as edu_type_name
+  from xonSchool ss
+  left join xonEduType xET ON ss.edu_type_id = xET.id;
 
 
 

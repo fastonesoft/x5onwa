@@ -12,16 +12,12 @@
         <view class="weui-cell__ft">{{student.stud_sex}}</view>
       </view>
       <view class="weui-cell">
-        <view class="weui-cell__bd">学生级别</view>
+        <view class="weui-cell__bd">学生分级</view>
         <view class="weui-cell__ft">{{student.step_name}}</view>
       </view>
       <view class="weui-cell">
         <view class="weui-cell__bd">年级班级</view>
         <view class="weui-cell__ft">{{student.cls_name}}</view>
-      </view>
-      <view class="weui-cell">
-        <view class="weui-cell__bd">学校名称</view>
-        <view class="weui-cell__ft">{{student.sch_name}}</view>
       </view>
       <view class="weui-cell">
         <view class="weui-cell__bd">学生来源</view>
@@ -32,15 +28,22 @@
         <view class="weui-cell__ft">{{student.status_name}}</view>
       </view>
       <view class="weui-cell">
-        <view class="weui-cell__bd">学籍编号</view>
-        <view class="weui-cell__ft">{{student.stud_code}}</view>
+        <view class="weui-cell__bd">学籍辅号</view>
+        <view class="weui-cell__ft">{{student.stud_code?student.stud_code:'无'}}</view>
       </view>
       <view class="weui-cell">
         <view class="weui-cell__bd">是否指标生</view>
         <view class="weui-cell__ft">
-          <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!student.stud_auth}}"></icon>
           <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{student.stud_auth}}"></icon>
         </view>
+      </view>
+      <view class="weui-cell">
+        <view class="weui-cell__bd">学制类型</view>
+        <view class="weui-cell__ft">{{student.edu_type_name}}</view>
+      </view>
+      <view class="weui-cell">
+        <view class="weui-cell__bd">毕业证号</view>
+        <view class="weui-cell__ft">{{student.stud_diploma?student.stud_diploma:'无'}}</view>
       </view>
 
     </view>

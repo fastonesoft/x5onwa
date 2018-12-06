@@ -104,7 +104,6 @@ Page({
       item.checked = item.uid === uid
     }
     this.setData({ students })
-    console.log(uid)
     // 跳转信息查询
     wx.navigateTo({
       url: 'student?uid=' + uid,
