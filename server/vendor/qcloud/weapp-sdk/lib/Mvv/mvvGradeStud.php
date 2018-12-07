@@ -56,6 +56,18 @@ class mvvGradeStud
   }
 
   /**
+   * 根据学生序号更新学生班级，完成调动
+   * @param $uid                学生序号
+   * @param $cls_id             目标班级
+   * @throws Exception
+   */
+  public static function studMove ($uid, $cls_id) {
+    xovGradeStud::checkByUid($uid);
+    xonGradeStud::update(compact('cls_id'), compact('uid'));
+    return xovGradeStud::getsBy(compact('uid'));
+  }
+
+  /**
    * 根据年级、班级、学生姓名部分模糊查询
    * @param $grade_id           年级编号
    * @param $cls_id             班级编号

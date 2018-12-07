@@ -17,7 +17,8 @@
     "pages/index/students",
     
     "pages/index/stud_add",
-    
+    "pages/index/stud_move",
+
     "pages/index/myrename",
     "pages/index/myexchange",
     "pages/index/myexqrcode",

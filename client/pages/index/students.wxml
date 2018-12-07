@@ -48,13 +48,13 @@
 
 <view class="students-images-area" wx:if="{{comeshow}}">
 
-  <image class="students_images" src="/images/index/stud_add.png" data-itemid="stud_add" bindtap="itemClick"></image>
-  <image class="students_images" src="/images/index/stud_come.png" data-itemid="stud_come" bindtap="itemClick"></image>
-  <image class="students_images" src="/images/index/stud_move.png" data-itemid="stud_move" bindtap="itemClick"></image>
-  <image class="students_images" src="/images/index/stud_jump.png" data-itemid="stud_jump" bindtap="itemClick"></image>
-  <image class="students_images" src="/images/index/stud_return.png" data-itemid="stud_return" bindtap="itemClick"></image>
-  <image class="students_images" src="/images/index/stud_repetition.png" data-itemid="stud_repetition" bindtap="itemClick"></image>
-  <image class="students_images" src="/images/index/stud_read.png" data-itemid="stud_read" bindtap="itemClick"></image>
+  <image class="students_images" src="/images/index/stud_add.png" data-itemid="stud_add" bindtap="studaddClick"></image>
+  <image class="students_images" src="/images/index/stud_come.png" data-itemid="stud_come" bindtap="studcomeClick"></image>
+  <image class="students_images" src="/images/index/stud_move.png" data-itemid="stud_move" bindtap="studmoveClick"></image>
+  <image class="students_images" src="/images/index/stud_jump.png" data-itemid="stud_jump" bindtap="studjumpClick"></image>
+  <image class="students_images" src="/images/index/stud_return.png" data-itemid="stud_return" bindtap="studreturnClick"></image>
+  <image class="students_images" src="/images/index/stud_repetition.png" data-itemid="stud_repetition" bindtap="studrepetClick"></image>
+  <image class="students_images" src="/images/index/stud_read.png" data-itemid="stud_read" bindtap="studreadClick"></image>
 
 
 </view>
@@ -65,13 +65,13 @@
     <radio-group name="stud_name" bindchange="studentsChange">
       <label class="weui-cell weui-check__label" wx:for="{{students}}" wx:key="uid">
         <radio class="weui-check" value="{{item.uid}}" checked="{{item.checked}}"/>
-        <view class="weui-cell__bd">
+        <view class="weui-cell__bd" data-uid="{{item.uid}}" bindtap="studentClick">
           {{item.cls_name}} - {{item.stud_name}}({{item.stud_sex}})
         </view>
         <view class="weui-cell__ft weui-cell__ft_in-radio">
           <image class="students_images" src="/images/index/stud_return.png"></image>
             <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.checked}}"></icon>
-          <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{item.checked}}"></icon>
+            <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{item.checked}}"></icon>
         </view>
       </label>
     </radio-group>

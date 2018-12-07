@@ -70,9 +70,9 @@ Page({
       }
     })
     that.x5va.checkForm(e, function (form) {
-      var pages = getCurrentPages();
-      var currPage = pages[pages.length - 1];
-      var prevPage = pages[pages.length - 2];
+      var pages = getCurrentPages()
+      var currPage = pages[pages.length - 1]
+      var prevPage = pages[pages.length - 2]
       var grades = prevPage.data.grades
       var gradeIndex = prevPage.data.gradeIndex
       var grade_id = grades[gradeIndex].id

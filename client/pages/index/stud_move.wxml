@@ -1,0 +1,52 @@
+<!--pages/index/stud_move.wxml-->
+<view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
+
+<block wx:if="{{student}}">
+  <view class="weui-cells__title">基本信息</view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell">
+      <view class="weui-cell__bd">学生姓名</view>
+      <view class="weui-cell__ft">{{student.stud_name}}</view>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__bd">学生性别</view>
+      <view class="weui-cell__ft">{{student.stud_sex}}</view>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__bd">学生分级</view>
+      <view class="weui-cell__ft">{{student.step_name}}</view>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__bd">年级班级</view>
+      <view class="weui-cell__ft">{{student.cls_name}}</view>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__bd">学生来源</view>
+      <view class="weui-cell__ft">{{student.type_name}}</view>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__bd">学籍状态</view>
+      <view class="weui-cell__ft">{{student.status_name}}</view>
+    </view>
+  </view>
+
+  <form bindsubmit="studmoveSubmit">
+    <view class="weui-cells__title">班级设置</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_select">
+        <view class="weui-cell__hd weui-cell__hd_in-select-after">
+          <view class="weui-label">目标班级</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker bindchange="classChange" name="classIndex" value="{{classIndex}}" range="{{classes}}" range-key="cls_name" disabled="{{!classes || classes.length===0}}">
+            <view class="weui-select weui-select_in-select-after">{{classes[classIndex].cls_name}}</view>
+          </picker>
+        </view>
+      </view>
+    </view>
+    <view class="weui-btn-area">
+      <button type="primary" form-type="submit">提交调动</button>
+    </view>
+  </form>
+</block>
+

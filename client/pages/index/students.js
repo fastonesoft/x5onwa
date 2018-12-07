@@ -104,6 +104,11 @@ Page({
       item.checked = item.uid === uid
     }
     this.setData({ students })
+
+  },
+
+  studentClick: function (e) {
+    var uid = e.currentTarget.dataset.uid
     // 跳转信息查询
     wx.navigateTo({
       url: 'student?uid=' + uid,
@@ -113,16 +118,26 @@ Page({
     })
   },
 
-  itemClick: function (event) {
-    var itemid = event.currentTarget.dataset.itemid;
-    console.log(itemid)
-    // 检测是否拥有权限
-    wx.navigateTo({
-      url: itemid,
-      success: () => {
+  // 正常添加
+  studaddClick: function (event) {
+    wx.navigateTo({ url: 'stud_add' })
+  },
 
+  // 学生调动
+  studmoveClick: function (e) {
+    // 检测是否有选择的学生
+    var uid;
+    var students = this.data.students
+    for (var i=0; i<students.length; i++) {
+      var item = students[i]
+      if (item.checked) {
+        uid = item.uid
+        break
       }
-    })
+    }
+    if (uid) {
+      wx.navigateTo({ url: 'stud_move?uid=' + uid })
+    }
   },
   
 })

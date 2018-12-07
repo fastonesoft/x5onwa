@@ -127,27 +127,7 @@ class Mysql
   }
 
   private static function likeProcess ($conditions, $operator = 'or') {
-    if (gettype($conditions) !== 'array') {
-      throw new Exception(Constants::E_CALL_FUNCTION_PARAM);
-    }
-    $condition = '';
-    $execValues = [];
-
-    $cdt = [];
-    foreach ($conditions as $key => $value) {
-      if (gettype($value) === 'number') {
-        array_push($cdt, $value);
-      } else {
-        array_push($cdt, $key . ' like :' . $key);
-        $execValues[$key] = $value;
-      }
-    }
-    $condition = implode(' ' . $operator . ' ', $cdt);
-    // 如果是or，则要加()，要是and，则不要加
-    if ($condition && $operator === 'or') {
-      $condition = '(' . $condition .')';
-    }
-    return [$condition, self::prepare($execValues)];
+    return self::baseProcess($conditions, $operator, 'like');
   }
 
   public static function like ($tableName, $columns = ['*'], $conditions, $likes, $suffix = '', $likes_opt = 'or') {
@@ -285,6 +265,37 @@ class Mysql
   /**
    * 按照指定的规则处理条件数组
    * @example ['a' => 1, 'b' => 2] 会被转换为 ['a = :a and b = :b', [':a' => 1, ':b' => 2]]
+   * @param array        $conditions 条件数组
+   * @param string       $operator  condition 连接的操作符：and|or
+   * @param string       $keyword 条件连接关键字 = <> like > <
+   */
+  private static function baseProcess ($conditions, $operator = 'or', $keyword = '=') {
+    if (gettype($conditions) !== 'array') {
+      throw new Exception(Constants::E_CALL_FUNCTION_PARAM);
+    }
+    $condition = '';
+    $execValues = [];
+
+    $cdt = [];
+    foreach ($conditions as $key => $value) {
+      if (gettype($value) === 'number') {
+        array_push($cdt, $value);
+      } else {
+        array_push($cdt, $key . " $keyword :" . $key);
+        $execValues[$key] = $value;
+      }
+    }
+    $condition = implode(' ' . $operator . ' ', $cdt);
+    // 如果是or，则要加()，要是and，则不要加
+    if ($condition && $operator === 'or') {
+      $condition = '(' . $condition .')';
+    }
+    return [$condition, self::prepare($execValues)];
+  }
+
+  /**
+   * 按照指定的规则处理条件数组
+   * @example ['a' => 1, 'b' => 2] 会被转换为 ['a = :a and b = :b', [':a' => 1, ':b' => 2]]
    * @param array|string $conditions 条件数组或字符串
    * @param string       $operator  condition 连接的操作符：and|or
    */
@@ -293,7 +304,6 @@ class Mysql
     $execValues = [];
     if (gettype($conditions) === 'array') {
       $cdt = [];
-
       foreach ($conditions as $key => $value) {
         if (gettype($value) === 'number') {
           array_push($cdt, $value);
@@ -302,16 +312,11 @@ class Mysql
           $execValues[$key] = $value;
         }
       }
-
       $condition = implode(' ' . $operator . ' ', $cdt);
     } else {
       $condition = $conditions;
     }
-
-    return [
-      $condition,
-      self::prepare($execValues)
-    ];
+    return [$condition, self::prepare($execValues)];
   }
 
   /**

@@ -10,6 +10,7 @@ class Gradestud extends CI_Controller {
   public function index() {
     Model\xonLogin::check(self::role_name, function ($user) {
       try {
+        // 未完成
 
         $this->json(['code' => 0, 'data' => $user]);
       } catch (Exception $e) {
@@ -24,6 +25,8 @@ class Gradestud extends CI_Controller {
     Model\xonLogin::check(self::role_name, function ($user) {
       try {
         $result = Mvv\mvvGradeStud::grades();
+
+        // 年级列表
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
         $this->json(['code' => 1, 'data' => $e->getMessage()]);
@@ -39,6 +42,7 @@ class Gradestud extends CI_Controller {
         $param = $_POST;
         $grade_id = $param['grade_id'];
 
+        // 班级列表
         $result = Mvv\mvvGradeStud::classes($grade_id);
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -56,7 +60,7 @@ class Gradestud extends CI_Controller {
         $grade_id = $param['grade_id'];
         $cls_id = $param['cls_id'];
 
-        // 当前年度
+        // 班级学生
         $result = Mvv\mvvGradeStud::studCls($grade_id, $cls_id);
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -76,7 +80,7 @@ class Gradestud extends CI_Controller {
         $stud_name = $param['stud_name'];
         $stud_name = Model\x5on::getLike($stud_name);
 
-        // 当前年度
+        // 模糊查询学生姓名
         $result = Mvv\mvvGradeStud::query($grade_id, $cls_id, $stud_name);
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -87,13 +91,47 @@ class Gradestud extends CI_Controller {
     });
   }
 
+  public function type() {
+    Model\xonLogin::check(self::role_name, function ($user) {
+      try {
+        $param = $_POST;
+
+        // 学生来源
+        $result = Mvv\mvvGradeStud::type();
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
+
+  public function status() {
+    Model\xonLogin::check(self::role_name, function ($user) {
+      try {
+        $param = $_POST;
+
+        // 学籍状态
+        $in_sch = 1;
+        $result = Mvv\mvvGradeStud::status($in_sch);
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
+
+
   public function uid() {
     Model\xonLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
         $uid = $param['uid'];
 
-        // 当前年度
+        // 根据序号查询学生信息
         $result = Mvv\mvvGradeStud::studByUid($uid);
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -117,7 +155,7 @@ class Gradestud extends CI_Controller {
         $stud_status_id = $param['stud_status_id'];
         $stud_auth = $param['stud_auth'];
 
-        // 当前年度
+        // 添加学生
         $result = Mvv\mvvGradeStud::addNoExam($grade_id, $cls_id, $stud_name, $stud_idc, $stud_type_id, $stud_status_id, $stud_auth, $come_date);
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -128,28 +166,15 @@ class Gradestud extends CI_Controller {
     });
   }
 
-  public function type() {
+  public function move() {
     Model\xonLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
-        // 学生来源
-        $result = Mvv\mvvGradeStud::type();
-        $this->json(['code' => 0, 'data' => $result]);
-      } catch (Exception $e) {
-        $this->json(['code' => 1, 'data' => $e->getMessage()]);
-      }
-    }, function ($error) {
-      $this->json($error);
-    });
-  }
+        $uid = $param['uid'];
+        $cls_id = $param['cls_id'];
 
-  public function status() {
-    Model\xonLogin::check(self::role_name, function ($user) {
-      try {
-        $param = $_POST;
-        // 学籍状态
-        $in_sch = 1;
-        $result = Mvv\mvvGradeStud::status($in_sch);
+        // 学生调动
+        $result = Mvv\mvvGradeStud::studMove($uid, $cls_id);
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
         $this->json(['code' => 1, 'data' => $e->getMessage()]);
