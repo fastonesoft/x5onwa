@@ -24,7 +24,7 @@ class cAppinfo extends vAppinfo
   }
 
   /**
-   * @param             $columns        ['*']、['id', 'name']
+   * @param             $columns        compact的数据
    * @param             $conditions     compact的条件
    * @return            number          受影响的数据条数
    * @throws Exception

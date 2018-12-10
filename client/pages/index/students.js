@@ -125,6 +125,7 @@ Page({
 
   // 学生调动
   studmoveClick: function (e) {
+    var that = this
     // 检测是否有选择的学生
     var uid;
     var students = this.data.students
@@ -137,6 +138,8 @@ Page({
     }
     if (uid) {
       wx.navigateTo({ url: 'stud_move?uid=' + uid })
+    } else {
+      x5on.showError(that, '没有选中相关学生')
     }
   },
   
