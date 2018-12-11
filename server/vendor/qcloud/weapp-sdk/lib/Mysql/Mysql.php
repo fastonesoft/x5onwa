@@ -62,14 +62,14 @@ class Mysql
    * 查询多行数据
    * @param string        $tableName 数据库名
    * @param array         $columns   查询的列名数组
-   * @param array|string  $condition 查询条件，若为字符串则会被直接拼接进 SQL 语句中，支持键值数组
+   * @param array         $condition 查询条件，若为字符串则会被直接拼接进 SQL 语句中，支持键值数组
    * @param string        $operator  condition 连接的操作符：and|or
    * @param string        $suffix    SQL 查询后缀，例如 order, limit 等其他操作
    * @return array
    */
   public static function select ($tableName, $columns = ['*'], $conditions = '', $operator = 'and', $suffix = '') {
     if (gettype($tableName)  !== 'string'
-      || gettype($conditions) !== 'array' && gettype($conditions) !== 'string'
+      || gettype($conditions) !== 'array'
       || gettype($columns)    !== 'array'
       || gettype($operator)   !== 'string'
       || gettype($suffix)     !== 'string') {
@@ -104,9 +104,11 @@ class Mysql
    * @return null||value                  返回：空值||函数值
    * @throws Exception
    */
-  public static function func ($tableName, $funcName, $fieldName, $conditions = '') {
-    if (gettype($tableName)  !== 'string'
-      || gettype($conditions) !== 'array' && gettype($conditions) !== 'string') {
+  public static function func ($tableName, $funcName, $fieldName, $conditions) {
+    if (gettype($tableName)   !== 'string'
+      || gettype($funcName)   !== 'string'
+      || gettype($fieldName)  !== 'string'
+      || gettype($conditions) !== 'array') {
       throw new Exception(Constants::E_CALL_FUNCTION_PARAM);
     }
 
@@ -127,17 +129,16 @@ class Mysql
   }
 
   private static function likeProcess ($conditions, $operator = 'or') {
-    return self::baseProcess($conditions, $operator, 'like');
+    return self::customProcess($conditions, $operator, 'like');
   }
 
-  public static function like ($tableName, $columns = ['*'], $conditions, $likes, $suffix = '', $likes_opt = 'or') {
+  public static function like ($tableName, $columns = ['*'], $conditions, $likes, $likes_opt = 'or', $suffix = '') {
     if (gettype($tableName) !== 'string'
       || gettype($columns) !== 'array'
       || gettype($conditions) !== 'array' && gettype($conditions) !== 'string'
-      || gettype($likes) !== 'array' && gettype($likes) !== 'string'
-      || gettype($suffix) !== 'string'
-      || gettype($likes_opt) !== 'string')
-    {
+      || gettype($likes) !== 'array'
+      || gettype($likes_opt) !== 'string'
+      || gettype($suffix) !== 'string') {
       throw new Exception(Constants::E_CALL_FUNCTION_PARAM);
     }
     // 处理条件
@@ -160,6 +161,41 @@ class Mysql
     $sql .= " $suffix";
     // 执行 SQL 语句
     $query = self::raw($sql, array_merge($execValues, $execLikesValues));
+    $allResult = $query->fetchAll(PDO::FETCH_OBJ);
+    return $allResult === NULL ? [] : $allResult;
+  }
+
+  public static function custom ($tableName, $columns = ['*'], $conditions, $customs, $customs_condition, $customs_opt = 'and', $suffix = '') {
+    if (gettype($tableName) !== 'string'
+      || gettype($columns) !== 'array'
+      || gettype($conditions) !== 'array' && gettype($conditions) !== 'string'
+      || gettype($customs) !== 'array'
+      || gettype($customs_condition) !== 'string'
+      || gettype($customs_opt) !== 'string'
+      || gettype($suffix) !== 'string')
+    {
+      throw new Exception(Constants::E_CALL_FUNCTION_PARAM);
+    }
+    // 处理条件
+    list($condition, $execValues) = array_values(self::conditionProcess($conditions, 'and'));
+    // 处理自定义条件
+    list($custom, $execCustomValues) = array_values(self::customProcess($customs, $customs_opt, $customs_condition));
+    // 查询字段列表串
+    $column = implode(', ', $columns);
+    // 拼接 SQL 语句
+    $sql = "SELECT $column FROM `$tableName`";
+    // 如果有条件则拼接 WHERE
+    if ($condition && $custom) {
+      $sql .= " WHERE $condition AND $custom";
+    } elseif ($condition) {
+      $sql .= " WHERE $condition";
+    } elseif ($custom) {
+      $sql .= " WHERE $custom";
+    }
+    // 拼接后缀
+    $sql .= " $suffix";
+    // 执行 SQL 语句
+    $query = self::raw($sql, array_merge($execValues, $execCustomValues));
     $allResult = $query->fetchAll(PDO::FETCH_OBJ);
     return $allResult === NULL ? [] : $allResult;
   }
@@ -190,7 +226,7 @@ class Mysql
   public static function update ($tableName, $updates, $conditions = '', $operator = 'and', $suffix = '') {
     if (gettype($tableName)  !== 'string'
       || gettype($updates)    !== 'array'
-      || gettype($conditions)!== 'array' && gettype($conditions) !== 'string'
+      || gettype($conditions) !== 'array'
       || gettype($operator)   !== 'string'
       || gettype($suffix)     !== 'string') {
       throw new Exception(Constants::E_CALL_FUNCTION_PARAM);
@@ -228,7 +264,7 @@ class Mysql
    */
   public static function delete ($tableName, $conditions, $operator = 'and', $suffix = '') {
     if (gettype($tableName)  !== 'string'
-      || $conditions && gettype($conditions)!== 'array' && gettype($conditions) !== 'string'
+      || gettype($conditions) !== 'array'
       || gettype($operator)   !== 'string'
       || gettype($suffix)     !== 'string') {
       throw new Exception(Constants::E_CALL_FUNCTION_PARAM);
@@ -263,13 +299,13 @@ class Mysql
   }
 
   /**
-   * 按照指定的规则处理条件数组
+   * 自定义规则处理条件数组
    * @example ['a' => 1, 'b' => 2] 会被转换为 ['a = :a and b = :b', [':a' => 1, ':b' => 2]]
    * @param array        $conditions 条件数组
    * @param string       $operator  condition 连接的操作符：and|or
    * @param string       $keyword 条件连接关键字 = <> like > <
    */
-  private static function baseProcess ($conditions, $operator = 'or', $keyword = '=') {
+  private static function customProcess ($conditions, $operator = 'or', $keyword = '=') {
     if (gettype($conditions) !== 'array') {
       throw new Exception(Constants::E_CALL_FUNCTION_PARAM);
     }

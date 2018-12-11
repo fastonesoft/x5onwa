@@ -273,8 +273,8 @@ class vAppinfo
    * 模糊查询
    */
 
-  public static function like ($columns = ['*'], $conditions = '', $likes = '', $suffix = '', $like_opt = 'or') {
-    return dbs::like(static::$tableName, $columns, $conditions, $likes, $suffix, $like_opt);
+  public static function like ($columns = ['*'], $conditions = '', $likes, $like_opt = 'or', $suffix = '') {
+    return dbs::like(static::$tableName, $columns, $conditions, $likes, $like_opt, $suffix);
   }
 
   public static function likes ($likes) {
@@ -311,6 +311,21 @@ class vAppinfo
 
   public static function likesColumnsByNumor ($columns, $conditions, $likes, $suffix) {
     return static::like($columns, $conditions, $likes, $suffix, 'or');
+  }
+
+  /**
+   * 自定义查询
+   */
+  public static function custom ($columns = ['*'], $conditions, $customs, $customs_condition, $customs_opt = 'and', $suffix = '') {
+    return dbs::custom(static::$tableName, $columns, $conditions, $customs, $customs_condition, $customs_opt, $suffix);
+  }
+
+  public static function customs ($customs, $customs_condition) {
+    return static::custom(['*'], '', $customs, $customs_condition);
+  }
+
+  public static function customsBy ($conditions, $customs, $customs_condition) {
+    return static::custom(['*'], $conditions, $customs, $customs_condition);
   }
 
 }
