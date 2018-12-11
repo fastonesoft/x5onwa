@@ -18,7 +18,9 @@
     
     "pages/index/stud_add",
     "pages/index/stud_move",
-
+    "pages/index/stud_return",
+    "pages/index/stud_jump",
+        
     "pages/index/myrename",
     "pages/index/myexchange",
     "pages/index/myexqrcode",

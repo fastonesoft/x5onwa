@@ -69,9 +69,9 @@
           {{item.cls_name}} - {{item.stud_name}}({{item.stud_sex}})
         </view>
         <view class="weui-cell__ft weui-cell__ft_in-radio">
-          <image class="students_images" src="/images/index/stud_return.png"></image>
-            <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.checked}}"></icon>
-            <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{item.checked}}"></icon>
+          <image class="students_images" src="/images/index/{{item.ico_name}}.png" wx:if="{{item.ico_name}}"></image>
+          <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.checked}}"></icon>
+          <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{item.checked}}"></icon>
         </view>
       </label>
     </radio-group>
