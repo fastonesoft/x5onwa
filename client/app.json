@@ -20,7 +20,9 @@
     "pages/index/stud_move",
     "pages/index/stud_return",
     "pages/index/stud_jump",
-        
+    "pages/index/stud_repetition",
+    "pages/index/stud_read",
+    
     "pages/index/myrename",
     "pages/index/myexchange",
     "pages/index/myexqrcode",

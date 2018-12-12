@@ -1,2 +1,53 @@
 <!--pages/index/stud_return.wxml-->
-<text>pages/index/stud_return.wxml</text>
+<view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
+
+<form bindsubmit="studreturnSubmit" wx:if="{{1}}">
+  <view class="weui-cells__title">学生列表</view>
+  <view class="weui-cells weui-cells_after-title">
+    <radio-group name="stud_name" bindchange="studentsChange">
+      <label class="weui-cell weui-check__label" wx:for="{{students}}" wx:key="uid">
+        <radio class="weui-check" value="{{item.uid}}" checked="{{item.checked}}" />
+        <view class="weui-cell__bd" data-uid="{{item.uid}}" bindtap="studentClick">
+          {{item.cls_name}} - {{item.stud_name}}({{item.stud_sex}})
+        </view>
+        <view class="weui-cell__ft weui-cell__ft_in-radio">
+          <image class="students_images" src="/images/index/stud_down.png"></image>
+          <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.checked}}"></icon>
+          <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{item.checked}}"></icon>
+        </view>
+      </label>
+    </radio-group>
+  </view>
+
+  <view class="weui-cells__title">年级设置</view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_select">
+      <view class="weui-cell__hd weui-cell__hd_in-select-after">
+        <view class="weui-label">目标年级</view>
+      </view>
+      <view class="weui-cell__bd">
+        <picker bindchange="gradeChange" value="{{gradeIndex}}" range="{{grades}}" range-key="grade_name" disabled="{{!grades || grades.length===0}}">
+          <view class="weui-select weui-select_in-select-after">{{grades[gradeIndex].grade_name}}</view>
+        </picker>
+      </view>
+    </view>
+  </view>
+
+  <view class="weui-cells__title">班级设置</view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_select">
+      <view class="weui-cell__hd weui-cell__hd_in-select-after">
+        <view class="weui-label">目标班级</view>
+      </view>
+      <view class="weui-cell__bd">
+        <picker bindchange="classChange" value="{{classIndex}}" range="{{classes}}" range-key="cls_name" disabled="{{!classes || classes.length===0}}">
+          <view class="weui-select weui-select_in-select-after">{{classes[classIndex].cls_name}}</view>
+        </picker>
+      </view>
+    </view>
+  </view>
+
+  <view class="weui-btn-area">
+    <button type="primary" form-type="submit">提交复学</button>
+  </view>
+</form>

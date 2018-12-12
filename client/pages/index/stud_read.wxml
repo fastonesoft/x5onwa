@@ -1,0 +1,58 @@
+<!--pages/index/stud_read.wxml-->
+<view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
+
+<form bindsubmit="studreadSubmit">
+  <view class="weui-cells__title">学生信息</view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+        <view class="weui-label">学生姓名</view>
+      </view>
+      <view class="weui-cell__bd">
+        <input class="weui-input" placeholder="输入学生姓名" name="stud_name" type="text" maxlength="4" />
+      </view>
+    </view>
+    <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+        <view class="weui-label">身份证号</view>
+      </view>
+      <view class="weui-cell__bd">
+        <input class="weui-input" placeholder="输入学生身份证号" name="stud_idc" type="idcard" maxlength="18" />
+      </view>
+    </view>
+    <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+        <view class="weui-label">进校时间</view>
+      </view>
+      <view class="weui-cell__bd">
+        <input class="weui-input" placeholder="输入进校时间" name="come_date" type="number" maxlength="10" />
+      </view>
+    </view>
+    <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+        <view class="weui-label">借读学校</view>
+      </view>
+      <view class="weui-cell__bd">
+        <input class="weui-input" placeholder="输入借读学校" name="memo" type="text" maxlength="10" />
+      </view>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__bd">学生来源</view>
+      <view class="weui-cell__ft">应届生</view>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__bd">学籍状态</view>
+      <view class="weui-cell__ft">借读</view>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__bd">是否指标生</view>
+      <view class="weui-cell__ft">
+        <icon type="cancel" size="23"></icon>
+      </view>
+    </view>
+  </view>
+
+  <view class="weui-btn-area">
+    <button type="primary" form-type="submit">提交添加</button>
+  </view>
+</form>

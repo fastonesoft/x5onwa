@@ -61,7 +61,6 @@ Page({
         that.setData({ students })
       }
     })
-
   },
 
   findSubmit: function (e) {
@@ -118,12 +117,12 @@ Page({
     })
   },
 
-  // 正常添加
+  // 添加
   studaddClick: function (event) {
     wx.navigateTo({ url: 'stud_add' })
   },
 
-  // 学生调动
+  // 调动
   studmoveClick: function (e) {
     var that = this
     // 检测是否有选择的学生
@@ -142,5 +141,24 @@ Page({
       x5on.showError(that, '没有选中相关学生')
     }
   },
+
+  // 复学
+  studreturnClick: function (e) {
+    wx.navigateTo({ url: 'stud_return' })
+  },
   
+  // 跳级
+  studjumpClick: function (e) {
+    wx.navigateTo({ url: 'stud_jump' })
+  },
+
+  // 重读
+  studrepetClick: function (e) {
+    wx.navigateTo({ url: 'stud_repetition' })
+  },
+
+  // 借读
+  studreadClick: function (e) {
+    wx.navigateTo({ url: 'stud_read' })
+  },
 })

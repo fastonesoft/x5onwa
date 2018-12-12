@@ -1,66 +1,65 @@
 // pages/index/stud_return.js
+var x5on = require('../x5on.js')
+
 Page({
 
-  /**
-   * 页面的初始数据
-   */
   data: {
+    students: [],
+  },
+
+  onLoad: function(options) {
+    var that = this
+    x5on.request({
+      url: x5on.url.gradestudgrade,
+      success: function(result) {
+        var grades = result.data
+        that.setData({ grades })
+      }
+    })
+  },
+
+  gradeChange: function(e) {
+    var that = this
+    var students = []
+    var classIndex = -1
+    var gradeIndex = e.detail.value
+    that.setData({ gradeIndex, classIndex, students })
+    //
+    var grades = that.data.grades
+    var grade_id = grades[gradeIndex].id
+    x5on.postFormEx({
+      url: x5on.url.gradestudclass,
+      data: { grade_id },
+      success: (result) => {
+        var classes = result.data
+        that.setData({ classes })
+      }
+    })
+  },
+
+  classChange: function(e) {
+    var that = this
+    var classes = that.data.classes
+    var classIndex = e.detail.value
+    if (classes.length == 0 || classIndex == -1) return
+    that.setData({ classIndex })
+
+    var grades = that.data.grades
+    var gradeIndex = that.data.gradeIndex
+    var cls_id = classes[classIndex].id
+    var grade_id = grades[gradeIndex].id
+    x5on.postFormEx({
+      url: x5on.url.gradestudcls,
+      data: { grade_id, cls_id },
+      success: (result) => {
+        var students = result.data
+        that.setData({ students })
+      }
+    })
+  },
+
+  studreturnSubmit: function (e) {
 
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })
