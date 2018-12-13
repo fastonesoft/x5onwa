@@ -161,4 +161,24 @@ Page({
   studreadClick: function (e) {
     wx.navigateTo({ url: 'stud_read' })
   },
+
+  // 休学
+  studdownClick: function (e) {
+    wx.navigateTo({ url: 'stud_down' })
+  },
+
+  // 转入
+  studcomeClick: function (e) {
+    wx.navigateTo({ url: 'stud_come' })
+  },
+
+  // 转出
+  studleaveClick: function (e) {
+    wx.navigateTo({ url: 'stud_leave' })
+  },
+
+  // 离校
+  studoutClick: function (e) {
+    wx.navigateTo({ url: 'stud_out' })
+  },
 })

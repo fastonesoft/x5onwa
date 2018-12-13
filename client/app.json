@@ -22,7 +22,11 @@
     "pages/index/stud_jump",
     "pages/index/stud_repetition",
     "pages/index/stud_read",
-    
+    "pages/index/stud_come",
+    "pages/index/stud_leave",
+    "pages/index/stud_out",
+    "pages/index/stud_down",
+        
     "pages/index/myrename",
     "pages/index/myexchange",
     "pages/index/myexqrcode",

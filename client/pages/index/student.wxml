@@ -35,6 +35,7 @@
         <view class="weui-cell__bd">是否指标生</view>
         <view class="weui-cell__ft">
           <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{student.stud_auth}}"></icon>
+          <icon type="cancel" size="23" wx:if="{{!student.stud_auth}}"></icon>
         </view>
       </view>
       <view class="weui-cell">
