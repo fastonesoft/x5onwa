@@ -69,7 +69,7 @@ class Mysql
    */
   public static function select ($tableName, $columns = ['*'], $conditions = '', $operator = 'and', $suffix = '') {
     if (gettype($tableName)  !== 'string'
-      || gettype($conditions) !== 'array'
+      || gettype($conditions) !== 'array' && gettype($conditions) !== 'string'
       || gettype($columns)    !== 'array'
       || gettype($operator)   !== 'string'
       || gettype($suffix)     !== 'string') {

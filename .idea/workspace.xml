@@ -1,11 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e320c52f-5500-4386-ac18-1de166a23f7f" name="Default" comment="start student 12.13">
+    <list default="true" id="e320c52f-5500-4386-ac18-1de166a23f7f" name="Default" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/client/pages/index/stud_come.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/client/pages/index/stud_come.json" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/client/pages/index/stud_come.wxml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/client/pages/index/stud_come.wxss" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/client/pages/index/stud_down.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/client/pages/index/stud_down.json" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/client/pages/index/stud_down.wxml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/client/pages/index/stud_down.wxss" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/client/pages/index/stud_leave.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/client/pages/index/stud_leave.json" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/client/pages/index/stud_leave.wxml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/client/pages/index/stud_leave.wxss" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/client/pages/index/stud_out.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/client/pages/index/stud_out.json" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/client/pages/index/stud_out.wxml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/client/pages/index/stud_out.wxss" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/client/pages/index/stud_down.wxml" afterPath="$PROJECT_DIR$/client/pages/index/stud_down.wxml" />
-      <change beforePath="$PROJECT_DIR$/client/pages/login/login.js" afterPath="$PROJECT_DIR$/client/pages/login/login.js" />
-      <change beforePath="$PROJECT_DIR$/client/pages/x5on.js" afterPath="$PROJECT_DIR$/client/pages/x5on.js" />
+      <change beforePath="$PROJECT_DIR$/client/app.json" afterPath="$PROJECT_DIR$/client/app.json" />
+      <change beforePath="$PROJECT_DIR$/client/pages/index/student.wxml" afterPath="$PROJECT_DIR$/client/pages/index/student.wxml" />
+      <change beforePath="$PROJECT_DIR$/client/pages/index/students.js" afterPath="$PROJECT_DIR$/client/pages/index/students.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -16,28 +32,6 @@
   </component>
   <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/server/composer.json</pharConfigPath>
-  </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Mysql.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/server/vendor/qcloud/weapp-sdk/lib/Mysql/Mysql.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="508">
-              <caret line="290" column="43" lean-forward="false" selection-start-line="290" selection-start-column="43" selection-end-line="290" selection-end-column="43" />
-              <folding>
-                <marker date="1544577389268" expanded="true" signature="1402:1466" ph="INSERT INTO `${$tableName}`... " />
-                <marker date="1544577389268" expanded="true" signature="2463:2495" ph="SELECT ${$co... ${$tableName}" />
-                <marker date="1544577389268" expanded="true" signature="3457:3514" ph="SELECT ${$fu... " />
-                <marker date="1544577389268" expanded="true" signature="4683:4715" ph="SELECT ${$co... ${$tableName}" />
-                <marker date="1544577389268" expanded="true" signature="6042:6074" ph="SELECT ${$co... ${$tableName}" />
-                <marker date="1544577389268" expanded="true" signature="8105:8129" ph="UPDATE `${$tableName}`... " />
-                <marker date="1544577389268" expanded="true" signature="9170:9212" ph="DELETE FROM `${$tableName}`... " />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -77,6 +71,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -89,52 +85,10 @@
               <item name="x5onwa" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="server" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
-            <path>
-              <item name="x5onwa" type="b2602c69:ProjectViewProjectNode" />
-              <item name="x5onwa" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="server" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="vendor" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="x5onwa" type="b2602c69:ProjectViewProjectNode" />
-              <item name="x5onwa" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="server" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="vendor" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="qcloud" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="x5onwa" type="b2602c69:ProjectViewProjectNode" />
-              <item name="x5onwa" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="server" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="vendor" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="qcloud" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="weapp-sdk" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="x5onwa" type="b2602c69:ProjectViewProjectNode" />
-              <item name="x5onwa" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="server" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="vendor" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="qcloud" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="weapp-sdk" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="lib" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="x5onwa" type="b2602c69:ProjectViewProjectNode" />
-              <item name="x5onwa" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="server" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="vendor" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="qcloud" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="weapp-sdk" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="lib" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Mysql" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -166,10 +120,7 @@
       <option name="presentableId" value="Default" />
       <updated>1544611179492</updated>
       <workItem from="1544611180657" duration="110000" />
-      <workItem from="1544663711413" duration="2511000" />
-      <workItem from="1544758218207" duration="853000" />
-      <workItem from="1544776020540" duration="3036000" />
-      <workItem from="1545389528343" duration="159000" />
+      <workItem from="1544663711413" duration="1268000" />
     </task>
     <task id="LOCAL-00001" summary="start student 12.12">
       <created>1544611234544</created>
@@ -178,29 +129,22 @@
       <option name="project" value="LOCAL" />
       <updated>1544611234544</updated>
     </task>
-    <task id="LOCAL-00002" summary="start student 12.13">
-      <created>1544697754609</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1544697754610</updated>
-    </task>
-    <option name="localTasksCounter" value="3" />
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6669000" />
+    <option name="totallyTimeSpent" value="1378000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17291667" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3280255" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32873806" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -222,60 +166,10 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="start student 12.12" />
-    <MESSAGE value="start student 12.13" />
-    <option name="LAST_COMMIT_MESSAGE" value="start student 12.13" />
+    <option name="LAST_COMMIT_MESSAGE" value="start student 12.12" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
-  </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/server/vendor/qcloud/weapp-sdk/lib/Mysql/Mysql.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1544577389268" expanded="true" signature="1402:1466" ph="INSERT INTO `${$tableName}`... " />
-            <marker date="1544577389268" expanded="true" signature="2463:2495" ph="SELECT ${$co... ${$tableName}" />
-            <marker date="1544577389268" expanded="true" signature="3457:3514" ph="SELECT ${$fu... " />
-            <marker date="1544577389268" expanded="true" signature="4683:4715" ph="SELECT ${$co... ${$tableName}" />
-            <marker date="1544577389268" expanded="true" signature="6042:6074" ph="SELECT ${$co... ${$tableName}" />
-            <marker date="1544577389268" expanded="true" signature="8105:8129" ph="UPDATE `${$tableName}`... " />
-            <marker date="1544577389268" expanded="true" signature="9170:9212" ph="DELETE FROM `${$tableName}`... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1102">
-          <caret line="23" column="35" lean-forward="false" selection-start-line="23" selection-start-column="35" selection-end-line="23" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" />
-    <entry file="file://$PROJECT_DIR$/server/config.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="25" column="25" lean-forward="true" selection-start-line="25" selection-start-column="25" selection-end-line="25" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/vendor/qcloud/weapp-sdk/lib/Mysql/Mysql.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="508">
-          <caret line="290" column="43" lean-forward="false" selection-start-line="290" selection-start-column="43" selection-end-line="290" selection-end-column="43" />
-          <folding>
-            <marker date="1544577389268" expanded="true" signature="1402:1466" ph="INSERT INTO `${$tableName}`... " />
-            <marker date="1544577389268" expanded="true" signature="2463:2495" ph="SELECT ${$co... ${$tableName}" />
-            <marker date="1544577389268" expanded="true" signature="3457:3514" ph="SELECT ${$fu... " />
-            <marker date="1544577389268" expanded="true" signature="4683:4715" ph="SELECT ${$co... ${$tableName}" />
-            <marker date="1544577389268" expanded="true" signature="6042:6074" ph="SELECT ${$co... ${$tableName}" />
-            <marker date="1544577389268" expanded="true" signature="8105:8129" ph="UPDATE `${$tableName}`... " />
-            <marker date="1544577389268" expanded="true" signature="9170:9212" ph="DELETE FROM `${$tableName}`... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
   </component>
 </project>
