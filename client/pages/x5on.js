@@ -265,7 +265,7 @@ var doLogin = function (options) {
       fail: err => {
         wx.hideToast()
         if (typeof options.fail === 'function') options.fail(err);
-        util.showModel('登录错误', err.message)
+        util.showModel('登录错误', err.errMsg)
       }
     })
   } else {
@@ -275,9 +275,10 @@ var doLogin = function (options) {
         if (typeof options.success === 'function') options.success(res);
       },
       fail: err => {
+        console.log(err)
         wx.hideToast()
         if (typeof options.fail === 'function') options.fail(err);
-        util.showModel('登录错误', err.message)
+        util.showModel('登录错误', err.errMsg)
       }
     })
   }
