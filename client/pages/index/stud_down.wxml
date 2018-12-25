@@ -4,6 +4,18 @@
 <form bindsubmit="studdownSubmit">
   <view class="weui-cells__title">学生信息</view>
   <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell">
+      <view class="weui-cell__bd">学生年级</view>
+      <view class="weui-cell__ft">{{grade_name}}</view>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__bd">学生班级</view>
+      <view class="weui-cell__ft">{{cls_name}}</view>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__bd">学生姓名</view>
+      <view class="weui-cell__ft">{{stud_name}}</view>
+    </view>
     <view class="weui-cell weui-cell_input">
       <view class="weui-cell__hd">
         <view class="weui-label">休学时间</view>
