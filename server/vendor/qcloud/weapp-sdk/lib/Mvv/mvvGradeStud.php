@@ -76,12 +76,12 @@ class mvvGradeStud
    */
   public static function query ($grade_id, $cls_id, $stud_name) {
     if ($grade_id && $cls_id) {
-      return xovGradeStud::likesBy(compact('grade_id', 'cls_id'), compact('stud_name'));
+      return xovGradeStud::likesBySuff(compact('grade_id', 'cls_id'), compact('stud_name'), 'order by grade_id, cls_num');
     } elseif ($grade_id) {
-      return xovGradeStud::likesBy(compact('grade_id'), compact('stud_name'));
+      return xovGradeStud::likesBySuff(compact('grade_id'), compact('stud_name'), 'order by grade_id, cls_num');
     } else {
       $current_year = 1;
-      return xovGradeStud::likesBy(compact('current_year'), compact('stud_name'));
+      return xovGradeStud::likesBySuff(compact('current_year'), compact('stud_name'), 'order by grade_id, cls_num');
     }
   }
 

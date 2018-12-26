@@ -278,39 +278,43 @@ class vAppinfo
   }
 
   public static function likes ($likes) {
-    return static::like(['*'], '', $likes);
+    return static::like(['*'], '', $likes, 'and');
+  }
+
+  public static function likesor ($likes) {
+    return static::like(['*'], '', $likes, 'or');
   }
 
   public static function likesBy ($conditions, $likes) {
-    return static::like(['*'], $conditions, $likes);
+    return static::like(['*'], $conditions, $likes, 'and');
   }
 
   public static function likesByor ($conditons, $likes) {
-    return static::like(['*'], $conditons, $likes, '', 'or');
+    return static::like(['*'], $conditons, $likes, 'or');
   }
 
-  public static function likesByNum ($conditions, $likes, $suffix) {
-    return static::like(['*'], $conditions, $likes, $suffix);
+  public static function likesBySuff ($conditions, $likes, $suffix) {
+    return static::like(['*'], $conditions, $likes, 'and', $suffix);
   }
 
-  public static function likesByNumor ($conditions, $likes, $suffix) {
-    return static::like(['*'], $conditions, $likes, $suffix, 'or');
+  public static function likesBySuffor ($conditions, $likes, $suffix) {
+    return static::like(['*'], $conditions, $likes, 'or', $suffix);
   }
 
   public static function likesColumnsBy ($columns, $conditions, $likes) {
-    return static::like($columns, $conditions, $likes);
+    return static::like($columns, $conditions, $likes, 'and');
   }
 
   public static function likesColumnsByor ($columns, $conditions, $likes) {
-    return static::like($columns, $conditions, $likes, '', 'or');
+    return static::like($columns, $conditions, $likes, 'or');
   }
 
-  public static function likesColumnsByNum ($columns, $conditions, $likes, $suffix) {
-    return static::like($columns, $conditions, $likes, $suffix);
+  public static function likesColumnsBySuff ($columns, $conditions, $likes, $suffix) {
+    return static::like($columns, $conditions, $likes, 'and', $suffix);
   }
 
-  public static function likesColumnsByNumor ($columns, $conditions, $likes, $suffix) {
-    return static::like($columns, $conditions, $likes, $suffix, 'or');
+  public static function likesColumnsBySuffor ($columns, $conditions, $likes, $suffix) {
+    return static::like($columns, $conditions, $likes, 'or', $suffix);
   }
 
   /**

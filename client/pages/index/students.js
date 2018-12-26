@@ -69,7 +69,7 @@ Page({
       stud_name: {
         required: true,
         chinese: true,
-        rangelength: [2, 4],
+        rangelength: [1, 3],
       },
     })
     that.x5va.checkForm(e, function (form) {
