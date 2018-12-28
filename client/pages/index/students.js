@@ -70,7 +70,11 @@ Page({
         required: true,
         chinese: true,
         rangelength: [1, 3],
-      },
+      }
+    }, {
+        stud_name: {
+          required: '学生姓名不得为空'
+        }
     })
     that.x5va.checkForm(e, function (form) {
       var grades = that.data.grades
