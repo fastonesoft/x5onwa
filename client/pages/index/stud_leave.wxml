@@ -1,2 +1,40 @@
 <!--pages/index/stud_leave.wxml-->
-<text>pages/index/stud_leave.wxml</text>
+<view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
+
+<form bindsubmit="studoutSubmit">
+  <view class="weui-cells__title">学生信息</view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell">
+      <view class="weui-cell__bd">学生年级</view>
+      <view class="weui-cell__ft">{{grade_name}}</view>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__bd">学生班级</view>
+      <view class="weui-cell__ft">{{cls_name}}</view>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__bd">学生姓名</view>
+      <view class="weui-cell__ft">{{stud_name}}</view>
+    </view>
+    <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+        <view class="weui-label">离校时间</view>
+      </view>
+      <view class="weui-cell__bd">
+        <input class="weui-input" placeholder="输入离校时间" name="come_date" type="text" maxlength="10" />
+      </view>
+    </view>
+    <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+        <view class="weui-label">离校原因</view>
+      </view>
+      <view class="weui-cell__bd">
+        <input class="weui-input" placeholder="输入离校原因" name="memo" type="number" maxlength="10" />
+      </view>
+    </view>
+  </view>
+
+  <view class="weui-btn-area">
+    <button type="primary" form-type="submit">提交离校</button>
+  </view>
+</form>
