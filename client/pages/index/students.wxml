@@ -49,6 +49,8 @@
 <view class="students-images-area" wx:if="{{comeshow}}">
 
   <image class="students_images" src="/images/index/stud_add.png" data-itemid="stud_add" bindtap="studaddClick"></image>
+  <image class="students_images" src="/images/index/stud_modi.png" data-itemid="stud_modi" bindtap="studmodiClick"></image>
+  <image class="students_images" src="/images/index/stud_auth.png" data-itemid="stud_auth" bindtap="studauthClick"></image>
   <image class="students_images" src="/images/index/stud_come.png" data-itemid="stud_come" bindtap="studcomeClick"></image>
   <image class="students_images" src="/images/index/stud_move.png" data-itemid="stud_move" bindtap="studmoveClick"></image>
   <image class="students_images" src="/images/index/stud_jump.png" data-itemid="stud_jump" bindtap="studjumpClick"></image>

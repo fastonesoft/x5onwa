@@ -17,6 +17,8 @@
     "pages/index/students",
     
     "pages/index/stud_add",
+    "pages/index/stud_modi",
+    "pages/index/stud_auth",
     "pages/index/stud_move",
     "pages/index/stud_return",
     "pages/index/stud_jump",

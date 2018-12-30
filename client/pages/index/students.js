@@ -126,6 +126,15 @@ Page({
     wx.navigateTo({ url: 'stud_add' })
   },
 
+  // 修改
+  studmodiClick: function (event) {
+    wx.navigateTo({ url: 'stud_modi' })
+  },
+  // 指标
+  studauthClick: function (event) {
+    wx.navigateTo({ url: 'stud_auth' })
+  },
+
   // 调动
   studmoveClick: function (e) {
     var that = this
