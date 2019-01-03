@@ -1,7 +1,7 @@
 <!--login.wxml-->
 <view class="container">
   <!-- 用户登录测试 -->
-  <image class="userinfor-bg" src="./loginbg.png"></image>
+  <image class="userinfor-bg" src="./loginbg.png" mode="aspectFill"></image>
   <view class="userinfo">
     <block wx:if="{{logged}}">
       <image class="userinfo-avatar" src="{{userinfor.avatarUrl}}"></image>

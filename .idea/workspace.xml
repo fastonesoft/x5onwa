@@ -3,8 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="e320c52f-5500-4386-ac18-1de166a23f7f" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/client/pages/index/stud_modi.js" afterPath="$PROJECT_DIR$/client/pages/index/stud_modi.js" />
       <change beforePath="$PROJECT_DIR$/client/pages/index/stud_modi.wxml" afterPath="$PROJECT_DIR$/client/pages/index/stud_modi.wxml" />
+      <change beforePath="$PROJECT_DIR$/client/pages/index/students.wxss" afterPath="$PROJECT_DIR$/client/pages/index/students.wxss" />
+      <change beforePath="$PROJECT_DIR$/client/pages/login/login.wxml" afterPath="$PROJECT_DIR$/client/pages/login/login.wxml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -36,21 +37,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Gradestud.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Gradestud.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server/application/controllers/Gradestud.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="589">
-              <caret line="83" column="38" lean-forward="false" selection-start-line="83" selection-start-column="38" selection-end-line="83" selection-end-column="38" />
+            <state relative-caret-position="569">
+              <caret line="176" column="58" lean-forward="false" selection-start-line="176" selection-start-column="51" selection-end-line="176" selection-end-column="58" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mvvGradeStud.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="mvvGradeStud.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server/vendor/qcloud/weapp-sdk/lib/Mvv/mvvGradeStud.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="322">
-              <caret line="51" column="49" lean-forward="true" selection-start-line="51" selection-start-column="49" selection-end-line="51" selection-end-column="49" />
+            <state relative-caret-position="778">
+              <caret line="51" column="45" lean-forward="false" selection-start-line="51" selection-start-column="42" selection-end-line="51" selection-end-column="45" />
               <folding />
             </state>
           </provider>
@@ -69,8 +70,8 @@
       <file leaf-file-name="x5on.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server/vendor/qcloud/weapp-sdk/lib/Model/x5on.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="305">
-              <caret line="151" column="25" lean-forward="false" selection-start-line="151" selection-start-column="25" selection-end-line="151" selection-end-column="25" />
+            <state relative-caret-position="969">
+              <caret line="55" column="69" lean-forward="true" selection-start-line="55" selection-start-column="69" selection-end-line="55" selection-end-column="69" />
               <folding />
             </state>
           </provider>
@@ -161,40 +162,6 @@
               <item name="server" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="vendor" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
-            <path>
-              <item name="x5onwa" type="b2602c69:ProjectViewProjectNode" />
-              <item name="x5onwa" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="server" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="vendor" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="qcloud" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="x5onwa" type="b2602c69:ProjectViewProjectNode" />
-              <item name="x5onwa" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="server" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="vendor" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="qcloud" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="weapp-sdk" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="x5onwa" type="b2602c69:ProjectViewProjectNode" />
-              <item name="x5onwa" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="server" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="vendor" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="qcloud" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="weapp-sdk" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="lib" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="x5onwa" type="b2602c69:ProjectViewProjectNode" />
-              <item name="x5onwa" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="server" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="vendor" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="qcloud" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="weapp-sdk" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="lib" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Model" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -283,16 +250,23 @@
       <option name="project" value="LOCAL" />
       <updated>1546163220888</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="start student 12.31">
+      <created>1546240093991</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1546240093992</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15399000" />
+    <option name="totallyTimeSpent" value="19689000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17291667" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17291667" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32908705" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -336,7 +310,8 @@
     <MESSAGE value="start student 12.28" />
     <MESSAGE value="start student 12.29" />
     <MESSAGE value="start student 12.30" />
-    <option name="LAST_COMMIT_MESSAGE" value="start student 12.30" />
+    <MESSAGE value="start student 12.31" />
+    <option name="LAST_COMMIT_MESSAGE" value="start student 12.31" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -514,38 +489,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/application/controllers/Youtu.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="9" column="27" lean-forward="true" selection-start-line="9" selection-start-column="27" selection-end-line="9" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/vendor/qcloud/weapp-sdk/lib/Model/x5on.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="305">
-          <caret line="151" column="25" lean-forward="false" selection-start-line="151" selection-start-column="25" selection-end-line="151" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/application/controllers/Gradestud.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="589">
-          <caret line="83" column="38" lean-forward="false" selection-start-line="83" selection-start-column="38" selection-end-line="83" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/vendor/qcloud/weapp-sdk/lib/Model/vAppinfo.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="949">
-          <caret line="284" column="49" lean-forward="true" selection-start-line="284" selection-start-column="49" selection-end-line="284" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/server/vendor/qcloud/weapp-sdk/lib/Mysql/Mysql.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="438">
@@ -562,10 +505,77 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/server/vendor/qcloud/cos-sdk-v5/src/Qcloud/Cos/Client.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="646">
+          <caret line="88" column="5" lean-forward="true" selection-start-line="88" selection-start-column="5" selection-end-line="88" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/vendor/qcloud/weapp-sdk/lib/Cos/CosAPI.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="569">
+          <caret line="31" column="17" lean-forward="true" selection-start-line="31" selection-start-column="17" selection-end-line="31" selection-end-column="17" />
+          <folding>
+            <element signature="e#6#24#0#PHP" expanded="true" />
+            <element signature="e#59#94#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/application/controllers/Upload.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="33" column="27" lean-forward="true" selection-start-line="33" selection-start-column="27" selection-end-line="33" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/application/controllers/Tunnel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="20" column="22" lean-forward="true" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/application/controllers/Youtu.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="9" column="27" lean-forward="true" selection-start-line="9" selection-start-column="27" selection-end-line="9" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/server/vendor/qcloud/weapp-sdk/lib/Mvv/mvvGradeStud.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="51" column="49" lean-forward="true" selection-start-line="51" selection-start-column="49" selection-end-line="51" selection-end-column="49" />
+        <state relative-caret-position="778">
+          <caret line="51" column="45" lean-forward="false" selection-start-line="51" selection-start-column="42" selection-end-line="51" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/vendor/qcloud/weapp-sdk/lib/Model/vAppinfo.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="949">
+          <caret line="284" column="49" lean-forward="true" selection-start-line="284" selection-start-column="49" selection-end-line="284" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/vendor/qcloud/weapp-sdk/lib/Model/x5on.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="969">
+          <caret line="55" column="69" lean-forward="true" selection-start-line="55" selection-start-column="69" selection-end-line="55" selection-end-column="69" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/application/controllers/Gradestud.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="569">
+          <caret line="176" column="58" lean-forward="false" selection-start-line="176" selection-start-column="51" selection-end-line="176" selection-end-column="58" />
           <folding />
         </state>
       </provider>
