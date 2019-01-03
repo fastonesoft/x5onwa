@@ -161,6 +161,20 @@ var doData = function (that, data) {
   }
 };
 
+var doArrChecked = function (arrs, success, fail) {
+  var notfind = true
+  for (let arr of arrs) {
+    if (arr.checked && typeof success === 'function') {
+      notfind = false
+      success(arr)
+      break
+    }
+  }
+  if (notfind && typeof fail === 'function') {
+    fail()
+  }
+}
+
 var doCheck = function (options) {
   const session = qcloud.Session.get()
   if (session) {
@@ -480,6 +494,7 @@ module.exports = {
   data: doData,
   login: doLogin,
   check: doCheck,
+  arrChecked: doArrChecked,
   request: doRequest,
   loadimage: doRequestImage,
   checkInput: doCheckInput,
