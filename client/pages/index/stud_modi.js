@@ -1,4 +1,6 @@
 // pages/index/stud_modi.js
+var x5on = require('../x5on.js')
+
 Page({
 
   data: {
@@ -7,6 +9,20 @@ Page({
       'http://wafer-1253456186.cossh.myqcloud.com/860039340.jpg',
     ],
   },
+
+  onLoad: function (e) {
+    var that = this
+    var uid = e.uid
+    x5on.postFormEx({
+      url: x5on.url.gradestuduid,
+      data: { uid },
+      success: (result) => {
+        var student = result.data
+        that.setData({ uid, student })
+      }
+    })
+  },
+
   chooseImage: function (e) {
     var that = this;
     wx.chooseImage({

@@ -132,8 +132,7 @@ Page({
     var students = this.data.students
     x5on.arrChecked(students, res => {
       var uid = res.uid;
-      console.log(res)
-      wx.navigateTo({ url: 'stud_modi' })
+      wx.navigateTo({ url: 'stud_modi?uid=' + uid })
     }, () => {
       x5on.showError(that, '没有选中相关学生')
     })

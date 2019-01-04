@@ -4,12 +4,23 @@
 <form bindsubmit="studmodiSubmit">
   <view class="weui-cells__title">学生信息</view>
   <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell">
+      <view class="weui-cell__bd">学生姓名</view>
+      <view class="weui-cell__ft">{{student.stud_name}}</view>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__bd">身份证号</view>
+      <view class="weui-cell__ft">{{student.stud_idc}}</view>
+    </view>
+  </view>
+  <view class="weui-cells__title">信息变更</view>
+  <view class="weui-cells weui-cells_after-title">
     <view class="weui-cell weui-cell_input">
       <view class="weui-cell__hd">
         <view class="weui-label">学生姓名</view>
       </view>
       <view class="weui-cell__bd">
-        <input class="weui-input" placeholder="输入学生姓名" name="stud_name" type="text" maxlength="4" />
+        <input class="weui-input" placeholder="输入学生姓名" name="stud_name" type="text" maxlength="4" value="{{student.stud_name}}" />
       </view>
     </view>
     <view class="weui-cell weui-cell_input">
@@ -17,35 +28,37 @@
         <view class="weui-label">身份证号</view>
       </view>
       <view class="weui-cell__bd">
-        <input class="weui-input" placeholder="输入学生身份证号" name="stud_idc" type="idcard" maxlength="18" />
+        <input class="weui-input" placeholder="输入学生身份证号" name="stud_idc" type="idcard" maxlength="18" value="{{student.stud_idc}}" />
       </view>
     </view>
   </view>
-        <view class="weui-cells">
-            <view class="weui-cell">
-                <view class="weui-cell__bd">
-                    <view class="weui-uploader">
-                        <view class="weui-uploader__hd">
-                            <view class="weui-uploader__title">图片上传</view>
-                            <view class="weui-uploader__info">{{files.length}}</view>
-                        </view>
-                        <view class="weui-uploader__bd">
-                            <view class="weui-uploader__files" id="uploaderFiles">
-                                <block wx:for="{{files}}" wx:key="*this">
-                                    <view class="weui-uploader__file weui-uploader__file_status" bindtap="previewImage" id="{{item}}">
-                                        <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
-                                        <view class="weui-uploader__file-content">户口复印</view>
-                                    </view>
-                                </block>
-                            </view>
-                            <view class="weui-uploader__input-box">
-                                <view class="weui-uploader__input" bindtap="chooseImage"></view>
-                            </view>
-                        </view>
-                    </view>
-                </view>
-            </view>
-        </view>
+
+  <view class="weui-cells">
+      <view class="weui-cell">
+          <view class="weui-cell__bd">
+              <view class="weui-uploader">
+                  <view class="weui-uploader__hd">
+                      <view class="weui-uploader__title">图片上传</view>
+                      <view class="weui-uploader__info">{{files.length}}</view>
+                  </view>
+                  <view class="weui-uploader__bd">
+                      <view class="weui-uploader__files" id="uploaderFiles">
+                          <block wx:for="{{files}}" wx:key="*this">
+                              <view class="weui-uploader__file weui-uploader__file_status" bindtap="previewImage" id="{{item}}">
+                                  <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
+                                  <view class="weui-uploader__file-content">户口复印</view>
+                              </view>
+                          </block>
+                      </view>
+                      <view class="weui-uploader__input-box">
+                          <view class="weui-uploader__input" bindtap="chooseImage"></view>
+                      </view>
+                  </view>
+              </view>
+          </view>
+      </view>
+  </view>
+
   <view class="weui-btn-area">
     <button type="primary" form-type="submit">提交修改</button>
   </view>
