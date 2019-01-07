@@ -173,8 +173,45 @@ class Gradestud extends CI_Controller {
         $uid = $param['uid'];
         $cls_id = $param['cls_id'];
 
-        // 学生调动
+        // 学生班级调动
         $result = Mvv\mvvGradeStud::studMove($uid, $cls_id);
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
+
+  public function modi() {
+    Model\xonLogin::check(self::role_name, function ($user) {
+      try {
+        $param = $_POST;
+        $uid = $param['uid'];
+        $stud_idc = $param['stud_idc'];
+        $stud_name = $param['stud_name'];
+
+        // 学生信息修改
+        $result = Mvv\mvvGradeStud::studMoid($uid, $stud_idc, $stud_name);
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
+
+  public function auth() {
+    Model\xonLogin::check(self::role_name, function ($user) {
+      try {
+        $param = $_POST;
+        $uid = $param['uid'];
+        $stud_auth = $param['stud_auth'] === 'true' ? 1 : 0;
+
+        // 学生信息修改
+        $result = Mvv\mvvGradeStud::studAuth($uid, $stud_auth);
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
         $this->json(['code' => 1, 'data' => $e->getMessage()]);

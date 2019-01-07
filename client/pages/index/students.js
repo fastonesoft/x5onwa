@@ -137,9 +137,17 @@ Page({
       x5on.showError(that, '没有选中相关学生')
     })
   },
+
   // 指标
   studauthClick: function (event) {
-    wx.navigateTo({ url: 'stud_auth' })
+    var that = this
+    var students = this.data.students
+    x5on.arrChecked(students, res => {
+      var uid = res.uid;
+      wx.navigateTo({ url: 'stud_auth?uid=' + uid })
+    }, () => {
+      x5on.showError(that, '没有选中相关学生')
+    })
   },
 
   // 调动

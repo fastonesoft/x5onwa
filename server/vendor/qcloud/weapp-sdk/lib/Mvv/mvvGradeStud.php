@@ -68,6 +68,30 @@ class mvvGradeStud
   }
 
   /**
+   * 修改学生信息（身份证号、姓名）
+   * @param $uid              学生序号
+   * @param $idc              身份证号
+   * @param $name             学生姓名
+   */
+  public static function studMoid ($uid, $idc, $name) {
+    $stud = xovGradeStud::checkByUid($uid);
+    $id = $stud->stud_idc;
+    xonChild::update(compact('idc', 'name'), compact('id'));
+    return xovGradeStud::getsby(compact('uid'));
+  }
+
+  /**
+   * 指标生变更
+   * @param $uid              学生序号
+   * @param $stud_auth        指标标志（只接收0、1）
+   */
+  public static function studAuth ($uid, $stud_auth) {
+    xovGradeStud::checkByUid($uid);
+    xonGradeStud::update(compact('stud_auth'), compact('uid'));
+    return xovGradeStud::getsBy(compact('uid'));
+  }
+
+  /**
    * 根据年级、班级、学生姓名部分模糊查询
    * @param $grade_id           年级编号
    * @param $cls_id             班级编号

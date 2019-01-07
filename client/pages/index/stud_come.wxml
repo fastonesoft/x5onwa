@@ -25,7 +25,7 @@
         <view class="weui-label">转学时间</view>
       </view>
       <view class="weui-cell__bd">
-        <input class="weui-input" placeholder="输入转学时间" name="come_date" type="number" maxlength="10" />
+        <input class="weui-input" placeholder="输入转学时间" name="come_date" type="text" maxlength="10" />
       </view>
     </view>
     <view class="weui-cell weui-cell_input">
@@ -33,7 +33,7 @@
         <view class="weui-label">转出学校</view>
       </view>
       <view class="weui-cell__bd">
-        <input class="weui-input" placeholder="输入转出学校" name="memo" type="number" maxlength="10" />
+        <input class="weui-input" placeholder="输入转出学校" name="memo" type="text" maxlength="10" />
       </view>
     </view>
     <view class="weui-cell weui-cell_select">
@@ -54,10 +54,10 @@
       <view class="weui-cell__bd">学籍状态</view>
       <view class="weui-cell__ft">转入</view>
     </view>
-    <view class="weui-cell">
+    <view class="weui-cell weui-cell_switch">
       <view class="weui-cell__bd">是否指标生</view>
       <view class="weui-cell__ft">
-        <icon type="cancel" size="23"></icon>
+        <switch name="stud_auth" />
       </view>
     </view>
   </view>

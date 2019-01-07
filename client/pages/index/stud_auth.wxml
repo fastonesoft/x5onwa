@@ -1,13 +1,13 @@
 <!--pages/index/stud_auth.wxml-->
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
-<form bindsubmit="studmodiSubmit">
+<form bindsubmit="studauthSubmit">
   <view class="weui-cells__title">学生信息</view>
   <view class="weui-cells weui-cells_after-title">
     <view class="weui-cell weui-cell_switch">
       <view class="weui-cell__bd">是否指标生</view>
       <view class="weui-cell__ft">
-        <switch name="stud_auth" checked="true" />
+        <switch name="stud_auth" checked="{{student.stud_auth}}" />
       </view>
     </view>
   </view>

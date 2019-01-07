@@ -1,66 +1,41 @@
 // pages/index/stud_auth.js
+var x5on = require('../x5on.js')
+
 Page({
 
-  /**
-   * 页面的初始数据
-   */
   data: {
 
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
+  onLoad: function (e) {
+    var that = this
+    var uid = e.uid
+    x5on.postFormEx({
+      url: x5on.url.gradestuduid,
+      data: { uid },
+      success: (result) => {
+        var student = result.data
+        that.setData({ student })
+      }
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  studauthSubmit: function (e) {
+    var that = this
+    e.detail.value.uid = that.data.student.uid
+    x5on.postFormEx({
+      url: x5on.url.gradestudauth,
+      data: e.detail.value,
+      success: (result) => {
+        var pages = getCurrentPages()
+        var prevPage = pages[pages.length - 2]
+        // 更新上一页数据
+        var students = result.data
+        prevPage.setData({ students })
+        // 
+        wx.navigateBack()
+      }
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

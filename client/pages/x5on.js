@@ -147,6 +147,8 @@ var doUrl = {
   gradestudtype: `${host}/weapp/gradestud/type`,
   gradestudstatus: `${host}/weapp/gradestud/status`,
   gradestudmove: `${host}/weapp/gradestud/move`,
+  gradestudmodi: `${host}/weapp/gradestud/modi`,
+  gradestudauth: `${host}/weapp/gradestud/auth`,
 
 
 
@@ -161,6 +163,7 @@ var doData = function (that, data) {
   }
 };
 
+// 数组选择检测
 var doArrChecked = function (arrs, success, fail) {
   var notfind = true
   for (let arr of arrs) {

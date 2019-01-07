@@ -44,7 +44,7 @@ Page({
       url: x5on.url.gradestudmove,
       data: { uid, cls_id },
       success: (result) => {
-        var pages = getCurrentPages();
+        var pages = getCurrentPages()
         var prevPage = pages[pages.length - 2]
         // 更新上一页数据
         var students = result.data
