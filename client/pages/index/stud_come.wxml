@@ -1,7 +1,7 @@
 <!--pages/index/stud_come.wxml-->
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
-<form bindsubmit="studaddSubmit">
+<form bindsubmit="studcomeSubmit">
   <view class="weui-cells__title">学生信息</view>
   <view class="weui-cells weui-cells_after-title">
     <view class="weui-cell weui-cell_input">
@@ -42,7 +42,7 @@
       </view>
       <view class="weui-cell__bd">
         <picker bindchange="transChange" name="stud_trans" value="{{stud_trans}}" range="{{trans}}" range-key="name" disabled="{{!trans || trans.length===0}}">
-          <view class="weui-select weui-select_in-select-after">{{trans[stud_trans].title}}</view>
+          <view class="weui-select weui-select_in-select-after">{{trans[stud_trans].name}}</view>
         </picker>
       </view>
     </view>

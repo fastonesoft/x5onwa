@@ -45,23 +45,23 @@ class x5va {
   __initDefaults() {
     this.defaults = {
       messages: {
-        required: '必填字段。',
-        tel: '请输入11位的手机号码。',
-        date: '请输入有效的日期，例如：2005-08-15。',
-        number: '请输入有效的数字。',
-        digits: '请输入有效的非负整数。',
-        chinese: '请输入有效的中文字符。',
-        idcard: '请输入18位的有效身份证。',
-        idcardrange: this.formatTpl('年龄不在 {0} 到 {1} 之间。'),
-        equalTo: this.formatTpl('输入值必须和 {0} 相同。'),
-        contains: this.formatTpl('输入值必须包含 {0}。'),
-        minlength: this.formatTpl('最少要输入 {0} 个字符。'),
-        maxlength: this.formatTpl('最多可以输入 {0} 个字符。'),
-        rangelength: this.formatTpl('请输入长度在 {0} 到 {1} 之间的字符。'),
-        min: this.formatTpl('请输入不小于 {0} 的数值。'),
-        max: this.formatTpl('请输入不大于 {0} 的数值。'),
-        range: this.formatTpl('请输入范围在 {0} 到 {1} 之间的数值。'),
-        custom: '请输入满足条件的有效数据。',
+        required: '不得为空',
+        tel: '请输入11位的手机号码',
+        date: '请输入有效的日期，例如：2005-08-15',
+        number: '请输入有效的数字',
+        digits: '请输入有效的非负整数',
+        chinese: '请输入有效的中文字符',
+        idcard: '请输入18位的有效身份证',
+        idcardrange: this.formatTpl('年龄不在 {0} 到 {1} 之间'),
+        equalTo: this.formatTpl('输入值必须和 {0} 相同'),
+        contains: this.formatTpl('输入值必须包含 {0}'),
+        minlength: this.formatTpl('最少输入 {0} 个字符'),
+        maxlength: this.formatTpl('最多输入 {0} 个字符'),
+        rangelength: this.formatTpl('字段长度在 {0} 到 {1} 之间的字符'),
+        min: this.formatTpl('请输入不小于 {0} 的数值'),
+        max: this.formatTpl('请输入不大于 {0} 的数值'),
+        range: this.formatTpl('请输入范围在 {0} 到 {1} 之间的数值'),
+        custom: '请输入满足条件的有效数据',
       }
     }
   }
@@ -364,7 +364,14 @@ class x5va {
    * @param {Object} rule 规则
    */
   defaultMessage(param, rule) {
-    let message = this.customMessage(param, rule) || this.defaults.messages[rule.method]
+    var rulename = rule.method
+    var message;
+    if (rulename === 'required') {
+      message = this.customMessage(param, rule) ? this.customMessage(param, rule) + this.defaults.messages[rule.method] : this.defaults.messages[rule.method]
+    } else {
+      message = this.customMessage(param, rule) || this.defaults.messages[rule.method]
+    }
+
     let type = typeof message
 
     if (type === 'undefined') {
@@ -406,6 +413,7 @@ class x5va {
   checkParam(param, rules, data) {
     // 缓存数据对象
     this.data = data
+    console.log(data)
     // 缓存字段对应的值
     // 表单值
     const values = data.detail.value

@@ -13,7 +13,6 @@ class xonGradeStud extends cAppinfo
     xonGradeStud::existBy(compact('year_id', 'stud_id'));
     // 无重复数据，添加
     $uid = x5on::getUid();
-    $stud_auth = $stud_auth === 'true' ? 1 : 0;
     $same_group = 0;
     $stud_code = null;
     $stud_diploma = null;

@@ -73,7 +73,7 @@ Page({
       }
     }, {
         stud_name: {
-          required: '学生姓名不得为空'
+          required: '学生姓名'
         }
     })
     that.x5va.checkForm(e, function (form) {

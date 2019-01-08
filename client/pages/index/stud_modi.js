@@ -40,10 +40,10 @@ Page({
       }
     }, {
       stud_idc: {
-        required: '身份证号不得为空'
+        required: '身份证号'
       },
       stud_name: {
-        required: '学生姓名不得为空'
+        required: '学生姓名'
       }      
     })
     that.x5va.checkForm(e, function (form) {

@@ -4,11 +4,6 @@ import x5va from '../x5va.js'
 
 Page({
 
-  data: {
-    stud_type: -1,
-    stud_status: -1,
-  },
-
   onLoad: function (e) {
     var that = this
     x5on.request({
@@ -68,6 +63,25 @@ Page({
       stud_auth: {
         required: true,
       }
+    }, {
+        stud_name: {
+          required: '学生姓名'
+        },
+        stud_idc: {
+          required: '身份证号'
+        },
+        come_date: {
+          required: '转学时间'
+        },
+        memo: {
+          required: '转出学校'
+        },
+        stud_type: {
+          required: '学生来源'
+        }, 
+        stud_status: {
+          required: '学籍状态'
+        },
     })
     that.x5va.checkForm(e, function (form) {
       var pages = getCurrentPages()
