@@ -193,7 +193,7 @@ class Gradestud extends CI_Controller {
         $stud_name = $param['stud_name'];
 
         // 学生信息修改
-        $result = Mvv\mvvGradeStud::studMoid($uid, $stud_idc, $stud_name);
+        $result = Mvv\mvvGradeStud::studModi($uid, $stud_idc, $stud_name);
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
         $this->json(['code' => 1, 'data' => $e->getMessage()]);
@@ -232,10 +232,11 @@ class Gradestud extends CI_Controller {
         $come_date = $param['come_date'];
         $stud_type_id = $param['stud_type_id'];
         $stud_status_id = $param['stud_status_id'];
+        $stud_trans_name = $param['stud_trans_name'];
         $stud_auth = $param['stud_auth'] === 'true' ? 1 : 0;
 
         // 学生信息修改
-        $result = Mvv\mvvGradeStud::studCome($grade_id, $cls_id, $stud_name, $stud_idc, $stud_type_id, $stud_status_id, $stud_auth, $come_date);
+        $result = Mvv\mvvGradeStud::addNoExam($grade_id, $cls_id, $stud_name, $stud_idc, $stud_type_id, $stud_status_id, $stud_auth, $come_date);
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
         $this->json(['code' => 1, 'data' => $e->getMessage()]);

@@ -8,10 +8,6 @@ Page({
     trans: [{ id: 0, name: '区县' }, { id: 1, name: '跨市' }, { id: 2, name: '跨省'}]
   },
 
-  onLoad: function (options) {
-
-  },
-
   transChange: function (e) {
     var that = this
     var stud_trans = e.detail.value
@@ -43,6 +39,9 @@ Page({
       stud_trans: {
         required: true,
         min: 0,
+      },
+      stud_auth: {
+        required: true,
       }
     }, {
         stud_idc: {
@@ -61,14 +60,30 @@ Page({
           required: '转入方式'
         }
     })
+
     that.x5va.checkForm(e, function (form) {
+      var pages = getCurrentPages()
+      var prevPage = pages[pages.length - 2]
+      var grades = prevPage.data.grades
+      var gradeIndex = prevPage.data.gradeIndex
+      var grade_id = grades[gradeIndex].id
+      var classes = prevPage.data.classes
+      var classIndex = prevPage.data.classIndex
+      var cls_id = classes[classIndex].id
+
+      var stud_trans = that.data.stud_trans
+      var trans = that.data.trans
+      form.stud_type_id = 1
+      form.stud_status_id = 3
+      form.stud_trans_name = trans[stud_trans].name
+      form.grade_id = grade_id
+      form.cls_id = cls_id
+
+      console.log(form)
       x5on.postFormEx({
         url: x5on.url.gradestudcome,
-        data: e.detail.value,
+        data: form,
         success: (result) => {
-          var pages = getCurrentPages()
-          var prevPage = pages[pages.length - 2]
-          // 更新上一页数据
           var students = result.data
           prevPage.setData({ students })
           // 

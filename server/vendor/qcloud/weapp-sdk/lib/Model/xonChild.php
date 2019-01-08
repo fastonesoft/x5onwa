@@ -10,11 +10,9 @@ class xonChild extends cAppinfo
     $id = $idc;
     // 检测身份证
     x5on::checkIdc($idc, 7, 18);
-    $res = self::getById($id);
-    if ( $res === null ) {
-      // 添加孩子
-      $uid = x5on::getUid();
-      self::insert(compact('id', 'uid', 'idc', 'name'));
-    }
+    $res = self::existById($id);
+    // 添加孩子
+    $uid = x5on::getUid();
+    self::insert(compact('id', 'uid', 'idc', 'name'));
   }
 }

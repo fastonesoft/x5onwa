@@ -413,7 +413,6 @@ class x5va {
   checkParam(param, rules, data) {
     // 缓存数据对象
     this.data = data
-    console.log(data)
     // 缓存字段对应的值
     // 表单值
     const values = data.detail.value
@@ -489,12 +488,13 @@ class x5va {
    * @param {String} value 字段的值
    */
   setValue(param, method, result, value) {
-    const params = this.form[param]
-    params.valid = result
-    params.invalid = !result
-    params.error[method] = !result
-    params.success[method] = result
-    params.viewValue = value
+    this.form[param] = value
+    // const params = this.form[param]
+    // params.valid = result
+    // params.invalid = !result
+    // params.error[method] = !result
+    // params.success[method] = result
+    // params.viewValue = value
   }
 
   /**
