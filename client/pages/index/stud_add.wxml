@@ -57,6 +57,6 @@
   </view>
 
   <view class="weui-btn-area">
-    <button type="primary" form-type="submit">提交添加</button>
+    <button type="primary" form-type="submit">提交</button>
   </view>
 </form>

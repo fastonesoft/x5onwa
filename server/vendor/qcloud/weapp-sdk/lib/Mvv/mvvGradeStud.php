@@ -36,7 +36,10 @@ class mvvGradeStud
    */
   public static function studCls ($grade_id, $cls_id) {
     if ($grade_id && $cls_id) {
-      return xovGradeStud::getsBySuff(compact('grade_id', 'cls_id'), 'order by grade_id, cls_num, stud_status_id, stud_sex_num, stud_id');
+      // 当前年度的在校生
+      $in_sch = 1;
+      $current_year = 1;
+      return xovGradeStud::getsBySuff(compact('grade_id', 'cls_id', 'in_sch', 'current_year'), 'order by grade_id, cls_num, stud_status_id, stud_sex_num, stud_id');
     } else {
       return [];
     }
@@ -100,13 +103,14 @@ class mvvGradeStud
    * @return array
    */
   public static function query ($grade_id, $cls_id, $stud_name) {
+    $in_sch = 1;
+    $current_year = 1;
     if ($grade_id && $cls_id) {
-      return xovGradeStud::likesBySuff(compact('grade_id', 'cls_id'), compact('stud_name'), 'order by grade_id, cls_num, stud_status_id, stud_sex_num, stud_id');
+      return xovGradeStud::likesBySuff(compact('grade_id', 'cls_id', 'in_sch', 'current_year'), compact('stud_name'), 'order by grade_id, cls_num, stud_status_id, stud_sex_num, stud_id');
     } elseif ($grade_id) {
-      return xovGradeStud::likesBySuff(compact('grade_id'), compact('stud_name'), 'order by grade_id, cls_num, stud_status_id, stud_sex_num, stud_id');
+      return xovGradeStud::likesBySuff(compact('grade_id', 'in_sch', 'current_year'), compact('stud_name'), 'order by grade_id, cls_num, stud_status_id, stud_sex_num, stud_id');
     } else {
-      $current_year = 1;
-      return xovGradeStud::likesBySuff(compact('current_year'), compact('stud_name'), 'order by grade_id, cls_num, stud_status_id, stud_sex_num, stud_id');
+      return xovGradeStud::likesBySuff(compact('current_year', 'in_sch'), compact('stud_name'), 'order by grade_id, cls_num, stud_status_id, stud_sex_num, stud_id');
     }
   }
 
