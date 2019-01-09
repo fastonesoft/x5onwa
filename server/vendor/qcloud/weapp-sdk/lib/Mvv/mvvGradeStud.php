@@ -36,7 +36,7 @@ class mvvGradeStud
    */
   public static function studCls ($grade_id, $cls_id) {
     if ($grade_id && $cls_id) {
-      return xovGradeStud::getsBy(compact('grade_id', 'cls_id'));
+      return xovGradeStud::getsBySuff(compact('grade_id', 'cls_id'), 'order by grade_id, cls_num, stud_status_id, stud_sex_num, stud_id');
     } else {
       return [];
     }
@@ -101,12 +101,12 @@ class mvvGradeStud
    */
   public static function query ($grade_id, $cls_id, $stud_name) {
     if ($grade_id && $cls_id) {
-      return xovGradeStud::likesBySuff(compact('grade_id', 'cls_id'), compact('stud_name'), 'order by grade_id, cls_num');
+      return xovGradeStud::likesBySuff(compact('grade_id', 'cls_id'), compact('stud_name'), 'order by grade_id, cls_num, stud_status_id, stud_sex_num, stud_id');
     } elseif ($grade_id) {
-      return xovGradeStud::likesBySuff(compact('grade_id'), compact('stud_name'), 'order by grade_id, cls_num');
+      return xovGradeStud::likesBySuff(compact('grade_id'), compact('stud_name'), 'order by grade_id, cls_num, stud_status_id, stud_sex_num, stud_id');
     } else {
       $current_year = 1;
-      return xovGradeStud::likesBySuff(compact('current_year'), compact('stud_name'), 'order by grade_id, cls_num');
+      return xovGradeStud::likesBySuff(compact('current_year'), compact('stud_name'), 'order by grade_id, cls_num, stud_status_id, stud_sex_num, stud_id');
     }
   }
 

@@ -164,8 +164,8 @@ var doData = function (that, data) {
   }
 };
 
-// 数组选择检测
-var doArrChecked = function (arrs, success, fail) {
+// 数组单项选择
+var doGetChecked = function (arrs, success, fail) {
   var notfind = true
   for (let arr of arrs) {
     if (arr.checked && typeof success === 'function') {
@@ -177,6 +177,15 @@ var doArrChecked = function (arrs, success, fail) {
   if (notfind && typeof fail === 'function') {
     fail()
   }
+}
+
+// 数组单项设置
+var doSetChecked = function (arrs, uid, success) {
+  for (var i = 0; i < arrs.length; i++) {
+    var item = arrs[i]
+    item.checked = item.uid === uid
+  }
+  if (typeof success === 'function') success(arrs)
 }
 
 var doCheck = function (options) {
@@ -498,7 +507,8 @@ module.exports = {
   data: doData,
   login: doLogin,
   check: doCheck,
-  arrChecked: doArrChecked,
+  getChecked: doGetChecked,
+  setChecked: doSetChecked,
   request: doRequest,
   loadimage: doRequestImage,
   checkInput: doCheckInput,

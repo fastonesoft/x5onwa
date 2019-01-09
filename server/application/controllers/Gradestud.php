@@ -40,7 +40,7 @@ class Gradestud extends CI_Controller {
     Model\xonLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
-        $grade_id = $param['grade_id'];
+        $grade_id = $param['grade_id'] === 'null' ? null : $param['grade_id'];
 
         // 班级列表
         $result = Mvv\mvvGradeStud::classes($grade_id);
@@ -57,8 +57,8 @@ class Gradestud extends CI_Controller {
     Model\xonLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
-        $grade_id = $param['grade_id'];
-        $cls_id = $param['cls_id'];
+        $grade_id = $param['grade_id'] === 'null' ? null : $param['grade_id'];
+        $cls_id = $param['cls_id'] === 'null' ? null : $param['cls_id'];
 
         // 班级学生
         $result = Mvv\mvvGradeStud::studCls($grade_id, $cls_id);
@@ -75,8 +75,8 @@ class Gradestud extends CI_Controller {
     Model\xonLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
-        $cls_id = $param['cls_id'];
-        $grade_id = $param['grade_id'];
+        $grade_id = $param['grade_id'] === 'null' ? null : $param['grade_id'];
+        $cls_id = $param['cls_id'] === 'null' ? null : $param['cls_id'];
         $stud_name = $param['stud_name'];
         $stud_name = Model\x5on::getLike($stud_name);
 

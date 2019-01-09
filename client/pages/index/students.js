@@ -21,6 +21,24 @@ Page({
     })
   },
 
+  getGradeid: function () {
+    var grades = this.data.grades
+    var gradeIndex = this.data.gradeIndex
+    if (grades.length>0 && gradeIndex && gradeIndex>-1) {
+      return grades[gradeIndex].id
+    }
+    return null
+  },
+
+  getClsid: function () {
+    var classes = this.data.classes
+    var classIndex = this.data.classIndex
+    if (classes.length>0 && classIndex && classIndex>-1) {
+      return classes[classIndex].id
+    }
+    return null
+  },
+
   gradeChange: function (e) {
     var that = this
     var students = []
@@ -29,8 +47,7 @@ Page({
     var comeshow = false
     that.setData({ gradeIndex, classIndex, students, comeshow })
     //
-    var grades = that.data.grades
-    var grade_id = grades[gradeIndex].id
+    var grade_id = that.getGradeid()
     x5on.postFormEx({
       url: x5on.url.gradestudclass,
       data: { grade_id },
@@ -49,10 +66,8 @@ Page({
     var comeshow = true
     that.setData({ classIndex, comeshow })
 
-    var grades = that.data.grades
-    var gradeIndex = that.data.gradeIndex
-    var cls_id = classes[classIndex].id
-    var grade_id = grades[gradeIndex].id
+    var cls_id = that.getClsid()
+    var grade_id = that.getGradeid()
     x5on.postFormEx({
       url: x5on.url.gradestudcls,
       data: { grade_id, cls_id },
@@ -77,17 +92,11 @@ Page({
         }
     })
     that.x5va.checkForm(e, function (form) {
-      var grades = that.data.grades
-      var classes = that.data.classes
-      var gradeIndex = that.data.gradeIndex
-      var classIndex = that.data.classIndex
-      var cls_id = classIndex && classIndex != -1 ? classes[classIndex].id : ''
-      var grade_id = gradeIndex && gradeIndex != -1 ? grades[gradeIndex].id : ''
-
-      var stud_name = form.stud_name.viewValue
+      form.cls_id = that.getClsid()
+      form.grade_id = that.getGradeid()
       x5on.postFormEx({
         url: x5on.url.gradestudquery,
-        data: { grade_id, cls_id, stud_name },
+        data: form,
         success: (result) => {
           var students = result.data
           that.setData({ students })
@@ -106,8 +115,8 @@ Page({
       var item = students[i]
       item.checked = item.uid === uid
     }
+    x5on.setChecked(students, uid, )
     this.setData({ students })
-
   },
 
   studentClick: function (e) {
@@ -130,7 +139,7 @@ Page({
   studmodiClick: function (event) {
     var that = this
     var students = this.data.students
-    x5on.arrChecked(students, res => {
+    x5on.getChecked(students, res => {
       var uid = res.uid;
       wx.navigateTo({ url: 'stud_modi?uid=' + uid })
     }, () => {
@@ -142,7 +151,7 @@ Page({
   studauthClick: function (event) {
     var that = this
     var students = this.data.students
-    x5on.arrChecked(students, res => {
+    x5on.getChecked(students, res => {
       var uid = res.uid;
       wx.navigateTo({ url: 'stud_auth?uid=' + uid })
     }, () => {

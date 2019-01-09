@@ -64,12 +64,8 @@ Page({
     that.x5va.checkForm(e, function (form) {
       var pages = getCurrentPages()
       var prevPage = pages[pages.length - 2]
-      var grades = prevPage.data.grades
-      var gradeIndex = prevPage.data.gradeIndex
-      var grade_id = grades[gradeIndex].id
-      var classes = prevPage.data.classes
-      var classIndex = prevPage.data.classIndex
-      var cls_id = classes[classIndex].id
+      var grade_id = prevPage.getGradeid()
+      var cls_id = prevPage.getClsid()
 
       var stud_trans = that.data.stud_trans
       var trans = that.data.trans
@@ -79,7 +75,6 @@ Page({
       form.grade_id = grade_id
       form.cls_id = cls_id
 
-      console.log(form)
       x5on.postFormEx({
         url: x5on.url.gradestudcome,
         data: form,

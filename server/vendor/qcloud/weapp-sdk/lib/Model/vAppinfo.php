@@ -55,11 +55,11 @@ class vAppinfo
     return static::select($columns, $conditions);
   }
 
-  public static function getsByNum ($conditions, $suffix = '') {
+  public static function getsBySuff ($conditions, $suffix = '') {
     return static::select(['*'], $conditions, $suffix);
   }
 
-  public static function getsColumnsByNum ($columns, $conditions, $suffix = '') {
+  public static function getsColumnsBySuff ($columns, $conditions, $suffix = '') {
     return static::select($columns, $conditions, $suffix);
   }
 

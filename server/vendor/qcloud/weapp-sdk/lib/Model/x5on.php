@@ -150,7 +150,8 @@ class x5on {
   }
 
   public static function getLike ($like) {
-    return '%' . $like . '%';
+    if ($like) return '%' . $like . '%';
+    return '%李%';
   }
 
   public static function getHomeByIdcard($num) {
