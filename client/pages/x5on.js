@@ -165,27 +165,44 @@ var doData = function (that, data) {
 };
 
 // 数组单项选择
-var doGetChecked = function (arrs, success, fail) {
-  var notfind = true
+var doGetRadio = function (arrs, success, fail) {
+  var find = null
   for (let arr of arrs) {
-    if (arr.checked && typeof success === 'function') {
-      notfind = false
-      success(arr)
-      break
+    if (arr.checked) {
+      find = arr; break
     }
   }
-  if (notfind && typeof fail === 'function') {
-    fail()
+  find && typeof success === 'function' && success(find)
+  !find && typeof fail === 'function' && fail()
+}
+
+// 数组多项选择
+var doGetCheckbox = function (arrs, success, fail) {
+  var res = []
+  for (let arr of arrs) {
+    arr.checked ? res.push(arr) : void(0)
   }
+  res.length > 0 ? typeof success === 'function' && success(res) : typeof fail === 'function' && fail()
 }
 
 // 数组单项设置
-var doSetChecked = function (arrs, uid, success) {
-  for (var i = 0; i < arrs.length; i++) {
-    var item = arrs[i]
-    item.checked = item.uid === uid
+var doSetRadio = function (arrs, uid, success) {
+  for (let arr of arrs) {
+    arr.checked = arr.uid === uid
   }
-  if (typeof success === 'function') success(arrs)
+  typeof success === 'function' && success(arrs)
+}
+
+// 数组多项设置
+var doSetCheckbox = function (arrs, uids, success) {
+  for (let arr of arrs) {
+    var checked = false
+    for (let uid of uids) {
+      if (arr.uid === uid) { checked = true; break }
+    }
+    arr.checked = checked
+  }
+  typeof success === 'function' && success(arrs)
 }
 
 var doCheck = function (options) {
@@ -507,8 +524,10 @@ module.exports = {
   data: doData,
   login: doLogin,
   check: doCheck,
-  getChecked: doGetChecked,
-  setChecked: doSetChecked,
+  getRadio: doGetRadio,
+  getCheckbox: doGetCheckbox,
+  setRadio: doSetRadio,
+  setCheckbox: doSetCheckbox,
   request: doRequest,
   loadimage: doRequestImage,
   checkInput: doCheckInput,

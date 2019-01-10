@@ -17,5 +17,8 @@ page { background: #F6F6F6; }
 /*增加的删除图标*/
 .remove-icon { height:50rpx; width:50rpx; border: none; vertical-align: middle; }
 .students_images { width: 46rpx; height: 46rpx; border: none; vertical-align: middle; margin-right: 15rpx; }
+
+/* weui */
 .weui-input { text-align: right; }
+.weui-select { text-align: right; }
 .weui-cell_vcode .weui-input { padding-right: 20rpx; }

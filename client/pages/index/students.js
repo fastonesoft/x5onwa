@@ -108,15 +108,10 @@ Page({
   },
 
   studentsChange: function (e) {
-    var that = this
-    var uid = e.detail.value
-    var students = this.data.students
-    for (var i = 0; i < students.length; i++) {
-      var item = students[i]
-      item.checked = item.uid === uid
-    }
-    x5on.setChecked(students, uid, )
-    this.setData({ students })
+    var uids = e.detail.value
+    x5on.setRadio(this.data.students, uids, students => {
+      this.setData({ students })
+    })
   },
 
   studentClick: function (e) {
@@ -139,7 +134,7 @@ Page({
   studmodiClick: function (event) {
     var that = this
     var students = this.data.students
-    x5on.getChecked(students, res => {
+    x5on.getRadio(students, res => {
       var uid = res.uid;
       wx.navigateTo({ url: 'stud_modi?uid=' + uid })
     }, () => {
@@ -151,7 +146,7 @@ Page({
   studauthClick: function (event) {
     var that = this
     var students = this.data.students
-    x5on.getChecked(students, res => {
+    x5on.getRadio(students, res => {
       var uid = res.uid;
       wx.navigateTo({ url: 'stud_auth?uid=' + uid })
     }, () => {
@@ -181,12 +176,22 @@ Page({
 
   // 复学
   studreturnClick: function (e) {
-    wx.navigateTo({ url: 'stud_return' })
+    x5on.getCheckbox(this.data.students, res => {
+      console.log(res)
+    }, () => {
+      console.log('error')
+    })
+    // wx.navigateTo({ url: 'stud_return' })
   },
   
   // 跳级
   studjumpClick: function (e) {
-    wx.navigateTo({ url: 'stud_jump' })
+    x5on.getRadio(this.data.students, res => {
+      console.log(res)
+    }, () => {
+      console.log('error')
+    })
+    // wx.navigateTo({ url: 'stud_jump' })
   },
 
   // 重读
