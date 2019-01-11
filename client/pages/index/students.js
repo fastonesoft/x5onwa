@@ -12,10 +12,9 @@ Page({
 
   onLoad: function (options) {
     var that = this
-    x5on.request({
+    x5on.requestEx({
       url: x5on.url.gradestudgrade,
-      success: function (result) {
-        var grades = result.data
+      success: grades => {
         that.setData({ grades })
       }
     })
@@ -51,8 +50,7 @@ Page({
     x5on.postFormEx({
       url: x5on.url.gradestudclass,
       data: { grade_id },
-      success: (result) => {
-        var classes = result.data
+      success: classes => {
         that.setData({ classes })
       }
     })
@@ -71,8 +69,7 @@ Page({
     x5on.postFormEx({
       url: x5on.url.gradestudcls,
       data: { grade_id, cls_id },
-      success: (result) => {
-        var students = result.data
+      success: students => {
         that.setData({ students })
       }
     })
@@ -97,8 +94,7 @@ Page({
       x5on.postFormEx({
         url: x5on.url.gradestudquery,
         data: form,
-        success: (result) => {
-          var students = result.data
+        success: students => {
           that.setData({ students })
         }
       })
@@ -108,19 +104,17 @@ Page({
   },
 
   studentsChange: function (e) {
-    var uids = e.detail.value
-    x5on.setRadio(this.data.students, uids, students => {
+    var uid = e.detail.value
+    x5on.setRadio(this.data.students, uid, students => {
       this.setData({ students })
     })
   },
 
   studentClick: function (e) {
     var uid = e.currentTarget.dataset.uid
-    // 跳转信息查询
     wx.navigateTo({
       url: 'student?uid=' + uid,
       success: () => {
-
       }
     })
   },
@@ -133,10 +127,8 @@ Page({
   // 修改
   studmodiClick: function (event) {
     var that = this
-    var students = this.data.students
-    x5on.getRadio(students, res => {
-      var uid = res.uid;
-      wx.navigateTo({ url: 'stud_modi?uid=' + uid })
+    x5on.getRadio(this.data.students, res => {
+      wx.navigateTo({ url: 'stud_modi?uid=' + res.uid })
     }, () => {
       x5on.showError(that, '没有选中相关学生')
     })
@@ -145,45 +137,28 @@ Page({
   // 指标
   studauthClick: function (event) {
     var that = this
-    var students = this.data.students
-    x5on.getRadio(students, res => {
-      var uid = res.uid;
-      wx.navigateTo({ url: 'stud_auth?uid=' + uid })
+    x5on.getRadio(this.data.students, res => {
+      wx.navigateTo({ url: 'stud_auth?uid=' + res.uid })
     }, () => {
       x5on.showError(that, '没有选中相关学生')
     })
+  },
+
+  // 转入
+  studcomeClick: function (e) {
+    wx.navigateTo({ url: 'stud_come' })
   },
 
   // 调动
   studmoveClick: function (e) {
     var that = this
-    // 检测是否有选择的学生
-    var uid;
-    var students = this.data.students
-    for (var i=0; i<students.length; i++) {
-      var item = students[i]
-      if (item.checked) {
-        uid = item.uid
-        break
-      }
-    }
-    if (uid) {
-      wx.navigateTo({ url: 'stud_move?uid=' + uid })
-    } else {
+    x5on.getRadio(this.data.students, res => {
+      wx.navigateTo({ url: 'stud_move?uid=' + res.uid })
+    }, () => {
       x5on.showError(that, '没有选中相关学生')
-    }
+    })
   },
 
-  // 复学
-  studreturnClick: function (e) {
-    x5on.getCheckbox(this.data.students, res => {
-      console.log(res)
-    }, () => {
-      console.log('error')
-    })
-    // wx.navigateTo({ url: 'stud_return' })
-  },
-  
   // 跳级
   studjumpClick: function (e) {
     x5on.getRadio(this.data.students, res => {
@@ -192,6 +167,11 @@ Page({
       console.log('error')
     })
     // wx.navigateTo({ url: 'stud_jump' })
+  },
+
+  // 复学
+  studreturnClick: function (e) {
+    wx.navigateTo({ url: 'stud_return' })
   },
 
   // 重读
@@ -207,11 +187,6 @@ Page({
   // 休学
   studdownClick: function (e) {
     wx.navigateTo({ url: 'stud_down' })
-  },
-
-  // 转入
-  studcomeClick: function (e) {
-    wx.navigateTo({ url: 'stud_come' })
   },
 
   // 转出

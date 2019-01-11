@@ -44,11 +44,11 @@ Page({
         required: true,
       }
     }, {
-        stud_idc: {
-          required: '身份证号'
-        },
         stud_name: {
           required: '学生姓名'
+        },
+        stud_idc: {
+          required: '身份证号'
         },
         come_date: {
           required: '转学时间'
@@ -78,10 +78,8 @@ Page({
       x5on.postFormEx({
         url: x5on.url.gradestudcome,
         data: form,
-        success: (result) => {
-          var students = result.data
+        success: students => {
           prevPage.setData({ students })
-          // 
           wx.navigateBack()
         }
       })

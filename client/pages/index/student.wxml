@@ -12,6 +12,10 @@
         <view class="weui-cell__ft">{{student.stud_sex}}</view>
       </view>
       <view class="weui-cell">
+        <view class="weui-cell__bd">身份证号</view>
+        <view class="weui-cell__ft">{{student.stud_idc}}</view>
+      </view>
+      <view class="weui-cell">
         <view class="weui-cell__bd">学生分级</view>
         <view class="weui-cell__ft">{{student.step_name}}</view>
       </view>
@@ -56,3 +60,7 @@
       </block>
     </view>
   </block>
+
+  <view class="weui-btn-area" wx:if="{{canshow}}">
+    <button type="primary" bindtap="returnClick">返回</button>
+  </view>

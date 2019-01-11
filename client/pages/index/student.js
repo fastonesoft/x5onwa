@@ -5,15 +5,18 @@ Page({
 
   onLoad: function (e) {
     var that = this
-    var uid = e.uid
     x5on.postFormEx({
       url: x5on.url.gradestuduid,
-      data: { uid },
-      success: (result) => {
-        var student = result.data
-        that.setData({ student })
+      data: e,
+      success: student => {
+        var canshow = true
+        that.setData({ student, canshow })
       }
     })
   },
+
+  returnClick: function (e) {
+    wx.navigateBack()
+  }
 
 })

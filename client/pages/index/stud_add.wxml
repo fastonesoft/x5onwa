@@ -28,25 +28,13 @@
         <input class="weui-input" placeholder="输入进校时间" name="come_date" type="number" maxlength="10" />
       </view>
     </view>
-    <view class="weui-cell weui-cell_select">
-      <view class="weui-cell__hd weui-cell__hd_in-select-after">
-        <view class="weui-label">学生来源</view>
-      </view>
-      <view class="weui-cell__bd">
-        <picker bindchange="typeChange" name="stud_type" value="{{stud_type}}" range="{{types}}" range-key="name" disabled="{{!types || types.length===0}}">
-          <view class="weui-select weui-select_in-select-after">{{types[stud_type].name}}</view>
-        </picker>
-      </view>
+    <view class="weui-cell">
+      <view class="weui-cell__bd">学籍状态</view>
+      <view class="weui-cell__ft">正常</view>
     </view>
-    <view class="weui-cell weui-cell_select">
-      <view class="weui-cell__hd weui-cell__hd_in-select-after">
-        <view class="weui-label">学籍状态</view>
-      </view>
-      <view class="weui-cell__bd">
-        <picker bindchange="statuChange" name="stud_status" value="{{stud_status}}" range="{{status}}" range-key="name" disabled="{{!status || status.length===0}}">
-          <view class="weui-select weui-select_in-select-after">{{status[stud_status].name}}</view>
-        </picker>
-      </view>
+    <view class="weui-cell">
+      <view class="weui-cell__bd">学生来源</view>
+      <view class="weui-cell__ft">应届生</view>
     </view>
     <view class="weui-cell weui-cell_switch">
       <view class="weui-cell__bd">是否指标生</view>

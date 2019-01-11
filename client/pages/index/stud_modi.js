@@ -13,21 +13,34 @@ Page({
 
   onLoad: function (e) {
     var that = this
-    var uid = e.uid
     x5on.postFormEx({
       url: x5on.url.gradestuduid,
-      data: { uid },
-      success: (result) => {
-        var student = result.data
+      data: e,
+      success: student => {
         that.setData({ student })
+        //
+        var stud_status_id = student.stud_status_id
+        x5on.requestEx({
+          url: x5on.url.gradestudstatus,
+          success: status => {
+            var stud_status = x5on.getIndex(status, stud_status_id)
+            that.setData({ status, stud_status })
+          }
+        })
       }
     })
+
   },
 
   studmodiSubmit: function (e) {
     var that = this
     e.detail.value.uid = that.data.student.uid
     that.x5va = new x5va({
+      uid: {
+        required: true,
+        minlength: 32,
+        maxlength: 32,
+      },
       stud_idc: {
         required: true,
         idcard: true,
@@ -49,14 +62,11 @@ Page({
     that.x5va.checkForm(e, function (form) {
       x5on.postFormEx({
         url: x5on.url.gradestudmodi,
-        data: e.detail.value,
-        success: (result) => {
+        data: form,
+        success: students => {
           var pages = getCurrentPages()
           var prevPage = pages[pages.length - 2]
-          // 更新上一页数据
-          var students = result.data
           prevPage.setData({ students })
-          // 
           wx.navigateBack()
         }
       })

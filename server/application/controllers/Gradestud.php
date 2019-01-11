@@ -192,7 +192,7 @@ class Gradestud extends CI_Controller {
         $stud_idc = $param['stud_idc'];
         $stud_name = $param['stud_name'];
 
-        // 学生信息修改
+        //
         $result = Mvv\mvvGradeStud::studModi($uid, $stud_idc, $stud_name);
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -210,7 +210,7 @@ class Gradestud extends CI_Controller {
         $uid = $param['uid'];
         $stud_auth = $param['stud_auth'] === 'true' ? 1 : 0;
 
-        // 学生信息修改
+        //
         $result = Mvv\mvvGradeStud::studAuth($uid, $stud_auth);
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -235,7 +235,55 @@ class Gradestud extends CI_Controller {
         $stud_trans_name = $param['stud_trans_name'];
         $stud_auth = $param['stud_auth'] === 'true' ? 1 : 0;
 
-        // 学生信息修改
+        //
+        $result = Mvv\mvvGradeStud::addNoExam($grade_id, $cls_id, $stud_name, $stud_idc, $stud_type_id, $stud_status_id, $stud_auth, $come_date);
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
+
+  public function repet() {
+    Model\xonLogin::check(self::role_name, function ($user) {
+      try {
+        $param = $_POST;
+        $cls_id = $param['cls_id'];
+        $grade_id = $param['grade_id'];
+        $stud_idc = $param['stud_idc'];
+        $stud_name = $param['stud_name'];
+        $come_date = $param['come_date'];
+        $stud_type_id = $param['stud_type_id'];
+        $stud_status_id = $param['stud_status_id'];
+        $stud_auth = $param['stud_auth'] === 'true' ? 1 : 0;
+
+        //
+        $result = Mvv\mvvGradeStud::addNoExam($grade_id, $cls_id, $stud_name, $stud_idc, $stud_type_id, $stud_status_id, $stud_auth, $come_date);
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
+
+  public function read() {
+    Model\xonLogin::check(self::role_name, function ($user) {
+      try {
+        $param = $_POST;
+        $cls_id = $param['cls_id'];
+        $grade_id = $param['grade_id'];
+        $stud_idc = $param['stud_idc'];
+        $stud_name = $param['stud_name'];
+        $come_date = $param['come_date'];
+        $stud_type_id = $param['stud_type_id'];
+        $stud_status_id = $param['stud_status_id'];
+        $stud_auth = $param['stud_auth'] === 'true' ? 1 : 0;
+
+        //
         $result = Mvv\mvvGradeStud::addNoExam($grade_id, $cls_id, $stud_name, $stud_idc, $stud_type_id, $stud_status_id, $stud_auth, $come_date);
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {

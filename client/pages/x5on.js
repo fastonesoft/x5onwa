@@ -150,6 +150,8 @@ var doUrl = {
   gradestudmodi: `${host}/weapp/gradestud/modi`,
   gradestudauth: `${host}/weapp/gradestud/auth`,
   gradestudcome: `${host}/weapp/gradestud/come`,
+  gradestudrepet: `${host}/weapp/gradestud/repet`,
+  gradestudread: `${host}/weapp/gradestud/read`,
 
 
 
@@ -163,6 +165,14 @@ var doData = function (that, data) {
     that.setData({ [i]: data[i] })
   }
 };
+
+// 获取索引值
+var doGetIndex = function (arrs, id) {
+  for (var i=0; i<arrs.length; i++) {
+    var arr = arr[i]
+    if (arr.id === id) return i
+  }
+}
 
 // 数组单项选择
 var doGetRadio = function (arrs, success, fail) {
@@ -282,6 +292,57 @@ var doRequest = function (options) {
   })
 };
 
+var doRequestEx = function (options) {
+  util.showBusy('正在查询...')
+  qcloud.request({
+    url: options.url,
+    success: function (result) {
+      wx.hideToast()
+      var res = result.data
+      res.code === 0 && typeof options.success === 'function' && options.success(res.data)
+      res.code === 1 && typeof options.fail === 'function' && options.fail(res.data)
+      if (options.donshow) return
+
+      res.code === 1 && util.showModel('查询出错', res.data)
+    },
+    fail: function (error) {
+      wx.hideToast()
+      options.donshow ? void(0) : util.showModel('请求失败', '请确认登录是否过期，网络是否畅通')
+    }
+  })
+};
+
+/**
+ * 数据提交
+ * @param {String}   请求地址
+ * @param {Object}   JSON序列
+ * @param {Function} 成功回调
+ * @param {Function} 失败回调
+ */
+var doPostFormEx = function (options) {
+  util.showBusy('正在请求...')
+  qcloud.request({
+    url: options.url,
+    data: options.data,
+    method: 'POST',
+    header: { 'content-type': 'application/x-www-form-urlencoded' },
+    login: false,
+    success: function (result) {
+      wx.hideToast()
+      var res = result.data
+      res.code === 0 && typeof options.success === 'function' && options.success(res.data)
+      res.code === 1 && typeof options.fail === 'function' && options.fail(res.data)
+      if (options.donshow) return
+
+      res.code === 1 && util.showModel('请求出错', res.data)
+    },
+    fail: function (error) {
+      wx.hideToast()
+      options.donshow ? void(0) : util.showModel('请求失败', error.message)
+    }
+  })
+};
+
 var doRequestImage = function (options) {
   qcloud.request({
     url: options.url,
@@ -304,11 +365,11 @@ var doLogin = function (options) {
     qcloud.loginWithCode({
       success: res => {
         wx.hideToast()
-        if (typeof options.success === 'function') options.success(res);
+        typeof options.success === 'function' && options.success(res);
       },
       fail: err => {
         wx.hideToast()
-        if (typeof options.fail === 'function') options.fail(err);
+        typeof options.fail === 'function' && options.fail(err);
         util.showModel('登录错误', err.errMsg)
       }
     })
@@ -316,13 +377,12 @@ var doLogin = function (options) {
     qcloud.login({
       success: res => {
         wx.hideToast()
-        if (typeof options.success === 'function') options.success(res);
+        typeof options.success === 'function' && options.success(res);
       },
-      fail: err => {
-        console.log(err)
+      fail: () => {
         wx.hideToast()
-        if (typeof options.fail === 'function') options.fail(err);
-        util.showModel('登录错误', err.errMsg)
+        typeof options.fail === 'function' && options.fail();
+        util.showModel('登录错误', '拒绝授权，获取微信用户信息失败')
       }
     })
   }
@@ -352,190 +412,20 @@ var doSuccess = function (message) {
   util.showSuccess(message);
 };
 
-/**
- * 输入检测
- * 页面数据准备：
- *   errorShow: false
- *   errorMessage: '错误提示'
- *   errorArray: [0, 0, 0, 0, 0, 0, 0, 0]，根据检测控件个数来定大小
- * @param {Object} 事件参数
- * @param {Object} 页面对象
- */
-var doCheckInput = function (event, that) {
-  var reg = event.currentTarget.dataset.reg
-  var index = event.currentTarget.dataset.index
-  var message = event.currentTarget.dataset.message
-
-  var value = event.detail.value
-  var patt = new RegExp(reg, 'g')
-
-  var item = 'errorArray[' + index + ']'
-  var error = !patt.test(value)
-  that.setData({
-    [item]: error
-  })
-  // 无错退出
-  if (!error) return
-  // 出错提示
-  doShowError(that, message)
-};
-
-/**
- * 输入检测
- */
-var doCheckInputEx = function (event, that) {
-  var uid = event.currentTarget.dataset.uid
-  var keys = that.data.items
-  for (var i=0; i<keys.length; i++) {
-    var key = keys[i]
-    if (key.uid === uid) {
-      // 检测
-      var value = event.detail.value
-      var patt = new RegExp(key.regex_js)
-      key.value = value
-      key.error = key.required && !patt.test(value)
-      // 更新
-      keys[i] = key
-      that.setData({ items: keys });
-      // 出错
-      if (key.error) doShowError(that, key.message)
-      break
-    }
-  }
-};
-
-/**
- * 数组方式数据检测
- */
-var doCheckInputReg = function (options) {
-  var uid = options.event.currentTarget.dataset.uid
-  var value = options.event.detail.value
-  var patt = new RegExp(options.reg)
-
-  var data = options.data
-  data.forEach(function (item) {
-    if (item.uid === uid) {
-      item.value = value
-      item.error = !patt.test(value)
-      if (item.error) doShowError(options.that, options.message)
-    }
-  })
-  if (typeof options.success === 'function') options.success(data)
-}
-
-var doCheckFormReg = function (that, message, success) {
-  var items = that.data.items;
-  for (var i = 0; i < items.length; i++) {
-    if (items[i].error) {
-      doShowError(that, message)
-      return
-    }
-  }
-  // 成功回调
-  if (typeof success === 'function') success()
-}
-
-
-/**
- * 表单提交
- * 页面数据准备：
- *   errorArray
- * @param {Int} 检测起始位
- * @param {Int} 检测结束位
- */
-var doCheckForm = function (that, begin, end, success) {
-  var error = false
-  for (var i=begin; i<=end; i++) {
-    if (that.data.errorArray[i]) {
-      error = true
-      break;
-    }
-  }
-  if (error) {
-    // 出错提示
-    doShowError(that, '表单数据有误，请检查')
-    return
-  }
-  // 成功回调
-  if (typeof success === 'function') success()
-};
-
-/**
- * 表单提交
- */
-var doCheckFormEx = function (that, success) {
-  var items = that.data.items;
-  for (var i=0; i<items.length; i++) {
-    if (items[i].error) {
-      doShowError(that, items[i].message)
-      return
-    }
-  }
-  // 成功回调
-  if (typeof success === 'function') success()
-};
-
-/**
- * 数据提交
- * @param {String}   请求地址
- * @param {Object}   JSON序列
- * @param {Function} 成功回调
- * @param {Function} 失败回调
- */
-var doPostFormEx = function (options) {
-  qcloud.request({
-    url: options.url,
-    data: options.data,
-    method: 'POST',
-    header: { 'content-type': 'application/x-www-form-urlencoded' },
-    login: false,
-    success: function (result) {
-      // 检测code是否为0，
-      var data = result.data
-      if (data.code === 0) {
-        // 为0，表示请求成功
-        if (typeof options.success === 'function') options.success(data)
-        return
-      } 
-      if (data.code === 1) {
-        // 不为0给出错误提示
-        if (typeof options.fail === 'function') options.fail()
-        // 用页面错误提示
-        if (options.that) {
-          doShowError(options.that, data.data)
-        } else {
-          util.showModel('请求失败', data.data);
-        }
-        return
-      }
-      util.showModel('请求出错', result);
-    },
-    fail: function (error) {
-      if (typeof options.fail === 'function') options.fail()
-      util.showModel('请求失败', error.message);
-    }
-  })
-};
-
-
 // 对外接口
 module.exports = {
   url: doUrl,
   data: doData,
   login: doLogin,
   check: doCheck,
+  getIndex: doGetIndex,
   getRadio: doGetRadio,
   getCheckbox: doGetCheckbox,
   setRadio: doSetRadio,
   setCheckbox: doSetCheckbox,
   request: doRequest,
+  requestEx: doRequestEx,
   loadimage: doRequestImage,
-  checkInput: doCheckInput,
-  checkInputEx: doCheckInputEx,
-  checkInputReg: doCheckInputReg,
-  checkForm: doCheckForm,
-  checkFormEx: doCheckFormEx,
-  checkFormReg: doCheckFormReg,
   postForm: doPostFormEx,
   postFormEx: doPostFormEx,
   showError: doShowError,
