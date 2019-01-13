@@ -191,9 +191,12 @@ class Gradestud extends CI_Controller {
         $uid = $param['uid'];
         $stud_idc = $param['stud_idc'];
         $stud_name = $param['stud_name'];
+        $stud_type_id = $param['stud_type_id'];
+        $stud_status_id = $param['stud_status_id'];
+
 
         //
-        $result = Mvv\mvvGradeStud::studModi($uid, $stud_idc, $stud_name);
+        $result = Mvv\mvvGradeStud::studModi($uid, $stud_idc, $stud_name, $stud_type_id, $stud_status_id);
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
         $this->json(['code' => 1, 'data' => $e->getMessage()]);

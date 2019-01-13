@@ -76,10 +76,11 @@ class mvvGradeStud
    * @param $idc              身份证号
    * @param $name             学生姓名
    */
-  public static function studModi ($uid, $idc, $name) {
+  public static function studModi ($uid, $idc, $name, $stud_type_id, $stud_status_id) {
     $stud = xovGradeStud::checkByUid($uid);
     $id = $stud->stud_idc;
     xonChild::update(compact('idc', 'name'), compact('id'));
+    xonGradeStud::update(compact('stud_type_id', 'stud_status_id'), compact('uid'));
     return xovGradeStud::getsby(compact('uid'));
   }
 

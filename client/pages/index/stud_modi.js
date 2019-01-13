@@ -17,19 +17,36 @@ Page({
       url: x5on.url.gradestuduid,
       data: e,
       success: student => {
-        that.setData({ student })
-        //
+        // 学生
+        var stud_type_id = student.stud_type_id
         var stud_status_id = student.stud_status_id
         x5on.requestEx({
           url: x5on.url.gradestudstatus,
           success: status => {
+            // 状态
             var stud_status = x5on.getIndex(status, stud_status_id)
-            that.setData({ status, stud_status })
+            x5on.requestEx({
+              url: x5on.url.gradestudtype,
+              success: types => {
+                // 来源
+                var stud_type = x5on.getIndex(types, stud_type_id)
+                that.setData({ student, status, types, stud_status, stud_type })
+              }
+            })
           }
         })
       }
     })
+  },
 
+  typesChange: function (e) {
+    var stud_type = e.detail.value
+    this.setData({ stud_type })
+  },
+
+  statusChange: function (e) {
+    var stud_status = e.detail.value
+    this.setData({ stud_status })
   },
 
   studmodiSubmit: function (e) {
@@ -50,6 +67,14 @@ Page({
         required: true,
         chinese: true,
         rangelength: [2, 4],
+      },
+      stud_type: {
+        required: true,
+        min: 0,
+      },
+      stud_status: {
+        required: true,
+        min: 0,
       }
     }, {
       stud_idc: {
@@ -57,9 +82,17 @@ Page({
       },
       stud_name: {
         required: '学生姓名'
-      }      
+      },
+      stud_type: {
+        required: '学生来源'
+      },
+      stud_status: {
+        required: '学籍状态'
+      }
     })
     that.x5va.checkForm(e, function (form) {
+      form.stud_type_id = x5on.getId(that.data.types, form.stud_type)
+      form.stud_status_id = x5on.getId(that.data.status, form.stud_status)
       x5on.postFormEx({
         url: x5on.url.gradestudmodi,
         data: form,

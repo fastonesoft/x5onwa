@@ -166,14 +166,18 @@ var doData = function (that, data) {
   }
 };
 
-// 获取索引值
+// 根据编号获取索引值
 var doGetIndex = function (arrs, id) {
   for (var i=0; i<arrs.length; i++) {
-    var arr = arr[i]
+    var arr = arrs[i]
     if (arr.id === id) return i
   }
 }
 
+// 根据索引获取编号
+var doGetId = function (arrs, index) {
+  return arrs.length>index ? arrs[index].id : null
+}
 // 数组单项选择
 var doGetRadio = function (arrs, success, fail) {
   var find = null
@@ -312,13 +316,6 @@ var doRequestEx = function (options) {
   })
 };
 
-/**
- * 数据提交
- * @param {String}   请求地址
- * @param {Object}   JSON序列
- * @param {Function} 成功回调
- * @param {Function} 失败回调
- */
 var doPostFormEx = function (options) {
   util.showBusy('正在请求...')
   qcloud.request({
@@ -418,6 +415,7 @@ module.exports = {
   data: doData,
   login: doLogin,
   check: doCheck,
+  getId: doGetId,
   getIndex: doGetIndex,
   getRadio: doGetRadio,
   getCheckbox: doGetCheckbox,
