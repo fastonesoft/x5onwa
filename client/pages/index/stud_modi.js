@@ -53,11 +53,6 @@ Page({
     var that = this
     e.detail.value.uid = that.data.student.uid
     that.x5va = new x5va({
-      uid: {
-        required: true,
-        minlength: 32,
-        maxlength: 32,
-      },
       stud_idc: {
         required: true,
         idcard: true,

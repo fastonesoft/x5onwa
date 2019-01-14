@@ -47,7 +47,7 @@ class x5va {
       messages: {
         required: '不得为空',
         tel: '请输入11位的手机号码',
-        date: '请输入有效的日期，例如：2005-08-15',
+        date: '请输入有效的日期，格式XXXX-XX-XX',
         number: '请输入有效的数字',
         digits: '请输入有效的非负整数',
         chinese: '请输入有效的中文字符',

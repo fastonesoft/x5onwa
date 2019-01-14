@@ -41,11 +41,8 @@ Page({
     that.x5va.checkForm(e, function (form) {
       var pages = getCurrentPages()
       var prevPage = pages[pages.length - 2]
-
-      var grade_id = prevPage.getGradeid()
-      var cls_id = prevPage.getClsid()
-      form.grade_id = grade_id
-      form.cls_id = cls_id
+      form.grade_id = prevPage.getGradeid()
+      form.cls_id = prevPage.getClsid()
 
       form.stud_type_id = 1
       form.stud_status_id = 1

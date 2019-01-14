@@ -1,27 +1,27 @@
 <!--pages/index/stud_down.wxml-->
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
-<form bindsubmit="studdownSubmit">
-  <view class="weui-cells__title">学生信息</view>
+<form bindsubmit="studdownSubmit" wx:if="{{student}}">
+  <view class="weui-cells__title">基本信息</view>
   <view class="weui-cells weui-cells_after-title">
     <view class="weui-cell">
-      <view class="weui-cell__bd">学生年级</view>
-      <view class="weui-cell__ft">{{grade_name}}</view>
+      <view class="weui-cell__bd">学生姓名</view>
+      <view class="weui-cell__ft">{{student.stud_name}}</view>
     </view>
     <view class="weui-cell">
       <view class="weui-cell__bd">学生班级</view>
-      <view class="weui-cell__ft">{{cls_name}}</view>
+      <view class="weui-cell__ft">{{student.cls_name}}</view>
     </view>
-    <view class="weui-cell">
-      <view class="weui-cell__bd">学生姓名</view>
-      <view class="weui-cell__ft">{{stud_name}}</view>
-    </view>
+  </view>
+
+  <view class="weui-cells__title">休学设置</view>
+  <view class="weui-cells weui-cells_after-title">
     <view class="weui-cell weui-cell_input">
       <view class="weui-cell__hd">
         <view class="weui-label">休学时间</view>
       </view>
       <view class="weui-cell__bd">
-        <input class="weui-input" placeholder="输入休学时间" name="come_date" type="number" maxlength="10" />
+        <input class="weui-input" placeholder="输入休学时间" name="down_date" type="text" maxlength="10" />
       </view>
     </view>
     <view class="weui-cell weui-cell_input">
@@ -29,7 +29,7 @@
         <view class="weui-label">结束时间</view>
       </view>
       <view class="weui-cell__bd">
-        <input class="weui-input" placeholder="输入结束时间" name="come_date" type="number" maxlength="10" />
+        <input class="weui-input" placeholder="输入结束时间" name="end_date" type="text" maxlength="10" />
       </view>
     </view>
     <view class="weui-cell weui-cell_input">
@@ -37,7 +37,7 @@
         <view class="weui-label">休学理由</view>
       </view>
       <view class="weui-cell__bd">
-        <input class="weui-input" placeholder="输入休学理由" name="memo" type="number" maxlength="10" />
+        <input class="weui-input" placeholder="输入休学理由" name="down_reason" type="text" maxlength="10" />
       </view>
     </view>
     <view class="weui-cell weui-cell_input">
@@ -45,11 +45,10 @@
         <view class="weui-label">班主任姓名</view>
       </view>
       <view class="weui-cell__bd">
-        <input class="weui-input" placeholder="输入班主任姓名" name="memo" type="number" maxlength="10" />
+        <input class="weui-input" placeholder="输入班主任姓名" name="teach_name" type="text" maxlength="4" />
       </view>
     </view>
   </view>
-
   <view class="weui-btn-area">
     <button type="primary" form-type="submit">提交</button>
   </view>

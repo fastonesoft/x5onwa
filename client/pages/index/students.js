@@ -186,7 +186,12 @@ Page({
 
   // 休学
   studdownClick: function (e) {
-    wx.navigateTo({ url: 'stud_down' })
+    var that = this
+    x5on.getRadio(this.data.students, res => {
+      wx.navigateTo({ url: 'stud_down?uid=' + res.uid })
+    }, () => {
+      x5on.showError(that, '没有选中相关学生')
+    })
   },
 
   // 转出
