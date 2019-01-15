@@ -1,7 +1,7 @@
 <!--pages/index/stud_return.wxml-->
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
-<form bindsubmit="studreturnSubmit" wx:if="{{1}}">
+<form bindsubmit="studreturnSubmit" wx:if="{{tasks.length!==0}}">
   <view class="weui-cells__title">学生列表</view>
   <view class="weui-cells weui-cells_after-title">
     <radio-group name="stud_name" bindchange="studentsChange">

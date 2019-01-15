@@ -4,18 +4,12 @@ var x5on = require('../x5on.js')
 Page({
 
   data: {
-    students: [],
+    tasks: [],
   },
 
   onLoad: function(e) {
-    var that = this
-    x5on.postFormEx({
-      url: x5on.url.gradestudtask,
-      data: e,
-      success: tasks => {
-        that.setData({ tasks })
-      }
-    })
+    var tasks = JSON.parse(e.tasks)
+    this.setData({ tasks })
   },
 
   gradeChange: function(e) {
@@ -30,8 +24,7 @@ Page({
     x5on.postFormEx({
       url: x5on.url.gradestudclass,
       data: { grade_id },
-      success: (result) => {
-        var classes = result.data
+      success: classes => {
         that.setData({ classes })
       }
     })

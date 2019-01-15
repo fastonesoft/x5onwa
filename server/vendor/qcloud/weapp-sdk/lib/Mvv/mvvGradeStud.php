@@ -13,6 +13,7 @@ use QCloud_WeApp_SDK\Model\xovClass;
 use QCloud_WeApp_SDK\Model\xovGradeCurrent;
 use QCloud_WeApp_SDK\Model\xovGradeStud;
 use \Exception;
+use QCloud_WeApp_SDK\Model\xovGradeStudTask;
 
 class mvvGradeStud
 {
