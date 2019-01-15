@@ -302,17 +302,16 @@ class Gradestud extends CI_Controller {
       try {
         $param = $_POST;
         $stud_id = $param['stud_id'];
-        $cls_id = $param['cls_id'];
+        $year_id = $param['year_id'];
+        $sch_id = $param['sch_id'];
         $grade_id = $param['grade_id'];
-        $stud_idc = $param['stud_idc'];
-        $stud_name = $param['stud_name'];
-        $come_date = $param['come_date'];
-        $stud_type_id = $param['stud_type_id'];
+        $cls_id = $param['cls_id'];
         $stud_status_id = $param['stud_status_id'];
-        $stud_auth = $param['stud_auth'] === 'true' ? 1 : 0;
-
+        $has_done = 0;
+        $task_memo = $param['task_memo'];
+        var_dump($task_memo->down_date);
         //
-        $result = Mvv\mvvGradeStud::addNoExam($grade_id, $cls_id, $stud_name, $stud_idc, $stud_type_id, $stud_status_id, $stud_auth, $come_date);
+        $result = Mvv\mvvGradeStud::addTask($stud_id, $year_id, $sch_id, $grade_id, $cls_id, $stud_status_id, $has_done);
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
         $this->json(['code' => 1, 'data' => $e->getMessage()]);

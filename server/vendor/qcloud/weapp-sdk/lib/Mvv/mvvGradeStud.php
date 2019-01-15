@@ -5,6 +5,7 @@ use QCloud_WeApp_SDK\Model\x5on;
 use QCloud_WeApp_SDK\Model\xonChild;
 use QCloud_WeApp_SDK\Model\xonGrade;
 use QCloud_WeApp_SDK\Model\xonGradeStud;
+use QCloud_WeApp_SDK\Model\xonGradeStudTask;
 use QCloud_WeApp_SDK\Model\xonStudent;
 use QCloud_WeApp_SDK\Model\xonStudStatus;
 use QCloud_WeApp_SDK\Model\xonStudType;
@@ -125,6 +126,15 @@ class mvvGradeStud
     // 添加年度学生
     $uid = xonGradeStud::add($grade_id, $cls_id, $stud_id, $stud_type_id, $stud_status_id, $stud_auth);
     return xovGradeStud::getsBy(compact('uid'));
+  }
+
+  public static function addTask ($stud_id, $year_id, $sch_id, $grade_id, $cls_id, $stud_status_id, $has_done) {
+    // 当前年度学校学生只能进行一次同类变更
+    xonGradeStudTask::existBy(compact('year_id', 'sch_id', 'stud_id', 'stud_status_id'));
+    $id = xonGradeStudTask::max('id', compact('grade_id'));
+    $id = x5on::getId($id, $grade_id, 4);
+    $uid = x5on::getUid();
+    xonGradeStudTask::insert(compact('id', 'uid', 'stud_id', 'year_id', 'sch_id', 'grade_id', 'cls_id', 'stud_status_id', 'has_done'));
   }
 
   public static function type () {

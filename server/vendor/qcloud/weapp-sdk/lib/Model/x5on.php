@@ -149,6 +149,16 @@ class x5on {
     return bin2hex(openssl_random_pseudo_bytes(16));
   }
 
+  public static function getId ($id, $prev, $right_bit) {
+    if ($id === null) {
+      return $prev . str_pad('1', $right_bit, '0', STR_PAD_LEFT);
+    } else {
+      $right = substr($id, - $right_bit);
+      $right++;
+      return $prev . str_pad($right, $right_bit, '0', STR_PAD_LEFT);
+    }
+  }
+
   public static function getLike ($like) {
     if ($like) return '%' . $like . '%';
     return '%李%';

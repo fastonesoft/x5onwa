@@ -51,16 +51,19 @@ Page({
         },
       })
 
-    that.x5va.checkForm(e, function (form) {
-      var pages = getCurrentPages()
-      var prevPage = pages[pages.length - 2]
-      var student = this.data.student
-      form.uid = student.uid
-      form.grade_id = prevPage.getGradeid()
-      form.cls_id = prevPage.getClsid()
+    that.x5va.checkForm(e, function (task_memo) {
+      var student = that.data.student
+      var form = {}
+      form.stud_id = student.stud_id
+      form.year_id = student.year_id
+      form.sch_id = student.sch_id
+      form.grade_id = student.grade_id
+      form.cls_id = student.cls_id
+      form.stud_status_id = student.stud_status_id
+      form.task_memo = task_memo
 
       x5on.postFormEx({
-        url: x5on.url.gradestudquery,
+        url: x5on.url.gradestuddown,
         data: form,
         success: students => {
           that.setData({ students })
