@@ -5,7 +5,7 @@
   <view class="weui-cells__title">学生列表</view>
   <view class="weui-cells weui-cells_after-title">
     <radio-group name="stud_name" bindchange="studentsChange">
-      <label class="weui-cell weui-check__label" wx:for="{{students}}" wx:key="uid">
+      <label class="weui-cell weui-check__label" wx:for="{{tasks}}" wx:key="uid">
         <radio class="weui-check" value="{{item.uid}}" checked="{{item.checked}}" />
         <view class="weui-cell__bd" data-uid="{{item.uid}}" bindtap="studentClick">
           {{item.cls_name}} - {{item.stud_name}}({{item.stud_sex}})

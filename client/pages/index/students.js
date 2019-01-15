@@ -171,7 +171,14 @@ Page({
 
   // 复学
   studreturnClick: function (e) {
-    wx.navigateTo({ url: 'stud_return' })
+    var that = this
+    var grade_id = that.getGradeid()
+    console.log(grade_id)
+    if (grade_id) {
+      wx.navigateTo({ url: 'stud_return?grade_id=' + grade_id + '&stud_status_id=6' })
+    } else {
+      x5on.showError(that, '没有选中相关学生')
+    }
   },
 
   // 重读

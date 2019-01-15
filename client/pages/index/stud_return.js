@@ -7,13 +7,13 @@ Page({
     students: [],
   },
 
-  onLoad: function(options) {
+  onLoad: function(e) {
     var that = this
-    x5on.request({
-      url: x5on.url.gradestudgrade,
-      success: function(result) {
-        var grades = result.data
-        that.setData({ grades })
+    x5on.postFormEx({
+      url: x5on.url.gradestudtask,
+      data: e,
+      success: tasks => {
+        that.setData({ tasks })
       }
     })
   },

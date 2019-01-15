@@ -38,7 +38,7 @@ Page({
           required: '转出学校'
         },
     })
-    that.x5va.checkForm(e, function (form) {
+    that.x5va.checkForm(e, form => {
       var pages = getCurrentPages()
       var prevPage = pages[pages.length - 2]
       form.grade_id = prevPage.getGradeid()
@@ -55,7 +55,7 @@ Page({
           wx.navigateBack()
         }
       })
-    }, function (error) {
+    }, error => {
       x5on.showError(that, error)
     })
   }
