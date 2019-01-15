@@ -51,7 +51,7 @@ Page({
         },
       })
 
-    that.x5va.checkForm(e, function (task_memo) {
+    that.x5va.checkForm(e, task_memo => {
       var student = that.data.student
       var form = {}
       form.stud_id = student.stud_id
@@ -60,16 +60,20 @@ Page({
       form.grade_id = student.grade_id
       form.cls_id = student.cls_id
       form.stud_status_id = student.stud_status_id
-      form.task_memo = task_memo
+      form.task_memo = JSON.stringify(task_memo)
 
       x5on.postFormEx({
         url: x5on.url.gradestuddown,
         data: form,
         success: students => {
-          that.setData({ students })
+          var dd = JSON.parse(students)
+          
+          console.log(dd)
+          // that.setData({ students })
+
         }
       })
-    }, function (error) {
+    }, error => {
       x5on.showError(that, error)
     })
   },
