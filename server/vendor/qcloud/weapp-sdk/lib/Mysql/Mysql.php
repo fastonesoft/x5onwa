@@ -289,7 +289,6 @@ class Mysql
   public static function raw ($sql, $execValues = []) {
     $query = self::getInstance()->prepare($sql);
     $result = $query->execute($execValues);
-
     if ($result) {
       return $query;
     } else {

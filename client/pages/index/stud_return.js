@@ -19,7 +19,7 @@ Page({
     var grade_id = prevPage.getGradeid()
 
     x5on.postFormEx({
-      url: x5on.url.gradestudgradedown,
+      url: x5on.url.gradestudgradesdown,
       data: { grade_id },
       success: grades => {
         that.setData({ grades })
@@ -29,7 +29,7 @@ Page({
 
   gradeChange: function(e) {
     var that = this
-    var classIndex = -1
+    var classIndex = 0
     var gradeIndex = e.detail.value
     that.setData({ gradeIndex, classIndex })
     //
@@ -44,10 +44,15 @@ Page({
   },
 
   classChange: function(e) {
-    var that = this
     var classIndex = e.detail.value
-    if (classes.length == 0 || classIndex == -1) return
-    that.setData({ classIndex })
+    this.setData({ classIndex })
+  },
+
+  studentsChange: function(e) {
+    var uid = e.detail.value
+    x5on.setRadio(this.data.tasks, uid, tasks => {
+      this.setData({ tasks })
+    })
   },
 
   studreturnSubmit: function (e) {

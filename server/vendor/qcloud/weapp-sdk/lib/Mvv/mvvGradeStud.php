@@ -143,7 +143,12 @@ class mvvGradeStud
   }
 
   public static function queryTask ($grade_id, $stud_status_id) {
-    return xovGradeStudTask::getsBy(compact('grade_id', 'stud_status_id'));
+    $has_done = 0;
+    return xovGradeStudTask::getsBy(compact('grade_id', 'stud_status_id', 'has_done'));
+  }
+
+  public static function gradesDown ($id) {
+    return xovGradeCurrent::customsSuff(compact('id'), '>', 'limit 1');
   }
 
   public static function type () {

@@ -320,16 +320,44 @@ class vAppinfo
   /**
    * 自定义查询
    */
-  public static function custom ($columns = ['*'], $conditions, $customs, $customs_condition, $customs_opt = 'and', $suffix = '') {
-    return dbs::custom(static::$tableName, $columns, $conditions, $customs, $customs_condition, $customs_opt, $suffix);
+  public static function custom ($columns = ['*'], $conditions, $customs, $condition_key, $customs_opt = 'and', $suffix = '') {
+    return dbs::custom(static::$tableName, $columns, $conditions, $customs, $condition_key, $customs_opt, $suffix);
   }
 
-  public static function customs ($customs, $customs_condition) {
-    return static::custom(['*'], '', $customs, $customs_condition);
+  public static function customs ($customs, $condition_key) {
+    return static::custom(['*'], '', $customs, $condition_key);
   }
 
-  public static function customsBy ($conditions, $customs, $customs_condition) {
-    return static::custom(['*'], $conditions, $customs, $customs_condition);
+  public static function customsSuff ($customs, $condition_key, $suffix) {
+    return static::custom(['*'], '', $customs, $condition_key, 'and', $suffix);
+  }
+
+  public static function customsSuffor ($customs, $condition_key, $suffix) {
+    return static::custom(['*'], '', $customs, $condition_key, 'or', $suffix);
+  }
+
+  public static function customsBy ($conditions, $customs, $condition_key) {
+    return static::custom(['*'], $conditions, $customs, $condition_key);
+  }
+
+  public static function customsBySuff ($conditions, $customs, $condition_key, $suffix) {
+    return static::custom(['*'], $conditions, $customs, $condition_key, 'and', $suffix);
+  }
+
+  public static function customsBySuffor ($conditions, $customs, $condition_key, $suffix) {
+    return static::custom(['*'], $conditions, $customs, $condition_key, 'or', $suffix);
+  }
+
+  public static function customsColumnsBy ($columns, $conditions, $customs, $condition_key) {
+    return static::custom($columns, $conditions, $customs, $condition_key);
+  }
+
+  public static function customsColumnsBySuff ($columns, $conditions, $customs, $condition_key, $suffix) {
+    return static::custom($columns, $conditions, $customs, $condition_key, 'and', $suffix);
+  }
+
+  public static function customsColumnsBySuffor ($columns, $conditions, $customs, $condition_key, $suffix) {
+    return static::custom($columns, $conditions, $customs, $condition_key, 'or', $suffix);
   }
 
 }

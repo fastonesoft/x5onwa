@@ -344,7 +344,7 @@ class Gradestud extends CI_Controller {
         $param = $_POST;
         $grade_id = $param['grade_id'];
         //
-        $result = Mvv\mvvGradeStud::queryTask($grade_id);
+        $result = Mvv\mvvGradeStud::gradesDown($grade_id);
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
         $this->json(['code' => 1, 'data' => $e->getMessage()]);
