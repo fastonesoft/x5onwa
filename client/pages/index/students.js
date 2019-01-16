@@ -171,7 +171,22 @@ Page({
 
   // 复学
   studreturnClick: function (e) {
-    wx.navigateTo({ url: 'stud_return' })
+    var that = this
+    var grade_id = that.getGradeid()
+    if (grade_id) {
+      var stud_status_id = 6
+      var form = { grade_id, stud_status_id }
+      x5on.postFormEx({
+        url: x5on.url.gradestudtask,
+        data: form,
+        success: tasks => {
+          if (tasks.length === 0) return
+          wx.navigateTo({ url: 'stud_return?tasks=' + JSON.stringify(tasks) })
+        }
+      })
+    } else {
+      x5on.showError(that, '没有选中相关学生')
+    }
   },
 
   // 重读

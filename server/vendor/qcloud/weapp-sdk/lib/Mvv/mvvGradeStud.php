@@ -13,6 +13,7 @@ use QCloud_WeApp_SDK\Model\xovClass;
 use QCloud_WeApp_SDK\Model\xovGradeCurrent;
 use QCloud_WeApp_SDK\Model\xovGradeStud;
 use \Exception;
+use QCloud_WeApp_SDK\Model\xovGradeStudTask;
 
 class mvvGradeStud
 {
@@ -128,13 +129,21 @@ class mvvGradeStud
     return xovGradeStud::getsBy(compact('uid'));
   }
 
-  public static function addTask ($stud_id, $year_id, $sch_id, $grade_id, $cls_id, $stud_status_id, $has_done) {
+  public static function addTask ($grade_stud_uid, $stud_id, $year_id, $sch_id, $grade_id, $cls_id, $stud_status_id, $has_done, $task_memo) {
     // 当前年度学校学生只能进行一次同类变更
     xonGradeStudTask::existBy(compact('year_id', 'sch_id', 'stud_id', 'stud_status_id'));
     $id = xonGradeStudTask::max('id', compact('grade_id'));
     $id = x5on::getId($id, $grade_id, 4);
     $uid = x5on::getUid();
-    xonGradeStudTask::insert(compact('id', 'uid', 'stud_id', 'year_id', 'sch_id', 'grade_id', 'cls_id', 'stud_status_id', 'has_done'));
+    xonGradeStudTask::insert(compact('id', 'uid', 'stud_id', 'year_id', 'sch_id', 'grade_id', 'cls_id', 'stud_status_id', 'has_done', 'task_memo'));
+    // 变更学生信息
+    $uid = $grade_stud_uid;
+    xonGradeStud::update(compact('stud_status_id'), compact('uid'));
+    return xovGradeStud::getsBy(compact('uid'));
+  }
+
+  public static function queryTask ($grade_id, $stud_status_id) {
+    return xovGradeStudTask::getsBy(compact('grade_id', 'stud_status_id'));
   }
 
   public static function type () {
