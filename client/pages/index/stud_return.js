@@ -55,6 +55,13 @@ Page({
     })
   },
 
+  studentClick: function(e) {
+    var task_memo = e.currentTarget.dataset.task_memo
+    var memos = JSON.parse(task_memo)
+    console.log(memos)
+    this.setData({ memos })
+  },
+
   studreturnSubmit: function (e) {
 
   },
