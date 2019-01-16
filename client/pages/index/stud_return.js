@@ -5,22 +5,35 @@ Page({
 
   data: {
     tasks: [],
+    grades: [],
+    classes: [],
   },
 
   onLoad: function(e) {
+    var that = this
     var tasks = JSON.parse(e.tasks)
     this.setData({ tasks })
+
+    var pages = getCurrentPages()
+    var prevPage = pages[pages.length - 2]
+    var grade_id = prevPage.getGradeid()
+
+    x5on.postFormEx({
+      url: x5on.url.gradestudgradedown,
+      data: { grade_id },
+      success: grades => {
+        that.setData({ grades })
+      }
+    })
   },
 
   gradeChange: function(e) {
     var that = this
-    var students = []
     var classIndex = -1
     var gradeIndex = e.detail.value
-    that.setData({ gradeIndex, classIndex, students })
+    that.setData({ gradeIndex, classIndex })
     //
-    var grades = that.data.grades
-    var grade_id = grades[gradeIndex].id
+    var grade_id = x5on.getId(this.data.grades, gradeIndex)
     x5on.postFormEx({
       url: x5on.url.gradestudclass,
       data: { grade_id },
@@ -32,23 +45,9 @@ Page({
 
   classChange: function(e) {
     var that = this
-    var classes = that.data.classes
     var classIndex = e.detail.value
     if (classes.length == 0 || classIndex == -1) return
     that.setData({ classIndex })
-
-    var grades = that.data.grades
-    var gradeIndex = that.data.gradeIndex
-    var cls_id = classes[classIndex].id
-    var grade_id = grades[gradeIndex].id
-    x5on.postFormEx({
-      url: x5on.url.gradestudcls,
-      data: { grade_id, cls_id },
-      success: (result) => {
-        var students = result.data
-        that.setData({ students })
-      }
-    })
   },
 
   studreturnSubmit: function (e) {
