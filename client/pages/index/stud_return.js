@@ -1,5 +1,6 @@
 // pages/index/stud_return.js
 var x5on = require('../x5on.js')
+import x5va from '../x5va.js'
 
 Page({
 
@@ -58,12 +59,45 @@ Page({
   studentClick: function(e) {
     var task_memo = e.currentTarget.dataset.task_memo
     var memos = JSON.parse(task_memo)
-    console.log(memos)
     this.setData({ memos })
   },
 
   studreturnSubmit: function (e) {
-
+    var that = this
+    that.x5va = new x5va({
+      stud_uid: {
+        required: true,
+      },
+      grade_id: {
+        required: true,
+        min: 0,
+      },
+      cls_id: {
+        required: true,
+        min: 0,
+      },
+    }, {
+        stud_uid: {
+          required: '学生列表'
+        },
+        grade_id: {
+          required: '目标年级'
+        },
+        cls_id: {
+          required: '目标班级'
+        },
+      })
+    that.x5va.checkForm(e, function (form) {
+      x5on.postFormEx({
+        url: x5on.url.gradestudquery,
+        data: form,
+        success: students => {
+          that.setData({ students })
+        }
+      })
+    }, function (error) {
+      x5on.showError(that, error)
+    })
   },
 
 })

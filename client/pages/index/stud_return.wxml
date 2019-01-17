@@ -48,7 +48,7 @@
         <view class="weui-label">目标年级</view>
       </view>
       <view class="weui-cell__bd">
-        <picker bindchange="gradeChange" value="{{gradeIndex}}" range="{{grades}}" range-key="grade_name" disabled="{{!grades || grades.length===0}}">
+        <picker bindchange="gradeChange" name="grade_id" value="{{grades[gradeIndex].id}}" range="{{grades}}" range-key="grade_name" disabled="{{!grades || grades.length===0}}">
           <view class="weui-select weui-select_in-select-after">{{grades[gradeIndex].grade_name}}</view>
         </picker>
       </view>
@@ -62,7 +62,7 @@
         <view class="weui-label">目标班级</view>
       </view>
       <view class="weui-cell__bd">
-        <picker bindchange="classChange" value="{{classIndex}}" range="{{classes}}" range-key="cls_name" disabled="{{!classes || classes.length===0}}">
+        <picker bindchange="classChange" name="cls_id" value="{{classes[classIndex].id}}" range="{{classes}}" range-key="cls_name" disabled="{{!classes || classes.length===0}}">
           <view class="weui-select weui-select_in-select-after">{{classes[classIndex].cls_name}}</view>
         </picker>
       </view>
