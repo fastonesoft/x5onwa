@@ -155,6 +155,7 @@ var doUrl = {
   gradestuddown: `${host}/weapp/gradestud/down`,
   gradestudtask: `${host}/weapp/gradestud/task`,
   gradestudgradesdown: `${host}/weapp/gradestud/gradesdown`,
+  gradestudreturns: `${host}/weapp/gradestud/returns`,
 
 
 

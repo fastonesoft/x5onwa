@@ -89,10 +89,13 @@ Page({
       })
     that.x5va.checkForm(e, function (form) {
       x5on.postFormEx({
-        url: x5on.url.gradestudquery,
+        url: x5on.url.gradestudreturns,
         data: form,
         success: students => {
-          that.setData({ students })
+          var pages = getCurrentPages()
+          var prevPage = pages[pages.length - 2]
+          prevPage.setData({ students })
+          wx.navigateBack()
         }
       })
     }, function (error) {
