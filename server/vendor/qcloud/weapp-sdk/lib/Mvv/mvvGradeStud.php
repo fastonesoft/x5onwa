@@ -129,17 +129,16 @@ class mvvGradeStud
     return xovGradeStud::getsBy(compact('uid'));
   }
 
-  public static function addTask ($grade_stud_uid, $stud_id, $year_id, $sch_id, $grade_id, $cls_id, $stud_status_id, $has_done, $task_memo) {
+  public static function addTask ($grade_stud_id, $task_status_id, $has_done, $task_memo) {
     // 当前年度学校学生只能进行一次同类变更
-    xonGradeStudTask::existBy(compact('year_id', 'sch_id', 'stud_id', 'stud_status_id'));
-    $id = xonGradeStudTask::max('id', compact('grade_id'));
-    $id = x5on::getId($id, $grade_id, 4);
+    xonGradeStudTask::existBy(compact('grade_stud_id', 'task_status_id'));
     $uid = x5on::getUid();
-    xonGradeStudTask::insert(compact('id', 'uid', 'stud_id', 'year_id', 'sch_id', 'grade_id', 'cls_id', 'stud_status_id', 'has_done', 'task_memo'));
+    xonGradeStudTask::insert(compact('uid', 'grade_stud_id', 'task_status_id', 'has_done', 'task_memo'));
     // 变更学生信息
-    $uid = $grade_stud_uid;
-    xonGradeStud::update(compact('stud_status_id'), compact('uid'));
-    return xovGradeStud::getsBy(compact('uid'));
+    $id = $grade_stud_id;
+    $stud_status_id = $task_status_id;
+    xonGradeStud::update(compact('stud_status_id'), compact('id'));
+    return xovGradeStud::getsBy(compact('id'));
   }
 
   public static function queryTask ($grade_id, $stud_status_id) {
@@ -149,6 +148,27 @@ class mvvGradeStud
 
   public static function gradesDown ($id) {
     return xovGradeCurrent::customsSuff(compact('id'), '>', 'limit 1');
+  }
+
+  public static function studReturn ($uid, $grade_id, $cls_id) {
+    // 查询、变更
+    $has_done = 1;
+    $task = xovGradeStudTask::checkByUid($uid);
+    xonGradeStudTask::update(compact('has_done'), compact('uid'));
+
+    $stud_id = $task->stud_id;
+    $stud_type_id = $task->stud_type_id;
+    $stud_status_id = 2;   // todo: 不直接设置
+    $stud_auth = $task->stud_auth;
+    $same_group = 0;
+    $stud_code = $task->stud_code;
+    $stud_diploma = $task->stud_diploma;
+
+    $id = xonGradeStud::max('id', compact('grade_id'));
+    $id = x5on::getId($id, $grade_id, 4);
+    $uid = x5on::getUid();
+    xonGradeStud::insert(compact('id', 'uid', 'grade_id', 'cls_id', 'stud_id', 'stud_type_id', 'stud_status_id', 'stud_auth', 'same_group', 'stud_code', 'stud_diploma'));
+    return xovGradeStud::getsBy(compact('id'));
   }
 
   public static function type () {

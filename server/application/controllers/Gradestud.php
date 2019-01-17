@@ -301,17 +301,12 @@ class Gradestud extends CI_Controller {
     Model\xonLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
-        $uid = $param['uid'];
-        $stud_id = $param['stud_id'];
-        $year_id = $param['year_id'];
-        $sch_id = $param['sch_id'];
-        $grade_id = $param['grade_id'];
-        $cls_id = $param['cls_id'];
+        $grade_stud_id = $param['grade_stud_id'];
         $stud_status_id = $param['stud_status_id'];
         $has_done = 0;
         $task_memo = $param['task_memo'];
         //
-        $result = Mvv\mvvGradeStud::addTask($uid, $stud_id, $year_id, $sch_id, $grade_id, $cls_id, $stud_status_id, $has_done, $task_memo);
+        $result = Mvv\mvvGradeStud::addTask($grade_stud_id, $stud_status_id, $has_done, $task_memo);
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
         $this->json(['code' => 1, 'data' => $e->getMessage()]);
@@ -358,9 +353,11 @@ class Gradestud extends CI_Controller {
     Model\xonLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
+        $task_uid = $param['task_uid'];
         $grade_id = $param['grade_id'];
+        $cls_id = $param['cls_id'];
         //
-        $result = Mvv\mvvGradeStud::gradesDown($grade_id);
+        $result = Mvv\mvvGradeStud::studReturn($task_uid, $grade_id, $cls_id);
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
         $this->json(['code' => 1, 'data' => $e->getMessage()]);

@@ -60,9 +60,8 @@ Page({
     var that = this
     var classes = that.data.classes
     var classIndex = e.detail.value
-    if (classes.length==0 || classIndex==-1) return
-    var comeshow = true
-    that.setData({ classIndex, comeshow })
+    if (classes.length===0 || classIndex===-1) return
+    that.setData({ classIndex })
 
     var cls_id = that.getClsid()
     var grade_id = that.getGradeid()
@@ -70,7 +69,8 @@ Page({
       url: x5on.url.gradestudcls,
       data: { grade_id, cls_id },
       success: students => {
-        that.setData({ students })
+        var comeshow = students.length !== 0
+        that.setData({ students, comeshow })
       }
     })
   },

@@ -4,7 +4,7 @@
 <form bindsubmit="studreturnSubmit" wx:if="{{tasks.length!==0}}">
   <view class="weui-cells__title">学生列表</view>
   <view class="weui-cells weui-cells_after-title">
-    <radio-group name="stud_uid" bindchange="studentsChange">
+    <radio-group name="task_uid" bindchange="studentsChange">
       <label class="weui-cell weui-check__label" wx:for="{{tasks}}" wx:key="uid">
         <radio class="weui-check" value="{{item.uid}}" checked="{{item.checked}}" />
         <view class="weui-cell__bd" data-task_memo="{{item.task_memo}}" bindtap="studentClick">

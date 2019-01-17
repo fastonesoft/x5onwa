@@ -65,7 +65,7 @@ Page({
   studreturnSubmit: function (e) {
     var that = this
     that.x5va = new x5va({
-      stud_uid: {
+      task_uid: {
         required: true,
       },
       grade_id: {
@@ -77,7 +77,7 @@ Page({
         min: 0,
       },
     }, {
-        stud_uid: {
+        task_uid: {
           required: '学生列表'
         },
         grade_id: {
