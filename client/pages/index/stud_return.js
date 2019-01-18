@@ -11,7 +11,6 @@ Page({
   },
 
   onLoad: function(e) {
-    var that = this
     var tasks = JSON.parse(e.tasks)
     this.setData({ tasks })
 
@@ -23,35 +22,35 @@ Page({
       url: x5on.url.gradestudgradesdown,
       data: { grade_id },
       success: grades => {
-        that.setData({ grades })
+        this.setData({ grades })
       }
     })
   },
 
   gradeChange: function(e) {
-    var that = this
-    var classIndex = 0
-    var gradeIndex = e.detail.value
-    that.setData({ gradeIndex, classIndex })
-    //
-    var grade_id = x5on.getId(this.data.grades, gradeIndex)
-    x5on.postFormEx({
-      url: x5on.url.gradestudclass,
-      data: { grade_id },
-      success: classes => {
-        that.setData({ classes })
-      }
+    x5on.pickChange(e, gradeIndex => {
+      var classIndex = 0
+      this.setData({ gradeIndex, classIndex })
+      //
+      var grade_id = x5on.getId(this.data.grades, gradeIndex)
+      x5on.postFormEx({
+        url: x5on.url.gradestudclass,
+        data: { grade_id },
+        success: classes => {
+          this.setData({ classes })
+        }
+      })
     })
   },
 
   classChange: function(e) {
-    var classIndex = e.detail.value
-    this.setData({ classIndex })
+    x5on.pickChange(e, classIndex => {
+      this.setData({ classIndex })
+    })
   },
 
   studentsChange: function(e) {
-    var uid = e.detail.value
-    x5on.setRadio(this.data.tasks, uid, tasks => {
+    x5on.setRadio(this.data.tasks, e.detail.value, tasks => {
       this.setData({ tasks })
     })
   },
@@ -86,8 +85,9 @@ Page({
         },
       })
     that.x5va.checkForm(e, function (form) {
-      form.cls_id = x5on.getId(that.data.grades, form.cls_id)
+      form.cls_id = x5on.getId(that.data.classes, form.cls_id)
       form.grade_id = x5on.getId(that.data.grades, form.grade_id)
+
       x5on.postFormEx({
         url: x5on.url.gradestudreturns,
         data: form,

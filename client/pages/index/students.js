@@ -94,7 +94,8 @@ Page({
         url: x5on.url.gradestudquery,
         data: form,
         success: students => {
-          that.setData({ students })
+          var comeshow = students.length !== 0
+          that.setData({ students, comeshow })
         }
       })
     }, function (error) {
@@ -103,16 +104,14 @@ Page({
   },
 
   studentsChange: function (e) {
-    var uid = e.detail.value
-    x5on.setRadio(this.data.students, uid, students => {
+    x5on.setRadio(this.data.students, e.detail.value, students => {
       this.setData({ students })
     })
   },
 
   studentClick: function (e) {
-    var uid = e.currentTarget.dataset.uid
     wx.navigateTo({
-      url: 'student?uid=' + uid,
+      url: 'student?uid=' + e.currentTarget.dataset.uid,
       success: () => {
       }
     })
