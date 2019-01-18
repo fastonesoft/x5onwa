@@ -23,7 +23,7 @@ Page({
   getGradeid: function () {
     var grades = this.data.grades
     var gradeIndex = this.data.gradeIndex
-    if (grades.length>0 && gradeIndex && gradeIndex>-1) {
+    if (grades && grades.length>0 && gradeIndex && gradeIndex>-1) {
       return grades[gradeIndex].id
     }
     return null
@@ -32,7 +32,7 @@ Page({
   getClsid: function () {
     var classes = this.data.classes
     var classIndex = this.data.classIndex
-    if (classes.length>0 && classIndex && classIndex>-1) {
+    if (classes && classes.length>0 && classIndex && classIndex>-1) {
       return classes[classIndex].id
     }
     return null
@@ -58,20 +58,19 @@ Page({
 
   classChange: function (e) {
     var that = this
-    var classes = that.data.classes
-    var classIndex = e.detail.value
-    if (classes.length===0 || classIndex===-1) return
-    that.setData({ classIndex })
-
-    var cls_id = that.getClsid()
-    var grade_id = that.getGradeid()
-    x5on.postFormEx({
-      url: x5on.url.gradestudcls,
-      data: { grade_id, cls_id },
-      success: students => {
-        var comeshow = students.length !== 0
-        that.setData({ students, comeshow })
-      }
+    x5on.pickChange(e, classIndex => {
+      that.setData({ classIndex })
+      // 
+      var cls_id = that.getClsid()
+      var grade_id = that.getGradeid()
+      x5on.postFormEx({
+        url: x5on.url.gradestudcls,
+        data: { grade_id, cls_id },
+        success: students => {
+          var comeshow = students.length !== 0
+          that.setData({ students, comeshow })
+        }
+      })
     })
   },
 

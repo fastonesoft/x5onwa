@@ -223,6 +223,11 @@ var doSetCheckbox = function (arrs, uids, success) {
   typeof success === 'function' && success(arrs)
 }
 
+var doPickChange = function (pick, success) {
+  var value = pick.detail.value
+  value > -1 && typeof success === 'function' && success(value)
+}
+
 var doCheck = function (options) {
   const session = qcloud.Session.get()
   if (session) {
@@ -425,6 +430,7 @@ module.exports = {
   getCheckbox: doGetCheckbox,
   setRadio: doSetRadio,
   setCheckbox: doSetCheckbox,
+  pickChange: doPickChange,
   request: doRequest,
   requestEx: doRequestEx,
   loadimage: doRequestImage,

@@ -70,11 +70,9 @@ Page({
       },
       grade_id: {
         required: true,
-        min: 0,
       },
       cls_id: {
         required: true,
-        min: 0,
       },
     }, {
         task_uid: {
@@ -88,6 +86,8 @@ Page({
         },
       })
     that.x5va.checkForm(e, function (form) {
+      form.cls_id = x5on.getId(that.data.grades, form.cls_id)
+      form.grade_id = x5on.getId(that.data.grades, form.grade_id)
       x5on.postFormEx({
         url: x5on.url.gradestudreturns,
         data: form,
