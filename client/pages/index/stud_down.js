@@ -55,7 +55,7 @@ Page({
       var student = that.data.student
       var form = {}
       form.grade_stud_id = student.id
-      form.stud_status_id = 6
+      form.stud_status_id = x5on.data.status_down
       form.task_memo = JSON.stringify(task_memo)
 
       x5on.postFormEx({

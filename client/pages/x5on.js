@@ -157,18 +157,22 @@ var doUrl = {
   gradestudgradesdown: `${host}/weapp/gradestud/gradesdown`,
   gradestudreturns: `${host}/weapp/gradestud/returns`,
 
-
-
   // 错误测试地址
   test: `${host}/weapp/youtu`,
   imageurl: `${host}/weapp/data`,
 };
 
-var doData = function (that, data) {
-  for (var i in data) {
-    that.setData({ [i]: data[i] })
-  }
-};
+var doData = {
+  status_normal: 1,
+  status_return: 2,
+  status_come: 3,
+  status_read: 4,
+  status_repetition: 5,
+  status_down: 21,
+  status_out: 22,
+  status_leave: 23,
+  status_temp: 99,
+}
 
 // 根据编号获取索引值
 var doGetIndex = function (arrs, id) {

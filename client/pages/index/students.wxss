@@ -1,4 +1,4 @@
 /* pages/index/students.wxss */
-.students-images-area { padding: 16rpx;  display: flex; flex-flow: row; }
-.students-images-area .students_images { width: 45rpx; height: 45rpx; margin-right: 15rpx; }
-.students_split { width: 1rpx; height: 44rpx; border-left: solid #ddd 1rpx; margin-right: 15rpx }
+.students-images-area { padding: 16rpx;  display: flex; flex-flow: row wrap; }
+.students-images-area .students_images { width: 70rpx; height: 70rpx; margin: 6rpx; }
+.students_split { width: 1rpx; height: 70rpx; border-left: solid #ddd 1rpx; margin: 6rpx; }

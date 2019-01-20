@@ -67,8 +67,12 @@ Page({
         url: x5on.url.gradestudcls,
         data: { grade_id, cls_id },
         success: students => {
+          var male = 0, female = 0
+          students.forEach(student => {
+            student.stud_sex_num ? male++ : female++
+          })
           var comeshow = students.length !== 0
-          that.setData({ students, comeshow })
+          that.setData({ students, comeshow, male, female })
         }
       })
     })
@@ -94,7 +98,7 @@ Page({
         url: x5on.url.gradestudquery,
         data: form,
         success: students => {
-          var comeshow = students.length !== 0
+          var comeshow = students.length === 0 ? false : that.data.comeshow
           that.setData({ students, comeshow })
         }
       })
@@ -172,7 +176,7 @@ Page({
     var that = this
     var grade_id = that.getGradeid()
     if (grade_id) {
-      var stud_status_id = 6
+      var stud_status_id = x5on.data.status_down
       var form = { grade_id, stud_status_id }
       x5on.postFormEx({
         url: x5on.url.gradestudtask,
@@ -207,12 +211,12 @@ Page({
     })
   },
 
-  // 转出
+  // 离校
   studleaveClick: function (e) {
     wx.navigateTo({ url: 'stud_leave' })
   },
 
-  // 离校
+  // 转出
   studoutClick: function (e) {
     wx.navigateTo({ url: 'stud_out' })
   },
