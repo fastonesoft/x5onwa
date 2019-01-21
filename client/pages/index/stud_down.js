@@ -64,7 +64,14 @@ Page({
         success: students => {
           var pages = getCurrentPages()
           var prevPage = pages[pages.length - 2]
-          prevPage.setData({ students })
+          //
+          var male = 0, female = 0
+          students.forEach(student => {
+            student.stud_sex_num ? male++ : female++
+          })
+          var comeshow = students.length !== 0
+          prevPage.setData({ students, comeshow, male, female })
+          //
           wx.navigateBack()
         }
       })

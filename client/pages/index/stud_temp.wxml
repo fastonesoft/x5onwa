@@ -1,4 +1,4 @@
-<!--pages/index/stud_out.wxml-->
+<!--pages/index/stud_temp.wxml-->
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
 <form bindsubmit="studoutSubmit">
@@ -18,33 +18,26 @@
     </view>
   </view>
 
-  <view class="weui-cells__title">转出设置</view>
+  <view class="weui-cells__title">临时设置</view>
   <view class="weui-cells weui-cells_after-title">
     <view class="weui-cell weui-cell_input">
       <view class="weui-cell__hd">
-        <view class="weui-label">转出时间</view>
+        <view class="weui-label">离校时间</view>
       </view>
       <view class="weui-cell__bd">
-        <input class="weui-input" placeholder="输入转出时间" name="out_date" type="text" maxlength="10" />
+        <input class="weui-input" placeholder="输入离校时间" name="temp_date" type="text" maxlength="10" />
       </view>
     </view>
     <view class="weui-cell weui-cell_input">
       <view class="weui-cell__hd">
-        <view class="weui-label">目标学校</view>
+        <view class="weui-label">离校原因</view>
       </view>
       <view class="weui-cell__bd">
-        <input class="weui-input" placeholder="输入目标学校" name="dest_sch" type="number" maxlength="10" />
-      </view>
-    </view>
-    <view class="weui-cell weui-cell_input">
-      <view class="weui-cell__hd">
-        <view class="weui-label">转出理由</view>
-      </view>
-      <view class="weui-cell__bd">
-        <input class="weui-input" placeholder="输入转出理由" name="memo" type="number" maxlength="10" />
+        <input class="weui-input" placeholder="输入离校原因" name="memo" type="text" maxlength="10" />
       </view>
     </view>
   </view>
+
   <view class="weui-btn-area">
     <button type="primary" form-type="submit">提交</button>
   </view>

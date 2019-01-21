@@ -12,6 +12,10 @@
       <view class="weui-cell__bd">学生班级</view>
       <view class="weui-cell__ft">{{student.cls_name}}</view>
     </view>
+    <view class="weui-cell">
+      <view class="weui-cell__bd">身份证号</view>
+      <view class="weui-cell__ft">{{student.stud_idc}}</view>
+    </view>
   </view>
 
   <view class="weui-cells__title">休学设置</view>

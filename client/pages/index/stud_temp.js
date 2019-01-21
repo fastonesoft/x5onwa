@@ -1,4 +1,4 @@
-// pages/index/stud_leave.js
+// pages/index/stud_temp.js
 var x5on = require('../x5on.js')
 import x5va from '../x5va.js'
 

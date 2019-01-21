@@ -86,6 +86,7 @@ Page({
       }
     })
     that.x5va.checkForm(e, function (form) {
+      form.uid = that.data.student.uid
       form.stud_type_id = x5on.getId(that.data.types, form.stud_type)
       form.stud_status_id = x5on.getId(that.data.status, form.stud_status)
       x5on.postFormEx({
@@ -94,7 +95,14 @@ Page({
         success: students => {
           var pages = getCurrentPages()
           var prevPage = pages[pages.length - 2]
-          prevPage.setData({ students })
+          //
+          var male = 0, female = 0
+          students.forEach(student => {
+            student.stud_sex_num ? male++ : female++
+          })
+          var comeshow = students.length !== 0
+          prevPage.setData({ students, comeshow, male, female })
+          //
           wx.navigateBack()
         }
       })

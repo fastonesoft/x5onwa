@@ -28,7 +28,8 @@
     "pages/index/stud_leave",
     "pages/index/stud_out",
     "pages/index/stud_down",
-        
+    "pages/index/stud_temp",
+
     "pages/index/myrename",
     "pages/index/myexchange",
     "pages/index/myexqrcode",

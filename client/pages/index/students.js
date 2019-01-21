@@ -5,6 +5,7 @@ import x5va from '../x5va.js'
 Page({
 
   data: {
+    comeshow: false,
     grades: [],
     classes: [],
     students: [],
@@ -98,8 +99,12 @@ Page({
         url: x5on.url.gradestudquery,
         data: form,
         success: students => {
+          var male = 0, female = 0
+          students.forEach(student => {
+            student.stud_sex_num ? male++ : female++
+          })
           var comeshow = students.length === 0 ? false : that.data.comeshow
-          that.setData({ students, comeshow })
+          that.setData({ students, comeshow, male, female })
         }
       })
     }, function (error) {
@@ -182,8 +187,8 @@ Page({
         url: x5on.url.gradestudtask,
         data: form,
         success: tasks => {
-          if (tasks.length === 0) return
-          wx.navigateTo({ url: 'stud_return?tasks=' + JSON.stringify(tasks) })
+          tasks.length === 0 && x5on.showError(that, '本年度没有要复学的学生')
+          tasks.length !== 0 && wx.navigateTo({ url: 'stud_return?tasks=' + JSON.stringify(tasks) })
         }
       })
     } else {
@@ -211,13 +216,33 @@ Page({
     })
   },
 
-  // 离校
-  studleaveClick: function (e) {
-    wx.navigateTo({ url: 'stud_leave' })
-  },
-
   // 转出
   studoutClick: function (e) {
-    wx.navigateTo({ url: 'stud_out' })
+    var that = this
+    x5on.getRadio(this.data.students, res => {
+      wx.navigateTo({ url: 'stud_out?uid=' + res.uid })
+    }, () => {
+      x5on.showError(that, '没有选中相关学生')
+    })
   },
+
+  // 离校
+  studleaveClick: function (e) {
+    var that = this
+    x5on.getRadio(this.data.students, res => {
+      wx.navigateTo({ url: 'stud_leave?uid=' + res.uid })
+    }, () => {
+      x5on.showError(that, '没有选中相关学生')
+    })
+  },
+
+  // 临时
+  studtempClick: function (e) {
+    var that = this
+    x5on.getRadio(this.data.students, res => {
+      wx.navigateTo({ url: 'stud_temp?uid=' + res.uid })
+    }, () => {
+      x5on.showError(that, '没有选中相关学生')
+    })
+  }, 
 })
