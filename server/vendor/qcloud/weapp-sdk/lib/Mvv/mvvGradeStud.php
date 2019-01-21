@@ -171,6 +171,20 @@ class mvvGradeStud
     return xovGradeStud::getsBy(compact('id'));
   }
 
+  public static function studTemp ($id, $uid, $task_memo) {
+    $res = xonGradeStud::checkBy(compact('id', 'uid'));
+    // 记录
+    $uid = x5on::getUid();
+    $grade_stud_id = $id;
+    $has_done = 0;
+    $task_status_id = $res->stud_status_id;  // 原始学籍状态
+    xonGradeStudTask::insert(compact('uid', 'grade_stud_id', 'has_done', 'task_status_id', 'task_memo'));
+    // 变更
+    $stud_status_id = x5on::STATUS_TEMP;
+    xonGradeStud::update(compact('stud_status_id'), compact('id'));
+    return xovGradeStud::getsBy(compact('id'));
+  }
+
   public static function type () {
     return xonStudType::getsColumns(['id', 'name']);
   }

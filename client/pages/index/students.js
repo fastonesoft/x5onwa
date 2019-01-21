@@ -176,24 +176,36 @@ Page({
     // wx.navigateTo({ url: 'stud_jump' })
   },
 
+  // 回校
+  studbackClick: function (e) {
+    var that = this
+    var grade_id = that.getGradeid()
+    var stud_status_id = x5on.data.status_down
+    var form = { grade_id, stud_status_id }
+    x5on.postFormEx({
+      url: x5on.url.gradestudtask,
+      data: form,
+      success: tasks => {
+        tasks.length === 0 && x5on.showError(that, '本年度没有要复学的学生')
+        tasks.length !== 0 && wx.navigateTo({ url: 'stud_return?tasks=' + JSON.stringify(tasks) })
+      }
+    })
+  },
+
   // 复学
   studreturnClick: function (e) {
     var that = this
     var grade_id = that.getGradeid()
-    if (grade_id) {
-      var stud_status_id = x5on.data.status_down
-      var form = { grade_id, stud_status_id }
-      x5on.postFormEx({
-        url: x5on.url.gradestudtask,
-        data: form,
-        success: tasks => {
-          tasks.length === 0 && x5on.showError(that, '本年度没有要复学的学生')
-          tasks.length !== 0 && wx.navigateTo({ url: 'stud_return?tasks=' + JSON.stringify(tasks) })
-        }
-      })
-    } else {
-      x5on.showError(that, '没有选中相关学生')
-    }
+    var stud_status_id = x5on.data.status_down
+    var form = { grade_id, stud_status_id }
+    x5on.postFormEx({
+      url: x5on.url.gradestudtask,
+      data: form,
+      success: tasks => {
+        tasks.length === 0 && x5on.showError(that, '本年度没有要复学的学生')
+        tasks.length !== 0 && wx.navigateTo({ url: 'stud_return?tasks=' + JSON.stringify(tasks) })
+      }
+    })
   },
 
   // 重读

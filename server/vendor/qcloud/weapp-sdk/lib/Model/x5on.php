@@ -14,6 +14,9 @@ class x5on {
   // 临时用户组编号
   const GROUP_TEMP_USER = 1;
 
+  // 学籍状态
+  const STATUS_TEMP = 99;
+
   // 用户信息设置
   const USER_SET_MYSELF = 'user-set-myself';
 

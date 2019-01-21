@@ -52,9 +52,8 @@ Page({
       })
 
     that.x5va.checkForm(e, task_memo => {
-      var student = that.data.student
       var form = {}
-      form.grade_stud_id = student.id
+      form.grade_stud_id = that.data.student.id
       form.stud_status_id = x5on.data.status_down
       form.task_memo = JSON.stringify(task_memo)
 

@@ -157,6 +157,9 @@ var doUrl = {
   gradestudgradesdown: `${host}/weapp/gradestud/gradesdown`,
   gradestudreturns: `${host}/weapp/gradestud/returns`,
 
+  gradestudtemp: `${host}/weapp/gradestud/temp`,
+
+
   // 错误测试地址
   test: `${host}/weapp/youtu`,
   imageurl: `${host}/weapp/data`,
