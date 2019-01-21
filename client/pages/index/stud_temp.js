@@ -25,7 +25,7 @@ Page({
       temp_reason: {
         required: true,
         chinese: true,
-        rangelength: [4, 10],
+        rangelength: [2, 10],
       },
     }, {
         temp_date: {
