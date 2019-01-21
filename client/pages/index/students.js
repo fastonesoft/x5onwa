@@ -180,14 +180,14 @@ Page({
   studbackClick: function (e) {
     var that = this
     var grade_id = that.getGradeid()
-    var stud_status_id = x5on.data.status_down
+    var stud_status_id = x5on.data.status_temp
     var form = { grade_id, stud_status_id }
     x5on.postFormEx({
       url: x5on.url.gradestudtask,
       data: form,
       success: tasks => {
-        tasks.length === 0 && x5on.showError(that, '本年度没有要复学的学生')
-        tasks.length !== 0 && wx.navigateTo({ url: 'stud_return?tasks=' + JSON.stringify(tasks) })
+        tasks.length === 0 && x5on.showError(that, '本年度没有要回校的学生')
+        tasks.length !== 0 && wx.navigateTo({ url: 'stud_back?tasks=' + JSON.stringify(tasks) })
       }
     })
   },
@@ -257,4 +257,5 @@ Page({
       x5on.showError(that, '没有选中相关学生')
     })
   }, 
+
 })

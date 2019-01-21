@@ -384,4 +384,21 @@ class Gradestud extends CI_Controller {
       $this->json($error);
     });
   }
+
+  public function back() {
+    Model\xonLogin::check(self::role_name, function ($user) {
+      try {
+        $param = $_POST;
+        $task_uid = $param['task_uid'];
+        $cls_id = $param['cls_id'];
+        //
+        $result = Mvv\mvvGradeStud::studBack($task_uid, $cls_id);
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
 }

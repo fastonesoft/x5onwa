@@ -178,10 +178,25 @@ class mvvGradeStud
     $grade_stud_id = $id;
     $has_done = 0;
     $task_status_id = $res->stud_status_id;  // 原始学籍状态
+    // 检测记录是否存在
+    xonGradeStudTask::existBy(compact('grade_stud_id', 'task_status_id'));
+    // 没有重复记录，添加
     xonGradeStudTask::insert(compact('uid', 'grade_stud_id', 'has_done', 'task_status_id', 'task_memo'));
     // 变更
     $stud_status_id = x5on::STATUS_TEMP;
     xonGradeStud::update(compact('stud_status_id'), compact('id'));
+    return xovGradeStud::getsBy(compact('id'));
+  }
+
+  public static function studBack ($uid, $cls_id) {
+    // 查询、变更
+    $has_done = 1;
+    $task = xovGradeStudTask::checkByUid($uid);
+    xonGradeStudTask::update(compact('has_done'), compact('uid'));
+
+    $id = $task->grade_stud_id;
+    $stud_status_id = $task->task_status_id;
+    xonGradeStud::update(compact('cls_id', 'stud_status_id'), compact('id'));
     return xovGradeStud::getsBy(compact('id'));
   }
 

@@ -47,26 +47,26 @@
 </form>
 
 <view class="students-images-area" wx:if="{{comeshow}}">
-  <image class="students_images" src="/images/index/stud_add.png" data-itemid="stud_add" bindtap="studaddClick"></image>
-  <image class="students_images" src="/images/index/stud_come.png" data-itemid="stud_come" bindtap="studcomeClick"></image>
-  <image class="students_images" src="/images/index/stud_read.png" data-itemid="stud_read" bindtap="studreadClick"></image>
-  <image class="students_images" src="/images/index/stud_repetition.png" data-itemid="stud_repetition" bindtap="studrepetClick"></image>
+  <image class="students_images" src="/images/index/stud_add.png" bindtap="studaddClick"></image>
+  <image class="students_images" src="/images/index/stud_come.png" bindtap="studcomeClick"></image>
+  <image class="students_images" src="/images/index/stud_read.png" bindtap="studreadClick"></image>
+  <image class="students_images" src="/images/index/stud_repetition.png" bindtap="studrepetClick"></image>
   
   <image class="students_split"></image>
-  <image class="students_images" src="/images/index/stud_modi.png" data-itemid="stud_modi" bindtap="studmodiClick"></image>
-  <image class="students_images" src="/images/index/stud_auth.png" data-itemid="stud_auth" bindtap="studauthClick"></image>
-  <image class="students_images" src="/images/index/stud_move.png" data-itemid="stud_move" bindtap="studmoveClick"></image>
-  <image class="students_images" src="/images/index/stud_jump.png" data-itemid="stud_jump" bindtap="studjumpClick"></image>
+  <image class="students_images" src="/images/index/stud_modi.png" bindtap="studmodiClick"></image>
+  <image class="students_images" src="/images/index/stud_auth.png" bindtap="studauthClick"></image>
+  <image class="students_images" src="/images/index/stud_move.png" bindtap="studmoveClick"></image>
+  <image class="students_images" src="/images/index/stud_jump.png" bindtap="studjumpClick"></image>
 
   <image class="students_split"></image>
-  <image class="students_images" src="/images/index/stud_back.png" data-itemid="stud_return" bindtap="studbackClick"></image>
-  <image class="students_images" src="/images/index/stud_return.png" data-itemid="stud_return" bindtap="studreturnClick"></image>
+  <image class="students_images" src="/images/index/stud_back.png" bindtap="studbackClick"></image>
+  <image class="students_images" src="/images/index/stud_return.png" bindtap="studreturnClick"></image>
 
   <image class="students_split"></image>
-  <image class="students_images" src="/images/index/stud_down.png" data-itemid="stud_down" bindtap="studdownClick"></image>
-  <image class="students_images" src="/images/index/stud_out.png" data-itemid="stud_out" bindtap="studoutClick"></image>
-  <image class="students_images" src="/images/index/stud_leave.png" data-itemid="stud_leave" bindtap="studleaveClick"></image>
-  <image class="students_images" src="/images/index/stud_temp.png" data-itemid="stud_return" bindtap="studtempClick"></image>
+  <image class="students_images" src="/images/index/stud_down.png" bindtap="studdownClick"></image>
+  <image class="students_images" src="/images/index/stud_out.png" bindtap="studoutClick"></image>
+  <image class="students_images" src="/images/index/stud_leave.png" bindtap="studleaveClick"></image>
+  <image class="students_images" src="/images/index/stud_temp.png" bindtap="studtempClick"></image>
 </view>
 
 <form wx:if="{{students.length>0}}">

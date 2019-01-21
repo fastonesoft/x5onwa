@@ -156,7 +156,7 @@ var doUrl = {
   gradestudtask: `${host}/weapp/gradestud/task`,
   gradestudgradesdown: `${host}/weapp/gradestud/gradesdown`,
   gradestudreturns: `${host}/weapp/gradestud/returns`,
-
+  gradestudback: `${host}/weapp/gradestud/back`,
   gradestudtemp: `${host}/weapp/gradestud/temp`,
 
 
@@ -189,6 +189,7 @@ var doGetIndex = function (arrs, id) {
 var doGetId = function (arrs, index) {
   return arrs.length>index ? arrs[index].id : null
 }
+
 // 数组单项选择
 var doGetRadio = function (arrs, success, fail) {
   var find = null

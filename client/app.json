@@ -29,6 +29,7 @@
     "pages/index/stud_out",
     "pages/index/stud_down",
     "pages/index/stud_temp",
+    "pages/index/stud_back",
 
     "pages/index/myrename",
     "pages/index/myexchange",
