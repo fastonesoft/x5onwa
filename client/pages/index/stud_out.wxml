@@ -45,6 +45,8 @@
       </view>
     </view>
   </view>
+  <view class="weui-cells__tips">确认转出设置，一旦提交，无法撤消。</view>
+
   <view class="weui-btn-area">
     <button type="primary" form-type="submit">提交</button>
   </view>

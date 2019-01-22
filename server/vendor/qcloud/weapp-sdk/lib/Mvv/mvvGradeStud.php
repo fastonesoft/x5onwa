@@ -38,7 +38,7 @@ class mvvGradeStud
    */
   public static function studCls ($grade_id, $cls_id) {
     if ($grade_id && $cls_id) {
-      // 当前年度的在校生
+      // 当前年度的在校生（往届生用别的方法查询）
       $in_sch = 1;
       $current_year = 1;
       return xovGradeStud::getsBySuff(compact('grade_id', 'cls_id', 'in_sch', 'current_year'), 'order by grade_id, cls_num, stud_status_id, stud_sex_num, stud_id');
@@ -147,10 +147,12 @@ class mvvGradeStud
   }
 
   public static function gradesDown ($id) {
+    // 休学年级查询
     return xovGradeCurrent::customsSuff(compact('id'), '>', 'limit 1');
   }
 
   public static function studReturn ($uid, $grade_id, $cls_id) {
+    // 复学设置
     // 查询、变更
     $has_done = 1;
     $task = xovGradeStudTask::checkByUid($uid);
@@ -172,16 +174,13 @@ class mvvGradeStud
   }
 
   public static function studTemp ($id, $uid, $task_memo) {
+    // 临时离校记录
     $res = xonGradeStud::checkBy(compact('id', 'uid'));
     // 记录
-    $uid = x5on::getUid();
-    $grade_stud_id = $id;
     $has_done = 0;
     $task_status_id = $res->stud_status_id;  // 原始学籍状态
-    // 检测记录是否存在
-    xonGradeStudTask::existBy(compact('grade_stud_id', 'task_status_id'));
-    // 没有重复记录，添加
-    xonGradeStudTask::insert(compact('uid', 'grade_stud_id', 'has_done', 'task_status_id', 'task_memo'));
+    // 添加记录
+    self::addTask($id, $task_status_id, $has_done, $task_memo);
     // 变更
     $stud_status_id = x5on::STATUS_TEMP;
     xonGradeStud::update(compact('stud_status_id'), compact('id'));
@@ -198,6 +197,10 @@ class mvvGradeStud
     $stud_status_id = $task->task_status_id;
     xonGradeStud::update(compact('cls_id', 'stud_status_id'), compact('id'));
     return xovGradeStud::getsBy(compact('id'));
+  }
+
+  public static function studOutLeave () {
+
   }
 
   public static function type () {

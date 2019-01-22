@@ -67,6 +67,8 @@
   <image class="students_images" src="/images/index/stud_out.png" bindtap="studoutClick"></image>
   <image class="students_images" src="/images/index/stud_leave.png" bindtap="studleaveClick"></image>
   <image class="students_images" src="/images/index/stud_temp.png" bindtap="studtempClick"></image>
+  <image class="students_split"></image>
+  <image class="students_images_big" src="/images/index/stud_notin.png" bindtap="studnotinClick"></image>
 </view>
 
 <form wx:if="{{students.length>0}}">
