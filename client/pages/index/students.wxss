@@ -1,5 +1,5 @@
 /* pages/index/students.wxss */
 .students-images-area { padding: 16rpx;  display: flex; flex-flow: row wrap; }
 .students-images-area .students_images { width: 66rpx; height: 66rpx; margin: 6rpx; }
-.students-images-area .students_images_big { width: 132rpx; height: 66rpx; margin: 6rpx; }
+.students-images-area .students_images_big { width: 104rpx; height: 66rpx; margin: 6rpx; }
 .students_split { width: 1rpx; height: 66rpx; border-left: solid #ddd 1rpx; margin: 6rpx; }

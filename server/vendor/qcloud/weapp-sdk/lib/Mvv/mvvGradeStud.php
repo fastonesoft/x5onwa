@@ -129,6 +129,16 @@ class mvvGradeStud
     return xovGradeStud::getsBy(compact('uid'));
   }
 
+  /**
+   * 作为任务管理的统一添加方法
+   * @param $grade_stud_id
+   * @param $task_status_id
+   * @param $has_done
+   * @param $task_memo
+   * @return array
+   * @throws Exception
+   */
+
   public static function addTask ($grade_stud_id, $task_status_id, $has_done, $task_memo) {
     // 当前年度学校学生只能进行一次同类变更
     xonGradeStudTask::existBy(compact('grade_stud_id', 'task_status_id'));
@@ -141,8 +151,7 @@ class mvvGradeStud
     return xovGradeStud::getsBy(compact('id'));
   }
 
-  public static function queryTask ($grade_id, $stud_status_id) {
-    $has_done = 0;
+  public static function queryTask ($grade_id, $stud_status_id, $has_done) {
     return xovGradeStudTask::getsBy(compact('grade_id', 'stud_status_id', 'has_done'));
   }
 
@@ -160,7 +169,7 @@ class mvvGradeStud
 
     $stud_id = $task->stud_id;
     $stud_type_id = $task->stud_type_id;
-    $stud_status_id = 2;   // todo: 不直接设置
+    $stud_status_id = x5on::STATUS_RETURN;
     $stud_auth = $task->stud_auth;
     $same_group = 0;
     $stud_code = $task->stud_code;
@@ -199,8 +208,18 @@ class mvvGradeStud
     return xovGradeStud::getsBy(compact('id'));
   }
 
-  public static function studOutLeave () {
-
+  public static function studOutLeave ($id, $uid, $task_memo) {
+    // 转出、离校记录
+    $res = xonGradeStud::checkBy(compact('id', 'uid'));
+    // 记录
+    $has_done = 1;
+    $task_status_id = $res->stud_status_id;  // 原始学籍状态
+    // 添加记录
+    self::addTask($id, $task_status_id, $has_done, $task_memo);
+    // 变更
+    $stud_status_id = x5on::STATUS_TEMP;
+    xonGradeStud::update(compact('stud_status_id'), compact('id'));
+    return xovGradeStud::getsBy(compact('id'));
   }
 
   public static function type () {

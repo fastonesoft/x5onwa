@@ -15,6 +15,7 @@ class x5on {
   const GROUP_TEMP_USER = 1;
 
   // 学籍状态
+  const STATUS_RETURN = 2;
   const STATUS_TEMP = 99;
 
   // 用户信息设置
