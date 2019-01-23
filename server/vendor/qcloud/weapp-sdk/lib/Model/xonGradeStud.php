@@ -6,18 +6,17 @@ class xonGradeStud extends cAppinfo
   protected static $tableName = 'xonGradeStud';
   protected static $tableTitle = '年度学生';
 
-  public static function add ($grade_id, $cls_id, $stud_id, $stud_type_id, $stud_status_id, $stud_auth) {
+  public static function add ($grade_id, $cls_id, $stud_id, $stud_type_id, $stud_status_id, $stud_auth, $stud_code, $stud_diploma) {
+    // 检测
     $grade = xonGrade::checkById($grade_id);
-    $year_id = $grade->year_id;
-    // 检测重复
-    xonGradeStud::existBy(compact('year_id', 'stud_id'));
-    // 无重复数据，添加
+    xonGradeStud::existBy(compact('grade_id', 'stud_id'));
+    // 无重复，添加
+    $id = self::max('id', compact('grade_id'));
+    $id = x5on::getId($id, $grade_id, 4);
     $uid = x5on::getUid();
     $same_group = 0;
-    $stud_code = null;
-    $stud_diploma = null;
-    self::insert(compact('uid', 'grade_id', 'cls_id', 'year_id', 'stud_id', 'stud_type_id', 'stud_status_id', 'stud_auth', 'same_group', 'stud_code', 'stud_diploma'));
-    return $uid;
+    xonGradeStud::insert(compact('id', 'uid', 'grade_id', 'cls_id', 'stud_id', 'stud_type_id', 'stud_status_id', 'stud_auth', 'same_group', 'stud_code', 'stud_diploma'));
+    return $id;
   }
 
 

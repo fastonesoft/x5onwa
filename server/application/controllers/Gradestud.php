@@ -306,7 +306,7 @@ class Gradestud extends CI_Controller {
         $has_done = 0;
         $task_memo = $param['task_memo'];
         //
-        $result = Mvv\mvvGradeStud::addTask($grade_stud_id, $stud_status_id, $has_done, $task_memo);
+        $result = Mvv\mvvGradeStud::studDown($grade_stud_id, $stud_status_id, $has_done, $task_memo);
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
         $this->json(['code' => 1, 'data' => $e->getMessage()]);
