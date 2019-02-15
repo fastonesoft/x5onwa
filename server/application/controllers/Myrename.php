@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+use QCloud_WeApp_SDK\Mvv;
 use QCloud_WeApp_SDK\Model;
 
 class Myrename extends CI_Controller {
@@ -10,7 +11,7 @@ class Myrename extends CI_Controller {
    * 当前年级列表
    */
   public function index() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $grades = Model\xovGradeCurrent::getRows();
         $result = compact('grades');
@@ -28,7 +29,7 @@ class Myrename extends CI_Controller {
    * 当前年级班级
    */
   public function classes() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
         $grade_id = $param['grade_id'];
@@ -47,7 +48,7 @@ class Myrename extends CI_Controller {
    * 变更班级序号
    */
   public function update() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
         $result = Model\xonClass::update($param);

@@ -1,12 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+use QCloud_WeApp_SDK\Mvv;
 use QCloud_WeApp_SDK\Model;
 
 class Child extends CI_Controller {
   const role_name = 'userchilds';
   public function index() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       // 孩子信息
 
       // 返回信息
@@ -17,7 +18,7 @@ class Child extends CI_Controller {
   }
 
   public function update () {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         // 获取参数
         $param = $_POST;

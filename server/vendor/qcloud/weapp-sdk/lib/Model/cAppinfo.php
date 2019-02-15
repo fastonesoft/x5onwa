@@ -33,6 +33,14 @@ class cAppinfo extends vAppinfo
     return dbs::update(static::$tableName, $columns, $conditions);
   }
 
+  public static function setsById ($columns, $id) {
+    return static::update($columns, compact('id'));
+  }
+
+  public static function setsByUid ($columns, $uid) {
+    return static::update($columns, compact('uid'));
+  }
+
   /**
    * @param             $conditions     compact的条件
    * @return            number          受影响的数据条数
@@ -40,14 +48,6 @@ class cAppinfo extends vAppinfo
    */
   public static function delete ($conditions) {
     return dbs::delete(static::$tableName, $conditions);
-  }
-
-  public static function setColumnsById ($columns, $id) {
-    return static::update($columns, compact('id'));
-  }
-
-  public static function setColumnsByUid ($columns, $uid) {
-    return static::update($columns, compact('uid'));
   }
 
   public static function delById ($id) {

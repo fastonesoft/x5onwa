@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+use QCloud_WeApp_SDK\Mvv;
 use QCloud_WeApp_SDK\Model;
 
 class Mytuning extends CI_Controller {
@@ -10,7 +11,7 @@ class Mytuning extends CI_Controller {
    * 当前年级列表
    */
   public function index() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $grades = Model\xovGradeCurrent::getRows();
         $result = compact('grades');
@@ -28,7 +29,7 @@ class Mytuning extends CI_Controller {
    * 当前年级班级
    */
   public function classes() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
         $grade_id = $param['grade_id'];
@@ -47,7 +48,7 @@ class Mytuning extends CI_Controller {
    * 调动学生查询
    */
   public function studmoves() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
         $grade_id = $param['grade_id'];
@@ -67,7 +68,7 @@ class Mytuning extends CI_Controller {
    * 查询本班用于交换的学生
    */
   public function studchanges() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
 
@@ -93,7 +94,7 @@ class Mytuning extends CI_Controller {
    * 微调学生交换
    */
   public function exchange() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
 
@@ -111,7 +112,7 @@ class Mytuning extends CI_Controller {
   }
 
   public function local() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
         $grade_stud_uid = $param['grade_stud_uid'];

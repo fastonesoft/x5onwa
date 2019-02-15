@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-use QCloud_WeApp_SDK\Mysql\Mysql as DB;
+use QCloud_WeApp_SDK\Mvv;
 use QCloud_WeApp_SDK\Model;
 
 class Tchreg extends CI_Controller {
@@ -11,15 +11,16 @@ class Tchreg extends CI_Controller {
    */
   const role_name = 'tchreg';
   public function index() {
-    Model\xonLogin::check(self::role_name, function ($user) {
-      // 获取参数
-      $param = $_POST;
-      // 处理数据
-      $name = $param["name"];
-      $result = DB::select('xovUserNotTeach', ['*'], compact('name'));
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
+      try {
+        $param = $_POST;
+        $name = $param["name"];
+        $result = DB::select('xovUserNotTeach', ['*'], compact('name'));
 
-      // 返回信息
-      $this->json(['code' => 0, 'data' => $result]);
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
     }, function ($error) {
       $this->json($error);
     });
@@ -31,7 +32,7 @@ class Tchreg extends CI_Controller {
    * 有学校返回[学校]、没有学校返回[]
    */
   public function usersch() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       $user_id = $user['unionId'];
       $group_id = Model\x5on::GROUP_ADMIN_VALUE;
       $result = DB::select('xonUserGroup', ['*'], compact('user_id', 'group_id'));
@@ -55,7 +56,7 @@ class Tchreg extends CI_Controller {
    * 根据提交的数据，注册相应的学校
    */
   public function usereg() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       // 获取参数
       $param = $_POST;
       // 准备数据

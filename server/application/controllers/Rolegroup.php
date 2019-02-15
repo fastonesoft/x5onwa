@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-use QCloud_WeApp_SDK\Mysql\Mysql as DB;
+use QCloud_WeApp_SDK\Mvv;
 use QCloud_WeApp_SDK\Model;
 
 class Rolegroup extends CI_Controller
@@ -11,7 +11,7 @@ class Rolegroup extends CI_Controller
    */
   const role_name = 'rolegroup';
   public function index() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       // 分组列表
       $result = DB::select('xonGroup', ['id', 'name'], '', 'and', 'order by id');
       // 返回信息
@@ -22,7 +22,7 @@ class Rolegroup extends CI_Controller
   }
 
   public function role() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       // 获取参数
       $param = $_POST;
       // 分组权限
@@ -41,7 +41,7 @@ class Rolegroup extends CI_Controller
   }
 
   public function update() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       // 获取参数
       $param = $_POST;
       $result = Model\xonRoleGroup::update($param);

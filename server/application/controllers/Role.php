@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-use QCloud_WeApp_SDK\Mysql\Mysql as DB;
+use QCloud_WeApp_SDK\Mvv;
 use QCloud_WeApp_SDK\Model;
 
 class Role extends CI_Controller {
@@ -11,7 +11,7 @@ class Role extends CI_Controller {
    */
   const role_name = 'userset';
   public function index() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       $user_id = $user['unionId'];
       $myrole = DB::select('xovUserRole', ['*'], compact('user_id'));
       // 构造权限列表

@@ -51,6 +51,14 @@ class vAppinfo
     return static::select(['*'], $conditions);
   }
 
+  public static function getsById ($id) {
+    return static::select(['*'], compact('id'));
+  }
+
+  public static function getsByUid ($uid) {
+    return static::select(['*'], compact('uid'));
+  }
+
   public static function getsColumnsBy ($columns, $conditions) {
     return static::select($columns, $conditions);
   }

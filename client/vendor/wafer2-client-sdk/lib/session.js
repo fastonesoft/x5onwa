@@ -1,5 +1,5 @@
 var constants = require('./constants');
-var SESSION_KEY = 'weapp_session_' + constants.WX_SESSION_MAGIC_ID;
+var SESSION_KEY = 'x5on_session_' + constants.WX_SESSION_MAGIC_ID;
 
 var Session = {
     get: function () {

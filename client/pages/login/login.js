@@ -1,33 +1,28 @@
- //index.js
+//index.js
 var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
 var util = require('../../utils/util.js')
 var x5on = require('../x5on.js')
 
-var app = getApp()
 Page({
 
   onShow: function () {
-    var that = this    
+    var that = this
+    // 检测登录
     x5on.check({
-      dontshow: true,
-      success: function (userinfor) {
-        var logged = true
-        var notlogged = false
-        // 个人信息
-        x5on.request({
-          dontshow: true,
-          url: x5on.url.userset,
-          success: function (result) {
-            var items = result.data.data
-            var inforchecked = result.data.checked
-            var notchecked = !inforchecked
-            that.setData({ items, inforchecked, notchecked, logged, notlogged, userinfor })
-          },
-          fail: function () {
-            that.setData({ logged: false, notlogged: true, userinfor: null })
-          }
-        });
+      fail: () => {
+        that.setData({ notauth: true })
+      }
+    });
+  },
+
+  onLoad: function () {
+    var that = this
+    x5on.request({
+      donshow: false,
+      url: x5on.url.user,
+      success: users => {
+        console.log(users)
       },
       fail: function () {
         that.setData({ logged: false, notlogged: true, userinfor: null })
@@ -36,6 +31,8 @@ Page({
   },
 
   inforClick: function () {
+
+
     wx.navigateTo({
       url: '/pages/index/userset',
       success: () => {
@@ -43,8 +40,8 @@ Page({
       }
     })
   },
-  
-  childAdd: function() {
+
+  childAdd: function () {
     wx.navigateTo({
       url: '/pages/index/userchilds',
       success: () => {
@@ -54,14 +51,16 @@ Page({
   },
 
   bindGetUserInfo: function (e) {
-    var that = this;
+
+    var that = this
+
     x5on.login({
-      e: e,
-      success: function () {   
-        // 不能改
-        that.onShow()
+      auth: e.detail,
+      success(res) {
+        console.log(res)
       },
-      fail: function() {
+      fail(error) {
+        console.log(error)
         that.setData({ logged: false, notlogged: true, userinfor: null })
       }
     });

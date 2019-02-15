@@ -1,8 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+use QCloud_WeApp_SDK\Mvv;
 use QCloud_WeApp_SDK\Model;
-use \QCloud_WeApp_SDK\Mvv;
 
 class Oauth extends CI_Controller {
 

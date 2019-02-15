@@ -1,50 +1,42 @@
 // pages/index/tchreg.js
 var x5on = require('../x5on.js')
-import x5va from '../x5va.js'
+import x5form from '../x5va.js'
 
 Page({
 
-  data: {
-    radios: [],
-    pickers: [],
-    sch_id: '',
-    pIndex: 0,
-    rIndex: 0
-  },
-
   onLoad: function () {
-    this.x5va = new x5va({
-      name: {
-        required: true,
-        chinese: true,
-        rangelength: [2, 4],
-      }
-    })
     var that = this
-    x5on.request({
-      url: x5on.url.tchsch,
-      success: function (result) {
-        var data = result.data
-        var sch_id = data.length > 0 ? data[0].sch_id : ''
-        that.setData({ pickers: data, sch_id: sch_id })
+    x5on.requestEx({
+      url: x5on.url.tchregusersch,
+      success: schools => {
+        that.setData({ schools })
       }
     })
   },
 
   findSubmit: function (e) {
     var that = this
-    // 检测输入
-    that.x5va.checkForm(e, function () {
+    var form = new x5form({
+      name: {
+        required: true,
+        chinese: true,
+        rangelength: [1, 3],
+      }
+    }, {
+        name: {
+          required: '教师姓名',
+        }
+      })
+    form.checkForm(e, forms => {
       x5on.postFormEx({
         url: x5on.url.tchreg,
-        data: e.detail.value,
-        success: (result) => {
-          var radios = result.data
+        data: forms,
+        success: radios => {
           radios.length === 0 ? x5on.showError(that, '没有找到你说的老师！') : that.setData({ radios })
         }
       })
-    }, function (error) {
-      x5on.showError(that, '教师姓名：' + error)
+    }, error => {
+      x5on.showError(that, error)
     })
   },
 
@@ -58,30 +50,44 @@ Page({
     this.setData({ radios: radios, rIndex: index })
   },
 
-  pickerChange: function (e) {
+  schoolChange: function (e) {
     var index = e.detail.value
-    var sch_id = this.data.pickers[index].sch_id
-    this.setData({ pIndex: index, sch_id: sch_id })
+    var sch_id = this.data.schools[index].sch_id
+    this.setData({ schIndex: index, sch_id: sch_id })
   },
 
   updateSubmit: function (e) {
     var that = this
-    var data = e.detail.value
-    if (data.user_id && data.sch_id) {
-      // 提交
+    var form = new x5form({
+      user_id: {
+        required: true,
+      },
+      sch_index: {
+        required: true,
+      }
+    }, {
+        user_id: {
+          required: '教师选择',
+        },
+        sch_index: {
+          required: '注册学校',
+        }
+      })
+    form.checkForm(e, forms => {
+      forms.sch_id = x5on.getId(that.data.schools, forms.sch_index)
       x5on.postFormEx({
-        url: x5on.url.tchschreg,
-        data: e.detail.value,
-        success: (result) => {
+        url: x5on.url.tchreguserreg,
+        data: forms,
+        success: radios => {
           // 数据提交成功，清除已添加的教师
           var radios = this.data.radios
           radios.splice(this.data.rIndex, 1)
           that.setData({ radios })
         }
       })
-    } else {
-      x5on.showError(that, '教师姓名、注册学校不得为空！')
-    }
+    }, error => {
+      x5on.showError(that, error)
+    })
   }
 
 })

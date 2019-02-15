@@ -11,7 +11,7 @@ page { background: #F6F6F6; }
   }
 .qrcode { width: 400rpx; height: 400rpx; }
 
-.x5ui-half-btn { margin:0 auto; width: 50%; margin-bottom: 30rpx; }
+.x5ui-half-btn { margin:30rpx auto; width: 40%; }
 .x5ui-column { display: flex; flex-flow: row wrap; }
 
 /*增加的删除图标*/

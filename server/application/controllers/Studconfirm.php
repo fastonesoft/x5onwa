@@ -1,12 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+use QCloud_WeApp_SDK\Mvv;
 use QCloud_WeApp_SDK\Model;
 
 class Studconfirm extends CI_Controller {
   const role_name = 'regconfirm';
   public function index() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         // 检测审核人员是否注册学校
         $confirm_user_id = $user['unionId'];
@@ -82,7 +83,7 @@ class Studconfirm extends CI_Controller {
   }
 
   public function pass() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         // 检测审核人员是否注册学校
         $confirm_user_id = $user['unionId'];
@@ -115,7 +116,7 @@ class Studconfirm extends CI_Controller {
   }
 
   public function cancel () {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
         $regged_stud_uid = $param['regged_stud_uid'];

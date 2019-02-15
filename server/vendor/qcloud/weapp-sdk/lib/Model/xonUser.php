@@ -8,8 +8,11 @@ use QCloud_WeApp_SDK\Helper;
 
 use \Exception;
 
-class xonUser
+class xonUser extends cAppinfo
 {
+  protected static $tableName = 'xonUser';
+  protected static $tableTitle = '用户列表';
+
   /**
    * 保存、更新用户信息
    *

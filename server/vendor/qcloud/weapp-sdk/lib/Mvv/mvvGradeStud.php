@@ -14,6 +14,7 @@ use QCloud_WeApp_SDK\Model\xovGradeCurrent;
 use QCloud_WeApp_SDK\Model\xovGradeStud;
 use \Exception;
 use QCloud_WeApp_SDK\Model\xovGradeStudTask;
+use QCloud_WeApp_SDK\Model\xovStudent;
 
 class mvvGradeStud
 {
@@ -78,12 +79,12 @@ class mvvGradeStud
    * @param $idc              身份证号
    * @param $name             学生姓名
    */
-  public static function studModi ($uid, $idc, $name, $stud_type_id, $stud_status_id) {
-    $stud = xovGradeStud::checkByUid($uid);
-    $id = $stud->stud_idc;
-    xonChild::update(compact('idc', 'name'), compact('id'));
-    xonGradeStud::update(compact('stud_type_id', 'stud_status_id'), compact('uid'));
-    return xovGradeStud::getsby(compact('uid'));
+  public static function studModi ($grade_stud_uid, $idc, $name, $stud_type_id, $stud_status_id) {
+    $grade_stud = xovGradeStud::checkByUid($grade_stud_uid);
+    $child_id = $grade_stud->child_id;
+    xonChild::setsById(compact('idc', 'name'), $child_id);
+    xonGradeStud::setsByUid(compact('stud_type_id', 'stud_status_id'), $grade_stud_uid);
+    return xovGradeStud::getsByUid($grade_stud_uid);
   }
 
   /**
@@ -91,10 +92,10 @@ class mvvGradeStud
    * @param $uid              学生序号
    * @param $stud_auth        指标标志（只接收0、1）
    */
-  public static function studAuth ($uid, $stud_auth) {
-    xovGradeStud::checkByUid($uid);
-    xonGradeStud::update(compact('stud_auth'), compact('uid'));
-    return xovGradeStud::getsBy(compact('uid'));
+  public static function studAuth ($grade_stud_uid, $stud_auth) {
+    xovGradeStud::checkByUid($grade_stud_uid);
+    xonGradeStud::setsByUid(compact('stud_auth'), $grade_stud_uid);
+    return xovGradeStud::getsByUid($grade_stud_uid);
   }
 
 
@@ -126,7 +127,7 @@ class mvvGradeStud
     $stud_id = xonStudent::add($stud_idc, $step_id, $come_date);
     // 添加年度学生
     $uid = xonGradeStud::add($grade_id, $cls_id, $stud_id, $stud_type_id, $stud_status_id, $stud_auth);
-    return xovGradeStud::getsBy(compact('uid'));
+    return xovGradeStud::getsByUid($uid);
   }
 
   /**
@@ -139,19 +140,18 @@ class mvvGradeStud
    * @throws Exception
    */
 
-  public static function taskDown ($grade_stud_id, $task_status_id, $task_memo) {
+  public static function taskDown ($grade_stud_id, $stud_status_id, $task_status_id, $task_memo) {
+    // 休学记录
     $has_done = 0;
-    // 添加任务记录
-    xonGradeStudTask::add($grade_stud_id, $task_status_id, $has_done, $task_memo);
-    // 变更学生信息
-    $id = $grade_stud_id;
+    xonGradeStudTask::add($grade_stud_id, $stud_status_id, $task_status_id, $has_done, $task_memo);
+    // 变更年度学生信息
     $stud_status_id = $task_status_id;
-    xonGradeStud::update(compact('stud_status_id'), compact('id'));
-    return xovGradeStud::getsBy(compact('id'));
+    xonGradeStud::setsById(compact('stud_status_id'), $grade_stud_id);
+    return xovGradeStud::getsById($grade_stud_id);
   }
 
   public static function taskTemp ($id, $uid, $task_memo) {
-    // 临时离校记录
+    // 临时离校
     $res = xonGradeStud::checkBy(compact('id', 'uid'));
     // 记录
     $has_done = 0;
@@ -160,8 +160,8 @@ class mvvGradeStud
     xonGradeStudTask::add($id, $task_status_id, $has_done, $task_memo);
     // 变更
     $stud_status_id = x5on::STATUS_TEMP;
-    xonGradeStud::update(compact('stud_status_id'), compact('id'));
-    return xovGradeStud::getsBy(compact('id'));
+    xonGradeStud::setsById(compact('stud_status_id'), $id);
+    return xovGradeStud::getsById($id);
   }
 
   public static function taskOutLeave ($id, $uid, $task_memo) {
@@ -174,12 +174,12 @@ class mvvGradeStud
     xonGradeStudTask::add($id, $task_status_id, $has_done, $task_memo);
     // 变更
     $stud_status_id = x5on::STATUS_TEMP;
-    xonGradeStud::update(compact('stud_status_id'), compact('id'));
-    return xovGradeStud::getsBy(compact('id'));
+    xonGradeStud::setsById(compact('stud_status_id'), $id);
+    return xovGradeStud::getsById($id);
   }
 
   public static function gradesDown ($id) {
-    // 休学年级查询
+    // 休学年级
     return xovGradeCurrent::customsSuff(compact('id'), '>', 'limit 1');
   }
 
@@ -187,8 +187,10 @@ class mvvGradeStud
     // 复学设置
     $has_done = 1;
     $task = xovGradeStudTask::checkByUid($uid);
-    xonGradeStudTask::update(compact('has_done'), compact('uid'));
-
+    xonGradeStudTask::setsByUid(compact('has_done'), $uid);
+    $grade = xonGrade::checkById($grade_id);
+    $step_id = $grade->step_id;
+    // 新学生信息
     $stud_id = $task->stud_id;
     $stud_type_id = $task->stud_type_id;
     $stud_status_id = x5on::STATUS_RETURN;
@@ -196,21 +198,23 @@ class mvvGradeStud
     $same_group = 0;
     $stud_code = $task->stud_code;
     $stud_diploma = $task->stud_diploma;
-
-    $id = xonGradeStud::add($grade_id, $cls_id, $stud_id, $stud_type_id, $stud_status_id, $stud_auth, $stud_code, $stud_diploma);
-    return xovGradeStud::getsBy(compact('id'));
+    // 添加新年度记录
+    $grade_stud_id = xonGradeStud::add($grade_id, $cls_id, $stud_id, $stud_type_id, $stud_status_id, $stud_auth, $stud_code, $stud_diploma);
+    // 变更学生信息
+    xonStudent::setsById(compact('step_id'), $stud_id);
+    return xovGradeStud::getsById($grade_stud_id);
   }
 
   public static function studBack ($uid, $cls_id) {
-    // 查询、变更
+    // 学生回校
     $has_done = 1;
     $task = xovGradeStudTask::checkByUid($uid);
-    xonGradeStudTask::update(compact('has_done'), compact('uid'));
+    xonGradeStudTask::setsByUid(compact('has_done'), $uid);
 
-    $id = $task->grade_stud_id;
+    $grade_stud_id = $task->grade_stud_id;
     $stud_status_id = $task->task_status_id;
-    xonGradeStud::update(compact('cls_id', 'stud_status_id'), compact('id'));
-    return xovGradeStud::getsBy(compact('id'));
+    xonGradeStud::setsById(compact('cls_id', 'stud_status_id'), $grade_stud_id);
+    return xovGradeStud::getsById($grade_stud_id);
   }
 
   public static function type () {

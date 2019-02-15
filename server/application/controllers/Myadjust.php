@@ -1,13 +1,14 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+use QCloud_WeApp_SDK\Mvv;
 use QCloud_WeApp_SDK\Model;
 
 class Myadjust extends CI_Controller {
   const role_name = 'myadjust';
 
   public function index() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $grades = Model\xovGradeCurrent::getRows();
         $result = compact('grades');
@@ -22,7 +23,7 @@ class Myadjust extends CI_Controller {
   }
 
   public function classes() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
         $user_id = $user['unionId'];
@@ -41,7 +42,7 @@ class Myadjust extends CI_Controller {
   }
 
   public function student() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
         $grade_id = $param['grade_id'];
@@ -58,7 +59,7 @@ class Myadjust extends CI_Controller {
   }
 
   public function studmove() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
         $user_id = $user['unionId'];
@@ -78,7 +79,7 @@ class Myadjust extends CI_Controller {
   }
 
   public function studlocal() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
         $grade_stud_uid = $param['grade_stud_uid'];
@@ -97,7 +98,7 @@ class Myadjust extends CI_Controller {
    * 本班调动中的学生
    */
   public function classmove() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
         $cls_id = $param['cls_id'];
@@ -115,7 +116,7 @@ class Myadjust extends CI_Controller {
   }
 
   public function classmoving() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
         $cls_id = $param['cls_id'];
@@ -131,7 +132,7 @@ class Myadjust extends CI_Controller {
   }
 
   public function classmoved() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
         $cls_id = $param['cls_id'];
@@ -147,7 +148,7 @@ class Myadjust extends CI_Controller {
   }
 
   public function studremove() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
         $grade_stud_uid = $param['grade_stud_uid'];
@@ -164,7 +165,7 @@ class Myadjust extends CI_Controller {
 
   // 调动申请的学生二维码
   public function movingqrcode() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
         $user_id = $user['unionId'];
@@ -201,7 +202,7 @@ class Myadjust extends CI_Controller {
 
   // 识别交换学生二维码 -> 完成交换
   public function studexchange() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
         $move_grade_stud_uid = $param['move_grade_stud_uid'];
@@ -224,7 +225,7 @@ class Myadjust extends CI_Controller {
   // 本人分管的学生调动 与 交换
   // 与 二维码识别不同，增加自主添加学生studmove记录
   public function studexchangeself() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
         $user_id = $user['unionId'];
@@ -254,7 +255,7 @@ class Myadjust extends CI_Controller {
 
   // 识别调动学生，查询交换学生列表
   public function scanmove() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
         $move_grade_stud_uid = $param['move_grade_stud_uid'];
@@ -285,7 +286,7 @@ class Myadjust extends CI_Controller {
 
   // 添加交换学生记录，返回交换学生列表
   public function addexchange() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
         $user_id = $user['unionId'];
@@ -310,7 +311,7 @@ class Myadjust extends CI_Controller {
 
   // 查询交换学生信息 并 与之匹配的调动学生信息
   public function queryexchange() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
         $grade_stud_uid = $param['grade_stud_uid'];
@@ -335,7 +336,7 @@ class Myadjust extends CI_Controller {
 
   // 查询交换学生列表
   public function exchangelist() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $user_id = $user['unionId'];
         $result = Model\xovGradeDivisionStud::getStudSumExchangingByUserId($user_id);
@@ -351,7 +352,7 @@ class Myadjust extends CI_Controller {
 
   // 删除交换列表学生
   public function removeliststud() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
         $grade_stud_uid = $param['grade_stud_uid'];

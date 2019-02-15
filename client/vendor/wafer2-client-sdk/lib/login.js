@@ -8,37 +8,30 @@ var constants = require('./constants');
 var Session = require('./session');
 
 /**
- * 微信登录，获取 code 和 encryptData
+ * 微信登录，获取 code 
  */
-function getWxLoginResult (cb) {
-    wx.login({
-        success (loginResult) {
-            wx.getUserInfo({
-                success (userResult) {
-                    cb(null, {
-                        code: loginResult.code,
-                        encryptedData: userResult.encryptedData,
-                        iv: userResult.iv,
-                        userInfo: userResult.userInfo
-                    })
-                },
-                fail (userError) {
-                    cb(new Error('获取微信用户信息失败，请检查网络状态'), null)
-                }
-            });
-        },
-        fail (loginError) {
-            cb(new Error('微信登录失败，请检查网络状态'), null)
-        }
-    })
+function getWxLoginResult(userResult, cb) {
+	wx.login({
+		success(loginResult) {
+			// 不用getUserInfor
+			cb(null, {
+				code: loginResult.code,
+				encryptedData: userResult.encryptedData,
+				iv: userResult.iv,
+			})
+		},
+		fail(loginError) {
+			cb('微信登录失败，请检查网络状态', null)
+		}
+	})
 }
 
-const noop = function noop() {}
+const noop = function noop() { }
 const defaultOptions = {
-    method: 'GET',
-    success: noop,
-    fail: noop,
-    loginUrl: null,
+	method: 'GET',
+	success: noop,
+	fail: noop,
+	loginUrl: null,
 }
 
 /**
@@ -46,6 +39,8 @@ const defaultOptions = {
  * 进行服务器登录，以获得登录会话
  * 受限于微信的限制，本函数需要在 <button open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo"></button> 的回调函数中调用
  * 需要先使用 <button> 弹窗，让用户接受授权，然后再安全调用 wx.getUserInfo 获取用户信息
+ * 
+ * 授权登录
  *
  * @param {Object}   opts           登录配置
  * @param {string}   opts.loginUrl  登录使用的 URL，服务器应该在这个 URL 上处理登录请求，建议配合服务端 SDK 使用
@@ -53,53 +48,56 @@ const defaultOptions = {
  * @param {Function} [opts.success] 可选。登录成功后的回调函数，参数 userInfo 微信用户信息
  * @param {Function} [opts.fail]    可选。登录失败后的回调函数，参数 error 错误信息
  */
-function login (opts) {
-    opts = Object.assign({}, defaultOptions, opts)
+function login(opts) {
+	opts = Object.assign({}, defaultOptions, opts)
 
-    if (!opts.loginUrl) {
-        return opts.fail(new Error('登录错误：缺少登录地址，请通过 setLoginUrl() 方法设置登录地址'))
-    }
+	if (!opts.loginUrl) {
+		return opts.fail('登录错误：缺少登录地址，请通过 setLoginUrl() 方法设置登录地址')
+	}
 
-    getWxLoginResult((err, loginResult) => {
-        if (err) {
-            return opts.fail(err)
-        }
+	// 授权登录，需要button提供的数据
+	getWxLoginResult(opts.auth, (err, loginResult) => {
 
-        // 构造请求头，包含 code、encryptedData 和 iv
-        const header = {
-            [constants.WX_HEADER_CODE]: loginResult.code,
-            [constants.WX_HEADER_ENCRYPTED_DATA]: loginResult.encryptedData,
-            [constants.WX_HEADER_IV]: loginResult.iv
-        }
+		if (err) {
+			return opts.fail(err)
+		}
 
-        // 请求服务器登录地址，获得会话信息
-        wx.request({
-            url: opts.loginUrl,
-            header: header,
-            method: opts.method,
-            success (result) {
-                const data = result.data;
+		// 构造请求头，包含 code、encryptedData 和 iv
+		const header = {
+			[constants.WX_HEADER_CODE]: loginResult.code,
+			[constants.WX_HEADER_ENCRYPTED_DATA]: loginResult.encryptedData,
+			[constants.WX_HEADER_IV]: loginResult.iv
+		}
 
-                if (!data || data.code !== 0 || !data.data || !data.data.skey) {
-                    return opts.fail(new Error(`响应错误，${JSON.stringify(data)}`))
-                }
+		// 请求服务器登录地址，获得会话信息
+		wx.request({
+			url: opts.loginUrl,
+			header: header,
+			method: opts.method,
+			success(result) {
+				const data = result.data;
 
-                const res = data.data
+				console.log(result)
 
-                if (!res || !res.userinfo) {
-                    return opts.fail(new Error(`登录失败(${data.error})：${data.message}`))
-                }
+				if (!data || data.code !== 0 || !data.data || !data.data.skey) {
+					return opts.fail(`响应错误，${JSON.stringify(data)}`)
+				}
 
-                // 成功地响应会话信息
-                Session.set(res)
-                opts.success(res.userinfo)
-            },
-            fail (err) {
-                console.error('登录失败，可能是网络错误或者服务器发生异常')
-                opts.fail(err)
-            }
-        });
-    })
+				const res = data.data
+
+				if (!res || !res.userinfo) {
+					return opts.fail(`响应失败，${JSON.stringify(data)}`)
+				}
+
+				// 成功地响应会话信息
+				Session.set(res)
+				opts.success(res.userinfo)
+			},
+			fail(err) {
+				opts.fail('登录失败，可能是网络错误或者服务器发生异常')
+			}
+		});
+	})
 }
 
 /**
@@ -109,59 +107,60 @@ function login (opts) {
  * 无需每次都使用 wx.getUserInfo 去获取用户信息
  * 后端 Wafer PHP SDK 需 2.2.x 及以上版本
  * 
+ * 已授权，自动登录
+ * 
  * @param {Object}   opts           登录配置
  * @param {string}   opts.loginUrl  登录使用的 URL，服务器应该在这个 URL 上处理登录请求，建议配合服务端 SDK 使用
  * @param {string}   [opts.method]  可选。请求使用的 HTTP 方法，默认为 GET
  * @param {Function} [opts.success] 可选。登录成功后的回调函数，参数 userInfo 微信用户信息
  * @param {Function} [opts.fail]    可选。登录失败后的回调函数，参数 error 错误信息
  */
-function loginWithCode (opts) {
-    opts = Object.assign({}, defaultOptions, opts)
+function loginWithCode(opts) {
+	opts = Object.assign({}, defaultOptions, opts)
 
-    if (!opts.loginUrl) {
-        return opts.fail(new Error('登录错误：缺少登录地址，请通过 setLoginUrl() 方法设置登录地址'))
-    }
+	if (!opts.loginUrl) {
+		return opts.fail('登录错误：缺少登录地址，请通过 setLoginUrl() 方法设置登录地址')
+	}
 
-    wx.login({
-        success (loginResult) {
-            // 构造请求头，包含 code、encryptedData 和 iv
-            const header = {
-                [constants.WX_HEADER_CODE]: loginResult.code
-            }
-    
-            // 请求服务器登录地址，获得会话信息
-            wx.request({
-                url: opts.loginUrl,
-                header: header,
-                method: opts.method,
-                success (result) {
-                    const data = result.data;
-    
-                    if (!data || data.code !== 0 || !data.data || !data.data.skey) {
-                        return opts.fail(new Error(`用户未登录过，请先使用 login() 登录`))
-                    }
-    
-                    const res = data.data
-    
-                    if (!res || !res.userinfo) {
-                        return opts.fail(new Error(`登录失败(${data.error})：${data.message}`))
-                    }
+	wx.login({
+		success(loginResult) {
+			// 构造请求头，包含 code、encryptedData 和 iv
+			const header = {
+				[constants.WX_HEADER_CODE]: loginResult.code
+			}
 
-                    // 成功地响应会话信息
-                    Session.set(res)
-                    opts.success(res.userinfo)
-                },
-                fail (err) {
-                    console.error('登录失败，可能是网络错误或者服务器发生异常')
-                    opts.fail(err)
-                }
-            });
-        }
-    })
+			// 请求服务器登录地址，获得会话信息
+			wx.request({
+				url: opts.loginUrl,
+				header: header,
+				method: opts.method,
+				success(result) {
+					const data = result.data;
+
+					if (!data || data.code !== 0 || !data.data || !data.data.skey) {
+						return opts.fail(`用户未登录过，请先使用 login() 登录`)
+					}
+
+					const res = data.data
+
+					if (!res || !res.userinfo) {
+						return opts.fail(`响应失败，${JSON.stringify(data)}`)
+					}
+
+					// 成功地响应会话信息
+					Session.set(res)
+					opts.success(res.userinfo)
+				},
+				fail(err) {
+					opts.fail('登录失败，可能是网络错误或者服务器发生异常')
+				}
+			});
+		}
+	})
 }
 
-function setLoginUrl (loginUrl) {
-    defaultOptions.loginUrl = loginUrl;
+function setLoginUrl(loginUrl) {
+	defaultOptions.loginUrl = loginUrl;
 }
 
 module.exports = { login, setLoginUrl, loginWithCode }

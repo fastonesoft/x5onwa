@@ -134,8 +134,8 @@ Page({
   // 修改
   studmodiClick: function (event) {
     var that = this
-    x5on.getRadio(this.data.students, res => {
-      wx.navigateTo({ url: 'stud_modi?uid=' + res.uid })
+    x5on.getRadio(this.data.students, stud => {
+      wx.navigateTo({ url: 'stud_modi?uid=' + stud.uid })
     }, () => {
       x5on.showError(that, '没有选中相关学生')
     })
@@ -144,8 +144,8 @@ Page({
   // 指标
   studauthClick: function (event) {
     var that = this
-    x5on.getRadio(this.data.students, res => {
-      wx.navigateTo({ url: 'stud_auth?uid=' + res.uid })
+    x5on.getRadio(this.data.students, stud => {
+      wx.navigateTo({ url: 'stud_auth?uid=' + stud.uid })
     }, () => {
       x5on.showError(that, '没有选中相关学生')
     })
@@ -159,17 +159,17 @@ Page({
   // 调动
   studmoveClick: function (e) {
     var that = this
-    x5on.getRadio(this.data.students, res => {
-      wx.navigateTo({ url: 'stud_move?uid=' + res.uid })
+    x5on.getRadio(this.data.students, stud => {
+      wx.navigateTo({ url: 'stud_move?uid=' + stud.uid })
     }, () => {
       x5on.showError(that, '没有选中相关学生')
     })
   },
 
-  // 跳级
+  // 跳级，一定要变更学生编号
   studjumpClick: function (e) {
-    x5on.getRadio(this.data.students, res => {
-      console.log(res)
+    x5on.getRadio(this.data.students, stud => {
+      console.log(stud)
     }, () => {
       console.log('error')
     })
@@ -180,8 +180,8 @@ Page({
   studbackClick: function (e) {
     var that = this
     var grade_id = that.getGradeid()
-    var stud_status_id = x5on.data.status_temp
-    var form = { grade_id, stud_status_id }
+    var task_status_id = x5on.data.status_temp
+    var form = { grade_id, task_status_id }
     x5on.postFormEx({
       url: x5on.url.gradestudtask,
       data: form,
@@ -196,8 +196,8 @@ Page({
   studreturnClick: function (e) {
     var that = this
     var grade_id = that.getGradeid()
-    var stud_status_id = x5on.data.status_down
-    var form = { grade_id, stud_status_id }
+    var task_status_id = x5on.data.status_down
+    var form = { grade_id, task_status_id }
     x5on.postFormEx({
       url: x5on.url.gradestudtask,
       data: form,
@@ -221,8 +221,8 @@ Page({
   // 休学
   studdownClick: function (e) {
     var that = this
-    x5on.getRadio(this.data.students, res => {
-      wx.navigateTo({ url: 'stud_down?uid=' + res.uid })
+    x5on.getRadio(this.data.students, stud => {
+      wx.navigateTo({ url: 'stud_down?uid=' + stud.uid })
     }, () => {
       x5on.showError(that, '没有选中相关学生')
     })
@@ -231,8 +231,8 @@ Page({
   // 转出
   studoutClick: function (e) {
     var that = this
-    x5on.getRadio(this.data.students, res => {
-      wx.navigateTo({ url: 'stud_out?uid=' + res.uid })
+    x5on.getRadio(this.data.students, stud => {
+      wx.navigateTo({ url: 'stud_out?uid=' + stud.uid })
     }, () => {
       x5on.showError(that, '没有选中相关学生')
     })
@@ -241,8 +241,8 @@ Page({
   // 离校
   studleaveClick: function (e) {
     var that = this
-    x5on.getRadio(this.data.students, res => {
-      wx.navigateTo({ url: 'stud_leave?uid=' + res.uid })
+    x5on.getRadio(this.data.students, stud => {
+      wx.navigateTo({ url: 'stud_leave?uid=' + stud.uid })
     }, () => {
       x5on.showError(that, '没有选中相关学生')
     })
@@ -251,8 +251,8 @@ Page({
   // 临时
   studtempClick: function (e) {
     var that = this
-    x5on.getRadio(this.data.students, res => {
-      wx.navigateTo({ url: 'stud_temp?uid=' + res.uid })
+    x5on.getRadio(this.data.students, stud => {
+      wx.navigateTo({ url: 'stud_temp?uid=' + stud.uid })
     }, () => {
       x5on.showError(that, '没有选中相关学生')
     })

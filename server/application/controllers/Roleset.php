@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-use QCloud_WeApp_SDK\Mysql\Mysql as DB;
+use QCloud_WeApp_SDK\Mvv;
 use QCloud_WeApp_SDK\Model;
 
 class Roleset extends CI_Controller
@@ -11,7 +11,7 @@ class Roleset extends CI_Controller
    */
   const role_name = 'roleset';
   public function index() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       // 权限列表
       $result = DB::select('xonRole', ['uid', 'title', 'can_show']);
       // 返回信息
@@ -25,7 +25,7 @@ class Roleset extends CI_Controller
    * 权限设置
    */
   public function update() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       // 获取参数
       $param = $_POST;
       $result = Model\xonRole::update($param);

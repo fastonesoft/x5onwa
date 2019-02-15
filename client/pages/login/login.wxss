@@ -1,24 +1,26 @@
 /**login.wxss**/
 
 page {
-  background: #f6f6f6;
+  background: #fff;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
 }
 
 .container {
-  height: 390rpx;
+  height: 400rpx;
+  position: relative;
   background-color: #fff;
 }
 
 .userinfor-bg {
   width: 100%;
-  position: absolute;
+  height: 100%;
 }
 
 .userinfo {
-  position: relative;
+  position: absolute;
+  top: 90rpx;
   width: 100%;
   border: none;
   display: flex;
@@ -27,6 +29,8 @@ page {
 }
 
 .userinfo-avatar {
+  overflow: hidden;
+  display: block;
   width: 220rpx;
   height: 220rpx;
   border: 12rpx solid #fff;

@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+use QCloud_WeApp_SDK\Mvv;
 use QCloud_WeApp_SDK\Model;
 
 class Mydivision extends CI_Controller {
@@ -8,7 +9,7 @@ class Mydivision extends CI_Controller {
 
 
   public function index() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $grades = Model\xovGradeCurrent::getRows();
         $result = compact('grades');
@@ -23,7 +24,7 @@ class Mydivision extends CI_Controller {
   }
 
   public function classes() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
         $grade_id = $param['grade_id'];
@@ -40,7 +41,7 @@ class Mydivision extends CI_Controller {
   }
 
   public function teachs() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
         $user_name = $param["user_name"];
@@ -58,7 +59,7 @@ class Mydivision extends CI_Controller {
   }
 
   public function update() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
 
@@ -78,7 +79,7 @@ class Mydivision extends CI_Controller {
   }
 
   public function classed() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
         $grade_id = $param['grade_id'];
@@ -95,7 +96,7 @@ class Mydivision extends CI_Controller {
   }
 
   public function remove() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
         $uid = $param['uid'];

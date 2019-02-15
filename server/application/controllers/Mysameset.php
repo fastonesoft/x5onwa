@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+use QCloud_WeApp_SDK\Mvv;
 use QCloud_WeApp_SDK\Model;
 
 class Mysameset extends CI_Controller {
@@ -10,7 +11,7 @@ class Mysameset extends CI_Controller {
    * 当前年级列表
    */
   public function index() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $grades = Model\xovGradeCurrent::getRows();
         $result = compact('grades');
@@ -28,7 +29,7 @@ class Mysameset extends CI_Controller {
    * 当前年级班级
    */
   public function classes() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
         $grade_id = $param['grade_id'];
@@ -47,7 +48,7 @@ class Mysameset extends CI_Controller {
    * 当前班级学生
    */
   public function students() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
         $cls_id = $param['cls_id'];
@@ -66,7 +67,7 @@ class Mysameset extends CI_Controller {
    * 提交同班设置
    */
   public function update() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
         $result = Model\xovGradeStud::updateSameGroup($param);

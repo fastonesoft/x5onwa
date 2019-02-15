@@ -27,8 +27,8 @@ var doUrl = {
 
   // 教师注册
   tchreg: `${host}/weapp/tchreg`,
-  tchsch: `${host}/weapp/tchreg/usersch`,
-  tchschreg: `${host}/weapp/tchreg/usereg`,
+  tchregusersch: `${host}/weapp/tchreg/usersch`,
+  tchreguserreg: `${host}/weapp/tchreg/usereg`,
 
   // 权限设置
   roleset: `${host}/weapp/roleset`,
@@ -124,7 +124,7 @@ var doUrl = {
   // 交换学生列表
   myadjustexchangelist: `${host}/weapp/myadjust/exchangelist`,
   myadjustremoveliststud: `${host}/weapp/myadjust/removeliststud`,
- 
+
   myadjuststudlocal: `${host}/weapp/myadjust/studlocal`,
   myadjustclassmove: `${host}/weapp/myadjust/classmove`,
   myadjustclassmoved: `${host}/weapp/myadjust/classmoved`,
@@ -165,6 +165,7 @@ var doUrl = {
   imageurl: `${host}/weapp/data`,
 };
 
+// 数据常量
 var doData = {
   status_normal: 1,
   status_return: 2,
@@ -179,7 +180,7 @@ var doData = {
 
 // 根据编号获取索引值
 var doGetIndex = function (arrs, id) {
-  for (var i=0; i<arrs.length; i++) {
+  for (var i = 0; i < arrs.length; i++) {
     var arr = arrs[i]
     if (arr.id === id) return i
   }
@@ -187,7 +188,7 @@ var doGetIndex = function (arrs, id) {
 
 // 根据索引获取编号
 var doGetId = function (arrs, index) {
-  return arrs.length>index ? arrs[index].id : null
+  return arrs.length > index ? arrs[index].id : null
 }
 
 // 数组单项选择
@@ -206,7 +207,7 @@ var doGetRadio = function (arrs, success, fail) {
 var doGetCheckbox = function (arrs, success, fail) {
   var res = []
   for (let arr of arrs) {
-    arr.checked ? res.push(arr) : void(0)
+    arr.checked ? res.push(arr) : void (0)
   }
   res.length > 0 ? typeof success === 'function' && success(res) : typeof fail === 'function' && fail()
 }
@@ -236,39 +237,6 @@ var doPickChange = function (pick, success) {
   value > -1 && typeof success === 'function' && success(value)
 }
 
-var doCheck = function (options) {
-  const session = qcloud.Session.get()
-  if (session) {
-    // 查看是否授权
-    wx.getSetting({
-      success: function (res) {
-        if (res.authSetting['scope.userInfo']) {
-          // 检查登录是否过期
-          wx.checkSession({
-            success: function () {
-              // 执行回调，返回用户信息
-              if (typeof options.success === 'function') options.success(session.userinfo);
-            },
-            fail: function () {
-              if (typeof options.fail === 'function') options.fail();
-              if (options.dontshow) return
-              util.showModel('登录过期', '请转到“登录”页面登录');
-            },
-          });
-        } else {
-          if (typeof options.fail === 'function') options.fail();
-          if (options.dontshow) return
-          util.showModel('授权失败', '请转到“登录”页面授权');
-        }
-      }
-    });
-  } else {
-    if (typeof options.fail === 'function') options.fail();
-    if (options.dontshow) return
-    util.showModel('缓存过期', '请转到“登录”页面登录');
-  }
-};
-
 /**
  * 关于错误代码
  * -1    ：   系统级出错代码，与登录有关，由系统检测
@@ -276,43 +244,6 @@ var doCheck = function (options) {
  *  1    ：   应用级出错代码，逻辑错误代码
  *  X    ：   ...
  */
-var doRequest = function (options) {
-  util.showBusy('正在查询...')
-  qcloud.request({
-    url: options.url,
-    login: false,
-    success: function (result) {
-      wx.hideToast()
-      // 检测code是否为0，
-      var data = result.data
-      if ( data.code === 0 ) {
-        // 为0，表示请求成功
-        if (typeof options.success === 'function') options.success(data)
-        return
-      } 
-      if ( data.code === 1 ) {
-        // 不为0给出错误提示
-        if (typeof options.fail === 'function') options.fail()
-        if (options.dontshow) return
-        // 用页面错误提示
-        if (options.that) {
-          doShowError(options.that, data.data)
-        } else {
-          util.showModel('加载失败', data.data);
-        }
-        return
-      }
-      util.showModel('加载出错', result);
-    },
-    fail: function (error) {
-      wx.hideToast()
-      if (typeof options.fail === 'function') options.fail()
-      if (options.dontshow) return
-      util.showModel('请求失败', '请确认登录是否过期，网络是否畅通');
-    }
-  })
-};
-
 var doRequestEx = function (options) {
   util.showBusy('正在查询...')
   qcloud.request({
@@ -327,8 +258,9 @@ var doRequestEx = function (options) {
       res.code === 1 && util.showModel('查询出错', res.data)
     },
     fail: function (error) {
+      console.log(error)
       wx.hideToast()
-      options.donshow ? void(0) : util.showModel('请求失败', '请确认登录是否过期，网络是否畅通')
+      options.donshow ? void (0) : util.showModel('请求失败', '请确认登录是否过期、网络是否畅通')
     }
   })
 };
@@ -352,7 +284,7 @@ var doPostFormEx = function (options) {
     },
     fail: function (error) {
       wx.hideToast()
-      options.donshow ? void(0) : util.showModel('请求失败', error.message)
+      options.donshow ? void (0) : util.showModel('请求失败', error.message)
     }
   })
 };
@@ -372,28 +304,53 @@ var doRequestImage = function (options) {
   })
 };
 
+// 权限检测
+var doAuth = function (authString) {
+  wx.getSetting({
+    success: function (res) {
+      var auth = res.authSetting[authString]
+      return !!auth
+    }
+  })
+  return false
+}
+
+// 登录检测
+var doCheck = function (options) {
+  // 查看是否授权
+  var auth = doAuth('scope.userInfo')
+  // 检测是否过期，没有过期，啥也不做
+  auth && wx.checkSession({
+    fail: function () {
+      util.showBusy('正在登录...')
+      // 过期，自动登录
+      qcloud.loginWithCode({
+        success: res => {
+          wx.hideToast()
+        },
+        fail: err => {
+          wx.hideToast()
+          typeof options.fail === 'function' && options.fail()
+        }
+      })
+    },
+  });
+  !auth && typeof options.fail === 'function' && options.fail()
+};
+
+
 var doLogin = function (options) {
   util.showBusy('正在登录...')
-  const session = qcloud.Session.get()
   if (session) {
-    qcloud.loginWithCode({
+
+  } else {
+    qcloud.login({
+      auth: options.auth,
       success: res => {
         wx.hideToast()
         typeof options.success === 'function' && options.success(res);
       },
       fail: err => {
-        wx.hideToast()
-        typeof options.fail === 'function' && options.fail(err);
-        util.showModel('登录错误', err.errMsg)
-      }
-    })
-  } else {
-    qcloud.login({
-      success: res => {
-        wx.hideToast()
-        typeof options.success === 'function' && options.success(res);
-      },
-      fail: () => {
         wx.hideToast()
         typeof options.fail === 'function' && options.fail();
         util.showModel('登录错误', '拒绝授权，获取微信用户信息失败')
@@ -430,6 +387,7 @@ var doSuccess = function (message) {
 module.exports = {
   url: doUrl,
   data: doData,
+  auth: doAuth,
   login: doLogin,
   check: doCheck,
   getId: doGetId,
@@ -439,8 +397,9 @@ module.exports = {
   setRadio: doSetRadio,
   setCheckbox: doSetCheckbox,
   pickChange: doPickChange,
-  request: doRequest,
+  request: doRequestEx,
   requestEx: doRequestEx,
+
   loadimage: doRequestImage,
   postForm: doPostFormEx,
   postFormEx: doPostFormEx,

@@ -1,14 +1,14 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+use QCloud_WeApp_SDK\Mvv;
 use QCloud_WeApp_SDK\Model;
-use \QCloud_WeApp_SDK\Mvv;
 
 class Gradestud extends CI_Controller {
   const role_name = 'students';
 
   public function index() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         // 未完成
 
@@ -22,7 +22,7 @@ class Gradestud extends CI_Controller {
   }
 
   public function grade() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $result = Mvv\mvvGradeStud::grades();
 
@@ -37,7 +37,7 @@ class Gradestud extends CI_Controller {
   }
 
   public function classes() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
         $grade_id = $param['grade_id'] === 'null' ? null : $param['grade_id'];
@@ -54,7 +54,7 @@ class Gradestud extends CI_Controller {
   }
 
   public function studcls() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
         $grade_id = $param['grade_id'] === 'null' ? null : $param['grade_id'];
@@ -72,7 +72,7 @@ class Gradestud extends CI_Controller {
   }
 
   public function query() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
         $grade_id = $param['grade_id'] === 'null' ? null : $param['grade_id'];
@@ -92,7 +92,7 @@ class Gradestud extends CI_Controller {
   }
 
   public function type() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
 
@@ -108,7 +108,7 @@ class Gradestud extends CI_Controller {
   }
 
   public function status() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
 
@@ -126,7 +126,7 @@ class Gradestud extends CI_Controller {
 
 
   public function uid() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
         $uid = $param['uid'];
@@ -143,7 +143,7 @@ class Gradestud extends CI_Controller {
   }
 
   public function add() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
         $cls_id = $param['cls_id'];
@@ -154,7 +154,6 @@ class Gradestud extends CI_Controller {
         $stud_type_id = $param['stud_type_id'];
         $stud_status_id = $param['stud_status_id'];
         $stud_auth = $param['stud_auth'] === 'true' ? 1 : 0;
-
         // 添加学生
         $result = Mvv\mvvGradeStud::addNoExam($grade_id, $cls_id, $stud_name, $stud_idc, $stud_type_id, $stud_status_id, $stud_auth, $come_date);
         $this->json(['code' => 0, 'data' => $result]);
@@ -167,7 +166,7 @@ class Gradestud extends CI_Controller {
   }
 
   public function move() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
         $uid = $param['uid'];
@@ -185,7 +184,7 @@ class Gradestud extends CI_Controller {
   }
 
   public function modi() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
         $uid = $param['uid'];
@@ -193,8 +192,6 @@ class Gradestud extends CI_Controller {
         $stud_name = $param['stud_name'];
         $stud_type_id = $param['stud_type_id'];
         $stud_status_id = $param['stud_status_id'];
-
-
         //
         $result = Mvv\mvvGradeStud::studModi($uid, $stud_idc, $stud_name, $stud_type_id, $stud_status_id);
         $this->json(['code' => 0, 'data' => $result]);
@@ -207,11 +204,11 @@ class Gradestud extends CI_Controller {
   }
 
   public function auth() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
         $uid = $param['uid'];
-        $stud_auth = $param['stud_auth'] === 'true' ? 1 : 0;
+        $stud_auth = Model\x5on::getBool($param['stud_auth']);
 
         //
         $result = Mvv\mvvGradeStud::studAuth($uid, $stud_auth);
@@ -225,7 +222,7 @@ class Gradestud extends CI_Controller {
   }
 
   public function come() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
         $cls_id = $param['cls_id'];
@@ -237,7 +234,6 @@ class Gradestud extends CI_Controller {
         $stud_status_id = $param['stud_status_id'];
         $stud_trans_name = $param['stud_trans_name'];
         $stud_auth = $param['stud_auth'] === 'true' ? 1 : 0;
-
         //
         $result = Mvv\mvvGradeStud::addNoExam($grade_id, $cls_id, $stud_name, $stud_idc, $stud_type_id, $stud_status_id, $stud_auth, $come_date);
         $this->json(['code' => 0, 'data' => $result]);
@@ -250,7 +246,7 @@ class Gradestud extends CI_Controller {
   }
 
   public function repet() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
         $cls_id = $param['cls_id'];
@@ -261,7 +257,6 @@ class Gradestud extends CI_Controller {
         $stud_type_id = $param['stud_type_id'];
         $stud_status_id = $param['stud_status_id'];
         $stud_auth = $param['stud_auth'] === 'true' ? 1 : 0;
-
         //
         $result = Mvv\mvvGradeStud::addNoExam($grade_id, $cls_id, $stud_name, $stud_idc, $stud_type_id, $stud_status_id, $stud_auth, $come_date);
         $this->json(['code' => 0, 'data' => $result]);
@@ -274,7 +269,7 @@ class Gradestud extends CI_Controller {
   }
 
   public function read() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
         $cls_id = $param['cls_id'];
@@ -285,7 +280,6 @@ class Gradestud extends CI_Controller {
         $stud_type_id = $param['stud_type_id'];
         $stud_status_id = $param['stud_status_id'];
         $stud_auth = $param['stud_auth'] === 'true' ? 1 : 0;
-
         //
         $result = Mvv\mvvGradeStud::addNoExam($grade_id, $cls_id, $stud_name, $stud_idc, $stud_type_id, $stud_status_id, $stud_auth, $come_date);
         $this->json(['code' => 0, 'data' => $result]);
@@ -298,15 +292,15 @@ class Gradestud extends CI_Controller {
   }
 
   public function down() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
         $grade_stud_id = $param['grade_stud_id'];
         $stud_status_id = $param['stud_status_id'];
-        $has_done = 0;
+        $task_status_id = $param['task_status_id'];
         $task_memo = $param['task_memo'];
         //
-        $result = Mvv\mvvGradeStud::studDown($grade_stud_id, $stud_status_id, $has_done, $task_memo);
+        $result = Mvv\mvvGradeStud::taskDown($grade_stud_id, $stud_status_id, $task_status_id, $task_memo);
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
         $this->json(['code' => 1, 'data' => $e->getMessage()]);
@@ -317,14 +311,14 @@ class Gradestud extends CI_Controller {
   }
 
   public function task() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
         $grade_id = $param['grade_id'];
-        $stud_status_id = $param['stud_status_id'];
-        $has_done = $param['has_done'];
+        $task_status_id = $param['task_status_id'];
+        $has_done = 0;
         //
-        $result = Mvv\mvvGradeStud::queryTask($grade_id, $stud_status_id, $has_done);
+        $result = Mvv\mvvGradeStudTask::query($grade_id, $task_status_id, $has_done);
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
         $this->json(['code' => 1, 'data' => $e->getMessage()]);
@@ -335,7 +329,7 @@ class Gradestud extends CI_Controller {
   }
 
   public function gradesdown() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
         $grade_id = $param['grade_id'];
@@ -351,7 +345,7 @@ class Gradestud extends CI_Controller {
   }
 
   public function returns() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
         $task_uid = $param['task_uid'];
@@ -369,14 +363,14 @@ class Gradestud extends CI_Controller {
   }
 
   public function temp() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
         $grade_stud_id = $param['id'];
         $grade_stud_uid = $param['uid'];
         $task_memo = $param['task_memo'];
         //
-        $result = Mvv\mvvGradeStud::studTemp($grade_stud_id, $grade_stud_uid, $task_memo);
+        $result = Mvv\mvvGradeStud::taskTemp($grade_stud_id, $grade_stud_uid, $task_memo);
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
         $this->json(['code' => 1, 'data' => $e->getMessage()]);
@@ -387,7 +381,7 @@ class Gradestud extends CI_Controller {
   }
 
   public function back() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
         $task_uid = $param['task_uid'];

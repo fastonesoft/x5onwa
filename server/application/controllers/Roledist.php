@@ -1,9 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-use QCloud_WeApp_SDK\Mysql\Mysql as DB;
-use QCloud_WeApp_SDK\Model;
 use QCloud_WeApp_SDK\Mvv;
+use QCloud_WeApp_SDK\Model;
 
 class Roledist extends CI_Controller
 {
@@ -15,7 +14,7 @@ class Roledist extends CI_Controller
    */
   const role_name = 'roledist';
   public function index() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       // 获取参数
       $param = $_POST;
       $name = $param["name"];
@@ -34,7 +33,7 @@ class Roledist extends CI_Controller
    * 请求部分用户组列表 >学生家长
    */
   public function group() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       $user_id = $user['unionId'];
       $user_max_group_id = Model\xonUserGroup::getUserMaxGroupId($user_id);
       $conditions = sprintf('id>%s and id<%s', Model\x5on::GROUP_STUDENT_PARENT, $user_max_group_id);
@@ -51,7 +50,7 @@ class Roledist extends CI_Controller
    * 添加用户进组
    */
   public function update() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       // 获取参数
       $param = $_POST;
       // 准备数据
@@ -80,7 +79,7 @@ class Roledist extends CI_Controller
    * 获取当前组下用户列表
    */
   public function groupuser() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       // 获取参数
       $param = $_POST;
       // 准备数据
@@ -98,7 +97,7 @@ class Roledist extends CI_Controller
    * 删除选中用户
    */
   public function deleteuser() {
-    Model\xonLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($user) {
       // 获取参数
       $param = $_POST;
       $uid = $param['uid'];
