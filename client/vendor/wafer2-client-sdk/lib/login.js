@@ -77,8 +77,6 @@ function login(opts) {
 			success(result) {
 				const data = result.data;
 
-				console.log(result)
-
 				if (!data || data.code !== 0 || !data.data || !data.data.skey) {
 					return opts.fail(`响应错误，${JSON.stringify(data)}`)
 				}

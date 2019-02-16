@@ -1,5 +1,4 @@
 //index.js
-var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
 var util = require('../../utils/util.js')
 var x5on = require('../x5on.js')
@@ -8,31 +7,31 @@ Page({
 
   onShow: function () {
     var that = this
-    // 检测登录
+    // 授权检测登录
     x5on.check({
+      success: () => {
+        x5on.request({
+          donshow: true,
+          url: x5on.url.user,
+          success: users => {
+            // 显示用户信息
+            users.reged = true
+            that.setData(users)
+          },
+          fail: error => {
+            // 显示注册信息
+            that.setData({ notreg: true })
+          }
+        })
+      },
       fail: () => {
+        // 显示授权按钮
         that.setData({ notauth: true })
       }
     });
   },
 
-  onLoad: function () {
-    var that = this
-    x5on.request({
-      donshow: false,
-      url: x5on.url.user,
-      success: users => {
-        console.log(users)
-      },
-      fail: function () {
-        that.setData({ logged: false, notlogged: true, userinfor: null })
-      }
-    })
-  },
-
   inforClick: function () {
-
-
     wx.navigateTo({
       url: '/pages/index/userset',
       success: () => {
@@ -51,19 +50,28 @@ Page({
   },
 
   bindGetUserInfo: function (e) {
-
     var that = this
-
-    x5on.login({
-      auth: e.detail,
-      success(res) {
-        console.log(res)
-      },
-      fail(error) {
-        console.log(error)
-        that.setData({ logged: false, notlogged: true, userinfor: null })
-      }
-    });
+    x5on.auth('scope.userInfo', () => {
+      x5on.login({
+        auth: e.detail,
+        success(res) {
+          // 登录成功，检测用户
+          x5on.request({
+            donshow: true,
+            url: x5on.url.user,
+            success: users => {
+              users.reged = true
+              that.setData(users)
+            },
+            fail: error => {
+              that.setData({ notreg: true })
+            }
+          })
+        }
+      });
+    }, () => {
+      x5on.showError(that, '拒绝授权，获取微信用户信息失败')
+    })
   },
 
   // 上传图片接口

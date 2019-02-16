@@ -1,8 +1,9 @@
 var constants = require('./constants');
 var utils = require('./utils');
 var Session = require('./session');
+var loginLib = require('./login');
 
-var noop = function noop() { };
+var noop = function noop() {};
 
 var buildAuthHeader = function buildAuthHeader(session) {
     var header = {};
@@ -15,6 +16,7 @@ var buildAuthHeader = function buildAuthHeader(session) {
 };
 
 function request(options) {
+    var requireLogin = options.login;
     var success = options.success || noop;
     var fail = options.fail || noop;
     var complete = options.complete || noop;
@@ -32,15 +34,26 @@ function request(options) {
         complete.call(null, error);
     };
 
-    doRequest();
+    // 是否已经进行过重试
+    var hasRetried = false;
 
+    if (requireLogin) {
+        doRequestWithLogin();
+    } else {
+        doRequest();
+    }
+
+    // 登录后再请求
+    function doRequestWithLogin() {
+        loginLib.loginWithCode({ success: doRequest, fail: callFail });
+    }
 
     // 实际进行请求的方法
     function doRequest() {
         var authHeader = {}
 
         var session = Session.get();
-
+    
         if (session) {
             authHeader = buildAuthHeader(session.skey);
         }
@@ -52,10 +65,14 @@ function request(options) {
                 var data = response.data;
                 // 查错的时候开
 console.log(data)
-
                 if ((data && data.code === -1) || response.statusCode === 401) {
                     Session.clear();
                     // 如果是登录态无效，并且还没重试过，会尝试登录后刷新凭据重新请求
+                    if (!hasRetried) {
+                        hasRetried = true;
+                        doRequestWithLogin();
+                        return;
+                    }
 
                     callFail(data.data);
                     return;

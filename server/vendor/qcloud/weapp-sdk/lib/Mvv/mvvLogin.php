@@ -21,10 +21,11 @@ class mvvLogin
 
   public static function check ($role_name, $success, $fail) {
     try {
-      $result = LoginService::check();
-      mvvUserRole::check($result->unionId, $role_name);
+      $user = LoginService::check();
+      // 权限检测
+      mvvUserRole::check($user->unionId, $role_name);
       // 成功
-      call_user_func($success, $result);
+      call_user_func($success, $user);
     } catch (Exception $e) {
       // 检测异常
       call_user_func($fail, ['code' => -1, 'data' => $e->getMessage()]);
