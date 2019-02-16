@@ -1,15 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e320c52f-5500-4386-ac18-1de166a23f7f" name="Default" comment="start student 1.21">
+    <list default="true" id="e320c52f-5500-4386-ac18-1de166a23f7f" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/x5onwa.iml" afterPath="$PROJECT_DIR$/.idea/x5onwa.iml" />
-      <change beforePath="$PROJECT_DIR$/client/pages/login/login.js" afterPath="$PROJECT_DIR$/client/pages/login/login.js" />
-      <change beforePath="$PROJECT_DIR$/client/pages/login/login.wxml" afterPath="$PROJECT_DIR$/client/pages/login/login.wxml" />
-      <change beforePath="$PROJECT_DIR$/client/pages/x5on.js" afterPath="$PROJECT_DIR$/client/pages/x5on.js" />
-      <change beforePath="$PROJECT_DIR$/server/application/controllers/User.php" afterPath="$PROJECT_DIR$/server/application/controllers/User.php" />
-      <change beforePath="$PROJECT_DIR$/server/vendor/qcloud/weapp-sdk/lib/Model/xonUser.php" afterPath="$PROJECT_DIR$/server/vendor/qcloud/weapp-sdk/lib/Model/xonUser.php" />
-      <change beforePath="$PROJECT_DIR$/server/vendor/qcloud/weapp-sdk/lib/Model/xonUserGroup.php" afterPath="$PROJECT_DIR$/server/vendor/qcloud/weapp-sdk/lib/Model/xonUserGroup.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -448,11 +441,18 @@
       <option name="project" value="LOCAL" />
       <updated>1548127755951</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="start student 1.21">
+      <created>1550307407943</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1550307407943</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="187916000" />
+    <option name="totallyTimeSpent" value="187952000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
