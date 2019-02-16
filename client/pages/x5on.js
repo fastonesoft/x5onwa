@@ -47,6 +47,7 @@ var doUrl = {
 
   // 用户检测
   user: `${host}/weapp/user`,
+  userreg: `${host}/weapp/user/reg`,
   // 用户设置
   userset: `${host}/weapp/userset`,
   usersetupdate: `${host}/weapp/userset/update`,
@@ -259,7 +260,6 @@ var doRequestEx = function (options) {
       res.code === 1 && util.showModel('查询出错', res.data)
     },
     fail: function (error) {
-      console.log(error)
       wx.hideToast()
       options.donshow ? void (0) : util.showModel('请求失败', error)
     }
@@ -319,20 +319,25 @@ var doAuth = function (authString, success, fail) {
 var doCheck = function (options) {
   // 查看是否授权
   doAuth('scope.userInfo', () => {
+    console.log(99999)
     // 检测是否过期
     wx.checkSession({
-      success: res => {
+      success(res) {
+        console.log(res)
         typeof options.success === 'function' && options.success()
       },
-      fail: error => {
+      fail(error) {
+        console.log(8)
         util.showBusy('正在登录...')
         // 过期，自动登录
         qcloud.loginWithCode({
           success: res => {
+            console.log(7)
             wx.hideToast()
             typeof options.success === 'function' && options.success()
           },
           fail: err => {
+            console.log(6)
             wx.hideToast()
             typeof options.fail === 'function' && options.fail()
           }
@@ -349,11 +354,13 @@ var doLogin = function (options) {
   util.showBusy('正在登录...')
   qcloud.login({
     auth: options.auth,
-    success: res => {
+    success(res) {
+      console.log(2222288888)
       wx.hideToast()
       typeof options.success === 'function' && options.success(res);
     },
-    fail: err => {
+    fail(err) {
+      console.log(121212)
       wx.hideToast()
       typeof options.fail === 'function' && options.fail(err);
       util.showModel('登录错误', err)

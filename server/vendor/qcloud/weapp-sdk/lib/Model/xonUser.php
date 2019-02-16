@@ -8,37 +8,19 @@ class xonUser extends cAppinfo
   protected static $tableName = 'xonUser';
   protected static $tableTitle = '用户列表';
 
-  public static function add ($userinfor) {
+  public static function add ($userinfor, $name, $mobil) {
     $id = $userinfor->unionId;
     $uid = x5on::getUid();
     $nick_name = $userinfor->nickName;
-    $name = $nick_name;
-    // 布尔型，直接设置数值
     $fixed = 0;
-    $create_time = date('Y-m-d H:i:s');
-    $last_visit_time = $create_time;
 
-    $result = dbs::row('xonUser', ['*'], compact('id'));
+    self::existsByCustom(compact('mobil'), '手机号码已存在');
+
+    $result = self::getById($id);
     if ($result === NULL) {
-      dbs::insert('xonUser', compact('id', 'uid', 'nick_name', 'name', 'fixed', 'create_time', 'last_visit_time'));
+      self::insert(compact('id', 'uid', 'nick_name', 'name', 'mobil', 'fixed'));
     } else {
-      dbs::update('xonUser', compact('nick_name', 'last_visit_time'), compact('id'));
+      self::setsById(compact('nick_name', 'name', 'mobil'), $id);
     }
   }
-
-
-
-  // 动态输入检测用
-    public static function checkRename ($id, $name) {
-      $result = dbs::row('xonUser', ['*'], compact('id'));
-      if ($result !== NULL) {
-        dbs::update('xonUser', compact('name'), compact('id'));
-        return NULL;
-      } else {
-        $error = true;
-        $message = '没找到你要改的记录';
-        return compact('error', 'message');
-      }
-    }
-
 }

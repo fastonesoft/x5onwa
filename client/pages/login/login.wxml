@@ -14,7 +14,7 @@
   </view>
 </block>
 
-<form bindsubmit="loginSubmit" wx:if="{{notreg}}">
+<form bindsubmit="regSubmit" wx:if="{{notreg}}">
   <view class="weui-cells">
     <view class="weui-cell weui-cell_input">
       <view class="weui-cell__hd">
@@ -42,11 +42,11 @@
   <view class="weui-cells">
     <view class="weui-cell">
       <view class="weui-cell__bd">用户姓名</view>
-      <view class="weui-cell__ft">石亮</view>
+      <view class="weui-cell__ft">{{name}}</view>
     </view>
     <view class="weui-cell">
       <view class="weui-cell__bd">手机号码</view>
-      <view class="weui-cell__ft">1388888888</view>
+      <view class="weui-cell__ft">{{mobil}}</view>
     </view>
   </view>
 </block>

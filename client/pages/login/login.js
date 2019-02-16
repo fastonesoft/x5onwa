@@ -1,7 +1,6 @@
 //index.js
-var config = require('../../config')
-var util = require('../../utils/util.js')
 var x5on = require('../x5on.js')
+import x5va from '../x5va.js'
 
 Page({
 
@@ -9,26 +8,67 @@ Page({
     var that = this
     // 授权检测登录
     x5on.check({
-      success: () => {
+      success() {
         x5on.request({
           donshow: true,
           url: x5on.url.user,
-          success: users => {
+          success(users) {
             // 显示用户信息
+            console.log(222)
             users.reged = true
             that.setData(users)
           },
-          fail: error => {
+          fail(error) {
             // 显示注册信息
+            console.log(111)
             that.setData({ notreg: true })
           }
         })
       },
-      fail: () => {
+      fail() {
         // 显示授权按钮
         that.setData({ notauth: true })
       }
     });
+  },
+
+  regSubmit: function (e) {
+    var that = this
+    var reg = new x5va({
+      name: {
+        required: true,
+        chinese: true,
+        rangelength: [2, 4],
+      },
+      mobil: {
+        required: true,
+        mobil: true,
+      }
+    }, {
+        name: {
+          required: '学生姓名'
+        },
+        mobil: {
+          required: '手机号码'
+        }
+    })
+    reg.checkForm(e, function (form) {
+
+      console.log(form)
+
+      x5on.postFormEx({
+        url: x5on.url.userreg,
+        data: form,
+        success: users => {
+          users.reged = true
+          that.setData(users)
+        }
+      })
+
+    }, function (error) {
+      x5on.showError(that, error)
+    })
+
   },
 
   inforClick: function () {
@@ -60,10 +100,12 @@ Page({
             donshow: true,
             url: x5on.url.user,
             success: users => {
+              console.log(users)
               users.reged = true
               that.setData(users)
             },
             fail: error => {
+              console.log(222313)
               that.setData({ notreg: true })
             }
           })
@@ -74,53 +116,53 @@ Page({
     })
   },
 
-  // 上传图片接口
-  doUpload: function () {
-    var that = this
+  // // 上传图片接口
+  // doUpload: function () {
+  //   var that = this
 
-    // 选择图片
-    wx.chooseImage({
-      count: 1,
-      sizeType: ['compressed'],
-      sourceType: ['album', 'camera'],
-      success: function (res) {
-        util.showBusy('正在上传')
-        var filePath = res.tempFilePaths[0]
+  //   // 选择图片
+  //   wx.chooseImage({
+  //     count: 1,
+  //     sizeType: ['compressed'],
+  //     sourceType: ['album', 'camera'],
+  //     success: function (res) {
+  //       util.showBusy('正在上传')
+  //       var filePath = res.tempFilePaths[0]
 
-        // 上传图片
-        wx.uploadFile({
-          url: config.service.uploadUrl,
-          filePath: filePath,
-          name: 'file',
+  //       // 上传图片
+  //       wx.uploadFile({
+  //         url: config.service.uploadUrl,
+  //         filePath: filePath,
+  //         name: 'file',
 
-          success: function (res) {
-            util.showSuccess('上传图片成功')
-            console.log(res)
-            res = JSON.parse(res.data)
-            console.log(res)
-            that.setData({
-              imgUrl: res.data.imgUrl
-            })
-          },
+  //         success: function (res) {
+  //           util.showSuccess('上传图片成功')
+  //           console.log(res)
+  //           res = JSON.parse(res.data)
+  //           console.log(res)
+  //           that.setData({
+  //             imgUrl: res.data.imgUrl
+  //           })
+  //         },
 
-          fail: function (e) {
-            util.showModel('上传图片失败')
-          }
-        })
+  //         fail: function (e) {
+  //           util.showModel('上传图片失败')
+  //         }
+  //       })
 
-      },
-      fail: function (e) {
-        console.error(e)
-      }
-    })
-  },
+  //     },
+  //     fail: function (e) {
+  //       console.error(e)
+  //     }
+  //   })
+  // },
 
-  // 预览图片
-  previewImg: function () {
-    wx.previewImage({
-      current: this.data.imgUrl,
-      urls: [this.data.imgUrl]
-    })
-  },
+  // // 预览图片
+  // previewImg: function () {
+  //   wx.previewImage({
+  //     current: this.data.imgUrl,
+  //     urls: [this.data.imgUrl]
+  //   })
+  // },
 
 })
