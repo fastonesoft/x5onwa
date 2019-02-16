@@ -10,7 +10,7 @@
 </view>
 <block wx:if="{{notauth}}">
   <view class="weui-btn-area x5ui-half-btn">
-    <button type="warn" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button>
+    <button type="warn" open-type="getUserInfo" bindgetuserinfo="bindAuth">授权登录</button>
   </view>
 </block>
 

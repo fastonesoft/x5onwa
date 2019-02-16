@@ -3,8 +3,6 @@ var x5on = require('../x5on.js')
 
 Page({
   data: {
-    errorShow: false,
-    errorMessage: '错误提示',
     items: [],
   },
 

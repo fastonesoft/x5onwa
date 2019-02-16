@@ -5,9 +5,9 @@ use QCloud_WeApp_SDK\Mvv;
 
 class Login extends CI_Controller {
   public function index() {
-    Mvv\mvvLogin::login(function ($userandskey) {
+    Mvv\mvvLogin::login(function ($userinforAndskey) {
       try {
-        $this->json(['code' => 0, 'data' => $userandskey]);
+        $this->json(['code' => 0, 'data' => $userinforAndskey]);
       } catch (Exception $e) {
         $this->json(['code' => 1, 'data' => $e->getMessage()]);
       }

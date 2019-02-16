@@ -6,14 +6,6 @@ use QCloud_WeApp_SDK\Model\xovUserRole;
 class mvvUserRole
 {
 
-  public static function check ($user_id, $role_name) {
-    try {
-      xovUserRole::checkBy(compact('user_id', 'role_name'));
-    } catch (Exception $e) {
-      throw new Exception('没有操作权限');
-    }
-  }
-
   /**
    * 标志出权限列表中我的权限
    * @param $roles        权限列表

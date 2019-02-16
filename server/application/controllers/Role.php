@@ -11,14 +11,14 @@ class Role extends CI_Controller {
    */
   const role_name = 'userset';
   public function index() {
-    Mvv\mvvLogin::check(self::role_name, function ($user) {
-      $user_id = $user['unionId'];
-      $myrole = DB::select('xovUserRole', ['*'], compact('user_id'));
-      // 构造权限列表
-      $roles = DB::select('xonRole', ['*']);
+    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
+      $user_id = $userinfor->unionId;
+      $myroles = Model\xovUserRole::getsBy(compact('user_id'));
 
+      // 构造权限列表
+      $roles = Model\xonRole::gets();
       // 处理权限结果
-      $result = Model\xonRole::sign($roles, $myrole);
+      $result = Mvv\mvvUserRole::sign($roles, $myroles);
 
       // 返回信息
       $this->json(['code' => 0, 'data' => $result]);

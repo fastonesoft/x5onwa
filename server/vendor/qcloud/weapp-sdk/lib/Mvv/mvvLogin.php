@@ -4,15 +4,16 @@ namespace QCloud_WeApp_SDK\Mvv;
 use \Exception;
 
 use QCloud_WeApp_SDK\Auth\LoginService;
+use QCloud_WeApp_SDK\Model\xovUserRole;
 
 class mvvLogin
 {
 
   public static function login ($success, $fail) {
     try {
-      $result = LoginService::login();
+      $userinforAndskey = LoginService::login();
       // 成功
-      call_user_func($success, $result);
+      call_user_func($success, $userinforAndskey);
     } catch (Exception $e) {
       // 登录异常
       call_user_func($fail, ['code' => -1, 'data' => $e->getMessage()]);
@@ -21,11 +22,24 @@ class mvvLogin
 
   public static function check ($role_name, $success, $fail) {
     try {
-      $user = LoginService::check();
+      $userinfor = LoginService::check();
+      $user_id = $userinfor->unionId;
       // 权限检测
-      mvvUserRole::check($user->unionId, $role_name);
+      xovUserRole::checksByCustom(compact('user_id', 'role_name'), '没有操作权限');
       // 成功
-      call_user_func($success, $user);
+      call_user_func($success, $userinfor);
+    } catch (Exception $e) {
+      // 检测异常
+      call_user_func($fail, ['code' => -1, 'data' => $e->getMessage()]);
+    }
+  }
+
+  // 用户注册使用
+  public static function norolecheck ($role_name, $success, $fail) {
+    try {
+      $userinfor = LoginService::check();
+      // 成功
+      call_user_func($success, $userinfor);
     } catch (Exception $e) {
       // 检测异常
       call_user_func($fail, ['code' => -1, 'data' => $e->getMessage()]);

@@ -14,13 +14,11 @@ Page({
           url: x5on.url.user,
           success(users) {
             // 显示用户信息
-            console.log(222)
             users.reged = true
             that.setData(users)
           },
-          fail(error) {
+          fail() {
             // 显示注册信息
-            console.log(111)
             that.setData({ notreg: true })
           }
         })
@@ -30,6 +28,32 @@ Page({
         that.setData({ notauth: true })
       }
     });
+  },
+
+  bindAuth: function (e) {
+    var that = this
+    x5on.auth('scope.userInfo', () => {
+      x5on.login({
+        auth: e.detail,
+        success(res) {
+          // 登录成功，检测用户
+          x5on.request({
+            donshow: true,
+            url: x5on.url.user,
+            success(users) {
+              users.notauth = false
+              users.reged = true
+              that.setData(users)
+            },
+            fail() {
+              that.setData({ notauth: false, notreg: true })
+            }
+          })
+        }
+      });
+    }, () => {
+      x5on.showError(that, '拒绝授权，获取微信用户信息失败')
+    })
   },
 
   regSubmit: function (e) {
@@ -42,7 +66,7 @@ Page({
       },
       mobil: {
         required: true,
-        mobil: true,
+        tel: true,
       }
     }, {
         name: {
@@ -53,18 +77,15 @@ Page({
         }
     })
     reg.checkForm(e, function (form) {
-
-      console.log(form)
-
       x5on.postFormEx({
         url: x5on.url.userreg,
         data: form,
         success: users => {
           users.reged = true
+          users.notreg = false
           that.setData(users)
         }
       })
-
     }, function (error) {
       x5on.showError(that, error)
     })
@@ -89,32 +110,7 @@ Page({
     })
   },
 
-  bindGetUserInfo: function (e) {
-    var that = this
-    x5on.auth('scope.userInfo', () => {
-      x5on.login({
-        auth: e.detail,
-        success(res) {
-          // 登录成功，检测用户
-          x5on.request({
-            donshow: true,
-            url: x5on.url.user,
-            success: users => {
-              console.log(users)
-              users.reged = true
-              that.setData(users)
-            },
-            fail: error => {
-              console.log(222313)
-              that.setData({ notreg: true })
-            }
-          })
-        }
-      });
-    }, () => {
-      x5on.showError(that, '拒绝授权，获取微信用户信息失败')
-    })
-  },
+
 
   // // 上传图片接口
   // doUpload: function () {

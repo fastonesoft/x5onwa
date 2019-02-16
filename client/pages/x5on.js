@@ -250,7 +250,7 @@ var doRequestEx = function (options) {
   util.showBusy('正在查询...')
   qcloud.request({
     url: options.url,
-    success: function (result) {
+    success(result) {
       wx.hideToast()
       var res = result.data
       res.code === 0 && typeof options.success === 'function' && options.success(res.data)
@@ -259,8 +259,9 @@ var doRequestEx = function (options) {
 
       res.code === 1 && util.showModel('查询出错', res.data)
     },
-    fail: function (error) {
+    fail(error) {
       wx.hideToast()
+      typeof options.fail === 'function' && options.fail(error)
       options.donshow ? void (0) : util.showModel('请求失败', error)
     }
   })
@@ -273,7 +274,7 @@ var doPostFormEx = function (options) {
     data: options.data,
     method: 'POST',
     header: { 'content-type': 'application/x-www-form-urlencoded' },
-    success: function (result) {
+    success(result) {
       wx.hideToast()
       var res = result.data
       res.code === 0 && typeof options.success === 'function' && options.success(res.data)
@@ -282,8 +283,9 @@ var doPostFormEx = function (options) {
 
       res.code === 1 && util.showModel('请求出错', res.data)
     },
-    fail: function (error) {
+    fail(error) {
       wx.hideToast()
+      typeof options.fail === 'function' && options.fail(error)
       options.donshow ? void (0) : util.showModel('请求失败', error)
     }
   })
@@ -293,11 +295,11 @@ var doRequestImage = function (options) {
   qcloud.request({
     url: options.url,
     login: false,
-    success: function (result) {
+    success(result) {
       var data = result.data
       if (typeof options.success === 'function') options.success(data)
     },
-    fail: function (error) {
+    fail(error) {
       if (typeof options.fail === 'function') options.fail(error)
       util.showModel('请求失败', '确认网络是否畅通');
     }
@@ -319,25 +321,20 @@ var doAuth = function (authString, success, fail) {
 var doCheck = function (options) {
   // 查看是否授权
   doAuth('scope.userInfo', () => {
-    console.log(99999)
     // 检测是否过期
     wx.checkSession({
-      success(res) {
-        console.log(res)
+      success() {
         typeof options.success === 'function' && options.success()
       },
       fail(error) {
-        console.log(8)
         util.showBusy('正在登录...')
         // 过期，自动登录
         qcloud.loginWithCode({
-          success: res => {
-            console.log(7)
+          success(res) {
             wx.hideToast()
             typeof options.success === 'function' && options.success()
           },
-          fail: err => {
-            console.log(6)
+          fail(err) {
             wx.hideToast()
             typeof options.fail === 'function' && options.fail()
           }
@@ -355,15 +352,13 @@ var doLogin = function (options) {
   qcloud.login({
     auth: options.auth,
     success(res) {
-      console.log(2222288888)
       wx.hideToast()
-      typeof options.success === 'function' && options.success(res);
+      typeof options.success === 'function' && options.success(res)
     },
     fail(err) {
-      console.log(121212)
       wx.hideToast()
-      typeof options.fail === 'function' && options.fail(err);
-      util.showModel('登录错误', err)
+      typeof options.fail === 'function' && options.fail()
+      util.showModel('登录错误', '状态异常，请稍后重试')
     }
   })
 };
