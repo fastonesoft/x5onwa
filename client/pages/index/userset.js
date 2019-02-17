@@ -6,7 +6,6 @@ Page({
 
   onShow: function () {
     var that = this
-    // 检测登录
     x5on.check({
       success() {
         x5on.request({

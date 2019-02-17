@@ -6,19 +6,12 @@ use QCloud_WeApp_SDK\Mysql\Mysql as dbs;
 use QCloud_WeApp_SDK\Constants;
 use \Exception;
 
-class xonParentChilds
+class xonUserChilds extends cAppinfo
 {
-  public static function insert () {
+  private static $tableName = 'xonParentChilds';
+  private static $tableTitle = '用户孩子';
+  // 更名为 xonUserChilds
 
-  }
-
-  public static function update () {
-
-  }
-
-  public static function delete () {
-
-  }
 
   public static function mychilds ($user_id) {
     return $res = dbs::select('xovParentChilds', ['uid', 'idc', 'child_id', 'child_name', 'relation_name'], compact('user_id'));

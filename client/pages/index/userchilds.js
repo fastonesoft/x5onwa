@@ -3,32 +3,27 @@ var x5on = require('../x5on.js')
 import x5va from '../x5va.js'
 
 Page({
-  data: {
-    pIndex: -1,
-    relations: [],
-    childs: [],
 
-    mychildShow: false,
-    userchildShow: false,
+  onShow: function () {
+    var that = this
+    x5on.check({
+      success() {
+        x5on.request({
+          url: x5on.url.userset,
+          success(users) {
+            users.notchecked = !users.checked
+            that.setData(users)
+          }
+        })
+      },
+      fail() {
+        wx.switchTab({ url: '/pages/login/login'})
+      }
+    });
   },
 
   onLoad: function (e) {
-    this.x5va = new x5va({
-      name: {
-        required: true,
-        chinese: true,
-        rangelength: [2, 4],
-      },
-      idc: {
-        required: true,
-        idcard: true,
-        idcardrange: [7, 16],
-      },
-      relation: {
-        required: true,
-        digits: true,
-      }
-    })
+
     var that = this
     x5on.request({
       url: x5on.url.relation,
@@ -47,15 +42,6 @@ Page({
     })
   },
 
-  inputCheck: function (e) {
-    let that = this
-    that.x5va.checkInput(e, function (error) {
-      x5on.showError(that, error)
-    }, function (form) {
-      that.setData({ form })
-    })
-  },
-
   pickerChange: function (e) {
     var index = e.detail.value
     if (index == -1) return
@@ -66,12 +52,30 @@ Page({
 
   userchildSubmit: function (e) {
     var that = this
-    that.x5va.checkForm(e, function () {
+    var userchild = new x5va({
+      name: {
+        required: true,
+        chinese: true,
+        rangelength: [2, 4],
+      },
+      idc: {
+        required: true,
+        idcard: true,
+        idcardrange: [7, 16],
+      },
+      relation: {
+        required: true,
+        digits: true,
+      }
+    })
+    userchild.checkForm(e, form => {
       let value = e.detail.value
       value.relation_id = that.data.relation_id
+
+
       x5on.postFormEx({
         url: x5on.url.userchildupdate,
-        data: value,
+        data: form,
         success: (res) => {
           var childs = res.data
           var mychildShow = childs.length > 0
@@ -79,10 +83,8 @@ Page({
           that.setData({ childs, mychildShow, userchildShow })
         }
       })
-    }, function (error, form) {
+    }, error => {
       x5on.showError(that, error)
-    }, function (form) {
-      that.setData({ form })
     })
   },
 

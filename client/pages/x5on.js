@@ -54,12 +54,9 @@ var doUrl = {
 
   // 用户孩子
   userchild: `${host}/weapp/userchild`,
-  userchildupdate: `${host}/weapp/child/update`,
-
-  // 称谓
-  relation: `${host}/weapp/relation`,
-  // 亲子关系
-  parentchilds: `${host}/weapp/parentchilds`,
+  userchildupdate: `${host}/weapp/userchild/update`,
+  userchildrelation: `${host}/weapp/userchild/relation`,
+  userchildparent: `${host}/weapp/userchild/parent`,
 
   // 报名
   regstudreg: `${host}/weapp/studreg/regstud`,
