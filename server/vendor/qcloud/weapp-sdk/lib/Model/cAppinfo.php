@@ -33,6 +33,10 @@ class cAppinfo extends vAppinfo
     return dbs::update(static::$tableName, $columns, $conditions);
   }
 
+  public static function setsBy ($columns, $conditions) {
+    return static::update($columns, $conditions);
+  }
+
   public static function setsById ($columns, $id) {
     return static::update($columns, compact('id'));
   }

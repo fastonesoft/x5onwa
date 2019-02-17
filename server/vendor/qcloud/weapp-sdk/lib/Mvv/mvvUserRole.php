@@ -1,6 +1,7 @@
 <?php
 namespace QCloud_WeApp_SDK\Mvv;
 
+use QCloud_WeApp_SDK\Model\xonRole;
 use QCloud_WeApp_SDK\Model\xovUserRole;
 
 class mvvUserRole
@@ -45,11 +46,10 @@ class mvvUserRole
       // 对象截取
       $uid = $k;
       $can_show = $v === 'true' ? 1 : 0;
-      // 查询记录
-      $res = dbs::row('xonRole', ['*'], compact('uid', 'can_show'));
-      if ($res === NULL) {
-        // 更新记录
-        dbs::update('xonRole', compact('can_show'), compact('uid'));
+
+      $res = xonRole::getBy(compact('uid', 'can_show'));
+      if ($res === null) {
+        xonRole::setsByUid(compact('can_show'), $uid);
         $result++;
       }
     }
