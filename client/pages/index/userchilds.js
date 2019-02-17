@@ -9,10 +9,15 @@ Page({
     x5on.check({
       success() {
         x5on.request({
-          url: x5on.url.userset,
-          success(users) {
-            users.notchecked = !users.checked
-            that.setData(users)
+          url: x5on.url.userchilds,
+          success(userchilds) {
+            that.setData({ userchilds })
+          }
+        })
+        x5on.request({
+          url: x5on.url.userchildsrelation,
+          success(relations) {
+            that.setData({ relations })
           }
         })
       },
@@ -20,26 +25,6 @@ Page({
         wx.switchTab({ url: '/pages/login/login'})
       }
     });
-  },
-
-  onLoad: function (e) {
-
-    var that = this
-    x5on.request({
-      url: x5on.url.relation,
-      success: function (result) {
-        that.setData({ relations: result.data })
-      }
-    })
-    x5on.request({
-      url: x5on.url.parentchilds,
-      success: function (result) {
-        var childs = result.data
-        var mychildShow = childs.length > 0
-        var userchildShow = childs.length < 1
-        that.setData({ childs, mychildShow, userchildShow })
-      }
-    })
   },
 
   pickerChange: function (e) {
@@ -65,24 +50,32 @@ Page({
       },
       relation: {
         required: true,
-        digits: true,
+        min: 0,
+      }
+    }, {
+      name: {
+        required: '孩子姓名'
+      },
+      idc: {
+        required: '身份证号'
+      },
+      relation: {
+        required: '亲子称谓'
       }
     })
     userchild.checkForm(e, form => {
-      let value = e.detail.value
-      value.relation_id = that.data.relation_id
+      console.log(form)
 
-
-      x5on.postFormEx({
-        url: x5on.url.userchildupdate,
-        data: form,
-        success: (res) => {
-          var childs = res.data
-          var mychildShow = childs.length > 0
-          var userchildShow = false
-          that.setData({ childs, mychildShow, userchildShow })
-        }
-      })
+      // x5on.postFormEx({
+      //   url: x5on.url.userchildupdate,
+      //   data: form,
+      //   success: (res) => {
+      //     var childs = res.data
+      //     var mychildShow = childs.length > 0
+      //     var userchildShow = false
+      //     that.setData({ childs, mychildShow, userchildShow })
+      //   }
+      // })
     }, error => {
       x5on.showError(that, error)
     })

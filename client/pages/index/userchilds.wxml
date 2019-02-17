@@ -1,7 +1,6 @@
-<!--pages/index/userchilds.wxml-->
+<!-- pages/index/userchilds.wxml -->
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
-
-<form bindsubmit="userchildSubmit" wx:if="{{userchildShow}}">
+<form bindsubmit="userchildSubmit" wx:if="{{userchilds.length<2}}">
   <view class="weui-cells__title">孩子信息</view>
   <view class="weui-cells weui-cells_after-title">
     <view class="weui-cell weui-cell_input">
@@ -21,7 +20,6 @@
       </view>
     </view>
   </view>
-
   <view class="weui-cells__title">亲子关系</view>
   <view class="weui-cells weui-cells_after-title">
     <view class="weui-cell weui-cell_select">
@@ -29,7 +27,7 @@
         <view class="weui-label">亲子称谓</view>
       </view>
       <view class="weui-cell__bd">
-        <picker name="relation" bindchange="pickerChange" value="{{pIndex}}" range="{{relations}}" range-key="name">
+        <picker name="relation" bindchange="pickerChange" value="{{pIndex}}" range="{{relations}}" range-key="name" disabled="{{!relations||relations.length==0}}">
           <view class="weui-select weui-select_in-select-after">{{relations[pIndex].name}}</view>
         </picker>
       </view>
@@ -39,8 +37,7 @@
     <button type="primary" form-type="submit">提交</button>
   </view>
 </form>
-
-<block wx:if="{{mychildShow}}" wx:for="{{childs}}" wx:key="uid">
+<block wx:for="{{userchilds}}" wx:key="uid">
   <view class="weui-cells__title">我的孩子</view>
   <view class="weui-cells weui-cells_after-title">
     <view class="weui-cell">
@@ -49,15 +46,14 @@
     </view>
     <view class="weui-cell">
       <view class="weui-cell__bd">身份证号</view>
-      <view class="weui-cell__ft">{{item.idc}}</view>
+      <view class="weui-cell__ft">{{item.child_idc}}</view>
     </view>
     <view class="weui-cell">
       <view class="weui-cell__bd">亲子称谓</view>
-      <view class="weui-cell__ft">{{item.relation_name}}</view>
+      <view class="weui-cell__ft">{{item.child_relation}}</view>
     </view>
   </view>
+  <view class="weui-btn-area">
+    <button type="primary" bindtap="returnClick">返回</button>
+  </view>
 </block>
-
-<view class="weui-btn-area">
-  <button type="primary" bindtap="returnClick">返回</button>
-</view>

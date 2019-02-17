@@ -15,6 +15,21 @@ var doUrl = {
   login: `${host}/weapp/login`,
   // 权限地址
   role: `${host}/weapp/role`,
+  
+  // 用户注册无检测
+  user: `${host}/weapp/user`,
+  userreg: `${host}/weapp/user/reg`,
+  // 用户设置有检测
+  userset: `${host}/weapp/userset`,
+  usersetupdate: `${host}/weapp/userset/update`,
+
+  // 用户孩子
+  userchilds: `${host}/weapp/userchilds`,
+  userchildsreg: `${host}/weapp/userchilds/reg`,
+  userchildsrelation: `${host}/weapp/userchilds/relation`,
+  userchildsparent: `${host}/weapp/userchilds/parent`,
+
+
 
   // 编码地址
   schcode: `${host}/weapp/schcode`,
@@ -33,7 +48,7 @@ var doUrl = {
   roleset: `${host}/weapp/roleset`,
   rolesetupdate: `${host}/weapp/roleset/update`,
 
-  // 权限分组
+  // 分组权限
   rolegroup: `${host}/weapp/rolegroup`,
   rolegrouprole: `${host}/weapp/rolegroup/role`,
   rolegroupupdate: `${host}/weapp/rolegroup/update`,
@@ -45,18 +60,8 @@ var doUrl = {
   roledistgroupuser: `${host}/weapp/roledist/groupuser`,
   roledistdeleteuser: `${host}/weapp/roledist/deleteuser`,
 
-  // 用户检测
-  user: `${host}/weapp/user`,
-  userreg: `${host}/weapp/user/reg`,
-  // 用户设置
-  userset: `${host}/weapp/userset`,
-  usersetupdate: `${host}/weapp/userset/update`,
 
-  // 用户孩子
-  userchild: `${host}/weapp/userchild`,
-  userchildupdate: `${host}/weapp/userchild/update`,
-  userchildrelation: `${host}/weapp/userchild/relation`,
-  userchildparent: `${host}/weapp/userchild/parent`,
+
 
   // 报名
   regstudreg: `${host}/weapp/studreg/regstud`,

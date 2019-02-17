@@ -464,7 +464,6 @@ class ComposerStaticInit1b277734c5cf2c915c36dd14ed3bc61f
         'QCloud_WeApp_SDK\\Helper\\Logger' => __DIR__ . '/..' . '/qcloud/weapp-sdk/lib/Helper/Logger.php',
         'QCloud_WeApp_SDK\\Helper\\Request' => __DIR__ . '/..' . '/qcloud/weapp-sdk/lib/Helper/Request.php',
         'QCloud_WeApp_SDK\\Helper\\Util' => __DIR__ . '/..' . '/qcloud/weapp-sdk/lib/Helper/Util.php',
-        'QCloud_WeApp_SDK\\Model\\User' => __DIR__ . '/..' . '/qcloud/weapp-sdk/lib/Model/User.php',
         'QCloud_WeApp_SDK\\Mysql\\Mysql' => __DIR__ . '/..' . '/qcloud/weapp-sdk/lib/Mysql/Mysql.php',
         'QCloud_WeApp_SDK\\Tunnel\\ITunnelHandler' => __DIR__ . '/..' . '/qcloud/weapp-sdk/lib/Tunnel/ITunnelHandler.php',
         'QCloud_WeApp_SDK\\Tunnel\\Signature' => __DIR__ . '/..' . '/qcloud/weapp-sdk/lib/Tunnel/Signature.php',

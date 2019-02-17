@@ -10,6 +10,7 @@ class Userset extends CI_Controller {
   public function index() {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
+        // 返回用户信息
         $user_id = $userinfor->unionId;
         $result = Model\xonUser::checkById($user_id);
 

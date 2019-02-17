@@ -11,11 +11,15 @@ class Rolegroup extends CI_Controller
    */
   const role_name = 'rolegroup';
   public function index() {
-    Mvv\mvvLogin::check(self::role_name, function ($user) {
-      // 分组列表
-      $result = DB::select('xonGroup', ['id', 'name'], '', 'and', 'order by id');
-      // 返回信息
-      $this->json(['code' => 0, 'data' => $result]);
+    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
+      try {
+        // 返回分组列表
+        $result = Model\xonGroup::gets();
+
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
     }, function ($error) {
       $this->json($error);
     });

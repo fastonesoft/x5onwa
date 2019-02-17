@@ -4,10 +4,10 @@ namespace QCloud_WeApp_SDK\Auth;
 use \Exception;
 
 use \QCloud_WeApp_SDK\Conf as Conf;
-use \QCloud_WeApp_SDK\Model\User as User;
 use \QCloud_WeApp_SDK\Constants as Constants;
 use \QCloud_WeApp_SDK\Helper\Logger as Logger;
 use \QCloud_WeApp_SDK\Helper\Request as Request;
+use QCloud_WeApp_SDK\Model\cSessionInfo;
 
 class AuthAPI {
   /**
@@ -27,10 +27,11 @@ class AuthAPI {
     // 如果只提供了 code
     // 就用 code 解出来的 openid 去查数据库
     if ($code && !$encryptData && !$iv) {
-      $userInfo = User::findUserByOpenId($openid);
+      $open_id = $openid;
+      $userInfo = cSessionInfo::getBy(compact('open_id'));
       $userinfo = json_decode($userInfo->user_info);
       // 更新登录态
-      User::storeUserInfo($userinfo, $skey, $session_key);
+      cSessionInfo::add($userinfo, $skey, $session_key);
       return compact('userinfo', 'skey');
     }
 
@@ -51,12 +52,12 @@ class AuthAPI {
     $userinfo = json_decode($decryptData);
 
     // 4. 储存到数据库中
-    User::storeUserInfo($userinfo, $skey, $session_key);
+    cSessionInfo::add($userinfo, $skey, $session_key);
     return compact('userinfo', 'skey');
   }
 
   public static function checkLogin($skey) {
-    $userinfo = User::findUserBySKey($skey);
+    $userinfo = cSessionInfo::getBy(compact('skey'));
     if ($userinfo === NULL) {
       throw new Exception("没有登录信息");
     }
