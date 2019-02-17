@@ -501,7 +501,7 @@ class x5va {
    * 验证所有字段的规则，返回验证是否通过
    * @param {Object} data 需要验证数据对象
    */
-  checkForm(data, success, fail, complete) {
+  checkForm(data, success, fail) {
     this.__initData()
     for (let param in this.rules) {
       this.setView(param)
@@ -510,11 +510,11 @@ class x5va {
     let passed = this.valid()
     // 成功，执行
     if (passed) {
-      if (typeof success === 'function') success(this.form)
+      typeof success === 'function' && success(this.form)
     }
     else {
       let error = this.errorList[0]
-      if (typeof fail === 'function') fail(error.msg)
+      typeof fail === 'function' && fail(error.msg)
     }
   }
 
@@ -523,7 +523,7 @@ class x5va {
    * @param {Object} data 焦点控件 e
    * 控件要提供 data-name 参数，值 为控件的 name
    */
-  checkInput(data, fail, complete) {
+  checkInput(data, fail) {
     this.__initError()
     let name = data.currentTarget.dataset.name
     let value = data.detail.value
@@ -533,10 +533,8 @@ class x5va {
     // 失败，给出错误信息
     if (!passed) {
       let error = this.errorList[0]
-      if (typeof fail === 'function') fail(error.msg)
+      typeof fail === 'function' && fail(error.msg)
     }
-    // 不管成功与否，都向外提供表单验证结果
-    if (typeof complete === 'function') complete(this.form)
   }
 
   /**

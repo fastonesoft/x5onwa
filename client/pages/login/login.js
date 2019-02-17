@@ -76,38 +76,20 @@ Page({
           required: '手机号码'
         }
     })
-    reg.checkForm(e, function (form) {
+    reg.checkForm(e, form => {
       x5on.postFormEx({
         url: x5on.url.userreg,
         data: form,
-        success: users => {
+        success(users) {
           users.reged = true
           users.notreg = false
           that.setData(users)
         }
       })
-    }, function (error) {
+    }, error => {
       x5on.showError(that, error)
     })
 
-  },
-
-  inforClick: function () {
-    wx.navigateTo({
-      url: '/pages/index/userset',
-      success: () => {
-        // 
-      }
-    })
-  },
-
-  childAdd: function () {
-    wx.navigateTo({
-      url: '/pages/index/userchilds',
-      success: () => {
-        // 
-      }
-    })
   },
 
 
