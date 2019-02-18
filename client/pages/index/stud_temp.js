@@ -6,7 +6,7 @@ Page({
 
   onLoad: function (e) {
     var that = this
-    x5on.postFormEx({
+    x5on.postForm({
       url: x5on.url.gradestuduid,
       data: e,
       success: student => {
@@ -41,7 +41,7 @@ Page({
       form.uid = that.data.student.uid
       form.task_memo = JSON.stringify(task_memo)
       
-      x5on.postFormEx({
+      x5on.postForm({
         url: x5on.url.gradestudtemp,
         data: form,
         success: students => {

@@ -5,7 +5,7 @@ Page({
 
   onLoad: function (e) {
     var that = this
-    x5on.postFormEx({
+    x5on.postForm({
       url: x5on.url.gradestuduid,
       data: e,
       success: student => {
@@ -17,7 +17,7 @@ Page({
   studauthSubmit: function (e) {
     var that = this
     e.detail.value.uid = that.data.student.uid
-    x5on.postFormEx({
+    x5on.postForm({
       url: x5on.url.gradestudauth,
       data: e.detail.value,
       success: students => {

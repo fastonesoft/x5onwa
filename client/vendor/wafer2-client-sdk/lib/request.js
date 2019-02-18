@@ -64,7 +64,7 @@ function request(options) {
             success: function (response) {
                 var data = response.data;
                 // 查错的时候开
-// console.log(data)
+console.log(data)
                 if ((data && data.code === -1) || response.statusCode === 401) {
                     Session.clear();
                     // 如果是登录态无效，并且还没重试过，会尝试登录后刷新凭据重新请求

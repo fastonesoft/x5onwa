@@ -42,7 +42,7 @@ Page({
   findSubmit: function (e) {
     var that = this;
     that.x5va.checkForm(e, function () {
-      x5on.postFormEx({
+      x5on.postForm({
         url: x5on.url.roledist,
         data: e.detail.value,
         success: (result) => {
@@ -71,7 +71,7 @@ Page({
     var group_id = this.data.pickers[index].id
     that.setData({ pIndex: index, group_id: group_id });
     // 刷新数据
-    x5on.postFormEx({
+    x5on.postForm({
       url: x5on.url.roledistgroupuser,
       data: {group_id},
       success: (res) => {
@@ -84,7 +84,7 @@ Page({
     var that = this
     var value = e.detail.value
     if (value.user_id && value.group_id) {
-      x5on.postFormEx({
+      x5on.postForm({
         url: x5on.url.roledistupdate,
         data: value,
         success: (res) => {
@@ -106,7 +106,7 @@ Page({
     var that = this
     var uid = e.currentTarget.dataset.uid
     var index = e.currentTarget.dataset.index
-    x5on.postFormEx({
+    x5on.postForm({
       url: x5on.url.roledistdeleteuser,
       data: {uid},
       success: (res) => {

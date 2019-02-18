@@ -53,7 +53,7 @@ Page({
       form.grade_id = grade_id
       form.cls_id = cls_id
 
-      x5on.postFormEx({
+      x5on.postForm({
         url: x5on.url.gradestudread,
         data: form,
         success: students => {

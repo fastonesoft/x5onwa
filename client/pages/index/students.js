@@ -13,7 +13,7 @@ Page({
 
   onLoad: function (options) {
     var that = this
-    x5on.requestEx({
+    x5on.request({
       url: x5on.url.gradestudgrade,
       success: grades => {
         that.setData({ grades })
@@ -48,7 +48,7 @@ Page({
     that.setData({ gradeIndex, classIndex, students, comeshow })
     //
     var grade_id = that.getGradeid()
-    x5on.postFormEx({
+    x5on.postForm({
       url: x5on.url.gradestudclass,
       data: { grade_id },
       success: classes => {
@@ -64,7 +64,7 @@ Page({
       // 
       var cls_id = that.getClsid()
       var grade_id = that.getGradeid()
-      x5on.postFormEx({
+      x5on.postForm({
         url: x5on.url.gradestudcls,
         data: { grade_id, cls_id },
         success: students => {
@@ -95,7 +95,7 @@ Page({
     that.x5va.checkForm(e, function (form) {
       form.cls_id = that.getClsid()
       form.grade_id = that.getGradeid()
-      x5on.postFormEx({
+      x5on.postForm({
         url: x5on.url.gradestudquery,
         data: form,
         success: students => {
@@ -182,7 +182,7 @@ Page({
     var grade_id = that.getGradeid()
     var task_status_id = x5on.data.status_temp
     var form = { grade_id, task_status_id }
-    x5on.postFormEx({
+    x5on.postForm({
       url: x5on.url.gradestudtask,
       data: form,
       success: tasks => {
@@ -198,7 +198,7 @@ Page({
     var grade_id = that.getGradeid()
     var task_status_id = x5on.data.status_down
     var form = { grade_id, task_status_id }
-    x5on.postFormEx({
+    x5on.postForm({
       url: x5on.url.gradestudtask,
       data: form,
       success: tasks => {

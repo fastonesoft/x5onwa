@@ -53,7 +53,7 @@ Page({
   myrenameSubmit: function (e) {
     var that = this
     x5on.checkFormReg(that, '班级号码输入有误', function () {
-      x5on.postFormEx({
+      x5on.postForm({
         url: x5on.url.myrenameupdate,
         data: e.detail.value,
         success: (result) => {

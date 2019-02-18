@@ -27,7 +27,6 @@ var doUrl = {
   userchilds: `${host}/weapp/userchilds`,
   userchildsreg: `${host}/weapp/userchilds/reg`,
   userchildsrelation: `${host}/weapp/userchilds/relation`,
-  userchildsparent: `${host}/weapp/userchilds/parent`,
 
 
 
@@ -248,7 +247,7 @@ var doPickChange = function (pick, success) {
  *  1    ：   应用级出错代码，逻辑错误代码
  *  X    ：   ...
  */
-var doRequestEx = function (options) {
+var doRequest = function (options) {
   util.showBusy('正在查询...')
   qcloud.request({
     url: options.url,
@@ -270,7 +269,7 @@ var doRequestEx = function (options) {
   })
 };
 
-var doPostFormEx = function (options) {
+var doPostForm = function (options) {
   util.showBusy('正在请求...')
   qcloud.request({
     url: options.url,
@@ -389,12 +388,8 @@ module.exports = {
   setRadio: doSetRadio,
   setCheckbox: doSetCheckbox,
   pickChange: doPickChange,
-  request: doRequestEx,
-  requestEx: doRequestEx,
-
-
-  postForm: doPostFormEx,
-  postFormEx: doPostFormEx,
+  request: doRequest,
+  postForm: doPostForm,
   showError: doShowError,
   showSuccess: doSuccess,
 }

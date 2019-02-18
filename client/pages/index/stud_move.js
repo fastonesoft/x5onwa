@@ -5,7 +5,7 @@ Page({
 
   onLoad: function (e) {
     var that = this
-    x5on.postFormEx({
+    x5on.postForm({
       url: x5on.url.gradestuduid,
       data: e,
       success: student => {
@@ -13,7 +13,7 @@ Page({
         var cls_id = student.cls_id
         var grade_id = student.grade_id
         //
-        x5on.postFormEx({
+        x5on.postForm({
           url: x5on.url.gradestudclass,
           data: { grade_id },
           success: classes => {
@@ -37,7 +37,7 @@ Page({
     var classIndex = e.detail.value.classIndex
     var cls_id = classes[classIndex].id
 
-    x5on.postFormEx({
+    x5on.postForm({
       url: x5on.url.gradestudmove,
       data: { uid, cls_id },
       success: students => {

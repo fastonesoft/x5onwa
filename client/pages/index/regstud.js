@@ -57,7 +57,7 @@ Page({
     this.setData({ form_show, inforIndex, form_id, form_name })
     x5on.check({
       success: () => {
-        x5on.postFormEx({
+        x5on.postForm({
           data: {form_id},
           url: x5on.url.schoolformkey,
           success: function (result) {            
@@ -75,7 +75,7 @@ Page({
     if (e.detail.value.sch_id && e.detail.value.child_id && e.detail.value.edu_type_id) {
       x5on.check({
         success: () => {
-          x5on.postFormEx({
+          x5on.postForm({
             data: e.detail.value,
             url: x5on.url.regstudreg,
             success: function (result) {
@@ -95,7 +95,7 @@ Page({
     var that = this
     x5on.check({
       success: () => {
-        x5on.postFormEx({
+        x5on.postForm({
           data: e.detail.value,
           url: x5on.url.regstudcancel,
           success: function (result) {            
@@ -125,7 +125,7 @@ Page({
   uploadSubmit: function (e) {
     var that = this;
     x5on.checkFormEx(this, function () {
-      x5on.postFormEx({
+      x5on.postForm({
         data: e.detail.value,
         url: x5on.url.schoolformvalueupdate,
         success: function (result) {

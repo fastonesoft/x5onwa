@@ -46,7 +46,7 @@ Page({
       idc: {
         required: true,
         idcard: true,
-        idcardrange: [7, 16],
+        idcardrange: [7, 18],
       },
       relation: {
         required: true,
@@ -64,18 +64,14 @@ Page({
       }
     })
     userchild.checkForm(e, form => {
-      console.log(form)
-
-      // x5on.postFormEx({
-      //   url: x5on.url.userchildupdate,
-      //   data: form,
-      //   success: (res) => {
-      //     var childs = res.data
-      //     var mychildShow = childs.length > 0
-      //     var userchildShow = false
-      //     that.setData({ childs, mychildShow, userchildShow })
-      //   }
-      // })
+      form.relation_id = x5on.getId(that.data.relations, form.relation)
+      x5on.postForm({
+        url: x5on.url.userchildsreg,
+        data: form,
+        success(userchilds) {
+          that.setData({ userchilds })
+        }
+      })
     }, error => {
       x5on.showError(that, error)
     })

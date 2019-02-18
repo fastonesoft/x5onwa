@@ -47,7 +47,7 @@ Page({
       form.stud_type_id = 1
       form.stud_status_id = 1
 
-      x5on.postFormEx({
+      x5on.postForm({
         url: x5on.url.gradestudadd,
         data: form,
         success: students => {

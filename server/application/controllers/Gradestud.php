@@ -4,10 +4,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 use QCloud_WeApp_SDK\Mvv;
 use QCloud_WeApp_SDK\Model;
 
-class Gradestud extends CI_Controller {
+class Gradestud extends CI_Controller
+{
   const role_name = 'students';
 
-  public function index() {
+  public function index()
+  {
     Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         // 未完成
@@ -21,7 +23,8 @@ class Gradestud extends CI_Controller {
     });
   }
 
-  public function grade() {
+  public function grade()
+  {
     Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $result = Mvv\mvvGradeStud::grades();
@@ -36,7 +39,8 @@ class Gradestud extends CI_Controller {
     });
   }
 
-  public function classes() {
+  public function classes()
+  {
     Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
@@ -53,7 +57,8 @@ class Gradestud extends CI_Controller {
     });
   }
 
-  public function studcls() {
+  public function studcls()
+  {
     Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
@@ -71,7 +76,8 @@ class Gradestud extends CI_Controller {
     });
   }
 
-  public function query() {
+  public function query()
+  {
     Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
@@ -91,7 +97,8 @@ class Gradestud extends CI_Controller {
     });
   }
 
-  public function type() {
+  public function type()
+  {
     Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
@@ -107,7 +114,8 @@ class Gradestud extends CI_Controller {
     });
   }
 
-  public function status() {
+  public function status()
+  {
     Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
@@ -125,7 +133,8 @@ class Gradestud extends CI_Controller {
   }
 
 
-  public function uid() {
+  public function uid()
+  {
     Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
@@ -142,7 +151,8 @@ class Gradestud extends CI_Controller {
     });
   }
 
-  public function add() {
+  public function add()
+  {
     Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
@@ -165,7 +175,8 @@ class Gradestud extends CI_Controller {
     });
   }
 
-  public function move() {
+  public function move()
+  {
     Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
@@ -183,7 +194,8 @@ class Gradestud extends CI_Controller {
     });
   }
 
-  public function modi() {
+  public function modi()
+  {
     Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
@@ -203,7 +215,8 @@ class Gradestud extends CI_Controller {
     });
   }
 
-  public function auth() {
+  public function auth()
+  {
     Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
@@ -221,7 +234,8 @@ class Gradestud extends CI_Controller {
     });
   }
 
-  public function come() {
+  public function come()
+  {
     Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
@@ -245,7 +259,8 @@ class Gradestud extends CI_Controller {
     });
   }
 
-  public function repet() {
+  public function repet()
+  {
     Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
@@ -268,7 +283,8 @@ class Gradestud extends CI_Controller {
     });
   }
 
-  public function read() {
+  public function read()
+  {
     Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
@@ -291,7 +307,8 @@ class Gradestud extends CI_Controller {
     });
   }
 
-  public function down() {
+  public function down()
+  {
     Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
@@ -310,7 +327,8 @@ class Gradestud extends CI_Controller {
     });
   }
 
-  public function task() {
+  public function task()
+  {
     Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
@@ -328,7 +346,8 @@ class Gradestud extends CI_Controller {
     });
   }
 
-  public function gradesdown() {
+  public function gradesdown()
+  {
     Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
@@ -344,7 +363,8 @@ class Gradestud extends CI_Controller {
     });
   }
 
-  public function returns() {
+  public function returns()
+  {
     Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
@@ -362,7 +382,8 @@ class Gradestud extends CI_Controller {
     });
   }
 
-  public function temp() {
+  public function temp()
+  {
     Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
@@ -380,7 +401,8 @@ class Gradestud extends CI_Controller {
     });
   }
 
-  public function back() {
+  public function back()
+  {
     Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;

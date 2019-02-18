@@ -3,8 +3,8 @@ namespace QCloud_WeApp_SDK\Model;
 
 class xonUserChilds extends cAppinfo
 {
-  private static $tableName = 'xonUserChilds';
-  private static $tableTitle = '家长孩子';
+  protected static $tableName = 'xonUserChilds';
+  protected static $tableTitle = '家长孩子';
 
   public static function add ($user_id, $child_id, $relation_id) {
     $user_child = self::existByCustom(compact('user_id', 'child_id'), '无需重复添加孩子记录');

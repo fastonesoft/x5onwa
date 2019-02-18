@@ -13,19 +13,19 @@ Page({
 
   onLoad: function (e) {
     var that = this
-    x5on.postFormEx({
+    x5on.postForm({
       url: x5on.url.gradestuduid,
       data: e,
       success: student => {
         // 学生
         var stud_type_id = student.stud_type_id
         var stud_status_id = student.stud_status_id
-        x5on.requestEx({
+        x5on.request({
           url: x5on.url.gradestudstatus,
           success: status => {
             // 状态
             var stud_status = x5on.getIndex(status, stud_status_id)
-            x5on.requestEx({
+            x5on.request({
               url: x5on.url.gradestudtype,
               success: types => {
                 // 来源
@@ -89,7 +89,7 @@ Page({
       form.uid = that.data.student.uid
       form.stud_type_id = x5on.getId(that.data.types, form.stud_type)
       form.stud_status_id = x5on.getId(that.data.status, form.stud_status)
-      x5on.postFormEx({
+      x5on.postForm({
         url: x5on.url.gradestudmodi,
         data: form,
         success: students => {

@@ -77,7 +77,7 @@ Page({
         }
     })
     reg.checkForm(e, form => {
-      x5on.postFormEx({
+      x5on.postForm({
         url: x5on.url.userreg,
         data: form,
         success(users) {

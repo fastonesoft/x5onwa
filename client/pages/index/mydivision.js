@@ -70,7 +70,7 @@ Page({
   findSubmit: function (e) {
     var that = this;
     x5on.checkForm(that, 0, 0, function () {
-      x5on.postFormEx({
+      x5on.postForm({
         url: x5on.url.mydivisionteachs,
         data: e.detail.value,
         success: (result) => {          
@@ -121,7 +121,7 @@ Page({
       if (has) classes.splice(index, 1)
     }
     that.setData({ teaches, classes })
-    x5on.postFormEx({
+    x5on.postForm({
       url: x5on.url.mydivisionupdate,
       data: data,
       success: result => {
@@ -141,7 +141,7 @@ Page({
       }
     })
     that.setData({ classed })
-    x5on.postFormEx({
+    x5on.postForm({
       url: x5on.url.mydivisionedremove,
       data: {uid},
       success: result => {

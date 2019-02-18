@@ -6,7 +6,7 @@ Page({
 
   onLoad: function () {
     var that = this
-    x5on.requestEx({
+    x5on.request({
       url: x5on.url.tchregusersch,
       success: schools => {
         that.setData({ schools })
@@ -28,7 +28,7 @@ Page({
         }
       })
     form.checkForm(e, forms => {
-      x5on.postFormEx({
+      x5on.postForm({
         url: x5on.url.tchreg,
         data: forms,
         success: radios => {
@@ -75,7 +75,7 @@ Page({
       })
     form.checkForm(e, forms => {
       forms.sch_id = x5on.getId(that.data.schools, forms.sch_index)
-      x5on.postFormEx({
+      x5on.postForm({
         url: x5on.url.tchreguserreg,
         data: forms,
         success: radios => {

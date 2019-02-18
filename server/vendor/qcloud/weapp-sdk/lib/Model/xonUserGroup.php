@@ -9,23 +9,19 @@ class xonUserGroup extends cAppinfo
 
   public static function add($user_id, $group_id)
   {
-    self::existByCustom(compact('user_id', 'group_id'), '不用重复添加');
-    $uid = x5on::getUid();
-    self::insert(compact('user_id', 'group_id', 'uid'));
+    $res = self::getBy(compact('user_id', 'group_id'));
+    if ($res === null) {
+      $uid = x5on::getUid();
+      self::insert(compact('user_id', 'group_id', 'uid'));
+    }
   }
 
+  // 添加临时用户，有权限记录，不再加
   public static function addTemp($user_id, $group_id)
   {
     $res = self::getBy(compact('user_id'));
     if ($res === null) {
       self::add($user_id, $group_id);
     }
-  }
-
-
-  public static function getUserMaxGroupId($user_id)
-  {
-    $group = dbs::row('xovUserGroup', ['group_id'], compact('user_id'), 'and', 'order by group_id desc');
-    return $group === null ? 0 : $group->group_id;
   }
 }
