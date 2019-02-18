@@ -12,9 +12,9 @@ class User extends CI_Controller {
       try {
         $user_id = $userinfor->unionId;
         $nick_name = $userinfor->nickName;
-        $result = Model\xonUser::checkById($user_id);
 
         // 更新nick_name
+        $result = Model\xonUser::checkById($user_id);
         Model\xonUser::setsById(compact('nick_name'), $user_id);
 
         $this->json(['code' => 0, 'data' => $result]);

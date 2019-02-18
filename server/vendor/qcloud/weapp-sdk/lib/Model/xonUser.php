@@ -1,8 +1,6 @@
 <?php
 namespace QCloud_WeApp_SDK\Model;
 
-use \Exception;
-
 class xonUser extends cAppinfo
 {
   protected static $tableName = 'xonUser';

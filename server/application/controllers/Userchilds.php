@@ -59,6 +59,9 @@ class Userchilds extends CI_Controller
         // 添加亲子关系
         Model\xonUserChilds::add($user_id, $child_id, $relation_id);
 
+
+
+
         // 添加家长权限
         Model\xonRoleGroup::add($user_id, Model\x5on::GROUP_STUDENT_PARENT);
 

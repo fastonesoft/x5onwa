@@ -15,7 +15,7 @@ var doUrl = {
   login: `${host}/weapp/login`,
   // 权限地址
   role: `${host}/weapp/role`,
-  
+
   // 用户注册无检测
   user: `${host}/weapp/user`,
   userreg: `${host}/weapp/user/reg`,
@@ -262,9 +262,10 @@ var doRequestEx = function (options) {
       res.code === 1 && util.showModel('查询出错', res.data)
     },
     fail(error) {
+      // error为文字提示
       wx.hideToast()
       typeof options.fail === 'function' && options.fail(error)
-      options.donshow ? void (0) : util.showModel('请求失败', error)
+      options.donshow ? void (0) : util.showModel('查询失败', error)
     }
   })
 };
@@ -289,21 +290,6 @@ var doPostFormEx = function (options) {
       wx.hideToast()
       typeof options.fail === 'function' && options.fail(error)
       options.donshow ? void (0) : util.showModel('请求失败', error)
-    }
-  })
-};
-
-var doRequestImage = function (options) {
-  qcloud.request({
-    url: options.url,
-    login: false,
-    success(result) {
-      var data = result.data
-      if (typeof options.success === 'function') options.success(data)
-    },
-    fail(error) {
-      if (typeof options.fail === 'function') options.fail(error)
-      util.showModel('请求失败', '确认网络是否畅通');
     }
   })
 };
@@ -406,7 +392,7 @@ module.exports = {
   request: doRequestEx,
   requestEx: doRequestEx,
 
-  loadimage: doRequestImage,
+
   postForm: doPostFormEx,
   postFormEx: doPostFormEx,
   showError: doShowError,
