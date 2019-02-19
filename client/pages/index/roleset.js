@@ -25,7 +25,7 @@ Page({
 
   rolesetSubmit: function (e) {
     // 不需要检测
-    x5on.postForm({
+    x5on.post({
       url: x5on.url.rolesetupdate,
       data: e.detail.value,
       success: (res) => {

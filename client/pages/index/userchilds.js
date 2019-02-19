@@ -65,7 +65,7 @@ Page({
     })
     userchild.checkForm(e, form => {
       form.relation_id = x5on.getId(that.data.relations, form.relation)
-      x5on.postForm({
+      x5on.post({
         url: x5on.url.userchildsreg,
         data: form,
         success(userchilds) {

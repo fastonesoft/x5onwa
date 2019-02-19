@@ -26,7 +26,7 @@ Page({
 
     // 班级列表
     var grade_id = this.data.grades[gradeIndex].id
-    x5on.postForm({
+    x5on.post({
       url: x5on.url.myrenameclass,
       data: { grade_id },
       success: function (result) {
@@ -53,7 +53,7 @@ Page({
   myrenameSubmit: function (e) {
     var that = this
     x5on.checkFormReg(that, '班级号码输入有误', function () {
-      x5on.postForm({
+      x5on.post({
         url: x5on.url.myrenameupdate,
         data: e.detail.value,
         success: (result) => {

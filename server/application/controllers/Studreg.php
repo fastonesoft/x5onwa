@@ -26,7 +26,8 @@ class Studreg extends CI_Controller
     });
   }
 
-  public function index1()
+  // 报名
+  public function reg()
   {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
@@ -34,21 +35,13 @@ class Studreg extends CI_Controller
         $sch_id = $param['sch_id'];
         $child_id = $param['child_id'];
 
+        // 注册学校相关信息
+        $school = Model\xonSchool::checkByIdCustom($sch_id, '没有找到编号对应学校');
+        $edu_type_id = $school->edu_type_id;
+
         $user_id = $userinfor->unionId;
-        $result = Model\xonStudReg::regStud($user_id, $child_id, $sch_id, $edu_type_id);
+        $result = Model\xonStudReg::add($user_id, $child_id, $sch_id, $edu_type_id);
 
-
-        // todo: 将以下内容做一些调整
-
-        // 检测是否已经录取
-        $enter = xonStudent::checkStudentEnter($child_id, $sch_id);
-        if ($enter !== false) {
-          return $enter;
-        }
-
-        Model\xovSchoolForm::getStudRegSchoolForm($sch_id);
-
-        // 正文内容
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
         $this->json(['code' => 1, 'data' => $e->getMessage()]);
@@ -58,8 +51,8 @@ class Studreg extends CI_Controller
     });
   }
 
-  // 检测是否报名
-  public function regcheck()
+  // 确认报名
+  public function check()
   {
     Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
@@ -76,7 +69,8 @@ class Studreg extends CI_Controller
     });
   }
 
-  public function regcancel()
+  // 取消报名
+  public function cancel()
   {
     Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {

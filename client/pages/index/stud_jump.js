@@ -22,7 +22,7 @@ Page({
     //
     var grades = that.data.grades
     var grade_id = grades[gradeIndex].id
-    x5on.postForm({
+    x5on.post({
       url: x5on.url.gradestudclass,
       data: { grade_id },
       success: (result) => {
@@ -43,7 +43,7 @@ Page({
     var gradeIndex = that.data.gradeIndex
     var cls_id = classes[classIndex].id
     var grade_id = grades[gradeIndex].id
-    x5on.postForm({
+    x5on.post({
       url: x5on.url.gradestudcls,
       data: { grade_id, cls_id },
       success: (result) => {

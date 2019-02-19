@@ -29,7 +29,7 @@ Page({
     that.setData({ gradeIndex })
     // 班级列表
     var grade_id = this.data.grades[gradeIndex].id
-    x5on.postForm({
+    x5on.post({
       url: x5on.url.mydivisionclass,
       data: { grade_id },
       success: function (result) {
@@ -37,7 +37,7 @@ Page({
         that.setData({ classes })
       }
     })
-    x5on.postForm({
+    x5on.post({
       url: x5on.url.mydivisionedclass,
       data: { grade_id },
       success: function (result) {
@@ -70,7 +70,7 @@ Page({
   findSubmit: function (e) {
     var that = this;
     x5on.checkForm(that, 0, 0, function () {
-      x5on.postForm({
+      x5on.post({
         url: x5on.url.mydivisionteachs,
         data: e.detail.value,
         success: (result) => {          
@@ -121,7 +121,7 @@ Page({
       if (has) classes.splice(index, 1)
     }
     that.setData({ teaches, classes })
-    x5on.postForm({
+    x5on.post({
       url: x5on.url.mydivisionupdate,
       data: data,
       success: result => {
@@ -141,7 +141,7 @@ Page({
       }
     })
     that.setData({ classed })
-    x5on.postForm({
+    x5on.post({
       url: x5on.url.mydivisionedremove,
       data: {uid},
       success: result => {

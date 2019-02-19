@@ -13,7 +13,7 @@ Page({
 
   onLoad: function (e) {
     var that = this
-    x5on.postForm({
+    x5on.post({
       url: x5on.url.gradestuduid,
       data: e,
       success: student => {
@@ -89,7 +89,7 @@ Page({
       form.uid = that.data.student.uid
       form.stud_type_id = x5on.getId(that.data.types, form.stud_type)
       form.stud_status_id = x5on.getId(that.data.status, form.stud_status)
-      x5on.postForm({
+      x5on.post({
         url: x5on.url.gradestudmodi,
         data: form,
         success: students => {

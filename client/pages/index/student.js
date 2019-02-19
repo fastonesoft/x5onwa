@@ -5,7 +5,7 @@ Page({
 
   onLoad: function (e) {
     var that = this
-    x5on.postForm({
+    x5on.post({
       url: x5on.url.gradestuduid,
       data: e,
       success: student => {

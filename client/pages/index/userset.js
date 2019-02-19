@@ -43,7 +43,7 @@ Page({
         }
     })
     update.checkForm(e, form => {
-      x5on.postForm({
+      x5on.post({
         url: x5on.url.usersetupdate,
         data: form,
         success(users) {

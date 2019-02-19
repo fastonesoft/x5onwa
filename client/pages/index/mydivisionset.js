@@ -25,7 +25,7 @@ Page({
 
     var grades = that.data.grades
     var grade_id = grades[gradeIndex].id
-    x5on.postForm({
+    x5on.post({
       url: x5on.url.mydivisionsetdata,
       data: { grade_id },
       success: (result) => {
@@ -46,7 +46,7 @@ Page({
     var data = e.detail.value
     data.grade_id = grades[gradeIndex].id
 
-    x5on.postForm({
+    x5on.post({
       url: x5on.url.mydivisionsetupdate,
       data: data,
       success: (result) => {

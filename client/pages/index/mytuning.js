@@ -36,7 +36,7 @@ Page({
 
     // 班级列表
     var grade_id = this.data.grades[gradeIndex].id
-    x5on.postForm({
+    x5on.post({
       url: x5on.url.mytuningclass,
       data: { grade_id },
       success: function (result) {
@@ -70,7 +70,7 @@ Page({
     var grade_id = grades[gradeIndex].id
     var stud_name = e.detail.value.stud_name
     x5on.checkForm(that, 0, 0, function () {
-      x5on.postForm({
+      x5on.post({
         url: x5on.url.mytuningstudmoves,
         data: { grade_id, stud_name },
         success: result => {
@@ -122,7 +122,7 @@ Page({
         var stud_sex_num = item.stud_sex_num
         var data = { value: item.value, cls_id: localcls_id, all, stud_sex_num }
         // 查询用于交换的本班学生
-        x5on.postForm({
+        x5on.post({
           url: x5on.url.mytuningstudchanges,
           data: data,
           success: result => {
@@ -160,7 +160,7 @@ Page({
       return
     }
 
-    x5on.postForm({
+    x5on.post({
       url: x5on.url.mytuningexchange,
       data: data,
       success: result => {
@@ -175,7 +175,7 @@ Page({
   localtap: function (e) {
     var that = this
     var grade_stud_uid = this.data.grade_stud_uid
-    x5on.postForm({
+    x5on.post({
       url: x5on.url.mytuninglocal,
       data: { grade_stud_uid },
       success: result => {

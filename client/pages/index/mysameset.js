@@ -29,7 +29,7 @@ Page({
 
     // 班级列表
     var grade_id = this.data.grades[gradeIndex].id
-    x5on.postForm({
+    x5on.post({
       url: x5on.url.mysamesetclass,
       data: { grade_id },
       success: function (result) {
@@ -47,7 +47,7 @@ Page({
 
     // 学生列表
     var cls_id = this.data.classes[classIndex].id
-    x5on.postForm({
+    x5on.post({
       url: x5on.url.mysamesetstudent,
       data: { cls_id },
       success: function (result) {
@@ -59,7 +59,7 @@ Page({
 
   samesetSubmit: function (e) {
     var that = this
-    x5on.postForm({
+    x5on.post({
       url: x5on.url.mysamesetstudentupdate,
       data: e.detail.value,
       success: function (result) {

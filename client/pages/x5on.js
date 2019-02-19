@@ -30,6 +30,7 @@ var doUrl = {
 
   // 报名
   regstud: `${host}/weapp/studreg`,
+  regstudreg: `${host}/weapp/studreg/reg`,
   regstudcheck: `${host}/weapp/studreg/regcheck`,
   regstudcancel: `${host}/weapp/studreg/regcancel`,
 
@@ -189,7 +190,11 @@ var doGetIndex = function (arrs, id) {
 
 // 根据索引获取编号
 var doGetId = function (arrs, index) {
-  return arrs.length > index ? arrs[index].id : null
+  return doGetIdex(arrs, index, 'id')
+}
+// 根据索引获取属性值
+var doGetIdex = function (arrs, index, obj_name) {
+  return arrs.length > index ? arrs[index][obj_name] : null
 }
 
 // 数组单项选择
@@ -233,7 +238,8 @@ var doSetCheckbox = function (arrs, uids, success) {
   typeof success === 'function' && success(arrs)
 }
 
-var doPickChange = function (pick, success) {
+// pick成功后返回相应的值
+var doSetPick = function (pick, success) {
   var value = pick.detail.value
   value > -1 && typeof success === 'function' && success(value)
 }
@@ -267,7 +273,7 @@ var doRequest = function (options) {
   })
 };
 
-var doPostForm = function (options) {
+var doPost = function (options) {
   util.showBusy('正在请求...')
   qcloud.request({
     url: options.url,
@@ -380,14 +386,15 @@ module.exports = {
   login: doLogin,
   check: doCheck,
   getId: doGetId,
+  getIdex: doGetIdex,
   getIndex: doGetIndex,
   getRadio: doGetRadio,
   getCheckbox: doGetCheckbox,
   setRadio: doSetRadio,
   setCheckbox: doSetCheckbox,
-  pickChange: doPickChange,
+  setPick: doSetPick,
   request: doRequest,
-  postForm: doPostForm,
+  post: doPost,
   showError: doShowError,
   showSuccess: doSuccess,
 }

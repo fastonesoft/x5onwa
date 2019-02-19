@@ -12,7 +12,7 @@ Page({
     var prevPage = pages[pages.length - 2]
     var grade_id = prevPage.getGradeid()
 
-    x5on.postForm({
+    x5on.post({
       url: x5on.url.gradestudclass,
       data: { grade_id },
       success: classes => {
@@ -65,7 +65,7 @@ Page({
     that.x5va.checkForm(e, function (form) {
       form.cls_id = x5on.getId(that.data.classes, form.cls_id)
 
-      x5on.postForm({
+      x5on.post({
         url: x5on.url.gradestudback,
         data: form,
         success: students => {

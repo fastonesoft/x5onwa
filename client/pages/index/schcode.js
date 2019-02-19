@@ -59,7 +59,7 @@ Page({
     var sch_id = this.data.sch_id
     x5on.check({
       success: () => {
-        x5on.postForm({
+        x5on.post({
           data: { form_id, sch_id },
           url: x5on.url.appformkey,
           success: function (result) {
@@ -76,7 +76,7 @@ Page({
     var that = this
     if (e.detail.value.sch_id && e.detail.value.form_id) {
       x5on.checkFormEx(this, function () {
-        x5on.postForm({
+        x5on.post({
           url: x5on.url.appformkeyupdate,
           data: e.detail.value,
           success: (res) => {

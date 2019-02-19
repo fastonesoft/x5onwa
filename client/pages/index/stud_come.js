@@ -75,7 +75,7 @@ Page({
       form.grade_id = grade_id
       form.cls_id = cls_id
 
-      x5on.postForm({
+      x5on.post({
         url: x5on.url.gradestudcome,
         data: form,
         success: students => {

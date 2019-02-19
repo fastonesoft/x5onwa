@@ -33,7 +33,7 @@ Page({
     // 分管班级列表
     var grades = that.data.grades
     var grade_id = grades[gradeIndex].id
-    x5on.postForm({
+    x5on.post({
       url: x5on.url.myadjustclass,
       data: { grade_id },
       success: (result) => {
@@ -63,7 +63,7 @@ Page({
     var grade_id = grades[gradeIndex].id
     var stud_name = e.detail.value.stud_name
     x5on.checkForm(that, 0, 0, function () {
-      x5on.postForm({
+      x5on.post({
         url: x5on.url.myadjuststudent,
         data: { grade_id, stud_name },
         success: (result) => {
@@ -88,7 +88,7 @@ Page({
       return
     }
     var cls_id = this.data.classes[classIndex].cls_id
-    x5on.postForm({
+    x5on.post({
       url: x5on.url.myadjustclassmove,
       data: { cls_id },
       success: (result) => {
@@ -136,7 +136,7 @@ Page({
       return
     }
     var cls_id = this.data.classes[classIndex].cls_id
-    x5on.postForm({
+    x5on.post({
       url: x5on.url.myadjuststudmove,
       data: { grade_stud_uid, cls_id },
       success: (result) => {
@@ -154,7 +154,7 @@ Page({
       x5on.showError(that, '不是同班学生选择，无法提交')
       return
     }
-    x5on.postForm({
+    x5on.post({
       url: x5on.url.myadjuststudlocal,
       data: { grade_stud_uid },
       success: result => {
@@ -170,7 +170,7 @@ Page({
     var that = this
     var studmoves = this.data.studmoves
     var grade_stud_uid = e.currentTarget.dataset.uid
-    x5on.postForm({
+    x5on.post({
       url: x5on.url.myadjuststudremove,
       data: { grade_stud_uid },
       success: result => {

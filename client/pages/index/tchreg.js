@@ -28,7 +28,7 @@ Page({
         }
       })
     form.checkForm(e, forms => {
-      x5on.postForm({
+      x5on.post({
         url: x5on.url.tchreg,
         data: forms,
         success: radios => {
@@ -75,7 +75,7 @@ Page({
       })
     form.checkForm(e, forms => {
       forms.sch_id = x5on.getId(that.data.schools, forms.sch_index)
-      x5on.postForm({
+      x5on.post({
         url: x5on.url.tchreguserreg,
         data: forms,
         success: radios => {

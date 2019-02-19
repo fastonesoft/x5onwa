@@ -28,7 +28,7 @@ Page({
 
         var move_grade_stud_uid = res.result
         that.setData({ move_grade_stud_uid })
-        x5on.postForm({
+        x5on.post({
           url: x5on.url.myadjuststudscanmove,
           data: { move_grade_stud_uid },
           success: function (result) {
@@ -56,7 +56,7 @@ Page({
     var that = this
     var grade_stud_uid = e.detail.value.grade_stud_uid
     var exchange_grade_stud_uid = this.data.move_grade_stud_uid
-    x5on.postForm({
+    x5on.post({
       url: x5on.url.myadjustaddexchange,
       data: { grade_stud_uid, exchange_grade_stud_uid },
       success: function (result) {
@@ -70,7 +70,7 @@ Page({
   showexchangestud: function (e) {
     var that = this
     var grade_stud_uid = e.currentTarget.dataset.uid
-    x5on.postForm({
+    x5on.post({
       url: x5on.url.myadjustqueryexchange,
       data: { grade_stud_uid },
       success: function (result) {
@@ -87,7 +87,7 @@ Page({
   liststudRemove: function (e) {
     var that = this
     var grade_stud_uid = e.currentTarget.dataset.uid
-    x5on.postForm({
+    x5on.post({
       url: x5on.url.myadjustremoveliststud,
       data: { grade_stud_uid },
       success: function (result) {

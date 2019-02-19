@@ -1,5 +1,6 @@
 // pages/index/regstud.js
 var x5on = require('../x5on.js')
+import x5va from '../x5va.js'
 
 Page({
 
@@ -21,74 +22,56 @@ Page({
   },
   
   schoolChange: function (e) {
-    var schIndex = e.detail.value
-    if (schIndex == -1 || this.data.schools.length == 0) return
-
-    var sch_id = this.data.schools[schIndex].id
-    var sch_name = this.data.schools[schIndex].name
-    var edu_type_id = this.data.schools[schIndex].edu_type_id
-    this.setData({ schIndex, sch_id, sch_name, edu_type_id })
+    x5on.setPick(e, schIndex => {
+      this.setData({ schIndex })
+    })
   },
 
   childChange: function (e) {
-    var childIndex = e.detail.value
-    if (childIndex == -1 || this.data.childs.length == 0) return
-
-    var child_id = this.data.childs[childIndex].child_id
-    var child_name = this.data.childs[childIndex].child_name
-    this.setData({ childIndex, child_id, child_name })
-  },
-
-  formChange: function (e) {
-    var that = this
-    var inforIndex = e.detail.value
-    if (inforIndex == -1 || that.data.forms.length == 0) return
-
-    var form_show = true
-    var form_id = that.data.forms[inforIndex].id
-    var form_name = that.data.forms[inforIndex].name    
-    this.setData({ form_show, inforIndex, form_id, form_name })
-    x5on.check({
-      success: () => {
-        x5on.postForm({
-          data: {form_id},
-          url: x5on.url.schoolformkey,
-          success: function (result) {            
-            var data = result.data
-            console.log(data)
-            that.setData({ items: data })
-          }
-        })
-      }
+    x5on.setPick(e, childIndex => {
+      this.setData({ childIndex })
     })
   },
 
   regstudSubmit: function (e) {
     var that = this
-    if (e.detail.value.sch_id && e.detail.value.child_id && e.detail.value.edu_type_id) {
-      x5on.check({
-        success: () => {
-          x5on.postForm({
-            data: e.detail.value,
-            url: x5on.url.regstudreg,
-            success: function (result) {
-              var data = result.data
-              console.log(data)
-              that.setData(data)
-            }
-          })
+    var regstud = new x5va({
+      school: {
+        required: true,
+        min: 0,
+      },
+      child: {
+        required: true,
+        min: 0,
+      }
+    }, {
+      school: {
+        required: '学校选择'
+      },
+        schild: {
+        required: '孩子选择'
+      }
+    })
+    regstud.checkForm(e, form => {
+      form.sch_id = x5on.getId(that.data.schools, form.school)
+      form.child_id = x5on.getIdex(that.data.childs, form.child, 'child_id')
+      x5on.post({
+        url: x5on.url.regstudreg,
+        data: form,
+        success(userchilds) {
+          that.setData({ userchilds })
         }
       })
-    } else {
-      x5on.showError(this, '报名学校、报名学生不得为空')
-    }
+    }, error => {
+      x5on.showError(that, error)
+    })
   },
 
   cancelSubmit: function (e) {
     var that = this
     x5on.check({
       success: () => {
-        x5on.postForm({
+        x5on.post({
           data: e.detail.value,
           url: x5on.url.regstudcancel,
           success: function (result) {            
@@ -118,7 +101,7 @@ Page({
   uploadSubmit: function (e) {
     var that = this;
     x5on.checkFormEx(this, function () {
-      x5on.postForm({
+      x5on.post({
         data: e.detail.value,
         url: x5on.url.schoolformvalueupdate,
         success: function (result) {

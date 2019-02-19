@@ -11,7 +11,7 @@ Page({
     var that = this
     var grade_stud_uid = options.uid
     that.setData({ grade_stud_uid })
-    x5on.postForm({
+    x5on.post({
       url: x5on.url.myadjustmovingqrcode,
       data: { grade_stud_uid },
       success: (result) => {
@@ -32,7 +32,7 @@ Page({
         var exchange_grade_stud_uid = res.result
         var move_grade_stud_uid = that.data.grade_stud_uid
 
-        x5on.postForm({
+        x5on.post({
           url: x5on.url.myadjuststudexchange,
           data: { move_grade_stud_uid, exchange_grade_stud_uid },
           success: function (result) {
@@ -71,7 +71,7 @@ Page({
 
     var move_grade_stud_uid = that.data.grade_stud_uid
     var exchange_grade_stud_uid = e.detail.value.grade_stud_uid
-    x5on.postForm({
+    x5on.post({
       url: x5on.url.myadjuststudexchangeself,
       data: { move_grade_stud_uid, exchange_grade_stud_uid },
       success: function (result) {
