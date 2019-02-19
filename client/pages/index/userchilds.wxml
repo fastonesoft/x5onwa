@@ -27,9 +27,9 @@
         <view class="weui-label">亲子称谓</view>
       </view>
       <view class="weui-cell__bd">
-        <picker name="relation" bindchange="pickerChange" value="{{pIndex}}" range="{{relations}}" range-key="name"
+        <picker name="relation" bindchange="relationChange" value="{{relationIndex}}" range="{{relations}}" range-key="name"
           disabled="{{!relations||relations.length==0}}">
-          <view class="weui-select weui-select_in-select-after">{{relations[pIndex].name}}</view>
+          <view class="weui-select weui-select_in-select-after">{{relations[relationIndex].name}}</view>
         </picker>
       </view>
     </view>

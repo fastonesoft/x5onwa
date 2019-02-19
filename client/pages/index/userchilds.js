@@ -27,12 +27,10 @@ Page({
     });
   },
 
-  pickerChange: function (e) {
-    var index = e.detail.value
-    if (index == -1) return
-
-    var relation_id = this.data.relations[index].id
-    this.setData({ pIndex: index, relation_id });
+  relationChange: function (e) {
+    x5on.setPick(e, relationIndex => {
+      this.setData({ relationIndex })
+    })
   },
 
   userchildSubmit: function (e) {

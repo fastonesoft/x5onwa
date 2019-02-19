@@ -29,7 +29,8 @@ class mvvStudreg
   // 取消报名
   public static function cancel($user_id, $uid)
   {
-    xonStudReg::checkBy(compact('user_id', 'uid'));
+    $checked = 1;
+    xonStudReg::existByCustom(compact('user_id', 'uid', 'checked'), '已经确认，不能取消');
     xonStudReg::delete(compact('user_id', 'uid'));
   }
 

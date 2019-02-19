@@ -1,5 +1,37 @@
 <!--pages/index/student.wxml-->
 
+<block wx:if="{{infor_added}}">
+  <view class="qrcode-area">
+    <image class="qrcode" src="data:image/png;base64,{{qrcode_data}}"></image>
+    <view>{{child_name}}</view>
+  </view>
+</block>
+<block wx:if="{{entered}}">
+  <view class="weui-cells__title">录取信息</view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell">
+      <view class="weui-cell__bd">学生姓名</view>
+      <view class="weui-cell__ft">{{stud_name}}</view>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__bd">录取学校</view>
+      <view class="weui-cell__ft">{{sch_name}}</view>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__bd">学生年级</view>
+      <view class="weui-cell__ft">{{step_name}}</view>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__bd">录取编号</view>
+      <view class="weui-cell__ft">{{enter_id}}</view>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__bd">学生编号</view>
+      <view class="weui-cell__ft">{{stud_id}}</view>
+    </view>
+  </view>
+</block>
+
   <block wx:if="{{student}}">
     <view class="weui-cells__title">基本信息</view>
     <view class="weui-cells weui-cells_after-title">

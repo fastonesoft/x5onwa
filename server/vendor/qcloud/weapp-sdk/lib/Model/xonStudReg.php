@@ -7,7 +7,7 @@ class xonStudReg extends cAppinfo
   protected static $tableTitle = '学生注册';
 
   public static function add($user_id, $child_id, $sch_id, $edu_type_id) {
-    xonStudReg::existByCustom(compact('child_id', 'sch_id'), '报名学校已记录，无需重复');
+    xonStudReg::existByCustom(compact('child_id', 'sch_id'), '报名学校已记录，无需重复设置');
     xonStudReg::existByCustom(compact('child_id', 'edu_type_id'), '同一学段学校不得重复报名');
 
     $checked = 0;

@@ -181,20 +181,32 @@ var doData = {
 }
 
 // 根据编号获取索引值
-var doGetIndex = function (arrs, id) {
+var doGetIndex = function (arrs, id_value) {
+  return doGetIndexe(arrs, 'id', id_value)
+}
+var doGetIndexe = function (arrs, obj_name, obj_value) {
   for (var i = 0; i < arrs.length; i++) {
     var arr = arrs[i]
-    if (arr.id === id) return i
+    if (arr[obj_name] === obj_value) return i
   }
 }
-
 // 根据索引获取编号
 var doGetId = function (arrs, index) {
-  return doGetIdex(arrs, index, 'id')
+  return doGetValue(arrs, index, 'id')
 }
-// 根据索引获取属性值
-var doGetIdex = function (arrs, index, obj_name) {
+var doGetValue = function (arrs, index, obj_name) {
   return arrs.length > index ? arrs[index][obj_name] : null
+}
+// 删除数组元素
+var doDelValue = function (arrs, obj_name, obj_value) {
+  var index = doGetIndexe(arrs, obj_name, obj_value)
+  arrs.splice(index, 1)
+}
+// 变更数组索引obj_value，set_name字段的值
+var doSetValue = function (arrs, obj_name, obj_value, set_name, set_value) {
+  var index = doGetIndexe(arrs, obj_name, obj_value)
+  arrs[index][set_name] = set_value
+  return arrs
 }
 
 // 数组单项选择
@@ -385,14 +397,19 @@ module.exports = {
   auth: doAuth,
   login: doLogin,
   check: doCheck,
+
   getId: doGetId,
-  getIdex: doGetIdex,
+  getValue: doGetValue,
   getIndex: doGetIndex,
   getRadio: doGetRadio,
   getCheckbox: doGetCheckbox,
   setRadio: doSetRadio,
   setCheckbox: doSetCheckbox,
   setPick: doSetPick,
+
+  delValue: doDelValue,
+  setValue: doSetValue,
+
   request: doRequest,
   post: doPost,
   showError: doShowError,

@@ -11,8 +11,6 @@ Page({
         x5on.request({
           url: x5on.url.regstud,
           success(childs_schools_studregs) {
-            childs_schools_studregs.studregs[0].checked = 0
-            childs_schools_studregs.studregs[1].checked = 1
             that.setData(childs_schools_studregs)
           }
         })
@@ -56,12 +54,14 @@ Page({
       })
     regstud.checkForm(e, form => {
       form.sch_id = x5on.getId(that.data.schools, form.school)
-      form.child_id = x5on.getIdex(that.data.childs, form.child, 'child_id')
+      form.child_id = x5on.getValue(that.data.childs, form.child, 'child_id')
       x5on.post({
         url: x5on.url.regstudreg,
         data: form,
-        success(userchilds) {
-          that.setData({ userchilds })
+        success(studreg) {
+          var studregs = that.data.studregs
+          studregs.push(studreg)
+          that.setData({ studregs })
         }
       })
     }, error => {
@@ -70,27 +70,31 @@ Page({
   },
 
   checkClick: function (e) {
+    var that = this
+    var form = e.currentTarget.dataset
     x5on.post({
-      data: e.detail.value,
+      data: form,
       url: x5on.url.regstudcheck,
-      success() {
-        
-        that.setData(result.data)
+      success(stud_reg_uid) {
+        var studregs =  x5on.setValue(that.data.studregs, 'uid', stud_reg_uid, 'checked', 1)
+        that.setData({ studregs })
       }
     })
   },
-
 
   cancelClick: function (e) {
+    var that = this
+    var form = e.currentTarget.dataset
     x5on.post({
-      data: e.detail.value,
+      data: form,
       url: x5on.url.regstudcancel,
-      success() {
-        that.setData(result.data)
+      success(stud_reg_uid) {
+        var studregs = that.data.studregs
+        x5on.delValue(studregs, 'uid', stud_reg_uid)
+        that.setData({ studregs })
       }
     })
   },
-
 
 
   cancelSubmit: function (e) {

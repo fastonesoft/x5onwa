@@ -33,71 +33,32 @@
     <button type="primary" form-type="submit">报名</button>
   </view>
 </form>
-
-<block wx:for="{{studregs}}" wx:key="uid">
+<block wx:if="{{studregs.length>0}}">
   <view class="weui-cells__title">报名信息</view>
-  <view class="weui-cells weui-cells_after-title">
-    <view class="weui-cell">
-      <view class="weui-cell__bd">报名学校</view>
-      <view class="weui-cell__ft">{{item.sch_name}}</view>
-    </view>
-    <view class="weui-cell">
-      <view class="weui-cell__bd">报名学生</view>
-      <view class="weui-cell__ft">{{item.child_name}}</view>
-    </view>
-  </view>
-  <view class="x5ui-mini">
-    <button class="weui-btn mini-btn" data-uid="{{item.uid}}" type="primary" size="mini" wx:if="{{!item.checked}}" bindtap="checkClick">确认</button>
-    <button class="weui-btn mini-btn" data-uid="{{item.uid}}" type="warn" size="mini" wx:if="{{!item.checked}}" bindtap="cancelClick">取消</button>
-  </view>
-</block>
-
-
-<block wx:if="{{infor_added && user_forms.length>0}}">
-  <view class="weui-cells__title">报名表格 - {{form_name}}</view>
-  <view class="weui-cells weui-cells_after-title">
-    <block wx:for="{{user_forms}}" wx:key="id">
+  <block wx:for="{{studregs}}" wx:key="uid">
+    <view class="weui-cells weui-cells_after-title">
       <view class="weui-cell">
-        <view class="weui-cell__bd">{{item.title}}</view>
-        <view class="weui-cell__ft">
-          <view wx:if="{{item.view_type!=='check'}}">{{item.value}}</view>
-          <icon wx:elif="{{item.value==='1'}}" class="weui-icon-radio" type="success_no_circle" size="20"></icon>
-        </view>
+        <view class="weui-cell__bd">报名学校</view>
+        <view class="weui-cell__ft">{{item.sch_name}}</view>
       </view>
-    </block>
-  </view>
-</block>
-<block wx:if="{{infor_added}}">
-  <view class="qrcode-area">
-    <image class="qrcode" src="data:image/png;base64,{{qrcode_data}}"></image>
-    <view>{{child_name}}</view>
-  </view>
-</block>
-<block wx:if="{{entered}}">
-  <view class="weui-cells__title">录取信息</view>
-  <view class="weui-cells weui-cells_after-title">
-    <view class="weui-cell">
-      <view class="weui-cell__bd">学生姓名</view>
-      <view class="weui-cell__ft">{{stud_name}}</view>
+      <view class="weui-cell">
+        <view class="weui-cell__bd">报名学生</view>
+        <view class="weui-cell__ft">{{item.child_name}}</view>
+      </view>
     </view>
-    <view class="weui-cell">
-      <view class="weui-cell__bd">录取学校</view>
-      <view class="weui-cell__ft">{{sch_name}}</view>
+    <view class="weui-cells__tips x5ui-mini">
+      <button class="weui-btn mini-btn" data-uid="{{item.uid}}" type="primary" size="mini" wx:if="{{!item.checked}}" bindtap="checkClick">
+        确认
+      </button>
+      <button class="weui-btn mini-btn" data-uid="{{item.uid}}" type="warn" size="mini" wx:if="{{!item.checked}}" bindtap="cancelClick">
+        取消
+      </button>
+      <button class="weui-btn mini-btn" data-uid="{{item.uid}}" type="default" size="mini" wx:if="{{item.checked}}" bindtap="regedClick">
+        详细信息
+      </button>
     </view>
-    <view class="weui-cell">
-      <view class="weui-cell__bd">学生年级</view>
-      <view class="weui-cell__ft">{{step_name}}</view>
-    </view>
-    <view class="weui-cell">
-      <view class="weui-cell__bd">录取编号</view>
-      <view class="weui-cell__ft">{{enter_id}}</view>
-    </view>
-    <view class="weui-cell">
-      <view class="weui-cell__bd">学生编号</view>
-      <view class="weui-cell__ft">{{stud_id}}</view>
-    </view>
-  </view>
-  <view class="weui-btn-area">
+  </block>
+  <view class="weui-btn-area x5ui-bottom">
     <button type="primary" bindtap="returnClick">返回</button>
   </view>
 </block>
