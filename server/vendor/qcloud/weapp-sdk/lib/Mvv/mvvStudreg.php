@@ -9,11 +9,7 @@ use QCloud_WeApp_SDK\Model\xonStudReg;
 class mvvStudreg
 {
 
-  public static function schools()
-  {
-    return xonSchool::gets();
-  }
-
+  // 报名注册
   public static function reg($user_id, $child_id, $sch_id, $edu_type_id)
   {
     xonStudReg::existByCustom(compact('child_id', 'edu_type_id'), '同类学校只能报一个');
@@ -21,6 +17,36 @@ class mvvStudreg
     $uid = x5on::getUid();
     xonStudReg::insert(compact('uid', 'child_id', 'sch_id', 'user_id', 'edu_type_id'));
   }
+
+  // 确认报名
+  public static function checked($user_id, $uid)
+  {
+    $checked = 1;
+    xonStudReg::checkBy(compact('user_id', 'uid'));
+    xonStudReg::setsBy(compact('checked'), compact('user_id', 'uid'));
+  }
+
+  // 取消报名
+  public static function cancel($user_id, $uid)
+  {
+    xonStudReg::checkBy(compact('user_id', 'uid'));
+    xonStudReg::delete(compact('user_id', 'uid'));
+  }
+
+  // 确认重置
+  public static function recheck($uid)
+  {
+    $checked = 0;
+    xonStudReg::setsByUid(compact('checked'), $uid);
+  }
+
+
+
+
+
+
+
+
 
   // 临时只能报一个
   public static function regCheck($user_id)
@@ -74,17 +100,7 @@ class mvvStudreg
     }
   }
 
-  // 取消报名
-  public static function regCancel($user_id, $sch_id, $child_id)
-  {
-    $res = dbs::row('xonStudReg', ['*'], compact('user_id', 'sch_id', 'child_id'));
-    if ($res !== null) {
-      $uid = $res->uid;
-      dbs::delete('xonStudReg', compact('uid'));
-    } else {
-      throw new Exception("传入参数有误，没有找到相关报名数据");
-    }
-  }
+
 
   public static function regCancelData($user_id)
   {

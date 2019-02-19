@@ -16,8 +16,9 @@ class Studreg extends CI_Controller
         $user_id = $userinfor->unionId;
         $childs = Model\xovUserChilds::getsBy(compact('user_id'));
         $schools = Model\xonSchool::gets();
+        $studregs = Model\xovStudReg::getsBy(compact('user_id'));
 
-        $this->json(['code' => 0, 'data' => compact('childs', 'schools')]);
+        $this->json(['code' => 0, 'data' => compact('childs', 'schools', 'studregs')]);
       } catch (Exception $e) {
         $this->json(['code' => 1, 'data' => $e->getMessage()]);
       }
@@ -26,7 +27,7 @@ class Studreg extends CI_Controller
     });
   }
 
-  // 报名
+  // 报名注册
   public function reg()
   {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
@@ -54,13 +55,16 @@ class Studreg extends CI_Controller
   // 确认报名
   public function check()
   {
-    Mvv\mvvLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
-        $user_id = $user['unionId'];
+        $param = $_POST;
+        $stud_reg_uid = $param['uid'];
 
-        $result = Model\xonStudReg::regCheck($user_id);
-        // 正文内容
-        $this->json(['code' => 0, 'data' => $result]);
+        // 根据用户及注册编号，确认注册信息
+        $user_id = $userinfor->unionId;
+        Mvv\mvvStudreg::checked($user_id, $stud_reg_uid);
+
+        $this->json(['code' => 0, 'data' => $stud_reg_uid]);
       } catch (Exception $e) {
         $this->json(['code' => 1, 'data' => $e->getMessage()]);
       }
@@ -72,16 +76,16 @@ class Studreg extends CI_Controller
   // 取消报名
   public function cancel()
   {
-    Mvv\mvvLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
-        $user_id = $user['unionId'];
         $param = $_POST;
-        $sch_id = $param['sch_id'];
-        $child_id = $param['child_id'];
-        Model\xonStudReg::regCancel($user_id, $sch_id, $child_id);
-        $result = Model\xonStudReg::regCancelData($user_id);
-        // 正文内容
-        $this->json(['code' => 0, 'data' => $result]);
+        $stud_reg_uid = $param['uid'];
+
+        // 根据用户及注册编号，取消注册信息
+        $user_id = $userinfor->unionId;
+        Mvv\mvvStudreg::cancel($user_id, $stud_reg_uid);
+
+        $this->json(['code' => 0, 'data' => $stud_reg_uid]);
       } catch (Exception $e) {
         $this->json(['code' => 1, 'data' => $e->getMessage()]);
       }

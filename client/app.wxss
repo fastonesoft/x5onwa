@@ -11,8 +11,11 @@ page { background: #F6F6F6; }
   }
 .qrcode { width: 400rpx; height: 400rpx; }
 
-.x5ui-half-btn { margin:30rpx auto; width: 40%; }
+.x5ui-half-btn { margin: 30rpx auto; width: 40%; }
 .x5ui-column { display: flex; flex-flow: row wrap; }
+.x5ui-mini { margin-top: 20rpx; text-align: center; }
+.x5ui-mini button { margin-top: 0; margin-right: 20rpx; }
+.x5ui-mini button:last-child { margin-right: 0rpx; }
 
 /*增加的删除图标*/
 .remove-icon { height:50rpx; width:50rpx; border: none; vertical-align: middle; }

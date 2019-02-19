@@ -10,17 +10,19 @@ Page({
       success() {
         x5on.request({
           url: x5on.url.regstud,
-          success(childs_schools) {
-            that.setData(childs_schools)
+          success(childs_schools_studregs) {
+            childs_schools_studregs.studregs[0].checked = 0
+            childs_schools_studregs.studregs[1].checked = 1
+            that.setData(childs_schools_studregs)
           }
         })
       },
       fail() {
-        wx.switchTab({ url: '/pages/login/login'})
+        wx.switchTab({ url: '/pages/login/login' })
       }
     });
   },
-  
+
   schoolChange: function (e) {
     x5on.setPick(e, schIndex => {
       this.setData({ schIndex })
@@ -45,13 +47,13 @@ Page({
         min: 0,
       }
     }, {
-      school: {
-        required: '学校选择'
-      },
+        school: {
+          required: '学校选择'
+        },
         schild: {
-        required: '孩子选择'
-      }
-    })
+          required: '孩子选择'
+        }
+      })
     regstud.checkForm(e, form => {
       form.sch_id = x5on.getId(that.data.schools, form.school)
       form.child_id = x5on.getIdex(that.data.childs, form.child, 'child_id')
@@ -67,6 +69,30 @@ Page({
     })
   },
 
+  checkClick: function (e) {
+    x5on.post({
+      data: e.detail.value,
+      url: x5on.url.regstudcheck,
+      success() {
+        
+        that.setData(result.data)
+      }
+    })
+  },
+
+
+  cancelClick: function (e) {
+    x5on.post({
+      data: e.detail.value,
+      url: x5on.url.regstudcancel,
+      success() {
+        that.setData(result.data)
+      }
+    })
+  },
+
+
+
   cancelSubmit: function (e) {
     var that = this
     x5on.check({
@@ -74,7 +100,7 @@ Page({
         x5on.post({
           data: e.detail.value,
           url: x5on.url.regstudcancel,
-          success: function (result) {            
+          success: function (result) {
             that.setData(result.data)
           }
         })
@@ -89,7 +115,7 @@ Page({
 
     var uid = e.currentTarget.dataset.uid
     var items = this.data.items
-    for (var i=0; i<items.length; i++) {
+    for (var i = 0; i < items.length; i++) {
       if (items[i].uid === uid) {
         items[i].error = false
         items[i].value = dynamIndex
