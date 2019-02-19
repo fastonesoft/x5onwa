@@ -1,34 +1,32 @@
 <?php
+
 namespace QCloud_WeApp_SDK\Mvv;
 
-use Guzzle\Cache\NullCacheAdapter;
 use QCloud_WeApp_SDK\Model\x5on;
-use QCloud_WeApp_SDK\Mysql\Mysql as dbs;
-use QCloud_WeApp_SDK\Constants;
-use \Exception;
+use QCloud_WeApp_SDK\Model\xonSchool;
+use QCloud_WeApp_SDK\Model\xonStudReg;
 
 class mvvStudreg
 {
 
-
-  public static function schools () {
-    return dbs::select('xonSchool', ['id', 'name', 'edu_type_id']);
+  public static function schools()
+  {
+    return xonSchool::gets();
   }
 
-  public static function regStud ($user_id, $child_id, $sch_id, $edu_type_id) {
-    $res = dbs::row('xonStudReg', ['*'], compact('child_id', 'edu_type_id'));
-    if ( $res !== null ) {
-      throw new Exception("同类学校只能报一个");
-    }
+  public static function reg($user_id, $child_id, $sch_id, $edu_type_id)
+  {
+    xonStudReg::existByCustom(compact('child_id', 'edu_type_id'), '同类学校只能报一个');
     // 保存
     $uid = x5on::getUid();
-    dbs::insert('xonStudReg', compact('uid', 'child_id', 'sch_id', 'user_id', 'edu_type_id'));
+    xonStudReg::insert(compact('uid', 'child_id', 'sch_id', 'user_id', 'edu_type_id'));
   }
 
   // 临时只能报一个
-  public static function regCheck ($user_id) {
+  public static function regCheck($user_id)
+  {
     $data = dbs::row('xovStudReg', ['uid', 'sch_id', 'sch_name', 'child_id', 'child_name'], compact('user_id'));
-    if ( $data !== null ) {
+    if ($data !== null) {
       $sch_reged = true;
       // 读取学校报名表格
       $sch_id = $data->sch_id;
@@ -46,7 +44,7 @@ class mvvStudreg
       $forms = dbs::select('xovSchoolForm', ['id', 'name'], compact('sch_id', 'app_name', 'current_year'));
 
       $form_setted = xonSchoolFormSet::checkSchoolFormSet($user_id);
-      if ( $form_setted === null || $form_setted !== null && ! $form_setted->checked ) {
+      if ($form_setted === null || $form_setted !== null && !$form_setted->checked) {
         $not_reg = false;
         $not_added = true;
         $infor_added = false;
@@ -63,7 +61,7 @@ class mvvStudreg
       // 查询用户已提交的表格数据
       $user_forms = xonSchoolFormKey::listKeysByFormId($user_id, $form_id);
       $not_reg = false;
-      $not_added = ! $infor_added;
+      $not_added = !$infor_added;
       return compact('not_reg', 'sch_reged', 'not_added', 'infor_added', 'sch_id', 'sch_name', 'child_id', 'child_name', 'forms', 'form_name', 'user_forms', 'qrcode_data');
     } else {
       $not_reg = true;
@@ -77,9 +75,10 @@ class mvvStudreg
   }
 
   // 取消报名
-  public static function regCancel ($user_id, $sch_id, $child_id) {
+  public static function regCancel($user_id, $sch_id, $child_id)
+  {
     $res = dbs::row('xonStudReg', ['*'], compact('user_id', 'sch_id', 'child_id'));
-    if ( $res !== null ) {
+    if ($res !== null) {
       $uid = $res->uid;
       dbs::delete('xonStudReg', compact('uid'));
     } else {
@@ -87,7 +86,8 @@ class mvvStudreg
     }
   }
 
-  public static function regCancelData($user_id) {
+  public static function regCancelData($user_id)
+  {
     $not_reg = true;
     $sch_reged = false;
     $not_added = true;
@@ -98,28 +98,31 @@ class mvvStudreg
   }
 
   // 获取用户报名记录编号
-  public static function getRegRowByUserId($user_id) {
+  public static function getRegRowByUserId($user_id)
+  {
     $res = dbs::row('xovStudReg', ['uid', 'sch_id', 'sch_name', 'child_id', 'child_name'], compact('user_id'));
-    if ( $res !== null ) {
+    if ($res !== null) {
       return $res;
     } else {
       throw new Exception("未找到用户报名记录");
     }
   }
 
-  public static function getRegRowByUid($uid) {
+  public static function getRegRowByUid($uid)
+  {
     $res = dbs::row('xovStudReg', ['uid', 'sch_id', 'sch_name', 'child_id', 'child_name'], compact('uid'));
-    if ( $res !== null ) {
+    if ($res !== null) {
       return $res;
     } else {
       throw new Exception("未找到编号对应报名记录");
     }
   }
 
-  public static function setStudExamUser($uid, $exam_user_id) {
+  public static function setStudExamUser($uid, $exam_user_id)
+  {
     $res = dbs::row('xonStudReg', ['*'], compact('uid'));
-    if ( $res !== null ) {
-      if ( $res->exam_user_id !== null ) throw new Exception("已经通过审核，无须再审");
+    if ($res !== null) {
+      if ($res->exam_user_id !== null) throw new Exception("已经通过审核，无须再审");
       // 未审核，标识一下
       dbs::update('xonStudReg', compact('exam_user_id'), compact('uid'));
     } else {
@@ -127,19 +130,21 @@ class mvvStudreg
     }
   }
 
-  public static function checkStudExamCancel ($uid) {
+  public static function checkStudExamCancel($uid)
+  {
     $res = dbs::row('xonStudReg', ['*'], compact('uid'));
-    if ( $res !== null ) {
-      if ( $res->exam_user_id !== null ) throw new Exception("已经通过审核，无法撤消");
+    if ($res !== null) {
+      if ($res->exam_user_id !== null) throw new Exception("已经通过审核，无法撤消");
     } else {
       throw new Exception("未找到编号对应报名记录");
     }
   }
 
-  public static function delStudExamUser($uid) {
+  public static function delStudExamUser($uid)
+  {
     $res = dbs::row('xonStudReg', ['*'], compact('uid'));
-    if ( $res !== null ) {
-      if ( $res->confirm_user_id !== null ) throw new Exception("已经确认，不能撤消");
+    if ($res !== null) {
+      if ($res->confirm_user_id !== null) throw new Exception("已经确认，不能撤消");
       $exam_user_id = null;
       dbs::update('xonStudReg', compact('exam_user_id'), compact('uid'));
     } else {
@@ -147,21 +152,23 @@ class mvvStudreg
     }
   }
 
-  public static function setStudConfirmUser($uid, $confirm_user_id) {
+  public static function setStudConfirmUser($uid, $confirm_user_id)
+  {
     $res = dbs::row('xonStudReg', ['*'], compact('uid'));
-    if ( $res !== null ) {
-      if ( $res->exam_user_id === null ) throw new Exception("未通过审核，无法确认");
-      if ( $res->confirm_user_id !== null ) throw new Exception("已经确认，不必重复操作");
+    if ($res !== null) {
+      if ($res->exam_user_id === null) throw new Exception("未通过审核，无法确认");
+      if ($res->confirm_user_id !== null) throw new Exception("已经确认，不必重复操作");
       dbs::update('xonStudReg', compact('confirm_user_id'), compact('uid'));
     } else {
       throw new Exception("未找到编号对应报名记录");
     }
   }
 
-  public static function checkStudConfirmCancel ($uid) {
+  public static function checkStudConfirmCancel($uid)
+  {
     $res = dbs::row('xonStudReg', ['*'], compact('uid'));
-    if ( $res !== null ) {
-      if ( $res->confirm_user_id !== null ) throw new Exception("已经通过审核，无法撤消");
+    if ($res !== null) {
+      if ($res->confirm_user_id !== null) throw new Exception("已经通过审核，无法撤消");
     } else {
       throw new Exception("未找到编号对应报名记录");
     }

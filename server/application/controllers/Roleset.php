@@ -6,10 +6,8 @@ use QCloud_WeApp_SDK\Model;
 
 class Roleset extends CI_Controller
 {
-  /**
-   * 权限列表
-   */
   const role_name = 'roleset';
+
   public function index() {
     Mvv\mvvLogin::check(self::role_name, function ($user) {
       // 权限列表

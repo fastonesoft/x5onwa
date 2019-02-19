@@ -8,15 +8,33 @@ class Studreg extends CI_Controller
 {
   const role_name = 'regstud';
 
-  public function regstud()
+  public function index()
   {
-    Mvv\mvvLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
-        $user_id = $user['unionId'];
+        // 返回报名孩子与学校列表
+        $user_id = $userinfor->unionId;
+        $childs = Model\xovUserChilds::getsBy(compact('user_id'));
+        $schools = Model\xonSchool::gets();
+
+        $this->json(['code' => 0, 'data' => compact('childs', 'schools')]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
+
+  public function index1()
+  {
+    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
+      try {
         $param = $_POST;
         $sch_id = $param['sch_id'];
         $child_id = $param['child_id'];
-        $edu_type_id = $param['edu_type_id'];
+
+        $user_id = $userinfor->unionId;
         $result = Model\xonStudReg::regStud($user_id, $child_id, $sch_id, $edu_type_id);
 
 

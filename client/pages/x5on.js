@@ -28,6 +28,22 @@ var doUrl = {
   userchildsreg: `${host}/weapp/userchilds/reg`,
   userchildsrelation: `${host}/weapp/userchilds/relation`,
 
+  // 报名
+  regstud: `${host}/weapp/studreg`,
+  regstudcheck: `${host}/weapp/studreg/regcheck`,
+  regstudcancel: `${host}/weapp/studreg/regcancel`,
+
+  // 审核
+  studexam: `${host}/weapp/studexam`,
+  studexampass: `${host}/weapp/studexam/pass`,
+  studexamcancel: `${host}/weapp/studexam/cancel`,
+  studconfirm: `${host}/weapp/studconfirm`,
+  studconfirmpass: `${host}/weapp/studconfirm/pass`,
+  studconfirmcancel: `${host}/weapp/studconfirm/cancel`,
+
+  // 学校表格
+  schoolformkey: `${host}/weapp/schoolformkey`,
+  schoolformvalueupdate: `${host}/weapp/schoolformvalue/update`,
 
 
   // 编码地址
@@ -60,24 +76,6 @@ var doUrl = {
   roledistdeleteuser: `${host}/weapp/roledist/deleteuser`,
 
 
-
-
-  // 报名
-  regstudreg: `${host}/weapp/studreg/regstud`,
-  regstudcheck: `${host}/weapp/studreg/regcheck`,
-  regstudcancel: `${host}/weapp/studreg/regcancel`,
-
-  // 审核
-  studexam: `${host}/weapp/studexam`,
-  studexampass: `${host}/weapp/studexam/pass`,
-  studexamcancel: `${host}/weapp/studexam/cancel`,
-  studconfirm: `${host}/weapp/studconfirm`,
-  studconfirmpass: `${host}/weapp/studconfirm/pass`,
-  studconfirmcancel: `${host}/weapp/studconfirm/cancel`,
-
-  // 学校表格
-  schoolformkey: `${host}/weapp/schoolformkey`,
-  schoolformvalueupdate: `${host}/weapp/schoolformvalue/update`,
 
 
   // 同班设置

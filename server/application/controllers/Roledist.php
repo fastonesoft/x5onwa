@@ -13,6 +13,7 @@ class Roledist extends CI_Controller
    * 学校管理员，查询所在学校用户
    */
   const role_name = 'roledist';
+
   public function index() {
     Mvv\mvvLogin::check(self::role_name, function ($user) {
       // 获取参数
@@ -20,9 +21,9 @@ class Roledist extends CI_Controller
       $name = $param["name"];
       $user_id = $user['unionId'];
 
+      // 返回信息
       $result = Mvv\mvvRoledist::getGroupUser($user_id, $name);
 
-      // 返回信息
       $this->json(['code' => 0, 'data' => $result]);
     }, function ($error) {
       $this->json($error);

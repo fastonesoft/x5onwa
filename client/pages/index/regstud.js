@@ -1,32 +1,25 @@
 // pages/index/regstud.js
-var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var x5on = require('../x5on.js')
 
 Page({
 
-  onLoad: function (options) {
+  onShow: function () {
     var that = this
-
     x5on.check({
-      success: () => {
-        // 是否报名
-        const session = qcloud.Session.get()
-        var userinfor = session ? session.userinfo : null
-        var user_id = userinfor ? userinfor.unionId : '0'
+      success() {
         x5on.request({
-          url: x5on.url.regstudcheck,
-          success: function (result) {
-            that.setData(result.data)
+          url: x5on.url.regstud,
+          success(childs_schools) {
+            that.setData(childs_schools)
           }
         })
+      },
+      fail() {
+        wx.switchTab({ url: '/pages/login/login'})
       }
-    })
+    });
   },
-
-  checkInput: function (e) {
-    x5on.checkInputEx(e, this)
-  },
-
+  
   schoolChange: function (e) {
     var schIndex = e.detail.value
     if (schIndex == -1 || this.data.schools.length == 0) return
