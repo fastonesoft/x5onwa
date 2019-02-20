@@ -3,11 +3,11 @@ var x5on = require('../x5on.js')
 
 Page({
 
-  onLoad: function (e) {
+  onLoad: function (param) {
     var that = this
     x5on.post({
       url: x5on.url.gradestuduid,
-      data: e,
+      data: param,
       success: student => {
         var canshow = true
         that.setData({ student, canshow })

@@ -45,6 +45,10 @@
         <view class="weui-cell__bd">报名学生</view>
         <view class="weui-cell__ft">{{item.child_name}}</view>
       </view>
+      <view class="weui-cell">
+        <view class="weui-cell__bd">学制类型</view>
+        <view class="weui-cell__ft">{{item.edu_type_name}}</view>
+      </view>
     </view>
     <view class="weui-cells__tips x5ui-mini">
       <button class="weui-btn mini-btn" data-uid="{{item.uid}}" type="primary" size="mini" wx:if="{{!item.checked}}" bindtap="checkClick">
@@ -59,6 +63,6 @@
     </view>
   </block>
   <view class="weui-btn-area x5ui-bottom">
-    <button type="primary" bindtap="returnClick">返回{{good.ok}}</button>
+    <button type="primary" bindtap="returnClick">返回</button>
   </view>
 </block>
