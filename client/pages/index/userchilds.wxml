@@ -57,9 +57,14 @@
         <view class="weui-cell__ft">{{item.child_idc}}</view>
       </view>
       <view class="weui-cell">
-        <view class="weui-cell__bd">亲子称谓</view>
+        <view class="weui-cell__bd">亲子关系</view>
         <view class="weui-cell__ft">{{item.child_relation}}</view>
       </view>
+    </view>
+    <view class="weui-cells__tips x5ui-mini">
+      <button class="weui-btn mini-btn" data-uid="{{item.uid}}" type="default" size="mini" bindtap="regedClick">
+        详细信息
+      </button>
     </view>
   </block>
   <view class="weui-btn-area">

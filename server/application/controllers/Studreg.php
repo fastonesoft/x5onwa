@@ -14,9 +14,11 @@ class Studreg extends CI_Controller
       try {
         // 返回报名孩子与学校列表
         $user_id = $userinfor->unionId;
+        $my_user_id = $user_id;
         $childs = Model\xovUserChilds::getsBy(compact('user_id'));
         $schools = Model\xonSchool::gets();
-        $studregs = Model\xovStudReg::getsBy(compact('user_id'));
+        // 用户孩子的报名信息
+        $studregs = Model\xovUserChildsReg::getsBy(compact('my_user_id'));
 
         $this->json(['code' => 0, 'data' => compact('childs', 'schools', 'studregs')]);
       } catch (Exception $e) {

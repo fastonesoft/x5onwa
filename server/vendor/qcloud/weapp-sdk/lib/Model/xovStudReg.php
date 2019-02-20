@@ -15,7 +15,6 @@ class xovStudReg extends vAppinfo
 
 
 
-
   public static function getStudRegRowByUserId ($user_id) {
     $res = dbs::row('xovStudReg', ['*'], compact('user_id'));
     if ( $res !== null ) {

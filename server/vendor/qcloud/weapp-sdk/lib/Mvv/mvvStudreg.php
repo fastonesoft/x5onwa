@@ -103,37 +103,6 @@ class mvvStudreg
 
 
 
-  public static function regCancelData($user_id)
-  {
-    $not_reg = true;
-    $sch_reged = false;
-    $not_added = true;
-    $infor_added = false;
-    $schools = xonStudReg::schools();
-    $childs = xonParentChilds::mychilds($user_id);
-    return compact('not_reg', 'sch_reged', 'not_added', 'infor_added', 'schools', 'childs');
-  }
-
-  // 获取用户报名记录编号
-  public static function getRegRowByUserId($user_id)
-  {
-    $res = dbs::row('xovStudReg', ['uid', 'sch_id', 'sch_name', 'child_id', 'child_name'], compact('user_id'));
-    if ($res !== null) {
-      return $res;
-    } else {
-      throw new Exception("未找到用户报名记录");
-    }
-  }
-
-  public static function getRegRowByUid($uid)
-  {
-    $res = dbs::row('xovStudReg', ['uid', 'sch_id', 'sch_name', 'child_id', 'child_name'], compact('uid'));
-    if ($res !== null) {
-      return $res;
-    } else {
-      throw new Exception("未找到编号对应报名记录");
-    }
-  }
 
   public static function setStudExamUser($uid, $exam_user_id)
   {
