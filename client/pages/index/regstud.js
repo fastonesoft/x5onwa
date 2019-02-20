@@ -1,6 +1,5 @@
 // pages/index/regstud.js
 var x5on = require('../x5on.js')
-import x5va from '../x5va.js'
 
 Page({
 
@@ -48,7 +47,7 @@ Page({
         school: {
           required: '学校选择'
         },
-        schild: {
+        child: {
           required: '孩子选择'
         }
       })
@@ -64,8 +63,8 @@ Page({
           that.setData({ studregs })
         }
       })
-    }, error => {
-      x5on.showError(that, error)
+    }, message => {
+      x5on.showError(that, message)
     })
   },
 
@@ -76,7 +75,7 @@ Page({
       data: form,
       url: x5on.url.regstudcheck,
       success(stud_reg_uid) {
-        var studregs =  x5on.setValue(that.data.studregs, 'uid', stud_reg_uid, 'checked', 1)
+        var studregs =  x5on.setValues(that.data.studregs, 'uid', stud_reg_uid, { checked: 1 })
         that.setData({ studregs })
       }
     })
@@ -93,57 +92,6 @@ Page({
         x5on.delValue(studregs, 'uid', stud_reg_uid)
         that.setData({ studregs })
       }
-    })
-  },
-
-
-  cancelSubmit: function (e) {
-    var that = this
-    x5on.check({
-      success: () => {
-        x5on.post({
-          data: e.detail.value,
-          url: x5on.url.regstudcancel,
-          success: function (result) {
-            that.setData(result.data)
-          }
-        })
-      }
-    })
-  },
-
-  // 动态创建的picker脚本（只能创一个）
-  dynamChange: function (e) {
-    var dynamIndex = e.detail.value
-    if (dynamIndex == -1 || this.data.items.length == 0) return
-
-    var uid = e.currentTarget.dataset.uid
-    var items = this.data.items
-    for (var i = 0; i < items.length; i++) {
-      if (items[i].uid === uid) {
-        items[i].error = false
-        items[i].value = dynamIndex
-      }
-    }
-    this.setData({ items })
-  },
-
-  uploadSubmit: function (e) {
-    var that = this;
-    x5on.checkFormEx(this, function () {
-      x5on.post({
-        data: e.detail.value,
-        url: x5on.url.schoolformvalueupdate,
-        success: function (result) {
-          var infor_added = true
-          var not_added = false
-          var form_show = false
-          var user_forms = result.data.user_forms
-          var qrcode_data = result.data.qrcode_data
-          that.setData({ form_show, infor_added, not_added, user_forms, qrcode_data })
-          //
-        }
-      })
     })
   },
 

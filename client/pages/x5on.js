@@ -2,6 +2,7 @@ var qcloud = require('../vendor/wafer2-client-sdk/index')
 var config = require('../config')
 var util = require('../utils/util.js')
 var session = require('../vendor/wafer2-client-sdk/lib/session.js')
+var x5va = require('./x5valid.js')
 
 /**
  * 请求列表
@@ -202,10 +203,12 @@ var doDelValue = function (arrs, obj_name, obj_value) {
   var index = doGetIndexe(arrs, obj_name, obj_value)
   arrs.splice(index, 1)
 }
-// 变更数组索引obj_value，set_name字段的值
-var doSetValue = function (arrs, obj_name, obj_value, set_name, set_value) {
+// 变更数组索引obj_value的对象，sets字段的值
+var doSetValues = function (arrs, obj_name, obj_value, obj_sets) {
   var index = doGetIndexe(arrs, obj_name, obj_value)
-  arrs[index][set_name] = set_value
+  for (var key in obj_sets) {
+    arrs[index].hasOwnProperty(key) && (arrs[index][key] = obj_sets[key])
+  }
   return arrs
 }
 
@@ -408,7 +411,7 @@ module.exports = {
   setPick: doSetPick,
 
   delValue: doDelValue,
-  setValue: doSetValue,
+  setValues: doSetValues,
 
   request: doRequest,
   post: doPost,

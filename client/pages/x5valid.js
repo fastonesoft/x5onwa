@@ -29,6 +29,7 @@ class x5va {
    */
   __initData() {
     this.form = {}
+    this.error = {}
     this.errorList = []
   }
 
@@ -489,6 +490,7 @@ class x5va {
    */
   setValue(param, method, result, value) {
     this.form[param] = value
+    this.error[param] = !result
     // const params = this.form[param]
     // params.valid = result
     // params.invalid = !result
@@ -510,11 +512,12 @@ class x5va {
     let passed = this.valid()
     // 成功，执行
     if (passed) {
-      typeof success === 'function' && success(this.form)
+      typeof success === 'function' && success(this.form, this.error)
     }
     else {
+      // error.msg: 提示信息，this.error：字段验证状态
       let error = this.errorList[0]
-      typeof fail === 'function' && fail(error.msg)
+      typeof fail === 'function' && fail(error.msg, this.error)
     }
   }
 
