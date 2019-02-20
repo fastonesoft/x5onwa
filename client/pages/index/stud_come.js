@@ -1,11 +1,10 @@
 // pages/index/stud_come.js
 var x5on = require('../x5on.js')
-import x5va from '../x5va.js'
 
 Page({
 
   data: {
-    trans: [{ id: 0, name: '区县' }, { id: 1, name: '跨市' }, { id: 2, name: '跨省'}]
+    trans: [{ id: 0, name: '区县' }, { id: 1, name: '跨市' }, { id: 2, name: '跨省' }]
   },
 
   transChange: function (e) {
@@ -16,7 +15,7 @@ Page({
 
   studcomeSubmit: function (e) {
     var that = this
-    that.x5va = new x5va({
+    var rules = {
       stud_name: {
         required: true,
         chinese: true,
@@ -43,25 +42,25 @@ Page({
       stud_auth: {
         required: true,
       }
-    }, {
-        stud_name: {
-          required: '学生姓名'
-        },
-        stud_idc: {
-          required: '身份证号'
-        },
-        come_date: {
-          required: '转学时间'
-        },
-        memo: {
-          required: '转出学校'
-        },
-        stud_trans: {
-          required: '转入方式'
-        }
-    })
-
-    that.x5va.checkForm(e, function (form) {
+    }
+    var messages = {
+      stud_name: {
+        required: '学生姓名'
+      },
+      stud_idc: {
+        required: '身份证号'
+      },
+      come_date: {
+        required: '转学时间'
+      },
+      memo: {
+        required: '转出学校'
+      },
+      stud_trans: {
+        required: '转入方式'
+      }
+    }
+    x5on.checkForm(e, rules, messages, function (form) {
       var pages = getCurrentPages()
       var prevPage = pages[pages.length - 2]
       var grade_id = prevPage.getGradeid()

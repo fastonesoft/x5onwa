@@ -1,6 +1,5 @@
 // pages/index/stud_leave.js
 var x5on = require('../x5on.js')
-import x5va from '../x5va.js'
 
 Page({
 

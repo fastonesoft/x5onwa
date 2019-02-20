@@ -1,6 +1,5 @@
 // pages/index/tchreg.js
 var x5on = require('../x5on.js')
-import x5form from '../x5va.js'
 
 Page({
 
@@ -16,18 +15,19 @@ Page({
 
   findSubmit: function (e) {
     var that = this
-    var form = new x5form({
+    var rules = {
       name: {
         required: true,
         chinese: true,
         rangelength: [1, 3],
       }
-    }, {
-        name: {
-          required: '教师姓名',
-        }
-      })
-    form.checkForm(e, forms => {
+    }
+    var messages = {
+      name: {
+        required: '教师姓名',
+      }
+    }
+    x5on.checkForm(e, rules, messages, forms => {
       x5on.post({
         url: x5on.url.tchreg,
         data: forms,

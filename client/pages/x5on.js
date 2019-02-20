@@ -417,4 +417,6 @@ module.exports = {
   post: doPost,
   showError: doShowError,
   showSuccess: doSuccess,
+
+  checkForm: x5va.checkForm,
 }

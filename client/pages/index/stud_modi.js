@@ -1,6 +1,5 @@
 // pages/index/stud_modi.js
 var x5on = require('../x5on.js')
-import x5va from '../x5va.js'
 
 Page({
 
@@ -51,8 +50,7 @@ Page({
 
   studmodiSubmit: function (e) {
     var that = this
-    e.detail.value.uid = that.data.student.uid
-    that.x5va = new x5va({
+    var rules = {
       stud_idc: {
         required: true,
         idcard: true,
@@ -71,7 +69,8 @@ Page({
         required: true,
         min: 0,
       }
-    }, {
+    }
+    var messages = {
       stud_idc: {
         required: '身份证号'
       },
@@ -84,8 +83,8 @@ Page({
       stud_status: {
         required: '学籍状态'
       }
-    })
-    that.x5va.checkForm(e, function (form) {
+    }
+    x5on.checkForm(e, rules, messages, form => {
       form.uid = that.data.student.uid
       form.stud_type_id = x5on.getId(that.data.types, form.stud_type)
       form.stud_status_id = x5on.getId(that.data.status, form.stud_status)
@@ -106,8 +105,8 @@ Page({
           wx.navigateBack()
         }
       })
-    }, function (error) {
-      x5on.showError(that, error)
+    }, message => {
+      x5on.showError(that, message)
     })
   },
 

@@ -1,12 +1,11 @@
 // pages/index/stud_repetition.js
 var x5on = require('../x5on.js')
-import x5va from '../x5va.js'
 
 Page({
 
   studrepetitionSubmit: function (e) {
     var that = this
-    that.x5va = new x5va({
+    var rules = {
       stud_name: {
         required: true,
         chinese: true,
@@ -26,22 +25,22 @@ Page({
         chinese: true,
         minlength: 4,
       },
-    }, {
-        stud_name: {
-          required: '学生姓名'
-        },
-        stud_idc: {
-          required: '身份证号'
-        },
-        come_date: {
-          required: '进校时间'
-        },
-        memo: {
-          required: '毕业学校'
-        },
-      })
-
-    that.x5va.checkForm(e, function (form) {
+    }
+    var messages = {
+      stud_name: {
+        required: '学生姓名'
+      },
+      stud_idc: {
+        required: '身份证号'
+      },
+      come_date: {
+        required: '进校时间'
+      },
+      memo: {
+        required: '毕业学校'
+      },
+    }
+    x5on.checkForm(e, rules, messages, function (form) {
       var pages = getCurrentPages()
       var prevPage = pages[pages.length - 2]
       var grade_id = prevPage.getGradeid()

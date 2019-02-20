@@ -1,6 +1,5 @@
 // pages/index/roledist.js
 var x5on = require('../x5on.js')
-import x5va from '../x5va.js'
 
 Page({
   data: {
@@ -13,13 +12,6 @@ Page({
   },
 
   onLoad: function () {
-    this.x5va = new x5va({
-      name: {
-        required: true,
-        chinese: true,
-        rangelength: [2, 4],
-      }
-    })
     var that = this
     x5on.request({
       url: x5on.url.roledistgroup,
@@ -41,7 +33,19 @@ Page({
 
   findSubmit: function (e) {
     var that = this;
-    that.x5va.checkForm(e, function () {
+    var rules = {
+      name: {
+        required: true,
+        chinese: true,
+        rangelength: [1, 3],
+      }
+    }
+    var messages = {
+      name: {
+        required: '教师姓名'
+      }
+    }
+    x5on.checkForm(e, rules, messages, form => {
       x5on.post({
         url: x5on.url.roledist,
         data: e.detail.value,
@@ -50,8 +54,8 @@ Page({
           data.length === 0 ? x5on.showError(that, '没有找到你说的老师！') : that.setData({ radios: result.data })
         }
       })
-    }, function (error) {
-      x5on.showError(that, '教师姓名：' + error)
+    }, message => {
+      x5on.showError(that, message)
     })
   },
 

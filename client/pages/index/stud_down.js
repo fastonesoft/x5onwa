@@ -1,6 +1,5 @@
 // pages/index/stud_down.js
 var x5on = require('../x5on.js')
-import x5va from '../x5va.js'
 
 Page({
 
@@ -17,7 +16,7 @@ Page({
 
   studdownSubmit: function (e) {
     var that = this
-    that.x5va = new x5va({
+    var rules = {
       down_date: {
         required: true,
         date: true,
@@ -36,22 +35,23 @@ Page({
         chinese: true,
         rangelength: [2, 4],
       },
-    }, {
-        down_date: {
-          required: '休学时间'
-        },
-        end_date: {
-          required: '结束时间'
-        },
-        down_reason: {
-          required: '休学理由'
-        },
-        teach_name: {
-          required: '班主任姓名'
-        },
-      })
+    }
+    var messages = {
+      down_date: {
+        required: '休学时间'
+      },
+      end_date: {
+        required: '结束时间'
+      },
+      down_reason: {
+        required: '休学理由'
+      },
+      teach_name: {
+        required: '班主任姓名'
+      },
+    }
 
-    that.x5va.checkForm(e, task_memo => {
+    x5on.checkForm(e, rules, messages, task_memo => {
       var form = {}
       form.grade_stud_id = that.data.student.id
       form.stud_status_id = that.data.student.stud_status_id

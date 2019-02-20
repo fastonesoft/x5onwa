@@ -1,6 +1,5 @@
 // pages/index/userset.js
 var x5on = require('../x5on.js')
-import x5va from '../x5va.js'
 
 Page({
 
@@ -17,14 +16,14 @@ Page({
         })
       },
       fail() {
-        wx.switchTab({ url: '/pages/login/login'})
+        wx.switchTab({ url: '/pages/login/login' })
       }
     });
   },
 
   usersetSubmit: function (e) {
     var that = this
-    var update = new x5va({
+    var rules = {
       name: {
         required: true,
         chinese: true,
@@ -34,15 +33,16 @@ Page({
         required: true,
         tel: true,
       }
-    }, {
-        name: {
-          required: '学生姓名'
-        },
-        mobil: {
-          required: '手机号码'
-        }
-    })
-    update.checkForm(e, form => {
+    }
+    var messages = {
+      name: {
+        required: '学生姓名'
+      },
+      mobil: {
+        required: '手机号码'
+      }
+    }
+    x5on.checkForm(e, rules, messages, form => {
       x5on.post({
         url: x5on.url.usersetupdate,
         data: form,

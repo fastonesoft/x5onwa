@@ -1,6 +1,5 @@
 //index.js
 var x5on = require('../x5on.js')
-import x5va from '../x5va.js'
 
 Page({
 
@@ -58,7 +57,7 @@ Page({
 
   regSubmit: function (e) {
     var that = this
-    var reg = new x5va({
+    var rules = {
       name: {
         required: true,
         chinese: true,
@@ -68,15 +67,16 @@ Page({
         required: true,
         tel: true,
       }
-    }, {
-        name: {
-          required: '学生姓名'
-        },
-        mobil: {
-          required: '手机号码'
-        }
-    })
-    reg.checkForm(e, form => {
+    }
+    var messages = {
+      name: {
+        required: '学生姓名'
+      },
+      mobil: {
+        required: '手机号码'
+      }
+    }
+    x5on.checkForm(e, rules, messages, form => {
       x5on.post({
         url: x5on.url.userreg,
         data: form,
@@ -89,7 +89,6 @@ Page({
     }, error => {
       x5on.showError(that, error)
     })
-
   },
 
 

@@ -1,12 +1,11 @@
 // pages/index/stud_add.js
 var x5on = require('../x5on.js')
-import x5va from '../x5va.js'
 
 Page({
 
   studaddSubmit: function (e) {
     var that = this
-    that.x5va = new x5va({
+    var rules = {
       stud_name: {
         required: true,
         chinese: true,
@@ -24,21 +23,22 @@ Page({
       stud_auth: {
         required: true,
       }
-    }, {
-        stud_name: {
-          required: '学生姓名'
-        },
-        stud_idc: {
-          required: '身份证号'
-        },
-        come_date: {
-          required: '转学时间'
-        },
-        memo: {
-          required: '转出学校'
-        },
-    })
-    that.x5va.checkForm(e, form => {
+    }
+    var messages = {
+      stud_name: {
+        required: '学生姓名'
+      },
+      stud_idc: {
+        required: '身份证号'
+      },
+      come_date: {
+        required: '转学时间'
+      },
+      memo: {
+        required: '转出学校'
+      },
+    }
+    x5on.checkForm(e, rules, messages, form => {
       var pages = getCurrentPages()
       var prevPage = pages[pages.length - 2]
       form.grade_id = prevPage.getGradeid()

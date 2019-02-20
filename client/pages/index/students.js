@@ -1,6 +1,5 @@
 // pages/index/students.js
 var x5on = require('../x5on.js')
-import x5va from '../x5va.js'
 
 Page({
 
@@ -24,7 +23,7 @@ Page({
   getGradeid: function () {
     var grades = this.data.grades
     var gradeIndex = this.data.gradeIndex
-    if (grades && grades.length>0 && gradeIndex && gradeIndex>-1) {
+    if (grades && grades.length > 0 && gradeIndex && gradeIndex > -1) {
       return grades[gradeIndex].id
     }
     return null
@@ -33,7 +32,7 @@ Page({
   getClsid: function () {
     var classes = this.data.classes
     var classIndex = this.data.classIndex
-    if (classes && classes.length>0 && classIndex && classIndex>-1) {
+    if (classes && classes.length > 0 && classIndex && classIndex > -1) {
       return classes[classIndex].id
     }
     return null
@@ -81,18 +80,19 @@ Page({
 
   findSubmit: function (e) {
     var that = this
-    that.x5va = new x5va({
+    var rules = {
       stud_name: {
         required: true,
         chinese: true,
         rangelength: [1, 3],
       }
-    }, {
-        stud_name: {
-          required: '学生姓名'
-        }
-    })
-    that.x5va.checkForm(e, function (form) {
+    }
+    var messages = {
+      stud_name: {
+        required: '学生姓名'
+      }
+    }
+    x5on.checkForm(e, rules, messages, form => {
       form.cls_id = that.getClsid()
       form.grade_id = that.getGradeid()
       x5on.post({
@@ -107,7 +107,7 @@ Page({
           that.setData({ students, comeshow, male, female })
         }
       })
-    }, function (error) {
+    }, error => {
       x5on.showError(that, error)
     })
   },
@@ -256,6 +256,6 @@ Page({
     }, () => {
       x5on.showError(that, '没有选中相关学生')
     })
-  }, 
+  },
 
 })

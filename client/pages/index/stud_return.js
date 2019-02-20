@@ -1,6 +1,5 @@
 // pages/index/stud_return.js
 var x5on = require('../x5on.js')
-import x5va from '../x5va.js'
 
 Page({
 
@@ -10,7 +9,7 @@ Page({
     classes: [],
   },
 
-  onLoad: function(e) {
+  onLoad: function (e) {
     var tasks = JSON.parse(e.tasks)
     this.setData({ tasks })
 
@@ -27,7 +26,7 @@ Page({
     })
   },
 
-  gradeChange: function(e) {
+  gradeChange: function (e) {
     x5on.pickChange(e, gradeIndex => {
       var classIndex = 0
       this.setData({ gradeIndex, classIndex })
@@ -43,19 +42,19 @@ Page({
     })
   },
 
-  classChange: function(e) {
+  classChange: function (e) {
     x5on.pickChange(e, classIndex => {
       this.setData({ classIndex })
     })
   },
 
-  studentsChange: function(e) {
+  studentsChange: function (e) {
     x5on.setRadio(this.data.tasks, e.detail.value, tasks => {
       this.setData({ tasks })
     })
   },
 
-  studentClick: function(e) {
+  studentClick: function (e) {
     var task_memo = e.currentTarget.dataset.task_memo
     var memos = JSON.parse(task_memo)
     this.setData({ memos })
@@ -63,7 +62,7 @@ Page({
 
   studreturnSubmit: function (e) {
     var that = this
-    that.x5va = new x5va({
+    var rules = {
       task_uid: {
         required: true,
       },
@@ -73,18 +72,19 @@ Page({
       cls_id: {
         required: true,
       },
-    }, {
-        task_uid: {
-          required: '学生列表'
-        },
-        grade_id: {
-          required: '目标年级'
-        },
-        cls_id: {
-          required: '目标班级'
-        },
-      })
-    that.x5va.checkForm(e, function (form) {
+    }
+    var messages = {
+      task_uid: {
+        required: '学生列表'
+      },
+      grade_id: {
+        required: '目标年级'
+      },
+      cls_id: {
+        required: '目标班级'
+      },
+    }
+    x5on.checkForm(e, rules, messages, form => {
       form.cls_id = x5on.getId(that.data.classes, form.cls_id)
       form.grade_id = x5on.getId(that.data.grades, form.grade_id)
 
@@ -101,12 +101,12 @@ Page({
           })
           var comeshow = students.length !== 0
           prevPage.setData({ students, comeshow, male, female })
-        // 
+          // 
           wx.navigateBack()
         }
       })
-    }, function (error) {
-      x5on.showError(that, error)
+    }, message => {
+      x5on.showError(that, message)
     })
   },
 

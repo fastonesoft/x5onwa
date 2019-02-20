@@ -1,6 +1,5 @@
 // pages/index/stud_back.js
 var x5on = require('../x5on.js')
-import x5va from '../x5va.js'
 
 Page({
 
@@ -47,22 +46,23 @@ Page({
 
   studbackSubmit: function (e) {
     var that = this
-    that.x5va = new x5va({
+    var rules = {
       task_uid: {
         required: true,
       },
       cls_id: {
         required: true,
       },
-    }, {
-        task_uid: {
-          required: '学生选择'
-        },
-        cls_id: {
-          required: '目标班级'
-        },
-      })
-    that.x5va.checkForm(e, function (form) {
+    }
+    var messages = {
+      task_uid: {
+        required: '学生选择'
+      },
+      cls_id: {
+        required: '目标班级'
+      },
+    }
+    x5on.checkForm(e, rules, messages, form => {
       form.cls_id = x5on.getId(that.data.classes, form.cls_id)
 
       x5on.post({
@@ -82,8 +82,8 @@ Page({
           wx.navigateBack()
         }
       })
-    }, function (error) {
-      x5on.showError(that, error)
+    }, message => {
+      x5on.showError(that, message)
     })
   },
 

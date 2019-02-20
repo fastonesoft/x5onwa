@@ -22,6 +22,6 @@ page { background: #F6F6F6; }
 .students_images { width: 46rpx; height: 46rpx; border: none; vertical-align: middle; margin-right: 15rpx; }
 
 /* weui */
-.weui-input { text-align: right; }
-.weui-select { text-align: right; }
+.weui-input { text-align: left; }
+.weui-select { text-align: left; }
 .weui-cell_vcode .weui-input { padding-right: 20rpx; }

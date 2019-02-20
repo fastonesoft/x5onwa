@@ -1,6 +1,5 @@
 // pages/index/userchilds.js
 var x5on = require('../x5on.js')
-import x5va from '../x5va.js'
 
 Page({
 
@@ -22,7 +21,7 @@ Page({
         })
       },
       fail() {
-        wx.switchTab({ url: '/pages/login/login'})
+        wx.switchTab({ url: '/pages/login/login' })
       }
     });
   },
@@ -35,7 +34,7 @@ Page({
 
   userchildSubmit: function (e) {
     var that = this
-    var userchild = new x5va({
+    var rules = {
       name: {
         required: true,
         chinese: true,
@@ -50,7 +49,8 @@ Page({
         required: true,
         min: 0,
       }
-    }, {
+    }
+    var messages = {
       name: {
         required: '孩子姓名'
       },
@@ -60,8 +60,8 @@ Page({
       relation: {
         required: '亲子称谓'
       }
-    })
-    userchild.checkForm(e, form => {
+    }
+    x5on.checkForm(e, rules, messages, (form, error) => {
       form.relation_id = x5on.getId(that.data.relations, form.relation)
       x5on.post({
         url: x5on.url.userchildsreg,
@@ -70,8 +70,9 @@ Page({
           that.setData({ userchilds })
         }
       })
-    }, error => {
-      x5on.showError(that, error)
+    }, (message, error) => {
+      that.setData({ error })
+      x5on.showError(that, message)
     })
   },
 

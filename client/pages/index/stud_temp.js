@@ -1,6 +1,5 @@
 // pages/index/stud_temp.js
 var x5on = require('../x5on.js')
-import x5va from '../x5va.js'
 
 Page({
 
@@ -17,7 +16,7 @@ Page({
 
   studtempSubmit: function (e) {
     var that = this
-    that.x5va = new x5va({
+    var rules = {
       temp_date: {
         required: true,
         date: true,
@@ -27,20 +26,21 @@ Page({
         chinese: true,
         rangelength: [2, 10],
       },
-    }, {
-        temp_date: {
-          required: '离校时间'
-        },
-        temp_reason: {
-          required: '离校原因'
-        },
-      })
-    that.x5va.checkForm(e, task_memo => {
+    }
+    var messages = {
+      temp_date: {
+        required: '离校时间'
+      },
+      temp_reason: {
+        required: '离校原因'
+      },
+    }
+    x5on.checkForm(e, rules, messages, task_memo => {
       var form = {}
       form.id = that.data.student.id
       form.uid = that.data.student.uid
       form.task_memo = JSON.stringify(task_memo)
-      
+
       x5on.post({
         url: x5on.url.gradestudtemp,
         data: form,
