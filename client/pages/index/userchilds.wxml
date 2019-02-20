@@ -1,5 +1,6 @@
 <!-- pages/index/userchilds.wxml -->
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
+
 <form bindsubmit="userchildSubmit" wx:if="{{userchilds.length<2}}">
   <view class="weui-cells__title">孩子信息</view>
   <view class="weui-cells weui-cells_after-title">
@@ -62,7 +63,7 @@
       </view>
     </view>
     <view class="weui-cells__tips x5ui-mini">
-      <button class="weui-btn mini-btn" data-uid="{{item.uid}}" type="default" size="mini" bindtap="regedClick">
+      <button class="weui-btn mini-btn" data-uid="{{item.child_uid}}" type="default" size="mini" bindtap="regedClick">
         详细信息
       </button>
     </view>

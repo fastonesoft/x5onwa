@@ -95,16 +95,7 @@ Page({
   },
 
   regedClick: function (e) {
-    var that = this
-    x5on.post({
-      data: e.currentTarget.dataset,
-      url: x5on.url.regstudcancel,
-      success(stud_reg_uid) {
-        var studregs = that.data.studregs
-        x5on.delValue(studregs, 'uid', stud_reg_uid)
-        that.setData({ studregs })
-      }
-    })
+    wx.navigateTo({ url: `/pages/index/student?uid=${e.currentTarget.dataset.uid}` })
   },
 
   returnClick: function (e) {

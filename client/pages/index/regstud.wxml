@@ -1,5 +1,6 @@
 <!-- pages/index/regstud.wxml -->
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
+
 <form bindsubmit="regstudSubmit">
   <view class="weui-cells__title">报名学校</view>
   <view class="weui-cells weui-cells_after-title">
@@ -33,6 +34,7 @@
     <button type="primary" form-type="submit">报名</button>
   </view>
 </form>
+
 <block wx:if="{{studregs.length>0}}">
   <view class="weui-cells__title">报名信息</view>
   <block wx:for="{{studregs}}" wx:key="uid">
@@ -57,7 +59,7 @@
       <button class="weui-btn mini-btn" data-uid="{{item.uid}}" type="warn" size="mini" wx:if="{{!item.checked}}" bindtap="cancelClick">
         取消
       </button>
-      <button class="weui-btn mini-btn" data-uid="{{item.uid}}" type="default" size="mini" wx:if="{{item.checked}}" bindtap="regedClick">
+      <button class="weui-btn mini-btn" data-uid="{{item.child_uid}}" type="default" size="mini" wx:if="{{item.checked}}" bindtap="regedClick">
         详细信息
       </button>
     </view>

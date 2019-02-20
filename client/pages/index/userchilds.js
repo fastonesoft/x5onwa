@@ -77,13 +77,7 @@ Page({
   },
 
   regedClick: function (e) {
-    x5on.post({
-      url: x5on.url.userchildsreg,
-      data: e.currentTarget.dataset,
-      success(userchilds) {
-        that.setData({ userchilds })
-      }
-    })
+    wx.navigateTo({ url: `/pages/index/student?uid=${e.currentTarget.dataset.uid}` })
   },
 
   returnClick: function (e) {

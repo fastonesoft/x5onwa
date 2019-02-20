@@ -35,6 +35,9 @@ var doUrl = {
   regstudcheck: `${host}/weapp/studreg/check`,
   regstudcancel: `${host}/weapp/studreg/cancel`,
 
+  // 学生
+  student: `${host}/weapp/student`,
+
   // 审核
   studexam: `${host}/weapp/studexam`,
   studexampass: `${host}/weapp/studexam/pass`,
