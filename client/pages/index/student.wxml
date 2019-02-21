@@ -1,5 +1,4 @@
 <!-- pages/index/student.wxml -->
-
 <view class="qrcode-area">
   <image class="qrcode" src="data:image/png;base64,{{qrcode_data}}"></image>
 </view>
@@ -14,9 +13,8 @@
     <view class="weui-cell__ft">{{child.idc}}</view>
   </view>
 </view>
-
 <block wx:for="{{students}}" wx:key="uid">
-  <view class="weui-cells__title">{{item.sch_name}}</view>
+  <view class="weui-cells__title">{{item.sch_name}} - {{item.edu_type_name}}</view>
   <view class="weui-cells weui-cells_after-title">
     <view class="weui-cell">
       <view class="weui-cell__bd">学生年级</view>
@@ -40,16 +38,8 @@
   <view class="weui-cells__title">{{item.sch_name}} - {{item.grade_name}}</view>
   <view class="weui-cells weui-cells_after-title">
     <view class="weui-cell">
-      <view class="weui-cell__bd">学生姓名</view>
-      <view class="weui-cell__ft">{{item.stud_name}}</view>
-    </view>
-    <view class="weui-cell">
-      <view class="weui-cell__bd">学生性别</view>
-      <view class="weui-cell__ft">{{item.stud_sex}}</view>
-    </view>
-    <view class="weui-cell">
-      <view class="weui-cell__bd">学生分级</view>
-      <view class="weui-cell__ft">{{item.step_name}}</view>
+      <view class="weui-cell__bd">起止年度</view>
+      <view class="weui-cell__ft">{{item.grade_year}} - {{item.grade_year+1}}</view>
     </view>
     <view class="weui-cell">
       <view class="weui-cell__bd">年级班级</view>
@@ -68,15 +58,15 @@
       <view class="weui-cell__ft">{{item.stud_code?item.stud_code:'无'}}</view>
     </view>
     <view class="weui-cell">
+      <view class="weui-cell__bd">全国学籍号</view>
+      <view class="weui-cell__ft">{{item.stud_code_g?item.stud_code_g:'无'}}</view>
+    </view>
+    <view class="weui-cell">
       <view class="weui-cell__bd">是否指标生</view>
       <view class="weui-cell__ft">
         <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{item.stud_auth}}"></icon>
         <icon type="cancel" size="23" wx:if="{{!item.stud_auth}}"></icon>
       </view>
-    </view>
-    <view class="weui-cell">
-      <view class="weui-cell__bd">学制类型</view>
-      <view class="weui-cell__ft">{{item.edu_type_name}}</view>
     </view>
     <block wx:if="{{item.graduated}}">
       <view class="weui-cell">
