@@ -7,7 +7,7 @@ use QCloud_WeApp_SDK\Model;
 class Roleset extends CI_Controller
 {
   /**
-   * 权限设置
+   * 权限设置（系统管理员权限）
    */
   const role_name = 'roleset';
   public function index() {

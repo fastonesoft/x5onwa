@@ -16,28 +16,46 @@ Page({
   rolegroupChange: function (e) {
     var that = this
     x5on.setPick(e, groupIndex => {
-      var group_id = x5on.getIndex(this.data.group)
+      var uid = x5on.getValue(this.data.rolegroups, groupIndex, 'uid')
+      that.setData({ groupIndex })
+      //
       x5on.post({
         url: x5on.url.rolegrouprole,
-        data: {group_id, group_id},
-        success: (res) => {
-          that.setData({ roleItems: res.data })        
+        data: { uid },
+        success(roles) {
+          that.setData({ roles })
         }
       })
     })
-
-    // 不需要检测
-
   },
 
   rolegroupSubmit: function (e) {
-    // 不需要检测
-    x5on.post({
-      url: x5on.url.rolegroupupdate,
-      data: e.detail.value,
-      success: (res) => {
-        x5on.showSuccess('更新' + res.data + '条记录')
+    var that = this
+    var rules = {
+      group: {
+        required: true,
       }
+    }
+    var messages = {
+      group: {
+        required: '分组选择'
+      }
+    }
+    x5on.checkForm(e, rules, messages, (form, error) => {
+      var form = e.detail.value
+      form.uid = x5on.getValue(that.data.rolegroups, form.group, 'uid')
+
+      console.log(form)
+      x5on.post({
+        url: x5on.url.rolegroupupdate,
+        data: form,
+        success(number) {
+          x5on.showSuccess('更新' + number + '条记录')
+        }
+      })
+    }, (message, error) => {
+      x5on.showError(that, message)
     })
   }
+
 })

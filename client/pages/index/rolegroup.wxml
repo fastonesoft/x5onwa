@@ -1,31 +1,35 @@
 <!--pages/index/rolegroup.wxml-->
-<view class="weui-cells__title">分组设置</view>
-<view class="weui-cells weui-cells_after-title">
-  <view class="weui-cell weui-cell_select">
-    <view class="weui-cell__hd weui-cell__hd_in-select-after">
-      <view class="weui-label">分组选择</view>
-    </view>
-    <view class="weui-cell__bd">
-      <picker bindchange="rolegroupChange" value="{{groupIndex}}" range="{{rolegroups}}" range-key="name" disabled="{{rolegroups.length==0}}">
-        <view class="weui-select weui-select_in-select-after">{{rolegroups[pIndex].name}}</view>
-      </picker>
-    </view>
-  </view>
-</view>
 
-<form bindsubmit="rolegroupSubmit" wx:if="{{roleItems.length>0}}">
-  <view class="weui-cells__title">是否设置</view>
+<form bindsubmit="rolegroupSubmit">
+  <view class="weui-cells__title">分组设置</view>
   <view class="weui-cells weui-cells_after-title">
-    <block wx:for="{{roleItems}}" wx:key="id">
-      <view class="weui-cell weui-cell_switch">
-        <view class="weui-cell__bd">{{item.title}}</view>
-        <view class="weui-cell__ft">
-          <switch name="{{item.id}}" checked="{{item.has_role}}"/>
-        </view>
+    <view class="weui-cell weui-cell_select">
+      <view class="weui-cell__hd weui-cell__hd_in-select-after">
+        <view class="weui-label">分组选择</view>
       </view>
-    </block>
+      <view class="weui-cell__bd">
+        <picker bindchange="rolegroupChange" name="group" value="{{groupIndex}}" range="{{rolegroups}}"
+          range-key="name" disabled="{{rolegroups.length==0}}">
+          <view class="weui-select weui-select_in-select-after">{{rolegroups[groupIndex].name}}</view>
+        </picker>
+      </view>
+    </view>
   </view>
-  <view class="weui-btn-area x5ui-bottom">
-    <button type="primary" form-type="submit">提交</button>
-  </view>
+
+  <block wx:if="{{roles.length>0}}">
+    <view class="weui-cells__title">权限设置</view>
+    <view class="weui-cells weui-cells_after-title">
+      <block wx:for="{{roles}}" wx:key="uid">
+        <view class="weui-cell weui-cell_switch">
+          <view class="weui-cell__bd">{{item.title}}</view>
+          <view class="weui-cell__ft">
+            <switch name="{{item.uid}}" checked="{{item.has_role}}" />
+          </view>
+        </view>
+      </block>
+    </view>
+    <view class="weui-btn-area x5ui-bottom">
+      <button type="primary" form-type="submit">提交</button>
+    </view>
+  </block>
 </form>
