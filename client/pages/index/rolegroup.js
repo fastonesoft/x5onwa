@@ -2,39 +2,32 @@
 var x5on = require('../x5on.js')
 
 Page({
-  data: {
-    roleItems: [],
-    pickers: [],
-    pIndex: -1,
-    group_id: '',
-  },
 
   onLoad: function () {
     var that = this
-    x5on.check({
-      showError: true,
-      success: () => x5on.request({
-        url: x5on.url.rolegroup,
-        success: function (result) {
-          that.setData({ pickers: result.data })
-        }
-      })
+    x5on.request({
+      url: x5on.url.rolegroup,
+      success(rolegroups) {
+        that.setData({ rolegroups })
+      }
     })
   },
 
-  pickerChange: function (e) {
+  rolegroupChange: function (e) {
     var that = this
-    var index = e.detail.value
-    var group_id = this.data.pickers[index].id
-    that.setData({ pIndex: index, group_id: group_id });
-    // 不需要检测
-    x5on.post({
-      url: x5on.url.rolegrouprole,
-      data: {group_id, group_id},
-      success: (res) => {
-        that.setData({ roleItems: res.data })        
-      }
+    x5on.setPick(e, groupIndex => {
+      var group_id = x5on.getIndex(this.data.group)
+      x5on.post({
+        url: x5on.url.rolegrouprole,
+        data: {group_id, group_id},
+        success: (res) => {
+          that.setData({ roleItems: res.data })        
+        }
+      })
     })
+
+    // 不需要检测
+
   },
 
   rolegroupSubmit: function (e) {

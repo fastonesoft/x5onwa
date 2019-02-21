@@ -26,7 +26,7 @@ class Rolegroup extends CI_Controller
   }
 
   public function role() {
-    Mvv\mvvLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       // 获取参数
       $param = $_POST;
       // 分组权限
@@ -45,7 +45,7 @@ class Rolegroup extends CI_Controller
   }
 
   public function update() {
-    Mvv\mvvLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       // 获取参数
       $param = $_POST;
       $result = Model\xonRoleGroup::update($param);

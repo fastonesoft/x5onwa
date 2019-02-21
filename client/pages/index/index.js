@@ -15,7 +15,7 @@ Page({
     x5on.check({
       success() {
         x5on.request({
-          url: x5on.url.role,
+          url: x5on.url.usersetrole,
           success(cores) {
             // 更新
             that.setData({ cores })

@@ -2,34 +2,24 @@
 var x5on = require('../x5on.js')
 
 Page({
-  data: {
-    errorShow: false,
-    errorMessage: '错误提示',
-    errorArray: [0],
-
-    roleItems: []
-  },
 
   onLoad: function () {
     var that = this
-    x5on.check({
-      showError: true,
-      success: () => x5on.request({
-        url: x5on.url.roleset,
-        success: function (result) {
-          that.setData({ roleItems: result.data })
-        }
-      })
+    x5on.request({
+      url: x5on.url.roleset,
+      success(rolesets) {
+        that.setData({ rolesets })
+      }
     })
   },
 
   rolesetSubmit: function (e) {
-    // 不需要检测
+    var that = this
     x5on.post({
       url: x5on.url.rolesetupdate,
       data: e.detail.value,
-      success: (res) => {
-        x5on.showSuccess('更新' + res.data + '条记录')
+      success(number) {
+        x5on.showSuccess('更新' + number + '条记录')
       }
     })
   }

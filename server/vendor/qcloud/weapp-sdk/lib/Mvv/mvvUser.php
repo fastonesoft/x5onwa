@@ -25,5 +25,4 @@ class mvvUser
     xonUser::setsById(compact('fixed'), $user_id);
   }
 
-
 }

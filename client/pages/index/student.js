@@ -4,10 +4,9 @@ var x5on = require('../x5on.js')
 Page({
 
   onLoad: function (param) {
-    console.log(param)
     var that = this
     x5on.post({
-      url: x5on.url.student,
+      url: x5on.url.userchildstudent,
       data: param,
       success(studinfor) {
         that.setData(studinfor)

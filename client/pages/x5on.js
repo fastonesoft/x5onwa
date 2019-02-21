@@ -14,29 +14,45 @@ var doUrl = {
 
   // 登录地址
   login: `${host}/weapp/login`,
-  // 权限地址
-  role: `${host}/weapp/role`,
+
+  // 权限设置
+  roleset: `${host}/weapp/roleset`,
+  rolesetupdate: `${host}/weapp/roleset/update`,
+
+  // 分组权限
+  rolegroup: `${host}/weapp/rolegroup`,
+  rolegrouprole: `${host}/weapp/rolegroup/role`,
+  rolegroupupdate: `${host}/weapp/rolegroup/update`,
+
+  // 权限分配
+  roledist: `${host}/weapp/roledist`,
+  roledistgroup: `${host}/weapp/roledist/group`,
+  roledistupdate: `${host}/weapp/roledist/update`,
+  roledistgroupuser: `${host}/weapp/roledist/groupuser`,
+  roledistdeleteuser: `${host}/weapp/roledist/deleteuser`,
+
+
 
   // 用户注册无检测
   user: `${host}/weapp/user`,
   userreg: `${host}/weapp/user/reg`,
   // 用户设置有检测
   userset: `${host}/weapp/userset`,
+  usersetrole: `${host}/weapp/userset/role`,
   usersetupdate: `${host}/weapp/userset/update`,
 
   // 用户孩子
   userchilds: `${host}/weapp/userchilds`,
   userchildsreg: `${host}/weapp/userchilds/reg`,
   userchildsrelation: `${host}/weapp/userchilds/relation`,
+  userchildstudent: `${host}/weapp/userchilds/student`,
+
 
   // 报名
   regstud: `${host}/weapp/studreg`,
   regstudreg: `${host}/weapp/studreg/reg`,
   regstudcheck: `${host}/weapp/studreg/check`,
   regstudcancel: `${host}/weapp/studreg/cancel`,
-
-  // 学生
-  student: `${host}/weapp/student`,
 
   // 审核
   studexam: `${host}/weapp/studexam`,
@@ -63,22 +79,6 @@ var doUrl = {
   tchreg: `${host}/weapp/tchreg`,
   tchregusersch: `${host}/weapp/tchreg/usersch`,
   tchreguserreg: `${host}/weapp/tchreg/usereg`,
-
-  // 权限设置
-  roleset: `${host}/weapp/roleset`,
-  rolesetupdate: `${host}/weapp/roleset/update`,
-
-  // 分组权限
-  rolegroup: `${host}/weapp/rolegroup`,
-  rolegrouprole: `${host}/weapp/rolegroup/role`,
-  rolegroupupdate: `${host}/weapp/rolegroup/update`,
-
-  // 权限分配
-  roledist: `${host}/weapp/roledist`,
-  roledistgroup: `${host}/weapp/roledist/group`,
-  roledistupdate: `${host}/weapp/roledist/update`,
-  roledistgroupuser: `${host}/weapp/roledist/groupuser`,
-  roledistdeleteuser: `${host}/weapp/roledist/deleteuser`,
 
 
 

@@ -6,30 +6,37 @@ use QCloud_WeApp_SDK\Model;
 
 class Roleset extends CI_Controller
 {
+  /**
+   * 权限设置
+   */
   const role_name = 'roleset';
-
   public function index() {
-    Mvv\mvvLogin::check(self::role_name, function ($user) {
-      // 权限列表
-      $result = DB::select('xonRole', ['uid', 'title', 'can_show']);
-      // 返回信息
-      $this->json(['code' => 0, 'data' => $result]);
+    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
+      try {
+        // 获取权限列表
+        $result = Model\xonRole::gets();
+
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
     }, function ($error) {
       $this->json($error);
     });
   }
 
-  /**
-   * 权限设置
-   */
   public function update() {
-    Mvv\mvvLogin::check(self::role_name, function ($user) {
-      // 获取参数
-      $param = $_POST;
-      $result = Model\xonRole::update($param);
+    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
+      try {
+        $param = $_POST;
 
-      // 返回信息
-      $this->json(['code' => 0, 'data' => $result]);
+        // 设置权限状态
+        $result = Mvv\mvvRoleset::update($param);
+
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
     }, function ($error) {
       $this->json($error);
     });

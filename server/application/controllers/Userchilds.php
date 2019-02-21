@@ -6,8 +6,10 @@ use QCloud_WeApp_SDK\Model;
 
 class Userchilds extends CI_Controller
 {
+  /**
+   * 用户孩子
+   */
   const role_name = 'userchilds';
-
   public function index()
   {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
@@ -65,6 +67,34 @@ class Userchilds extends CI_Controller
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
         $this->json(['code' => 1, 'data' => $e->getmessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
+
+  public function student() {
+    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
+      try {
+        $param = $_POST;
+        $uid = $param['uid'];
+
+        // 根据孩子编号，获取学生相关信息，包括二维码
+        $qrcode_data = Model\x5on::getQrcodeBase64($uid);
+
+        // 一、基本信息
+        $child = Model\xonChild::checkByUid($uid);
+        $child_id = $child->id;
+
+        // 二、注册信息
+        $students = Model\xovStudent::getsBy(compact('child_id'));
+
+        // 三、年度信息
+        $gradestuds = Model\xovGradeStud::getsBy(compact('child_id'));
+
+        $this->json(['code' => 0, 'data' => compact('qrcode_data', 'child', 'students', 'gradestuds')]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
       }
     }, function ($error) {
       $this->json($error);

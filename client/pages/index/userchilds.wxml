@@ -68,7 +68,7 @@
       </button>
     </view>
   </block>
-  <view class="weui-btn-area">
+  <view class="weui-btn-area x5ui-bottom">
     <button type="primary" bindtap="returnClick">返回</button>
   </view>
 </block>
