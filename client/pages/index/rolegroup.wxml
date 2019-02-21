@@ -1,4 +1,5 @@
 <!--pages/index/rolegroup.wxml-->
+<view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
 <form bindsubmit="rolegroupSubmit">
   <view class="weui-cells__title">分组设置</view>

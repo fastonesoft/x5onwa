@@ -42,13 +42,13 @@ Page({
       }
     }
     x5on.checkForm(e, rules, messages, (form, error) => {
-      var form = e.detail.value
-      form.uid = x5on.getValue(that.data.rolegroups, form.group, 'uid')
+      var value = e.detail.value
+      value.uid = x5on.getValue(that.data.rolegroups, form.group, 'uid')
+      delete value.group   // 删除无用属性
 
-      console.log(form)
       x5on.post({
         url: x5on.url.rolegroupupdate,
-        data: form,
+        data: value,
         success(number) {
           x5on.showSuccess('更新' + number + '条记录')
         }

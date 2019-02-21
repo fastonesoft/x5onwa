@@ -14,13 +14,11 @@ class Rolegroup extends CI_Controller
   {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
-        // 当前用户最大权限组
+        /**
+         * 查询当前用户所能够设置的权限分组的权限
+         */
         $user_id = $userinfor->unionId;
-        $group_id = Model\xonUserGroup::max('group_id', compact('user_id'));
-
-        // 返回小于当前用户组权限的权限列表
-//        $result = Model\xonGroup::customs(compact('group_id'), '<');
-        $result = Model\xonGroup::gets();
+        $result = Mvv\mvvGroup::less($user_id);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -35,6 +33,9 @@ class Rolegroup extends CI_Controller
   {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
+        /**
+         * 根据分组编号，查询分组对应的权限设置
+         */
         $param = $_POST;
         $group_uid = $param['uid'];
 
@@ -67,12 +68,17 @@ class Rolegroup extends CI_Controller
   public function update()
   {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
-      $param = $_POST;
+      try {
+        /**
+         * 根据参数变更分组权限
+         */
+        $param = $_POST;
+        $result = Mvv\mvvGroupRole::update($param);
 
-      // 根据参数变更分组权限
-      $result = Mvv\mvvGroupRole::update($param);
-
-      $this->json(['code' => 0, 'data' => $result]);
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
     }, function ($error) {
       $this->json($error);
     });

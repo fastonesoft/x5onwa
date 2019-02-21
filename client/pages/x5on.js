@@ -26,10 +26,10 @@ var doUrl = {
 
   // 权限分配
   roledist: `${host}/weapp/roledist`,
+  roledistuser: `${host}/weapp/roledist/user`,
+  roledistadd: `${host}/weapp/roledist/add`,
   roledistgroup: `${host}/weapp/roledist/group`,
-  roledistupdate: `${host}/weapp/roledist/update`,
-  roledistgroupuser: `${host}/weapp/roledist/groupuser`,
-  roledistdeleteuser: `${host}/weapp/roledist/deleteuser`,
+  roledistdel: `${host}/weapp/roledist/del`,
 
 
 

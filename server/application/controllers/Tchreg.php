@@ -14,7 +14,7 @@ class Tchreg extends CI_Controller {
     Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
-        $name = $param["name"];
+        $name = $param['name'];
         $result = DB::select('xovUserNotTeach', ['*'], compact('name'));
 
         $this->json(['code' => 0, 'data' => $result]);

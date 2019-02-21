@@ -1,16 +1,15 @@
 <?php
+
 namespace QCloud_WeApp_SDK\Mvv;
 
-use Guzzle\Cache\NullCacheAdapter;
 use QCloud_WeApp_SDK\Model\x5on;
-use QCloud_WeApp_SDK\Mysql\Mysql as dbs;
-use QCloud_WeApp_SDK\Constants;
-use \Exception;
+use QCloud_WeApp_SDK\Model\xonUser;
 
 class mvvRoledist
 {
 
-  public static function getGroupUser ($user_id, $name) {
+  public static function user($user_id, $name)
+  {
     $group_id = x5on::GROUP_ADMIN_VALUE;
     $res = dbs::row('xonUserGroup', ['*'], compact('user_id', 'group_id'));
 
@@ -23,7 +22,7 @@ class mvvRoledist
       $usergroup = dbs::row('xonUserGroup', ['*'], compact('user_id', 'group_id'));
       $school = dbs::row('xovSchoolTeach', ['*'], compact('user_id'));
       if ($usergroup !== null && $school !== null) {
-        $sch_id = $school -> sch_id;
+        $sch_id = $school->sch_id;
         $user_name = $name;
         $result = dbs::select('xovSchoolTeach', ['user_id as id', 'user_name as name', 'nick_name', '0 as checked'], compact('sch_id', 'user_name'));
       } else {
@@ -32,6 +31,28 @@ class mvvRoledist
       }
     }
     return $result;
+  }
+
+  public static function add($user_id, $group_id) {
+    $uid = bin2hex(openssl_random_pseudo_bytes(16));
+    $res = DB::row('xonUserGroup', ['*'], compact('user_id', 'group_id'));
+    if ($res === NULL) {
+      $num++;
+      DB::insert('xonUserGroup', compact('uid', 'user_id', 'group_id'));
+    }
+    // 返回信息：
+    // 一、变更数目
+    // 二、刷新列表
+    $data = DB::select('xovUserGroup', ['uid', 'user_name', 'nick_name'], compact('group_id'));
+    return (object)['num' => $num, 'data' => $data];
+  }
+
+
+  public static function group($sch_id, $group_id) {
+
+  }
+  public static function del() {
+
   }
 
 }

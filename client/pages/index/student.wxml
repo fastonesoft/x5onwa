@@ -22,7 +22,7 @@
     </view>
     <view class="weui-cell">
       <view class="weui-cell__bd">录取编号</view>
-      <view class="weui-cell__ft">{{item.id.substr(-4)}}</view>
+      <view class="weui-cell__ft">{{item.reg_no}}</view>
     </view>
     <view class="weui-cell">
       <view class="weui-cell__bd">学生编号</view>
