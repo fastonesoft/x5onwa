@@ -3,7 +3,8 @@
 namespace QCloud_WeApp_SDK\Mvv;
 
 use QCloud_WeApp_SDK\Model\x5on;
-use QCloud_WeApp_SDK\Model\xonUser;
+use QCloud_WeApp_SDK\Model\xonUserGroup;
+use QCloud_WeApp_SDK\Model\xovUser;
 
 class mvvRoledist
 {
@@ -11,23 +12,24 @@ class mvvRoledist
   public static function user($user_id, $name)
   {
     $group_id = x5on::GROUP_ADMIN_VALUE;
-    $res = dbs::row('xonUserGroup', ['*'], compact('user_id', 'group_id'));
-
-    if ($res !== null) {
-      // 系统管理员：可以对所有人，分组
-      $result = dbs::select('xovUser', ['id', 'name', 'nick_name', '0 as checked'], compact('name'));
+    $admin = xonUserGroup::getBy(compact('user_id', 'group_id'));
+    if ($admin !== null) {
+      // 系统管理员，可以分配非管理级的任意权限组
+      $result = xovUser::likes(compact('name'));
     } else {
-      // 学校管理员：注册学校，返回学校老师查询信息；没有注册，无信息返回
+      // 学校管理员
+      // 没有注册学校，报错
+      // 注册，返回学校老师查询信息
       $group_id = x5on::GROUP_SCHOOL_ADMIN_VALUE;
-      $usergroup = dbs::row('xonUserGroup', ['*'], compact('user_id', 'group_id'));
-      $school = dbs::row('xovSchoolTeach', ['*'], compact('user_id'));
-      if ($usergroup !== null && $school !== null) {
-        $sch_id = $school->sch_id;
-        $user_name = $name;
-        $result = dbs::select('xovSchoolTeach', ['user_id as id', 'user_name as name', 'nick_name', '0 as checked'], compact('sch_id', 'user_name'));
-      } else {
-        // 否：不返回数据
-        $result = [];
+      $sch_admin = xonUserGroup::getBy(compact('user_id', 'group_id'));
+      if ($sch_admin !== null) {
+        // 查询本校老师名单
+        $sch_admin_user = xovUser::checkById($user_id);
+        $sch_id = $sch_admin_user->sch_id;
+        if ($sch_id === null) {
+          throw new \Exception('未注册学校，不能分配教师权限');
+        }
+        $result = xovUser::likesBy(compact('sch_id'), compact('name'));
       }
     }
     return $result;
@@ -51,7 +53,12 @@ class mvvRoledist
   public static function group($sch_id, $group_id) {
 
   }
+
   public static function del() {
+
+  }
+
+  public static function member() {
 
   }
 

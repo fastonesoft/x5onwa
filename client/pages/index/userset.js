@@ -10,7 +10,7 @@ Page({
         x5on.request({
           url: x5on.url.userset,
           success(users) {
-            users.notchecked = !users.checked
+            users.notconfirmed = !users.confirmed
             that.setData(users)
           }
         })
@@ -47,7 +47,7 @@ Page({
         url: x5on.url.usersetupdate,
         data: form,
         success(users) {
-          users.notchecked = !users.checked
+          users.notconfirmed = !users.confirmed
           that.setData(users)
         }
       })

@@ -51,28 +51,8 @@ class Roledist extends CI_Controller
     });
   }
 
-  public function add() {
-    Mvv\mvvLogin::check(self::role_name, function ($user) {
-      try {
-        /**
-         * 添加用户进组
-         */
-        $param = $_POST;
-        $user_id = $param['user_id'];
-        $group_id = $param['group_id'];
-        $result = Mvv\mvvRoledist::add($user_id, $group_id);
-
-        $this->json(['code' => 0, 'data' => $result]);
-      } catch (Exception $e) {
-        $this->json(['code' => 1, 'data' => $e->getMessage()]);
-      }
-    }, function ($error) {
-      $this->json($error);
-    });
-  }
-
   public function group() {
-    Mvv\mvvLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
         /**
          * 获取当前组下用户列表
@@ -94,8 +74,28 @@ class Roledist extends CI_Controller
     });
   }
 
+  public function add() {
+    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
+      try {
+        /**
+         * 添加用户进组
+         */
+        $param = $_POST;
+        $user_id = $param['user_id'];
+        $group_id = $param['group_id'];
+        $result = Mvv\mvvRoledist::add($user_id, $group_id);
+
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
+
   public function del() {
-    Mvv\mvvLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
         /**
          * 删除选中用户
@@ -115,4 +115,24 @@ class Roledist extends CI_Controller
     });
   }
 
+  public function member() {
+    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
+      try {
+        /**
+         * 获取成员列表
+         */
+        $param = $_POST;
+        $uid = $param['uid'];
+        $result = DB::delete('xonUserGroup', compact('uid'));
+
+        $result = Mvv\mvvRoledist::member($user_id, $group_id);
+
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
 }

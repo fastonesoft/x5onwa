@@ -44,68 +44,62 @@ Page({
     x5on.setRadio(this.data.users, e.detail.value, users => {
       this.setData({ users })
     })
-   },
+  },
 
-   groupChange: function (e) {
-    x5on.setPick(this.data.groups, groupIndex => {
+  groupChange: function (e) {
+    var that = this
+    x5on.setPick(e, groupIndex => {
       this.setData({ groupIndex })
 
-          // 刷新数据
-    x5on.post({
-      url: x5on.url.roledistgroupuser,
-      data: {group_id},
-      success: (res) => {
-        that.setData({ teachs: res.data })
-      }
+      var uid = x5on.getUid(that.data.groups, groupIndex)
+      x5on.post({
+        url: x5on.url.roledistmember,
+        data: { uid },
+        success(members) {
+          that.setData({ members })
+        }
+      })
     })
-    })
-   },
-
-  roleChange: function (e) {
-    var that = this
-    var index = e.detail.value
-    var group_id = this.data.pickers[index].id
-    that.setData({ pIndex: index, group_id: group_id });
-
   },
 
   roledistSubmit: function (e) {
     var that = this
-    var value = e.detail.value
-    if (value.user_id && value.group_id) {
+    var rules = {
+      user_uid: {
+        required: true,
+      },
+      group: {
+        required: true,
+      }
+    }
+    var messages = {
+      user_uid: {
+        required: '教师选择',
+      },
+      group: {
+        required: '分组选择',
+      }
+    }
+    x5on.checkForm(e, rules, messages, form => {
       x5on.post({
-        url: x5on.url.roledistupdate,
-        data: value,
-        success: (res) => {
-          x5on.showSuccess('添加' + res.data.num + '个教师')
-          if (res.data && res.data.num === 1) {
-            // 添加成功，刷新数据
-            var radios = that.data.radios
-            radios.splice(that.data.rIndex, 1)
-            that.setData({ radios: radios, teachs: res.data.data })
-          }
+        url: x5on.url.roledistadd,
+        data: form,
+        success(members) {
+          that.setData({ members })
         }
       })
-    } else {
-      x5on.showError(this, '教师选择、权限分组不得为空！')
-    }    
+    }, message => {
+      x5on.showError(that, message)
+    })
   },
 
   roledistRemove: function (e) {
-    var that = this
     var uid = e.currentTarget.dataset.uid
-    var index = e.currentTarget.dataset.index
     x5on.post({
-      url: x5on.url.roledistdeleteuser,
-      data: {uid},
-      success: (res) => {
-        x5on.showSuccess('删除' + res.data + '个教师')
-        if (res.data && res.data === 1) {
-          // 添加成功，刷新数据
-          var teachs = that.data.teachs
-          teachs.splice(index, 1)
-          that.setData({ teachs })
-        }
+      url: x5on.url.roledistdel,
+      data: { uid },
+      success(number) {
+        x5on.showSuccess('删除' + number + '个教师')
       }
     })
   },

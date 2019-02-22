@@ -562,9 +562,9 @@ class x5va {
   }
 }
 
-function checkForm (data, rules, messages, success, fail) {
+function checkForm (e, rules, messages, success, fail) {
   var valid = new x5va(rules, messages)
-  valid.checkForm(data, (form, error) => {
+  valid.checkForm(e, (form, error) => {
     typeof success === 'function' && success(form, error)
   }, (message, error) => {
     typeof fail === 'function' && fail(message, error)

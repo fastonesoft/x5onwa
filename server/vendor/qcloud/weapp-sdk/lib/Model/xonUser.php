@@ -11,15 +11,15 @@ class xonUser extends cAppinfo
     $uid = x5on::getUid();
     $nick_name = $userinfor->nickName;
     $fixed = 0;
-    $checked = 1;
+    $confirmed = 1;
 
     self::existsByCustom(compact('mobil'), '手机号码已存在');
 
     $result = self::getById($id);
     if ($result === NULL) {
-      self::insert(compact('id', 'uid', 'nick_name', 'name', 'mobil', 'fixed', 'checked'));
+      self::insert(compact('id', 'uid', 'nick_name', 'name', 'mobil', 'fixed', 'confirmed'));
     } else {
-      self::setsById(compact('nick_name', 'name', 'mobil', 'checked'), $id);
+      self::setsById(compact('nick_name', 'name', 'mobil', 'confirmed'), $id);
     }
   }
 }

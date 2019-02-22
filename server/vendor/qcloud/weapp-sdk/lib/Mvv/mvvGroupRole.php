@@ -32,7 +32,6 @@ class mvvGroupRole
     return $roles;
   }
 
-
   /**
    * @param $group_uid  分组编号
    * @param $roles      权限列表

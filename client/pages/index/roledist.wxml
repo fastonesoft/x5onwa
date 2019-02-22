@@ -22,7 +22,7 @@
   <view wx:if="{{users.length>0}}">
     <view class="weui-cells__title">教师选择</view>
     <view class="weui-cells weui-cells_after-title">
-      <radio-group name="user" bindchange="userChange">
+      <radio-group name="user_uid" bindchange="userChange">
         <label class="weui-cell weui-check__label" wx:for="{{users}}" wx:key="uid">
           <radio class="weui-check" value="{{item.uid}}" checked="{{item.checked}}"/>
           <view class="weui-cell__bd">{{item.name}}（{{item.nick_name}}）</view>
@@ -48,7 +48,7 @@
     </view>
   </view>
   <view class="weui-btn-area">
-    <button type="primary" form-type="submit">设置权限</button>
+    <button type="primary" form-type="submit">设置</button>
   </view>
 </form>
 

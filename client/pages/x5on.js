@@ -27,10 +27,10 @@ var doUrl = {
   // 权限分配
   roledist: `${host}/weapp/roledist`,
   roledistuser: `${host}/weapp/roledist/user`,
-  roledistadd: `${host}/weapp/roledist/add`,
   roledistgroup: `${host}/weapp/roledist/group`,
+  roledistadd: `${host}/weapp/roledist/add`,
   roledistdel: `${host}/weapp/roledist/del`,
-
+  roledistmember: `${host}/weapp/roledist/member`,
 
 
   // 用户注册无检测
@@ -198,6 +198,9 @@ var doGetIndexe = function (arrs, obj_name, obj_value) {
 var doGetId = function (arrs, index) {
   return doGetValue(arrs, index, 'id')
 }
+var doGetUid = function (arrs, index) {
+  return doGetValue(arrs, index, 'uid')
+}
 var doGetValue = function (arrs, index, obj_name) {
   return arrs.length > index ? arrs[index][obj_name] : null
 }
@@ -237,9 +240,9 @@ var doGetCheckbox = function (arrs, success, fail) {
 }
 
 // 数组单项设置
-var doSetRadio = function (arrs, uid, success) {
+var doSetRadio = function (arrs, e_detail_value, success) {
   for (let arr of arrs) {
-    arr.checked = arr.uid === uid
+    arr.checked = arr.uid === e_detail_value
   }
   typeof success === 'function' && success(arrs)
 }
@@ -257,8 +260,8 @@ var doSetCheckbox = function (arrs, uids, success) {
 }
 
 // pick成功后返回相应的值
-var doSetPick = function (pick, success) {
-  var value = pick.detail.value
+var doSetPick = function (e, success) {
+  var value = e.detail.value
   value > -1 && typeof success === 'function' && success(value)
 }
 
@@ -405,6 +408,7 @@ module.exports = {
   check: doCheck,
 
   getId: doGetId,
+  getUid: doGetUid,
   getValue: doGetValue,
   getIndex: doGetIndex,
   getRadio: doGetRadio,
