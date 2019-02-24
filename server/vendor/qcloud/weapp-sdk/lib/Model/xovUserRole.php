@@ -1,8 +1,6 @@
 <?php
 namespace QCloud_WeApp_SDK\Model;
 
-use \Exception;
-
 class xovUserRole extends vAppinfo
 {
   protected static $tableName = 'xovUserRole';

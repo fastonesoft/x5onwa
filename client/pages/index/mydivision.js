@@ -77,7 +77,7 @@ Page({
           var teaches = result.data
           that.setData({ teaches })
           if (teaches.length === 0) {
-              x5on.showError(that, '没有找到你说的老师！')
+              x5on.showError(that, '没有找到你要的老师！')
           } 
         }
       })

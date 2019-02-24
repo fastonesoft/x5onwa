@@ -1,5 +1,6 @@
-<!-- pages/index/roledist.wxml -->
+<!--pages/index/tchreg.wxml-->
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
+
 <form bindsubmit="findSubmit">
   <view class="weui-cells__title">用户查询</view>
   <view class="weui-cells weui-cells_after-title">
@@ -8,7 +9,7 @@
         <view class="weui-label">用户姓名</view>
       </view>
       <view class="weui-cell__bd">
-        <input class="weui-input" placeholder="请输入用户姓名" name="name" type="text" maxlength="4" />
+        <input class="weui-input" placeholder="请输入用户姓名" name="name" confirm-type="done" type="text" maxlength="4" />
       </view>
       <view class="weui-cell__ft">
         <button type="normal" form-type="submit">查询</button>
@@ -16,12 +17,13 @@
     </view>
   </view>
 </form>
-<form bindsubmit="roledistSubmit">
-  <view wx:if="{{users.length>0}}">
-    <view class="weui-cells__title">用户选择</view>
+
+<form bindsubmit="teachSubmit">
+  <block wx:if="{{teachs.length>0}}">
+    <view class="weui-cells__title">教师选择</view>
     <view class="weui-cells weui-cells_after-title">
-      <radio-group name="user_uid" bindchange="userChange">
-        <label class="weui-cell weui-check__label" wx:for="{{users}}" wx:key="uid">
+      <radio-group name="user_uid" bindchange="teachChange">
+        <label class="weui-cell weui-check__label" wx:for="{{teachs}}" wx:key="uid">
           <radio class="weui-check" value="{{item.uid}}" checked="{{item.checked}}" />
           <view class="weui-cell__bd">{{item.name}}({{item.nick_name}})</view>
           <view class="weui-cell__ft weui-cell__ft_in-radio">
@@ -31,34 +33,38 @@
         </label>
       </radio-group>
     </view>
-  </view>
-  <view class="weui-cells__title">权限分组</view>
+  </block>
+  <view class="weui-cells__title">学校选择</view>
   <view class="weui-cells weui-cells_after-title">
     <view class="weui-cell weui-cell_select">
       <view class="weui-cell__hd weui-cell__hd_in-select-after">
-        <view class="weui-label">分组选择</view>
+        <view class="weui-label">注册学校</view>
       </view>
       <view class="weui-cell__bd">
-        <picker name="group" bindchange="groupChange" value="{{groupIndex}}" range="{{groups}}" range-key="name" disabled="{{!groups||groups.length==0}}">
-          <view class="weui-select weui-select_in-select-after">{{groups[groupIndex].name}}</view>
+        <picker bindchange="schoolChange" name="school" value="{{schIndex}}" range="{{schools}}" range-key="name"
+          disabled="{{!schools||schools.length===0}}">
+          <view class="weui-select weui-select_in-select-after">{{schools[schIndex].name}}</view>
         </picker>
       </view>
     </view>
   </view>
-  <view class="weui-btn-area">
-    <button type="primary" form-type="submit">设置</button>
+  <view class="weui-cells__tips x5ui-mini">
+    <button class="weui-btn mini-btn" type="warn" size="mini" form-type="submit">
+      注册
+    </button>
   </view>
 </form>
+
 <view wx:if="{{members.length>0}}">
   <form bindsubmit="memberSubmit">
-    <view class="weui-cells__title">成员查询</view>
+    <view class="weui-cells__title">教师查询</view>
     <view class="weui-cells weui-cells_after-title">
       <view class="weui-cell weui-cell_input weui-cell_vcode">
         <view class="weui-cell__hd">
-          <view class="weui-label">成员姓名</view>
+          <view class="weui-label">教师姓名</view>
         </view>
         <view class="weui-cell__bd">
-          <input class="weui-input" placeholder="请输入成员姓名" name="name" type="text" maxlength="4" />
+          <input class="weui-input" placeholder="请输入教师姓名" name="name" type="text" maxlength="4" />
         </view>
         <view class="weui-cell__ft">
           <button type="normal" form-type="submit">查询</button>
@@ -66,15 +72,20 @@
       </view>
     </view>
   </form>
-  <view class="weui-cells__title">成员列表</view>
+  <view class="weui-cells__title">教师列表</view>
   <view class="weui-cells weui-cells_after-title">
     <block wx:for="{{members}}" wx:key="uid">
       <view class="weui-cell">
-        <view class="weui-cell__bd">{{item.user_name}}({{item.nick_name}})</view>
+        <view class="weui-cell__bd">{{item.name}}({{item.nick_name}})</view>
         <view class="weui-cell__ft">
-          <image src="../../images/remove.png" class="remove-icon" data-uid="{{item.uid}}" bindtap="roledistRemove"></image>
+          <image src="../../images/remove.png" class="remove-icon" data-uid="{{item.uid}}" bindtap="useregRemove">
+          </image>
         </view>
       </view>
     </block>
   </view>
+</view>
+
+<view class="weui-btn-area x5ui-bottom">
+  <button type="primary" bindtap="returnClick">返回</button>
 </view>

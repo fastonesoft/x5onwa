@@ -1,0 +1,69 @@
+<!--pages/index/usereset.wxml-->
+<view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
+
+<form bindsubmit="findSubmit">
+	<view class="weui-cells__title">用户查询</view>
+	<view class="weui-cells weui-cells_after-title">
+		<view class="weui-cell weui-cell_input weui-cell_vcode">
+			<view class="weui-cell__hd">
+				<view class="weui-label">用户姓名</view>
+			</view>
+			<view class="weui-cell__bd">
+				<input class="weui-input" placeholder="请输入用户姓名" name="name" confirm-type="done" type="text" maxlength="4" />
+			</view>
+			<view class="weui-cell__ft">
+				<button type="normal" form-type="submit">查询</button>
+			</view>
+		</view>
+	</view>
+</form>
+
+<block wx:if="{{users.length>0}}">
+	<view class="weui-cells__title">用户选择</view>
+	<view class="weui-cells weui-cells_after-title">
+		<radio-group name="user_uid" bindchange="userChange">
+			<label class="weui-cell weui-check__label" wx:for="{{users}}" wx:key="uid">
+				<radio class="weui-check" value="{{item.uid}}" checked="{{item.checked}}" />
+				<view class="weui-cell__bd">{{item.name}}({{item.nick_name}})</view>
+				<view class="weui-cell__ft weui-cell__ft_in-radio">
+					<icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.checked}}"></icon>
+					<icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{item.checked}}"></icon>
+				</view>
+			</label>
+		</radio-group>
+	</view>
+</block>
+
+<form bindsubmit="userSubmit" wx:if="{{user}}">
+	<view class="weui-cells__title">用户信息</view>
+	<view class="weui-cells weui-cells_after-title">
+		<view class="weui-cell">
+			<view class="weui-cell__bd">姓名昵称</view>
+			<view class="weui-cell__ft">{{user.name}}({{user.nick_name}})</view>
+		</view>
+		<view class="weui-cell">
+			<view class="weui-cell__bd">手机号码</view>
+			<view class="weui-cell__ft">{{user.mobil}}</view>
+		</view>
+		<view class="weui-cell weui-cell_switch">
+			<view class="weui-cell__bd">是否确认</view>
+			<view class="weui-cell__ft">
+				<switch name="confirmed" checked="{{user.confirmed}}" />
+			</view>
+		</view>
+		<view class="weui-cell weui-cell_switch">
+			<view class="weui-cell__bd">帐号冻结</view>
+			<view class="weui-cell__ft">
+				<switch name="fixed" checked="{{user.fixed}}" />
+			</view>
+		</view>
+	</view>
+	<view class="weui-cells__tips x5ui-mini">
+		<button class="weui-btn mini-btn" type="warn" size="mini" form-type="submit">
+			提交
+		</button>
+	</view>
+</form>
+<view class="weui-btn-area x5ui-bottom">
+	<button type="primary" bindtap="returnClick">返回</button>
+</view>

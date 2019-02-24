@@ -31,11 +31,12 @@ var doUrl = {
   roledistadd: `${host}/weapp/roledist/add`,
   roledistdel: `${host}/weapp/roledist/del`,
   roledistmember: `${host}/weapp/roledist/member`,
-
+  roledistmemfind: `${host}/weapp/roledist/memfind`,
 
   // 用户注册无检测
   user: `${host}/weapp/user`,
   userreg: `${host}/weapp/user/reg`,
+
   // 用户设置有检测
   userset: `${host}/weapp/userset`,
   usersetrole: `${host}/weapp/userset/role`,
@@ -47,12 +48,28 @@ var doUrl = {
   userchildsrelation: `${host}/weapp/userchilds/relation`,
   userchildstudent: `${host}/weapp/userchilds/student`,
 
+  // 用户重置
+  usereset: `${host}/weapp/usereset`,
+  useresetupdate: `${host}/weapp/usereset/update`,
+
+  // 用户注册教师
+  tchreg: `${host}/weapp/usereg`,
+  tchregreg: `${host}/weapp/usereg/reg`,
+  tchreguser: `${host}/weapp/usereg/user`,
+  tchregmember: `${host}/weapp/usereg/member`,
+  tchregmemfind: `${host}/weapp/usereg/memfind`,
+  tchregdel: `${host}/weapp/usereg/del`,
+
 
   // 报名
   regstud: `${host}/weapp/studreg`,
   regstudreg: `${host}/weapp/studreg/reg`,
   regstudcheck: `${host}/weapp/studreg/check`,
   regstudcancel: `${host}/weapp/studreg/cancel`,
+
+
+
+
 
   // 审核
   studexam: `${host}/weapp/studexam`,
@@ -74,12 +91,6 @@ var doUrl = {
   appform: `${host}/weapp/appform`,
   appformkey: `${host}/weapp/appformkey`,
   appformkeyupdate: `${host}/weapp/appformkey/update`,
-
-  // 教师注册
-  tchreg: `${host}/weapp/tchreg`,
-  tchregusersch: `${host}/weapp/tchreg/usersch`,
-  tchreguserreg: `${host}/weapp/tchreg/usereg`,
-
 
 
 
@@ -208,6 +219,7 @@ var doGetValue = function (arrs, index, obj_name) {
 var doDelValue = function (arrs, obj_name, obj_value) {
   var index = doGetIndexe(arrs, obj_name, obj_value)
   arrs.splice(index, 1)
+  return arrs;
 }
 // 变更数组索引obj_value的对象，sets字段的值
 var doSetValues = function (arrs, obj_name, obj_value, obj_sets) {

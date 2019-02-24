@@ -4,23 +4,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 use QCloud_WeApp_SDK\Mvv;
 use QCloud_WeApp_SDK\Model;
 
-class Roledist extends CI_Controller
+class Usereg extends CI_Controller
 {
   /**
-   * 权限分配
-   * 根据帐号不同权限，查询不同用户
+   * 教师用户注册
    * 系统管理员，查询所有用户
    * 学校管理员，查询所在学校用户
    */
-  const role_name = 'roledist';
-  public function index() {
+  const role_name = 'usereg';
+  public function index()
+  {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
         /**
-         * 查询当前用户所能够设置的权限分组
+         * 用户学校查询
+         * 如果是管理员返回[学校列表]
+         * 有学校返回[学校]、没有学校返回[]
          */
         $user_id = $userinfor->unionId;
-        $result = Mvv\mvvGroup::less($user_id);
+        $result = Mvv\mvvUsereg::school($user_id);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -31,16 +33,18 @@ class Roledist extends CI_Controller
     });
   }
 
-  public function user() {
+  public function user()
+  {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
         /**
-         * 本校老师查询
+         * 不是教师的用户
+         * 根据姓名查询出不是教师的用户列表
          */
         $param = $_POST;
         $name = $param['name'];
         $user_id = $userinfor->unionId;
-        $result = Mvv\mvvRoledist::user($user_id,  Model\x5on::getLike($name));
+        $result = Mvv\mvvUsereg::user($user_id, Model\x5on::getLike($name));
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -51,35 +55,18 @@ class Roledist extends CI_Controller
     });
   }
 
-  public function add() {
+  public function reg()
+  {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
         /**
-         * 添加用户进组
+         * 用户注册学校
+         * 根据提交的数据，注册相应的学校
          */
         $param = $_POST;
+        $sch_uid = $param['sch_uid'];
         $user_uid = $param['user_uid'];
-        $group_uid = $param['group_uid'];
-        $result = Mvv\mvvRoledist::add($user_uid, $group_uid);
-
-        $this->json(['code' => 0, 'data' => $result]);
-      } catch (Exception $e) {
-        $this->json(['code' => 1, 'data' => $e->getMessage()]);
-      }
-    }, function ($error) {
-      $this->json($error);
-    });
-  }
-
-  public function del() {
-    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
-      try {
-        /**
-         * 删除选中用户
-         */
-        $param = $_POST;
-        $user_group_uid = $param['uid'];
-        $result = Mvv\mvvRoledist::del($user_group_uid);
+        $result = Mvv\mvvUsereg::reg($user_uid, $sch_uid);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -94,11 +81,11 @@ class Roledist extends CI_Controller
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
         /**
-         * 获取成员列表
+         * 注册学校教师列表
          */
         $param = $_POST;
-        $group_uid = $param['uid'];
-        $result = Mvv\mvvRoledist::member($group_uid);
+        $sch_uid = $param['sch_uid'];
+        $result = Mvv\mvvUsereg::member($sch_uid);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -113,12 +100,31 @@ class Roledist extends CI_Controller
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
         /**
-         * 获取成员列表
+         * 学校教师查询
          */
         $param = $_POST;
+        $sch_uid = $param['sch_uid'];
         $name = $param['name'];
-        $group_uid = $param['uid'];
-        $result = Mvv\mvvRoledist::memfind($group_uid, Model\x5on::getLike($name));
+        $result = Mvv\mvvUsereg::memfind($sch_uid, Model\x5on::getLike($name));
+
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
+
+  public function del() {
+    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
+      try {
+        /**
+         * 学校教师删除
+         */
+        $param = $_POST;
+        $user_uid = $param['user_uid'];
+        $result = Mvv\mvvUsereg::del($user_uid);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {

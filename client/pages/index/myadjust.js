@@ -70,7 +70,7 @@ Page({
           var students = result.data
           that.setData({ students })
           if (students.length === 0) {
-            x5on.showError(that, '没有找到你说的学生！')
+            x5on.showError(that, '没有找到你要的学生！')
           }
         }
       })

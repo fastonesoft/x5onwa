@@ -12,7 +12,7 @@ page { background: #F6F6F6; }
 .qrcode { width: 400rpx; height: 400rpx; }
 
 .x5ui-column { display: flex; flex-flow: row wrap; }
-.x5ui-mini { text-align: center; }
+.x5ui-mini { text-align: center; margin-top: 20rpx; }
 .x5ui-mini button { margin-top: 0rpx; margin-right: 20rpx; }
 .x5ui-mini button:last-child { margin-right: 0rpx; }
 .x5ui-bottom { margin-bottom: 40rpx; }
