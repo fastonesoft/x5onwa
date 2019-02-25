@@ -8,7 +8,7 @@ page {
 }
 
 .container {
-  height: 400rpx;
+  height: 375rpx;
   position: relative;
   background-color: #fff;
 }
@@ -20,7 +20,7 @@ page {
 
 .userinfo {
   position: absolute;
-  top: 90rpx;
+  top: 110rpx;
   width: 100%;
   border: none;
   display: flex;
@@ -31,14 +31,14 @@ page {
 .userinfo-avatar {
   overflow: hidden;
   display: block;
-  width: 220rpx;
-  height: 220rpx;
-  border: 12rpx solid #fff;
+  width: 4.5em;
+  height: 4.5em;
+  border: 0.3em solid #fff;
   border-radius: 50%;
   margin-bottom: 10rpx;
 }
 
 .userinfo-nickname {
-  font-size: 40rpx;
+  font-size: 17px;
   color: #e6a800;
 }

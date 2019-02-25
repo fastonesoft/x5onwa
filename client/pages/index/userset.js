@@ -3,22 +3,15 @@ var x5on = require('../x5on.js')
 
 Page({
 
-  onShow: function () {
+  onLoad: function () {
     var that = this
-    x5on.check({
-      success() {
-        x5on.request({
-          url: x5on.url.userset,
-          success(users) {
-            users.notconfirmed = !users.confirmed
-            that.setData(users)
-          }
-        })
-      },
-      fail() {
-        wx.switchTab({ url: '/pages/login/login' })
+    x5on.request({
+      url: x5on.url.userset,
+      success(users) {
+        users.notconfirmed = !users.confirmed
+        that.setData(users)
       }
-    });
+    })
   },
 
   usersetSubmit: function (e) {

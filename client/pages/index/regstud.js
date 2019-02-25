@@ -3,21 +3,14 @@ var x5on = require('../x5on.js')
 
 Page({
 
-  onShow: function () {
+  onLoad: function () {
     var that = this
-    x5on.check({
-      success() {
-        x5on.request({
-          url: x5on.url.regstud,
-          success(childs_schools_studregs) {
-            that.setData(childs_schools_studregs)
-          }
-        })
-      },
-      fail() {
-        wx.switchTab({ url: '/pages/login/login' })
+    x5on.request({
+      url: x5on.url.regstud,
+      success(childs_schools_studregs) {
+        that.setData(childs_schools_studregs)
       }
-    });
+    })
   },
 
   schoolChange: function (e) {

@@ -3,7 +3,7 @@ page { background: #F6F6F6; }
 
 .qrcode-area {
   display: flex;
-  margin-top: 50rpx;
+  margin-top: 30rpx;
   align-items: center;
   align-content: flex-start;
   justify-content: center;
@@ -12,13 +12,13 @@ page { background: #F6F6F6; }
 .qrcode { width: 400rpx; height: 400rpx; }
 
 .x5ui-column { display: flex; flex-flow: row wrap; }
-.x5ui-mini { text-align: center; margin-top: 20rpx; }
-.x5ui-mini button { margin-top: 0rpx; margin-right: 20rpx; }
-.x5ui-mini button:last-child { margin-right: 0rpx; }
-.x5ui-bottom { margin-bottom: 40rpx; }
+.x5ui-mini { text-align: center; margin-top: 0.5em; }
+.x5ui-mini button { margin-top: 0px; margin-right: 20rpx; }
+.x5ui-mini button:last-child { margin-right: 0px; }
+.x5ui-bottom { margin-bottom: 1em; }
 
 /*增加的删除图标*/
-.remove-icon { height: 50rpx; width: 50rpx; border: none; vertical-align: middle; }
+.remove-icon { height: 1.2em; width: 1.2em; border: none; vertical-align: middle; }
 .students_images { width: 46rpx; height: 46rpx; border: none; vertical-align: middle; margin-right: 15rpx; }
 
 /* weui */

@@ -3,27 +3,20 @@ var x5on = require('../x5on.js')
 
 Page({
 
-  onShow: function () {
+  onLoad: function () {
     var that = this
-    x5on.check({
-      success() {
-        x5on.request({
-          url: x5on.url.userchilds,
-          success(userchilds) {
-            that.setData({ userchilds })
-          }
-        })
-        x5on.request({
-          url: x5on.url.userchildsrelation,
-          success(relations) {
-            that.setData({ relations })
-          }
-        })
-      },
-      fail() {
-        wx.switchTab({ url: '/pages/login/login' })
+    x5on.request({
+      url: x5on.url.userchilds,
+      success(userchilds) {
+        that.setData({ userchilds })
       }
-    });
+    })
+    x5on.request({
+      url: x5on.url.userchildsrelation,
+      success(relations) {
+        that.setData({ relations })
+      }
+    })
   },
 
   relationChange: function (e) {
