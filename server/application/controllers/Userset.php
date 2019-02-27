@@ -4,12 +4,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 use QCloud_WeApp_SDK\Mvv;
 use QCloud_WeApp_SDK\Model;
 
-class Userset extends CI_Controller {
+class Userset extends CI_Controller
+{
   /**
    * 用户设置
    */
   const role_name = 'userset';
-  public function index() {
+
+  public function index()
+  {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
         // 返回用户信息
@@ -25,7 +28,8 @@ class Userset extends CI_Controller {
     });
   }
 
-  public function update() {
+  public function update()
+  {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
         $param = $_POST;
@@ -49,7 +53,8 @@ class Userset extends CI_Controller {
     });
   }
 
-  public function role() {
+  public function role()
+  {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
         // 获取权限列表index当中显示
@@ -58,9 +63,12 @@ class Userset extends CI_Controller {
 
         // 处理权限结果，仅返回用户可选权限列表
         $roles = Model\xonRole::gets();
-        $result = Mvv\mvvUserRole::sign($roles, $myroles);
+        $cores = Mvv\mvvUserRole::sign($roles, $myroles);
 
-        $this->json(['code' => 0, 'data' => $result]);
+        // 获取权限分类
+        $types = Model\xonType::gets();
+
+        $this->json(['code' => 0, 'data' => compact('types', 'cores')]);
       } catch (Exception $e) {
         $this->json(['code' => 1, 'data' => $e->getMessage()]);
       }

@@ -7,7 +7,7 @@ page { background: #F6F6F6; }
   align-items: center;
   align-content: flex-start;
   justify-content: center;
-  flex-flow: column wrap;
+  flex-flow: column;
   }
 .qrcode { width: 400rpx; height: 400rpx; }
 
@@ -16,6 +16,10 @@ page { background: #F6F6F6; }
 .x5ui-mini button { margin-top: 0px; margin-right: 20rpx; }
 .x5ui-mini button:last-child { margin-right: 0px; }
 .x5ui-bottom { margin-bottom: 1em; }
+
+.x5ui-panel { display: flex; flex-flow: row; border-bottom: solid 1px #D9D9D9; font-size: 13px; color:#999; margin: 10px 10px 0 10px; padding-bottom: 5px; }
+.x5ui-panel_ico { width: 5px; background-color: rgb(87, 56, 221); }
+.x5ui-panel_title { text-indent: 5px; }
 
 /*增加的删除图标*/
 .remove-icon { height: 1.2em; width: 1.2em; border: none; vertical-align: middle; }

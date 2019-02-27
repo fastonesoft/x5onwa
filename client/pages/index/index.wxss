@@ -17,13 +17,12 @@ page {
   background-size: 100% auto;
   background-position: bottom center;
   font-size: 16px;
+  margin-bottom: 20rpx;
 }
-
 .swiper-img{
   border: none;
   width: 100%;
 }
-
 .cores{
   width: 100%;
   display: flex;
@@ -38,7 +37,6 @@ page {
   align-items: center;
   align-content: flex-start;
   justify-content: center;
-
 }
 .core-item.disabled{
   color: #9c9c9c;

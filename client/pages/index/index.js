@@ -16,14 +16,15 @@ Page({
       success() {
         x5on.request({
           url: x5on.url.usersetrole,
-          success(cores) {
+          success(result) {
             // 更新
-            that.setData({ cores })
+            console.log(result)
+            that.setData(result)
           }
         })
       },
       fail() {
-        that.setData({ cores: [] })
+        that.setData({ types: [], cores: [] })
         wx.switchTab({ url: '/pages/login/login'})
       }
     });
@@ -33,11 +34,6 @@ Page({
     var itemid = event.currentTarget.dataset.itemid;
     console.log(itemid)
     // 检测是否拥有权限    
-    wx.navigateTo({
-      url: itemid,
-      success: () => {
-
-      }
-    })
+    wx.navigateTo({ url: itemid })
   }
 });
