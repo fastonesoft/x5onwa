@@ -10,25 +10,23 @@
   </swiper>
 
   <!--功能导航-->
-  <block wx:for="{{types}}" wx:for-item="type" wx:key="id">
+  <view wx:for="{{types}}" wx:for-index="index" wx:for-item="type" wx:if="{{roles[index].length>0}}" wx:key="id">
     <view class="x5ui-panel">
       <view class="x5ui-panel_ico"></view>
       <view class="x5ui-panel_title">{{type.name}}</view>
     </view>
 
     <view class="cores">
-      <block wx:for="{{cores}}" wx:key="id">
-        <view wx:if="{{item.type_id==type.id&&item.has_role}}" class="core-item" data-itemid="{{item.name}}"
-          bindtap="itemClick">
-          <image src="/images/index/{{item.name}}.png"></image>
-          <text>{{item.title}}</text>
+      <block wx:for="{{roles[index]}}" wx:key="id">
+        <view wx:if="{{item.has_role}}" class="core-item" data-itemid="{{item.name}}" bindtap="itemClick">
+          <image class="core-item_image" src="/images/index/{{item.name}}.png"></image>
+          <text class="core-item_text">{{item.title}}</text>
         </view>
-        <view wx:elif="{{item.type_id==type.id&&item.can_show}}" class="core-item disabled">
+        <view wx:elif="{{item.can_show}}" class="core-item disabled">
           <image src="/images/index/{{item.name}}@disabled.png"></image>
           <text>{{item.title}}</text>
         </view>
       </block>
     </view>
-  </block>
-
+  </view>
 </view>
