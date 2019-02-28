@@ -21,6 +21,8 @@ page { background: #F6F6F6; }
 .x5ui-panel_ico { width: 5px; background-color: rgb(87, 56, 221); }
 .x5ui-panel_title { text-indent: 5px; }
 
+.x5ui-btn_half { width: 40%; }
+
 /*增加的删除图标*/
 .remove-icon { height: 1.2em; width: 1.2em; border: none; vertical-align: middle; }
 .students_images { width: 46rpx; height: 46rpx; border: none; vertical-align: middle; margin-right: 15rpx; }

@@ -15,6 +15,7 @@ Page({
     x5on.check({
       success() {
         x5on.request({
+          donshow: true,
           url: x5on.url.usersetrole,
           success(result) {
             // 重新组织数据
@@ -23,14 +24,16 @@ Page({
             var roles = []
             types.forEach(type_item => {
               var role = []
-
               cores.forEach(core => {
                 core.type_id === type_item.id && role.push(core)
               });
-
               roles.push(role)
             });
             that.setData({ types, roles })
+          },
+          fail() {
+            that.setData({ types: [], roles: [] })
+            wx.switchTab({ url: '/pages/login/login' })
           }
         })
       },
