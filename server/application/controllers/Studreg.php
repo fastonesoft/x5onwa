@@ -39,7 +39,11 @@ class Studreg extends CI_Controller
       try {
         $param = $_POST;
         $area_id = $param['area_id'];
-        $edu_type_id = $param['edu_type_id'];
+        $edu_type_id = (int) $param['edu_type_id'];
+
+var_dump($area_id);
+var_dump($edu_type_id);
+
         $result = Model\xovSchool::getsBy(compact('area_id', 'edu_type_id'));
 
         $this->json(['code' => 0, 'data' => $result]);

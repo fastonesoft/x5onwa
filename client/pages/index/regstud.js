@@ -62,6 +62,7 @@ Page({
     x5on.checkForm(e, rules, messages, form => {
       form.area_id = x5on.getId(that.data.areas, form.area)
       form.edu_type_id = x5on.getId(that.data.edutypes, form.edutype)
+      console.log(form)
       x5on.post({
         url: x5on.url.regstudschool,
         data: form,
