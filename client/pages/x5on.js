@@ -63,6 +63,7 @@ var doUrl = {
 
   // 报名
   regstud: `${host}/weapp/studreg`,
+  regstudschool: `${host}/weapp/studreg/school`,
   regstudreg: `${host}/weapp/studreg/reg`,
   regstudcheck: `${host}/weapp/studreg/check`,
   regstudcancel: `${host}/weapp/studreg/cancel`,

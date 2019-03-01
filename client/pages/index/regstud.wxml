@@ -1,6 +1,28 @@
 <!-- pages/index/regstud.wxml -->
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
+<form bindsubmit="schoolSubmit">
+  <view class="weui-cells__title">地区类型</view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_select">
+      <view class="weui-cell__hd weui-cell__hd_in-select-after x5ui-btn_half">
+        <picker bindchange="areaChange" name="area" value="{{areaIndex}}" range="{{areas}}" range-key="name" disabled="{{!areas||areas.length==0||areas.length==1}}">
+          <view class="weui-select weui-select_in-select-after">{{areas[areaIndex].name}}</view>
+        </picker>
+      </view>
+      <view class="weui-cell__bd weui-cell__hd_in-select-after">
+        <picker bindchange="edutypeChange" name="edutype" value="{{edutypeIndex}}" range="{{edutypes}}" range-key="name"
+          disabled="{{!edutypes||edutypes.length==0}}">
+          <view class="weui-select weui-select_in-select-after x5ui-pick_noborder">{{edutypes[edutypeIndex].name}}</view>
+        </picker>
+      </view>
+      <view class="weui-cell__ft">
+        <button type="normal" form-type="submit">查询</button>
+      </view>
+    </view>
+  </view>
+</form>
+
 <form bindsubmit="regstudSubmit">
   <view class="weui-cells__title">报名学校</view>
   <view class="weui-cells weui-cells_after-title">
@@ -9,12 +31,14 @@
         <view class="weui-label">学校选择</view>
       </view>
       <view class="weui-cell__bd">
-        <picker bindchange="schoolChange" name="school" value="{{schIndex}}" range="{{schools}}" range-key="name" disabled="{{!schools||schools.length==0}}">
+        <picker bindchange="schoolChange" name="school" value="{{schIndex}}" range="{{schools}}" range-key="name"
+          disabled="{{!schools||schools.length==0}}">
           <view class="weui-select weui-select_in-select-after">{{schools[schIndex].name}}</view>
         </picker>
       </view>
     </view>
   </view>
+
   <view class="weui-cells__title">报名学生</view>
   <view class="weui-cells weui-cells_after-title">
     <view class="weui-cell weui-cell_select">
@@ -22,7 +46,8 @@
         <view class="weui-label">学生选择</view>
       </view>
       <view class="weui-cell__bd">
-        <picker bindchange="childChange" name="child" value="{{childIndex}}" range="{{childs}}" range-key="child_name" disabled="{{!childs||childs.length==0}}">
+        <picker bindchange="childChange" name="child" value="{{childIndex}}" range="{{childs}}" range-key="child_name"
+          disabled="{{!childs||childs.length==0}}">
           <view class="weui-select weui-select_in-select-after">
             {{childs[childIndex].child_name}}
           </view>
@@ -53,13 +78,16 @@
       </view>
     </view>
     <view class="weui-cells__tips x5ui-mini">
-      <button class="weui-btn mini-btn" data-uid="{{item.uid}}" type="primary" size="mini" wx:if="{{!item.checked}}" bindtap="checkClick">
+      <button class="weui-btn mini-btn" data-uid="{{item.uid}}" type="primary" size="mini" wx:if="{{!item.checked}}"
+        bindtap="checkClick">
         确认
       </button>
-      <button class="weui-btn mini-btn" data-uid="{{item.uid}}" type="warn" size="mini" wx:if="{{!item.checked}}" bindtap="cancelClick">
+      <button class="weui-btn mini-btn" data-uid="{{item.uid}}" type="warn" size="mini" wx:if="{{!item.checked}}"
+        bindtap="cancelClick">
         取消
       </button>
-      <button class="weui-btn mini-btn" data-uid="{{item.child_uid}}" type="default" size="mini" wx:if="{{item.checked}}" bindtap="regedClick">
+      <button class="weui-btn mini-btn" data-uid="{{item.child_uid}}" type="default" size="mini" wx:if="{{item.checked}}"
+        bindtap="regedClick">
         详细信息
       </button>
     </view>

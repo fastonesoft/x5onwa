@@ -23,8 +23,8 @@
           <text class="core-item_text">{{item.title}}</text>
         </view>
         <view wx:elif="{{item.can_show}}" class="core-item disabled">
-          <image src="/images/index/{{item.name}}@disabled.png"></image>
-          <text>{{item.title}}</text>
+          <image class="core-item_image" src="/images/index/{{item.name}}@disabled.png"></image>
+          <text class="core-item_text">{{item.title}}</text>
         </view>
       </block>
     </view>

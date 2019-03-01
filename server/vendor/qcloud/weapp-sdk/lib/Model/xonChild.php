@@ -14,7 +14,12 @@ class xonChild extends cAppinfo
     // 检测身份证
     x5on::checkIdc($idc, 7, 18);
     $res = self::getBy(compact('idc'));
-    if ($res === null) {
+    if ($res !== null) {
+      // 检测学生信息是否正确
+      self::checkByCustom(compact('idc', 'name'), '孩子姓名、身份证号不吻合');
+      //
+      return $res;
+    } else {
       // 添加孩子
       $id = $idc;
       $uid = x5on::getUid();
@@ -22,6 +27,6 @@ class xonChild extends cAppinfo
       //
       return self::getById($id);
     }
-    return $res;
+
   }
 }

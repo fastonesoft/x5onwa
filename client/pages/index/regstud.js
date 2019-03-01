@@ -3,13 +3,29 @@ var x5on = require('../x5on.js')
 
 Page({
 
+  data: {
+    areaIndex: 0,
+  },
+
   onLoad: function () {
     var that = this
     x5on.request({
       url: x5on.url.regstud,
-      success(childs_schools_studregs) {
-        that.setData(childs_schools_studregs)
+      success(childs_areas_edutypes_studregs) {
+        that.setData(childs_areas_edutypes_studregs)
       }
+    })
+  },
+
+  areaChange: function (e) {
+    x5on.setPick(e, areaIndex => {
+      this.setData({ areaIndex })
+    })
+  },
+
+  edutypeChange: function (e) {
+    x5on.setPick(e, edutypeIndex => {
+      this.setData({ edutypeIndex })
     })
   },
 
@@ -22,6 +38,39 @@ Page({
   childChange: function (e) {
     x5on.setPick(e, childIndex => {
       this.setData({ childIndex })
+    })
+  },
+
+  schoolSubmit: function (e) {
+    var that = this
+    var rules = {
+      area: {
+        required: true,
+      },
+      edutype: {
+        required: true,
+      },
+    }
+    var messages = {
+      area: {
+        required: '报名地区'
+      },
+      edutype: {
+        required: '学校类型'
+      }
+    }
+    x5on.checkForm(e, rules, messages, form => {
+      form.area_id = x5on.getId(that.data.areas, form.area)
+      form.edu_type_id = x5on.getId(that.data.edutypes, form.edutype)
+      x5on.post({
+        url: x5on.url.regstudschool,
+        data: form,
+        success(schools) {
+          that.setData({ schools })
+        }
+      })
+    }, message => {
+      x5on.showError(that, message)
     })
   },
 

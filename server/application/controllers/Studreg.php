@@ -18,11 +18,31 @@ class Studreg extends CI_Controller
         $user_id = $userinfor->unionId;
         $my_user_id = $user_id;
         $childs = Model\xovUserChilds::getsBy(compact('user_id'));
-        $schools = Model\xonSchool::gets();
+        $areas = Model\xonArea::gets();
+        $edutypes = Model\xonEduType::gets();
         // 用户孩子的报名信息
         $studregs = Model\xovUserChildsReg::getsBy(compact('my_user_id'));
 
-        $this->json(['code' => 0, 'data' => compact('childs', 'schools', 'studregs')]);
+        $this->json(['code' => 0, 'data' => compact('childs', 'areas', 'edutypes', 'studregs')]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
+
+  // 地区学校查询
+  public function school()
+  {
+    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
+      try {
+        $param = $_POST;
+        $area_id = $param['area_id'];
+        $edu_type_id = $param['edu_type_id'];
+        $result = Model\xovSchool::getsBy(compact('area_id', 'edu_type_id'));
+
+        $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
         $this->json(['code' => 1, 'data' => $e->getMessage()]);
       }

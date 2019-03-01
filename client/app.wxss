@@ -22,6 +22,7 @@ page { background: #F6F6F6; }
 .x5ui-panel_title { text-indent: 5px; }
 
 .x5ui-btn_half { width: 40%; }
+.x5ui-pick_noborder { border-right: none; }
 
 /*增加的删除图标*/
 .remove-icon { height: 1.2em; width: 1.2em; border: none; vertical-align: middle; }
