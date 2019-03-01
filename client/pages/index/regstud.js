@@ -17,31 +17,7 @@ Page({
     })
   },
 
-  areaChange: function (e) {
-    x5on.setPick(e, areaIndex => {
-      this.setData({ areaIndex })
-    })
-  },
-
-  edutypeChange: function (e) {
-    x5on.setPick(e, edutypeIndex => {
-      this.setData({ edutypeIndex })
-    })
-  },
-
-  schoolChange: function (e) {
-    x5on.setPick(e, schIndex => {
-      this.setData({ schIndex })
-    })
-  },
-
-  childChange: function (e) {
-    x5on.setPick(e, childIndex => {
-      this.setData({ childIndex })
-    })
-  },
-
-  schoolSubmit: function (e) {
+  schoolQuery: function (formValue) {
     var that = this
     var rules = {
       area: {
@@ -59,15 +35,17 @@ Page({
         required: '学校类型'
       }
     }
-    x5on.checkForm(e, rules, messages, form => {
+    x5on.checkForm(formValue, rules, messages, form => {
       form.area_id = x5on.getId(that.data.areas, form.area)
       form.edu_type_id = x5on.getId(that.data.edutypes, form.edutype)
-      console.log(form)
       x5on.post({
-        url: x5on.url.regstudschool,
+        url: x5on.url.regstudstep,
         data: form,
-        success(schools) {
-          that.setData({ schools })
+        success(steps) {
+          that.setData({
+            steps,
+            stepIndex: -1
+          })
         }
       })
     }, message => {
@@ -75,10 +53,44 @@ Page({
     })
   },
 
+  areaChange: function (e) {
+    x5on.setPick(e, areaIndex => {
+      this.setData({ areaIndex })
+      //
+      var form = {}
+      form.area = areaIndex
+      form.edutype = this.data.edutypeIndex
+      this.schoolQuery(form)
+    })
+  },
+
+  edutypeChange: function (e) {
+    x5on.setPick(e, edutypeIndex => {
+      this.setData({ edutypeIndex })
+      //
+      var form = {}
+      form.area = this.data.areaIndex
+      form.edutype = edutypeIndex
+      this.schoolQuery(form)
+    })
+  },
+
+  stepChange: function (e) {
+    x5on.setPick(e, stepIndex => {
+      this.setData({ stepIndex })
+    })
+  },
+
+  childChange: function (e) {
+    x5on.setPick(e, childIndex => {
+      this.setData({ childIndex })
+    })
+  },
+
   regstudSubmit: function (e) {
     var that = this
     var rules = {
-      school: {
+      step: {
         required: true,
         min: 0,
       },
@@ -88,15 +100,15 @@ Page({
       }
     }
     var messages = {
-      school: {
+      step: {
         required: '学校选择'
       },
       child: {
         required: '孩子选择'
       }
     }
-    x5on.checkForm(e, rules, messages, form => {
-      form.sch_id = x5on.getId(that.data.schools, form.school)
+    x5on.checkForm(e.detail.value, rules, messages, form => {
+      form.steps_id = x5on.getId(that.data.steps, form.step)
       form.child_id = x5on.getValue(that.data.childs, form.child, 'child_id')
       x5on.post({
         url: x5on.url.regstudreg,
@@ -118,7 +130,9 @@ Page({
       data: e.currentTarget.dataset,
       url: x5on.url.regstudcheck,
       success(stud_reg_uid) {
-        var studregs = x5on.setValues(that.data.studregs, 'uid', stud_reg_uid, { checked: 1 })
+        var studregs = x5on.setValues(that.data.studregs, 'uid', stud_reg_uid, {
+          checked: 1
+        })
         that.setData({ studregs })
       }
     })
@@ -132,13 +146,17 @@ Page({
       success(stud_reg_uid) {
         var studregs = that.data.studregs
         x5on.delValue(studregs, 'uid', stud_reg_uid)
-        that.setData({ studregs })
+        that.setData({
+          studregs
+        })
       }
     })
   },
 
   regedClick: function (e) {
-    wx.navigateTo({ url: `/pages/index/student?uid=${e.currentTarget.dataset.uid}` })
+    wx.navigateTo({
+      url: `/pages/index/student?uid=${e.currentTarget.dataset.uid}`
+    })
   },
 
   returnClick: function (e) {

@@ -54,7 +54,7 @@ Page({
         required: '亲子称谓'
       }
     }
-    x5on.checkForm(e, rules, messages, (form, error) => {
+    x5on.checkForm(e.detail.value, rules, messages, (form, error) => {
       form.relation_id = x5on.getId(that.data.relations, form.relation)
       x5on.post({
         url: x5on.url.userchildsreg,

@@ -33,18 +33,15 @@ class Studreg extends CI_Controller
   }
 
   // 地区学校查询
-  public function school()
+  public function step()
   {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
         $param = $_POST;
         $area_id = $param['area_id'];
-        $edu_type_id = (int) $param['edu_type_id'];
-
-var_dump($area_id);
-var_dump($edu_type_id);
-
-        $result = Model\xovSchool::getsBy(compact('area_id', 'edu_type_id'));
+        $edu_type_id = $param['edu_type_id'];
+        $recruit_end = 0;
+        $result = Model\xovSchoolStep::getsBy(compact('area_id', 'edu_type_id', 'recruit_end'));
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -61,15 +58,16 @@ var_dump($edu_type_id);
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
         $param = $_POST;
-        $sch_id = $param['sch_id'];
+        $steps_id = $param['steps_id'];
         $child_id = $param['child_id'];
 
         // 注册学校相关信息
-        $school = Model\xonSchool::checkByIdCustom($sch_id, '没有找到编号对应学校');
-        $edu_type_id = $school->edu_type_id;
+        $step = Model\xovSchoolStep::checkByIdCustom($steps_id, '没有找到编号对应学校');
+        $sch_id = $step->sch_id;
+        $edu_type_id = $step->edu_type_id;
 
         $user_id = $userinfor->unionId;
-        $result = Model\xonStudReg::add($user_id, $child_id, $sch_id, $edu_type_id);
+        $result = Model\xonStudReg::add($user_id, $child_id, $sch_id, $edu_type_id, $steps_id);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {

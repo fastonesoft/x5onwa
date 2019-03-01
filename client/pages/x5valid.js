@@ -416,7 +416,7 @@ class x5va {
     this.data = data
     // 缓存字段对应的值
     // 表单值
-    const values = data.detail.value
+    const values = data
     const value = values[param] !== null && values[param] !== undefined ? values[param] : ''
     // 遍历某个指定字段的所有规则，依次验证规则，否则缓存错误信息
     for (let method in rules) {
@@ -562,9 +562,9 @@ class x5va {
   }
 }
 
-function checkForm (e, rules, messages, success, fail) {
+function checkForm (e_detail_value, rules, messages, success, fail) {
   var valid = new x5va(rules, messages)
-  valid.checkForm(e, (form, error) => {
+  valid.checkForm(e_detail_value, (form, error) => {
     typeof success === 'function' && success(form, error)
   }, (message, error) => {
     typeof fail === 'function' && fail(message, error)
