@@ -62,11 +62,6 @@
         <view class="weui-cell__ft">{{item.child_relation}}</view>
       </view>
     </view>
-    <view class="weui-cells__tips x5ui-mini">
-      <button class="weui-btn mini-btn" data-uid="{{item.child_uid}}" type="default" size="mini" bindtap="regedClick">
-        详细信息
-      </button>
-    </view>
   </block>
   <view class="weui-btn-area x5ui-bottom">
     <button type="primary" bindtap="returnClick">返回</button>

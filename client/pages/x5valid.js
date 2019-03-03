@@ -471,14 +471,14 @@ class x5va {
    * @param {String} param 字段名
    */
   setView(param) {
-    this.form[param] = {
-      name: param,
-      valid: true,
-      invalid: false,
-      error: {},
-      success: {},
-      viewValue: ``,
-    }
+    // this.form[param] = {
+    //   name: param,
+    //   valid: true,
+    //   invalid: false,
+    //   error: {},
+    //   success: {},
+    //   viewValue: ``,
+    // }
   }
 
   /**
@@ -526,19 +526,19 @@ class x5va {
    * @param {Object} data 焦点控件 e
    * 控件要提供 data-name 参数，值 为控件的 name
    */
-  checkInput(data, fail) {
-    this.__initError()
-    let name = data.currentTarget.dataset.name
-    let value = data.detail.value
-    // 验证
-    this.setView(name)
-    let passed = this.checkInputParam(name, this.rules[name], value)
-    // 失败，给出错误信息
-    if (!passed) {
-      let error = this.errorList[0]
-      typeof fail === 'function' && fail(error.msg)
-    }
-  }
+  // checkInput(data, fail) {
+  //   this.__initError()
+  //   let name = data.currentTarget.dataset.name
+  //   let value = data.detail.value
+  //   // 验证
+  //   this.setView(name)
+  //   let passed = this.checkInputParam(name, this.rules[name], value)
+  //   // 失败，给出错误信息
+  //   if (!passed) {
+  //     let error = this.errorList[0]
+  //     typeof fail === 'function' && fail(error.msg)
+  //   }
+  // }
 
   /**
    * 返回验证是否通过

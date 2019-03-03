@@ -60,17 +60,16 @@ Page({
         url: x5on.url.userchildsreg,
         data: form,
         success(userchilds) {
-          that.setData({ userchilds })
+          that.setData({ userchilds, error })
+        },
+        fail() {
+          that.setData({ error })
         }
       })
     }, (message, error) => {
       that.setData({ error })
       x5on.showError(that, message)
     })
-  },
-
-  regedClick: function (e) {
-    wx.navigateTo({ url: `/pages/index/student?uid=${e.currentTarget.dataset.uid}` })
   },
 
   returnClick: function (e) {

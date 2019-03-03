@@ -16,6 +16,7 @@ class mvvUserRole
   {
     // 按照权限列表，逐一检测是否有权限：
     // 有，则标志为1，没有标志为0
+    $result = [];
     foreach ($roles as $k => $v) {
       $has_role = 0;
       foreach ($myroles as $value) {
@@ -25,12 +26,10 @@ class mvvUserRole
         }
       }
       $roles[$k]->has_role = $has_role;
+      if ($roles[$k]->has_role || $roles[$k]->can_show) {
+        array_push($result, $roles[$k]);
+      }
     }
-    // 筛选数组
-    $result = array_filter($roles, function ($role) {
-      // 返回：有权限的 || 看得见的
-      return $role->has_role || $role->can_show;
-    });
     return $result;
   }
 

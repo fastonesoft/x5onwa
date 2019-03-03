@@ -155,7 +155,7 @@ Page({
 
   regedClick: function (e) {
     wx.navigateTo({
-      url: `/pages/index/student?uid=${e.currentTarget.dataset.uid}`
+      url: `/pages/index/studenroll?uid=${e.currentTarget.dataset.uid}`
     })
   },
 

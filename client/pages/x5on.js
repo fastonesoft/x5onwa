@@ -47,6 +47,7 @@ var doUrl = {
   userchildsreg: `${host}/weapp/userchilds/reg`,
   userchildsrelation: `${host}/weapp/userchilds/relation`,
   userchildstudent: `${host}/weapp/userchilds/student`,
+  userchildstudenroll: `${host}/weapp/userchilds/studenroll`,
 
   // 用户重置
   usereset: `${host}/weapp/usereset`,
