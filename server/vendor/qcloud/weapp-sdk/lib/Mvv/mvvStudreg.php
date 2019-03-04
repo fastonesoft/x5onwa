@@ -21,25 +21,25 @@ class mvvStudreg
   // 确认报名
   public static function checked($user_id, $uid)
   {
-    $checked = 1;
+    $confirmed = 1;
     xonStudReg::checkByCustom(compact('user_id', 'uid'), '不是本人报名，不能确认');
-    xonStudReg::setsBy(compact('checked'), compact('user_id', 'uid'));
+    xonStudReg::setsBy(compact('confirmed'), compact('user_id', 'uid'));
   }
 
   // 取消报名
   public static function cancel($user_id, $uid)
   {
-    $checked = 1;
+    $confirmed = 1;
     xonStudReg::checkByCustom(compact('user_id', 'uid'), '不是本人报名，不能取消');
-    xonStudReg::existByCustom(compact('user_id', 'uid', 'checked'), '已经确认，不能取消');
+    xonStudReg::existByCustom(compact('user_id', 'uid', 'confirmed'), '已经确认，不能取消');
     xonStudReg::delBy(compact('user_id', 'uid'));
   }
 
   // 确认重置
   public static function recheck($uid)
   {
-    $checked = 0;
-    xonStudReg::setsByUid(compact('checked'), $uid);
+    $confirmed = 0;
+    xonStudReg::setsByUid(compact('confirmed'), $uid);
   }
 
 

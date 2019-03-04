@@ -137,8 +137,8 @@ class Studreg extends CI_Controller
 
         // 二、用户孩子"已确认"的报名信息
         $my_user_id = $userinfor->unionId;
-        $checked = 1;
-        $studregs = Model\xovUserChildsReg::getsBy(compact('my_user_id', 'checked'));
+        $confirmed = 1;
+        $studregs = Model\xovUserChildsReg::getsBy(compact('my_user_id', 'confirmed'));
 
         // 三、录取信息
         $students = Model\xovStudent::getsBy(compact('child_id'));

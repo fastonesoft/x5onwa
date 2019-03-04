@@ -1,7 +1,7 @@
 /**login.wxss**/
 
 page {
-  background: #fff;
+  background-color: #fff;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -10,7 +10,7 @@ page {
 .container {
   height: 375rpx;
   position: relative;
-  background-color: #fff;
+
 }
 
 .userinfor-bg {

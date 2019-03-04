@@ -443,7 +443,7 @@ CREATE TABLE xonStudReg (
   edu_type_id INT(11) NOT NULL,
   sch_id VARCHAR(10) NOT NULL,
   steps_id VARCHAR(16) NOT NULL,
-  checked BOOLEAN NOT NULL,
+  confirmed BOOLEAN NOT NULL,
   exam_user_id VARCHAR(36),
   confirm_user_id VARCHAR(36),
   PRIMARY KEY (child_id, edu_type_id),
