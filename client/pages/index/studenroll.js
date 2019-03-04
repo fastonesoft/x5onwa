@@ -6,7 +6,7 @@ Page({
   onLoad: function (param) {
     var that = this
     x5on.post({
-      url: x5on.url.userchildstudenroll,
+      url: x5on.url.regstudstudenroll,
       data: param,
       success(studinfor) {
         that.setData(studinfor)

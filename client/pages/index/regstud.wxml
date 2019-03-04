@@ -84,7 +84,7 @@
       </button>
       <button class="weui-btn mini-btn" data-uid="{{item.child_uid}}" type="default" size="mini" wx:if="{{item.checked}}"
         bindtap="regedClick">
-        录取情况
+        详细信息
       </button>
     </view>
   </block>

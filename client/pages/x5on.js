@@ -47,7 +47,6 @@ var doUrl = {
   userchildsreg: `${host}/weapp/userchilds/reg`,
   userchildsrelation: `${host}/weapp/userchilds/relation`,
   userchildstudent: `${host}/weapp/userchilds/student`,
-  userchildstudenroll: `${host}/weapp/userchilds/studenroll`,
 
   // 用户重置
   usereset: `${host}/weapp/usereset`,
@@ -68,6 +67,7 @@ var doUrl = {
   regstudreg: `${host}/weapp/studreg/reg`,
   regstudcheck: `${host}/weapp/studreg/check`,
   regstudcancel: `${host}/weapp/studreg/cancel`,
+  regstudstudenroll: `${host}/weapp/studreg/studenroll`,
 
 
 

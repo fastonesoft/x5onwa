@@ -29,13 +29,13 @@ Page({
     }
     var messages = {
       name: {
-        required: '学生姓名'
+        required: '用户姓名'
       },
       mobil: {
         required: '手机号码'
       }
     }
-    x5on.checkForm(e, rules, messages, form => {
+    x5on.checkForm(e.detail.value, rules, messages, form => {
       x5on.post({
         url: x5on.url.usersetupdate,
         data: form,

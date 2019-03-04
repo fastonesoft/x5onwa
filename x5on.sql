@@ -65,6 +65,7 @@ INSERT INTO xonRole VALUES (2, replace(uuid(), '-', ''), 'userchilds', '我的�
 INSERT INTO xonRole VALUES (3, replace(uuid(), '-', ''), 'regstud', '新生注册', 1, 1);
 INSERT INTO xonRole VALUES (4, replace(uuid(), '-', ''), 'regexam', '报名审核', 0, 1);
 INSERT INTO xonRole VALUES (5, replace(uuid(), '-', ''), 'regconfirm', '确认审核', 0, 1);
+INSERT INTO xonRole VALUES (6, replace(uuid(), '-', ''), 'regquery', '报名查询', 0, 1);
 
 INSERT INTO xonRole VALUES (21, replace(uuid(), '-', ''), 'student', '学生信息', 0, 2);
 INSERT INTO xonRole VALUES (22, replace(uuid(), '-', ''), 'students', '学生名册', 0, 2);
@@ -135,11 +136,14 @@ INSERT INTO xonGroupRole VALUES (50, 1, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (50, 2, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (50, 3, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (50, 4, replace(uuid(), '-', ''));
+INSERT INTO xonGroupRole VALUES (50, 6, replace(uuid(), '-', ''));
 
 INSERT INTO xonGroupRole VALUES (60, 1, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (60, 2, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (60, 3, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (60, 5, replace(uuid(), '-', ''));
+INSERT INTO xonGroupRole VALUES (60, 6, replace(uuid(), '-', ''));
+
 /**
   学校管理员
  */
@@ -148,6 +152,7 @@ INSERT INTO xonGroupRole VALUES (70, 2, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (70, 3, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (70, 4, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (70, 5, replace(uuid(), '-', ''));
+INSERT INTO xonGroupRole VALUES (70, 6, replace(uuid(), '-', ''));
 
 INSERT INTO xonGroupRole VALUES (70, 43, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (70, 44, replace(uuid(), '-', ''));
@@ -171,6 +176,7 @@ INSERT INTO xonGroupRole VALUES (99, 2, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (99, 3, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (99, 4, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (99, 5, replace(uuid(), '-', ''));
+INSERT INTO xonGroupRole VALUES (99, 6, replace(uuid(), '-', ''));
 
 INSERT INTO xonGroupRole VALUES (99, 21, replace(uuid(), '-', ''));
 INSERT INTO xonGroupRole VALUES (99, 22, replace(uuid(), '-', ''));
@@ -222,14 +228,16 @@ CREATE TABLE xonEduType (
   id INT(11) NOT NULL,
   uid VARCHAR(36) NOT NULL,
   name VARCHAR(10) NOT NULL,
+  begin INT(11) NOT NULL,
+  end INT(11) NOT NULL,
   PRIMARY KEY (id),
   UNIQUE KEY uid (uid),
   UNIQUE KEY name (name)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学制类型';
 
-INSERT INTO xonEduType VALUES (1, replace(uuid(), '-', ''), '小学');
-INSERT INTO xonEduType VALUES (2, replace(uuid(), '-', ''), '初中');
-INSERT INTO xonEduType VALUES (3, replace(uuid(), '-', ''), '高中');
+INSERT INTO xonEduType VALUES (1, replace(uuid(), '-', ''), '小学', 7, 10);
+INSERT INTO xonEduType VALUES (2, replace(uuid(), '-', ''), '初中', 12, 15);
+INSERT INTO xonEduType VALUES (3, replace(uuid(), '-', ''), '高中', 15, 18);
 
 CREATE TABLE xonEdu (
   id INT(11) NOT NULL,

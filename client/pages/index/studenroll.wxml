@@ -1,41 +1,52 @@
 <!--pages/index/studenroll.wxml-->
 <block wx:if="{{child}}">
-    <view class="qrcode-area">
-      <image class="qrcode" src="data:image/png;base64,{{qrcode_data}}"></image>
-    </view>
-    <view class="weui-cells__title">基本信息</view>
-    <view class="weui-cells weui-cells_after-title">
-      <view class="weui-cell">
-        <view class="weui-cell__bd">孩子姓名</view>
-        <view class="weui-cell__ft">{{child.name}}</view>
-      </view>
-      <view class="weui-cell">
-        <view class="weui-cell__bd">身份证号</view>
-        <view class="weui-cell__ft">{{child.idc}}</view>
-      </view>
-    </view>
-  </block>
-  <block wx:for="{{students}}" wx:key="uid">
-    <view class="weui-cells__title">{{item.sch_name}} - {{item.edu_type_name}}</view>
-    <view class="weui-cells weui-cells_after-title">
-      <view class="weui-cell">
-        <view class="weui-cell__bd">学生年级</view>
-        <view class="weui-cell__ft">{{item.steps_name}}</view>
-      </view>
-      <view class="weui-cell">
-        <view class="weui-cell__bd">录取编号</view>
-        <view class="weui-cell__ft">{{item.reg_no}}</view>
-      </view>
-      <view class="weui-cell">
-        <view class="weui-cell__bd">学生编号</view>
-        <view class="weui-cell__ft">{{item.id}}</view>
-      </view>
-      <view class="weui-cell">
-        <view class="weui-cell__bd">进校时间</view>
-        <view class="weui-cell__ft">{{item.come_date}}</view>
-      </view>
-    </view>
-  </block>
-  <view class="weui-btn-area x5ui-bottom">
-    <button type="primary" bindtap="returnClick">返回</button>
+  <view class="qrcode-area">
+    <image class="qrcode" src="data:image/png;base64,{{qrcode_data}}"></image>
   </view>
+  <view class="weui-cells__title">基本信息</view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell">
+      <view class="weui-cell__bd">孩子姓名</view>
+      <view class="weui-cell__ft">{{child.name}}</view>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__bd">身份证号</view>
+      <view class="weui-cell__ft">{{child.idc}}</view>
+    </view>
+  </view>
+</block>
+
+<block wx:for="{{studregs}}" wx:key="uid">
+  <view class="weui-cells__title">{{item.edu_type_name}}</view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell">
+      <view class="weui-cell__bd">学校分级</view>
+      <view class="weui-cell__ft">{{item.steps_name}}</view>
+    </view>
+  </view>
+</block>
+
+<block wx:for="{{students}}" wx:key="uid">
+  <view class="weui-cells__title">{{item.sch_name}} - {{item.edu_type_name}}</view>
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell">
+      <view class="weui-cell__bd">学生年级</view>
+      <view class="weui-cell__ft">{{item.steps_name}}</view>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__bd">录取编号</view>
+      <view class="weui-cell__ft">{{item.reg_no}}</view>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__bd">学生编号</view>
+      <view class="weui-cell__ft">{{item.id}}</view>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__bd">进校时间</view>
+      <view class="weui-cell__ft">{{item.come_date}}</view>
+    </view>
+  </view>
+</block>
+<view class="weui-btn-area x5ui-bottom">
+  <button type="primary" bindtap="returnClick">返回</button>
+</view>

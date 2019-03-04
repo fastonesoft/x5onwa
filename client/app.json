@@ -6,6 +6,7 @@
     "pages/index/regstud",
     "pages/index/regexam",
     "pages/index/regconfirm",
+    "pages/index/regquery",
     "pages/index/schcode",
     "pages/index/usereg",
     "pages/index/roleset",
