@@ -5,6 +5,7 @@ namespace QCloud_WeApp_SDK\Mvv;
 use QCloud_WeApp_SDK\Model\xonSchool;
 use QCloud_WeApp_SDK\Model\xonUser;
 use QCloud_WeApp_SDK\Model\xonUserSchool;
+use QCloud_WeApp_SDK\Model\xovSchool;
 use QCloud_WeApp_SDK\Model\xovUser;
 use QCloud_WeApp_SDK\Model\xovUserOnly;
 
@@ -20,11 +21,11 @@ class mvvUsereg
     global $result;
     mvvUser::admins($user_id, function () {
       global $result;
-      $result = xonSchool::gets();
+      $result = xovSchool::gets();
     }, function ($sch_admin_user) {
       global $result;
       $sch_id = $sch_admin_user->sch_id;
-      $result = xonSchool::getsBy(compact('sch_id'));
+      $result = xovSchool::getsById($sch_id);
     });
     return $result;
   }
@@ -34,18 +35,9 @@ class mvvUsereg
    * @param $name
    * @throws \Exception
    */
-  public static function user($user_id, $find_name)
+  public static function user($name)
   {
-    global $result;
-    mvvUser::admins($user_id, function ($name) {
-      global $result;
-      $result = xovUserOnly::likes(compact('name'));
-    }, function ($sch_admin_user, $name) {
-      global $result;
-      $sch_id = $sch_admin_user->sch_id;
-      $result = xovUserOnly::likesBy(compact('sch_id'), compact('name'));
-    }, $find_name);
-    return $result;
+    return xovUserOnly::likes(compact('name'));
   }
 
   public static function reg($user_uid, $sch_uid)

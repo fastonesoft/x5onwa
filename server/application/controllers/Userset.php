@@ -37,9 +37,9 @@ class Userset extends CI_Controller
         $mobil = $param['mobil'];
 
         // 变更用户信息
-        $checked = 1;
+        $confirmed = 1;
         $user_id = $userinfor->unionId;
-        Mvv\mvvUser::update($user_id, $name, $mobil, $checked);
+        Mvv\mvvUser::update($user_id, $name, $mobil, $confirmed);
 
         // 返回用户信息
         $result = Model\xonUser::getById($user_id);

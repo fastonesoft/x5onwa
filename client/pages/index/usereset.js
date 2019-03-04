@@ -17,7 +17,7 @@ Page({
         required: '用户姓名'
       }
     }
-    x5on.checkForm(e, rules, messages, form => {
+    x5on.checkForm(e.detail.value, rules, messages, form => {
       x5on.post({
         url: x5on.url.usereset,
         data: form,
@@ -52,7 +52,7 @@ Page({
         required: true,
       }
     }
-    x5on.checkForm(e, rules, {}, form => {
+    x5on.checkForm(e.detail.value, rules, {}, form => {
       form.uid = that.data.user.uid
       x5on.post({
         url: x5on.url.useresetupdate,
@@ -62,6 +62,8 @@ Page({
           that.setData({ users: [], user: null })
         }
       })
+    }, message => {
+      x5on.showError(that, message)
     })
   },
 

@@ -27,7 +27,7 @@ Page({
         required: '用户姓名'
       }
     }
-    x5on.checkForm(e, rules, messages, form => {
+    x5on.checkForm(e.detail.value, rules, messages, form => {
       x5on.post({
         url: x5on.url.roledistuser,
         data: form,
@@ -79,7 +79,7 @@ Page({
         required: '分组选择',
       }
     }
-    x5on.checkForm(e, rules, messages, form => {
+    x5on.checkForm(e.detail.value, rules, messages, form => {
       form.group_uid = x5on.getUid(that.data.groups, form.group)
       x5on.post({
         url: x5on.url.roledistadd,
@@ -119,14 +119,15 @@ Page({
         required: '成员姓名'
       }
     }
-    x5on.checkForm(e, rules, messages, form => {
+    x5on.checkForm(e.detail.value, rules, messages, form => {
       var groupIndex = that.data.groupIndex
       form.uid = x5on.getUid(that.data.groups, groupIndex)
       x5on.post({
         url: x5on.url.roledistmemfind,
         data: form,
         success(members) {
-          members.length === 0 ? x5on.showError(that, '没有找到你要的分组成员！') : that.setData({ members })
+          that.setData({ members })
+          members.length === 0 && x5on.showError(that, '没有找到你要的分组成员！')
         }
       })
     }, message => {

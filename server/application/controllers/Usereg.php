@@ -43,8 +43,7 @@ class Usereg extends CI_Controller
          */
         $param = $_POST;
         $name = $param['name'];
-        $user_id = $userinfor->unionId;
-        $result = Mvv\mvvUsereg::user($user_id, Model\x5on::getLike($name));
+        $result = Mvv\mvvUsereg::user(Model\x5on::getLike($name));
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {

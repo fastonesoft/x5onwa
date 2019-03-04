@@ -131,7 +131,7 @@ Page({
       url: x5on.url.regstudcheck,
       success(stud_reg_uid) {
         var studregs = x5on.setValues(that.data.studregs, 'uid', stud_reg_uid, {
-          checked: 1
+          confirmed: 1
         })
         that.setData({ studregs })
       }

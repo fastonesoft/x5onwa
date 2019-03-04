@@ -6,6 +6,7 @@ use QCloud_WeApp_SDK\Model\x5on;
 use QCloud_WeApp_SDK\Model\xonUser;
 use QCloud_WeApp_SDK\Model\xonUserGroup;
 use QCloud_WeApp_SDK\Model\xovUser;
+use QCloud_WeApp_SDK\Model\xovUserGroup;
 
 class mvvUser
 {
@@ -37,6 +38,7 @@ class mvvUser
   }
 
   /**
+   * 可能要逐步放弃的功能
    * @param $user_id
    * @param $success_admin
    * @param $success_school
@@ -60,6 +62,13 @@ class mvvUser
         throw new \Exception('未注册学校，不能操作');
       }
       call_user_func($success_school, $sch_admin_user, $param);
+    }
+  }
+
+  public static function groupAdmin($group_id, $user_id, $success) {
+    $admin = xovUserGroup::getBy(compact('group_id', 'user_id'));
+    if ($admin !== null) {
+      call_user_func($success, $admin);
     }
   }
 

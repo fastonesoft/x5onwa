@@ -27,7 +27,7 @@ Page({
         required: '用户姓名',
       }
     }
-    x5on.checkForm(e, rules, messages, forms => {
+    x5on.checkForm(e.detail.value, rules, messages, forms => {
       x5on.post({
         url: x5on.url.tchreguser,
         data: forms,
@@ -50,9 +50,9 @@ Page({
 
   schoolChange: function (e) {
     var that = this
-    x5on.setPick(e, schIndex => {
-      that.setData({ schIndex })
-      var sch_uid = x5on.getUid(that.data.schools, schIndex)
+    x5on.setPick(e, schoolIndex => {
+      that.setData({ schoolIndex })
+      var sch_uid = x5on.getUid(that.data.schools, schoolIndex)
       x5on.post({
         url: x5on.url.tchregmember,
         data: { sch_uid },
@@ -81,7 +81,7 @@ Page({
         required: '注册学校',
       }
     }
-    x5on.checkForm(e, rules, messages, forms => {
+    x5on.checkForm(e.detail.value, rules, messages, forms => {
       forms.sch_uid = x5on.getUid(that.data.schools, forms.school)
       x5on.post({
         url: x5on.url.tchregreg,
@@ -109,9 +109,9 @@ Page({
         required: '教师姓名',
       }
     }
-    x5on.checkForm(e, rules, messages, form => {
-      var schIndex = that.data.schIndex
-      form.sch_uid = x5on.getUid(that.data.schools, schIndex)
+    x5on.checkForm(e.detail.value, rules, messages, form => {
+      var schoolIndex = that.data.schoolIndex
+      form.sch_uid = x5on.getUid(that.data.schools, schoolIndex)
       x5on.post({
         url: x5on.url.tchregmemfind,
         data: form,

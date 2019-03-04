@@ -57,10 +57,24 @@ class mvvRoledist
     return xovUserGroup::getsBy(compact('group_id'));
   }
 
-  public static function member($group_uid) {
-    $group = xonGroup::checkByUid($group_uid);
-    $group_id = $group->id;
-    return xovUserGroup::getsBy(compact('group_id'));
+  /**
+   * @param $user_id
+   * @param $group_uid
+   * @return array
+   * @throws \Exception
+   */
+  public static function member($user_id, $group_uid) {
+    global $result;
+    mvvUser::admins($user_id, function ($group_uid) {
+      global $result;
+      $group = xonGroup::checkByUid($group_uid);
+      $group_id = $group->id;
+      $result =  xovUserGroup::getsBy(compact('group_id'));
+    }, function () {
+
+    }, $group_uid);
+
+
   }
 
   public static function memfind($group_uid, $user_name) {

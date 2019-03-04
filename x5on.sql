@@ -32,6 +32,18 @@ CREATE TABLE cSessionInfo (
 
 /*自定义*/
 
+CREATE TABLE xonAuth (
+	id BOOLEAN NOT NULL,
+	uid VARCHAR(36) NOT NULL,
+	name VARCHAR(20) NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY uid (uid),
+	UNIQUE KEY name (name)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='指标设置';
+
+INSERT INTO xonAuth VALUES (0, replace(uuid(), '-', ''), '非指标生');
+INSERT INTO xonAuth VALUES (1, replace(uuid(), '-', ''), '指标生');
+
 CREATE TABLE xonType (
 	id INT(11) NOT NULL,
 	uid VARCHAR(36) NOT NULL,
@@ -444,6 +456,7 @@ CREATE TABLE xonStudReg (
   sch_id VARCHAR(10) NOT NULL,
   steps_id VARCHAR(16) NOT NULL,
   confirmed BOOLEAN NOT NULL,
+  stud_auth BOOLEAN,
   exam_user_id VARCHAR(36),
   confirm_user_id VARCHAR(36),
   PRIMARY KEY (child_id, edu_type_id),
@@ -1065,9 +1078,9 @@ AS
  */
 CREATE VIEW xovUserGroup
 AS
-  SELECT a.*, b.name as user_name, nick_name
+  SELECT a.*, b.name as user_name, nick_name, b.sch_id
   FROM xonUserGroup a 
-  LEFT JOIN xonUser b ON a.user_id = b.id;
+  INNER JOIN xovUser b ON a.user_id = b.id;
 
 /**
   视图：查询我的孩子
@@ -1112,6 +1125,11 @@ AS
     else 0 end as sex_num
   FROM xonChild A;
 
+CREATE VIEW xovSchoolEdu
+AS
+  SELECT a.*, b.name as edus_name
+  FROM xonSchoolEdu a
+  LEFT JOIN xonEdu b ON a.edu_id = b.id;
 
 CREATE VIEW xovSchools
 as
@@ -1122,24 +1140,17 @@ as
 CREATE VIEW xovSchool
 AS
   SELECT a.*,
-    b.name as schs_name, b.area_id, b.area_name,
+    concat(b.name, '-', a.name) as schs_name, b.area_id, b.area_name,
     c.name as edu_type_name
   FROM xonSchool a
   LEFT JOIN xovSchools b on a.schs_id = b.id
   LEFT JOIN xonEduType c ON a.edu_type_id = c.id;
 
-CREATE VIEW xovSchoolEdu
-AS
-  SELECT a.*, b.name as edus_name
-  FROM xonSchoolEdu a
-  LEFT JOIN xonEdu b ON a.edu_id = b.id;
-
-
 CREATE VIEW xovSchoolStep
 	AS
 	SELECT ss.*, sy.year as come_year,
-    concat(sc.schs_name, '-', sc.name, '-', ss.name) as steps_name,
-    sc.name as sch_name, sc.edu_type_id, sc.edu_type_name, sc.area_id
+    concat(sc.schs_name, '-', ss.name) as steps_name,
+    sc.schs_name, sc.edu_type_id, sc.edu_type_name, sc.area_id
 	FROM xonSchoolStep ss 
 	LEFT JOIN xovSchool sc on ss.sch_id = sc.id
   LEFT JOIN xonSchoolYear sy on ss.years_id = sy.id;
@@ -1152,7 +1163,7 @@ CREATE VIEW xovStudent
 AS
   SELECT A.*, substring(A.id, -4) as reg_no,
     C2.idc as stud_idc, C2.name as stud_name, C2.sex_name, C2.sex_num,
-    S.steps_name, S.sch_name, S.come_year, S.edu_type_name
+    S.steps_name, S.schs_name, S.come_year, S.edu_type_name
   FROM xonStudent A
   LEFT JOIN xovChild C2 ON A.child_id = C2.id
   LEFT JOIN xovSchoolStep S ON A.steps_id = S.id;
@@ -1161,14 +1172,16 @@ AS
 CREATE VIEW xovStudReg
 AS
   SELECT a.*, 
-    S.sch_name, S.edu_type_name, S.steps_name,
+    S.schs_name, S.edu_type_name, S.steps_name,
     C2.uid as child_uid, C2.name as child_name, C2.idc as child_idc,
-    U.name as exam_user_name, U2.name as confirm_user_name
+    U.name as exam_user_name, U2.name as confirm_user_name,
+    au.name as auth_name
   FROM xonStudReg a
   LEFT JOIN xovSchoolStep S on a.steps_id = S.id
   LEFT JOIN xovChild C2 on a.child_id = C2.id
   LEFT JOIN xonUser U on a.exam_user_id = U.id
-  LEFT JOIN xonUser U2 on a.confirm_user_id = U2.id;
+  LEFT JOIN xonUser U2 on a.confirm_user_id = U2.id
+  LEFT JOIN xonAuth au on a.stud_auth = au.id;
 
 CREATE VIEW xovUserChildsReg
 AS
@@ -1185,7 +1198,7 @@ ON a.child_id = b.child_id;
 CREATE VIEW xovGrade
 AS
   SELECT A.*,
-    S.sch_id, S.sch_name, S.name as step_name, S.edu_type_name, S.graduated,
+    S.sch_id, S.schs_name, S.name as step_name, S.edu_type_name, S.graduated,
     B.year as grade_year, B.is_current,
     E.edus_name as grade_name
   FROM xonGrade A
@@ -1221,7 +1234,7 @@ AS
     S.steps_name, S.child_id, S.stud_idc, S.stud_name, S.sex_name, S.sex_num, 
     t.name as type_name,
     C.name AS status_name, C.ico_name, C.in_sch, 
-    gg.edu_type_name, gg.sch_name, gg.grade_name, gg.is_current, gg.graduated,
+    gg.edu_type_name, gg.schs_name, gg.grade_name, gg.is_current, gg.graduated,
     C2.num as cls_num, C2.cls_name, C2.cls_order
   FROM xonGradeStud A
   LEFT JOIN xovStudent S ON A.stud_id = S.id

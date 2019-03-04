@@ -74,15 +74,15 @@
 
     </view>
     <view class="weui-cells__tips x5ui-mini">
-      <button class="weui-btn mini-btn" data-uid="{{item.uid}}" type="primary" size="mini" wx:if="{{!item.checked}}"
+      <button class="weui-btn mini-btn" data-uid="{{item.uid}}" type="primary" size="mini" wx:if="{{!item.confirmed}}"
         bindtap="checkClick">
         确认
       </button>
-      <button class="weui-btn mini-btn" data-uid="{{item.uid}}" type="warn" size="mini" wx:if="{{!item.checked}}"
+      <button class="weui-btn mini-btn" data-uid="{{item.uid}}" type="warn" size="mini" wx:if="{{!item.confirmed}}"
         bindtap="cancelClick">
         取消
       </button>
-      <button class="weui-btn mini-btn" data-uid="{{item.child_uid}}" type="default" size="mini" wx:if="{{item.checked}}"
+      <button class="weui-btn mini-btn" data-uid="{{item.child_uid}}" type="default" size="mini" wx:if="{{item.confirmed}}"
         bindtap="regedClick">
         详细信息
       </button>

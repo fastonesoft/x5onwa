@@ -20,9 +20,9 @@ class xonStudReg extends cAppinfo
     xonStudReg::existByCustom(compact('child_id', 'sch_id'), '报名学校已记录，无需重复设置');
     xonStudReg::existByCustom(compact('child_id', 'edu_type_id'), '同一学段学校不得重复报名');
 
-    $checked = 0;
+    $confirmed = 0;
     $uid = x5on::getUid();
-    xonStudReg::insert(compact('uid', 'user_id', 'child_id', 'sch_id', 'edu_type_id', 'steps_id', 'checked'));
+    xonStudReg::insert(compact('uid', 'user_id', 'child_id', 'sch_id', 'edu_type_id', 'steps_id', 'confirmed'));
 
     return xovStudReg::getByUid($uid);
   }

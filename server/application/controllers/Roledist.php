@@ -98,7 +98,8 @@ class Roledist extends CI_Controller
          */
         $param = $_POST;
         $group_uid = $param['uid'];
-        $result = Mvv\mvvRoledist::member($group_uid);
+        $user_id = $userinfor->unionId;
+        $result = Mvv\mvvRoledist::member($user_id, $group_uid);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
