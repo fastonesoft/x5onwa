@@ -367,14 +367,14 @@ INSERT INTO xonYear VALUES (2022, replace(uuid(), '-', ''));
 
 
 /**
-  学校用户 -> 老师
+  学校用户 -> 老师，可以注册多重学校
  */
 CREATE TABLE xonUserSchool (
   uid VARCHAR(36) NOT NULL,
   user_id VARCHAR(36) NOT NULL,
   sch_id VARCHAR(10) NOT NULL,
-  PRIMARY KEY (uid),
-  UNIQUE KEY user_id (user_id),
+  PRIMARY KEY (user_id, sch_id),
+  UNIQUE KEY uid (uid),
   FOREIGN KEY (user_id) REFERENCES xonUser(id),
   FOREIGN KEY (sch_id) REFERENCES xonSchool(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户注册学校';
@@ -1040,63 +1040,6 @@ create view vAppinfo
 as select * from cAppinfo;
 
 
-/**
-  视图：非管理用户查询
- */
-CREATE VIEW xovUser
-AS
-SELECT a.*, y.sch_id, z.name as sch_name
-FROM xonUser a 
-LEFT JOIN xonUserSchool y on a.id = y.user_id
-LEFT JOIN xonSchool z on y.sch_id = z.id
-WHERE a.id NOT IN (SELECT user_id FROM xonUserGroup WHERE group_id = 99);
-
-/**
-  视图：非管理用户，且不是老师（仅仅是普通用户）
- */
-CREATE VIEW xovUserOnly
-AS
-  SELECT *
-  FROM xovUser a
-  WHERE a.id NOT IN (
-    SELECT user_id FROM xonUserSchool
-  );
-
-/**
-  视图：用户权限
- */
-CREATE VIEW xovUserRole
-AS
-  SELECT a.*, b.name as role_name, b.title as role_title
-  FROM (
-    SELECT DISTINCT user_id, role_id
-    FROM xonUserGroup c INNER JOIN xonGroupRole d ON c.group_id = d.group_id
-  ) a LEFT JOIN xonRole b on a.role_id = b.id;
-
-/**
-  视图：查询组用户信息
- */
-CREATE VIEW xovUserGroup
-AS
-  SELECT a.*, b.name as user_name, nick_name, b.sch_id
-  FROM xonUserGroup a 
-  INNER JOIN xovUser b ON a.user_id = b.id;
-
-/**
-  视图：查询我的孩子
- */
- CREATE VIEW xovUserChilds
- AS
-  SELECT a.*,
-    c.uid as child_uid, c.idc as child_idc, c.name as child_name,
-    d.name as child_relation
-  FROM xonUserChilds a
-  LEFT JOIN xonChild c on a.child_id = c.id
-  LEFT JOIN xonRelation d on a.relation_id = d.id;
-
-
-
-
 
 
 /**
@@ -1158,12 +1101,11 @@ CREATE VIEW xovSchoolStep
 /**
   学校学生
  */
-
 CREATE VIEW xovStudent
 AS
   SELECT A.*, substring(A.id, -4) as reg_no,
     C2.idc as stud_idc, C2.name as stud_name, C2.sex_name, C2.sex_num,
-    S.steps_name, S.schs_name, S.come_year, S.edu_type_name
+    S.steps_name, S.schs_name, S.name as step_name, S.come_year, S.edu_type_name
   FROM xonStudent A
   LEFT JOIN xovChild C2 ON A.child_id = C2.id
   LEFT JOIN xovSchoolStep S ON A.steps_id = S.id;
@@ -1188,6 +1130,68 @@ AS
 SELECT a.user_id AS my_user_id, b.*
 FROM xonUserChilds a INNER JOIN xovStudReg b
 ON a.child_id = b.child_id;
+
+
+
+
+
+
+/**
+  视图：非管理用户查询
+ */
+CREATE VIEW xovUser
+AS
+SELECT a.*, y.sch_id, z.name as sch_name
+FROM xonUser a 
+LEFT JOIN xonUserSchool y on a.id = y.user_id
+LEFT JOIN xovSchool z on y.sch_id = z.id
+WHERE a.id NOT IN (SELECT user_id FROM xonUserGroup WHERE group_id = 99);
+
+/**
+  视图：非管理用户，且不是老师（仅仅是普通用户）
+ */
+CREATE VIEW xovUserOnly
+AS
+  SELECT *
+  FROM xovUser a
+  WHERE a.id NOT IN (
+    SELECT user_id FROM xonUserSchool
+  );
+
+
+/**
+  视图：查询组用户信息
+ */
+CREATE VIEW xovUserGroup
+AS
+  SELECT a.*, b.name as user_name, b.nick_name, b.sch_id
+  FROM xonUserGroup a 
+  INNER JOIN xovUser b ON a.user_id = b.id;
+
+
+/**
+  视图：用户权限
+ */
+CREATE VIEW xovUserRole
+AS
+  SELECT a.*, b.name as role_name, b.title as role_title
+  FROM (
+    SELECT DISTINCT user_id, role_id
+    FROM xonUserGroup c INNER JOIN xonGroupRole d ON c.group_id = d.group_id
+  ) a LEFT JOIN xonRole b on a.role_id = b.id;
+
+/**
+  视图：查询我的孩子
+ */
+ CREATE VIEW xovUserChilds
+ AS
+  SELECT a.*,
+    c.uid as child_uid, c.idc as child_idc, c.name as child_name,
+    d.name as child_relation
+  FROM xonUserChilds a
+  LEFT JOIN xonChild c on a.child_id = c.id
+  LEFT JOIN xonRelation d on a.relation_id = d.id;
+
 
 
 

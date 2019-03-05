@@ -15,6 +15,7 @@ Page({
 
   rolesetSubmit: function (e) {
     var that = this
+    console.log(e)
     x5on.post({
       url: x5on.url.rolesetupdate,
       data: e.detail.value,

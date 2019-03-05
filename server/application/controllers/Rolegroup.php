@@ -73,7 +73,10 @@ class Rolegroup extends CI_Controller
          * 根据参数变更分组权限
          */
         $param = $_POST;
-        $result = Mvv\mvvGroupRole::update($param);
+        $group_uid = $param['uid'];
+        $group_json = $param['groups'];
+
+        $result = Mvv\mvvGroupRole::update($group_uid, $group_json);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {

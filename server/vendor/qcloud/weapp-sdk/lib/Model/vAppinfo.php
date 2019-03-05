@@ -34,6 +34,9 @@ class vAppinfo
   public static function min ($fieldName, $conditions = '') {
     return dbs::func(static::$tableName, 'min', $fieldName, $conditions);
   }
+  public static function count ($conditions = '') {
+    return dbs::func(static::$tableName, 'count', '*', $conditions);
+  }
 
   /**
    * 详细的查询功能，不提示

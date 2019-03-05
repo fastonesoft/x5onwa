@@ -37,19 +37,15 @@ class mvvGroupRole
    * @param $roles      权限列表
    * @return int        变更记录
    */
-  public static function update($param)
+  public static function update($group_uid, $group_json)
   {
-    $group_uid = $param['uid'];
-    unset($param['uid']);
-
     $result = 0;
     $group = xonGroup::checkByUid($group_uid);
     $group_id = $group->id;
 
+    $groups = json_decode($group_json);
     // 设置权限记录
-    foreach ($param as $uid => $value) {
-      $has_role = $value === 'true' ? 1 : 0;
-
+    foreach ($groups as $uid => $has_role) {
       $role = xonRole::checkByUid($uid);
       $role_id = $role->id;
 

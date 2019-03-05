@@ -5,8 +5,36 @@ use QCloud_WeApp_SDK\Mvv;
 use QCloud_WeApp_SDK\Model;
 
 class Studexam extends CI_Controller {
+  /**
+   * 报名审核
+   */
   const role_name = 'regexam';
   public function index() {
+    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
+      try {
+        $user_id = $userinfor->unionId;
+        $user = Model\xovUser::getById($user_id);
+
+
+        $recruit_end = 0;
+        $result = Model\xovSchoolStep::getsBy(compact('area_id', 'edu_type_id', 'recruit_end'));
+
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
+
+
+
+
+
+
+
+  public function index1() {
     Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         // 检测审核人员是否注册学校

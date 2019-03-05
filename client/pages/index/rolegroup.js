@@ -32,20 +32,19 @@ Page({
   rolegroupSubmit: function (e) {
     var that = this
     var rules = {
-      group: {
+      uid: {
         required: true,
       }
     }
     var messages = {
-      group: {
-        required: '分组选择'
+      uid: {
+        required: '分组设置'
       }
     }
-    x5on.checkForm(e, rules, messages, (form, error) => {
-      var value = e.detail.value
-      value.uid = x5on.getValue(that.data.rolegroups, form.group, 'uid')
-      delete value.group   // 删除无用属性
-
+    var value = {}
+    value.uid = x5on.getValue(this.data.rolegroups, this.data.groupIndex, 'uid')
+    x5on.checkForm(value, rules, messages, (form, error) => {
+      value.groups = JSON.stringify(e.detail.value)
       x5on.post({
         url: x5on.url.rolegroupupdate,
         data: value,
@@ -56,6 +55,10 @@ Page({
     }, (message, error) => {
       x5on.showError(that, message)
     })
+  },
+
+  returnClick: function (e) {
+    wx.navigateBack()
   }
 
 })

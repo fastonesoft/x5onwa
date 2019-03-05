@@ -10,7 +10,6 @@ class Studreg extends CI_Controller
    * 新生注册
    */
   const role_name = 'regstud';
-
   public function index()
   {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
@@ -151,4 +150,7 @@ class Studreg extends CI_Controller
       $this->json($error);
     });
   }
+
+
+
 }
