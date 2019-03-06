@@ -22,6 +22,7 @@ class Roledist extends CI_Controller
         $user_id = $userinfor->unionId;
         $groups = Mvv\mvvGroup::less($user_id);
         // 系统管理：查询所有；学校管理，只能设置本校
+
         $schools =
 
         $this->json(['code' => 0, 'data' => compact('groups', 'schools')]);

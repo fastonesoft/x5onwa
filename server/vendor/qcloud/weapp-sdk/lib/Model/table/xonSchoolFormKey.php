@@ -1,26 +1,11 @@
 <?php
 namespace QCloud_WeApp_SDK\Model;
 
-use Guzzle\Cache\NullCacheAdapter;
 use QCloud_WeApp_SDK\Mysql\Mysql as dbs;
-use QCloud_WeApp_SDK\Constants;
 use \Exception;
 
 class xonSchoolFormKey
 {
-
-  public static function insert () {
-
-  }
-
-  public static function update () {
-
-  }
-
-  public static function delete () {
-
-  }
-
 
   public static function getDefaultKeysByFormId($form_id) {
     $res = dbs::select('xonSchoolFormKey', ['*', 'default_value as value, required as error'], compact('form_id'));

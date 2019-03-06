@@ -7,6 +7,7 @@ use QCloud_WeApp_SDK\Model\xonUser;
 use QCloud_WeApp_SDK\Model\xonUserGroup;
 use QCloud_WeApp_SDK\Model\xovUser;
 use QCloud_WeApp_SDK\Model\xovUserGroup;
+use QCloud_WeApp_SDK\Model\xovUserGroupSchool;
 
 class mvvUser
 {
@@ -65,11 +66,20 @@ class mvvUser
     }
   }
 
-  public static function groupAdmin($group_id, $user_id, $success) {
-    $admin = xovUserGroup::getBy(compact('group_id', 'user_id'));
-    if ($admin !== null) {
-      call_user_func($success, $admin);
-    }
+  public static function userGroup($user_id, $group_id, $success) {
+    $usergroup = xovUserGroup::checkByCustom(compact('group_id', 'user_id'), '没有操作权限，请联系管理员');
+    call_user_func($success, $usergroup);
+  }
+
+  public static function userGroupSchool($user_id, $group_id, $success) {
+    // 查找用户对应学校，有多重设置，返回第一个
+    $checked = 1;
+    $id = $user_id;
+    $user = xovUser::checkByCustom(compact('id', 'checked'), '没有设置当前学校，请返回登录页');
+    $sch_id = $user->sch_id;
+
+    $usergroup = xovUserGroupSchool::checkByCustom(compact('group_id', 'user_id', 'sch_id'), '没有操作权限，请联系学校管理员');
+    call_user_func($success, $usergroup);
   }
 
 }

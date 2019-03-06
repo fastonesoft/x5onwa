@@ -1,25 +1,10 @@
 <?php
 namespace QCloud_WeApp_SDK\Model;
 
-use Guzzle\Cache\NullCacheAdapter;
 use QCloud_WeApp_SDK\Mysql\Mysql as dbs;
-use QCloud_WeApp_SDK\Constants;
-use \Exception;
 
 class xonSchoolFormValue
 {
-
-  public static function insert () {
-
-  }
-
-  public static function update () {
-
-  }
-
-  public static function delete () {
-
-  }
 
   public static function saveKeyValue ($user_id, $form_id, $key_id, $value) {
     $value = $value === 'true' ? 1 : $value;

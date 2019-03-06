@@ -232,6 +232,7 @@ CREATE TABLE xonUserGroupSchool (
   user_id VARCHAR(36) NOT NULL,
   group_id INT(11) NOT NULL,
   sch_id VARCHAR(10) NOT NULL,
+  checked BOOLEAN NOT NULL,
   PRIMARY KEY (user_id, group_id, sch_id),
   UNIQUE KEY uid (uid),
   FOREIGN KEY (user_id) REFERENCES xonUser(id),
@@ -1175,7 +1176,7 @@ AS
  */
 CREATE VIEW xovUserGroup
 AS
-  SELECT a.*, b.sch_id, b.name as user_name, b.nick_name
+  SELECT a.*, b.name as user_name, b.nick_name
   FROM xonUserGroup a 
   INNER JOIN xovUser b ON a.user_id = b.id;
 

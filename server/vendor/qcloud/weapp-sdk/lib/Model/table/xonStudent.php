@@ -35,9 +35,9 @@ class xonStudent extends cAppinfo
     return $id;
   }
 
+
+
 // 以下内容要移到 mvv 中去
-
-
   public static function checkStudentEnter ($child_id, $sch_id) {
     $res = self::getBy(compact('child_id', 'sch_id'));
     if ($res !== null) {
