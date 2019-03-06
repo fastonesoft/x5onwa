@@ -121,9 +121,9 @@ INSERT INTO xonGroup VALUES (90, replace(uuid(), '-', ''), '流量控制');
 INSERT INTO xonGroup VALUES (99, replace(uuid(), '-', ''), '系统管理');
 
 CREATE TABLE xonGroupRole (
+  uid VARCHAR(36) NOT NULL,
 	group_id INT(11) NOT NULL,
 	role_id INT(11) NOT NULL,
-	uid VARCHAR(36) NOT NULL,
 	PRIMARY KEY (group_id, role_id),
 	UNIQUE KEY uid (uid),
 	FOREIGN KEY (group_id) REFERENCES xonGroup(id),
@@ -134,83 +134,74 @@ CREATE TABLE xonGroupRole (
   临时用户组权限
   新生报名
  */
-INSERT INTO xonGroupRole VALUES (1, 1, replace(uuid(), '-', ''));
-INSERT INTO xonGroupRole VALUES (1, 2, replace(uuid(), '-', ''));
-INSERT INTO xonGroupRole VALUES (2, 1, replace(uuid(), '-', ''));
-INSERT INTO xonGroupRole VALUES (2, 2, replace(uuid(), '-', ''));
-INSERT INTO xonGroupRole VALUES (2, 3, replace(uuid(), '-', ''));
-INSERT INTO xonGroupRole VALUES (2, 21, replace(uuid(), '-', ''));
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 1, 1);
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 1, 2);
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 2, 1);
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 2, 2);
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 2, 3);
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 2, 21);
 
 /**
   学科主管、年级主管
  */
-INSERT INTO xonGroupRole VALUES (50, 1, replace(uuid(), '-', ''));
-INSERT INTO xonGroupRole VALUES (50, 2, replace(uuid(), '-', ''));
-INSERT INTO xonGroupRole VALUES (50, 3, replace(uuid(), '-', ''));
-INSERT INTO xonGroupRole VALUES (50, 4, replace(uuid(), '-', ''));
-INSERT INTO xonGroupRole VALUES (50, 6, replace(uuid(), '-', ''));
-
-INSERT INTO xonGroupRole VALUES (60, 1, replace(uuid(), '-', ''));
-INSERT INTO xonGroupRole VALUES (60, 2, replace(uuid(), '-', ''));
-INSERT INTO xonGroupRole VALUES (60, 3, replace(uuid(), '-', ''));
-INSERT INTO xonGroupRole VALUES (60, 5, replace(uuid(), '-', ''));
-INSERT INTO xonGroupRole VALUES (60, 6, replace(uuid(), '-', ''));
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 50, 1);
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 50, 2);
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 50, 3);
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 50, 4);
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 50, 6);
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 60, 1);
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 60, 2);
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 60, 3);
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 60, 5);
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 60, 6);
 
 /**
   学校管理员
  */
-INSERT INTO xonGroupRole VALUES (70, 1, replace(uuid(), '-', ''));
-INSERT INTO xonGroupRole VALUES (70, 2, replace(uuid(), '-', ''));
-INSERT INTO xonGroupRole VALUES (70, 3, replace(uuid(), '-', ''));
-INSERT INTO xonGroupRole VALUES (70, 4, replace(uuid(), '-', ''));
-INSERT INTO xonGroupRole VALUES (70, 5, replace(uuid(), '-', ''));
-INSERT INTO xonGroupRole VALUES (70, 6, replace(uuid(), '-', ''));
-
-INSERT INTO xonGroupRole VALUES (70, 43, replace(uuid(), '-', ''));
-INSERT INTO xonGroupRole VALUES (70, 44, replace(uuid(), '-', ''));
-INSERT INTO xonGroupRole VALUES (70, 45, replace(uuid(), '-', ''));
-INSERT INTO xonGroupRole VALUES (70, 46, replace(uuid(), '-', ''));
-INSERT INTO xonGroupRole VALUES (70, 47, replace(uuid(), '-', ''));
-INSERT INTO xonGroupRole VALUES (70, 48, replace(uuid(), '-', ''));
-INSERT INTO xonGroupRole VALUES (70, 49, replace(uuid(), '-', ''));
-
-INSERT INTO xonGroupRole VALUES (70, 81, replace(uuid(), '-', ''));
-INSERT INTO xonGroupRole VALUES (70, 82, replace(uuid(), '-', ''));
-INSERT INTO xonGroupRole VALUES (70, 83, replace(uuid(), '-', ''));
-
-INSERT INTO xonGroupRole VALUES (70, 93, replace(uuid(), '-', ''));
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 70, 1);
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 70, 2);
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 70, 3);
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 70, 4);
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 70, 5);
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 70, 6);
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 70, 43);
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 70, 44);
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 70, 45);
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 70, 46);
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 70, 47);
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 70, 48);
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 70, 49);
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 70, 81);
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 70, 82);
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 70, 83);
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 70, 93);
 
 /**
   管理员组权限
  */
-INSERT INTO xonGroupRole VALUES (99, 1, replace(uuid(), '-', ''));
-INSERT INTO xonGroupRole VALUES (99, 2, replace(uuid(), '-', ''));
-INSERT INTO xonGroupRole VALUES (99, 3, replace(uuid(), '-', ''));
-INSERT INTO xonGroupRole VALUES (99, 4, replace(uuid(), '-', ''));
-INSERT INTO xonGroupRole VALUES (99, 5, replace(uuid(), '-', ''));
-INSERT INTO xonGroupRole VALUES (99, 6, replace(uuid(), '-', ''));
-
-INSERT INTO xonGroupRole VALUES (99, 21, replace(uuid(), '-', ''));
-INSERT INTO xonGroupRole VALUES (99, 22, replace(uuid(), '-', ''));
-
-INSERT INTO xonGroupRole VALUES (99, 41, replace(uuid(), '-', ''));
-INSERT INTO xonGroupRole VALUES (99, 42, replace(uuid(), '-', ''));
-INSERT INTO xonGroupRole VALUES (99, 43, replace(uuid(), '-', ''));
-INSERT INTO xonGroupRole VALUES (99, 44, replace(uuid(), '-', ''));
-INSERT INTO xonGroupRole VALUES (99, 45, replace(uuid(), '-', ''));
-INSERT INTO xonGroupRole VALUES (99, 46, replace(uuid(), '-', ''));
-INSERT INTO xonGroupRole VALUES (99, 47, replace(uuid(), '-', ''));
-INSERT INTO xonGroupRole VALUES (99, 48, replace(uuid(), '-', ''));
-INSERT INTO xonGroupRole VALUES (99, 49, replace(uuid(), '-', ''));
-
-
-INSERT INTO xonGroupRole VALUES (99, 81, replace(uuid(), '-', ''));
-INSERT INTO xonGroupRole VALUES (99, 82, replace(uuid(), '-', ''));
-INSERT INTO xonGroupRole VALUES (99, 83, replace(uuid(), '-', ''));
-
-INSERT INTO xonGroupRole VALUES (99, 91, replace(uuid(), '-', ''));
-INSERT INTO xonGroupRole VALUES (99, 92, replace(uuid(), '-', ''));
-INSERT INTO xonGroupRole VALUES (99, 93, replace(uuid(), '-', ''));
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 99, 1);
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 99, 2);
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 99, 3);
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 99, 4);
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 99, 5);
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 99, 6);
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 99, 21);
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 99, 22);
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 99, 41);
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 99, 42);
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 99, 43);
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 99, 44);
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 99, 45);
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 99, 46);
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 99, 47);
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 99, 48);
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 99, 49);
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 99, 81);
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 99, 82);
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 99, 83);
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 99, 91);
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 99, 92);
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 99, 93);
 
 
 CREATE TABLE xonUser (
@@ -235,6 +226,18 @@ CREATE TABLE xonUserGroup (
   FOREIGN KEY (user_id) REFERENCES xonUser(id),
   FOREIGN KEY (group_id) REFERENCES xonGroup(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户分组';
+
+CREATE TABLE xonUserGroupSchool (
+  uid VARCHAR(36) NOT NULL,
+  user_id VARCHAR(36) NOT NULL,
+  group_id INT(11) NOT NULL,
+  sch_id VARCHAR(10) NOT NULL,
+  PRIMARY KEY (user_id, group_id, sch_id),
+  UNIQUE KEY uid (uid),
+  FOREIGN KEY (user_id) REFERENCES xonUser(id),
+  FOREIGN KEY (group_id) REFERENCES xonGroup(id),
+  FOREIGN KEY (sch_id) REFERENCES xonSchool(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户分组学校';
 
 CREATE TABLE xonEduType (
   id INT(11) NOT NULL,
@@ -1141,11 +1144,19 @@ ON a.child_id = b.child_id;
  */
 CREATE VIEW xovUser
 AS
-SELECT a.*, y.sch_id, z.name as sch_name
+SELECT a.*, y.sch_id, z.schs_name
 FROM xonUser a 
 LEFT JOIN xonUserSchool y on a.id = y.user_id
 LEFT JOIN xovSchool z on y.sch_id = z.id
 WHERE a.id NOT IN (SELECT user_id FROM xonUserGroup WHERE group_id = 99);
+
+CREATE VIEW xovUserInfor
+AS
+SELECT a.*, y.sch_id, z.schs_name
+FROM xonUser a 
+LEFT JOIN xonUserSchool y on a.id = y.user_id
+LEFT JOIN xovSchool z on y.sch_id = z.id;
+
 
 /**
   视图：非管理用户，且不是老师（仅仅是普通用户）
@@ -1164,8 +1175,14 @@ AS
  */
 CREATE VIEW xovUserGroup
 AS
-  SELECT a.*, b.name as user_name, b.nick_name, b.sch_id
+  SELECT a.*, b.sch_id, b.name as user_name, b.nick_name
   FROM xonUserGroup a 
+  INNER JOIN xovUser b ON a.user_id = b.id;
+
+CREATE VIEW xovUserGroupSchool
+AS
+  SELECT a.*, b.name as user_name, b.nick_name
+  FROM xonUserGroupSchool a 
   INNER JOIN xovUser b ON a.user_id = b.id;
 
 

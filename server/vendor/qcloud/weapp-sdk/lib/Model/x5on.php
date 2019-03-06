@@ -11,6 +11,9 @@ class x5on
   const GROUP_ADMIN_VALUE = 99;
   // 学校管理员
   const GROUP_SCHOOL_ADMIN_VALUE = 70;
+
+  // 普通用户最高能分配的组号
+  const GROUP_NORMAL_MAX = 2;
   // 学生家长
   const GROUP_STUDENT_PARENT = 2;
   // 临时用户组编号

@@ -14,7 +14,7 @@ class User extends CI_Controller {
         $nick_name = $userinfor->nickName;
 
         // 更新nick_name
-        $result = Model\xonUser::checkById($user_id);
+        $result = Model\xovUserInfor::checkById($user_id);
         Model\xonUser::setsById(compact('nick_name'), $user_id);
 
         $this->json(['code' => 0, 'data' => $result]);

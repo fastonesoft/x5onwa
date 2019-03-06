@@ -3,12 +3,16 @@ var x5on = require('../x5on.js')
 
 Page({
 
+  data: {
+    schoolIndex: 0,
+  },
+
   onLoad: function () {
     var that = this
     x5on.request({
       url: x5on.url.roledist,
-      success(groups) {
-        that.setData({ groups })
+      success(school_groups) {
+        that.setData(school_groups)
       }
     })
   },

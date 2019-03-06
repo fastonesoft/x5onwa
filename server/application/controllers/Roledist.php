@@ -20,9 +20,11 @@ class Roledist extends CI_Controller
          * 查询当前用户所能够设置的权限分组
          */
         $user_id = $userinfor->unionId;
-        $result = Mvv\mvvGroup::less($user_id);
+        $groups = Mvv\mvvGroup::less($user_id);
+        // 系统管理：查询所有；学校管理，只能设置本校
+        $schools =
 
-        $this->json(['code' => 0, 'data' => $result]);
+        $this->json(['code' => 0, 'data' => compact('groups', 'schools')]);
       } catch (Exception $e) {
         $this->json(['code' => 1, 'data' => $e->getMessage()]);
       }

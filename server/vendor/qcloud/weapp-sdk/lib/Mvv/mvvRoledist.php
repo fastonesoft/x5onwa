@@ -12,6 +12,10 @@ use QCloud_WeApp_SDK\Model\xovUserGroup;
 class mvvRoledist
 {
 
+  public static function school($user_id) {
+
+  }
+
   public static function user($user_id, $name)
   {
     $group_id = x5on::GROUP_ADMIN_VALUE;
@@ -64,17 +68,16 @@ class mvvRoledist
    * @throws \Exception
    */
   public static function member($user_id, $group_uid) {
-    global $result;
-    mvvUser::admins($user_id, function ($group_uid) {
-      global $result;
+    $result = [];
+    mvvUser::admins($user_id, function ($group_uid) use ($result) {
       $group = xonGroup::checkByUid($group_uid);
       $group_id = $group->id;
       $result =  xovUserGroup::getsBy(compact('group_id'));
+      return $result;
     }, function () {
 
     }, $group_uid);
-
-
+    return $result;
   }
 
   public static function memfind($group_uid, $user_name) {

@@ -48,5 +48,9 @@
       <view class="weui-cell__bd">手机号码</view>
       <view class="weui-cell__ft">{{mobil}}</view>
     </view>
+    <view class="weui-cell" wx:if="{{schs_name}}">
+      <view class="weui-cell__bd">注册学校</view>
+      <view class="weui-cell__ft">{{schs_name}}</view>
+    </view>
   </view>
 </block>
