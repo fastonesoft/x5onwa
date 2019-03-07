@@ -46,6 +46,7 @@
           </view>
         </label>
       </radio-group>
+      
     </view>
   </view>
   <view class="weui-cells__title">权限分组</view>
