@@ -68,6 +68,12 @@ class mvvRoledist
    * @throws \Exception
    */
   public static function member($user_id, $group_uid) {
+
+
+
+
+
+
     $result = [];
     mvvUser::admins($user_id, function ($group_uid) use ($result) {
       $group = xonGroup::checkByUid($group_uid);

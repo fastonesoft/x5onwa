@@ -11,10 +11,10 @@ Page({
         x5on.request({
           donshow: true,
           url: x5on.url.user,
-          success(users) {
+          success(user_schs) {
             // 显示用户信息
-            users.reged = true
-            that.setData(users)
+            user_schs.reged = true
+            that.setData(user_schs)
           },
           fail() {
             // 显示注册信息
@@ -91,7 +91,12 @@ Page({
     })
   },
 
-
+  userschsChange: function (e) {
+    var that = this
+    x5on.setRadio(that.data.userschs, e.detail.value, userschs => {
+      that.setData({ userschs })
+    })
+  },
 
   // // 上传图片接口
   // doUpload: function () {

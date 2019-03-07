@@ -14,10 +14,12 @@ class User extends CI_Controller {
         $nick_name = $userinfor->nickName;
 
         // 更新nick_name
-        $result = Model\xovUserInfor::checkById($user_id);
+        $user = Model\xovUserInfor::checkById($user_id);
         Model\xonUser::setsById(compact('nick_name'), $user_id);
 
-        $this->json(['code' => 0, 'data' => $result]);
+        $userschs = Model\xovUserSchool::getsBy(compact('user_id'));
+
+        $this->json(['code' => 0, 'data' => compact('user', 'userschs')]);
       } catch (Exception $e) {
         $this->json(['code' => 1, 'data' => $e->getMessage()]);
       }

@@ -227,18 +227,6 @@ CREATE TABLE xonUserGroup (
   FOREIGN KEY (group_id) REFERENCES xonGroup(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户分组';
 
-CREATE TABLE xonUserGroupSchool (
-  uid VARCHAR(36) NOT NULL,
-  user_id VARCHAR(36) NOT NULL,
-  group_id INT(11) NOT NULL,
-  sch_id VARCHAR(10) NOT NULL,
-  checked BOOLEAN NOT NULL,
-  PRIMARY KEY (user_id, group_id, sch_id),
-  UNIQUE KEY uid (uid),
-  FOREIGN KEY (user_id) REFERENCES xonUser(id),
-  FOREIGN KEY (group_id) REFERENCES xonGroup(id),
-  FOREIGN KEY (sch_id) REFERENCES xonSchool(id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户分组学校';
 
 CREATE TABLE xonEduType (
   id INT(11) NOT NULL,
@@ -341,6 +329,21 @@ INSERT INTO xonSchoolEdu VALUES ('321204020207', replace(uuid(), '-', ''), '3212
 INSERT INTO xonSchoolEdu VALUES ('321204020208', replace(uuid(), '-', ''), '3212040202', 8);
 INSERT INTO xonSchoolEdu VALUES ('321204020209', replace(uuid(), '-', ''), '3212040202', 9);
 
+/**
+  学校用户 -> 老师，可以注册多重学校
+ */
+CREATE TABLE xonUserGroupSchool (
+  uid VARCHAR(36) NOT NULL,
+  user_id VARCHAR(36) NOT NULL,
+  group_id INT(11) NOT NULL,
+  sch_id VARCHAR(10) NOT NULL,
+  checked BOOLEAN NOT NULL,
+  PRIMARY KEY (user_id, group_id, sch_id),
+  UNIQUE KEY uid (uid),
+  FOREIGN KEY (user_id) REFERENCES xonUser(id),
+  FOREIGN KEY (group_id) REFERENCES xonGroup(id),
+  FOREIGN KEY (sch_id) REFERENCES xonSchool(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户学校分组';
 
 
 /**
@@ -370,18 +373,6 @@ INSERT INTO xonYear VALUES (2021, replace(uuid(), '-', ''));
 INSERT INTO xonYear VALUES (2022, replace(uuid(), '-', ''));
 
 
-/**
-  学校用户 -> 老师，可以注册多重学校
- */
-CREATE TABLE xonUserSchool (
-  uid VARCHAR(36) NOT NULL,
-  user_id VARCHAR(36) NOT NULL,
-  sch_id VARCHAR(10) NOT NULL,
-  PRIMARY KEY (user_id, sch_id),
-  UNIQUE KEY uid (uid),
-  FOREIGN KEY (user_id) REFERENCES xonUser(id),
-  FOREIGN KEY (sch_id) REFERENCES xonSchool(id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户注册学校';
 
 
 CREATE TABLE xonSchoolCode (
@@ -1176,16 +1167,15 @@ AS
  */
 CREATE VIEW xovUserGroup
 AS
-  SELECT a.*, b.name as user_name, b.nick_name
+  SELECT a.*, b.sch_id, b.name as user_name, b.nick_name
   FROM xonUserGroup a 
   INNER JOIN xovUser b ON a.user_id = b.id;
 
 CREATE VIEW xovUserGroupSchool
 AS
-  SELECT a.*, b.name as user_name, b.nick_name
-  FROM xonUserGroupSchool a 
-  INNER JOIN xovUser b ON a.user_id = b.id;
-
+  SELECT a.*, concat(a.area_name, '-', a.schs_name) as areas_name, b.id as user_id
+  FROM xonUserGroupSchool a
+  INNER JOIN xovUser b on a.id = b.sch_id;
 
 /**
   视图：用户权限

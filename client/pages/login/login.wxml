@@ -42,15 +42,27 @@
   <view class="weui-cells">
     <view class="weui-cell">
       <view class="weui-cell__bd">用户姓名</view>
-      <view class="weui-cell__ft">{{name}}</view>
+      <view class="weui-cell__ft">{{user.name}}</view>
     </view>
     <view class="weui-cell">
       <view class="weui-cell__bd">手机号码</view>
-      <view class="weui-cell__ft">{{mobil}}</view>
+      <view class="weui-cell__ft">{{user.mobil}}</view>
     </view>
-    <view class="weui-cell" wx:if="{{schs_name}}">
-      <view class="weui-cell__bd">注册学校</view>
-      <view class="weui-cell__ft">{{schs_name}}</view>
-    </view>
+  </view>
+</block>
+
+<block wx:if="{{userschs.length>0}}">
+  <view class="weui-cells__title">注册学校</view>
+  <view class="weui-cells weui-cells_after-title">
+    <radio-group name="uid" bindchange="userschsChange">
+      <label class="weui-cell weui-check__label" wx:for="{{userschs}}" wx:key="uid">
+        <radio class="weui-check" value="{{item.uid}}" checked="{{item.checked}}" />
+        <view class="weui-cell__bd">{{item.areas_name}}</view>
+        <view class="weui-cell__ft weui-cell__ft_in-radio">
+          <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.checked}}"></icon>
+          <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{item.checked}}"></icon>
+        </view>
+      </label>
+    </radio-group>
   </view>
 </block>
