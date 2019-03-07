@@ -14,10 +14,10 @@ class User extends CI_Controller {
         $nick_name = $userinfor->nickName;
 
         // 更新nick_name
-        $user = Model\xovUserInfor::checkById($user_id);
+        $user = Model\xovUserAll::checkById($user_id);
         Model\xonUser::setsById(compact('nick_name'), $user_id);
-
-        $userschs = Model\xovUserSchool::getsBy(compact('user_id'));
+        // 获取用户学校信息
+        $userschs = Model\xovUserSchool::getsById($user_id);
 
         $this->json(['code' => 0, 'data' => compact('user', 'userschs')]);
       } catch (Exception $e) {

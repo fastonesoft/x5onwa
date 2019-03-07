@@ -1078,8 +1078,11 @@ as
 CREATE VIEW xovSchool
 AS
   SELECT a.*,
-    concat(b.name, '-', a.name) as schs_name, b.area_id, b.area_name,
-    c.name as edu_type_name
+    b.area_id, b.area_name,
+    c.name as edu_type_name,
+    concat(b.area_name, '-', b.name) as area_schs,
+    concat(b.area_name, '-', b.name, '-', a.name) as area_sch,
+    concat(b.name, '-', a.name) as schs_sch
   FROM xonSchool a
   LEFT JOIN xovSchools b on a.schs_id = b.id
   LEFT JOIN xonEduType c ON a.edu_type_id = c.id;
@@ -1087,8 +1090,8 @@ AS
 CREATE VIEW xovSchoolStep
 	AS
 	SELECT ss.*, sy.year as come_year,
-    concat(sc.schs_name, '-', ss.name) as steps_name,
-    sc.schs_name, sc.edu_type_id, sc.edu_type_name, sc.area_id
+    concat(sc.schs_sch, '-', ss.name) as schs_steps,
+    sc.schs_sch, sc.edu_type_id, sc.edu_type_name, sc.area_id
 	FROM xonSchoolStep ss 
 	LEFT JOIN xovSchool sc on ss.sch_id = sc.id
   LEFT JOIN xonSchoolYear sy on ss.years_id = sy.id;
@@ -1100,7 +1103,7 @@ CREATE VIEW xovStudent
 AS
   SELECT A.*, substring(A.id, -4) as reg_no,
     C2.idc as stud_idc, C2.name as stud_name, C2.sex_name, C2.sex_num,
-    S.steps_name, S.schs_name, S.name as step_name, S.come_year, S.edu_type_name
+    S.schs_steps, S.schs_sch, S.name as step_name, S.come_year, S.edu_type_name
   FROM xonStudent A
   LEFT JOIN xovChild C2 ON A.child_id = C2.id
   LEFT JOIN xovSchoolStep S ON A.steps_id = S.id;
@@ -1109,7 +1112,7 @@ AS
 CREATE VIEW xovStudReg
 AS
   SELECT a.*, 
-    S.schs_name, S.edu_type_name, S.steps_name,
+    S.schs_sch, S.edu_type_name, S.schs_steps,
     C2.uid as child_uid, C2.name as child_name, C2.idc as child_idc,
     U.name as exam_user_name, U2.name as confirm_user_name,
     au.name as auth_name
@@ -1132,60 +1135,77 @@ ON a.child_id = b.child_id;
 
 
 /**
-  视图：非管理用户查询
+  视图：非系统管理用户
  */
 CREATE VIEW xovUser
 AS
-SELECT a.*, y.sch_id, z.schs_name
-FROM xonUser a 
-LEFT JOIN xonUserSchool y on a.id = y.user_id
-LEFT JOIN xovSchool z on y.sch_id = z.id
-WHERE a.id NOT IN (SELECT user_id FROM xonUserGroup WHERE group_id = 99);
+  SELECT a.*
+  FROM xonUser a 
+  WHERE a.id NOT IN (SELECT user_id FROM xonUserGroup WHERE group_id = 99);
 
-CREATE VIEW xovUserInfor
+/* 视图：所有用户 */
+CREATE VIEW xovUserAll
 AS
-SELECT a.*, y.sch_id, z.schs_name
-FROM xonUser a 
-LEFT JOIN xonUserSchool y on a.id = y.user_id
-LEFT JOIN xovSchool z on y.sch_id = z.id;
+  SELECT *
+  FROM xonUser;
 
 
-/**
-  视图：非管理用户，且不是老师（仅仅是普通用户）
- */
+/* 视图：普通用户 */
 CREATE VIEW xovUserOnly
 AS
   SELECT *
   FROM xovUser a
-  WHERE a.id NOT IN (
-    SELECT user_id FROM xonUserSchool
-  );
+  WHERE a.id NOT IN (SELECT user_id FROM xonUserGroupSchool);
+
+/* 视图：注册用户 xovUserReged */
 
 
-/**
-  视图：查询组用户信息
- */
+/* 视图：学校用户 */
+CREATE VIEW xovUserSched
+AS
+  SELECT *
+  FROM xovUser a
+  WHERE a.id IN (SELECT user_id FROM xonUserGroupSchool);
+
+/* 视图：学校用户详细信息 */
+CREATE VIEW xovUserSchool
+AS
+  SELECT a.*, b.checked, c.area_schs, c.area_sch, c.schs_sch
+  FROM xovUserSched a
+  INNER JOIN xonUserGroupSchool b on a.id = b.user_id
+  INNER JOIN xovSchool c on b.sch_id = c.id;
+
+/* 视图：查询组用户信息 */
 CREATE VIEW xovUserGroup
 AS
-  SELECT a.*, b.sch_id, b.name as user_name, b.nick_name
+  SELECT a.*, b.name as user_name, b.nick_name
   FROM xonUserGroup a 
   INNER JOIN xovUser b ON a.user_id = b.id;
 
+
+/* 视图：查询学校组用户信息 */
 CREATE VIEW xovUserGroupSchool
 AS
-  SELECT a.*, concat(a.area_name, '-', a.schs_name) as areas_name, b.id as user_id
+  SELECT a.*, b.name as user_name, b.nick_name
   FROM xonUserGroupSchool a
-  INNER JOIN xovUser b on a.id = b.sch_id;
+  INNER JOIN xovUser b on a.user_id = b.id;
 
-/**
-  视图：用户权限
- */
+/* 视图：用户权限 */
 CREATE VIEW xovUserRole
 AS
   SELECT a.*, b.name as role_name, b.title as role_title
   FROM (
     SELECT DISTINCT user_id, role_id
     FROM xonUserGroup c INNER JOIN xonGroupRole d ON c.group_id = d.group_id
+  ) a LEFT JOIN xonRole b on a.role_id = b.id;
+
+/* 视图：学校用户权限 */
+CREATE VIEW xovUserRoleSchool
+AS
+  SELECT a.*, b.name as role_name, b.title as role_title
+  FROM (
+    SELECT DISTINCT user_id, role_id, sch_id
+    FROM xonUserGroupSchool c INNER JOIN xonGroupRole d ON c.group_id = d.group_id
   ) a LEFT JOIN xonRole b on a.role_id = b.id;
 
 /**
@@ -1210,7 +1230,7 @@ AS
 CREATE VIEW xovGrade
 AS
   SELECT A.*,
-    S.sch_id, S.schs_name, S.name as step_name, S.edu_type_name, S.graduated,
+    S.sch_id, S.schs_sch, S.name as step_name, S.edu_type_name, S.graduated,
     B.year as grade_year, B.is_current,
     E.edus_name as grade_name
   FROM xonGrade A
@@ -1243,10 +1263,10 @@ AS
 CREATE VIEW xovGradeStud
 AS
   SELECT A.*,
-    S.steps_name, S.child_id, S.stud_idc, S.stud_name, S.sex_name, S.sex_num, 
+    S.schs_steps, S.child_id, S.stud_idc, S.stud_name, S.sex_name, S.sex_num, 
     t.name as type_name,
     C.name AS status_name, C.ico_name, C.in_sch, 
-    gg.edu_type_name, gg.schs_name, gg.grade_name, gg.is_current, gg.graduated,
+    gg.edu_type_name, gg.schs_sch, gg.grade_name, gg.is_current, gg.graduated,
     C2.num as cls_num, C2.cls_name, C2.cls_order
   FROM xonGradeStud A
   LEFT JOIN xovStudent S ON A.stud_id = S.id
