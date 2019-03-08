@@ -24,15 +24,6 @@ var doUrl = {
   rolegrouprole: `${host}/weapp/rolegroup/role`,
   rolegroupupdate: `${host}/weapp/rolegroup/update`,
 
-  // 权限分配
-  roledist: `${host}/weapp/roledist`,
-  roledistuser: `${host}/weapp/roledist/user`,
-  roledistgroup: `${host}/weapp/roledist/group`,
-  roledistadd: `${host}/weapp/roledist/add`,
-  roledistdel: `${host}/weapp/roledist/del`,
-  roledistmember: `${host}/weapp/roledist/member`,
-  roledistmemfind: `${host}/weapp/roledist/memfind`,
-
   // 用户注册无检测
   user: `${host}/weapp/user`,
   userreg: `${host}/weapp/user/reg`,
@@ -52,13 +43,14 @@ var doUrl = {
   usereset: `${host}/weapp/usereset`,
   useresetupdate: `${host}/weapp/usereset/update`,
 
-  // 用户注册教师
-  tchreg: `${host}/weapp/usereg`,
-  tchregreg: `${host}/weapp/usereg/reg`,
-  tchreguser: `${host}/weapp/usereg/user`,
-  tchregmember: `${host}/weapp/usereg/member`,
-  tchregmemfind: `${host}/weapp/usereg/memfind`,
-  tchregdel: `${host}/weapp/usereg/del`,
+  // 教师权限分配
+  userdist: `${host}/weapp/userdist`,
+  userdistuser: `${host}/weapp/userdist/user`,
+  userdistgroup: `${host}/weapp/userdist/group`,
+  userdistadd: `${host}/weapp/userdist/add`,
+  userdistdel: `${host}/weapp/userdist/del`,
+  userdistmember: `${host}/weapp/userdist/member`,
+  userdistmemfind: `${host}/weapp/userdist/memfind`,
 
 
   // 报名

@@ -18,7 +18,7 @@ class mvvRoledist
 
   public static function user($user_id, $name)
   {
-    $group_id = x5on::GROUP_ADMIN_VALUE;
+    $group_id = x5on::GROUP_ADMIN;
     $admin = xonUserGroup::getBy(compact('user_id', 'group_id'));
     if ($admin !== null) {
       // 系统管理员，可以分配任意权限组
@@ -27,7 +27,7 @@ class mvvRoledist
       // 学校管理员
       // 没有注册学校，报错
       // 注册，返回学校老师查询信息
-      $group_id = x5on::GROUP_SCHOOL_ADMIN_VALUE;
+      $group_id = x5on::GROUP_ADMIN_SCHOOL;
       xonUserGroup::checkByCustom(compact('user_id', 'group_id'), '不是管理员，不能查询教师名单');
       // 查询本校老师名单
       $sch_admin_user = xovUser::checkById($user_id);

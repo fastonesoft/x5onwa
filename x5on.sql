@@ -58,6 +58,8 @@ INSERT INTO xonType VALUES (2, replace(uuid(), '-', ''), '学籍');
 INSERT INTO xonType VALUES (3, replace(uuid(), '-', ''), '考试');
 INSERT INTO xonType VALUES (4, replace(uuid(), '-', ''), '分班');
 INSERT INTO xonType VALUES (9, replace(uuid(), '-', ''), '设置');
+INSERT INTO xonType VALUES (10, replace(uuid(), '-', ''), '安全');
+
 
 CREATE TABLE xonRole (
 	id INT(11) NOT NULL,
@@ -92,13 +94,12 @@ INSERT INTO xonRole VALUES (47, replace(uuid(), '-', ''), 'mysameset', '同班�
 INSERT INTO xonRole VALUES (48, replace(uuid(), '-', ''), 'myrename', '班号变更', 0, 4);
 INSERT INTO xonRole VALUES (49, replace(uuid(), '-', ''), 'mydivisionset', '调动设置', 0, 4);
 
-INSERT INTO xonRole VALUES (81, replace(uuid(), '-', ''), 'schcode', '编码设置', 0, 9);
-INSERT INTO xonRole VALUES (82, replace(uuid(), '-', ''), 'usereg', '教师注册', 0, 9);
+INSERT INTO xonRole VALUES (81, replace(uuid(), '-', ''), 'areadist', '地区分配', 0, 9);
+INSERT INTO xonRole VALUES (82, replace(uuid(), '-', ''), 'userdist', '教师分配', 0, 9);
 INSERT INTO xonRole VALUES (83, replace(uuid(), '-', ''), 'usereset', '用户重置', 0, 9);
 
-INSERT INTO xonRole VALUES (91, replace(uuid(), '-', ''), 'roleset', '权限设置', 0, 9);
-INSERT INTO xonRole VALUES (92, replace(uuid(), '-', ''), 'rolegroup', '权限分组', 0, 9);
-INSERT INTO xonRole VALUES (93, replace(uuid(), '-', ''), 'roledist', '权限分配', 0, 9);
+INSERT INTO xonRole VALUES (91, replace(uuid(), '-', ''), 'roleset', '权限设置', 0, 10);
+INSERT INTO xonRole VALUES (92, replace(uuid(), '-', ''), 'rolegroup', '权限分组', 0, 10);
 
 CREATE TABLE xonGroup (
 	id INT(11) NOT NULL,
@@ -117,7 +118,7 @@ INSERT INTO xonGroup VALUES (50, replace(uuid(), '-', ''), '年管会');
 INSERT INTO xonGroup VALUES (60, replace(uuid(), '-', ''), '教学处');
 INSERT INTO xonGroup VALUES (70, replace(uuid(), '-', ''), '学校管理');
 INSERT INTO xonGroup VALUES (80, replace(uuid(), '-', ''), '集团管理');
-INSERT INTO xonGroup VALUES (90, replace(uuid(), '-', ''), '流量控制');
+INSERT INTO xonGroup VALUES (90, replace(uuid(), '-', ''), '地区管理');
 INSERT INTO xonGroup VALUES (99, replace(uuid(), '-', ''), '系统管理');
 
 CREATE TABLE xonGroupRole (
@@ -174,7 +175,6 @@ INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 70, 49);
 INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 70, 81);
 INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 70, 82);
 INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 70, 83);
-INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 70, 93);
 
 /**
   管理员组权限
@@ -201,7 +201,6 @@ INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 99, 82);
 INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 99, 83);
 INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 99, 91);
 INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 99, 92);
-INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 99, 93);
 
 
 CREATE TABLE xonUser (
@@ -1181,7 +1180,6 @@ AS
   SELECT a.*, b.name as user_name, b.nick_name
   FROM xonUserGroup a 
   INNER JOIN xovUser b ON a.user_id = b.id;
-
 
 /* 视图：查询学校组用户信息 */
 CREATE VIEW xovUserGroupSchool

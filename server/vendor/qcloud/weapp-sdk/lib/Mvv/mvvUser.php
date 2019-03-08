@@ -47,14 +47,14 @@ class mvvUser
    */
   public static function admins($user_id, $success_admin, $success_school, $param = '')
   {
-    $group_id = x5on::GROUP_ADMIN_VALUE;
+    $group_id = x5on::GROUP_ADMIN;
     $admin = xonUserGroup::getBy(compact('user_id', 'group_id'));
     if ($admin !== null) {
       // 系统管理员
       call_user_func($success_admin, $param);
     } else {
       // 学校管理员
-      $group_id = x5on::GROUP_SCHOOL_ADMIN_VALUE;
+      $group_id = x5on::GROUP_ADMIN_SCHOOL;
       xonUserGroup::checkByCustom(compact('user_id', 'group_id'), '不是学校管理员，不能操作');
       // 查询本校名单
       $sch_admin_user = xovUser::checkById($user_id);
@@ -66,24 +66,6 @@ class mvvUser
     }
   }
 
-  public static function userGroup($user_id, $group_id, $success) {
-    $usergroup = xovUserGroup::getBy(compact('group_id', 'user_id'));
-    if ($usergroup !== null) {
-      call_user_func($success, $usergroup);
-    }
-  }
 
-  public static function userGroupSchool($user_id, $group_id, $success) {
-    // 查找用户对应学校，有多重设置，返回第一个
-    $checked = 1;
-    $id = $user_id;
-    $user = xovUser::checkByCustom(compact('id', 'checked'), '当前用户不属于任何学校，没有操作权限');
-    $sch_id = $user->sch_id;
-
-    $usergroup = xovUserGroupSchool::getBy(compact('group_id', 'user_id', 'sch_id'));
-    if ($usergroup !== null) {
-      call_user_func($success, $usergroup);
-    }
-  }
 
 }

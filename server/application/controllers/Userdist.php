@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 use QCloud_WeApp_SDK\Mvv;
 use QCloud_WeApp_SDK\Model;
 
-class Roledist extends CI_Controller
+class Userdist extends CI_Controller
 {
   /**
    * 权限分配
@@ -12,7 +12,7 @@ class Roledist extends CI_Controller
    * 系统管理员，查询所有用户
    * 学校管理员，查询所在学校用户
    */
-  const role_name = 'roledist';
+  const role_name = 'userdist';
   public function index() {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
@@ -23,7 +23,7 @@ class Roledist extends CI_Controller
         $groups = Mvv\mvvGroup::less($user_id);
         // 系统管理：查询所有；学校管理，只能设置本校
 
-        $schools =
+        $schools = [];
 
         $this->json(['code' => 0, 'data' => compact('groups', 'schools')]);
       } catch (Exception $e) {

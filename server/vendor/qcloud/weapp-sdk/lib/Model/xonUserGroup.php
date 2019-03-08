@@ -26,4 +26,15 @@ class xonUserGroup extends cAppinfo
       self::add($user_id, $group_id);
     }
   }
+
+  public static function addArea($user_id, $group_id)
+  {
+    if ($group_id > x5on::GROUP_ADMIN_AREA) throw new \Exception('地区管理权限分组有上限');
+
+    $res = self::getBy(compact('user_id', 'group_id'));
+    if ($res === null) {
+      $uid = x5on::getUid();
+      self::insert(compact('user_id', 'group_id', 'uid'));
+    }
+  }
 }

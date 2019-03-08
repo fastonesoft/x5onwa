@@ -7,10 +7,12 @@ use \Exception;
 
 class x5on
 {
-  // 系统管理员组编号
-  const GROUP_ADMIN_VALUE = 99;
+  // 系统管理员
+  const GROUP_ADMIN = 99;
   // 学校管理员
-  const GROUP_SCHOOL_ADMIN_VALUE = 70;
+  const GROUP_ADMIN_SCHOOL = 70;
+  // 地区管理
+  const GROUP_ADMIN_AREA = 90;
 
   // 普通用户最高能分配的组号
   const GROUP_NORMAL_MAX = 2;

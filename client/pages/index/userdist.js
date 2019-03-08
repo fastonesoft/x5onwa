@@ -1,4 +1,4 @@
-// pages/index/roledist.js
+// pages/index/userdist.js
 var x5on = require('../x5on.js')
 
 Page({
@@ -10,7 +10,7 @@ Page({
   onLoad: function () {
     var that = this
     x5on.request({
-      url: x5on.url.roledist,
+      url: x5on.url.userdist,
       success(school_groups) {
         that.setData(school_groups)
       }
@@ -33,10 +33,11 @@ Page({
     }
     x5on.checkForm(e.detail.value, rules, messages, form => {
       x5on.post({
-        url: x5on.url.roledistuser,
+        url: x5on.url.userdistuser,
         data: form,
         success(users) {
-          users.length === 0 ? x5on.showError(that, '没有找到你要的用户！') : that.setData({ users })
+          that.setData({ users })
+          users.length === 0 && x5on.showError(that, '没有找到你要的用户！')
         }
       })
     }, message => {
@@ -56,7 +57,7 @@ Page({
       that.setData({ groupIndex })
       var uid = x5on.getUid(that.data.groups, groupIndex)
       x5on.post({
-        url: x5on.url.roledistmember,
+        url: x5on.url.userdistmember,
         data: { uid },
         success(members) {
           that.setData({ members })
@@ -65,7 +66,7 @@ Page({
     })
   },
 
-  roledistSubmit: function (e) {
+  userdistSubmit: function (e) {
     var that = this
     var rules = {
       user_uid: {
@@ -86,7 +87,7 @@ Page({
     x5on.checkForm(e.detail.value, rules, messages, form => {
       form.group_uid = x5on.getUid(that.data.groups, form.group)
       x5on.post({
-        url: x5on.url.roledistadd,
+        url: x5on.url.userdistadd,
         data: form,
         success(members) {
           that.setData({ members })
@@ -97,11 +98,11 @@ Page({
     })
   },
 
-  roledistRemove: function (e) {
+  userdistRemove: function (e) {
     var that = this
     var uid = e.currentTarget.dataset.uid
     x5on.post({
-      url: x5on.url.roledistdel,
+      url: x5on.url.userdistdel,
       data: { uid },
       success(members) {
         that.setData({ members })
@@ -127,7 +128,7 @@ Page({
       var groupIndex = that.data.groupIndex
       form.uid = x5on.getUid(that.data.groups, groupIndex)
       x5on.post({
-        url: x5on.url.roledistmemfind,
+        url: x5on.url.userdistmemfind,
         data: form,
         success(members) {
           that.setData({ members })
@@ -138,4 +139,8 @@ Page({
       x5on.showError(that, message)
     })
   },
+
+  returnClick: function (e) {
+    wx.navigateBack()
+  }
 })
