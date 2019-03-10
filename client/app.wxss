@@ -1,5 +1,5 @@
 @import "./pages/weui.wxss";
-page { background: #F6F6F6; }
+page { background: #F6F6F6; font-size: 16px; margin-bottom: 1em; }
 
 .qrcode-area {
   display: flex;
@@ -15,7 +15,6 @@ page { background: #F6F6F6; }
 .x5ui-mini { text-align: center; margin-top: 0.5em; }
 .x5ui-mini button { margin-top: 0px; margin-right: 20rpx; }
 .x5ui-mini button:last-child { margin-right: 0px; }
-.x5ui-bottom { margin-bottom: 1em; }
 
 .x5ui-panel { display: flex; flex-flow: row; border-bottom: solid 1px #D9D9D9; font-size: 13px; color:#999; margin: 10px 10px 5px 10px; padding-bottom: 5px; }
 .x5ui-panel_ico { width: 5px; background-color: rgb(87, 56, 221); }
@@ -23,6 +22,7 @@ page { background: #F6F6F6; }
 
 .x5ui-btn_half { width: 40%; }
 .x5ui-pick_noborder { border-right: none; }
+.x5ui-color_red { color: red; }
 
 /*增加的删除图标*/
 .remove-icon { height: 1.2em; width: 1.2em; border: none; vertical-align: middle; }

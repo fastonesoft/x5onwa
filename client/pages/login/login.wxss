@@ -2,15 +2,11 @@
 
 page {
   background-color: #fff;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
 }
 
 .container {
-  height: 375rpx;
+  height: 220px;
   position: relative;
-
 }
 
 .userinfor-bg {
@@ -20,7 +16,7 @@ page {
 
 .userinfo {
   position: absolute;
-  top: 110rpx;
+  top: 80px;
   width: 100%;
   border: none;
   display: flex;

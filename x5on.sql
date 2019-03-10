@@ -57,7 +57,7 @@ INSERT INTO xonType VALUES (1, replace(uuid(), '-', ''), '报名');
 INSERT INTO xonType VALUES (2, replace(uuid(), '-', ''), '学籍');
 INSERT INTO xonType VALUES (3, replace(uuid(), '-', ''), '考试');
 INSERT INTO xonType VALUES (4, replace(uuid(), '-', ''), '分班');
-INSERT INTO xonType VALUES (9, replace(uuid(), '-', ''), '设置');
+INSERT INTO xonType VALUES (8, replace(uuid(), '-', ''), '设置');
 INSERT INTO xonType VALUES (10, replace(uuid(), '-', ''), '安全');
 
 
@@ -94,12 +94,14 @@ INSERT INTO xonRole VALUES (47, replace(uuid(), '-', ''), 'mysameset', '同班�
 INSERT INTO xonRole VALUES (48, replace(uuid(), '-', ''), 'myrename', '班号变更', 0, 4);
 INSERT INTO xonRole VALUES (49, replace(uuid(), '-', ''), 'mydivisionset', '调动设置', 0, 4);
 
-INSERT INTO xonRole VALUES (81, replace(uuid(), '-', ''), 'areadist', '地区分配', 0, 9);
-INSERT INTO xonRole VALUES (82, replace(uuid(), '-', ''), 'userdist', '教师分配', 0, 9);
-INSERT INTO xonRole VALUES (83, replace(uuid(), '-', ''), 'usereset', '用户重置', 0, 9);
+INSERT INTO xonRole VALUES (81, replace(uuid(), '-', ''), 'areadist', '地区分配', 0, 8);
+INSERT INTO xonRole VALUES (82, replace(uuid(), '-', ''), 'grpdist', '集团设置', 0, 8);
+INSERT INTO xonRole VALUES (83, replace(uuid(), '-', ''), 'schdist', '学校设置', 0, 8);
+INSERT INTO xonRole VALUES (84, replace(uuid(), '-', ''), 'userdist', '教师分配', 0, 8);
+INSERT INTO xonRole VALUES (85, replace(uuid(), '-', ''), 'usereset', '用户重置', 0, 8);
 
-INSERT INTO xonRole VALUES (91, replace(uuid(), '-', ''), 'roleset', '权限设置', 0, 10);
-INSERT INTO xonRole VALUES (92, replace(uuid(), '-', ''), 'rolegroup', '权限分组', 0, 10);
+INSERT INTO xonRole VALUES (101, replace(uuid(), '-', ''), 'roleset', '权限设置', 0, 10);
+INSERT INTO xonRole VALUES (102, replace(uuid(), '-', ''), 'rolegroup', '权限分组', 0, 10);
 
 CREATE TABLE xonGroup (
 	id INT(11) NOT NULL,
@@ -172,9 +174,9 @@ INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 70, 46);
 INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 70, 47);
 INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 70, 48);
 INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 70, 49);
-INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 70, 81);
-INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 70, 82);
-INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 70, 83);
+
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 70, 84);
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 70, 85);
 
 /**
   管理员组权限
@@ -199,8 +201,10 @@ INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 99, 49);
 INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 99, 81);
 INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 99, 82);
 INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 99, 83);
-INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 99, 91);
-INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 99, 92);
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 99, 84);
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 99, 85);
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 99, 101);
+INSERT INTO xonGroupRole VALUES (replace(uuid(), '-', ''), 99, 102);
 
 
 CREATE TABLE xonUser (
@@ -269,12 +273,21 @@ CREATE TABLE xonArea (
   id VARCHAR(6) NOT NULL,
   uid VARCHAR(36) NOT NULL,
   name VARCHAR(20) NOT NULL,
+  user_id VARCHAR(36),
   PRIMARY KEY (id),
   UNIQUE KEY uid (uid),
   UNIQUE KEY name (name)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='地区列表';
 
-INSERT INTO xonArea VALUES ('321204', replace(uuid(), '-', ''), '泰州市姜堰区');
+
+INSERT INTO xonArea VALUES ('321200', replace(uuid(), '-', ''), '泰州市', null);
+INSERT INTO xonArea VALUES ('321202', replace(uuid(), '-', ''), '海陵区', null);
+INSERT INTO xonArea VALUES ('321203', replace(uuid(), '-', ''), '高港区', null);
+INSERT INTO xonArea VALUES ('321204', replace(uuid(), '-', ''), '姜堰区', null);
+INSERT INTO xonArea VALUES ('321281', replace(uuid(), '-', ''), '兴化市', null);
+INSERT INTO xonArea VALUES ('321282', replace(uuid(), '-', ''), '靖江市', null);
+INSERT INTO xonArea VALUES ('321283', replace(uuid(), '-', ''), '泰兴市', null);
+
 
 CREATE TABLE xonSchools (
   id VARCHAR(8) NOT NULL,
@@ -1034,8 +1047,6 @@ create view vAppinfo
 as select * from cAppinfo;
 
 
-
-
 /**
   分班考试
  */
@@ -1132,10 +1143,10 @@ ON a.child_id = b.child_id;
 
 
 
-
 /**
   视图：非系统管理用户
  */
+
 CREATE VIEW xovUser
 AS
   SELECT a.*
@@ -1147,6 +1158,29 @@ CREATE VIEW xovUserAll
 AS
   SELECT *
   FROM xonUser;
+
+
+
+create view xovArea
+as
+  select a.*,
+    (select b.name from xonArea b where b.id = concat(left(a.id, 4), '00')) as city,
+    (select c.name from xonArea c where c.id = concat(left(a.id, 2), '0000')) as prov,
+    d.name as user_name, d.nick_name
+  from xonArea a left join xovUserAll d on a.user_id = d.id;
+
+create view xovAreas
+as
+  select id, uid,
+    IF(right(id, 4)='0000', 1, IF(right(id, 2)='00', 2, 3)) as area_type,
+    name as area_name,
+    concat(left(id, 4), '00') as city_id,
+    IF(name=city, name, concat(city, name)) as city_name,
+    concat(left(id, 2), '0000') as prov_id,
+    IF(name=prov, name, IF(name=city, concat(prov, name), concat(prov, city, name))) as prov_name,
+    user_name, nick_name
+  from xovArea;
+
 
 
 /* 视图：普通用户 */

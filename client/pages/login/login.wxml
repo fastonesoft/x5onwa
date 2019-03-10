@@ -15,7 +15,7 @@
 </block>
 
 <form bindsubmit="regSubmit" wx:if="{{notreg}}">
-  <view class="weui-cells">
+  <view class="weui-cells weui-cells_after-title">
     <view class="weui-cell weui-cell_input">
       <view class="weui-cell__hd">
         <view class="weui-label">用户姓名</view>
@@ -39,7 +39,7 @@
 </form>
 
 <block wx:if="{{reged}}">
-  <view class="weui-cells">
+  <view class="weui-cells weui-cells_after-title">
     <view class="weui-cell">
       <view class="weui-cell__bd">用户姓名</view>
       <view class="weui-cell__ft">{{user.name}}</view>
@@ -64,5 +64,11 @@
         </view>
       </label>
     </radio-group>
+  </view>
+</block>
+
+<block wx:if="{{user.fixed}}">
+  <view class="weui-cells__tips x5ui-color_red">
+    帐号已冻结，具体原因，请联系管理员！
   </view>
 </block>

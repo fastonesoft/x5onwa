@@ -32,6 +32,6 @@
   </view>
 </form>
 
-<view class="weui-btn-area x5ui-bottom">
+<view class="weui-btn-area">
   <button type="primary" bindtap="returnClick">返回</button>
 </view>
