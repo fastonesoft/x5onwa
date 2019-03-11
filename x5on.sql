@@ -96,7 +96,7 @@ INSERT INTO xonRole VALUES (49, replace(uuid(), '-', ''), 'mydivisionset', '调�
 
 INSERT INTO xonRole VALUES (81, replace(uuid(), '-', ''), 'areadist', '地区分配', 0, 8);
 INSERT INTO xonRole VALUES (82, replace(uuid(), '-', ''), 'grpdist', '集团设置', 0, 8);
-INSERT INTO xonRole VALUES (83, replace(uuid(), '-', ''), 'schdist', '学校设置', 0, 8);
+INSERT INTO xonRole VALUES (83, replace(uuid(), '-', ''), 'schdist', '学校注册', 0, 8);
 INSERT INTO xonRole VALUES (84, replace(uuid(), '-', ''), 'userdist', '教师分配', 0, 8);
 INSERT INTO xonRole VALUES (85, replace(uuid(), '-', ''), 'usereset', '用户重置', 0, 8);
 
@@ -118,9 +118,9 @@ INSERT INTO xonGroup VALUES (3, replace(uuid(), '-', ''), '科任老师');
 INSERT INTO xonGroup VALUES (4, replace(uuid(), '-', ''), '班主任');
 INSERT INTO xonGroup VALUES (50, replace(uuid(), '-', ''), '年管会');
 INSERT INTO xonGroup VALUES (60, replace(uuid(), '-', ''), '教学处');
-INSERT INTO xonGroup VALUES (70, replace(uuid(), '-', ''), '学校管理');
+INSERT INTO xonGroup VALUES (70, replace(uuid(), '-', ''), '学校注册');
 INSERT INTO xonGroup VALUES (80, replace(uuid(), '-', ''), '集团管理');
-INSERT INTO xonGroup VALUES (90, replace(uuid(), '-', ''), '地区管理');
+INSERT INTO xonGroup VALUES (90, replace(uuid(), '-', ''), '地区分配');
 INSERT INTO xonGroup VALUES (99, replace(uuid(), '-', ''), '系统管理');
 
 CREATE TABLE xonGroupRole (
@@ -1172,13 +1172,13 @@ as
 create view xovAreas
 as
   select id, uid,
-    IF(right(id, 4)='0000', 1, IF(right(id, 2)='00', 2, 3)) as area_type,
+    IF(right(id, 4)='0000', 0, IF(right(id, 2)='00', 1, 2)) as area_type,
     name as area_name,
     concat(left(id, 4), '00') as city_id,
     IF(name=city, name, concat(city, name)) as city_name,
     concat(left(id, 2), '0000') as prov_id,
     IF(name=prov, name, IF(name=city, concat(prov, name), concat(prov, city, name))) as prov_name,
-    user_name, nick_name
+    user_id, user_name, nick_name
   from xovArea;
 
 

@@ -9,7 +9,6 @@
     "pages/index/regquery",
     "pages/index/roleset",
     "pages/index/rolegroup",
-    "pages/index/areadist",
     "pages/index/userset",
     "pages/index/usereset",
     "pages/index/userdist",
@@ -17,6 +16,9 @@
     "pages/index/student",
     "pages/index/studenroll",
     "pages/index/students",
+
+    "pages/index/areadist",
+    "pages/index/area_add",
     
     "pages/index/stud_add",
     "pages/index/stud_modi",

@@ -53,6 +53,13 @@ var doUrl = {
   userdistmemfind: `${host}/weapp/userdist/memfind`,
 
 
+  // 地区分配
+  areadist: `${host}/weapp/areadist`,
+  areadistadd: `${host}/weapp/areadist/add`,
+  areadistuser: `${host}/weapp/areadist/user`,
+  areadistdist: `${host}/weapp/areadist/dist`,
+  areadistmember: `${host}/weapp/areadist/member`,
+
   // 报名
   regstud: `${host}/weapp/studreg`,
   regstudstep: `${host}/weapp/studreg/step`,
@@ -60,6 +67,8 @@ var doUrl = {
   regstudcheck: `${host}/weapp/studreg/check`,
   regstudcancel: `${host}/weapp/studreg/cancel`,
   regstudstudenroll: `${host}/weapp/studreg/studenroll`,
+
+
 
 
 
@@ -229,7 +238,8 @@ var doGetRadio = function (arrs, success, fail) {
   var find = null
   for (let arr of arrs) {
     if (arr.checked) {
-      find = arr; break
+      find = arr;
+      break
     }
   }
   find && typeof success === 'function' && success(find)
@@ -240,7 +250,7 @@ var doGetRadio = function (arrs, success, fail) {
 var doGetCheckbox = function (arrs, success, fail) {
   var res = []
   for (let arr of arrs) {
-    arr.checked ? res.push(arr) : void (0)
+    arr.checked ? res.push(arr) : void(0)
   }
   res.length > 0 ? typeof success === 'function' && success(res) : typeof fail === 'function' && fail()
 }
@@ -258,7 +268,10 @@ var doSetCheckbox = function (arrs, uids, success) {
   for (let arr of arrs) {
     var checked = false
     for (let uid of uids) {
-      if (arr.uid === uid) { checked = true; break }
+      if (arr.uid === uid) {
+        checked = true;
+        break
+      }
     }
     arr.checked = checked
   }
@@ -295,7 +308,7 @@ var doRequest = function (options) {
       // error为文字提示
       wx.hideToast()
       typeof options.fail === 'function' && options.fail(error)
-      options.donshow ? void (0) : util.showModel('查询失败', error)
+      options.donshow ? void(0) : util.showModel('查询失败', error)
     }
   })
 };
@@ -306,7 +319,9 @@ var doPost = function (options) {
     url: options.url,
     data: options.data,
     method: 'POST',
-    header: { 'content-type': 'application/x-www-form-urlencoded' },
+    header: {
+      'content-type': 'application/x-www-form-urlencoded'
+    },
     success(result) {
       wx.hideToast()
       var res = result.data
@@ -319,7 +334,7 @@ var doPost = function (options) {
     fail(error) {
       wx.hideToast()
       typeof options.fail === 'function' && options.fail(error)
-      options.donshow ? void (0) : util.showModel('请求失败', error)
+      options.donshow ? void(0) : util.showModel('请求失败', error)
     }
   })
 };
@@ -328,7 +343,7 @@ var doPost = function (options) {
 var doAuth = function (authString, success, fail) {
   wx.getSetting({
     success(res) {
-      var auth = !!res.authSetting[authString]
+      var auth = !!res.authSetting[authString] 
       !auth && typeof fail === 'function' && fail()
       auth && typeof success === 'function' && success()
     }

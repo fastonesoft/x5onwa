@@ -1,66 +1,108 @@
-// pages/index/areadist.js
+var x5on = require('../x5on.js')
+
 Page({
 
-  /**
-   * 页面的初始数据
-   */
+
   data: {
+    areatypes: ['省份', '地市', '区县'],
+  },
+
+  findSubmit: function (e) {
+    var that = this
+    var rules = {
+      name: {
+        required: true,
+        chinese: true,
+        rangelength: [1, 3],
+      }
+    }
+    var messages = {
+      name: {
+        required: '用户姓名'
+      }
+    }
+    x5on.checkForm(e.detail.value, rules, messages, form => {
+      x5on.post({
+        url: x5on.url.areadistuser,
+        data: form,
+        success(users) {
+          that.setData({ users })
+          users.length === 0 && x5on.showError(that, '没有找到你要的用户！')
+        }
+      })
+    }, message => {
+      x5on.showError(that, message)
+    })
+  },
+
+  userChange: function (e) {
+    x5on.setRadio(this.data.users, e.detail.value, users => {
+      this.setData({ users })
+    })
+  },
+
+  areatypeChange: function (e) {
+    var that = this
+    x5on.setPick(e, areatypeIndex => {
+      that.setData({ areatypeIndex })
+      //
+      x5on.post({
+        url: x5on.url.areadist,
+        data: { areatype: areatypeIndex },
+        success(areas_members) {
+          areas_members.areaIndex = -1
+          that.setData(areas_members)
+        }
+      })
+    })
+  },
+
+  areaChange: function (e) {
+    var that = this
+    x5on.setPick(e, areaIndex => {
+      that.setData({ areaIndex })
+    })
+  },
+
+  areadistSubmit: function (e) {
+    var that = this
+    var rules = {
+      user_uid: {
+        required: true,
+      },
+      area: {
+        required: true,
+      }
+    }
+    var messages = {
+      user_uid: {
+        required: '用户选择'
+      },
+      area: {
+        required: '地区设置'
+      }
+    }
+    x5on.checkForm(e.detail.value, rules, messages, form => {
+      form.area_uid = x5on.getUid(that.data.areas, form.area)
+      x5on.post({
+        url: x5on.url.areadistdist,
+        data: form,
+        success(members) {
+          that.setData({ members })
+        }
+      })
+    }, message => {
+      x5on.showError(that, message)
+    })
 
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
+  addClick: function (e) {
+    wx.navigateTo({ url: '/pages/index/area_add' })
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  returnClick: function (e) {
+    wx.navigateBack()
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

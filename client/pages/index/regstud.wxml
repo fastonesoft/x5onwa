@@ -1,6 +1,6 @@
 <!-- pages/index/regstud.wxml -->
-
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
+
 <view class="weui-cells__title">地区类型</view>
 <view class="weui-cells weui-cells_after-title">
   <view class="weui-cell weui-cell_select">

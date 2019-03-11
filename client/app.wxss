@@ -21,6 +21,7 @@ page { background: #F6F6F6; font-size: 16px; margin-bottom: 1em; }
 .x5ui-panel_title { text-indent: 5px; }
 
 .x5ui-btn_half { width: 40%; }
+.x5ui-btn_half_half { width: 20%; }
 .x5ui-pick_noborder { border-right: none; }
 .x5ui-color_red { color: red; }
 
