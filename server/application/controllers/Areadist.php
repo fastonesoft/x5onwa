@@ -15,9 +15,7 @@ class Areadist extends CI_Controller {
         $param = $_POST;
         $area_type = $param['areatype'];
         $areas = Model\xovAreas::getsBy(compact('area_type'));
-
-        $user_id = null;
-        $members = Model\xovAreas::customsBy(compact('area_type'), compact('user_id'), 'is not');
+        $members = Model\xovAreasDisted::getsBy(compact('area_type'));
 
         $this->json(['code' => 0, 'data' => compact('areas', 'members')]);
       } catch (Exception $e) {
@@ -90,8 +88,7 @@ class Areadist extends CI_Controller {
         $param = $_POST;
         $area_type = $param['areatype'];
 
-        $user_id = null;
-        $result = Model\xovAreas::customsBy(compact('area_type'), compact('user_id'), 'is not');
+        $result = Model\xovAreasDisted::getsBy(compact('area_type'));
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {

@@ -1161,17 +1161,17 @@ AS
 
 
 
-create view xovArea
-as
-  select a.*,
+CREATE VIEW xovArea
+AS
+  SELECT a.*,
     (select b.name from xonArea b where b.id = concat(left(a.id, 4), '00')) as city,
     (select c.name from xonArea c where c.id = concat(left(a.id, 2), '0000')) as prov,
     d.name as user_name, d.nick_name
-  from xonArea a left join xovUserAll d on a.user_id = d.id;
+  FROM xonArea a left join xovUserAll d on a.user_id = d.id;
 
-create view xovAreas
-as
-  select id, uid,
+create VIEW xovAreas
+AS
+  SELECT id, uid,
     IF(right(id, 4)='0000', 0, IF(right(id, 2)='00', 1, 2)) as area_type,
     name as area_name,
     concat(left(id, 4), '00') as city_id,
@@ -1179,9 +1179,12 @@ as
     concat(left(id, 2), '0000') as prov_id,
     IF(name=prov, name, IF(name=city, concat(prov, name), concat(prov, city, name))) as prov_name,
     user_id, user_name, nick_name
-  from xovArea;
+  FROM xovArea;
 
-
+CREATE VIEW xovAreasDisted
+AS
+  SELECT *
+  FROM xovAreas WHERE user_id IS NOT NULL;
 
 /* 视图：普通用户 */
 CREATE VIEW xovUserOnly

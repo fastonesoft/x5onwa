@@ -287,7 +287,6 @@ class Mysql
    * @param array  $data SQL 语句的参数值
    */
   public static function raw ($sql, $execValues = []) {
-    var_dump($sql);
     $query = self::getInstance()->prepare($sql);
     $result = $query->execute($execValues);
     if ($result) {
