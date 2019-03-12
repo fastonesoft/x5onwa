@@ -2,7 +2,6 @@ var x5on = require('../x5on.js')
 
 Page({
 
-
   data: {
     areatypes: ['省份', '地市', '区县'],
   },
@@ -48,7 +47,7 @@ Page({
       //
       x5on.post({
         url: x5on.url.areadist,
-        data: { areatype: areatypeIndex },
+        data: { area_type: areatypeIndex },
         success(areas_members) {
           areas_members.areaIndex = -1
           that.setData(areas_members)
@@ -72,6 +71,9 @@ Page({
       },
       area: {
         required: true,
+      },
+      areatype: {
+        required: true,
       }
     }
     var messages = {
@@ -80,10 +82,14 @@ Page({
       },
       area: {
         required: '地区设置'
+      },
+      areatype: {
+        required: '地区类型'
       }
     }
     x5on.checkForm(e.detail.value, rules, messages, form => {
       form.area_uid = x5on.getUid(that.data.areas, form.area)
+      form.area_type = x5on.getId(that.data.areatypes, form.areatype)
       x5on.post({
         url: x5on.url.areadistdist,
         data: form,
@@ -95,6 +101,19 @@ Page({
       x5on.showError(that, message)
     })
 
+  },
+
+  areadistRemove: function (e) {
+    var that = this
+    var uid = e.currentTarget.dataset.uid
+    x5on.post({
+      url: x5on.url.areadistdel,
+      data: { uid },
+      success(number) {
+        var members = x5on.delValue(that.data.members, 'uid', uid)
+        that.setData({ members })
+      }
+    })
   },
 
   addClick: function (e) {

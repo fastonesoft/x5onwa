@@ -58,6 +58,7 @@ var doUrl = {
   areadistadd: `${host}/weapp/areadist/add`,
   areadistuser: `${host}/weapp/areadist/user`,
   areadistdist: `${host}/weapp/areadist/dist`,
+  areadistdel: `${host}/weapp/areadist/del`,
   areadistmember: `${host}/weapp/areadist/member`,
 
   // 报名

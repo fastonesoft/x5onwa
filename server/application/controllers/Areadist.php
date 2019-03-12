@@ -13,7 +13,7 @@ class Areadist extends CI_Controller {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
         $param = $_POST;
-        $area_type = $param['areatype'];
+        $area_type = $param['area_type'];
         $areas = Model\xovAreas::getsBy(compact('area_type'));
         $members = Model\xovAreasDisted::getsBy(compact('area_type'));
 
@@ -82,11 +82,28 @@ class Areadist extends CI_Controller {
     });
   }
 
+  public function del() {
+    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
+      try {
+        $param = $_POST;
+        $uid = $param['uid'];
+
+        $result = Mvv\mvvArea::del($uid);
+
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
+
   public function member() {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
         $param = $_POST;
-        $area_type = $param['areatype'];
+        $area_type = $param['area_type'];
 
         $result = Model\xovAreasDisted::getsBy(compact('area_type'));
 
