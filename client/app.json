@@ -19,7 +19,12 @@
 
     "pages/index/areadist",
     "pages/index/area_add",
-    
+
+    "pages/index/grpdist",
+    "pages/index/grp_add",
+    "pages/index/schdist",
+    "pages/index/sch_add",
+
     "pages/index/stud_add",
     "pages/index/stud_modi",
     "pages/index/stud_auth",

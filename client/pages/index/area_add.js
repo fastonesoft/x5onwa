@@ -1,66 +1,44 @@
 // pages/index/area_add.js
+var x5on = require('../x5on.js')
+
 Page({
 
-  /**
-   * 页面的初始数据
-   */
-  data: {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  areaddSubmit: function (e) {
+    var that = this;
+    var rules = {
+      id: {
+        required: true,
+        digits: true,
+        minlength: 6,
+        maxlength: 6,
+      },
+      name: {
+        required: true,
+        chinese: true,
+        minlength: 2,
+        maxlength: 20,
+      }
+    }
+    var messages = {
+      id: {
+        required: '地区编码'
+      },
+      name: {
+        required: '地区名称'
+      }
+    }
+    x5on.checkForm(e.detail.value, rules, messages, form => {
+      x5on.post({
+        url: x5on.url.areadistadd,
+        data: form,
+        success() {
+          x5on.showSuccess('地区添加成功')
+          wx.navigateBack()
+        }
+      })
+    }, mes => {
+      x5on.showError(that, mes)
+    })
   }
+
 })

@@ -22,7 +22,12 @@ class mvvArea
     xovAreasDisted::existByCustom(compact('user_id'), '用户已分配管理地区，不得重复分配');
     // 分配
     xonArea::setsById(compact('user_id'), $area_id);
-
+    // 分配组权限
+    $group_id = x5on::GROUP_ADMIN_AREA;
+    $user_group = xonUserGroup::getBy(compact('user_id', 'group_id'));
+    if ($user_group === null) {
+      xonUserGroup::addArea($user_id, $group_id);
+    }
     return xovAreas::getsById($area_id);
   }
 

@@ -10,6 +10,7 @@ class xonArea extends cAppinfo
   public static function add($id, $name)
   {
     self::existByIdCustom($id, '地区编号已存在');
+    self::existByCustom(compact('name'), '地区名称已存在');
     //
     $uid = x5on::getUid();
     $user_id = null;

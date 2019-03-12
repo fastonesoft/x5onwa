@@ -1,0 +1,55 @@
+<!--pages/index/grpdist.wxml-->
+
+<form bindsubmit="findSubmit">
+	<view class="weui-cells__title">用户查询</view>
+	<view class="weui-cells weui-cells_after-title">
+		<view class="weui-cell weui-cell_input weui-cell_vcode">
+			<view class="weui-cell__hd">
+				<view class="weui-label">用户姓名</view>
+			</view>
+			<view class="weui-cell__bd">
+				<input class="weui-input" placeholder="请输入用户姓名" name="name" type="text" maxlength="4" />
+			</view>
+			<view class="weui-cell__ft">
+				<button type="normal" form-type="submit">查询</button>
+			</view>
+		</view>
+	</view>
+</form>
+
+<form bindsubmit="areadistSubmit">
+	<view wx:if="{{users.length>0}}">
+		<view class="weui-cells__title">用户选择</view>
+		<view class="weui-cells weui-cells_after-title">
+			<radio-group name="user_uid" bindchange="userChange">
+				<label class="weui-cell weui-check__label" wx:for="{{users}}" wx:key="uid">
+					<radio class="weui-check" value="{{item.uid}}" checked="{{item.checked}}" />
+					<view class="weui-cell__bd">{{item.name}}({{item.nick_name}})</view>
+					<view class="weui-cell__ft weui-cell__ft_in-radio">
+						<icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.checked}}"></icon>
+						<icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{item.checked}}"></icon>
+					</view>
+				</label>
+			</radio-group>
+		</view>
+	</view>
+
+	<view class="weui-cells__title">地区设置</view>
+	<view class="weui-cells weui-cells_after-title">
+		<view class="weui-cell weui-cell_select">
+			<view class="weui-cell__hd weui-cell__hd_in-select-after">
+				<view class="weui-label">地区选择</view>
+			</view>
+			<view class="weui-cell__bd">
+				<picker name="area" bindchange="areaChange" value="{{areaIndex}}" range="{{areas}}" range-key="name"
+					disabled="{{!areas||areas.length==0}}">
+					<view class="weui-select weui-select_in-select-after">{{areas[areaIndex].name}}</view>
+				</picker>
+			</view>
+		</view>
+	</view>
+	<view class="weui-cells__tips x5ui-mini">
+		<button class="weui-btn mini-btn" type="primary" size="mini" bindtap="addClick">添加</button>
+		<button class="weui-btn mini-btn" type="warn" size="mini" form-type="submit">提交</button>
+	</view>
+</form>
