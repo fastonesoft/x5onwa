@@ -4,20 +4,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 use QCloud_WeApp_SDK\Mvv;
 use QCloud_WeApp_SDK\Model;
 
-class Grpdist extends CI_Controller {
+class Schsdist extends CI_Controller {
   /**
    * 集团设置
    */
-  const role_name = 'grpdist';
+  const role_name = 'schsdist';
   public function index() {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
         // 地区管辖的集团列表
         $user_id = $userinfor->unionId;
-        $areas = Model\xovAreasDisted::getsBy(compact('user_id'));
+        $areas = Model\xovAreasDist::getsBy(compact('user_id'));
+        $schs = Model\xovSchools::getsBy(compact('user_id'));
         $members = Model\xovSchoolsDist::getsBy(compact('user_id'));
 
-        $this->json(['code' => 0, 'data' => compact('areas', 'members')]);
+        $this->json(['code' => 0, 'data' => compact('areas', 'schs', 'members')]);
       } catch (Exception $e) {
         $this->json(['code' => 1, 'data' => $e->getMessage()]);
       }
@@ -70,10 +71,10 @@ class Grpdist extends CI_Controller {
       try {
         $param = $_POST;
         $user_uid = $param['user_uid'];
-        $area_uid = $param['area_uid'];
+        $schs_uid = $param['schs_uid'];
 
         // 地区分配、添加用户进组
-        $result = Mvv\mvvArea::dist($user_uid, $area_uid);
+        $result = Mvv\mvvSchools::dist($user_uid, $schs_uid);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -90,7 +91,23 @@ class Grpdist extends CI_Controller {
         $param = $_POST;
         $uid = $param['uid'];
 
-        $result = Mvv\mvvArea::del($uid);
+        $result = Mvv\mvvSchools::del($uid);
+
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
+
+  public function schs() {
+    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
+      try {
+        $param = $_POST;
+        $area_id = $param['area_id'];
+        $result = Model\xovSchools::getsBy(compact('area_id'));
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {

@@ -1,4 +1,4 @@
-<!--pages/index/grp_add.wxml-->
+<!--pages/index/schs_add.wxml-->
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
 <form bindsubmit="grpaddSubmit">

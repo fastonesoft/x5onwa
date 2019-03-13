@@ -5,7 +5,7 @@ use QCloud_WeApp_SDK\Model\x5on;
 use QCloud_WeApp_SDK\Model\xonArea;
 use QCloud_WeApp_SDK\Model\xonUserGroup;
 use QCloud_WeApp_SDK\Model\xovAreas;
-use QCloud_WeApp_SDK\Model\xovAreasDisted;
+use QCloud_WeApp_SDK\Model\xovAreasDist;
 use QCloud_WeApp_SDK\Model\xovUser;
 
 class mvvArea
@@ -18,8 +18,8 @@ class mvvArea
     $area_id = $area->id;
 
     // 检测是否已分配
-    xovAreasDisted::existByIdCustom($area_id, '地区已分配管理，请删除再重试');
-    xovAreasDisted::existByCustom(compact('user_id'), '用户已分配管理地区，不得重复分配');
+    xovAreasDist::existByIdCustom($area_id, '地区已分配管理，请删除再重试');
+    xovAreasDist::existByCustom(compact('user_id'), '用户已分配管理地区，不得重复分配');
     // 分配
     xonArea::setsById(compact('user_id'), $area_id);
     // 分配组权限

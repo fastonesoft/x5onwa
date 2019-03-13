@@ -52,7 +52,6 @@ var doUrl = {
   userdistmember: `${host}/weapp/userdist/member`,
   userdistmemfind: `${host}/weapp/userdist/memfind`,
 
-
   // 地区分配
   areadist: `${host}/weapp/areadist`,
   areadistadd: `${host}/weapp/areadist/add`,
@@ -60,6 +59,15 @@ var doUrl = {
   areadistdist: `${host}/weapp/areadist/dist`,
   areadistdel: `${host}/weapp/areadist/del`,
   areadistmember: `${host}/weapp/areadist/member`,
+
+  // 集团分配
+  schsdist: `${host}/weapp/schsdist`,
+  schsdistadd: `${host}/weapp/schsdist/add`,
+  schsdistuser: `${host}/weapp/schsdist/user`,
+  schsdistdist: `${host}/weapp/schsdist/dist`,
+  schsdistschs: `${host}/weapp/schsdist/schs`,
+  schsdistdel: `${host}/weapp/schsdist/del`,
+  schsdistmember: `${host}/weapp/schsdist/member`,
 
   // 报名
   regstud: `${host}/weapp/studreg`,
@@ -251,7 +259,7 @@ var doGetRadio = function (arrs, success, fail) {
 var doGetCheckbox = function (arrs, success, fail) {
   var res = []
   for (let arr of arrs) {
-    arr.checked ? res.push(arr) : void(0)
+    arr.checked ? res.push(arr) : void (0)
   }
   res.length > 0 ? typeof success === 'function' && success(res) : typeof fail === 'function' && fail()
 }
@@ -309,7 +317,7 @@ var doRequest = function (options) {
       // error为文字提示
       wx.hideToast()
       typeof options.fail === 'function' && options.fail(error)
-      options.donshow ? void(0) : util.showModel('查询失败', error)
+      options.donshow ? void (0) : util.showModel('查询失败', error)
     }
   })
 };
@@ -335,7 +343,7 @@ var doPost = function (options) {
     fail(error) {
       wx.hideToast()
       typeof options.fail === 'function' && options.fail(error)
-      options.donshow ? void(0) : util.showModel('请求失败', error)
+      options.donshow ? void (0) : util.showModel('请求失败', error)
     }
   })
 };
@@ -344,7 +352,7 @@ var doPost = function (options) {
 var doAuth = function (authString, success, fail) {
   wx.getSetting({
     success(res) {
-      var auth = !!res.authSetting[authString] 
+      var auth = !!res.authSetting[authString]
       !auth && typeof fail === 'function' && fail()
       auth && typeof success === 'function' && success()
     }

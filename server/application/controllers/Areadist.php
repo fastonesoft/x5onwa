@@ -15,7 +15,8 @@ class Areadist extends CI_Controller {
         $param = $_POST;
         $area_type = $param['area_type'];
         $areas = Model\xovAreas::getsBy(compact('area_type'));
-        $members = Model\xovAreasDisted::getsBy(compact('area_type'));
+        $members = Model\xovAreasDist::getsBy(compact('area_type'));
+        // todo: 所有刷新 都用这个？
 
         $this->json(['code' => 0, 'data' => compact('areas', 'members')]);
       } catch (Exception $e) {
@@ -105,7 +106,7 @@ class Areadist extends CI_Controller {
         $param = $_POST;
         $area_type = $param['area_type'];
 
-        $result = Model\xovAreasDisted::getsBy(compact('area_type'));
+        $result = Model\xovAreasDist::getsBy(compact('area_type'));
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {

@@ -9,10 +9,12 @@ class x5on
 {
   // 系统管理员
   const GROUP_ADMIN = 99;
-  // 学校管理员
-  const GROUP_ADMIN_SCHOOL = 70;
   // 地区管理
   const GROUP_ADMIN_AREA = 90;
+  // 集团管理
+  const GROUP_ADMIN_SCHOOLS = 80;
+  // 学校管理员
+  const GROUP_ADMIN_SCHOOL = 70;
 
   // 普通用户最高能分配的组号
   const GROUP_NORMAL_MAX = 2;

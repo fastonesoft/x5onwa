@@ -20,8 +20,9 @@
     "pages/index/areadist",
     "pages/index/area_add",
 
-    "pages/index/grpdist",
-    "pages/index/grp_add",
+    "pages/index/schsdist",
+    "pages/index/schs_add",
+    
     "pages/index/schdist",
     "pages/index/sch_add",
 

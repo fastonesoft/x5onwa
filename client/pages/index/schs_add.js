@@ -1,4 +1,4 @@
-// pages/index/grp_add.js
+// pages/index/schs_add.js
 Page({
 
   /**

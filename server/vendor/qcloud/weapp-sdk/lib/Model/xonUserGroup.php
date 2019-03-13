@@ -37,4 +37,26 @@ class xonUserGroup extends cAppinfo
       self::insert(compact('user_id', 'group_id', 'uid'));
     }
   }
+
+  public static function addSchs($user_id, $group_id)
+  {
+    if ($group_id > x5on::GROUP_ADMIN_SCHOOLS) throw new \Exception('集团管理权限分组有上限');
+
+    $res = self::getBy(compact('user_id', 'group_id'));
+    if ($res === null) {
+      $uid = x5on::getUid();
+      self::insert(compact('user_id', 'group_id', 'uid'));
+    }
+  }
+
+  public static function addSch($user_id, $group_id)
+  {
+    if ($group_id > x5on::GROUP_ADMIN_SCHOOL) throw new \Exception('学校管理权限分组有上限');
+
+    $res = self::getBy(compact('user_id', 'group_id'));
+    if ($res === null) {
+      $uid = x5on::getUid();
+      self::insert(compact('user_id', 'group_id', 'uid'));
+    }
+  }
 }
