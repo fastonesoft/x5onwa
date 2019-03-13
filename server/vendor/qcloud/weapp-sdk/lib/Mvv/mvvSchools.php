@@ -1,14 +1,7 @@
 <?php
 namespace QCloud_WeApp_SDK\Mvv;
 
-use QCloud_WeApp_SDK\Model\x5on;
-use QCloud_WeApp_SDK\Model\xonArea;
-use QCloud_WeApp_SDK\Model\xonUserGroup;
-use QCloud_WeApp_SDK\Model\xovAreas;
-use QCloud_WeApp_SDK\Model\xovAreasDisted;
-use QCloud_WeApp_SDK\Model\xovUser;
-
-class mvvArea
+class mvvSchools
 {
 
   public static function dist($user_uid, $area_uid) {
@@ -41,5 +34,6 @@ class mvvArea
     $user_id = null;
     return xonArea::setsByUid(compact('user_id'), $uid);
   }
+
 
 }
