@@ -31,6 +31,11 @@ class mvvSchools
     return xovSchools::getsById($schs_id);
   }
 
+  public static function schs($user_id) {
+    xovUser::checkById($user_id);
+    return xovSchools::getBy(compact('user_id'));
+  }
+
   public static function del($uid) {
     $schs = xovSchools::checkByUid($uid);
     // 二、删除地区管理组用户记录

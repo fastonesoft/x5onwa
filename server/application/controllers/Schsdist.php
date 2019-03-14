@@ -4,12 +4,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 use QCloud_WeApp_SDK\Mvv;
 use QCloud_WeApp_SDK\Model;
 
-class Schsdist extends CI_Controller {
+class Schsdist extends CI_Controller
+{
   /**
    * 集团设置
    */
   const role_name = 'schsdist';
-  public function index() {
+
+  public function index()
+  {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
         // 地区管辖的集团列表
@@ -27,11 +30,12 @@ class Schsdist extends CI_Controller {
     });
   }
 
-  public function user() {
+  public function user()
+  {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
         $param = $_POST;
-        $name =Model\x5on::getLike($param['name']) ;
+        $name = Model\x5on::getLike($param['name']);
 
         // 用户查找
         $result = Model\xovUser::likes(compact('name'));
@@ -45,7 +49,8 @@ class Schsdist extends CI_Controller {
     });
   }
 
-  public function add() {
+  public function add()
+  {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
         $param = $_POST;
@@ -66,7 +71,8 @@ class Schsdist extends CI_Controller {
     });
   }
 
-  public function dist() {
+  public function dist()
+  {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
         $param = $_POST;
@@ -85,7 +91,8 @@ class Schsdist extends CI_Controller {
     });
   }
 
-  public function del() {
+  public function del()
+  {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
         $param = $_POST;
@@ -102,12 +109,12 @@ class Schsdist extends CI_Controller {
     });
   }
 
-  public function schs() {
+  public function schs()
+  {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
-        $param = $_POST;
-        $area_id = $param['area_id'];
-        $result = Model\xovSchools::getsBy(compact('area_id'));
+        $user_id = $userinfor->unionId;
+        $result = Mvv\mvvSchools::schs($user_id);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -118,7 +125,8 @@ class Schsdist extends CI_Controller {
     });
   }
 
-  public function member() {
+  public function member()
+  {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
         $user_id = $userinfor->unionId;
