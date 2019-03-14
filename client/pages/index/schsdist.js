@@ -60,8 +60,9 @@ Page({
 			x5on.post({
 				data: { area_id },
         url: x5on.url.schsdistschs,
-        success(schs) {
-          that.setData({ schs, schsIndex: -1 })
+        success(schs_members) {
+					schs_members.schsIndex = -1
+          that.setData(schs_members)
         }
       })
     })
@@ -79,28 +80,21 @@ Page({
     var rules = {
       user_uid: {
         required: true,
-      },
+			},
       schs: {
         required: true,
       },
-      schstype: {
-        required: true,
-      }
     }
     var messages = {
       user_uid: {
         required: '用户选择'
-      },
+			},
       schs: {
-        required: '地区设置'
+        required: '集团名称'
       },
-      schstype: {
-        required: '地区类型'
-      }
     }
     x5on.checkForm(e.detail.value, rules, messages, form => {
-      form.schs_uid = x5on.getUid(that.data.schss, form.schs)
-      form.schs_type = x5on.getId(that.data.schstypes, form.schstype)
+      form.schs_uid = x5on.getUid(that.data.schs, form.schs)
       x5on.post({
         url: x5on.url.schsdistdist,
         data: form,
@@ -112,7 +106,35 @@ Page({
       x5on.showError(that, message)
     })
 
-  },
+	},
+	
+	memberSubmit: function (e) {
+		var that = this
+		var rules = {
+			name: {
+				required: true,
+				chinese: true,
+				rangelength: [1, 3],
+			}
+		}
+		var messages = {
+			name: {
+				required: '成员姓名'
+			}
+		}
+		x5on.checkForm(e.detail.value, rules, messages, form => {
+			x5on.post({
+				url: x5on.url.schsdistmemfind,
+				data: form,
+				success(members) {
+					that.setData({ members })
+					members.length === 0 && x5on.showError(that, '没有找到你要的成员！')
+				}
+			})
+		}, message => {
+			x5on.showError(that, message)
+		})
+	},
 
   schsdistRemove: function (e) {
     var that = this
@@ -128,7 +150,9 @@ Page({
   },
 
   addClick: function (e) {
-    wx.navigateTo({ url: '/pages/index/schs_add' })
+		var area_id = x5on.getId(this.data.areas, this.data.areaIndex)
+		area_id && wx.navigateTo({ url: '/pages/index/schs_add' })
+		!area_id && x5on.showError(this, '地区没有设置')
   },
 
   returnClick: function (e) {

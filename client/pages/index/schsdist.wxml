@@ -1,4 +1,5 @@
 <!--pages/index/schsdist.wxml-->
+<view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
 <form bindsubmit="findSubmit">
 	<view class="weui-cells__title">用户查询</view>
@@ -44,9 +45,9 @@
 				</picker>
 			</view>
 			<view class="weui-cell__bd weui-cell__hd_in-select-after">
-				<picker bindchange="schsChange" name="schs" value="{{schsIndex}}" range="{{schss}}" range-key="city_name"
-					disabled="{{!schss||schss.length==0}}">
-					<view class="weui-select weui-select_in-select-after">{{schss[schsIndex].city_name}}</view>
+				<picker bindchange="schsChange" name="schs" value="{{schsIndex}}" range="{{schs}}" range-key="name"
+					disabled="{{!schs||schs.length==0}}">
+					<view class="weui-select weui-select_in-select-after">{{schs[schsIndex].name}}</view>
 				</picker>
 			</view>
 		</view>

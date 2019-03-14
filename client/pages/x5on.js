@@ -68,6 +68,7 @@ var doUrl = {
   schsdistschs: `${host}/weapp/schsdist/schs`,
   schsdistdel: `${host}/weapp/schsdist/del`,
   schsdistmember: `${host}/weapp/schsdist/member`,
+  schsdistmemfind: `${host}/weapp/schsdist/memfind`,
 
   // 报名
   regstud: `${host}/weapp/studreg`,

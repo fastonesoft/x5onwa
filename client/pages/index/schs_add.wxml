@@ -1,7 +1,7 @@
 <!--pages/index/schs_add.wxml-->
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
-<form bindsubmit="grpaddSubmit">
+<form bindsubmit="schsaddSubmit">
     <view class="weui-cells__title">集团设置</view>
     <view class="weui-cells weui-cells_after-title">
         <view class="weui-cell weui-cell_input">

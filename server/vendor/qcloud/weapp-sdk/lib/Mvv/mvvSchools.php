@@ -28,12 +28,8 @@ class mvvSchools
     if ($user_group === null) {
       xonUserGroup::addSchs($user_id, $group_id);
     }
+    // 只显示成功的记录
     return xovSchools::getsById($schs_id);
-  }
-
-  public static function schs($user_id) {
-    xovUser::checkById($user_id);
-    return xovSchools::getBy(compact('user_id'));
   }
 
   public static function del($uid) {

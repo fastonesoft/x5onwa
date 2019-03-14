@@ -10,16 +10,16 @@ class Schsdist extends CI_Controller
    * 集团设置
    */
   const role_name = 'schsdist';
-
   public function index()
   {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
         // 地区管辖的集团列表
         $user_id = $userinfor->unionId;
+        $area_user_id = $user_id;
         $areas = Model\xovAreasDist::getsBy(compact('user_id'));
-        $schs = Model\xovSchools::getsBy(compact('user_id'));
-        $members = Model\xovSchoolsDist::getsBy(compact('user_id'));
+        $schs = Model\xovSchools2Dist::getsBy(compact('area_user_id'));
+        $members = Model\xovSchoolsDist::getsBy(compact('area_user_id'));
 
         $this->json(['code' => 0, 'data' => compact('areas', 'schs', 'members')]);
       } catch (Exception $e) {
@@ -113,10 +113,14 @@ class Schsdist extends CI_Controller
   {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
-        $user_id = $userinfor->unionId;
-        $result = Mvv\mvvSchools::schs($user_id);
+        $param = $_POST;
+        $area_id = $param['area_id'];
 
-        $this->json(['code' => 0, 'data' => $result]);
+        $area_user_id = $userinfor->unionId;
+        $schs = Model\xovSchools2Dist::getsBy(compact('area_id', 'area_user_id'));
+        $members = Model\xovSchoolsDist::getsBy(compact('area_id', 'area_user_id'));
+
+        $this->json(['code' => 0, 'data' => compact('schs', 'members')]);
       } catch (Exception $e) {
         $this->json(['code' => 1, 'data' => $e->getMessage()]);
       }
@@ -129,8 +133,8 @@ class Schsdist extends CI_Controller
   {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
-        $user_id = $userinfor->unionId;
-        $result = Model\xovSchoolsDist::getsBy(compact('user_id'));
+        $area_user_id = $userinfor->unionId;
+        $result = Model\xovSchoolsDist::getsBy(compact('area_user_id'));
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -140,5 +144,25 @@ class Schsdist extends CI_Controller
       $this->json($error);
     });
   }
+
+  public function memfind()
+  {
+    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
+      try {
+        $param = $_POST;
+        $user_name = Model\x5on::getLike($param['name']);
+
+        $area_user_id = $userinfor->unionId;
+        $result = Model\xovSchoolsDist::likes(compact('area_user_id', 'user_name'));
+
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
+
 
 }

@@ -4,7 +4,7 @@ var x5on = require('../x5on.js')
 Page({
 
   areaddSubmit: function (e) {
-    var that = this;
+    var that = this
     var rules = {
       id: {
         required: true,

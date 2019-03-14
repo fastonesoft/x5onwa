@@ -1,66 +1,57 @@
 // pages/index/schs_add.js
+var x5on = require('../x5on.js')
+
 Page({
 
-  /**
-   * 页面的初始数据
-   */
-  data: {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  schsaddSubmit: function (e) {
+    var that = this
+    var rules = {
+      code: {
+        required: true,
+        digits: true,
+        minlength: 2,
+        maxlength: 2,
+      },
+      name: {
+        required: true,
+        chinese: true,
+        minlength: 4,
+        maxlength: 20,
+      },
+      full_name: {
+        required: true,
+        chinese: true,
+        minlength: 2,
+        maxlength: 50,
+      },
+    }
+    var messages = {
+      code: {
+        required: '集团编号'
+      },
+      name: {
+        required: '集团名称'
+      },
+      full_name: {
+        required: '集团全称'
+      },
+    }
+    x5on.checkForm(e.detail.value, rules, messages, form => {
+      var pages = getCurrentPages();
+      var prevPage = pages[pages.length - 2];
+      form.area_id = x5on.getId(prevPage.data.areas, prevPage.data.areaIndex)
+  
+      x5on.post({
+        url: x5on.url.schsdistadd,
+        data: form,
+        success() {
+          x5on.showSuccess('集团添加成功')
+          wx.navigateBack()
+        }
+      })
+    }, mes => {
+      x5on.showError(that, mes)
+    })
   }
+
 })
