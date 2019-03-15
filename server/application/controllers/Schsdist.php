@@ -16,12 +16,9 @@ class Schsdist extends CI_Controller
       try {
         // 地区管辖的集团列表
         $user_id = $userinfor->unionId;
-        $area_user_id = $user_id;
-        $areas = Model\xovAreasDist::getsBy(compact('user_id'));
-        $schs = Model\xovSchools2Dist::getsBy(compact('area_user_id'));
-        $members = Model\xovSchoolsDist::getsBy(compact('area_user_id'));
+        $result = Model\xovAreasDist::getsBy(compact('user_id'));
 
-        $this->json(['code' => 0, 'data' => compact('areas', 'schs', 'members')]);
+        $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
         $this->json(['code' => 1, 'data' => $e->getMessage()]);
       }

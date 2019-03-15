@@ -52,7 +52,7 @@
 			</view>
 		</view>
 	</view>
-	<view class="weui-cells__tips x5ui-mini">
+	<view class="weui-cells__tips x5ui-mini" wx:if="{{areaIndex>=0}}">
 		<button class="weui-btn mini-btn" type="primary" size="mini" bindtap="addClick">添加</button>
 		<button class="weui-btn mini-btn" type="warn" size="mini" form-type="submit">提交</button>
 	</view>

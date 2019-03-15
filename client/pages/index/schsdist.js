@@ -3,16 +3,12 @@ var x5on = require('../x5on.js')
 
 Page({
 
-	data: {
-		areaIndex: 0
-	},
-
 	onLoad: function (e) {
 		var that = this
 		x5on.request({
 			url: x5on.url.schsdist,
-			success(areas_members) {
-				that.setData(areas_members)
+			success(areas) {
+				that.setData({ areas })
 			}
 		})
 	},
@@ -127,7 +123,7 @@ Page({
 				url: x5on.url.schsdistmemfind,
 				data: form,
 				success(members) {
-					that.setData({ members })
+					members.length !== 0 && that.setData({ members })
 					members.length === 0 && x5on.showError(that, '没有找到你要的成员！')
 				}
 			})
