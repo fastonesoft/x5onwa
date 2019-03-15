@@ -39,7 +39,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="xonSchools.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="xonSchools.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/xonSchools.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="152">
@@ -49,13 +49,15 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Areadist.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/controllers/Areadist.php">
+      <file leaf-file-name="Schdist.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/application/controllers/Schdist.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="145">
-              <caret line="67" column="64" lean-forward="false" selection-start-line="67" selection-start-column="64" selection-end-line="67" selection-end-column="64" />
+            <state relative-caret-position="651">
+              <caret line="116" column="63" lean-forward="false" selection-start-line="116" selection-start-column="63" selection-end-line="116" selection-end-column="63" />
               <folding>
-                <element signature="e#71#96#0#PHP" expanded="true" />
+                <element signature="n#add#0;n#Schdist#0;n#!!top" expanded="false" />
+                <element signature="n#dist#0;n#Schdist#0;n#!!top" expanded="false" />
+                <element signature="n#del#0;n#Schdist#0;n#!!top" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -64,8 +66,20 @@
       <file leaf-file-name="Schsdist.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/controllers/Schsdist.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="551">
-              <caret line="59" column="37" lean-forward="true" selection-start-line="59" selection-start-column="37" selection-end-line="59" selection-end-column="37" />
+            <state relative-caret-position="570">
+              <caret line="117" column="60" lean-forward="true" selection-start-line="117" selection-start-column="60" selection-end-line="117" selection-end-column="60" />
+              <folding>
+                <element signature="e#71#96#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Areadist.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/controllers/Areadist.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1273">
+              <caret line="67" column="64" lean-forward="false" selection-start-line="67" selection-start-column="64" selection-end-line="67" selection-end-column="64" />
               <folding>
                 <element signature="e#71#96#0#PHP" expanded="true" />
               </folding>
@@ -115,6 +129,7 @@
         <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/xovSchoolsDist.php" />
         <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchools.php" />
         <option value="$PROJECT_DIR$/application/controllers/Schsdist.php" />
+        <option value="$PROJECT_DIR$/application/controllers/Schdist.php" />
       </list>
     </option>
   </component>
@@ -249,9 +264,9 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Code\x5onwa\server\application\controllers" />
       <recent name="D:\Code\x5onwa\server\vendor\qcloud\weapp-sdk\lib\Model" />
       <recent name="D:\Code\x5onwa\server\vendor\qcloud\weapp-sdk\lib\Mvv" />
-      <recent name="D:\Code\x5onwa\server\application\controllers" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -281,12 +296,12 @@
       <updated>1552020472468</updated>
       <workItem from="1552020475442" duration="23839000" />
       <workItem from="1552477679430" duration="7141000" />
-      <workItem from="1552525278638" duration="5690000" />
+      <workItem from="1552525278638" duration="8984000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="52104000" />
+    <option name="totallyTimeSpent" value="55398000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -528,16 +543,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/Areadist.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="145">
-          <caret line="67" column="64" lean-forward="false" selection-start-line="67" selection-start-column="64" selection-end-line="67" selection-end-column="64" />
-          <folding>
-            <element signature="e#71#96#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchools.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="451">
@@ -557,21 +562,43 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/xonSchools.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="8" column="25" lean-forward="false" selection-start-line="8" selection-start-column="25" selection-end-line="8" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/Schsdist.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="551">
-          <caret line="59" column="37" lean-forward="true" selection-start-line="59" selection-start-column="37" selection-end-line="59" selection-end-column="37" />
+        <state relative-caret-position="570">
+          <caret line="117" column="60" lean-forward="true" selection-start-line="117" selection-start-column="60" selection-end-line="117" selection-end-column="60" />
           <folding>
             <element signature="e#71#96#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/xonSchools.php">
+    <entry file="file://$PROJECT_DIR$/application/controllers/Areadist.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" column="25" lean-forward="false" selection-start-line="8" selection-start-column="25" selection-end-line="8" selection-end-column="25" />
-          <folding />
+        <state relative-caret-position="1273">
+          <caret line="67" column="64" lean-forward="false" selection-start-line="67" selection-start-column="64" selection-end-line="67" selection-end-column="64" />
+          <folding>
+            <element signature="e#71#96#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/Schdist.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="651">
+          <caret line="116" column="63" lean-forward="false" selection-start-line="116" selection-start-column="63" selection-end-line="116" selection-end-column="63" />
+          <folding>
+            <element signature="n#add#0;n#Schdist#0;n#!!top" expanded="false" />
+            <element signature="n#dist#0;n#Schdist#0;n#!!top" expanded="false" />
+            <element signature="n#del#0;n#Schdist#0;n#!!top" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

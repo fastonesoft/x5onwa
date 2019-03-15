@@ -55,7 +55,7 @@ Page({
 			//
 			x5on.post({
 				data: { schs_id },
-        url: x5on.url.schdistsch,
+        url: x5on.url.schdistschs,
         success(sch_members) {
 					sch_members.schIndex = -1
           that.setData(sch_members)

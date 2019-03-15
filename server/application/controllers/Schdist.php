@@ -4,19 +4,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 use QCloud_WeApp_SDK\Mvv;
 use QCloud_WeApp_SDK\Model;
 
-class Schsdist extends CI_Controller
+class Schdist extends CI_Controller
 {
   /**
-   * 集团设置
+   * 学校设置
    */
-  const role_name = 'schsdist';
+  const role_name = 'schdist';
   public function index()
   {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
-        // 用户所属地区列表
+        // 用户所属集团列表
         $user_id = $userinfor->unionId;
-        $result = Model\xovAreasDist::getsBy(compact('user_id'));
+        $result = Model\xovSchoolsDist::getsBy(compact('user_id'));
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -106,15 +106,15 @@ class Schsdist extends CI_Controller
     });
   }
 
-  public function schs()
+  public function sch()
   {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
         $param = $_POST;
-        $area_id = $param['area_id'];
+        $schs_id = $param['schs_id'];
 
-        $area_user_id = $userinfor->unionId;
-        $schs = Model\xovSchools2Dist::getsBy(compact('area_id', 'area_user_id'));
+        $schs_user_id = $userinfor->unionId;
+        $schs = Model\xovSchools2Dist::getsBy(compact('schs_id'));
         $members = Model\xovSchoolsDist::getsBy(compact('area_id', 'area_user_id'));
 
         $this->json(['code' => 0, 'data' => compact('schs', 'members')]);

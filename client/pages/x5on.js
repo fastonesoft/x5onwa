@@ -70,6 +70,16 @@ var doUrl = {
   schsdistmember: `${host}/weapp/schsdist/member`,
   schsdistmemfind: `${host}/weapp/schsdist/memfind`,
 
+    // 学校注册
+    schdist: `${host}/weapp/schdist`,
+    schdistadd: `${host}/weapp/schdist/add`,
+    schdistuser: `${host}/weapp/schdist/user`,
+    schdistdist: `${host}/weapp/schdist/dist`,
+    schdistschs: `${host}/weapp/schdist/schs`,
+    schdistdel: `${host}/weapp/schdist/del`,
+    schdistmember: `${host}/weapp/schdist/member`,
+    schdistmemfind: `${host}/weapp/schdist/memfind`,
+
   // 报名
   regstud: `${host}/weapp/studreg`,
   regstudstep: `${host}/weapp/studreg/step`,
