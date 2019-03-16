@@ -8,7 +8,7 @@ use \Exception;
 class x5on
 {
   // 系统管理员
-  const GROUP_ADMIN = 99;
+  const GROUP_ADMIN = 999;
   // 地区管理
   const GROUP_ADMIN_AREA = 90;
   // 集团管理

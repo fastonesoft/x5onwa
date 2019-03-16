@@ -113,9 +113,8 @@ class Schdist extends CI_Controller
         $param = $_POST;
         $schs_id = $param['schs_id'];
 
-        $schs_user_id = $userinfor->unionId;
         $schs = Model\xovSchools2Dist::getsBy(compact('schs_id'));
-        $members = Model\xovSchoolsDist::getsBy(compact('area_id', 'area_user_id'));
+        $members = Model\xovSchoolsDist::getsBy(compact('schs_id'));
 
         $this->json(['code' => 0, 'data' => compact('schs', 'members')]);
       } catch (Exception $e) {

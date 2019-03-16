@@ -4,7 +4,7 @@ namespace QCloud_WeApp_SDK\Mvv;
 
 use QCloud_WeApp_SDK\Model\xonRole;
 
-class mvvUserRole
+class mvvRole
 {
   /**
    * 标志出权限列表中我的权限
@@ -43,9 +43,8 @@ class mvvUserRole
   {
     // 计数
     $result = 0;
-    foreach ($roles as $k => $v) {
+    foreach ($roles as $uid => $v) {
       // 对象截取
-      $uid = $k;
       $can_show = $v === 'true' ? 1 : 0;
 
       $res = xonRole::getBy(compact('uid', 'can_show'));

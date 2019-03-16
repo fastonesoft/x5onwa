@@ -63,7 +63,7 @@ class Userset extends CI_Controller
 
         // 处理权限结果，仅返回用户可选权限列表
         $roles = Model\xonRole::gets();
-        $cores = Mvv\mvvUserRole::sign($roles, $myroles);
+        $cores = Mvv\mvvRole::sign($roles, $myroles);
 
         // 获取权限分类
         $types = Model\xonType::gets();
