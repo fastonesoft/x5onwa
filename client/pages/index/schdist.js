@@ -90,12 +90,13 @@ Page({
 			},
 		}
 		x5on.checkForm(e.detail.value, rules, messages, form => {
-			form.sch_uid = x5on.getUid(that.data.sch, form.sch)
+			form.sch_uid = x5on.getUid(that.data.schos, form.sch)
 			x5on.post({
 				url: x5on.url.schdistdist,
 				data: form,
-				success(members) {
-					that.setData({ members })
+				success(sch_members) {
+					sch_members.schoIndex = -1
+					that.setData(sch_members)
 				}
 			})
 		}, message => {
@@ -119,6 +120,7 @@ Page({
 			}
 		}
 		x5on.checkForm(e.detail.value, rules, messages, form => {
+			form.schs_id = x5on.getId(that.data.schs, that.data.schsIndex)
 			x5on.post({
 				url: x5on.url.schdistmemfind,
 				data: form,
@@ -138,9 +140,9 @@ Page({
 		x5on.post({
 			url: x5on.url.schdistdel,
 			data: { uid },
-			success(number) {
-				var members = x5on.delValue(that.data.members, 'uid', uid)
-				that.setData({ members })
+			success(sch_members) {
+				sch_members.schoIndex = -1
+				that.setData(sch_members)
 			}
 		})
 	},

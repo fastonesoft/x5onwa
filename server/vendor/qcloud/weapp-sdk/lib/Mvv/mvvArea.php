@@ -25,10 +25,7 @@ class mvvArea
     xonArea::setsById(compact('user_id'), $area_id);
     // 分配组权限
     $group_id = x5on::GROUP_ADMIN_AREA;
-    $user_group = xonUserGroup::getBy(compact('user_id', 'group_id'));
-    if ($user_group === null) {
-      xonUserGroup::addArea($user_id, $group_id);
-    }
+    xonUserGroup::addArea($user_id, $group_id);
   }
 
   public static function del($uid) {

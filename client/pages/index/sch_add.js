@@ -1,66 +1,66 @@
 // pages/index/sch_add.js
+var x5on = require('../x5on.js')
+
 Page({
 
-  /**
-   * 页面的初始数据
-   */
-  data: {
+  schaddSubmit: function (e) {
+    var that = this
+    var rules = {
+      code: {
+        required: true,
+        digits: true,
+        minlength: 2,
+        maxlength: 2,
+      },
+      name: {
+        required: true,
+        chinese: true,
+        minlength: 4,
+        maxlength: 20,
+      },
+      edutype: {
+        required: true,
+        min: 0,
+      }
+    }
+    var messages = {
+      code: {
+        required: '学校编号'
+      },
+      name: {
+        required: '学校名称'
+      },
+      edutype: {
+        required: '学制类型'
+      }
+    }
+    x5on.checkForm(e.detail.value, rules, messages, form => {
+      var pages = getCurrentPages();
+      var prevPage = pages[pages.length - 2];
+      form.schs_id = x5on.getId(prevPage.data.schs, prevPage.data.schsIndex)
+      form.edu_type_id = x5on.getId(that.data.edutypes, form.edutype)
+      x5on.post({
+        url: x5on.url.schdistadd,
+        data: form,
+        success(schs_members) {
+          schs_members.schsIndex = -1
+          prevPage.setData(schs_members)
+          //
+          x5on.showSuccess('学校添加成功')
+          wx.navigateBack()
+        }
+      })
+    }, mes => {
+      x5on.showError(that, mes)
+    })
 
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
+  edutypeChange: function (e) {
+		var that = this
+		x5on.setPick(e, edutypeIndex => {
+			that.setData({ edutypeIndex })
+		})
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

@@ -12,10 +12,6 @@ use QCloud_WeApp_SDK\Model\xovUserOnly;
 class mvvUsereg
 {
 
-  /**
-   * @param $user_id
-   * @throws \Exception
-   */
   public static function school($user_id)
   {
     global $result;
