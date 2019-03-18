@@ -5,6 +5,7 @@ use QCloud_WeApp_SDK\Model\x5on;
 use QCloud_WeApp_SDK\Model\xonArea;
 use QCloud_WeApp_SDK\Model\xonUserGroup;
 use QCloud_WeApp_SDK\Model\xovAreas;
+use QCloud_WeApp_SDK\Model\xovAreas2Dist;
 use QCloud_WeApp_SDK\Model\xovAreasDist;
 use QCloud_WeApp_SDK\Model\xovUser;
 
@@ -28,7 +29,6 @@ class mvvArea
     if ($user_group === null) {
       xonUserGroup::addArea($user_id, $group_id);
     }
-    return xovAreas::getsById($area_id);
   }
 
   public static function del($uid) {
@@ -39,7 +39,13 @@ class mvvArea
     xonUserGroup::delBy(compact('user_id', 'group_id'));
     // 一、删除地区用户记录
     $user_id = null;
-    return xonArea::setsByUid(compact('user_id'), $uid);
+    xonArea::setsByUid(compact('user_id'), $uid);
+  }
+
+  public static function refresh($area_type) {
+    $areas = xovAreas2Dist::getsBy(compact('area_type'));
+    $members = xovAreasDist::getsBy(compact('area_type'));
+    return compact('areas', 'members');
   }
 
 }

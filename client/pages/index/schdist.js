@@ -124,7 +124,7 @@ Page({
 				data: form,
 				success(members) {
 					members.length !== 0 && that.setData({ members })
-					members.length === 0 && x5on.showError(that, '没有找到你要的成员！')
+					members.length === 0 && x5on.showError(that, '没有找到你要的学校成员！')
 				}
 			})
 		}, message => {

@@ -27,6 +27,26 @@ class Schdist extends CI_Controller
     });
   }
 
+  public function sch()
+  {
+    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
+      try {
+        $param = $_POST;
+        $schs_id = $param['schs_id'];
+
+        // 学校预分配列表、学校已分配列表
+        $schos = Model\xovSchool2Dist::getsBy(compact('schs_id'));
+        $members = Model\xovSchoolDist::getsBy(compact('schs_id'));
+
+        $this->json(['code' => 0, 'data' => compact('schos', 'members')]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
+
   public function user()
   {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
@@ -56,7 +76,7 @@ class Schdist extends CI_Controller
         $full_name = $param['full_name'];
         $area_id = $param['area_id'];
 
-        // 集团添加
+        // 学校添加
         $result = Model\xonSchools::add($code, $name, $full_name, $area_id);
 
         $this->json(['code' => 0, 'data' => $result]);
@@ -76,7 +96,7 @@ class Schdist extends CI_Controller
         $user_uid = $param['user_uid'];
         $schs_uid = $param['schs_uid'];
 
-        // 地区分配、添加用户进组
+        // 学校用户分配，学校管理进组
         $result = Mvv\mvvSchools::dist($user_uid, $schs_uid);
 
         $this->json(['code' => 0, 'data' => $result]);
@@ -95,42 +115,8 @@ class Schdist extends CI_Controller
         $param = $_POST;
         $uid = $param['uid'];
 
+        // 学校管理员删除
         $result = Mvv\mvvSchools::del($uid);
-
-        $this->json(['code' => 0, 'data' => $result]);
-      } catch (Exception $e) {
-        $this->json(['code' => 1, 'data' => $e->getMessage()]);
-      }
-    }, function ($error) {
-      $this->json($error);
-    });
-  }
-
-  public function sch()
-  {
-    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
-      try {
-        $param = $_POST;
-        $schs_id = $param['schs_id'];
-
-        $schos = Model\xovSchool2Dist::getsBy(compact('schs_id'));
-        $members = Model\xovSchoolDist::getsBy(compact('schs_id'));
-
-        $this->json(['code' => 0, 'data' => compact('schos', 'members')]);
-      } catch (Exception $e) {
-        $this->json(['code' => 1, 'data' => $e->getMessage()]);
-      }
-    }, function ($error) {
-      $this->json($error);
-    });
-  }
-
-  public function member()
-  {
-    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
-      try {
-        $area_user_id = $userinfor->unionId;
-        $result = Model\xovSchoolDist::getsBy(compact('area_user_id'));
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -146,10 +132,12 @@ class Schdist extends CI_Controller
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
         $param = $_POST;
+        $schs_id = $param['schs_id'];
         $user_name = Model\x5on::getLike($param['name']);
 
-        $area_user_id = $userinfor->unionId;
-        $result = Model\xovSchoolsDist::likes(compact('area_user_id', 'user_name'));
+        // 学校已分配用户查询
+        // user_name 没有咋办。。。
+        $result = Model\xovSchoolDist::likes(compact('schs_id', 'user_name'));
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {

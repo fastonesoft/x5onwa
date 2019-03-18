@@ -40,11 +40,13 @@ Page({
       var pages = getCurrentPages();
       var prevPage = pages[pages.length - 2];
       form.area_id = x5on.getId(prevPage.data.areas, prevPage.data.areaIndex)
-  
       x5on.post({
         url: x5on.url.schsdistadd,
         data: form,
-        success() {
+        success(schs_members) {
+          schs_members.schsIndex = -1
+          prevPage.setData(schs_members)
+          //
           x5on.showSuccess('集团添加成功')
           wx.navigateBack()
         }

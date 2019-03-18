@@ -3,7 +3,7 @@ var x5on = require('../x5on.js')
 Page({
 
   data: {
-    areatypes: ['省份', '地市', '区县'],
+    areatypes: [{id: 0, name: '省份'}, {id: 1, name: '地市'}, {id: 2, name: '区县'}]
   },
 
   findSubmit: function (e) {
@@ -93,8 +93,9 @@ Page({
       x5on.post({
         url: x5on.url.areadistdist,
         data: form,
-        success(members) {
-          that.setData({ members })
+        success(areas_members) {
+          areas_members.areaIndex = -1
+          that.setData(areas_members)
         }
       })
     }, message => {
@@ -103,15 +104,48 @@ Page({
 
   },
 
+  memberSubmit: function (e) {
+    var that = this
+    var rules = {
+      name: {
+        required: true,
+        chinese: true,
+        rangelength: [1, 3],
+      }
+    }
+    var messages = {
+      name: {
+        required: '成员姓名'
+      }
+    }
+    x5on.checkForm(e.detail.value, rules, messages, form => {
+      var areatypeIndex = that.data.areatypeIndex
+      form.area_type = x5on.getId(that.data.areatypes, areatypeIndex)
+      x5on.post({
+        url: x5on.url.areadistmemfind,
+        data: form,
+        success(members) {
+          members.length !== 0 && that.setData({ members })
+          members.length === 0 && x5on.showError(that, '没有找到你要的地区成员！')
+        }
+      })
+    }, message => {
+      x5on.showError(that, message)
+    })
+  },
+
   areadistRemove: function (e) {
     var that = this
-    var uid = e.currentTarget.dataset.uid
+    var form = {}
+    var areatypeIndex = that.data.areatypeIndex
+    form.uid = e.currentTarget.dataset.uid
+    form.area_type = x5on.getId(that.data.areatypes, areatypeIndex)
     x5on.post({
       url: x5on.url.areadistdel,
-      data: { uid },
-      success(number) {
-        var members = x5on.delValue(that.data.members, 'uid', uid)
-        that.setData({ members })
+      data: form,
+      success(areas_members) {
+        areas_members.areaIndex = -1
+        that.setData(areas_members)
       }
     })
   },

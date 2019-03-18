@@ -58,7 +58,7 @@ var doUrl = {
   areadistuser: `${host}/weapp/areadist/user`,
   areadistdist: `${host}/weapp/areadist/dist`,
   areadistdel: `${host}/weapp/areadist/del`,
-  areadistmember: `${host}/weapp/areadist/member`,
+  areadistmemfind: `${host}/weapp/areadist/memfind`,
 
   // 集团分配
   schsdist: `${host}/weapp/schsdist`,
@@ -67,7 +67,6 @@ var doUrl = {
   schsdistdist: `${host}/weapp/schsdist/dist`,
   schsdistschs: `${host}/weapp/schsdist/schs`,
   schsdistdel: `${host}/weapp/schsdist/del`,
-  schsdistmember: `${host}/weapp/schsdist/member`,
   schsdistmemfind: `${host}/weapp/schsdist/memfind`,
 
   // 学校注册
@@ -77,7 +76,6 @@ var doUrl = {
   schdistdist: `${host}/weapp/schdist/dist`,
   schdistsch: `${host}/weapp/schdist/sch`,
   schdistdel: `${host}/weapp/schdist/del`,
-  schdistmember: `${host}/weapp/schdist/member`,
   schdistmemfind: `${host}/weapp/schdist/memfind`,
 
   // 报名

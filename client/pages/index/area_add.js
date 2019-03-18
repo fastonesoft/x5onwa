@@ -28,10 +28,16 @@ Page({
       }
     }
     x5on.checkForm(e.detail.value, rules, messages, form => {
+      var pages = getCurrentPages();
+      var prevPage = pages[pages.length - 2];
+      form.area_type = x5on.getId(prevPage.data.areatypes, prevPage.data.areatypeIndex)
       x5on.post({
         url: x5on.url.areadistadd,
         data: form,
-        success() {
+        success(areas_members) {
+          areas_members.areaIndex = -1
+          prevPage.setData(areas_members)
+          //
           x5on.showSuccess('地区添加成功')
           wx.navigateBack()
         }

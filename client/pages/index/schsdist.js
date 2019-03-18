@@ -94,8 +94,9 @@ Page({
       x5on.post({
         url: x5on.url.schsdistdist,
         data: form,
-        success(members) {
-          that.setData({ members })
+        success(schs_members) {
+					schs_members.schsIndex = -1
+          that.setData(schs_members)
         }
       })
     }, message => {
@@ -119,12 +120,14 @@ Page({
 			}
 		}
 		x5on.checkForm(e.detail.value, rules, messages, form => {
+			var areaIndex = that.data.areaIndex
+			form.area_id = x5on.getId(that.data.areas, areaIndex)
 			x5on.post({
 				url: x5on.url.schsdistmemfind,
 				data: form,
 				success(members) {
 					members.length !== 0 && that.setData({ members })
-					members.length === 0 && x5on.showError(that, '没有找到你要的成员！')
+					members.length === 0 && x5on.showError(that, '没有找到你要的集团成员！')
 				}
 			})
 		}, message => {
@@ -138,10 +141,10 @@ Page({
     x5on.post({
       url: x5on.url.schsdistdel,
       data: { uid },
-      success(number) {
-        var members = x5on.delValue(that.data.members, 'uid', uid)
-        that.setData({ members })
-      }
+			success(schs_members) {
+				schs_members.schsIndex = -1
+				that.setData(schs_members)
+			}
     })
   },
 
