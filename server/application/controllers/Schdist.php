@@ -113,10 +113,10 @@ class Schdist extends CI_Controller
         $param = $_POST;
         $schs_id = $param['schs_id'];
 
-        $schs = Model\xovSchools2Dist::getsBy(compact('schs_id'));
-        $members = Model\xovSchoolsDist::getsBy(compact('schs_id'));
+        $schos = Model\xovSchool2Dist::getsBy(compact('schs_id'));
+        $members = Model\xovSchoolDist::getsBy(compact('schs_id'));
 
-        $this->json(['code' => 0, 'data' => compact('schs', 'members')]);
+        $this->json(['code' => 0, 'data' => compact('schos', 'members')]);
       } catch (Exception $e) {
         $this->json(['code' => 1, 'data' => $e->getMessage()]);
       }
@@ -130,7 +130,7 @@ class Schdist extends CI_Controller
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
         $area_user_id = $userinfor->unionId;
-        $result = Model\xovSchoolsDist::getsBy(compact('area_user_id'));
+        $result = Model\xovSchoolDist::getsBy(compact('area_user_id'));
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {

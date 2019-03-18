@@ -55,19 +55,19 @@ Page({
 			//
 			x5on.post({
 				data: { schs_id },
-				url: x5on.url.schdistschs,
+				url: x5on.url.schdistsch,
 				success(sch_members) {
-					sch_members.schIndex = -1
+					sch_members.schoIndex = -1
 					that.setData(sch_members)
 				}
 			})
 		})
 	},
 
-	schChange: function (e) {
+	schoChange: function (e) {
 		var that = this
-		x5on.setPick(e, schIndex => {
-			that.setData({ schIndex })
+		x5on.setPick(e, schoIndex => {
+			that.setData({ schoIndex })
 		})
 	},
 
