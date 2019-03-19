@@ -71,11 +71,6 @@ class mvvRole
     if (!$res) throw new \Exception('没有操作权限');
   }
 
-  /**
-   * 更新权限列表中“显示”设置
-   * @param $roles        变更列表
-   * @throws Exception
-   */
   public static function update($roles)
   {
     // 计数

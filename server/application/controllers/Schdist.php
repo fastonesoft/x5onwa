@@ -66,6 +66,21 @@ class Schdist extends CI_Controller
     });
   }
 
+  public function edutype() {
+    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
+      try {
+        // 学制编号查询
+        $result = Model\xonEduType::gets();
+
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
+
   public function add()
   {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {

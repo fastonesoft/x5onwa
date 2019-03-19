@@ -3,6 +3,16 @@ var x5on = require('../x5on.js')
 
 Page({
 
+  onLoad: function (e) {
+    var that = this
+    x5on.request({
+      url: x5on.url.schdistedutype,
+      success(edutypes) {
+        that.setData({ edutypes })
+      }
+    })
+  },
+
   schaddSubmit: function (e) {
     var that = this
     var rules = {
@@ -42,9 +52,9 @@ Page({
       x5on.post({
         url: x5on.url.schdistadd,
         data: form,
-        success(schs_members) {
-          schs_members.schsIndex = -1
-          prevPage.setData(schs_members)
+        success(schos_members) {
+          schos_members.schoIndex = -1
+          prevPage.setData(schos_members)
           //
           x5on.showSuccess('添加成功')
           wx.navigateBack()

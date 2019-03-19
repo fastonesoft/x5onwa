@@ -78,7 +78,8 @@ Page({
         required: true,
 			},
       schs: {
-        required: true,
+				required: true,
+				min: 0,
       },
     }
     var messages = {

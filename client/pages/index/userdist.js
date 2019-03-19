@@ -82,6 +82,7 @@ Page({
       },
       group: {
         required: '分组选择',
+        min: 0,
       }
     }
     x5on.checkForm(e.detail.value, rules, messages, form => {

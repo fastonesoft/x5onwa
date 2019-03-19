@@ -71,9 +71,11 @@ Page({
       },
       area: {
         required: true,
+        min: 0,
       },
       areatype: {
         required: true,
+        min: 0,
       }
     }
     var messages = {

@@ -10,7 +10,6 @@ class Userset extends CI_Controller
    * 用户设置
    */
   const role_name = 'userset';
-
   public function index()
   {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {

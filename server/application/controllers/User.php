@@ -6,7 +6,6 @@ use QCloud_WeApp_SDK\Model;
 
 class User extends CI_Controller {
   const role_name = 'userset';
-
   public function index() {
     Mvv\mvvLogin::norolecheck(self::role_name, function ($userinfor) {
       try {

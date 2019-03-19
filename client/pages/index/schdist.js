@@ -56,9 +56,9 @@ Page({
 			x5on.post({
 				data: { schs_id },
 				url: x5on.url.schdistsch,
-				success(sch_members) {
-					sch_members.schoIndex = -1
-					that.setData(sch_members)
+				success(schos_members) {
+					schos_members.schoIndex = -1
+					that.setData(schos_members)
 				}
 			})
 		})
@@ -79,6 +79,7 @@ Page({
 			},
 			sch: {
 				required: true,
+				min: 0,
 			},
 		}
 		var messages = {
@@ -94,9 +95,9 @@ Page({
 			x5on.post({
 				url: x5on.url.schdistdist,
 				data: form,
-				success(sch_members) {
-					sch_members.schoIndex = -1
-					that.setData(sch_members)
+				success(schos_members) {
+					schos_members.schoIndex = -1
+					that.setData(schos_members)
 				}
 			})
 		}, message => {
@@ -140,9 +141,9 @@ Page({
 		x5on.post({
 			url: x5on.url.schdistdel,
 			data: { uid },
-			success(sch_members) {
-				sch_members.schoIndex = -1
-				that.setData(sch_members)
+			success(schos_members) {
+				schos_members.schoIndex = -1
+				that.setData(schos_members)
 			}
 		})
 	},

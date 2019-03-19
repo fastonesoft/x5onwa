@@ -26,9 +26,9 @@
 			</view>
 			<view class="weui-cell__bd">
 				<picker bindchange="edutypeChange" name="edutype" value="{{edutypeIndex}}" range="{{edutypes}}"
-					range-key="edutype_name" disabled="{{!edutypes||edutypes.length==0}}">
+					range-key="name" disabled="{{!edutypes||edutypes.length==0}}">
 					<view class="weui-select weui-select_in-select-after">
-						{{edutypes[edutypeIndex].edutype_name}}
+						{{edutypes[edutypeIndex].name}}
 					</view>
 				</picker>
 			</view>

@@ -73,6 +73,7 @@ var doUrl = {
   // 学校注册
   schdist: `${host}/weapp/schdist`,
   schdistadd: `${host}/weapp/schdist/add`,
+  schdistedutype: `${host}/weapp/schdist/edutype`,
   schdistuser: `${host}/weapp/schdist/user`,
   schdistdist: `${host}/weapp/schdist/dist`,
   schdistsch: `${host}/weapp/schdist/sch`,
