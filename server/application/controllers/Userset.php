@@ -57,21 +57,9 @@ class Userset extends CI_Controller
   {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
-        // 获取权限列表index当中显示
         $user_id = $userinfor->unionId;
-        $myroles = Model\xovUserRole::getsBy(compact('user_id'));
-        // 查询用户学校
-        $id = $user_id;
-        $checked = 1;
-        $userschool = Model\xovUserSchool::getBy(compact('id', 'checked'));
-        $sch_id = $userschool ? $userschool->sch_id : null;
-        // 用户学校对应权限
-        $myroleschs = Model\xovUserRoleSchool::getsBy(compact('user_id', 'sch_id'));
-
-        // 处理权限结果，仅返回用户可选权限列表
-        $roles = Model\xonRole::gets();
-        $cores = Mvv\mvvRole::sign($roles, $myroles, $myroleschs);
-
+        // 获取用户及学校权限
+        $cores = Mvv\mvvRole::cores($user_id);
         // 获取权限分类
         $types = Model\xonType::gets();
 

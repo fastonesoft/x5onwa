@@ -26,14 +26,9 @@ class mvvLogin
     try {
       $userinfor = LoginService::check();
       $user_id = $userinfor->unionId;
+
       // 权限检测
-      xovUserRole::checksByCustom(compact('user_id', 'role_name'), '没有操作权限');
-      // 学校权限检测
-      $id = $user_id;
-      $checked = 1;
-      $userschool = xovUserSchool::getBy(compact('id', 'checked'));
-      $sch_id = $userschool ? $userschool->sch_id : null;
-      xovUserRoleSchool::checksByCustom(compact('user_id', 'sch_id', 'role_name'), '没有操作权限');
+      mvvRole::checkRole($user_id, $role_name);
 
       // 成功
       call_user_func($success, $userinfor);

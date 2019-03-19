@@ -3,6 +3,10 @@
 namespace QCloud_WeApp_SDK\Mvv;
 
 use QCloud_WeApp_SDK\Model\xonRole;
+use QCloud_WeApp_SDK\Model\xovUser;
+use QCloud_WeApp_SDK\Model\xovUserRole;
+use QCloud_WeApp_SDK\Model\xovUserRoleSchool;
+use QCloud_WeApp_SDK\Model\xovUserSchool;
 
 class mvvRole
 {
@@ -39,6 +43,33 @@ class mvvRole
     return $result;
   }
 
+  // 构造用户、学校权限列表
+  public static function cores($user_id) {
+    $roles = xonRole::gets();
+    $myroles = xovUserRole::getsBy(compact('user_id'));
+    // 查询用户学校
+    $id = $user_id;
+    $checked = 1;
+    $userschool = xovUserSchool::getBy(compact('id', 'checked'));
+    $sch_id = $userschool ? $userschool->sch_id : null;
+    // 用户学校对应权限
+    $myroleschs = xovUserRoleSchool::getsBy(compact('user_id', 'sch_id'));
+
+    return self::sign($roles, $myroles, $myroleschs);
+  }
+
+  // 检测是否有权限
+  public static function checkRole($user_id, $role_name) {
+    $cores = self::cores($user_id);
+    $res = false;
+    foreach ($cores as $role) {
+      if ($role->name === $role_name) {
+        $res = true;
+        break;
+      }
+    }
+    if (!$res) throw new \Exception('没有操作权限');
+  }
 
   /**
    * 更新权限列表中“显示”设置
