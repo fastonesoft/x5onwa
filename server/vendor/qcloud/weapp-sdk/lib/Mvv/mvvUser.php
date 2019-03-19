@@ -5,6 +5,7 @@ namespace QCloud_WeApp_SDK\Mvv;
 use QCloud_WeApp_SDK\Model\x5on;
 use QCloud_WeApp_SDK\Model\xonUser;
 use QCloud_WeApp_SDK\Model\xonUserGroup;
+use QCloud_WeApp_SDK\Model\xonUserGroupSchool;
 use QCloud_WeApp_SDK\Model\xovUser;
 use QCloud_WeApp_SDK\Model\xovUserGroup;
 use QCloud_WeApp_SDK\Model\xovUserGroupSchool;
@@ -12,13 +13,6 @@ use QCloud_WeApp_SDK\Model\xovUserGroupSchool;
 class mvvUser
 {
 
-  /**
-   * @param $user_id
-   * @param $name
-   * @param $mobil
-   * @param $confirmed
-   * @throws \Exception
-   */
   public static function update($user_id, $name, $mobil, $confirmed)
   {
     // 检测手机号，是否存在；存在：看看用户名是不是自已，不是自己提示出错
@@ -37,6 +31,21 @@ class mvvUser
     xonUser::checkById($user_id);
     xonUser::setsById(compact('fixed'), $user_id);
   }
+
+  public static function changeSchool($user_group_uid) {
+    // 一、查询编号对应记录
+    $user_group = xonUserGroupSchool::checkByUid($user_group_uid);
+    $user_id = $user_group->user_id;
+    // 二、清除编号对应用户的状态
+    $checked = 0;
+    xonUserGroupSchool::setsBy(compact('checked'), compact('user_id'));
+    // 三、更新编号对应记录
+    $checked = 1;
+    return xonUserGroupSchool::setsByUid(compact('checked'), $user_group_uid);
+  }
+
+
+
 
   /**
    * 可能要逐步放弃的功能

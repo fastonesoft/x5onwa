@@ -38,7 +38,7 @@ Page({
           areas_members.areaIndex = -1
           prevPage.setData(areas_members)
           //
-          x5on.showSuccess('地区添加成功')
+          x5on.showSuccess('添加成功')
           wx.navigateBack()
         }
       })

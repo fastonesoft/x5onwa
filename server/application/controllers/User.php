@@ -54,4 +54,5 @@ class User extends CI_Controller {
       $this->json($error);
     });
   }
+
 }

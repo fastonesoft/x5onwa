@@ -3,16 +3,13 @@
 namespace QCloud_WeApp_SDK\Mvv;
 
 use QCloud_WeApp_SDK\Model\xonUser;
+use QCloud_WeApp_SDK\Model\xonUserGroupSchool;
 use QCloud_WeApp_SDK\Model\xovUser;
+use QCloud_WeApp_SDK\Model\xovUserGroupSchool;
 
 class mvvUsereset
 {
-  /**
-   * @param $user_id
-   * @param $find_name
-   * @return mixed
-   * @throws \Exception
-   */
+
   public static function user($user_id, $find_name)
   {
     global $result;
@@ -32,5 +29,6 @@ class mvvUsereset
     xonUser::checkByUid($user_uid);
     return xonUser::setsByUid(compact('confirmed', 'fixed'), $user_uid);
   }
+
 
 }

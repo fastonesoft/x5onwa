@@ -46,7 +46,7 @@ Page({
           schs_members.schsIndex = -1
           prevPage.setData(schs_members)
           //
-          x5on.showSuccess('学校添加成功')
+          x5on.showSuccess('添加成功')
           wx.navigateBack()
         }
       })

@@ -97,6 +97,14 @@ Page({
     var that = this
     x5on.setRadio(that.data.userschs, e.detail.value, userschs => {
       that.setData({ userschs })
+      // 切换学校
+      x5on.post({
+        url: x5on.url.usersetchange,
+        data: { uid: e.detail.value },
+        success(sch_members) {
+          x5on.showSuccess('切换成功')
+        }
+      })
     })
   },
 

@@ -32,6 +32,7 @@ var doUrl = {
   userset: `${host}/weapp/userset`,
   usersetrole: `${host}/weapp/userset/role`,
   usersetupdate: `${host}/weapp/userset/update`,
+  usersetchange: `${host}/weapp/userset/change`,
 
   // 用户孩子
   userchilds: `${host}/weapp/userchilds`,
