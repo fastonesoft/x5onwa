@@ -4,12 +4,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 use QCloud_WeApp_SDK\Mvv;
 use QCloud_WeApp_SDK\Model;
 
-class Areadist extends CI_Controller {
+class Areadist extends CI_Controller
+{
   /**
    * 地区分配
    */
   const role_name = 'areadist';
-  public function index() {
+
+  public function index()
+  {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
         // 地区、地区分配用户查询
@@ -26,7 +29,8 @@ class Areadist extends CI_Controller {
     });
   }
 
-  public function dist() {
+  public function dist()
+  {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
         $param = $_POST;
@@ -47,11 +51,12 @@ class Areadist extends CI_Controller {
     });
   }
 
-  public function user() {
+  public function user()
+  {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
         $param = $_POST;
-        $name =Model\x5on::getLike($param['name']) ;
+        $name = Model\x5on::getLike($param['name']);
 
         // 用户查找
         $result = Model\xovUser::likes(compact('name'));
@@ -65,7 +70,8 @@ class Areadist extends CI_Controller {
     });
   }
 
-  public function add() {
+  public function add()
+  {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
         $param = $_POST;
@@ -86,7 +92,8 @@ class Areadist extends CI_Controller {
     });
   }
 
-  public function del() {
+  public function del()
+  {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
         $param = $_POST;
@@ -106,7 +113,8 @@ class Areadist extends CI_Controller {
     });
   }
 
-  public function memfind() {
+  public function memfind()
+  {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
         $param = $_POST;

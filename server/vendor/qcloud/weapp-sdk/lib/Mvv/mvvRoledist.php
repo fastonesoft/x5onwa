@@ -61,12 +61,6 @@ class mvvRoledist
     return xovUserGroup::getsBy(compact('group_id'));
   }
 
-  /**
-   * @param $user_id
-   * @param $group_uid
-   * @return array
-   * @throws \Exception
-   */
   public static function member($user_id, $group_uid) {
 
     $result = [];

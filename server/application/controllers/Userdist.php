@@ -17,11 +17,10 @@ class Userdist extends CI_Controller
         /**
          * 查询当前用户所能够设置的权限分组
          */
+        $groups = Mvv\mvvGroup::groupLess(Model\x5on::GROUP_ADMIN_SCHOOL);
+        // 学校管理员管辖的学校列表
         $user_id = $userinfor->unionId;
-        $groups = Mvv\mvvGroup::less($user_id);
-        // 系统管理：查询所有；学校管理，只能设置本校
-
-        $schos = [];
+        $schos = Mvv\mvvUserDist::schos($user_id);
 
         $this->json(['code' => 0, 'data' => compact('groups', 'schos')]);
       } catch (Exception $e) {
@@ -36,12 +35,13 @@ class Userdist extends CI_Controller
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
         /**
-         * 本校老师查询
+         * 查询所有用户
          */
         $param = $_POST;
-        $name = $param['name'];
-        $user_id = $userinfor->unionId;
-        $result = Mvv\mvvRoledist::user($user_id,  Model\x5on::getLike($name));
+        $name = Model\x5on::getLike($param['name']);
+
+        // 用户查找
+        $result = Model\xovUser::likes(compact('name'));
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -59,6 +59,7 @@ class Userdist extends CI_Controller
          * 添加用户进组
          */
         $param = $_POST;
+        $sch_uid = $param['sch_uid'];
         $user_uid = $param['user_uid'];
         $group_uid = $param['group_uid'];
         $result = Mvv\mvvRoledist::add($user_uid, $group_uid);
