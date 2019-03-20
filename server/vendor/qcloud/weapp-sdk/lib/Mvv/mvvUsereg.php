@@ -26,7 +26,6 @@ class mvvUsereg
     return $result;
   }
 
-
   public static function user($name)
   {
     return xovUserOnly::likes(compact('name'));

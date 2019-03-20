@@ -47,6 +47,7 @@ class mvvSchools
     return $area_id;
   }
 
+  // 刷新客户端数据
   public static function refresh($area_id) {
     $schs = xovSchools2Dist::getsBy(compact('area_id'));
     $members = xovSchoolsDist::getsBy(compact('area_id'));

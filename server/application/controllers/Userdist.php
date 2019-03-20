@@ -7,9 +7,7 @@ use QCloud_WeApp_SDK\Model;
 class Userdist extends CI_Controller
 {
   /**
-   * 权限分配
-   * 根据帐号不同权限，查询不同用户
-   * 系统管理员，查询所有用户
+   * 教师权限分配
    * 学校管理员，查询所在学校用户
    */
   const role_name = 'userdist';
@@ -23,9 +21,9 @@ class Userdist extends CI_Controller
         $groups = Mvv\mvvGroup::less($user_id);
         // 系统管理：查询所有；学校管理，只能设置本校
 
-        $schools = [];
+        $schos = [];
 
-        $this->json(['code' => 0, 'data' => compact('groups', 'schools')]);
+        $this->json(['code' => 0, 'data' => compact('groups', 'schos')]);
       } catch (Exception $e) {
         $this->json(['code' => 1, 'data' => $e->getMessage()]);
       }

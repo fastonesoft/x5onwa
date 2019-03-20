@@ -4,15 +4,15 @@ var x5on = require('../x5on.js')
 Page({
 
   data: {
-    schoolIndex: 0,
+    schoIndex: 0,
   },
 
   onLoad: function () {
     var that = this
     x5on.request({
       url: x5on.url.userdist,
-      success(school_groups) {
-        that.setData(school_groups)
+      success(schos_groups) {
+        that.setData(schos_groups)
       }
     })
   },

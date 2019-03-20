@@ -8,9 +8,9 @@
       <view class="weui-label">注册学校</view>
     </view>
     <view class="weui-cell__bd">
-      <picker bindchange="schoolChange" name="school" value="{{schoolIndex}}" range="{{schools}}" range-key="schs_name"
-        disabled="{{!schools||schools.length===0||schools.length===1}}">
-        <view class="weui-select weui-select_in-select-after">{{schools[schoolIndex].schs_name}}</view>
+      <picker bindchange="schoChange" name="scho" value="{{schoIndex}}" range="{{schos}}" range-key="schs_name"
+        disabled="{{!schos||schos.length===0||schos.length===1}}">
+        <view class="weui-select weui-select_in-select-after">{{schos[schoIndex].schs_name}}</view>
       </picker>
     </view>
   </view>
@@ -62,7 +62,7 @@
       </view>
     </view>
   </view>
-  <view class="weui-cells__tips x5ui-mini" wx:if="{{groupIndex>-1&&schoolIndex>-1}}">
+  <view class="weui-cells__tips x5ui-mini" wx:if="{{groupIndex>-1&&schoIndex>-1}}">
     <button class="weui-btn mini-btn" type="warn" size="mini" form-type="submit">提交</button>
   </view>
   <view class="weui-btn-area">
