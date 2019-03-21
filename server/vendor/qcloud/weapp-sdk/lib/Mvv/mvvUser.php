@@ -8,7 +8,7 @@ use QCloud_WeApp_SDK\Model\xonUserGroup;
 use QCloud_WeApp_SDK\Model\xonUserGroupSchool;
 use QCloud_WeApp_SDK\Model\xovUser;
 use QCloud_WeApp_SDK\Model\xovUserGroup;
-use QCloud_WeApp_SDK\Model\xovUserGroupSchool;
+use QCloud_WeApp_SDK\Model\xovUserSchoolGroup;
 
 class mvvUser
 {

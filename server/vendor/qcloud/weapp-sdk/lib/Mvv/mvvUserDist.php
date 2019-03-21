@@ -5,7 +5,7 @@ use QCloud_WeApp_SDK\Model\xonGroup;
 use QCloud_WeApp_SDK\Model\xonSchool;
 use QCloud_WeApp_SDK\Model\xonUserGroupSchool;
 use QCloud_WeApp_SDK\Model\xovUser;
-use QCloud_WeApp_SDK\Model\xovUserGroupSchool;
+use QCloud_WeApp_SDK\Model\xovUserSchoolGroup;
 
 class mvvUserDist
 {
@@ -46,7 +46,7 @@ class mvvUserDist
     mvvUserGroupSchool::schAdmin($sch_admin_user_id, function ($user_sch_group) use ($group_uid, $sch_uid, &$result) {
       $sch_id = xonSchool::checkUid2Id($sch_uid);
       $group_id = xonGroup::checkUid2Id($group_uid);
-      $result = xovUserGroupSchool::getsBy(compact('sch_id', 'group_id'));
+      $result = xovUserSchoolGroup::getsBy(compact('sch_id', 'group_id'));
     });
     return $result;
   }
@@ -57,7 +57,7 @@ class mvvUserDist
     mvvUserGroupSchool::schAdmin($sch_admin_user_id, function ($user_sch_group) use ($group_uid, $sch_uid, $user_name, &$result) {
       $sch_id = xonSchool::checkUid2Id($sch_uid);
       $group_id = xonGroup::checkUid2Id($group_uid);
-      $result = xovUserGroupSchool::likesBy(compact('sch_id', 'group_id'), compact('user_name'));
+      $result = xovUserSchoolGroup::likesBy(compact('sch_id', 'group_id'), compact('user_name'));
     });
     return $result;
   }

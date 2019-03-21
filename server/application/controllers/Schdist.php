@@ -152,7 +152,7 @@ class Schdist extends CI_Controller
         $user_name = Model\x5on::getLike($param['name']);
 
         // 学校已分配用户查询
-        $result = Model\xovUserGroupSchools::likes(compact('schs_id', 'user_name'));
+        $result = Model\xovUserSchoolGroup::likes(compact('schs_id', 'user_name'));
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {

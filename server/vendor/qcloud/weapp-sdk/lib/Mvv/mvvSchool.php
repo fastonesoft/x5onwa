@@ -7,7 +7,7 @@ use QCloud_WeApp_SDK\Model\xovSchool;
 use QCloud_WeApp_SDK\Model\xovSchool2Dist;
 use QCloud_WeApp_SDK\Model\xovSchoolDist;
 use QCloud_WeApp_SDK\Model\xonUserGroupSchool;
-use QCloud_WeApp_SDK\Model\xovUserGroupSchools;
+use QCloud_WeApp_SDK\Model\xovUserSchoolGroup;
 
 class mvvSchool
 {
@@ -15,7 +15,7 @@ class mvvSchool
   public static function refresh($schs_id) {
     $group_id = x5on::GROUP_ADMIN_SCHOOL;
     $schos = xovSchool2Dist::getsBy(compact('schs_id'));
-    $members = xovUserGroupSchools::getsBy(compact('schs_id', 'group_id'));
+    $members = xovUserSchoolGroup::getsBy(compact('schs_id', 'group_id'));
     return compact('schos', 'members');
   }
 
@@ -38,7 +38,7 @@ class mvvSchool
   }
 
   public static function del($user_group_school_uid) {
-    $user_group_school = xovUserGroupSchools::checkByUid($user_group_school_uid);
+    $user_group_school = xovUserSchoolGroup::checkByUid($user_group_school_uid);
     $schs_id = $user_group_school->schs_id;
     // 删除学校用户组
     xonUserGroupSchool::delByUid($user_group_school_uid);
