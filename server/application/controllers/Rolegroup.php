@@ -17,8 +17,7 @@ class Rolegroup extends CI_Controller
         /**
          * 查询当前用户所能够设置的权限分组的权限
          */
-        $user_id = $userinfor->unionId;
-        $result = Mvv\mvvGroup::less($user_id);
+        $result = Mvv\mvvGroup::lessBetween(Model\x5on::GROUP_TEMP_USER, Model\x5on::GROUP_ADMIN);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {

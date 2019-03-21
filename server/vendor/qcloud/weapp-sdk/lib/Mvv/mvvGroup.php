@@ -19,7 +19,18 @@ class mvvGroup
     $groups = xonGroup::customs(compact('id'), '<');
 
     foreach ($groups as $group) {
-      $group->id > x5on::GROUP_NORMAL_MAX && array_push($res, $group);
+      $group->id >= x5on::GROUP_NORMAL_MAX && array_push($res, $group);
+    }
+    return $res;
+  }
+
+  public static function lessBetween($begin_group_id, $end_group_id) {
+    $id = $end_group_id;
+    $res = [];
+    $groups = xonGroup::customs(compact('id'), '<');
+
+    foreach ($groups as $group) {
+      $group->id >= $begin_group_id && array_push($res, $group);
     }
     return $res;
   }

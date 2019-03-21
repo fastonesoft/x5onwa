@@ -9,7 +9,7 @@ class xonUserGroup extends cAppinfo
 
   public static function add($user_id, $group_id)
   {
-    if ($group_id > x5on::GROUP_NORMAL_MAX) throw new \Exception('普通用户权限分组有上限');
+    if ($group_id >= x5on::GROUP_NORMAL_MAX) throw new \Exception('普通用户权限分组有上限');
 
     $res = self::getBy(compact('user_id', 'group_id'));
     if ($res === null) {
