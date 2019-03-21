@@ -166,6 +166,16 @@ class vAppinfo
     return $res;
   }
 
+  // 根据系统编号获取数据编号
+  public static function checkUid2IdCustom ($uid, $message) {
+    $res = static::getByUid($uid);
+    if ( $res === null ) {
+      throw new Exception(static::$tableTitle . '：' . $message);
+    }
+    return $res->id;
+  }
+
+
   // 检测数据，默认提示
   public static function checks () {
     return static::checksCustom('没有找到数据集合');
@@ -190,6 +200,9 @@ class vAppinfo
   }
   public static function checkColumnsByUid ($columns, $uid) {
     return static::checkColumnsByUidCustom($columns, $uid, '没有找到序列号对应记录字段');
+  }
+  public static function checkUid2Id ($uid) {
+    return static::checkUid2IdCustom($uid, '没有找到序列号对应记录');
   }
 
 

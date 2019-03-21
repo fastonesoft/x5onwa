@@ -55,10 +55,12 @@ Page({
     var that = this
     x5on.setPick(e, groupIndex => {
       that.setData({ groupIndex })
-      var uid = x5on.getUid(that.data.groups, groupIndex)
+      var group_uid = x5on.getUid(that.data.groups, groupIndex)
+      var sch_uid = x5on.getUid(that.data.schos, that.data.schoIndex)
+      console.log(sch_uid)
       x5on.post({
         url: x5on.url.userdistmember,
-        data: { uid },
+        data: { group_uid, sch_uid },
         success(members) {
           that.setData({ members })
         }
@@ -86,6 +88,7 @@ Page({
       }
     }
     x5on.checkForm(e.detail.value, rules, messages, form => {
+      form.sch_uid = x5on.getUid(that.data.schos, that.data.schoIndex)
       form.group_uid = x5on.getUid(that.data.groups, form.group)
       x5on.post({
         url: x5on.url.userdistadd,

@@ -62,9 +62,10 @@ class Userdist extends CI_Controller
         $sch_uid = $param['sch_uid'];
         $user_uid = $param['user_uid'];
         $group_uid = $param['group_uid'];
-        $result = Mvv\mvvRoledist::add($user_uid, $group_uid);
+        $user_id = $userinfor->unionId;
+        Mvv\mvvUserDist::dists($user_id, $user_uid, $group_uid, $sch_uid);
 
-        $this->json(['code' => 0, 'data' => $result]);
+        $this->json(['code' => 0, 'data' => []]);
       } catch (Exception $e) {
         $this->json(['code' => 1, 'data' => $e->getMessage()]);
       }
@@ -99,9 +100,10 @@ class Userdist extends CI_Controller
          * 获取成员列表
          */
         $param = $_POST;
-        $group_uid = $param['uid'];
+        $sch_uid = $param['sch_uid'];
+        $group_uid = $param['group_uid'];
         $user_id = $userinfor->unionId;
-        $result = Mvv\mvvRoledist::member($user_id, $group_uid);
+        $result = Mvv\mvvUserDist::member($user_id, $group_uid, $sch_uid);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -120,8 +122,10 @@ class Userdist extends CI_Controller
          */
         $param = $_POST;
         $name = $param['name'];
-        $group_uid = $param['uid'];
-        $result = Mvv\mvvRoledist::memfind($group_uid, Model\x5on::getLike($name));
+        $sch_uid = $param['sch_uid'];
+        $group_uid = $param['group_uid'];
+        $user_id = $userinfor->unionId;
+        $result = Mvv\mvvUserDist::memfind($user_id, $group_uid, $sch_uid, Model\x5on::getLike($name));
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
