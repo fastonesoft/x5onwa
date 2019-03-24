@@ -7,7 +7,7 @@ use QCloud_WeApp_SDK\Model;
 class Userdist extends CI_Controller
 {
   /**
-   * 教师权限分配
+   * 教师权限分组分配
    * 学校管理员，查询所在学校用户
    */
   const role_name = 'userdist';

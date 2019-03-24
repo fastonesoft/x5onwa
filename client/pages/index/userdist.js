@@ -57,7 +57,6 @@ Page({
       that.setData({ groupIndex })
       var group_uid = x5on.getUid(that.data.groups, groupIndex)
       var sch_uid = x5on.getUid(that.data.schos, that.data.schoIndex)
-      console.log(sch_uid)
       x5on.post({
         url: x5on.url.userdistmember,
         data: { group_uid, sch_uid },
