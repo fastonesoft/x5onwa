@@ -1,8 +1,10 @@
 <?php
 namespace QCloud_WeApp_SDK\Mvv;
 
+use QCloud_WeApp_SDK\Model\x5on;
 use QCloud_WeApp_SDK\Model\xonSchool;
 use QCloud_WeApp_SDK\Model\xonUserSchool;
+use QCloud_WeApp_SDK\Model\xonUserSchoolGroup;
 use QCloud_WeApp_SDK\Model\xovUser;
 use QCloud_WeApp_SDK\Model\xovUserSchool;
 
@@ -30,11 +32,14 @@ class mvvUserSchool
 
   // 学校教师分配
   public static function distSchTch($sch_admin_user_id, $user_uid, $sch_uid) {
-    mvvUserSchoolGroup::schAdmin($sch_admin_user_id, function ($user_sch_group) use ($user_uid, $sch_uid) {
+    $result = [];
+    mvvUserSchoolGroup::schAdmin($sch_admin_user_id, function ($user_sch_group) use ($user_uid, $sch_uid, &$result) {
       $sch_id = xonSchool::checkUid2Id($sch_uid);
       $user_id = xovUser::checkUid2Id($user_uid);
-      xonUserSchool::add($user_id, $sch_id);
+      $user_sch_id = xonUserSchool::add($user_id, $sch_id);
+      $result = xovUserSchool::getById($user_sch_id);
     });
+    return $result;
   }
 
   // 本校成员列表
@@ -58,8 +63,9 @@ class mvvUserSchool
   }
 
   // 本校成员查询
-  public static function memfindTch($sch_admin_user_id, $user_name) {
+  public static function memfindTch($sch_admin_user_id, $like_name) {
     $result = [];
+    $user_name = x5on::getLike($like_name);
     mvvUserSchoolGroup::schAdmin($sch_admin_user_id, function ($user_sch_group) use ($user_name, &$result) {
       $sch_id = $user_sch_group->sch_id;
       $result = xovUserSchool::likesBy(compact('sch_id'), compact('user_name'));
@@ -68,13 +74,27 @@ class mvvUserSchool
   }
 
   // 学校成员查询
-  public static function memfindSchTch($sch_admin_user_id, $sch_uid, $user_name) {
+  public static function memfindSchTch($sch_admin_user_id, $sch_uid, $like_name) {
     $result = [];
+    $user_name = x5on::getLike($like_name);
     mvvUserSchoolGroup::schAdmin($sch_admin_user_id, function ($user_sch_group) use ($sch_uid, $user_name, &$result) {
       $sch_id = xonSchool::checkUid2Id($sch_uid);
       $result = xovUserSchool::likesBy(compact('sch_id'), compact('user_name'));
     });
     return $result;
+  }
+
+  public static function del($sch_admin_user_id, $user_uid, $sch_uid) {
+    mvvUserSchoolGroup::schAdmin($sch_admin_user_id, function ($user_sch_group) use ($user_uid, $sch_uid) {
+      $user_id = xovUser::checkUid2Id($user_uid);
+      $sch_id = xonSchool::checkUid2Id($sch_uid);
+      $user_sch = xonUserSchool::checkBy(compact('user_id', 'sch_id'));
+      $user_sch_id = $user_sch->id;
+      // 删除学校权限组所有记录
+      xonUserSchoolGroup::delBy(compact('user_sch_id'));
+      // 删除学校用户
+      xonUserSchool::delById($user_sch_id);
+    });
   }
 
   // 教师学校切换

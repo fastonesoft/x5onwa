@@ -16,7 +16,7 @@ class User extends CI_Controller {
         $user = Model\xovUserAll::checkById($user_id);
         Model\xonUser::setsById(compact('nick_name'), $user_id);
         // 获取用户学校信息
-        $userschs = Model\xovUserSchool::getsBy(compact('user_id'));
+        $userschs = Model\xovUserSchoolAll::getsBy(compact('user_id'));
 
         $this->json(['code' => 0, 'data' => compact('user', 'userschs')]);
       } catch (Exception $e) {

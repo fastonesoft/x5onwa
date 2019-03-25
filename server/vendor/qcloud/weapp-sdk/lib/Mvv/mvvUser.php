@@ -4,7 +4,9 @@ namespace QCloud_WeApp_SDK\Mvv;
 
 use QCloud_WeApp_SDK\Model\x5on;
 use QCloud_WeApp_SDK\Model\xonUser;
-use QCloud_WeApp_SDK\Model\xovUserOnly;
+use QCloud_WeApp_SDK\Model\xovUser;
+use QCloud_WeApp_SDK\Model\xovUserAll;
+use QCloud_WeApp_SDK\Model\xovUseOnly;
 
 class mvvUser
 {
@@ -31,10 +33,24 @@ class mvvUser
   }
 
   // 普通用户查询
-  public static function userOnly($like_name) {
-    $user_name = x5on::getLike($like_name);
-    return xovUserOnly::likes(compact('user_name'));
+  public static function likeOnly($like_name) {
+    $name = x5on::getLike($like_name);
+    return xovUseOnly::likes(compact('name'));
   }
+
+  // 非系统管理用户
+  public static function likeUser($like_name) {
+    $name = x5on::getLike($like_name);
+    return xovUser::likes(compact('name'));
+  }
+
+  // 所有用户
+  public static function likeAll($like_name) {
+    $name = x5on::getLike($like_name);
+    return xovUserAll::likes(compact('name'));
+  }
+
+
 
 
 }

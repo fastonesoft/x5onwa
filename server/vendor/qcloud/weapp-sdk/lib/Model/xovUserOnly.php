@@ -1,8 +1,8 @@
 <?php
 namespace QCloud_WeApp_SDK\Model;
 
-class xovUserOnly extends vAppinfo
+class xovUseOnly extends vAppinfo
 {
-  protected static $tableName = 'xovUserOnly';
+  protected static $tableName = 'xovUseOnly';
   protected static $tableTitle = '普通用户查询';
 }

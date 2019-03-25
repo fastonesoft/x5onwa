@@ -19,9 +19,10 @@ class Usersch extends CI_Controller
          * 如果是管理员返回[学校列表]
          */
         $user_id = $userinfor->unionId;
-        $result = Mvv\mvvUserSchool::schos($user_id);
+        $schos = Mvv\mvvUserSchool::schos($user_id);
+        $members =
 
-        $this->json(['code' => 0, 'data' => $result]);
+        $this->json(['code' => 0, 'data' => compact('schos', 'members')]);
       } catch (Exception $e) {
         $this->json(['code' => 1, 'data' => $e->getMessage()]);
       }
@@ -40,7 +41,7 @@ class Usersch extends CI_Controller
          */
         $param = $_POST;
         $name = $param['name'];
-        $result = Mvv\mvvUser::userOnly($name);
+        $result = Mvv\mvvUser::likeUser($name);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -61,9 +62,9 @@ class Usersch extends CI_Controller
         $param = $_POST;
         $sch_uid = $param['sch_uid'];
         $user_uid = $param['user_uid'];
-        Mvv\mvvUserSchool::distSchTch($userinfor->unionId, $user_uid, $sch_uid);
+        $result = Mvv\mvvUserSchool::distSchTch($userinfor->unionId, $user_uid, $sch_uid);
 
-        $this->json(['code' => 0, 'data' => []]);
+        $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
         $this->json(['code' => 1, 'data' => $e->getMessage()]);
       }
@@ -80,7 +81,7 @@ class Usersch extends CI_Controller
          */
         $param = $_POST;
         $sch_uid = $param['sch_uid'];
-        $result = Mvv\mvvUserSchool::member($sch_uid);
+        $result = Mvv\mvvUserSchool::memberSchTch($userinfor->unionId, $sch_uid);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -98,9 +99,9 @@ class Usersch extends CI_Controller
          * 学校教师查询
          */
         $param = $_POST;
-        $sch_uid = $param['sch_uid'];
         $name = $param['name'];
-        $result = Mvv\mvvUsereg::memfind($sch_uid, Model\x5on::getLike($name));
+        $sch_uid = $param['sch_uid'];
+        $result = Mvv\mvvUserSchool::memfindSchTch($userinfor->unionId, $sch_uid, $name);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -118,10 +119,11 @@ class Usersch extends CI_Controller
          * 学校教师删除
          */
         $param = $_POST;
+        $sch_uid = $param['sch_uid'];
         $user_uid = $param['user_uid'];
-        $result = Mvv\mvvUsereg::del($user_uid);
+        Mvv\mvvUserSchool::del($userinfor->unionId, $user_uid, $sch_uid);
 
-        $this->json(['code' => 0, 'data' => $result]);
+        $this->json(['code' => 0, 'data' => []]);
       } catch (Exception $e) {
         $this->json(['code' => 1, 'data' => $e->getMessage()]);
       }

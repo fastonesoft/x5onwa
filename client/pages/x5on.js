@@ -15,15 +15,6 @@ var doUrl = {
   // 登录地址
   login: `${host}/weapp/login`,
 
-  // 权限设置
-  roleset: `${host}/weapp/roleset`,
-  rolesetupdate: `${host}/weapp/roleset/update`,
-
-  // 分组权限
-  rolegroup: `${host}/weapp/rolegroup`,
-  rolegrouprole: `${host}/weapp/rolegroup/role`,
-  rolegroupupdate: `${host}/weapp/rolegroup/update`,
-
   // 用户注册无检测
   user: `${host}/weapp/user`,
   userreg: `${host}/weapp/user/reg`,
@@ -45,13 +36,12 @@ var doUrl = {
   useresetupdate: `${host}/weapp/usereset/update`,
 
   // 教师注册
-  usertch: `${host}/weapp/usertch`,
-  usertchuser: `${host}/weapp/usertch/user`,
-  usertchgroup: `${host}/weapp/usertch/group`,
-  usertchadd: `${host}/weapp/usertch/add`,
-  usertchdel: `${host}/weapp/usertch/del`,
-  usertchmember: `${host}/weapp/usertch/member`,
-  usertchmemfind: `${host}/weapp/usertch/memfind`,
+  usersch: `${host}/weapp/usersch`,
+  userschuser: `${host}/weapp/usersch/user`,
+  userschreg: `${host}/weapp/usersch/reg`,
+  userschdel: `${host}/weapp/usersch/del`,
+  userschmember: `${host}/weapp/usersch/member`,
+  userschmemfind: `${host}/weapp/usersch/memfind`,
 
   // 教师权限分配
   userdist: `${host}/weapp/userdist`,
@@ -99,6 +89,16 @@ var doUrl = {
 
 
 
+
+
+  // 权限设置
+  roleset: `${host}/weapp/roleset`,
+  rolesetupdate: `${host}/weapp/roleset/update`,
+
+  // 分组权限
+  rolegroup: `${host}/weapp/rolegroup`,
+  rolegrouprole: `${host}/weapp/rolegroup/role`,
+  rolegroupupdate: `${host}/weapp/rolegroup/update`,
 
 
 

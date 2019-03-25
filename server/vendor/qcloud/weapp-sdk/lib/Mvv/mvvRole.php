@@ -3,10 +3,9 @@
 namespace QCloud_WeApp_SDK\Mvv;
 
 use QCloud_WeApp_SDK\Model\xonRole;
-use QCloud_WeApp_SDK\Model\xovUser;
 use QCloud_WeApp_SDK\Model\xovUserRole;
 use QCloud_WeApp_SDK\Model\xovUserRoleSchool;
-use QCloud_WeApp_SDK\Model\xovUserSchool;
+use QCloud_WeApp_SDK\Model\xovUserSchoolAll;
 
 class mvvRole
 {
@@ -49,7 +48,7 @@ class mvvRole
     $myroles = xovUserRole::getsBy(compact('user_id'));
     // 查询用户学校
     $checked = 1;
-    $userschool = xovUserSchool::getBy(compact('user_id', 'checked'));
+    $userschool = xovUserSchoolAll::getBy(compact('user_id', 'checked'));
     $sch_id = $userschool ? $userschool->sch_id : null;
     // 用户学校对应权限
     $myroleschs = xovUserRoleSchool::getsBy(compact('user_id', 'sch_id'));
