@@ -11,6 +11,7 @@
     "pages/index/rolegroup",
     "pages/index/userset",
     "pages/index/usereset",
+    "pages/index/userreg",
     "pages/index/userdist",
     "pages/index/userchilds",
     "pages/index/student",

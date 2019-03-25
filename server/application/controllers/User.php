@@ -5,7 +5,7 @@ use QCloud_WeApp_SDK\Mvv;
 use QCloud_WeApp_SDK\Model;
 
 class User extends CI_Controller {
-  const role_name = 'userset';
+  const role_name = 'user';   /** 这里的role_name没用到**/
   public function index() {
     Mvv\mvvLogin::norolecheck(self::role_name, function ($userinfor) {
       try {
