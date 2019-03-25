@@ -4,14 +4,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 use QCloud_WeApp_SDK\Mvv;
 use QCloud_WeApp_SDK\Model;
 
-class Usereg extends CI_Controller
+class Usersch extends CI_Controller
 {
   /**
    * 教师用户注册
-   * 系统管理员，查询所有用户
-   * 学校管理员，查询所在学校用户
    */
-  const role_name = 'usereg';
+  const role_name = 'usersch';
   public function index()
   {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
@@ -19,10 +17,9 @@ class Usereg extends CI_Controller
         /**
          * 用户学校查询
          * 如果是管理员返回[学校列表]
-         * 有学校返回[学校]、没有学校返回[]
          */
         $user_id = $userinfor->unionId;
-        $result = Mvv\mvvUsereg::school($user_id);
+        $result = Mvv\mvvUserSchool::schos($user_id);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -43,7 +40,7 @@ class Usereg extends CI_Controller
          */
         $param = $_POST;
         $name = $param['name'];
-        $result = Mvv\mvvUsereg::user(Model\x5on::getLike($name));
+        $result = Mvv\mvvUser::userOnly($name);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -60,14 +57,13 @@ class Usereg extends CI_Controller
       try {
         /**
          * 用户注册学校
-         * 根据提交的数据，注册相应的学校
          */
         $param = $_POST;
         $sch_uid = $param['sch_uid'];
         $user_uid = $param['user_uid'];
-        $result = Mvv\mvvUsereg::reg($user_uid, $sch_uid);
+        Mvv\mvvUserSchool::distSchTch($userinfor->unionId, $user_uid, $sch_uid);
 
-        $this->json(['code' => 0, 'data' => $result]);
+        $this->json(['code' => 0, 'data' => []]);
       } catch (Exception $e) {
         $this->json(['code' => 1, 'data' => $e->getMessage()]);
       }
@@ -84,7 +80,7 @@ class Usereg extends CI_Controller
          */
         $param = $_POST;
         $sch_uid = $param['sch_uid'];
-        $result = Mvv\mvvUsereg::member($sch_uid);
+        $result = Mvv\mvvUserSchool::member($sch_uid);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {

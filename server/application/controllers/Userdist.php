@@ -7,8 +7,7 @@ use QCloud_WeApp_SDK\Model;
 class Userdist extends CI_Controller
 {
   /**
-   * 教师权限分组分配
-   * 学校管理员，查询所在学校用户
+   * 教师权限分配
    */
   const role_name = 'userdist';
   public function index() {
@@ -20,7 +19,7 @@ class Userdist extends CI_Controller
         $groups = Mvv\mvvGroup::groupLess(Model\x5on::GROUP_ADMIN_SCHOOL);
         // 学校管理员管辖的学校列表
         $user_id = $userinfor->unionId;
-        $schos = Mvv\mvvUserDist::schos($user_id);
+        $schos = Mvv\mvvUserSchool::schos($user_id);
 
         $this->json(['code' => 0, 'data' => compact('groups', 'schos')]);
       } catch (Exception $e) {

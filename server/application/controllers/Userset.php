@@ -36,9 +36,8 @@ class Userset extends CI_Controller
         $mobil = $param['mobil'];
 
         // 变更用户信息
-        $confirmed = 1;
         $user_id = $userinfor->unionId;
-        Mvv\mvvUser::update($user_id, $name, $mobil, $confirmed);
+        Mvv\mvvUser::update($user_id, $name, $mobil);
 
         // 返回用户信息
         $result = Model\xonUser::getById($user_id);
@@ -78,7 +77,7 @@ class Userset extends CI_Controller
         $uid = $param['uid'];
 
         // 用户注册学校切换
-        $result = Mvv\mvvUser::changeSchool($uid);
+        $result = Mvv\mvvUserSchool::changeSchool($uid);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {

@@ -44,6 +44,15 @@ var doUrl = {
   usereset: `${host}/weapp/usereset`,
   useresetupdate: `${host}/weapp/usereset/update`,
 
+  // 教师注册
+  usertch: `${host}/weapp/usertch`,
+  usertchuser: `${host}/weapp/usertch/user`,
+  usertchgroup: `${host}/weapp/usertch/group`,
+  usertchadd: `${host}/weapp/usertch/add`,
+  usertchdel: `${host}/weapp/usertch/del`,
+  usertchmember: `${host}/weapp/usertch/member`,
+  usertchmemfind: `${host}/weapp/usertch/memfind`,
+
   // 教师权限分配
   userdist: `${host}/weapp/userdist`,
   userdistuser: `${host}/weapp/userdist/user`,
