@@ -11,6 +11,7 @@ use QCloud_WeApp_SDK\Model\xovSchoolDist;
 use QCloud_WeApp_SDK\Model\xonUserGroupSchool;
 use QCloud_WeApp_SDK\Model\xovUserSchool;
 use QCloud_WeApp_SDK\Model\xovUserSchoolGroup;
+use QCloud_WeApp_SDK\Model\xovUserSchoolGroupAll;
 
 class mvvSchool
 {
@@ -18,7 +19,7 @@ class mvvSchool
   public static function refresh($schs_id) {
     $group_id = x5on::GROUP_ADMIN_SCHOOL;
     $schos = xovSchool2Dist::getsBy(compact('schs_id'));
-    $members = xovUserSchoolGroup::getsBy(compact('schs_id', 'group_id'));
+    $members = xovUserSchoolGroupAll::getsBy(compact('schs_id', 'group_id'));
     return compact('schos', 'members');
   }
 

@@ -7,6 +7,7 @@ use QCloud_WeApp_SDK\Model\xonUserSchoolGroup;
 use QCloud_WeApp_SDK\Model\xovUser;
 use QCloud_WeApp_SDK\Model\xovUserSchool;
 use QCloud_WeApp_SDK\Model\xovUserSchoolGroup;
+use QCloud_WeApp_SDK\Model\xovUserSchoolGroupAll;
 
 class mvvUserSchoolGroup
 {
@@ -16,12 +17,12 @@ class mvvUserSchoolGroup
   {
     // 查找用户对应学校，有多重设置，返回第一个
     $checked = 1;
-    xovUserSchoolGroup::checkByCustom(compact('user_id', 'checked'), '不属于任何学校，无法操作');
+    xovUserSchoolGroupAll::checkByCustom(compact('user_id', 'checked'), '不属于任何学校，无法操作');
 
     // todo: 上面、下面，这种可能要变成xovUserSchoolGroupAll
 
     $group_id = x5on::GROUP_ADMIN_SCHOOL;
-    $user_sch_group = xovUserSchoolGroup::checkByCustom(compact('user_id', 'group_id', 'checked'), '不是学校管理员，无法操作');
+    $user_sch_group = xovUserSchoolGroupAll::checkByCustom(compact('user_id', 'group_id', 'checked'), '不是学校管理员，无法操作');
     call_user_func($success, $user_sch_group);
   }
 
@@ -38,9 +39,9 @@ class mvvUserSchoolGroup
       $group_id = $group->id;
 
       // 查询教师对应学校记录
-      $user_sch = xovUserSchool::checkByUid($user_sch_uid);
+      $user_sch_id = xovUserSchool::checkUid2Id($user_sch_uid);
 
-      xonUserSchoolGroup::add($user_sch->id, $group_id);
+      xonUserSchoolGroup::add($user_sch_id, $group_id);
       $result = xovUserSchoolGroup::getsBy(compact('sch_id', 'group_id'));
     });
     return $result;
@@ -101,6 +102,42 @@ class mvvUserSchoolGroup
       // 当前组教师列表
       $result = xovUserSchoolGroup::getsBy(compact('sch_id', 'group_id'));
     });
+    return $result;
+  }
+
+  // 教师所属分组查询
+  public static function groups($sch_admin_user_id, $user_sch_uid)
+  {
+    $result = [];
+    self::schAdmin($sch_admin_user_id, function ($user_sch_group) use ($user_sch_uid, &$result) {
+      $sch_id = $user_sch_group->sch_id;
+
+      $user_sch = xovUserSchool::checkByUid($user_sch_uid);
+      $user_id = $user_sch->user_id;
+
+      $groups = mvvGroup::groupLess(x5on::GROUP_ADMIN_SCHOOL);
+      $sch_groups = xovUserSchoolGroup::getsBy(compact('sch_id', 'user_id'));
+
+      // 返回合并后的教师分组情况数组
+      $result = self::merge($groups, $sch_groups);
+    });
+    return $result;
+  }
+
+  // 合并分组列表与教师分组
+  private static function merge($groups, $sch_groups) {
+    $result = [];
+    foreach ($groups as $key => $group) {
+      $has_role = 0;
+      foreach ($sch_groups as $sch_group) {
+        if ($group->id === $sch_group->group_id) {
+          $has_role = 1;
+          break;
+        }
+      }
+      $groups[$key]->has_role = $has_role;
+      array_push($result, $groups[$key]);
+    }
     return $result;
   }
 

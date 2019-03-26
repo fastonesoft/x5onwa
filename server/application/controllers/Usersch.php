@@ -14,12 +14,9 @@ class Usersch extends CI_Controller
   {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
-        /**
-         * 用户学校查询
-         * 如果是管理员返回[学校列表]
-         */
+        // 学校教师列表
         $user_id = $userinfor->unionId;
-        $result = Mvv\mvvUserSchool::memberTch($user_id);
+        $result = Mvv\mvvUserSchool::members($user_id);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -34,10 +31,7 @@ class Usersch extends CI_Controller
   {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
-        /**
-         * 不是教师的用户
-         * 根据姓名查询出不是教师的用户列表
-         */
+        // 普通用户或者教师
         $param = $_POST;
         $name = $param['name'];
         $result = Mvv\mvvUser::likeUser($name);
@@ -55,9 +49,7 @@ class Usersch extends CI_Controller
   {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
-        /**
-         * 用户注册学校
-         */
+        // 老师注册
         $param = $_POST;
         $user_uid = $param['user_uid'];
         $result = Mvv\mvvUserSchool::dist($userinfor->unionId, $user_uid);
@@ -74,9 +66,7 @@ class Usersch extends CI_Controller
   public function member() {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
-        /**
-         * 注册学校教师列表
-         */
+        // 教师列表
         $result = Mvv\mvvUserSchool::members($userinfor->unionId);
 
         $this->json(['code' => 0, 'data' => $result]);
@@ -91,9 +81,7 @@ class Usersch extends CI_Controller
   public function memfind() {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
-        /**
-         * 学校教师查询
-         */
+        // 教师查询
         $param = $_POST;
         $name = $param['name'];
         $result = Mvv\mvvUserSchool::memfind($userinfor->unionId, $name);
@@ -110,9 +98,7 @@ class Usersch extends CI_Controller
   public function del() {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
-        /**
-         * 学校教师删除
-         */
+        // 教师删除
         $param = $_POST;
         $user_sch_uid = $param['user_sch_uid'];
         Mvv\mvvUserSchool::del($userinfor->unionId, $user_sch_uid);

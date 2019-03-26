@@ -51,6 +51,8 @@ var doUrl = {
   userdistdel: `${host}/weapp/userdist/del`,
   userdistmember: `${host}/weapp/userdist/member`,
   userdistmemfind: `${host}/weapp/userdist/memfind`,
+  // 教师权限预览
+  userview: `${host}/weapp/userview`,
 
   // 地区分配
   areadist: `${host}/weapp/areadist`,

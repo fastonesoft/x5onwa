@@ -13,6 +13,7 @@
     "pages/index/usereset",
     "pages/index/usersch",
     "pages/index/userdist",
+    "pages/index/userview",
     "pages/index/userchilds",
     "pages/index/student",
     "pages/index/studenroll",

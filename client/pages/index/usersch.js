@@ -64,7 +64,7 @@ Page({
         url: x5on.url.userschreg,
         data: form,
         success(members) {
-          var users = []
+          var users = x5on.delValue(that.data.users, 'uid', form.user_uid)
           that.setData({ users, members })
         }
       })
