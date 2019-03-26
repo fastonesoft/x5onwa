@@ -13,15 +13,10 @@ class Userdist extends CI_Controller
   public function index() {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
-        /**
-         * 查询当前用户所能够设置的权限分组
-         */
-        $groups = Mvv\mvvGroup::groupLess(Model\x5on::GROUP_ADMIN_SCHOOL);
-        // 学校管理员管辖的学校列表
-        $user_id = $userinfor->unionId;
-        $schos = Mvv\mvvUserSchool::schos($user_id);
+        // 查询当前用户所能够设置的权限分组
+        $result = Mvv\mvvGroup::groupLess(Model\x5on::GROUP_ADMIN_SCHOOL);
 
-        $this->json(['code' => 0, 'data' => compact('groups', 'schos')]);
+        $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
         $this->json(['code' => 1, 'data' => $e->getMessage()]);
       }
@@ -33,14 +28,10 @@ class Userdist extends CI_Controller
   public function user() {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
-        /**
-         * 查询所有用户
-         */
+        // 教师查找
         $param = $_POST;
-        $name = Model\x5on::getLike($param['name']);
-
-        // 用户查找
-        $result = Model\xovUser::likes(compact('name'));
+        $name = $param['name'];
+        $result = Mvv\mvvUserSchool::memfind($userinfor->unionId, $name);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -54,17 +45,13 @@ class Userdist extends CI_Controller
   public function add() {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
-        /**
-         * 添加用户进组
-         */
+        // 添加教师进组
         $param = $_POST;
-        $sch_uid = $param['sch_uid'];
         $user_uid = $param['user_uid'];
         $group_uid = $param['group_uid'];
-        $user_id = $userinfor->unionId;
-        Mvv\mvvUserDist::dists($user_id, $user_uid, $group_uid, $sch_uid);
+        $result = Mvv\mvvUserSchoolGroup::dist($userinfor->unionId, $user_uid, $group_uid);
 
-        $this->json(['code' => 0, 'data' => []]);
+        $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
         $this->json(['code' => 1, 'data' => $e->getMessage()]);
       }
@@ -76,12 +63,10 @@ class Userdist extends CI_Controller
   public function del() {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
-        /**
-         * 删除选中用户
-         */
+        // 删除教师
         $param = $_POST;
-        $user_group_uid = $param['uid'];
-        $result = Mvv\mvvRoledist::del($user_group_uid);
+        $user_sch_group_uid = $param['user_sch_group_uid'];
+        $result = Mvv\mvvUserSchoolGroup::del($userinfor->unionId, $user_sch_group_uid);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -95,14 +80,10 @@ class Userdist extends CI_Controller
   public function member() {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
-        /**
-         * 获取成员列表
-         */
+        // 获取成员列表
         $param = $_POST;
-        $sch_uid = $param['sch_uid'];
         $group_uid = $param['group_uid'];
-        $user_id = $userinfor->unionId;
-        $result = Mvv\mvvUserDist::member($user_id, $group_uid, $sch_uid);
+        $result = Mvv\mvvUserSchoolGroup::members($userinfor->unionId, $group_uid);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -116,15 +97,11 @@ class Userdist extends CI_Controller
   public function memfind() {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
-        /**
-         * 获取成员列表
-         */
+        // 成员查询
         $param = $_POST;
         $name = $param['name'];
-        $sch_uid = $param['sch_uid'];
         $group_uid = $param['group_uid'];
-        $user_id = $userinfor->unionId;
-        $result = Mvv\mvvUserDist::memfind($user_id, $group_uid, $sch_uid, Model\x5on::getLike($name));
+        $result = Mvv\mvvUserSchoolGroup::memfind($userinfor->unionId, $group_uid, $name);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {

@@ -90,6 +90,22 @@ class x5on
     return $imageString;
   }
 
+  public static function checkArr($arrs, $keyName, $value) {
+    return self::checkArrCustom($arrs, $keyName, $value, '找到编号对应记录');
+  }
+
+  public static function checkArrCustom($arrs, $keyName, $value, $message) {
+    $res = false;
+    $json_arrs = json_decode(json_encode($arrs), true);
+    foreach ($json_arrs as $item) {
+      if ($item[$keyName] === $value) {
+        $res = true;
+        return json_decode(json_encode($item));
+      }
+    }
+    if (!$res) throw new Exception($message);
+  }
+
   public static function checkIdc($idcard, $more_than, $less_than)
   {
     $idc = strtoupper($idcard);

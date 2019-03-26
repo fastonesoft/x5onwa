@@ -3,16 +3,12 @@ var x5on = require('../x5on.js')
 
 Page({
 
-  data: {
-    schoIndex: 0,
-  },
-
   onLoad: function () {
     var that = this
     x5on.request({
       url: x5on.url.userdist,
-      success(schos_groups) {
-        that.setData(schos_groups)
+      success(groups) {
+        that.setData({ groups })
       }
     })
   },
@@ -46,7 +42,7 @@ Page({
   },
 
   userChange: function (e) {
-    x5on.setRadio(this.data.users, e.detail.value, users => {
+    x5on.setRadioex(this.data.users, e.detail.value, 'selected', users => {
       this.setData({ users })
     })
   },
@@ -56,10 +52,9 @@ Page({
     x5on.setPick(e, groupIndex => {
       that.setData({ groupIndex })
       var group_uid = x5on.getUid(that.data.groups, groupIndex)
-      var sch_uid = x5on.getUid(that.data.schos, that.data.schoIndex)
       x5on.post({
         url: x5on.url.userdistmember,
-        data: { group_uid, sch_uid },
+        data: { group_uid },
         success(members) {
           that.setData({ members })
         }
@@ -87,7 +82,6 @@ Page({
       }
     }
     x5on.checkForm(e.detail.value, rules, messages, form => {
-      form.sch_uid = x5on.getUid(that.data.schos, that.data.schoIndex)
       form.group_uid = x5on.getUid(that.data.groups, form.group)
       x5on.post({
         url: x5on.url.userdistadd,
@@ -103,10 +97,10 @@ Page({
 
   userdistRemove: function (e) {
     var that = this
-    var uid = e.currentTarget.dataset.uid
+    var user_sch_group_uid = e.currentTarget.dataset.uid
     x5on.post({
       url: x5on.url.userdistdel,
-      data: { uid },
+      data: { user_sch_group_uid },
       success(members) {
         that.setData({ members })
       }
@@ -129,12 +123,12 @@ Page({
     }
     x5on.checkForm(e.detail.value, rules, messages, form => {
       var groupIndex = that.data.groupIndex
-      form.uid = x5on.getUid(that.data.groups, groupIndex)
+      form.group_uid = x5on.getUid(that.data.groups, groupIndex)
       x5on.post({
         url: x5on.url.userdistmemfind,
         data: form,
         success(members) {
-          that.setData({ members })
+          members.length !== 0 && that.setData({ members })
           members.length === 0 && x5on.showError(that, '没有找到你要的分组成员！')
         }
       })

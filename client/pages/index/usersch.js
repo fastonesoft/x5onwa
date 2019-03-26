@@ -7,8 +7,8 @@ Page({
     var that = this
     x5on.request({
       url: x5on.url.usersch,
-      success(schos) {
-        that.setData({ schos })
+      success(members) {
+        that.setData({ members })
       }
     })
   },
@@ -47,21 +47,6 @@ Page({
     })
   },
 
-  schoChange: function (e) {
-    var that = this
-    x5on.setPick(e, schoIndex => {
-      that.setData({ schoIndex })
-      var sch_uid = x5on.getUid(that.data.schos, that.data.schoIndex)
-      x5on.post({
-        url: x5on.url.userschmember,
-        data: { sch_uid },
-        success(members) {
-          that.setData({ members })
-        }
-      })
-    })
-  },
-
   userschSubmit: function (e) {
     var that = this
     var rules = {
@@ -75,18 +60,57 @@ Page({
       },
     }
     x5on.checkForm(e.detail.value, rules, messages, form => {
-      form.sch_uid = x5on.getUid(that.data.schos, that.data.schoIndex)
       x5on.post({
         url: x5on.url.userschreg,
         data: form,
         success(members) {
-          // 刷新members，清空users
           var users = []
           that.setData({ users, members })
         }
       })
     }, message => {
       x5on.showError(that, message)
+    })
+  },
+
+  memberSubmit: function (e) {
+    var that = this
+    var rules = {
+      name: {
+        required: true,
+        chinese: true,
+        rangelength: [1, 3],
+      }
+    }
+    var messages = {
+      name: {
+        required: '成员姓名'
+      }
+    }
+    x5on.checkForm(e.detail.value, rules, messages, form => {
+      x5on.post({
+        url: x5on.url.userschmemfind,
+        data: form,
+        success(members) {
+          members.length !== 0 && that.setData({ members })
+          members.length === 0 && x5on.showError(that, '没有找到你要的学校成员！')
+        }
+      })
+    }, message => {
+      x5on.showError(that, message)
+    })
+  },
+
+  userschRemove: function (e) {
+    var that = this
+    var user_sch_uid = e.currentTarget.dataset.uid
+    x5on.post({
+      url: x5on.url.userschdel,
+      data: { user_sch_uid },
+      success() {
+        var members = x5on.delValue(that.data.members, 'uid', user_sch_uid)
+        that.setData({ members })
+      }
     })
   },
 

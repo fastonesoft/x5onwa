@@ -292,6 +292,13 @@ var doSetRadio = function (arrs, e_detail_value, success) {
   typeof success === 'function' && success(arrs)
 }
 
+var doSetRadioex = function (arrs, e_detail_value, checked_obj_name, success) {
+  for (let arr of arrs) {
+    arr[checked_obj_name] = arr.uid === e_detail_value
+  }
+  typeof success === 'function' && success(arrs)
+}
+
 // 数组多项设置
 var doSetCheckbox = function (arrs, uids, success) {
   for (let arr of arrs) {
@@ -464,6 +471,7 @@ module.exports = {
   getRadio: doGetRadio,
   getCheckbox: doGetCheckbox,
   setRadio: doSetRadio,
+  setRadioex: doSetRadioex,
   setCheckbox: doSetCheckbox,
   setPick: doSetPick,
 
