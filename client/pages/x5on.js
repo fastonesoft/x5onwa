@@ -53,6 +53,7 @@ var doUrl = {
   userdistmemfind: `${host}/weapp/userdist/memfind`,
   // 教师权限预览
   userview: `${host}/weapp/userview`,
+  userviewupdate: `${host}/weapp/userview/update`,
 
   // 地区分配
   areadist: `${host}/weapp/areadist`,
@@ -266,14 +267,18 @@ var doSetValues = function (arrs, obj_name, obj_value, obj_sets) {
 
 // 数组单项选择
 var doGetRadio = function (arrs, success, fail) {
+  doGetRadio(arrs, 'checked', success, fail)
+}
+
+// 数组单项选择
+var doGetRadioex = function (arrs, checked_obj_name, success, fail) {
   var find = null
   for (let arr of arrs) {
-    if (arr.checked) {
-      find = arr;
-      break
+    if (arr[checked_obj_name]) {
+      find = arr; break
     }
   }
-  find && typeof success === 'function' && success(find)
+  find && typeof success === 'function' && success(find);
   !find && typeof fail === 'function' && fail()
 }
 
@@ -307,8 +312,7 @@ var doSetCheckbox = function (arrs, uids, success) {
     var checked = false
     for (let uid of uids) {
       if (arr.uid === uid) {
-        checked = true;
-        break
+        checked = true; break
       }
     }
     arr.checked = checked
@@ -381,8 +385,8 @@ var doPost = function (options) {
 var doAuth = function (authString, success, fail) {
   wx.getSetting({
     success(res) {
-      var auth = !!res.authSetting[authString]
-      !auth && typeof fail === 'function' && fail()
+      var auth = !!res.authSetting[authString];
+      !auth && typeof fail === 'function' && fail();
       auth && typeof success === 'function' && success()
     }
   })
@@ -471,6 +475,7 @@ module.exports = {
   getValue: doGetValue,
   getIndex: doGetIndex,
   getRadio: doGetRadio,
+  getRadioex: doGetRadioex,
   getCheckbox: doGetCheckbox,
   setRadio: doSetRadio,
   setRadioex: doSetRadioex,

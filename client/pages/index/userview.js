@@ -48,7 +48,21 @@ Page({
   },
 
   userviewSubmit: function (e) {
-
+    var that = this
+    var form = {}
+    form.groups_json = JSON.stringify(e.detail.value)
+    x5on.getRadioex(that.data.users, 'selected', user => {
+      form.user_sch_uid = user.uid
+      x5on.post({
+        url: x5on.url.userviewupdate,
+        data: form,
+        success() {
+          that.setData({ users: [], groups: [] })
+        }
+      })
+    }, () => {
+      x5on.showError(that, '教师选择没有设置')
+    })
   },
 
   returnClick: function (e) {

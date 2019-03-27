@@ -187,9 +187,9 @@ class x5on
     return '%李%';
   }
 
-  public static function getBool($true)
+  public static function getBool($true_string)
   {
-    return $true === 'true' ? 1 : 0;
+    return $true_string === 'true' ? 1 : 0;
   }
 
 }

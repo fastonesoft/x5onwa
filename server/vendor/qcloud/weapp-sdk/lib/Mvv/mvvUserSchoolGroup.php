@@ -3,6 +3,7 @@
 namespace QCloud_WeApp_SDK\Mvv;
 
 use QCloud_WeApp_SDK\Model\x5on;
+use QCloud_WeApp_SDK\Model\xonGroup;
 use QCloud_WeApp_SDK\Model\xonUserSchoolGroup;
 use QCloud_WeApp_SDK\Model\xovUser;
 use QCloud_WeApp_SDK\Model\xovUserSchool;
@@ -105,27 +106,8 @@ class mvvUserSchoolGroup
     return $result;
   }
 
-  // 教师所属分组查询
-  public static function groups($sch_admin_user_id, $user_sch_uid)
-  {
-    $result = [];
-    self::schAdmin($sch_admin_user_id, function ($user_sch_group) use ($user_sch_uid, &$result) {
-      $sch_id = $user_sch_group->sch_id;
-
-      $user_sch = xovUserSchool::checkByUid($user_sch_uid);
-      $user_id = $user_sch->user_id;
-
-      $groups = mvvGroup::groupLess(x5on::GROUP_ADMIN_SCHOOL);
-      $sch_groups = xovUserSchoolGroup::getsBy(compact('sch_id', 'user_id'));
-
-      // 返回合并后的教师分组情况数组
-      $result = self::merge($groups, $sch_groups);
-    });
-    return $result;
-  }
-
   // 合并分组列表与教师分组
-  private static function merge($groups, $sch_groups) {
+  private static function doMerge($groups, $sch_groups) {
     $result = [];
     foreach ($groups as $key => $group) {
       $has_role = 0;
@@ -140,6 +122,59 @@ class mvvUserSchoolGroup
     }
     return $result;
   }
+
+  // 教师所属分组查询
+  public static function groups($sch_admin_user_id, $user_sch_uid)
+  {
+    $result = [];
+    self::schAdmin($sch_admin_user_id, function ($user_sch_group) use ($user_sch_uid, &$result) {
+      $sch_id = $user_sch_group->sch_id;
+
+      $user_sch = xovUserSchool::checkByUid($user_sch_uid);
+      $user_sch_id = $user_sch->id;
+
+      $groups = mvvGroup::groupLess(x5on::GROUP_ADMIN_SCHOOL);
+      $sch_groups = xonUserSchoolGroup::getsBy(compact('user_sch_id'));
+
+      // 返回合并后的教师分组情况数组
+      $result = self::doMerge($groups, $sch_groups);
+    });
+    return $result;
+  }
+
+  private static function doGroups($user_sch_id, $groups, $groups_json) {
+    $new_groups = json_decode($groups_json);
+    foreach ($new_groups as $uid => $value) {
+      foreach ($groups as $group) {
+        // 检测是否组成员
+        if ($uid === $group->uid) {
+          $grp = xonGroup::getByUid($uid);
+          $group_id = $grp->id;
+          $user_sch_group = xonUserSchoolGroup::getBy(compact('user_sch_id', 'group_id'));
+
+          // 判断为真，不存在，添加
+          $value && $user_sch_group === null && xonUserSchoolGroup::add($user_sch_id, $group_id);
+          // 判断为假，存在，删除
+          !$value && $user_sch_group !== null && xonUserSchoolGroup::delBy(compact('user_sch_id', 'group_id'));
+        }
+      }
+    }
+  }
+
+  // 教师所属分组更新
+  public static function update($sch_admin_user_id, $user_sch_uid, $groups_json)
+  {
+    self::schAdmin($sch_admin_user_id, function ($user_sch_group) use ($user_sch_uid, $groups_json) {
+      $user_sch = xovUserSchool::checkByUid($user_sch_uid);
+      $user_sch_id = $user_sch->id;
+
+      $groups = mvvGroup::groupLess(x5on::GROUP_ADMIN_SCHOOL);
+
+      // 返回合并后的教师分组情况数组
+      $result = self::doGroups($user_sch_id, $groups, $groups_json);
+    });
+  }
+
 
 
 
