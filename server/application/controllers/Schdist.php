@@ -10,7 +10,6 @@ class Schdist extends CI_Controller
    * 学校设置
    */
   const role_name = 'schdist';
-
   public function index()
   {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
