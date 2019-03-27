@@ -30,25 +30,34 @@ class mvvSchool
     $sch_id = $scho->id;
     $schs_id = $scho->schs_id;
 
-    // 分配教师学校
-    $user_sch_id = xonUserSchool::add($user_id, $sch_id);
+    // 查询教师是否注册，否，添加
+    $user_sch = xonUserSchool::getBy(compact('user_id', 'sch_id'));
+    if ($user_sch === null) {
+      $user_sch_id = xonUserSchool::add($user_id, $sch_id);
+      $user_sch = xonUserSchool::getById($user_sch_id);
+    }
+    $user_sch_id = $user_sch->id;
 
-    // 分配教师学校组
+    // 查询教师是否分配管理
     $group_id = x5on::GROUP_ADMIN_SCHOOL;
-    $userschgroup_uid = xonUserSchoolGroup::add($user_sch_id, $group_id);
+    $user_sch_group = xonUserSchoolGroup::existByCustom(compact('user_sch_id', 'group_id'), '已经是学校管理员，不必重复设置');
+    xonUserSchoolGroup::add($user_sch_id, $group_id);
 
     // 返回数据
     return self::refresh($schs_id);
   }
 
-  public static function del($user_sch_id) {
-    $user_sch = xovUserSchool::checkById($user_sch_id);
-    $schs_id = $user_sch->schs_id;
+  // 学校管理删除
+  public static function del($user_sch_group_uid) {
+    // 查询管理员记录
+    $user_sch_group = xovUserSchoolGroupAll::checkByUid($user_sch_group_uid);
+    $schs_id = $user_sch_group->schs_id;
+    $user_sch_id = $user_sch_group->user_sch_id;
+
     // 删除管理组用户记录
     $group_id = x5on::GROUP_ADMIN_SCHOOL;
     xonUserSchoolGroup::delBy(compact('user_sch_id', 'group_id'));
-    // 删除学校用户管理员记录
-    xonUserSchool::delById($user_sch_id);
+
     // 返回数据
     return self::refresh($schs_id);
   }

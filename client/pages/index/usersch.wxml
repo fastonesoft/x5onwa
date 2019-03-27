@@ -59,7 +59,7 @@
       </view>
     </view>
   </form>
-  <view class="weui-cells__title">成员列表</view>
+  <view class="weui-cells__title">成员列表({{members.length}})</view>
   <view class="weui-cells weui-cells_after-title">
     <block wx:for="{{members}}" wx:key="uid">
       <view class="weui-cell">

@@ -106,35 +106,6 @@ Page({
 
 	},
 
-	memberSubmit: function (e) {
-		var that = this
-		var rules = {
-			name: {
-				required: true,
-				chinese: true,
-				rangelength: [1, 3],
-			}
-		}
-		var messages = {
-			name: {
-				required: '成员姓名'
-			}
-		}
-		x5on.checkForm(e.detail.value, rules, messages, form => {
-			form.schs_id = x5on.getId(that.data.schs, that.data.schsIndex)
-			x5on.post({
-				url: x5on.url.schdistmemfind,
-				data: form,
-				success(members) {
-					members.length !== 0 && that.setData({ members })
-					members.length === 0 && x5on.showError(that, '没有找到你要的学校成员！')
-				}
-			})
-		}, message => {
-			x5on.showError(that, message)
-		})
-	},
-
 	schdistRemove: function (e) {
 		var that = this
 		var uid = e.currentTarget.dataset.uid

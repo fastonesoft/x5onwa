@@ -80,7 +80,6 @@ var doUrl = {
   schdistdist: `${host}/weapp/schdist/dist`,
   schdistsch: `${host}/weapp/schdist/sch`,
   schdistdel: `${host}/weapp/schdist/del`,
-  schdistmemfind: `${host}/weapp/schdist/memfind`,
 
   // 报名
   regstud: `${host}/weapp/studreg`,

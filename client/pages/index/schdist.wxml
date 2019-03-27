@@ -59,21 +59,6 @@
 </form>
 
 <view wx:if="{{members.length>0}}">
-	<form bindsubmit="memberSubmit">
-		<view class="weui-cells">
-			<view class="weui-cell weui-cell_input weui-cell_vcode">
-				<view class="weui-cell__hd">
-					<view class="weui-label">成员姓名</view>
-				</view>
-				<view class="weui-cell__bd">
-					<input class="weui-input" placeholder="请输入成员姓名" name="name" type="text" maxlength="4" />
-				</view>
-				<view class="weui-cell__ft">
-					<button type="normal" form-type="submit">查询</button>
-				</view>
-			</view>
-		</view>
-	</form>
 	<view class="weui-cells__title">学校管理</view>
 	<view class="weui-cells weui-cells_after-title">
 		<block wx:for="{{members}}" wx:key="uid">

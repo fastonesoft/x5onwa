@@ -142,24 +142,4 @@ class Schdist extends CI_Controller
     });
   }
 
-  public function memfind()
-  {
-    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
-      try {
-        $param = $_POST;
-        $schs_id = $param['schs_id'];
-        $user_name = Model\x5on::getLike($param['name']);
-
-        // 学校已分配用户查询
-        $result = Model\xovUserSchoolGroup::likes(compact('schs_id', 'user_name'));
-
-        $this->json(['code' => 0, 'data' => $result]);
-      } catch (Exception $e) {
-        $this->json(['code' => 1, 'data' => $e->getMessage()]);
-      }
-    }, function ($error) {
-      $this->json($error);
-    });
-  }
-
 }
