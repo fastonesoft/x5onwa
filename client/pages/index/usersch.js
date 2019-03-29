@@ -32,7 +32,7 @@ Page({
         url: x5on.url.userschuser,
         data: form,
         success(users) {
-          that.setData({ users })
+          users.length !== 0 && that.setData({ users })
           users.length === 0 && x5on.showError(that, '没有找到你要的用户！')
         }
       })

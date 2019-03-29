@@ -90,12 +90,11 @@ var doUrl = {
   regstudstudenroll: `${host}/weapp/studreg/studenroll`,
 
   // 班级分管
-  mydivision: `${host}/weapp/mydivision`,
-  mydivisionclass: `${host}/weapp/mydivision/classes`,
-  mydivisionteachs: `${host}/weapp/mydivision/teachs`,
-  mydivisionupdate: `${host}/weapp/mydivision/update`,
-  mydivisionedclass: `${host}/weapp/mydivision/classed`,
-  mydivisionedremove: `${host}/weapp/mydivision/remove`,
+  mydivi: `${host}/weapp/mydivi`,
+  mydiviclsdiv: `${host}/weapp/mydivi/clsdiv`,
+  mydiviteachs: `${host}/weapp/mydivi/teachs`,
+  mydividist: `${host}/weapp/mydivi/dist`,
+  mydiviremove: `${host}/weapp/mydivi/remove`,
 
 
 
@@ -189,9 +188,9 @@ var doUrl = {
   myadjustmovingqrcode: `${host}/weapp/myadjust/movingqrcode`,
 
   // 调动设置
-  mydivisionset: `${host}/weapp/mydivisionset`,
-  mydivisionsetdata: `${host}/weapp/mydivisionset/data`,
-  mydivisionsetupdate: `${host}/weapp/mydivisionset/update`,
+  mydiviset: `${host}/weapp/mydiviset`,
+  mydivisetdata: `${host}/weapp/mydiviset/data`,
+  mydivisetupdate: `${host}/weapp/mydiviset/update`,
 
   // 学生学籍
   gradestud: `${host}/weapp/gradestud`,
@@ -272,7 +271,7 @@ var doSetValues = function (arrs, obj_name, obj_value, obj_sets) {
 
 // 数组单项选择
 var doGetRadio = function (arrs, success, fail) {
-  doGetRadio(arrs, 'checked', success, fail)
+  doGetRadioex(arrs, 'checked', success, fail)
 }
 
 // 数组单项选择
@@ -312,10 +311,10 @@ var doSetRadioex = function (arrs, e_detail_value, checked_obj_name, success) {
 }
 
 // 数组多项设置
-var doSetCheckbox = function (arrs, uids, success) {
+var doSetCheckbox = function (arrs, e_detail_value_uids, success) {
   for (let arr of arrs) {
     var checked = false
-    for (let uid of uids) {
+    for (let uid of e_detail_value_uids) {
       if (arr.uid === uid) {
         checked = true; break
       }
