@@ -89,6 +89,19 @@ var doUrl = {
   regstudcancel: `${host}/weapp/studreg/cancel`,
   regstudstudenroll: `${host}/weapp/studreg/studenroll`,
 
+  // 班级分管
+  mydivision: `${host}/weapp/mydivision`,
+  mydivisionclass: `${host}/weapp/mydivision/classes`,
+  mydivisionteachs: `${host}/weapp/mydivision/teachs`,
+  mydivisionupdate: `${host}/weapp/mydivision/update`,
+  mydivisionedclass: `${host}/weapp/mydivision/classed`,
+  mydivisionedremove: `${host}/weapp/mydivision/remove`,
+
+
+
+
+
+
 
 
 
@@ -148,13 +161,6 @@ var doUrl = {
   mytuninglocal: `${host}/weapp/mytuning/local`,
 
 
-  // 班级分管
-  mydivision: `${host}/weapp/mydivision`,
-  mydivisionclass: `${host}/weapp/mydivision/classes`,
-  mydivisionteachs: `${host}/weapp/mydivision/teachs`,
-  mydivisionupdate: `${host}/weapp/mydivision/update`,
-  mydivisionedclass: `${host}/weapp/mydivision/classed`,
-  mydivisionedremove: `${host}/weapp/mydivision/remove`,
 
   // 分班调整
   myadjust: `${host}/weapp/myadjust`,

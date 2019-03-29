@@ -10,9 +10,4 @@ class xovGradeCurrent extends vAppinfo
 {
   protected static $tableName = 'xovGradeCurrent';
   protected static $tableTitle = '当前年级';
-
-  public static function getRows () {
-    return dbs::select('xovGradeCurrent', ['id', 'name']);
-  }
-
 }

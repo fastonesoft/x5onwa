@@ -3,12 +3,6 @@ var x5on = require('../x5on.js')
 
 Page({
 
-  data: {
-    errorMessage: '错误提示',
-    errorArray: [1],
-
-    grades: []
-  },
 
   onLoad: function (options) {
     var that = this
@@ -149,6 +143,12 @@ Page({
         that.setData({ classes })
       }
     })
-  }
+  },
+
+  
+	returnClick: function (e) {
+		wx.navigateBack()
+	},
+
 
 })

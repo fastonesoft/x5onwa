@@ -13,7 +13,7 @@ class Mysameset extends CI_Controller {
   public function index() {
     Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
-        $grades = Model\xovGradeCurrent::getRows();
+        $grades = Model\xovGradeCurrent::gets();
         $result = compact('grades');
 
         $this->json(['code' => 0, 'data' => $result]);

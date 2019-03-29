@@ -5,15 +5,16 @@ use QCloud_WeApp_SDK\Mvv;
 use QCloud_WeApp_SDK\Model;
 
 class Mydivision extends CI_Controller {
-  const role_name = 'mydivision';
-
-
+  /**
+   * 班级分管
+   */
+  const role_name = 'mydivi';
   public function index() {
-    Mvv\mvvLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
-        $grades = Model\xovGradeCurrent::getRows();
-        $result = compact('grades');
-        // 正文
+        // 当前年级
+        $result = Mvv\mvvMyDivi::grades($userinfor->unionId);
+
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
         $this->json(['code' => 1, 'data' => $e->getMessage()]);
@@ -24,13 +25,13 @@ class Mydivision extends CI_Controller {
   }
 
   public function classes() {
-    Mvv\mvvLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
+        // 当前年级班级
         $param = $_POST;
         $grade_id = $param['grade_id'];
-        $result = Model\xovClass::getRows4Division($grade_id);
+        $result = Mvv\mvvMyDivi::classes($userinfor->unionId, $grade_id);
 
-        // 正文
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
         $this->json(['code' => 1, 'data' => $e->getMessage()]);
@@ -41,14 +42,13 @@ class Mydivision extends CI_Controller {
   }
 
   public function teachs() {
-    Mvv\mvvLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
+        // 教师查询
         $param = $_POST;
         $user_name = $param["user_name"];
-        $division_user_id = $user['unionId'];
-        $sch_id = Model\xovSchoolTeach::getUserSchoolId($division_user_id);
-        $result = Model\xonGradeDivision::getSchoolTeach($sch_id, $user_name);
-        // 正文
+        $result = Mvv\mvvMyDivi::teachs($userinfor->unionId, $user_name);
+
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
         $this->json(['code' => 1, 'data' => $e->getMessage()]);
@@ -59,14 +59,14 @@ class Mydivision extends CI_Controller {
   }
 
   public function update() {
-    Mvv\mvvLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
+        // 设置班级分管
         $param = $_POST;
-
-        $user_id = $param['user_id'];
+        $user_uid = $param['user_uid'];
         $cls_ids = $param['cls_ids'];
-        $grade_id = Model\xonGradeDivision::setDivision($user_id, $cls_ids);
-        $result = Model\xovClass::getRows4Divisioned($grade_id);
+//        $grade_id = Model\xonGradeDivision::setDivision($user_id, $cls_ids);
+        $result = Mvv\mvvMyDivi::update($userinfor->unionId, $user_uid, $cls_ids);
 
         // 正文
         $this->json(['code' => 0, 'data' => $result]);
@@ -79,13 +79,13 @@ class Mydivision extends CI_Controller {
   }
 
   public function classed() {
-    Mvv\mvvLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
+        // 已分管班级
         $param = $_POST;
         $grade_id = $param['grade_id'];
-        $result = Model\xovClass::getRows4Divisioned($grade_id);
+        $result = Mvv\mvvMyDivi::classed($userinfor->unionId, $grade_id);
 
-        // 正文
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
         $this->json(['code' => 1, 'data' => $e->getMessage()]);
@@ -96,12 +96,12 @@ class Mydivision extends CI_Controller {
   }
 
   public function remove() {
-    Mvv\mvvLogin::check(self::role_name, function ($user) {
+    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
         $param = $_POST;
         $uid = $param['uid'];
-        $grade_id = Model\xonGradeDivision::removeDivision($uid);
-        $result = Model\xovClass::getRows4Division($grade_id);
+//        $grade_id = Model\xonGradeDivision::removeDivision($uid);
+        $result = Mvv\mvvMyDivi::remove($userinfor->unionId, $grade_id);
 
         // 正文
         $this->json(['code' => 0, 'data' => $result]);
