@@ -81,11 +81,11 @@ class mvvUserSchool
     // 一、查询编号对应记录
     $user_sch = xonUserSchool::checkByUid($user_sch_uid);
     // 二、清除编号对应用户的状态
-    $checked = 0;
-    xonUserSchool::setsBy(compact('checked'), compact('user_id'));
+    $confirmed = 0;
+    xonUserSchool::setsBy(compact('confirmed'), compact('user_id'));
     // 三、更新编号对应记录
-    $checked = 1;
-    return xonUserSchool::setsByUid(compact('checked'), $user_sch_uid);
+    $confirmed = 1;
+    return xonUserSchool::setsByUid(compact('confirmed'), $user_sch_uid);
   }
 
 
