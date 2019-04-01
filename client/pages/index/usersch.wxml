@@ -35,7 +35,7 @@
     </view>
   </block>
   <view class="weui-cells__tips x5ui-mini" wx:if="{{users.length>0}}">
-    <button class="weui-btn mini-btn" type="warn" size="mini" form-type="submit">提交</button>
+    <button type="warn" size="mini" form-type="submit">提交</button>
   </view>
 </form>
 

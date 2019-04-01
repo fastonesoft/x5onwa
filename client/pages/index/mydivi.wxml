@@ -65,7 +65,7 @@
     </view>
   </block>
   <view class="weui-cells__tips x5ui-mini" wx:if="{{teachs.length>0&&classes.length>0}}">
-    <button class="weui-btn mini-btn" type="warn" size="mini" form-type="submit">提交</button>
+    <button type="warn" size="mini" form-type="submit">提交</button>
   </view>
 </form>
 <view wx:if="{{classed.length>0}}">

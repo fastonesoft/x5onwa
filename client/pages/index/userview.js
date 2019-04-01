@@ -34,7 +34,7 @@ Page({
   userChange: function (e) {
     var that = this
     var user_sch_uid = e.detail.value
-    x5on.setRadioex(that.data.users, user_sch_uid, 'selected', users => {
+    x5on.setRadio(that.data.users, user_sch_uid, users => {
       that.setData({ users })
       // 读取用户所在组
       x5on.post({
@@ -51,7 +51,7 @@ Page({
     var that = this
     var form = {}
     form.groups_json = JSON.stringify(e.detail.value)
-    x5on.getRadioex(that.data.users, 'selected', user => {
+    x5on.getRadio(that.data.users, user => {
       form.user_sch_uid = user.uid
       x5on.post({
         url: x5on.url.userviewupdate,

@@ -56,11 +56,11 @@
   <view class="weui-cells weui-cells_after-title">
     <radio-group name="uid" bindchange="userschsChange">
       <label class="weui-cell weui-check__label" wx:for="{{userschs}}" wx:key="uid">
-        <radio class="weui-check" value="{{item.uid}}" checked="{{item.checked}}" />
+        <radio class="weui-check" value="{{item.uid}}" checked="{{item.is_current}}" />
         <view class="weui-cell__bd">{{item.schs_sch}}</view>
         <view class="weui-cell__ft weui-cell__ft_in-radio">
-          <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.checked}}"></icon>
-          <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{item.checked}}"></icon>
+          <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.is_current}}"></icon>
+          <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{item.is_current}}"></icon>
         </view>
       </label>
     </radio-group>

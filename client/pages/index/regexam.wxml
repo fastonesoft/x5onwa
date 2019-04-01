@@ -74,10 +74,10 @@
     </view>
   </view>
   <view class="weui-cells__tips x5ui-mini">
-    <button class="weui-btn mini-btn" data-uid="{{item.uid}}" type="primary" size="mini" bindtap="checkClick">
+    <button data-uid="{{item.uid}}" type="primary" size="mini" bindtap="checkClick">
       确认
     </button>
-    <button class="weui-btn mini-btn" data-uid="{{item.uid}}" type="warn" size="mini" bindtap="cancelClick">
+    <button data-uid="{{item.uid}}" type="warn" size="mini" bindtap="cancelClick">
       取消
     </button>
   </view>

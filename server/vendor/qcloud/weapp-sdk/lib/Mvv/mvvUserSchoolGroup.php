@@ -17,13 +17,13 @@ class mvvUserSchoolGroup
   public static function schAdmin($user_id, $success)
   {
     // 查找用户对应学校，有多重设置，返回第一个
-    $checked = 1;
-    xovUserSchoolGroupAll::checkByCustom(compact('user_id', 'checked'), '不属于任何学校，无法操作');
+    $is_current = 1;
+    xovUserSchoolGroupAll::checkByCustom(compact('user_id', 'is_current'), '不属于任何学校，无法操作');
 
     // todo: 上面、下面，这种可能要变成xovUserSchoolGroupAll
 
     $group_id = x5on::GROUP_ADMIN_SCHOOL;
-    $user_sch_group = xovUserSchoolGroupAll::checkByCustom(compact('user_id', 'group_id', 'checked'), '不是学校管理员，无法操作');
+    $user_sch_group = xovUserSchoolGroupAll::checkByCustom(compact('user_id', 'group_id', 'is_current'), '不是学校管理员，无法操作');
     call_user_func($success, $user_sch_group);
   }
 

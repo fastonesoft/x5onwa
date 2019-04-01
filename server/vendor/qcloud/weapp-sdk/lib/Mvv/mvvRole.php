@@ -47,8 +47,8 @@ class mvvRole
     $roles = xonRole::gets();
     $myroles = xovUserRole::getsBy(compact('user_id'));
     // 查询用户学校
-    $confirmed = 1;
-    $userschool = xovUserSchoolAll::getBy(compact('user_id', 'confirmed'));
+    $is_current = 1;
+    $userschool = xovUserSchoolAll::getBy(compact('user_id', 'is_current'));
     $sch_id = $userschool ? $userschool->sch_id : null;
     // 用户学校对应权限
     $myroleschs = xovUserRoleSchool::getsBy(compact('user_id', 'sch_id'));

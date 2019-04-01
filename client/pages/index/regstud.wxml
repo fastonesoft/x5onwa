@@ -5,8 +5,9 @@
 <view class="weui-cells weui-cells_after-title">
   <view class="weui-cell weui-cell_select">
     <view class="weui-cell__hd weui-cell__hd_in-select-after x5ui-btn_half">
-      <picker bindchange="areaChange" name="area" value="{{areaIndex}}" range="{{areas}}" range-key="name" disabled="{{!areas||areas.length==0||areas.length==1}}">
-        <view class="weui-select weui-select_in-select-after">{{areas[areaIndex].name}}</view>
+      <picker bindchange="areaChange" name="area" value="{{areaIndex}}" range="{{areas}}" range-key="city_name"
+        disabled="{{!areas||areas.length==0||areas.length==1}}">
+        <view class="weui-select weui-select_in-select-after">{{areas[areaIndex].city_name}}</view>
       </picker>
     </view>
     <view class="weui-cell__bd weui-cell__hd_in-select-after">
@@ -26,7 +27,7 @@
         <view class="weui-label">学校选择</view>
       </view>
       <view class="weui-cell__bd">
-        <picker bindchange="stepChange" name="step" value="{{stepIndex}}" range="{{steps}}" range-key="schs_steps"
+        <picker bindchange="stepChange" name="step" value="{{stepIndex}}" range="{{steps}}" range-key="schs_sch"
           disabled="{{!steps||steps.length==0}}">
           <view class="weui-select weui-select_in-select-after">{{steps[stepIndex].schs_steps}}</view>
         </picker>
@@ -74,15 +75,15 @@
 
     </view>
     <view class="weui-cells__tips x5ui-mini">
-      <button class="weui-btn mini-btn" data-uid="{{item.uid}}" type="primary" size="mini" wx:if="{{!item.confirmed}}"
+      <button data-uid="{{item.uid}}" type="primary" size="mini" wx:if="{{!item.confirmed}}"
         bindtap="checkClick">
         确认
       </button>
-      <button class="weui-btn mini-btn" data-uid="{{item.uid}}" type="warn" size="mini" wx:if="{{!item.confirmed}}"
+      <button data-uid="{{item.uid}}" type="warn" size="mini" wx:if="{{!item.confirmed}}"
         bindtap="cancelClick">
         取消
       </button>
-      <button class="weui-btn mini-btn" data-uid="{{item.child_uid}}" type="default" size="mini" wx:if="{{item.confirmed}}"
+      <button data-uid="{{item.child_uid}}" type="default" size="mini" wx:if="{{item.confirmed}}"
         bindtap="regedClick">
         详细信息
       </button>

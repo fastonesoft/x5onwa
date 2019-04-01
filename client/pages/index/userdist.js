@@ -42,7 +42,7 @@ Page({
   },
 
   userChange: function (e) {
-    x5on.setRadioex(this.data.users, e.detail.value, 'selected', users => {
+    x5on.setRadio(this.data.users, e.detail.value, users => {
       this.setData({ users })
     })
   },

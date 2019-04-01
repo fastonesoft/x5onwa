@@ -18,7 +18,8 @@ class Studreg extends CI_Controller
         $user_id = $userinfor->unionId;
         $my_user_id = $user_id;
         $childs = Model\xovUserChilds::getsBy(compact('user_id'));
-        $areas = Model\xonArea::gets();
+        $area_type = 2;
+        $areas = Model\xovAreas::getsBy(compact('area_type'));
         $edutypes = Model\xonEduType::gets();
         // 用户孩子的报名信息
         $studregs = Model\xovUserChildsReg::getsBy(compact('my_user_id'));

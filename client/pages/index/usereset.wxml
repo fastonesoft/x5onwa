@@ -59,7 +59,7 @@
 		</view>
 	</view>
 	<view class="weui-cells__tips x5ui-mini">
-		<button class="weui-btn mini-btn" type="warn" size="mini" form-type="submit">
+		<button type="warn" size="mini" form-type="submit">
 			提交
 		</button>
 	</view>

@@ -95,7 +95,7 @@ Page({
 
   userschsChange: function (e) {
     var that = this
-    x5on.setRadio(that.data.userschs, e.detail.value, userschs => {
+    x5on.setRadioex(that.data.userschs, e.detail.value, 'is_current', userschs => {
       that.setData({ userschs })
       // 切换学校
       x5on.post({

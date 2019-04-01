@@ -48,7 +48,7 @@
     </view>
   </view>
   <view class="weui-cells__tips x5ui-mini" wx:if="{{groupIndex>-1}}">
-    <button class="weui-btn mini-btn" type="warn" size="mini" form-type="submit">提交</button>
+    <button type="warn" size="mini" form-type="submit">提交</button>
   </view>
 </form>
 <view class="weui-btn-area">
