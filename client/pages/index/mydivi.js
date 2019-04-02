@@ -72,37 +72,43 @@ Page({
 
   mydiviSubmit: function (e) {
     var that = this
-    var data = e.detail.value
-    if (!data.user_id || data.cls_ids.length==0) {
-      x5on.showError(that, '教师、班级未做选择')
-      return
-    }
-    var teachs = this.data.teachs
-    var classes = this.data.classes
-    teachs.forEach(function (item, index) {
-      if (item.user_id == data.user_id) {
-        teachs.splice(index, 1)
+    var rules = {
+      user_uid: {
+        required: true,
+      },
+      grade: {
+        required: true,
+        min: 0,
+      },
+      cls_uids: {
+        required: true,
+        arr: true,
       }
-    })
-    for (var index = classes.length - 1; index >= 0; index--) {
-      var has = false
-      var item = classes[index]
-      for (var i=0; i < data.cls_ids.length; i++) {
-        if (item.id == data.cls_ids[i]) {
-          has = true
-          break
+    }
+    var messages = {
+      user_uid: {
+        required: '教师选择'
+      },
+      grade: {
+        required: '年级选择'
+      },
+      cls_uids: {
+        required: '班级选择'
+      }
+    }
+    x5on.checkForm(e.detail.value, rules, messages, form => {
+      form.grade_id = x5on.getId(that.data.grades, form.grade)
+      form.cls_uid_jsons = JSON.stringify(form.cls_uids)
+      console.log(form)
+      x5on.post({
+        url: x5on.url.mydividist,
+        data: form,
+        success(class_classed) {
+          that.setData(class_classed)
         }
-      }
-      if (has) classes.splice(index, 1)
-    }
-    that.setData({ teachs, classes })
-    x5on.post({
-      url: x5on.url.mydiviupdate,
-      data: data,
-      success: result => {
-        var classed = result.data
-        that.setData({ classed })
-      }
+      })
+    }, mes => {
+      x5on.showError(that, mes)
     })
   },
 
@@ -117,7 +123,6 @@ Page({
       }
     })
   },
-
   
 	returnClick: function (e) {
 		wx.navigateBack()

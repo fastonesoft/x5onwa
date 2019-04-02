@@ -65,8 +65,8 @@ class mvvMyDivi
     $result = [];
     mvvUserSchoolGroup::schAdmin($sch_admin_user_id, function ($user_sch_group) use ($grade_id, $user_uid, $cls_uid_jsons, &$result) {
       $sch_id = $user_sch_group->sch_id;
-
-      $user_id = xovUser::checkUid2Id($user_uid);
+      $user_sch = xovUserSchool::checkByUid($user_uid);
+      $user_id = $user_sch->user_id;
       $cls_uids = json_decode($cls_uid_jsons);
       self::doDist($user_id, $cls_uids);
       $result = self::refresh($grade_id);

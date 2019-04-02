@@ -65,8 +65,8 @@ class Mydivi extends CI_Controller {
         $param = $_POST;
         $grade_id = $param['grade_id'];
         $user_uid = $param['user_uid'];
-        $cls_uids = $param['cls_uids'];
-        $result = Mvv\mvvMyDivi::dist($userinfor->unionId, $grade_id, $user_uid, $cls_uids);
+        $cls_uid_jsons = $param['cls_uid_jsons'];
+        $result = Mvv\mvvMyDivi::dist($userinfor->unionId, $grade_id, $user_uid, $cls_uid_jsons);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {

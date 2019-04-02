@@ -40,7 +40,7 @@ class mvvSchool
 
     // 查询教师是否分配管理
     $group_id = x5on::GROUP_ADMIN_SCHOOL;
-    $user_sch_group = xonUserSchoolGroup::existByCustom(compact('user_sch_id', 'group_id'), '已经是学校管理员，不必重复设置');
+    $user_sch_group = xovUserSchoolGroupAll::existByCustom(compact('user_id', 'group_id'), '已经是学校管理员，不能重复设置');
     xonUserSchoolGroup::add($user_sch_id, $group_id);
 
     // 返回数据

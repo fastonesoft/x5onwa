@@ -47,6 +47,7 @@ class x5va {
     this.defaults = {
       messages: {
         required: '不得为空',
+        arr: '多重选择不得为空',
         tel: '请输入11位的手机号码',
         date: '请输入有效的日期，格式XXXX-XX-XX',
         number: '请输入有效的数字',
@@ -91,6 +92,10 @@ class x5va {
        */
       tel(value) {
         return that.optional(value) || /^1[34578]\d{9}$/.test(value)
+      },
+      /** 多重选择不得为空 */
+      arr(value) {
+        return that.optional(value) || Array.isArray(value) && value.length>0
       },
       /**
        * 验证ISO类型的日期格式
