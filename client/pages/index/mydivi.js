@@ -99,7 +99,6 @@ Page({
     x5on.checkForm(e.detail.value, rules, messages, form => {
       form.grade_id = x5on.getId(that.data.grades, form.grade)
       form.cls_uid_jsons = JSON.stringify(form.cls_uids)
-      console.log(form)
       x5on.post({
         url: x5on.url.mydividist,
         data: form,
@@ -127,6 +126,5 @@ Page({
 	returnClick: function (e) {
 		wx.navigateBack()
 	},
-
 
 })

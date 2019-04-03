@@ -96,14 +96,10 @@ var doUrl = {
   mydividist: `${host}/weapp/mydivi/dist`,
   mydiviremove: `${host}/weapp/mydivi/remove`,
 
-
-
-
-
-
-
-
-
+  // 分类设置
+  typeset: `${host}/weapp/typeset`,
+  // 学科设置
+  subset: `${host}/weapp/subset`,
 
   // 权限设置
   roleset: `${host}/weapp/roleset`,
@@ -124,19 +120,6 @@ var doUrl = {
   studconfirm: `${host}/weapp/studconfirm`,
   studconfirmpass: `${host}/weapp/studconfirm/pass`,
   studconfirmcancel: `${host}/weapp/studconfirm/cancel`,
-
-  // 学校表格
-  schoolformkey: `${host}/weapp/schoolformkey`,
-  schoolformvalueupdate: `${host}/weapp/schoolformvalue/update`,
-
-
-  // 编码地址
-  schcode: `${host}/weapp/schcode`,
-
-  // 表单
-  appform: `${host}/weapp/appform`,
-  appformkey: `${host}/weapp/appformkey`,
-  appformkeyupdate: `${host}/weapp/appformkey/update`,
 
 
 

@@ -1,0 +1,26 @@
+<!--pages/index/typeset.wxml-->
+<view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
+
+<form bindsubmit="typesetSubmit">
+	<view class="weui-cells weui-cells_after-title">
+		<view class="weui-cell weui-cell_input">
+			<view class="weui-cell__hd">
+				<view class="weui-label">分类编号</view>
+			</view>
+			<view class="weui-cell__bd">
+				<input class="weui-input" placeholder="输入分类编号" name="id" type="number" maxlength="2" />
+			</view>
+		</view>
+		<view class="weui-cell weui-cell_input">
+			<view class="weui-cell__hd">
+				<view class="weui-label">分类名称</view>
+			</view>
+			<view class="weui-cell__bd">
+				<input class="weui-input" placeholder="输入分类名称" name="name" type="text" maxlength="20" />
+			</view>
+		</view>
+	</view>
+	<view class="weui-btn-area">
+		<button type="primary" form-type="submit">提交</button>
+	</view>
+</form>

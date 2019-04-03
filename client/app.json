@@ -54,6 +54,18 @@
     "pages/index/myclass",
     "pages/index/mystud",
 
+    "pages/index/typeset",
+    "pages/index/subset",
+    "pages/index/schyear",
+    "pages/index/schstep",
+    "pages/index/schedu",
+    "pages/index/schgrade",
+    "pages/index/schclass",
+    "pages/index/schgradegroup",
+    "pages/index/schclassgroup",
+    "pages/index/schgradestud",
+
+
     "pages/class/class",
     "pages/phone/phone"
   ],
