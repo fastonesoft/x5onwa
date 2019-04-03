@@ -1,2 +1,22 @@
 <!--pages/index/schyear.wxml-->
-<text>pages/index/schyear.wxml</text>
+<block wx:if="{{schyears.length>0}}">
+	<view class="weui-cells__title">年度列表</view>
+	<view class="weui-cells weui-cells_after-title">
+		<radio-group name="uid" bindchange="schyearsChange">
+			<label class="weui-cell weui-check__label" wx:for="{{schyears}}" wx:key="uid">
+				<radio class="weui-check" value="{{item.uid}}" checked="{{item.is_current}}" />
+				<view class="weui-cell__bd">{{item.schs_sch}}</view>
+				<view class="weui-cell__ft weui-cell__ft_in-radio">
+					<icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.is_current}}"></icon>
+					<icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{item.is_current}}"></icon>
+				</view>
+			</label>
+		</radio-group>
+	</view>
+</block>
+<view class="weui-cells__tips x5ui-mini">
+	<button type="primary" size="mini" form-type="submit">添加</button>
+</view>
+<view class="weui-btn-area">
+	<button type="primary" bindtap="returnClick">返回</button>
+</view>

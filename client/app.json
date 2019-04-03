@@ -57,6 +57,7 @@
     "pages/index/typeset",
     "pages/index/subset",
     "pages/index/schyear",
+    "pages/index/schyear_add",
     "pages/index/schstep",
     "pages/index/schedu",
     "pages/index/schgrade",

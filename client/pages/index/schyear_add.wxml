@@ -1,0 +1,26 @@
+<!--pages/index/schyear_add.wxml-->
+<view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
+
+<form bindsubmit="schyearaddSubmit">
+	<view class="weui-cells__title">学校年度</view>
+	<view class="weui-cells weui-cells_after-title">
+		<view class="weui-cell weui-cell_input">
+			<view class="weui-cell__hd">
+				<view class="weui-label">年份设置</view>
+			</view>
+			<view class="weui-cell__bd">
+				<input class="weui-input" placeholder="输入年份设置" name="year" type="number" maxlength="4" />
+			</view>
+		</view>
+
+		<view class="weui-cell weui-cell_switch">
+			<view class="weui-cell__bd">当前年度</view>
+			<view class="weui-cell__ft">
+				<switch name="is_current" />
+			</view>
+		</view>
+	</view>
+	<view class="weui-btn-area">
+		<button type="primary" form-type="submit">提交</button>
+	</view>
+</form>
