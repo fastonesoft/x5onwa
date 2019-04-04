@@ -1,37 +1,31 @@
-// pages/index/subset.js
+// pages/index/typeset_add.js
 var x5on = require('../x5on.js')
 
 Page({
 
-  subsetSubmit: function (e) {
+  typesetaddSubmit: function (e) {
     var that = this
     var rules = {
-      user_uid: {
+      id: {
         required: true,
+        digits: true,
+        minlength: 1,
       },
-      grade: {
+      name: {
         required: true,
-        min: 0,
+        chinese: true,
+        minlength: 2,
       },
-      cls_uids: {
-        required: true,
-        arr: true,
-      }
     }
     var messages = {
-      user_uid: {
-        required: '教师选择'
+      id: {
+        required: '分类编号'
       },
-      grade: {
-        required: '年级选择'
+      name: {
+        required: '分类名称'
       },
-      cls_uids: {
-        required: '班级选择'
-      }
     }
     x5on.checkForm(e.detail.value, rules, messages, form => {
-      form.grade_id = x5on.getId(that.data.grades, form.grade)
-      form.cls_uid_jsons = JSON.stringify(form.cls_uids)
       x5on.post({
         url: x5on.url.mydividist,
         data: form,
@@ -43,6 +37,5 @@ Page({
       x5on.showError(that, mes)
     })
   },
-  
 
 })

@@ -3,39 +3,32 @@ var x5on = require('../x5on.js')
 
 Page({
 
-  typesetSubmit: function (e) {
+  data: {
+    schoIndex: 0,
+  },
+
+  onload: function (e) {
     var that = this
-    var rules = {
-      id: {
-        required: true,
-        digits: true,
-        minlength: 1,
-      },
-      name: {
-        required: true,
-        chinese: true,
-        minlength: 2,
-      },
-    }
-    var messages = {
-      id: {
-        required: '分类编号'
-      },
-      name: {
-        required: '分类名称'
-      },
-    }
-    x5on.checkForm(e.detail.value, rules, messages, form => {
-      x5on.post({
-        url: x5on.url.mydividist,
-        data: form,
-        success(class_classed) {
-          that.setData(class_classed)
-        }
-      })
-    }, mes => {
-      x5on.showError(that, mes)
+    x5on.request({
+      url: x5on.url.typeset,
+      success(schos_typesets) {
+        that.setData(schos_typesets)
+      }
     })
+  },
+
+  typesetRemove: function (e) {
+    var that = this
+    x5on.request({
+      url: x5on.url.typesetdel,
+      success(typesets) {
+        that.setData({ typesets })
+      }
+    })
+  },
+
+  returnClick: function (e) {
+		wx.navigateBack()
   },
 
 

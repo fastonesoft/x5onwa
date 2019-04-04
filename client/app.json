@@ -55,7 +55,9 @@
     "pages/index/mystud",
 
     "pages/index/typeset",
+    "pages/index/typeset_add",
     "pages/index/subset",
+    "pages/index/subset_add",
     "pages/index/schyear",
     "pages/index/schyear_add",
     "pages/index/schstep",

@@ -33,3 +33,8 @@
 		<button type="primary" form-type="submit">提交</button>
 	</view>
 </form>
+
+
+<view class="weui-btn-area">
+	<button type="primary" bindtap="returnClick">返回</button>
+</view>

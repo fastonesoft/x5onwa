@@ -81,6 +81,11 @@ var doUrl = {
   schdistsch: `${host}/weapp/schdist/sch`,
   schdistdel: `${host}/weapp/schdist/del`,
 
+  // 学校年度
+  schyear: `${host}/weapp/schyear`,
+  schyearadd: `${host}/weapp/schyear/add`,
+  schyeardel: `${host}/weapp/schyear/del`,
+
   // 报名
   regstud: `${host}/weapp/studreg`,
   regstudstep: `${host}/weapp/studreg/step`,
@@ -98,8 +103,12 @@ var doUrl = {
 
   // 分类设置
   typeset: `${host}/weapp/typeset`,
+  typesetadd: `${host}/weapp/typeset/add`,
+  typesetdel: `${host}/weapp/typeset/del`,
   // 学科设置
   subset: `${host}/weapp/subset`,
+  subsetadd: `${host}/weapp/subset/add`,
+  subsetdel: `${host}/weapp/subset/del`,
 
   // 权限设置
   roleset: `${host}/weapp/roleset`,
