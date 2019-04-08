@@ -14,8 +14,8 @@
 	</view>
 </view>
 
-<comPick pickTitle="测试标题" pickLabel="测试标签" picks="{{grades}}" pickKey="schs_sch" pickValue="step_name" />
-<comPick pickTitle="测试标题" pickLabel="测试标签" picks="{{grades}}" pickKey="schs_sch" pickValue="step_name" pickIndex="-1" />
+<comPick name="dddd" value="" pickTitle="测试标题" pickLabel="测试标签" picks="{{grades}}" pickKey="schs_sch" pickValue="step_name" bind:pickChange="pick1Change" />
+<comPick pickTitle="测试标题" pickLabel="测试标签" picks="{{grades}}" pickKey="schs_sch" pickValue="step_name" pickIndex="-1" bind:pickChange="pick2Change" />
 
 <block wx:if="{{typesets.length>0}}">
 	<view class="weui-cells__title">权限分类</view>

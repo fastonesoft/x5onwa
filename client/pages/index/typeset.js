@@ -24,6 +24,14 @@ Page({
     })
   },
 
+  pick1Change: function (e) {
+    console.log(e)
+  },
+
+  pick2Change: function (e) {
+    console.log(e.detail)
+  },
+
   typesetRemove: function (e) {
     var that = this
     x5on.request({

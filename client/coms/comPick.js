@@ -15,13 +15,6 @@ Component({
   },
 
   /**
-   * 组件的初始数据
-   */
-  data: {
-
-  },
-
-  /**
    * 组件的方法列表
    */
   methods: {
@@ -29,6 +22,9 @@ Component({
       var that = this
       x5on.setPick(e, pickIndex => {
         that.setData({ pickIndex })
+        // 推送数据
+        var pickData = x5on.getArr(this.data.picks, pickIndex)
+        this.triggerEvent('pickChange', pickData)
       })
     }
   }

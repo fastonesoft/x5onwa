@@ -246,6 +246,15 @@ var doGetUid = function (arrs, index) {
 var doGetValue = function (arrs, index, obj_name) {
   return arrs.length > index ? arrs[index][obj_name] : null
 }
+var doGetArr = function (arrs, index) {
+  return arrs.length > index ? arrs[index] : null
+}
+var doGetArrex = function (arrs, obj_name, obj_value) {
+  for (var i = 0; i < arrs.length; i++) {
+    var arr = arrs[i]
+    if (arr[obj_name] === obj_value) return arr
+  }
+}
 // 删除数组元素
 var doDelValue = function (arrs, obj_name, obj_value) {
   var index = doGetIndexe(arrs, obj_name, obj_value)
@@ -469,6 +478,8 @@ module.exports = {
   getId: doGetId,
   getUid: doGetUid,
   getValue: doGetValue,
+  getArr: doGetArr,
+  getArrex: doGetArrex,
   getIndex: doGetIndex,
   getRadio: doGetRadio,
   getRadioex: doGetRadioex,
