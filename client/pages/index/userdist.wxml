@@ -54,6 +54,7 @@
 <view class="weui-btn-area">
   <button type="primary" bindtap="returnClick">返回</button>
 </view>
+
 <view wx:if="{{members.length>0}}">
   <form bindsubmit="memberSubmit">
     <view class="weui-cells">

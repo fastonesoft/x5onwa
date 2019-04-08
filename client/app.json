@@ -1,7 +1,6 @@
 {
   "pages": [
     "pages/login/login",
-
     "pages/index/index",
     "pages/index/regstud",
     "pages/index/regexam",
@@ -18,16 +17,12 @@
     "pages/index/student",
     "pages/index/studenroll",
     "pages/index/students",
-
     "pages/index/areadist",
     "pages/index/area_add",
-
     "pages/index/schsdist",
     "pages/index/schs_add",
-    
     "pages/index/schdist",
     "pages/index/sch_add",
-
     "pages/index/stud_add",
     "pages/index/stud_modi",
     "pages/index/stud_auth",
@@ -42,7 +37,6 @@
     "pages/index/stud_down",
     "pages/index/stud_temp",
     "pages/index/stud_back",
-
     "pages/index/myrename",
     "pages/index/myexchange",
     "pages/index/myexqrcode",
@@ -53,7 +47,6 @@
     "pages/index/myadjust",
     "pages/index/myclass",
     "pages/index/mystud",
-
     "pages/index/typeset",
     "pages/index/typeset_add",
     "pages/index/subset",
@@ -67,8 +60,6 @@
     "pages/index/schgradegroup",
     "pages/index/schclassgroup",
     "pages/index/schgradestud",
-
-
     "pages/class/class",
     "pages/phone/phone"
   ],
@@ -104,7 +95,8 @@
         "pagePath": "pages/class/class",
         "iconPath": "images/tabs/class.png",
         "selectedIconPath": "images/tabs/classs.png"
-      }      
+      }
     ]
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }
