@@ -32,6 +32,14 @@ Page({
     console.log(e.detail)
   },
 
+  typesetSubmit: function (e) {
+    console.log(e)
+  },
+
+  memberRemove: function (e) {
+    console.log(e)
+  },
+
   typesetRemove: function (e) {
     var that = this
     x5on.request({

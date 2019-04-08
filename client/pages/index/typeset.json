@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "分类设置",
   "usingComponents": {
-    "comPick": "../../coms/comPick"
+    "comPick": "../../coms/comPick",
+    "comMember": "../../coms/comMember"
   }
 }

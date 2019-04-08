@@ -1,1 +1,4 @@
 /* coms/comMember.wxss */
+@import "../pages/weui.wxss";
+
+.remove-icon { height: 1.2em; width: 1.2em; border: none; vertical-align: middle; }

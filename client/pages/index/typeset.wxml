@@ -1,4 +1,5 @@
 <!--pages/index/typeset.wxml-->
+<form bindsubmit="typesetSubmit">
 
 <view class="weui-cells__title">学校选择</view>
 <view class="weui-cells weui-cells_after-title">
@@ -14,8 +15,10 @@
 	</view>
 </view>
 
-<comPick name="dddd" value="" pickTitle="测试标题" pickLabel="测试标签" picks="{{grades}}" pickKey="schs_sch" pickValue="step_name" bind:pickChange="pick1Change" />
-<comPick pickTitle="测试标题" pickLabel="测试标签" picks="{{grades}}" pickKey="schs_sch" pickValue="step_name" pickIndex="-1" bind:pickChange="pick2Change" />
+<comPick pickTitle="学校设置" pickLabel="学校选择" picks="{{grades}}" pickKey="schs_sch" pickValue="step_name" bind:pickChange="pick1Change" />
+<comPick pickTitle="学校设置" pickLabel="学校选择" picks="{{grades}}" pickKey="schs_sch" pickValue="step_name" pickIndex="-1" bind:pickChange="pick2Change" />
+
+<comMember members="{{grades}}" userName="id" nickName="grade_name" bind:memberRemove="memberRemove" />
 
 <block wx:if="{{typesets.length>0}}">
 	<view class="weui-cells__title">权限分类</view>
@@ -37,3 +40,5 @@
 <view class="weui-btn-area">
 	<button type="primary" bindtap="returnClick">返回</button>
 </view>
+
+</form>
