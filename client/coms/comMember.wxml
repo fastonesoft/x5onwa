@@ -1,9 +1,10 @@
 <!--coms/comMember.wxml-->
 <view wx:if="{{members.length>0}}">
-	<view class="weui-cells__title">成员列表</view>
+	<view class="weui-cells__title">{{title}}</view>
 	<view class="weui-cells weui-cells_after-title">
 		<view class="weui-cell" wx:for="{{members}}" wx:key="uid">
-			<view class="weui-cell__bd">{{item[userName]}}({{item[nickName]}})</view>
+			<view class="weui-cell__bd" wx:if="{{memo}}">{{item[key]}}({{item[memo]}})</view>
+			<view class="weui-cell__bd" wx:else>{{item[key]}}</view>
 			<view class="weui-cell__ft">
 				<image src="../images/remove.png" class="remove-icon" data-uid="{{item.uid}}" bindtap="memberRemove">
 				</image>

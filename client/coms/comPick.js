@@ -4,22 +4,22 @@ var x5on = require('../pages/x5on.js')
 Component({
 
   properties: {
-    pickTitle: String,
-    pickLabel: String,
+    title: String,
+    label: String,
     picks: Array,
-    pickKey: String,
-    pickValue: String,
-    pickIndex: Number,
+    key: String,
+    value: String,
+    index: Number,
   },
 
   methods: {
     pickChange: function (e) {
       var that = this
-      x5on.setPick(e, pickIndex => {
-        that.setData({ pickIndex })
+      x5on.setPick(e, index => {
+        that.setData({ index })
         // 推送数据
-        var pickData = x5on.getArr(this.data.picks, pickIndex)
-        this.triggerEvent('pickChange', pickData)
+        var res = x5on.getArr(this.data.picks, index)
+        this.triggerEvent('pickChange', res)
       })
     }
   }

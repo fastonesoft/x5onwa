@@ -40,6 +40,18 @@ Page({
     console.log(e)
   },
 
+  findSubmit: function (e) {
+    console.log(e)
+  },
+
+  radioChange: function (e) {
+    console.log(e)
+  },
+
+  checkChange: function (e) {
+    console.log(e)
+  },
+
   typesetRemove: function (e) {
     var that = this
     x5on.request({

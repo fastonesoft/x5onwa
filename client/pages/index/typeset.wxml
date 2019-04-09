@@ -1,44 +1,47 @@
 <!--pages/index/typeset.wxml-->
 <form bindsubmit="typesetSubmit">
 
-<view class="weui-cells__title">学校选择</view>
-<view class="weui-cells weui-cells_after-title">
-	<view class="weui-cell weui-cell_select">
-		<view class="weui-cell__hd weui-cell__hd_in-select-after">
-			<view class="weui-label">学校选择</view>
-		</view>
-		<view class="weui-cell__bd">
-			<picker name="scho" bindchange="schoChange" value="{{schoIndex}}" range="{{schos}}" range-key="schs_sch" disabled="{{!schos||schos.length==0}}">
-				<view class="weui-select weui-select_in-select-after">{{schos[schoIndex].schs_sch}}</view>
-			</picker>
-		</view>
-	</view>
-</view>
 
-<comPick pickTitle="学校设置" pickLabel="学校选择" picks="{{grades}}" pickKey="schs_sch" pickValue="step_name" bind:pickChange="pick1Change" />
-<comPick pickTitle="学校设置" pickLabel="学校选择" picks="{{grades}}" pickKey="schs_sch" pickValue="step_name" pickIndex="-1" bind:pickChange="pick2Change" />
-
-<comMember members="{{grades}}" userName="id" nickName="grade_name" bind:memberRemove="memberRemove" />
-
-<block wx:if="{{typesets.length>0}}">
-	<view class="weui-cells__title">权限分类</view>
+	<view class="weui-cells__title">学校选择</view>
 	<view class="weui-cells weui-cells_after-title">
-		<view class="weui-cell" wx:for="{{typesets}}" wx:key="uid">
-			<view class="weui-cell__bd">{{item.user_name}}({{item.nick_name}})</view>
-			<view class="weui-cell__ft">
-				<image src="../../images/remove.png" class="remove-icon" data-uid="{{item.uid}}" bindtap="typesetRemove">
-				</image>
+		<view class="weui-cell weui-cell_select">
+			<view class="weui-cell__hd weui-cell__hd_in-select-after">
+				<view class="weui-label">学校选择</view>
+			</view>
+			<view class="weui-cell__bd">
+				<picker name="scho" bindchange="schoChange" value="{{schoIndex}}" range="{{schos}}" range-key="schs_sch" disabled="{{!schos||schos.length==0}}">
+					<view class="weui-select weui-select_in-select-after">{{schos[schoIndex].schs_sch}}</view>
+				</picker>
 			</view>
 		</view>
 	</view>
-</block>
 
-<view class="weui-cells__tips x5ui-mini">
-	<button type="primary" size="mini" form-type="submit">添加</button>
-</view>
+	<comFind title="用户查询" label="用户姓名" bind:findSubmit="findSubmit" />
+	<comPick title="学校设置" label="学校选择" picks="{{grades}}" key="schs_sch" value="step_name" index="-1" bind:pickChange="pick2Change" />
+	<comMember members="{{grades}}" key="id" bind:memberRemove="memberRemove" />
+	<comRadio radios="{{grades}}" key="id" checked="checked" bind:radioChange="radioChange" />
+	<comCheck checks="{{grades}}" title="测试多选" key="id" memo="grade_name" bind:checkChange="checkChange" />
 
-<view class="weui-btn-area">
-	<button type="primary" bindtap="returnClick">返回</button>
-</view>
+
+	<block wx:if="{{typesets.length>0}}">
+		<view class="weui-cells__title">权限分类</view>
+		<view class="weui-cells weui-cells_after-title">
+			<view class="weui-cell" wx:for="{{typesets}}" wx:key="uid">
+				<view class="weui-cell__bd">{{item.user_name}}({{item.nick_name}})</view>
+				<view class="weui-cell__ft">
+					<image src="../../images/remove.png" class="remove-icon" data-uid="{{item.uid}}" bindtap="typesetRemove">
+					</image>
+				</view>
+			</view>
+		</view>
+	</block>
+
+	<view class="weui-cells__tips x5ui-mini">
+		<button type="primary" size="mini" form-type="submit">添加</button>
+	</view>
+
+	<view class="weui-btn-area">
+		<button type="primary" bindtap="returnClick">返回</button>
+	</view>
 
 </form>

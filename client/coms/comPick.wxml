@@ -1,14 +1,13 @@
 <!--Com/pick.wxml-->
-<view class="weui-cells__title">{{pickTitle}}</view>
+<view class="weui-cells__title">{{title}}</view>
 <view class="weui-cells weui-cells_after-title">
 	<view class="weui-cell weui-cell_select">
 		<view class="weui-cell__hd weui-cell__hd_in-select-after">
-			<view class="weui-label">{{pickLabel}}</view>
+			<view class="weui-label">{{label}}</view>
 		</view>
 		<view class="weui-cell__bd">
-			<picker name="compick" bindchange="pickChange" value="{{pickIndex}}" range="{{picks}}"
-				range-key="{{pickKey}}" disabled="{{!picks||picks.length==0}}">
-				<view class="weui-select weui-select_in-select-after">{{picks[pickIndex][pickValue]}}</view>
+			<picker bindchange="pickChange" value="{{index}}" range="{{picks}}" range-key="{{key}}" disabled="{{!picks||picks.length==0}}">
+				<view class="weui-select weui-select_in-select-after">{{picks[index][value]}}</view>
 			</picker>
 		</view>
 	</view>

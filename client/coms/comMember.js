@@ -5,8 +5,9 @@ Component({
 
   properties: {
     members: Array,
-    userName: String,
-    nickName: String,
+    title: String,
+    key: String,
+    memo: String,
   },
 
   methods: {
