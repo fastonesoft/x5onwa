@@ -10,6 +10,19 @@ Component({
     key: String,
     value: String,
     index: Number,
+    url: String,
+  },
+
+  lifetimes: {
+    ready() {
+      var that = this
+      that.data.url && x5on.request({
+        url: that.data.url,
+        success(picks) {
+          that.setData({ picks })
+        }
+      })
+    },
   },
 
   methods: {

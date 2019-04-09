@@ -8,6 +8,19 @@ Component({
     title: String,
     key: String,
     memo: String,
+    url: String,
+  },
+
+  lifetimes: {
+    ready() {
+      var that = this
+      that.data.url && x5on.request({
+        url: that.data.url,
+        success(members) {
+          that.setData({ members })
+        }
+      })
+    },
   },
 
   methods: {

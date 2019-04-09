@@ -4,18 +4,32 @@ var x5on = require('../pages/x5on.js')
 Component({
 
   properties: {
-    radios: Array,
     title: String,
+    radios: Array,
     key: String,
     memo: String,
     checked: String,
+    url: String,
+  },
+
+  lifetimes: {
+    ready() {
+      var that = this
+      that.data.url && x5on.request({
+        url: that.data.url,
+        success(radios) {
+          that.setData({ radios })
+        }
+      })
+    },
   },
 
   methods: {
     radioChange: function (e) {
-      x5on.setRadioex(this.data.radios, e.detail.value, this.data.checked, radios => {
+      var uid = e.detail.value
+      x5on.setRadioex(this.data.radios, uid, this.data.checked, radios => {
         this.setData({ radios })
-        this.triggerEvent('radioChange', { radios })
+        this.triggerEvent('radioChange', { uid, radios })
       })
     }
   }

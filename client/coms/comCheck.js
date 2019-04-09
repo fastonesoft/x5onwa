@@ -11,24 +11,24 @@ Component({
     url: String,
   },
 
-  pageLifetimes: {
+  lifetimes: {
     ready() {
-      console.log(this.data.url)
-      
-      this.data.url && x5on.request({
-        url: this.data.url,
+      var that = this
+      that.data.url && x5on.request({
+        url: that.data.url,
         success(checks) {
           that.setData({ checks })
         }
       })
-    }
+    },
   },
 
   methods: {
     checkChange: function (e) {
-      x5on.setCheckbox(this.data.checks, e.detail.value, checks => {
+      var uids = e.detail.value
+      x5on.setCheckbox(this.data.checks, uids, checks => {
         this.setData({ checks })
-        this.triggerEvent('checkChange', { checks })
+        this.triggerEvent('checkChange', { uids, checks })
       })
     }
   }
