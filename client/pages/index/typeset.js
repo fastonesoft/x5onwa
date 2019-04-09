@@ -5,6 +5,7 @@ Page({
 
   data: {
     schoIndex: 0,
+    mydivi: x5on.url.mydivi,
   },
 
   onLoad: function (e) {
@@ -16,6 +17,7 @@ Page({
     //   }
     // })
 
+ 
     x5on.request({
       url: x5on.url.mydivi,
       success(grades) {

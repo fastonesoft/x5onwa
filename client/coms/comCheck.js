@@ -8,6 +8,20 @@ Component({
     checks: Array,
     key: String,
     memo: String,
+    url: String,
+  },
+
+  pageLifetimes: {
+    ready() {
+      console.log(this.data.url)
+      
+      this.data.url && x5on.request({
+        url: this.data.url,
+        success(checks) {
+          that.setData({ checks })
+        }
+      })
+    }
   },
 
   methods: {

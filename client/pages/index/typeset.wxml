@@ -20,7 +20,7 @@
 	<comPick title="学校设置" label="学校选择" picks="{{grades}}" key="schs_sch" value="step_name" index="-1" bind:pickChange="pick2Change" />
 	<comMember members="{{grades}}" key="id" bind:memberRemove="memberRemove" />
 	<comRadio radios="{{grades}}" key="id" checked="checked" bind:radioChange="radioChange" />
-	<comCheck checks="{{grades}}" title="测试多选" key="id" memo="grade_name" bind:checkChange="checkChange" />
+	<comCheck url="{{mydivi}}" title="测试多选" key="id" memo="grade_name" bind:checkChange="checkChange" />
 
 
 	<block wx:if="{{typesets.length>0}}">
