@@ -289,11 +289,15 @@ var doGetRadioex = function (arrs, checked_obj_name, success, fail) {
 
 // 数组多项选择
 var doGetCheckbox = function (arrs, success, fail) {
+  doGetCheckboxex(arrs, 'checked', success, fail)
+}
+var doGetCheckboxex = function (arrs, obj_name, success, fail) {
   var res = []
   for (let arr of arrs) {
-    arr.checked ? res.push(arr) : void (0)
+    arr[obj_name] ? res.push(arr) : void (0)
   }
-  res.length > 0 ? typeof success === 'function' && success(res) : typeof fail === 'function' && fail()
+  res.length > 0 && typeof success === 'function' && success(res)
+  res.length == 0 && typeof fail === 'function' && fail()
 }
 
 // 数组单项设置
@@ -484,6 +488,7 @@ module.exports = {
   getRadio: doGetRadio,
   getRadioex: doGetRadioex,
   getCheckbox: doGetCheckbox,
+  getCheckboxex: doGetCheckboxex,
   setRadio: doSetRadio,
   setRadioex: doSetRadioex,
   setCheckbox: doSetCheckbox,

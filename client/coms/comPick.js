@@ -25,14 +25,24 @@ Component({
     },
   },
 
+  ready() {
+    var that = this
+    that.data.url && x5on.request({
+      url: that.data.url,
+      success(picks) {
+        that.setData({ picks })
+      }
+    })
+  },
+
   methods: {
     pickChange: function (e) {
       var that = this
       x5on.setPick(e, index => {
         that.setData({ index })
         // 推送数据
-        var res = x5on.getArr(this.data.picks, index)
-        this.triggerEvent('pickChange', res)
+        var picked = x5on.getArr(this.data.picks, index)
+        this.triggerEvent('pickChange', picked)
       })
     }
   }

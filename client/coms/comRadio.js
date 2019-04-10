@@ -24,12 +24,28 @@ Component({
     },
   },
 
+  ready() {
+    var that = this
+    that.data.url && x5on.request({
+      url: that.data.url,
+      success(radios) {
+        that.setData({ radios })
+      }
+    })
+  },
+
   methods: {
     radioChange: function (e) {
       var uid = e.detail.value
-      x5on.setRadioex(this.data.radios, uid, this.data.checked, radios => {
+      this.data.checked && x5on.setRadioex(this.data.radios, uid, this.data.checked, radios => {
         this.setData({ radios })
-        this.triggerEvent('radioChange', { uid, radios })
+        var radio = x5on.getArrex(this.data.radios, 'uid', uid)
+        this.triggerEvent('radioChange', { uid, radio })
+      })
+      !this.data.checked && x5on.setRadio(this.data.radios, uid, radios => {
+        this.setData({ radios })
+        var radio = x5on.getArrex(this.data.radios, 'uid', uid)
+        this.triggerEvent('radioChange', { uid, radio })
       })
     }
   }

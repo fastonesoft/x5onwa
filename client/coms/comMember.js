@@ -23,6 +23,16 @@ Component({
     },
   },
 
+  ready() {
+    var that = this
+    that.data.url && x5on.request({
+      url: that.data.url,
+      success(members) {
+        that.setData({ members })
+      }
+    })
+  },
+
   methods: {
     memberRemove: function (e) {
       var uid = e.currentTarget.dataset.uid
