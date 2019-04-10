@@ -36,16 +36,16 @@ Component({
 
   methods: {
     radioChange: function (e) {
+      var that = this
       var uid = e.detail.value
-      this.data.checked && x5on.setRadioex(this.data.radios, uid, this.data.checked, radios => {
-        this.setData({ radios })
-        var radio = x5on.getArrex(this.data.radios, 'uid', uid)
-        this.triggerEvent('radioChange', { uid, radio })
-      })
-      !this.data.checked && x5on.setRadio(this.data.radios, uid, radios => {
-        this.setData({ radios })
-        var radio = x5on.getArrex(this.data.radios, 'uid', uid)
-        this.triggerEvent('radioChange', { uid, radio })
+      var selected = that.data.checked ? that.data.checked : 'checked'
+
+      console.log(selected)
+
+      x5on.setRadioex(that.data.radios, uid, selected, radios => {
+        that.setData({ radios })
+        var radio = x5on.getArrex(that.data.radios, 'uid', uid)
+        that.triggerEvent('radioChange', { uid, radio })
       })
     }
   }

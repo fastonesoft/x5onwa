@@ -317,6 +317,9 @@ var doSetRadioex = function (arrs, e_detail_value, checked_obj_name, success) {
 
 // 数组多项设置
 var doSetCheckbox = function (arrs, e_detail_value_uids, success) {
+  doSetCheckboxex(arrs, e_detail_value_uids, 'checked', success)
+}
+var doSetCheckboxex = function (arrs, e_detail_value_uids, checked_obj_name, success) {
   for (let arr of arrs) {
     var checked = false
     for (let uid of e_detail_value_uids) {
@@ -324,7 +327,7 @@ var doSetCheckbox = function (arrs, e_detail_value_uids, success) {
         checked = true; break
       }
     }
-    arr.checked = checked
+    arr[checked_obj_name] = checked
   }
   typeof success === 'function' && success(arrs)
 }
@@ -492,6 +495,7 @@ module.exports = {
   setRadio: doSetRadio,
   setRadioex: doSetRadioex,
   setCheckbox: doSetCheckbox,
+  setCheckboxex: doSetCheckboxex,
   setPick: doSetPick,
 
   delValue: doDelValue,

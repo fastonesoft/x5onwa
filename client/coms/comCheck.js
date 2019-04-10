@@ -38,15 +38,13 @@ Component({
     checkChange: function (e) {
       var that = this
       var uids = e.detail.value
-      that.data.checked && x5on.setCheckbox(that.data.checks, uids, checks => {
+      var selected = that.data.checked ? that.data.checked : 'checked'
+      
+      console.log(selected)
+
+      x5on.setCheckboxex(that.data.checks, uids, selected, checks => {
         that.setData({ checks })
-        x5on.getCheckboxex(that.data.checks, that.data.checked, checked => {
-          that.triggerEvent('checkChange', { uids, checked })
-        })
-      })
-      !that.data.checked && x5on.setCheckbox(that.data.checks, uids, checks => {
-        that.setData({ checks })
-        x5on.getCheckboxex(that.data.checks, that.data.checked, checked => {
+        x5on.getCheckboxex(that.data.checks, selected, checked => {
           that.triggerEvent('checkChange', { uids, checked })
         })
       })

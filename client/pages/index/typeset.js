@@ -46,13 +46,31 @@ Page({
     console.log(e)
   },
 
-  radioChange: function (e) {
+  radio1Change: function (e) {
     console.log(e)
   },
 
-  checkChange: function (e) {
+  check1Change: function (e) {
     console.log(e)
   },
+
+  member1Remove: function (e) {
+    console.log(e)
+  },
+
+
+
+  radio2Change: function (e) {
+    console.log(e)
+  },
+
+  check2Change: function (e) {
+    console.log(e)
+  },
+  member2Remove: function (e) {
+    console.log(e)
+  },
+
 
   typesetRemove: function (e) {
     var that = this
