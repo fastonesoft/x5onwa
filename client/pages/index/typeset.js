@@ -4,8 +4,7 @@ var x5on = require('../x5on.js')
 Page({
 
   data: {
-    schoIndex: 0,
-    mydivi: x5on.url.mydivi,
+    typeseturl: x5on.url.typeset,
   },
 
   onLoad: function (e) {
@@ -17,26 +16,8 @@ Page({
     //   }
     // })
 
- 
-    x5on.request({
-      url: x5on.url.mydivi,
-      success(grades) {
-        that.setData({ grades, schos: grades })
-      }
-    })
   },
 
-  pick1Change: function (e) {
-    console.log(e)
-  },
-
-  pick2Change: function (e) {
-    console.log(e.detail)
-  },
-
-  typesetSubmit: function (e) {
-    console.log(e)
-  },
 
   memberRemove: function (e) {
     console.log(e)
@@ -46,30 +27,6 @@ Page({
     console.log(e)
   },
 
-  radio1Change: function (e) {
-    console.log(e)
-  },
-
-  check1Change: function (e) {
-    console.log(e)
-  },
-
-  member1Remove: function (e) {
-    console.log(e)
-  },
-
-
-
-  radio2Change: function (e) {
-    console.log(e)
-  },
-
-  check2Change: function (e) {
-    console.log(e)
-  },
-  member2Remove: function (e) {
-    console.log(e)
-  },
 
 
   typesetRemove: function (e) {

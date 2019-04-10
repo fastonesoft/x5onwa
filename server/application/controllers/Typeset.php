@@ -12,13 +12,9 @@ class Typeset extends CI_Controller {
   public function index() {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
-        // 分类设置
-        $param = $_POST;
-        $id = $param['id'];
-        $name = $param['name'];
-        $result = Mvv\mvvMyDivi::remove($userinfor->unionId, $class_div_uid);
+        $result = Mvv\mvvTypeSet::types();
 
-        $this->json(['code' => 0, 'data' => []]);
+        $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
         $this->json(['code' => 1, 'data' => $e->getMessage()]);
       }

@@ -13,8 +13,10 @@ Component({
   },
 
   lifetimes: {
-    ready() {
+    attached() {
       var that = this
+      !that.data.checked && that.setData({ checked: 'checked' })
+      //
       that.data.url && x5on.request({
         url: that.data.url,
         success(radios) {
@@ -24,8 +26,10 @@ Component({
     },
   },
 
-  ready() {
+  attached() {
     var that = this
+    !that.data.checked && that.setData({ checked: 'checked' })
+    //
     that.data.url && x5on.request({
       url: that.data.url,
       success(radios) {
@@ -38,14 +42,11 @@ Component({
     radioChange: function (e) {
       var that = this
       var uid = e.detail.value
-      var selected = that.data.checked ? that.data.checked : 'checked'
 
-      console.log(selected)
-
-      x5on.setRadioex(that.data.radios, uid, selected, radios => {
+      x5on.setRadioex(that.data.radios, uid, that.data.checked, radios => {
         that.setData({ radios })
         var radio = x5on.getArrex(that.data.radios, 'uid', uid)
-        that.triggerEvent('radioChange', { uid, radio })
+        radio && that.triggerEvent('radioChange', { uid, radio })
       })
     }
   }

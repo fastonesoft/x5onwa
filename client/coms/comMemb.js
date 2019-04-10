@@ -4,7 +4,7 @@ var x5on = require('../pages/x5on.js')
 Component({
 
   properties: {
-    members: Array,
+    membs: Array,
     title: String,
     key: String,
     memo: String,
@@ -16,8 +16,8 @@ Component({
       var that = this
       that.data.url && x5on.request({
         url: that.data.url,
-        success(members) {
-          that.setData({ members })
+        success(membs) {
+          that.setData({ membs })
         }
       })
     },
@@ -27,8 +27,8 @@ Component({
     var that = this
     that.data.url && x5on.request({
       url: that.data.url,
-      success(members) {
-        that.setData({ members })
+      success(membs) {
+        that.setData({ membs })
       }
     })
   },
@@ -36,10 +36,10 @@ Component({
   methods: {
     memberRemove: function (e) {
       var uid = e.currentTarget.dataset.uid
-      var removed = x5on.getArrex(this.data.members, 'uid', uid)
-      var members = x5on.delValue(this.data.members, 'uid', uid)
-      this.setData({ members })
-      this.triggerEvent('memberRemove', { removed, members })
+      var removed = x5on.getArrex(this.data.membs, 'uid', uid)
+      var membs = x5on.delValue(this.data.membs, 'uid', uid)
+      this.setData({ membs })
+      this.triggerEvent('memberRemove', { removed, membs })
     }
   }
 })

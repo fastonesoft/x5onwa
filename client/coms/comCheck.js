@@ -13,8 +13,10 @@ Component({
   },
 
   lifetimes: {
-    ready() {
+    attached() {
       var that = this
+      !that.data.checked && that.setData({ checked: 'checked' })
+      //
       that.data.url && x5on.request({
         url: that.data.url,
         success(checks) {
@@ -24,8 +26,10 @@ Component({
     },
   },
 
-  ready() {
+  attached() {
     var that = this
+    !that.data.checked && that.setData({ checked: 'checked' })
+    //
     that.data.url && x5on.request({
       url: that.data.url,
       success(checks) {
@@ -38,13 +42,10 @@ Component({
     checkChange: function (e) {
       var that = this
       var uids = e.detail.value
-      var selected = that.data.checked ? that.data.checked : 'checked'
-      
-      console.log(selected)
 
-      x5on.setCheckboxex(that.data.checks, uids, selected, checks => {
+      x5on.setCheckboxex(that.data.checks, uids, that.data.checked, checks => {
         that.setData({ checks })
-        x5on.getCheckboxex(that.data.checks, selected, checked => {
+        x5on.getCheckboxex(that.data.checks, that.data.checked, checked => {
           that.triggerEvent('checkChange', { uids, checked })
         })
       })

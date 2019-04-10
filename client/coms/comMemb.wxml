@@ -1,13 +1,12 @@
 <!--coms/comMember.wxml-->
-<view wx:if="{{members.length>0}}">
+<view wx:if="{{membs.length>0}}">
 	<view class="weui-cells__title">{{title}}</view>
 	<view class="weui-cells weui-cells_after-title">
-		<view class="weui-cell" wx:for="{{members}}" wx:key="uid">
+		<view class="weui-cell" wx:for="{{membs}}" wx:key="uid">
 			<view class="weui-cell__bd" wx:if="{{memo}}">{{item[key]}}({{item[memo]}})</view>
 			<view class="weui-cell__bd" wx:else>{{item[key]}}</view>
 			<view class="weui-cell__ft">
-				<image src="../images/remove.png" class="remove-icon" data-uid="{{item.uid}}" bindtap="memberRemove">
-				</image>
+				<icon class="remove-icon" type="cancel" size="23" data-uid="{{item.uid}}" bindtap="memberRemove"></icon>
 			</view>
 		</view>
 	</view>
