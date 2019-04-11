@@ -18,6 +18,6 @@ Component({
       }, mes => {
         x5on.showError(that, mes)
       })
-    }
+    },
   }
 })

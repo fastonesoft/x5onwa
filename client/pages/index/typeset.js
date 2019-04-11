@@ -16,43 +16,50 @@ Page({
     //   }
     // })
 
-    var fields = [{
-      mode: 0,
-      name: 'name',
-      label: '学生姓名',
-      type: 'text',
-      maxlength: '4',
-    }, {
-      mode: 0,
-      name: 'year',
-      label: '学制年度',
-      type: 'number',
-      maxlength: '4',
-    }]
-    var rules = {
-      name: {
-        required: true,
-        chinese: true,
-        rangelength: [2, 4],
-      },
-      year: {
-        required: true,
-        digits: true,
-        rangelength: [2, 4],
-      }
-    }
-    var messages = {
-      name: {
-        required: '学生姓名'
-      },
-      year: {
-        required: '学制年度'
-      }
-    }
+    x5on.request({
+      url: x5on.url.typeset,
+      success(typesets) {
+        that.setData({ typesets })
+        //
+        var fields = [{
+          mode: 0,
+          name: 'name',
+          label: '学生姓名',
+          type: 'text',
+          maxlength: '4',
+          value: '你是谁？'
+        }, {
+          mode: 1,
+          name: 'year',
+          label: '学制年度',
+          value: true,
+        }]
+        var rules = {
+          name: {
+            required: true,
+            chinese: true,
+            rangelength: [2, 4],
+          },
+          year: {
+            required: true,
+          }
+        }
+        var messages = {
+          name: {
+            required: '学生姓名'
+          },
+          year: {
+            required: '学制年度'
+          }
+        }
 
-    that.setData({ fields, rules, messages })
+        that.setData({ fields, rules, messages })
+      }
+    })
+
 
   },
+
 
 
   memberRemove: function (e) {
@@ -86,18 +93,18 @@ Page({
   },
 
   returnClick: function (e) {
-		wx.navigateBack()
+    wx.navigateBack()
   },
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
+
+
+
+
+
 
 })
