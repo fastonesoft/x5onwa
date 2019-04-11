@@ -16,17 +16,63 @@ Page({
     //   }
     // })
 
+    var fields = [{
+      mode: 0,
+      name: 'name',
+      label: '学生姓名',
+      type: 'text',
+      maxlength: '4',
+    }, {
+      mode: 0,
+      name: 'year',
+      label: '学制年度',
+      type: 'number',
+      maxlength: '4',
+    }]
+    var rules = {
+      name: {
+        required: true,
+        chinese: true,
+        rangelength: [2, 4],
+      },
+      year: {
+        required: true,
+        digits: true,
+        rangelength: [2, 4],
+      }
+    }
+    var messages = {
+      name: {
+        required: '学生姓名'
+      },
+      year: {
+        required: '学制年度'
+      }
+    }
+
+    that.setData({ fields, rules, messages })
+
   },
 
 
   memberRemove: function (e) {
-    console.log(e)
+    var types = []
+    types.push(e.detail.removed)
+    this.setData({ types })
+  },
+
+  member1Remove: function (e) {
+    console.log(111)
   },
 
   findSubmit: function (e) {
     console.log(e)
   },
 
+  formSubmit: function (e) {
+    console.log(e)
+
+  },
 
 
   typesetRemove: function (e) {
@@ -42,6 +88,16 @@ Page({
   returnClick: function (e) {
 		wx.navigateBack()
   },
-
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 })

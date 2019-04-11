@@ -1,0 +1,2 @@
+/* coms/comForm.wxss */
+@import "../pages/weui.wxss";

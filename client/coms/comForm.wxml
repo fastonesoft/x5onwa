@@ -1,0 +1,28 @@
+<!--coms/comForm.wxml-->
+<view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
+
+<form bindsubmit="formSubmit">
+	<view class="weui-cells__title">{{title}}</view>
+	<view class="weui-cells weui-cells_after-title">
+		<block wx:for="{{fields}}" wx:key="name">
+			<view class="weui-cell weui-cell_input" wx:if="{{item.mode==0}}">
+				<view class="weui-cell__hd">
+					<view class="weui-label">{{item.label}}</view>
+				</view>
+				<view class="weui-cell__bd">
+					<input class="weui-input" placeholder="输入{{item.label}}" name="{{item.name}}" type="{{item.type}}"
+						maxlength="{{item.maxlength}}" />
+				</view>
+			</view>
+			<view class="weui-cell weui-cell_switch" wx:if="{{item.mode==1}}">
+				<view class="weui-cell__bd">{{item.label}}</view>
+				<view class="weui-cell__ft">
+					<switch name="{{item.name}}" checked="true" />
+				</view>
+			</view>
+		</block>
+	</view>
+	<view class="weui-btn-area">
+		<button type="primary" form-type="submit">提交</button>
+	</view>
+</form>
