@@ -64,7 +64,7 @@ Page({
         url: x5on.url.userschreg,
         data: form,
         success(members) {
-          var users = x5on.delValue(that.data.users, 'uid', form.user_uid)
+          var users = x5on.delArr(that.data.users, 'uid', form.user_uid)
           that.setData({ users, members })
         }
       })
@@ -108,7 +108,7 @@ Page({
       url: x5on.url.userschdel,
       data: { user_sch_uid },
       success() {
-        var members = x5on.delValue(that.data.members, 'uid', user_sch_uid)
+        var members = x5on.delArr(that.data.members, 'uid', user_sch_uid)
         that.setData({ members })
       }
     })

@@ -37,7 +37,7 @@ Component({
     memberRemove: function (e) {
       var uid = e.currentTarget.dataset.uid
       var removed = x5on.getArrex(this.data.membs, 'uid', uid)
-      var membs = x5on.delValue(this.data.membs, 'uid', uid)
+      var membs = x5on.delArr(this.data.membs, 'uid', uid)
       this.setData({ membs })
       this.triggerEvent('memberRemove', { removed, membs })
     }

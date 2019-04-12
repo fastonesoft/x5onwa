@@ -261,13 +261,13 @@ var doGetArrex = function (arrs, obj_name, obj_value) {
   return null
 }
 // 删除数组元素
-var doDelValue = function (arrs, obj_name, obj_value) {
+var doDelArr = function (arrs, obj_name, obj_value) {
   var index = doGetIndexe(arrs, obj_name, obj_value)
   arrs.splice(index, 1)
   return arrs;
 }
 // 变更数组索引obj_value的对象，sets字段的值
-var doSetValues = function (arrs, obj_name, obj_value, obj_sets) {
+var doSetArr = function (arrs, obj_name, obj_value, obj_sets) {
   var index = doGetIndexe(arrs, obj_name, obj_value)
   for (var key in obj_sets) {
     arrs[index].hasOwnProperty(key) && (arrs[index][key] = obj_sets[key])
@@ -285,7 +285,8 @@ var doGetRadioex = function (arrs, checked_obj_name, success, fail) {
   var find = null
   for (let arr of arrs) {
     if (arr[checked_obj_name]) {
-      find = arr; break
+      find = arr;
+      break
     }
   }
   find && typeof success === 'function' && success(find);
@@ -299,7 +300,7 @@ var doGetCheckbox = function (arrs, success, fail) {
 var doGetCheckboxex = function (arrs, obj_name, success, fail) {
   var res = []
   for (let arr of arrs) {
-    arr[obj_name] ? res.push(arr) : void (0)
+    arr[obj_name] ? res.push(arr) : void(0)
   }
   res.length > 0 && typeof success === 'function' && success(res)
   res.length == 0 && typeof fail === 'function' && fail()
@@ -329,7 +330,8 @@ var doSetCheckboxex = function (arrs, e_detail_value_uids, checked_obj_name, suc
     var checked = false
     for (let uid of e_detail_value_uids) {
       if (arr.uid === uid) {
-        checked = true; break
+        checked = true;
+        break
       }
     }
     arr[checked_obj_name] = checked
@@ -350,6 +352,31 @@ var doSetPick = function (e, success) {
  *  1    ：   应用级出错代码，逻辑错误代码
  *  X    ：   ...
  */
+var poRequest = function (url, donshow) {
+  return new Promise((reject, resolve) => {
+    util.showBusy('正在查询...')
+    qcloud.request({
+      url: url,
+      success(result) {
+        wx.hideToast()
+        var res = result.data
+        res.code === 0 && reject(res.data)
+        res.code === 1 && resolve(res.data)
+        if (donshow) return
+  
+        res.code === 1 && util.showModel('查询出错', res.data)
+      },
+      fail(error) {
+        // error为文字提示
+        wx.hideToast()
+        resolve(error)
+        if (donshow) return
+        util.showModel('查询失败', error)
+      }
+    })
+  })
+}
+
 var doRequest = function (options) {
   util.showBusy('正在查询...')
   qcloud.request({
@@ -367,10 +394,38 @@ var doRequest = function (options) {
       // error为文字提示
       wx.hideToast()
       typeof options.fail === 'function' && options.fail(error)
-      options.donshow ? void (0) : util.showModel('查询失败', error)
+      options.donshow ? void(0) : util.showModel('查询失败', error)
     }
   })
 };
+
+var poPost = function (url, data, donshow) {
+  return new Promise((reject, resolve) => {
+    util.showBusy('正在请求...')
+    qcloud.request({
+      url: url,
+      data: data,
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      success(result) {
+        wx.hideToast()
+        var res = result.data
+        res.code === 0 && reject(res.data)
+        res.code === 1 && resolve(res.data)
+        if (donshow) return
+        res.code === 1 && util.showModel('请求出错', res.data)
+      },
+      fail(error) {
+        wx.hideToast()
+        resolve(res.data)
+        if (donshow) return
+        util.showModel('请求失败', error)
+      }
+    })
+  })
+}
 
 var doPost = function (options) {
   util.showBusy('正在请求...')
@@ -393,7 +448,7 @@ var doPost = function (options) {
     fail(error) {
       wx.hideToast()
       typeof options.fail === 'function' && options.fail(error)
-      options.donshow ? void (0) : util.showModel('请求失败', error)
+      options.donshow ? void(0) : util.showModel('请求失败', error)
     }
   })
 };
@@ -455,6 +510,23 @@ var doLogin = function (options) {
   })
 };
 
+var poLogin = function (e_detail, donshow) {
+  return new Promise((resolve, reject) => {
+    !donshow && util.showBusy('正在登录...')
+    qcloud.login({
+      auth: e_detail,
+      success(res) {
+        !donshow && wx.hideToast()
+        resolve(res)
+      },
+      fail(err) {
+        !donshow && wx.hideToast()
+        reject(err)
+      }
+    })
+  })
+}
+
 /**
  * 错误显示
  */
@@ -483,9 +555,18 @@ var doSuccess = function (message) {
 module.exports = {
   url: doUrl,
   data: doData,
+
   auth: doAuth,
   login: doLogin,
   check: doCheck,
+  request: doRequest,
+  post: doPost,
+  showError: doShowError,
+  showSuccess: doSuccess,
+
+  plogin: poLogin,
+  prequest: poRequest,
+  ppost: poPost,
 
   getId: doGetId,
   getUid: doGetUid,
@@ -502,14 +583,8 @@ module.exports = {
   setCheckbox: doSetCheckbox,
   setCheckboxex: doSetCheckboxex,
   setPick: doSetPick,
-
-  delValue: doDelValue,
-  setValues: doSetValues,
-
-  request: doRequest,
-  post: doPost,
-  showError: doShowError,
-  showSuccess: doSuccess,
+  setArr: doSetArr,
+  delArr: doDelArr,
 
   checkForm: x5va.checkForm,
 }

@@ -6,7 +6,7 @@
 			<view class="weui-cell__bd" wx:if="{{memo}}">{{item[key]}}({{item[memo]}})</view>
 			<view class="weui-cell__bd" wx:else>{{item[key]}}</view>
 			<view class="weui-cell__ft">
-				<icon class="remove-icon" type="cancel" size="23" data-uid="{{item.uid}}" bindtap="memberRemove"></icon>
+				<icon type="cancel" size="23" data-uid="{{item.uid}}" bindtap="memberRemove"></icon>
 			</view>
 		</view>
 	</view>

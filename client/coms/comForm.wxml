@@ -5,7 +5,15 @@
 	<view class="weui-cells__title">{{title}}</view>
 	<view class="weui-cells weui-cells_after-title">
 		<block wx:for="{{fields}}" wx:key="name">
-			<view class="weui-cell weui-cell_input" wx:if="{{item.mode==0}}">
+			<view class="weui-cell" wx:if="{{item.mode==0}}">
+				<view class="weui-cell__bd">{{item.label}}</view>
+				<view class="weui-cell__ft" wx:if="{{!item.bool}}">{{item.value}}</view>
+				<view class="weui-cell__ft" wx:else>
+					<icon type="success" size="23" wx:if="{{item.value}}"></icon>
+					<icon type="cancel" size="23" wx:if="{{!item.value}}"></icon>
+				</view>
+			</view>
+			<view class="weui-cell weui-cell_input" wx:if="{{item.mode==1}}">
 				<view class="weui-cell__hd">
 					<view class="weui-label">{{item.label}}</view>
 				</view>
@@ -14,26 +22,18 @@
 						maxlength="{{item.maxlength}}" value="{{item.value}}" />
 				</view>
 			</view>
-			<view class="weui-cell weui-cell_switch" wx:if="{{item.mode==1}}">
+			<view class="weui-cell weui-cell_switch" wx:if="{{item.mode==2}}">
 				<view class="weui-cell__bd">{{item.label}}</view>
 				<view class="weui-cell__ft">
 					<switch name="{{item.name}}" checked="{{item.value}}" />
 				</view>
 			</view>
-			<view class="weui-cell weui-cell_select" wx:if="{{item.mode==2}}">
-				<view class="weui-cell__hd weui-cell__hd_in-select-after">
-					<view class="weui-label">{{item.label}}</view>
-				</view>
-				<view class="weui-cell__bd">
-					<picker bindchange="pickChange" value="{{item.index}}" range="{{item.picks}}" range-key="{{item.key}}"
-						disabled="{{!item.picks||item.picks.length==0}}">
-						<view class="weui-select weui-select_in-select-after">{{item.picks[item.index][item.value]}}</view>
-					</picker>
-				</view>
-			</view>
 		</block>
 	</view>
-	<view class="weui-btn-area">
+	<view class="weui-btn-area" wx:if="{{!mini}}">
 		<button type="primary" form-type="submit">提交</button>
+	</view>
+	<view class="weui-cells__tips x5ui-mini" wx:if="{{mini}}">
+		<button type="warn" size="mini" form-type="submit">提交</button>
 	</view>
 </form>

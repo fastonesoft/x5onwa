@@ -8,6 +8,7 @@ Component({
     fields: Array,
     rules: Object,
     messages: Object,
+    mini: Boolean,
   },
 
   methods: {
@@ -21,3 +22,48 @@ Component({
     },
   }
 })
+
+
+// var fields = [{
+//   mode: 0,
+//   label: '文字测试',
+//   value: false,
+//   bool: true,
+// }, {
+//   mode: 1,
+//   name: 'name',
+//   label: '学生姓名',
+//   type: 'text',
+//   maxlength: '4',
+//   value: '你是谁？'
+// }, {
+//   mode: 2,
+//   name: 'year',
+//   label: '学制年度',
+//   value: true,
+// }]
+// var rules = {
+//   name: {
+//     required: true,
+//     chinese: true,
+//     rangelength: [2, 4],
+//   },
+//   year: {
+//     required: true,
+//   }
+// }
+// var messages = {
+//   name: {
+//     required: '学生姓名'
+//   },
+//   year: {
+//     required: '学制年度'
+//   }
+// }
+
+// that.setData({
+//   fields,
+//   rules,
+//   messages
+// })
+// })

@@ -130,7 +130,7 @@ Page({
       data: e.currentTarget.dataset,
       url: x5on.url.regstudcheck,
       success(stud_reg_uid) {
-        var studregs = x5on.setValues(that.data.studregs, 'uid', stud_reg_uid, {
+        var studregs = x5on.setArr(that.data.studregs, 'uid', stud_reg_uid, {
           confirmed: 1
         })
         that.setData({ studregs })
@@ -145,7 +145,7 @@ Page({
       url: x5on.url.regstudcancel,
       success(stud_reg_uid) {
         var studregs = that.data.studregs
-        x5on.delValue(studregs, 'uid', stud_reg_uid)
+        x5on.delArr(studregs, 'uid', stud_reg_uid)
         that.setData({
           studregs
         })

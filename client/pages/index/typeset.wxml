@@ -1,9 +1,6 @@
 <!--pages/index/typeset.wxml-->
 
 <comMemb url="{{typeseturl}}" title="分类列表" key="name" memo="id" bind:memberRemove="memberRemove" />
-<comMemb membs="{{types}}" title="分类列表" key="name" memo="id" bind:memberRemove="member1Remove" />
-
-<comForm fields="{{fields}}" title="表单名称" rules="{{rules}}" messages="{{messages}}" bind:formSubmit="formSubmit" />
 
 <view class="weui-cells__tips x5ui-mini">
 	<button type="primary" size="mini" form-type="submit">添加</button>
