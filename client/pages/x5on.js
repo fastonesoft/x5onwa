@@ -419,7 +419,7 @@ var poPost = function (url, data, donshow) {
       },
       fail(error) {
         wx.hideToast()
-        resolve(res.data)
+        resolve(error)
         if (donshow) return
         util.showModel('请求失败', error)
       }
