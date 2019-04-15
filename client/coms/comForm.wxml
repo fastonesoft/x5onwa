@@ -28,6 +28,17 @@
 					<switch name="{{item.name}}" checked="{{item.value}}" />
 				</view>
 			</view>
+
+			<view class="weui-cell weui-cell_select" wx:if="{{item.mode==3}}">
+				<view class="weui-cell__hd weui-cell__hd_in-select-after">
+					<view class="weui-label">{{item.label}}</view>
+				</view>
+				<view class="weui-cell__bd">
+					<picker bindchange="pickChange" name="{{item.name}}" data-name="{{item.name}}" value="{{item.index}}" range="{{item.picks}}" range-key="{{item.key}}" disabled="{{!item.picks||item.picks.length==0}}">
+						<view class="weui-select weui-select_in-select-after">{{item.picks[item.index][item.value]}}</view>
+					</picker>
+				</view>
+			</view>
 		</block>
 	</view>
 	<view class="weui-btn-area" wx:if="{{!mini}}">

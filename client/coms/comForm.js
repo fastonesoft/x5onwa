@@ -20,6 +20,10 @@ Component({
         x5on.showError(that, mes)
       })
     },
+
+    pickChange: function (e) {
+      console.log(e)
+    }
   }
 })
 

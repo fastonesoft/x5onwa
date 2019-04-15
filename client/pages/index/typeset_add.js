@@ -17,6 +17,20 @@ Page({
       name: 'name',
       type: 'text',
       maxlength: 2,
+    }, {
+      mode: 3,
+      label: '选择测试1',
+      name: 'selec1',
+      picks: [{id: 0, name: '测试'}, {id: 1, name: '姓名'}],
+      key: 'name',
+      value: 'id',
+    },{
+      mode: 3,
+      label: '选择测试2',
+      name: 'selec2',
+      picks: [{id: 0, name: '李四'}, {id: 1, name: '王八'}],
+      key: 'name',
+      value: 'id',
     }]
     var rules = {
       id: {
@@ -43,8 +57,7 @@ Page({
 
   formSubmit: function (e) {
     var that = this
-    console.log(e)
-
+    wx.navigateBack()
   },
 
 })
