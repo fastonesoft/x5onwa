@@ -376,6 +376,34 @@ var doRequest = function (options) {
   })
 };
 
+var poPost = function (url, data, donshow) {
+  return new Promise((reject, resolve) => {
+    util.showBusy('正在请求...')
+    qcloud.request({
+      url: url,
+      data: data,
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      success(result) {
+        wx.hideToast()
+        var res = result.data
+        res.code === 0 && reject(res.data)
+        res.code === 1 && resolve(res.data)
+        if (donshow) return
+        res.code === 1 && util.showModel('请求出错', res.data)
+      },
+      fail(error) {
+        wx.hideToast()
+        resolve(error)
+        if (donshow) return
+        util.showModel('请求失败', error)
+      }
+    })
+  })
+}
+
 var doPost = function (options) {
   util.showBusy('正在请求...')
   qcloud.request({
