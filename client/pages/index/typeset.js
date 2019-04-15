@@ -24,15 +24,4 @@ Page({
     wx.navigateBack()
   },
 
-
-
-
-
-
-
-
-
-
-
-
 })
