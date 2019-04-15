@@ -3,8 +3,21 @@ var x5on = require('../x5on.js')
 
 Page({
 
-  typesetaddSubmit: function (e) {
-    var that = this
+  onLoad: function (e) {
+    var fields = [{
+      mode: 1,
+      label: '分类编号',
+      name: 'id',
+      type: 'number',
+      maxlength: 2,
+      min: 1,
+    }, {
+      mode: 1,
+      label: '分类名称',
+      name: 'name',
+      type: 'text',
+      maxlength: 2,
+    }]
     var rules = {
       id: {
         required: true,
@@ -25,17 +38,13 @@ Page({
         required: '分类名称'
       },
     }
-    x5on.checkForm(e.detail.value, rules, messages, form => {
-      x5on.post({
-        url: x5on.url.mydividist,
-        data: form,
-        success(class_classed) {
-          that.setData(class_classed)
-        }
-      })
-    }, mes => {
-      x5on.showError(that, mes)
-    })
+    this.setData({ fields, rules, messages })
+  },
+
+  formSubmit: function (e) {
+    var that = this
+    console.log(e)
+
   },
 
 })

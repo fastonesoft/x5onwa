@@ -16,6 +16,10 @@ Page({
   },
 
 
+  addClick: function (e) {
+    wx.navigateTo({ url: 'typeset_add' })
+  },
+
   returnClick: function (e) {
     wx.navigateBack()
   },

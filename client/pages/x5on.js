@@ -352,30 +352,7 @@ var doSetPick = function (e, success) {
  *  1    ：   应用级出错代码，逻辑错误代码
  *  X    ：   ...
  */
-var poRequest = function (url, donshow) {
-  return new Promise((reject, resolve) => {
-    util.showBusy('正在查询...')
-    qcloud.request({
-      url: url,
-      success(result) {
-        wx.hideToast()
-        var res = result.data
-        res.code === 0 && reject(res.data)
-        res.code === 1 && resolve(res.data)
-        if (donshow) return
-  
-        res.code === 1 && util.showModel('查询出错', res.data)
-      },
-      fail(error) {
-        // error为文字提示
-        wx.hideToast()
-        resolve(error)
-        if (donshow) return
-        util.showModel('查询失败', error)
-      }
-    })
-  })
-}
+
 
 var doRequest = function (options) {
   util.showBusy('正在查询...')
@@ -398,34 +375,6 @@ var doRequest = function (options) {
     }
   })
 };
-
-var poPost = function (url, data, donshow) {
-  return new Promise((reject, resolve) => {
-    util.showBusy('正在请求...')
-    qcloud.request({
-      url: url,
-      data: data,
-      method: 'POST',
-      header: {
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      success(result) {
-        wx.hideToast()
-        var res = result.data
-        res.code === 0 && reject(res.data)
-        res.code === 1 && resolve(res.data)
-        if (donshow) return
-        res.code === 1 && util.showModel('请求出错', res.data)
-      },
-      fail(error) {
-        wx.hideToast()
-        resolve(res.data)
-        if (donshow) return
-        util.showModel('请求失败', error)
-      }
-    })
-  })
-}
 
 var doPost = function (options) {
   util.showBusy('正在请求...')
@@ -522,6 +471,57 @@ var poLogin = function (e_detail, donshow) {
       fail(err) {
         !donshow && wx.hideToast()
         reject(err)
+      }
+    })
+  })
+}
+var poRequest = function (url, donshow) {
+  return new Promise((reject, resolve) => {
+    util.showBusy('正在查询...')
+    qcloud.request({
+      url: url,
+      success(result) {
+        wx.hideToast()
+        var res = result.data
+        res.code === 0 && reject(res.data)
+        res.code !== 0 && resolve(res.data)
+        if (donshow) return
+  
+        res.code !== 0 && util.showModel('查询出错', res.data)
+      },
+      fail(error) {
+        // error为文字提示
+        wx.hideToast()
+        resolve(error)
+        if (donshow) return
+        util.showModel('查询失败', error)
+      }
+    })
+  })
+}
+var poPost = function (url, data, donshow) {
+  return new Promise((reject, resolve) => {
+    util.showBusy('正在请求...')
+    qcloud.request({
+      url: url,
+      data: data,
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      success(result) {
+        wx.hideToast()
+        var res = result.data
+        res.code === 0 && reject(res.data)
+        res.code !== 0 && resolve(res.data)
+        if (donshow) return
+        res.code !== 0 && util.showModel('请求出错', res.data)
+      },
+      fail(error) {
+        wx.hideToast()
+        resolve(error)
+        if (donshow) return
+        util.showModel('请求失败', error)
       }
     })
   })

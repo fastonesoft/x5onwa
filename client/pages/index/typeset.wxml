@@ -3,7 +3,7 @@
 <comMemb url="{{typeseturl}}" title="分类列表" key="name" memo="id" bind:memberRemove="memberRemove" />
 
 <view class="weui-cells__tips x5ui-mini">
-	<button type="primary" size="mini" form-type="submit">添加</button>
+	<button type="primary" size="mini" bindtap="addClick">添加</button>
 </view>
 
 <view class="weui-btn-area">
