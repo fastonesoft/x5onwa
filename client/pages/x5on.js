@@ -345,6 +345,27 @@ var doSetPick = function (e, success) {
   value > -1 && typeof success === 'function' && success(value)
 }
 
+var doReForm = function (fields, form) {
+  var res = {}
+  for (var key in form) {
+    if (form.hasOwnProperty(key)) {
+      console.log(key)
+      for (let field of fields) {
+        if (field.mode !== 3 && field.name === key ) {
+          res[key] = form[key]
+        }
+        if (field.mode === 3 && field.name === key ) {
+          var index = form[key]
+          res[key] = field.picks[index].id
+        }
+      }
+    } else {
+      console.log(key)
+    }
+  }
+  return res
+}
+
 /**
  * 关于错误代码
  * -1    ：   系统级出错代码，与登录有关，由系统检测
@@ -614,5 +635,6 @@ module.exports = {
   setArr: doSetArr,
   delArr: doDelArr,
 
+  reForm: doReForm,
   checkForm: x5va.checkForm,
 }

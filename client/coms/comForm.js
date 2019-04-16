@@ -11,10 +11,19 @@ Component({
     mini: Boolean,
   },
 
+  data: {
+    pickForm: {}
+  },
+
   methods: {
     formSubmit: function (e) {
       var that = this
-      x5on.checkForm(e.detail.value, that.data.rules, that.data.messages, form => {
+      console.log(e)
+      console.log('----')
+      x5on.checkForm(e.detail.value, that.data.rules, that.data.messages, oldform => {
+        console.log(oldform)
+        var form = x5on.reForm(that.data.fields, oldform)
+        console.log(form)
         that.triggerEvent('formSubmit', { form })
       }, mes => {
         x5on.showError(that, mes)
@@ -22,7 +31,10 @@ Component({
     },
 
     pickChange: function (e) {
-      console.log(e)
+      var {name, picked} = e.detail
+      var pickForm = this.data.pickForm
+      pickForm[name] = picked
+      this.setData({ pickForm })
     }
   }
 })

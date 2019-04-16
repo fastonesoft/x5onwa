@@ -1,11 +1,10 @@
-// Com/comPick.js
+// coms/comSubPick.js
 var x5on = require('../pages/x5on.js')
 
 Component({
 
   properties: {
     name: String,
-    title: String,
     label: String,
     picks: Array,
     key: String,
