@@ -3,11 +3,6 @@ var x5on = require('../x5on.js')
 
 Page({
 
-  data: {
-    typeseturl: x5on.url.typeset,
-  },
-
-
   onLoad: function (e) {
     var fields = [{
       mode: 1,
@@ -15,7 +10,6 @@ Page({
       name: 'id',
       type: 'number',
       maxlength: 2,
-      min: 1,
     }, {
       mode: 1,
       label: '分类名称',
@@ -26,10 +20,11 @@ Page({
       mode: 3,
       label: '选择测试1',
       name: 'selec1',
+      url: x5on.url.typeset,
       picks: [{id: 0, name: '测试'}, {id: 1, name: '姓名'}],
       rangeKey: 'name',
       selectKey: 'name',
-      valueKey: 'id',
+      valueKey: 'uid',
     }, {
       mode: 3,
       label: '选择测试2',
@@ -44,6 +39,7 @@ Page({
         required: true,
         digits: true,
         minlength: 1,
+        min: 1,
       },
       name: {
         required: true,
@@ -52,7 +48,6 @@ Page({
       },
       selec1: {
         required: true,
-        min: 0,
       },
       selec2: {
         required: true,
