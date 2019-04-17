@@ -10,9 +10,7 @@ Page({
   memberRemove: function (e) {
     var types = []
     types.push(e.detail.removed)
-    this.setData({
-      types
-    })
+    this.setData({ types })
   },
 
 

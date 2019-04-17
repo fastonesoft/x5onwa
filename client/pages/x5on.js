@@ -336,8 +336,7 @@ var doSetCheckboxex = function (arrs, e_detail_value_uids, checked_obj_name, suc
     var checked = false
     for (let uid of e_detail_value_uids) {
       if (arr.uid === uid) {
-        checked = true;
-        break
+        checked = true; break
       }
     }
     arr[checked_obj_name] = checked

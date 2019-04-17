@@ -7,32 +7,17 @@ Page({
     var fields = [{
       mode: 1,
       label: '分类编号',
+      message: '输入分类编号',
       name: 'id',
       type: 'number',
       maxlength: 2,
     }, {
       mode: 1,
       label: '分类名称',
+      message: '输入分类名称',
       name: 'name',
       type: 'text',
       maxlength: 2,
-    }, {
-      mode: 3,
-      label: '选择测试1',
-      name: 'selec1',
-      url: x5on.url.typeset,
-      picks: [{id: 0, name: '测试'}, {id: 1, name: '姓名'}],
-      rangeKey: 'name',
-      selectKey: 'name',
-      valueKey: 'uid',
-    }, {
-      mode: 3,
-      label: '选择测试2',
-      name: 'selec2',
-      picks: [{id: 0, name: '李四'}, {id: 1, name: '王八'}],
-      rangeKey: 'name',
-      selectKey: 'name',
-      valueKey: 'id',
     }]
     var rules = {
       id: {
@@ -46,13 +31,6 @@ Page({
         chinese: true,
         minlength: 2,
       },
-      selec1: {
-        required: true,
-      },
-      selec2: {
-        required: true,
-        min: 0,
-      },
     }
     var messages = {
       id: {
@@ -61,19 +39,22 @@ Page({
       name: {
         required: '分类名称'
       },
-      selec1: {
-        required: '选择测试1',
-      },
-      selec2: {
-        required: '选择测试2',
-      },
     }
     this.setData({ fields, rules, messages })
   },
 
   formSubmit: function (e) {
     var that = this
-    // wx.navigateBack()
+    wx.navigateBack()
+
+    // mode: 3,
+    // label: '选择测试1',
+    // name: 'selec1',
+    // url: x5on.url.typeset,
+    // picks: [{id: 0, name: '测试'}, {id: 1, name: '姓名'}],
+    // rangeKey: 'name',
+    // selectKey: 'name',
+    // valueKey: 'uid',
   },
 
 })

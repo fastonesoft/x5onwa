@@ -18,7 +18,7 @@
 					<view class="weui-label">{{item.label}}</view>
 				</view>
 				<view class="weui-cell__bd">
-					<input class="weui-input" placeholder="输入{{item.label}}" name="{{item.name}}" type="{{item.type}}"
+					<input class="weui-input" placeholder="{{item.message}}" name="{{item.name}}" type="{{item.type}}"
 						maxlength="{{item.maxlength}}" value="{{item.value}}" />
 				</view>
 			</view>
