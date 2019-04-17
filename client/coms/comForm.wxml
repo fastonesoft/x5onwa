@@ -28,12 +28,9 @@
 					<switch name="{{item.name}}" checked="{{item.value}}" />
 				</view>
 			</view>
-
-
-
-			<comPick name="{{item.name}}" label="{{item.label}}" key="{{item.key}}" value="{{item.value}}" index="{{item.index}}"
-				picks="{{item.picks}}" bind:pickChange="pickChange" wx:if="{{item.mode==3}}" />
-
+			<comSubPick name="{{item.name}}" label="{{item.label}}" rangeKey="{{item.rangeKey}}" valueKey="{{item.valueKey}}"
+				selectKey="{{item.selectKey}}" selectIndex="{{item.selectIndex}}" picks="{{item.picks}}"
+				bind:subpickChange="subpickChange" wx:if="{{item.mode==3}}" />
 		</block>
 	</view>
 	<view class="weui-btn-area" wx:if="{{!mini}}">

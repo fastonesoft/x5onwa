@@ -6,15 +6,15 @@ Component({
   properties: {
     name: String,
     label: String,
-    picks: Array,
-    key: String,
-    value: String,
-    index: Number,
     url: String,
+    picks: Array,
+    rangeKey: String,
+    valueKey: String,
+    selectKey: String,
   },
 
   lifetimes: {
-    ready() {
+    attached() {
       var that = this
       that.data.url && x5on.request({
         url: that.data.url,
@@ -25,7 +25,7 @@ Component({
     },
   },
 
-  ready() {
+  attached() {
     var that = this
     that.data.url && x5on.request({
       url: that.data.url,
@@ -36,14 +36,15 @@ Component({
   },
 
   methods: {
-    pickChange: function (e) {
+    subpickChange: function (e) {
       var that = this
-      x5on.setPick(e, index => {
-        that.setData({ index })
+      x5on.setPick(e, selectIndex => {
+        that.setData({ selectIndex })
         // 推送数据
-        var name = this.data.name
-        var picked = x5on.getArr(this.data.picks, index)
-        this.triggerEvent('pickChange', { name, picked })
+        var name = that.data.name
+        var picked = x5on.getArr(that.data.picks, selectIndex)
+        var value = picked[that.data.valueKey]
+        that.triggerEvent('subpickChange', { name, value })
       })
     }
   }

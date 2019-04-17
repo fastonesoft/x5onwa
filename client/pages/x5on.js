@@ -306,6 +306,12 @@ var doGetCheckboxex = function (arrs, obj_name, success, fail) {
   res.length == 0 && typeof fail === 'function' && fail()
 }
 
+// pick成功后返回相应的值
+var doSetPick = function (e, success) {
+  var value = e.detail.value
+  value > -1 && typeof success === 'function' && success(value)
+}
+
 // 数组单项设置
 var doSetRadio = function (arrs, e_detail_value, success) {
   for (let arr of arrs) {
@@ -339,33 +345,6 @@ var doSetCheckboxex = function (arrs, e_detail_value_uids, checked_obj_name, suc
   typeof success === 'function' && success(arrs)
 }
 
-// pick成功后返回相应的值
-var doSetPick = function (e, success) {
-  var value = e.detail.value
-  value > -1 && typeof success === 'function' && success(value)
-}
-
-var doReForm = function (fields, form) {
-  var res = {}
-  for (var key in form) {
-    if (form.hasOwnProperty(key)) {
-      console.log(key)
-      for (let field of fields) {
-        if (field.mode !== 3 && field.name === key ) {
-          res[key] = form[key]
-        }
-        if (field.mode === 3 && field.name === key ) {
-          var index = form[key]
-          res[key] = field.picks[index].id
-        }
-      }
-    } else {
-      console.log(key)
-    }
-  }
-  return res
-}
-
 /**
  * 关于错误代码
  * -1    ：   系统级出错代码，与登录有关，由系统检测
@@ -373,8 +352,6 @@ var doReForm = function (fields, form) {
  *  1    ：   应用级出错代码，逻辑错误代码
  *  X    ：   ...
  */
-
-
 var doRequest = function (options) {
   util.showBusy('正在查询...')
   qcloud.request({
@@ -635,6 +612,5 @@ module.exports = {
   setArr: doSetArr,
   delArr: doDelArr,
 
-  reForm: doReForm,
   checkForm: x5va.checkForm,
 }

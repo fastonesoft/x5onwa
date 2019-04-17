@@ -3,9 +3,13 @@ var x5on = require('../x5on.js')
 
 Page({
 
+  data: {
+    typeseturl: x5on.url.typeset,
+  },
+
+
   onLoad: function (e) {
     var fields = [{
-      index: 0,
       mode: 1,
       label: '分类编号',
       name: 'id',
@@ -13,30 +17,27 @@ Page({
       maxlength: 2,
       min: 1,
     }, {
-      index: 1,
       mode: 1,
       label: '分类名称',
       name: 'name',
       type: 'text',
       maxlength: 2,
     }, {
-      index: 2,
       mode: 3,
       label: '选择测试1',
       name: 'selec1',
       picks: [{id: 0, name: '测试'}, {id: 1, name: '姓名'}],
-      select: -1,
-      key: 'name',
-      value: 'name',
-    },{
-      index: 3,
+      rangeKey: 'name',
+      selectKey: 'name',
+      valueKey: 'id',
+    }, {
       mode: 3,
       label: '选择测试2',
       name: 'selec2',
       picks: [{id: 0, name: '李四'}, {id: 1, name: '王八'}],
-      select: 0,
-      key: 'name',
-      value: 'name',
+      rangeKey: 'name',
+      selectKey: 'name',
+      valueKey: 'id',
     }]
     var rules = {
       id: {

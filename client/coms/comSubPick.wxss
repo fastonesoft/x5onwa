@@ -1,2 +1,4 @@
 /* coms/comSubPick.wxss */
 @import "../pages/weui.wxss";
+.weui-cells_before{top:0;border-top:1rpx solid #d9d9d9}
+.weui-cells_after{bottom:0;border-bottom:1rpx solid #d9d9d9}

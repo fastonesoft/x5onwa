@@ -1,6 +1,6 @@
 {
   "component": true,
   "usingComponents": {
-    "comPick": "../../coms/comPick"
+    "comSubPick": "../../coms/comSubPick"
   }
 }
