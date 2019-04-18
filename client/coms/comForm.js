@@ -21,7 +21,7 @@ Component({
       var oldform = {}
       Object.assign(oldform, e.detail.value, that.data.pickForm)
       x5on.checkForm(oldform, that.data.rules, that.data.messages, form => {
-        that.triggerEvent('formSubmit', { form })
+        that.triggerEvent('formSubmit', form)
       }, mes => {
         x5on.showError(that, mes)
       })

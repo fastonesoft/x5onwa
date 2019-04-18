@@ -45,7 +45,14 @@ Page({
 
   formSubmit: function (e) {
     var that = this
-    wx.navigateBack()
+    var form = e.detail
+    x5on.ppost(x5on.url.typesetadd, form)
+    .then(typeset => {
+      console.log(typeset)
+    }, error => {
+
+    })
+    // wx.navigateBack()
 
     // mode: 3,
     // label: '选择测试1',

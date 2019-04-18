@@ -22,4 +22,22 @@ class Typeset extends CI_Controller {
       $this->json($error);
     });
   }
+
+  public function add() {
+    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
+      try {
+        $param = $_POST;
+        $id = $param['id'];
+        $name = $param['name'];
+
+        $result = Mvv\mvvTypeSet::add($id, $name);
+
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
 }

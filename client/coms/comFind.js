@@ -24,7 +24,7 @@ Component({
         }
       }
       x5on.checkForm(e.detail.value, rules, messages, form => {
-        this.triggerEvent('findSubmit', { form })
+        this.triggerEvent('findSubmit', form)
       }, message => {
         x5on.showError(that, message)
       })
