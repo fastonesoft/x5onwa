@@ -3,16 +3,23 @@ var x5on = require('../x5on.js')
 
 Page({
 
-  data: {
-    typeseturl: x5on.url.typeset,
+  onLoad: function (e) {
+    var that = this
+    x5on.prequest(x5on.url.typeset)
+      .then(typesets => {
+        that.setData({ typesets })
+      })
   },
 
   memberRemove: function (e) {
-    var types = []
-    types.push(e.detail.removed)
-    this.setData({ types })
+    let that = this
+    let { removed, membs } = e.detail
+    let uid = removed.uid
+    x5on.ppost(x5on.url.typesetdel, { uid })
+      .then(number => {
+        that.setData({ typesets: membs })
+      })
   },
-
 
   addClick: function (e) {
     wx.navigateTo({ url: 'typeset_add' })

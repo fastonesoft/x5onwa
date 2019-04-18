@@ -47,12 +47,19 @@ Page({
     var that = this
     var form = e.detail
     x5on.ppost(x5on.url.typesetadd, form)
-    .then(typeset => {
-      console.log(typeset)
-    }, error => {
+      .then(typeset => {
+        x5on.prevPage(page => {
+          var typesets = page.data.typesets
+          typesets = x5on.add(typesets, typeset, 'id')
+          page.setData({ typesets })
+          //
+          wx.navigateBack()
+        })
+      })
+      .catch(error => {
+        x5on.showError(that, error)
+      })
 
-    })
-    // wx.navigateBack()
 
     // mode: 3,
     // label: '选择测试1',

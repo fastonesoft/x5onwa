@@ -230,6 +230,26 @@ var doData = {
   status_temp: 99,
 }
 
+// 数据对象添加
+var doAdd = function (arrs, arr, sort_field) {
+  arrs.push(arr)
+  arrs.doSort(arrs, sort_field)
+  return arrs
+}
+// 数据对象排序
+var doSort = function (arrs, sort_field) {
+  arrs.sort(function (a, b) {
+    if (a[sort_field]<b[sort_field]) {
+      return -1
+    } else if (a[sort_field]>b[sort_field]) {
+      return 1
+    } else {
+      return 0
+    }
+  })
+  return arrs
+}
+
 // 根据编号获取索引值
 var doGetIndex = function (arrs, id_value) {
   return doGetIndexe(arrs, 'id', id_value)
@@ -501,32 +521,34 @@ var poLogin = function (e_detail, donshow) {
   })
 }
 var poRequest = function (url, donshow) {
-  return new Promise((reject, resolve) => {
+  return new Promise((resolve, reject) => {
     util.showBusy('正在查询...')
     qcloud.request({
       url: url,
       success(result) {
         wx.hideToast()
         var res = result.data
-        res.code === 0 && reject(res.data)
-        res.code !== 0 && resolve(res.data)
-        if (donshow) return
-  
-        res.code !== 0 && util.showModel('查询出错', res.data)
+        if (res.code === 0) {
+          resolve(res.data)
+        } else {
+          var error = res.data ? res.data : '请确认查询地址是否有误'
+          reject(error)
+          if (donshow) return
+          util.showModel('查询出错', error)
+        }
       },
       fail(error) {
-        // error为文字提示
         wx.hideToast()
-        resolve(error)
+        reject(error)
         if (donshow) return
-        util.showModel('查询失败', error)
+        error && util.showModel('查询失败', error)
       }
     })
   })
 }
 var poPost = function (url, data, donshow) {
-  return new Promise((reject, resolve) => {
-    util.showBusy('正在请求...')
+  return new Promise((resolve, reject) => {
+    util.showBusy('正在提交...')
     qcloud.request({
       url: url,
       data: data,
@@ -537,16 +559,20 @@ var poPost = function (url, data, donshow) {
       success(result) {
         wx.hideToast()
         var res = result.data
-        res.code === 0 && reject(res.data)
-        res.code !== 0 && resolve(res.data)
-        if (donshow) return
-        res.code !== 0 && util.showModel('请求出错', res.data)
+        if (res.code === 0) {
+          resolve(res.data)
+        } else {
+          var error = res.data ? res.data : '请确认提交地址是否有误'
+          reject(error)
+          if (donshow) return
+          util.showModel('提交出错', error)
+        }
       },
       fail(error) {
         wx.hideToast()
-        resolve(error)
+        reject(error)
         if (donshow) return
-        util.showModel('请求失败', error)
+        error && util.showModel('提交失败', error)
       }
     })
   })
@@ -576,6 +602,12 @@ var doSuccess = function (message) {
   util.showSuccess(message);
 };
 
+var doPrevPage = function (success) {
+  var pages = getCurrentPages();
+  var prevPage = pages[pages.length - 2];
+  success(prevPage)
+}
+
 // 对外接口
 module.exports = {
   url: doUrl,
@@ -592,6 +624,9 @@ module.exports = {
   plogin: poLogin,
   prequest: poRequest,
   ppost: poPost,
+
+  add: doAdd,
+  sort: doSort,
 
   getId: doGetId,
   getUid: doGetUid,
@@ -612,4 +647,5 @@ module.exports = {
   delArr: doDelArr,
 
   checkForm: x5va.checkForm,
+  prevPage: doPrevPage,
 }

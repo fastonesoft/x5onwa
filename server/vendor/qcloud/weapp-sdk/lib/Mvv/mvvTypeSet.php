@@ -14,6 +14,11 @@ class mvvTypeSet
     return xonType::add($id, $name);
   }
 
+  public static function del($uid) {
+    xonType::checkByUid($uid);
+    return xonType::delByUid($uid);
+  }
+
 
 
 

@@ -1,3 +1,4 @@
 <!--pages/index/typeset_add.wxml-->
+<view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
 <comForm title="分类设置" fields="{{fields}}" rules="{{rules}}" messages="{{messages}}" bind:formSubmit="formSubmit" />

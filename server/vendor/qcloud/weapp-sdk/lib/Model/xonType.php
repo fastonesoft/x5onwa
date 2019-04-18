@@ -11,6 +11,7 @@ class xonType extends cAppinfo
     self::existByCustom(compact('name'), '分类名称已存在');
     //
     $uid = x5on::getUid();
-    return self::insert(compact('id', 'uid', 'name'));
+    self::insert(compact('id', 'uid', 'name'));
+    return self::getByUid($uid);
   }
 }
