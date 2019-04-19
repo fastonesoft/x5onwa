@@ -1,11 +1,6 @@
 {
   "navigationBarTitleText": "分类设置",
   "usingComponents": {
-    "comForm": "../../coms/comForm",
-    "comCheck": "../../coms/comCheck",
-    "comRadio": "../../coms/comRadio",
-    "comFind": "../../coms/comFind",
-    "comPick": "../../coms/comPick",
     "comMemb": "../../coms/comMemb"
   }
 }

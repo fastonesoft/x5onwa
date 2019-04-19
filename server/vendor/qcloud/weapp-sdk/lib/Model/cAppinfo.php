@@ -1,4 +1,5 @@
 <?php
+
 namespace QCloud_WeApp_SDK\Model;
 
 use QCloud_WeApp_SDK\Mysql\Mysql as dbs;
@@ -17,19 +18,23 @@ class cAppinfo extends vAppinfo
    * @return int
    * @throws Exception
    */
-  public static function insert ($data) {
+  public static function insert($data)
+  {
     return dbs::insert(static::$tableName, $data);
   }
 
-  public static function setsBy ($columns, $conditions) {
+  public static function setsBy($columns, $conditions)
+  {
     return dbs::update(static::$tableName, $columns, $conditions);
   }
 
-  public static function setsById ($columns, $id) {
+  public static function setsById($columns, $id)
+  {
     return static::setsBy($columns, compact('id'));
   }
 
-  public static function setsByUid ($columns, $uid) {
+  public static function setsByUid($columns, $uid)
+  {
     return static::setsBy($columns, compact('uid'));
   }
 
@@ -38,16 +43,37 @@ class cAppinfo extends vAppinfo
    * @return            number          受影响的数据条数
    * @throws Exception
    */
-  public static function delBy ($conditions) {
+  public static function delBy($conditions)
+  {
     return dbs::delete(static::$tableName, $conditions);
   }
 
-  public static function delById ($id) {
+  public static function delById($id)
+  {
     return static::delBy(compact('id'));
   }
 
-  public static function delByUid ($uid) {
+  public static function delByUid($uid)
+  {
     return static::delBy(compact('uid'));
+  }
+
+  public static function delByIdCustom($id)
+  {
+    try {
+      return static::delBy(compact('id'));
+    } catch (Exception $e) {
+      throw new Exception('无法删除，请确认是否存在外键约束');
+    }
+  }
+
+  public static function delByUidCustom($uid)
+  {
+    try {
+      return static::delBy(compact('uid'));
+    } catch (Exception $e) {
+      throw new Exception('无法删除，请确认是否存在外键约束');
+    }
   }
 
 }

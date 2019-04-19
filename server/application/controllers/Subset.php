@@ -4,15 +4,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 use QCloud_WeApp_SDK\Mvv;
 use QCloud_WeApp_SDK\Model;
 
-class Typeset extends CI_Controller {
+class Subset extends CI_Controller {
   /**
-   * 分类设置
+   * 学科设置
    */
-  const role_name = 'typeset';
+  const role_name = 'subset';
   public function index() {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
-        $result = Mvv\mvvTypeSet::types();
+        $result = Mvv\mvvSubSet::subs();
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -29,8 +29,9 @@ class Typeset extends CI_Controller {
         $param = $_POST;
         $id = $param['id'];
         $name = $param['name'];
+        $short = $param['short'];
 
-        $result = Mvv\mvvTypeSet::add($id, $name);
+        $result = Mvv\mvvSubSet::add($id, $name, $short);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -47,7 +48,7 @@ class Typeset extends CI_Controller {
         $param = $_POST;
         $uid = $param['uid'];
 
-        $result = Mvv\mvvTypeSet::del($uid);
+        $result = Mvv\mvvSubSet::del($uid);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {

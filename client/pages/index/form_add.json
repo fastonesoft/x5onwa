@@ -1,4 +1,5 @@
 {
+  "navigationBarTitleText": "数据添加",
   "usingComponents": {
     "comForm": "../../coms/comForm"
   }

@@ -233,18 +233,15 @@ var doData = {
 // 数据对象添加
 var doAdd = function (arrs, arr, sort_field) {
   arrs.push(arr)
-  arrs.doSort(arrs, sort_field)
-  return arrs
+  return doSort(arrs, sort_field)
 }
 // 数据对象排序
 var doSort = function (arrs, sort_field) {
   arrs.sort(function (a, b) {
     if (a[sort_field]<b[sort_field]) {
       return -1
-    } else if (a[sort_field]>b[sort_field]) {
-      return 1
     } else {
-      return 0
+      return 1
     }
   })
   return arrs

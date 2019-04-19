@@ -16,7 +16,7 @@ class mvvTypeSet
 
   public static function del($uid) {
     xonType::checkByUid($uid);
-    return xonType::delByUid($uid);
+    return xonType::delByUidCustom($uid);
   }
 
 

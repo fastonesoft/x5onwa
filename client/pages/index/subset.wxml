@@ -1,39 +1,10 @@
 <!--pages/index/subset.wxml-->
-<view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
-<form bindsubmit="subsetSubmit">
-		<view class="weui-cells__title">分类设置</view>
-	<view class="weui-cells weui-cells_after-title">
-		<view class="weui-cell weui-cell_input">
-			<view class="weui-cell__hd">
-				<view class="weui-label">学科编号</view>
-			</view>
-			<view class="weui-cell__bd">
-				<input class="weui-input" placeholder="输入学科编号" name="id" type="number" maxlength="2" />
-			</view>
-		</view>
-		<view class="weui-cell weui-cell_input">
-			<view class="weui-cell__hd">
-				<view class="weui-label">学科名称</view>
-			</view>
-			<view class="weui-cell__bd">
-				<input class="weui-input" placeholder="输入学科名称" name="name" type="text" maxlength="20" />
-			</view>
-		</view>
-		<view class="weui-cell weui-cell_input">
-			<view class="weui-cell__hd">
-				<view class="weui-label">学科简称</view>
-			</view>
-			<view class="weui-cell__bd">
-				<input class="weui-input" placeholder="输入学科简称" name="short" type="text" maxlength="1" />
-			</view>
-		</view>
-	</view>
-	<view class="weui-btn-area">
-		<button type="primary" form-type="submit">提交</button>
-	</view>
-</form>
+<comMemb membs="{{membs}}" title="学科列表" key="name" memo="id" bind:memberRemove="memberRemove" />
 
+<view class="weui-cells__tips x5ui-mini">
+	<button type="primary" size="mini" bindtap="addClick">添加</button>
+</view>
 
 <view class="weui-btn-area">
 	<button type="primary" bindtap="returnClick">返回</button>
