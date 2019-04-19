@@ -19,6 +19,9 @@ Page({
       .then(number => {
         that.setData({ typesets: membs })
       })
+      .catch(error => {
+        console.log(error)
+      })
   },
 
   addClick: function (e) {
