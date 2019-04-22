@@ -1,8 +1,8 @@
 <?php
 namespace QCloud_WeApp_SDK\Model;
 
-class xovSchoolYear extends vAppinfo
+class xovSchYear extends vAppinfo
 {
-  protected static $tableName = 'xovSchoolYear';
+  protected static $tableName = 'xovSchYear';
   protected static $tableTitle = '学校年度查询';
 }

@@ -27,9 +27,10 @@ class Schyear extends CI_Controller {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
         $param = $_POST;
-        $sch_uid = $param['sch_uid'];
-        $user_uid = $param['user_uid'];
-        $result = '';
+        $year = $param['year'];
+        $is_current = $param['is_current'];
+
+        $result = Mvv\mvvSchYear::add($userinfor->unionId, $year, $is_current);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -44,9 +45,8 @@ class Schyear extends CI_Controller {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
         $param = $_POST;
-        $sch_uid = $param['sch_uid'];
-        $user_uid = $param['user_uid'];
-        $result = '';
+        $uid = $param['uid'];
+        $result = Mvv\mvvSchYear::del($userinfor->unionId, $uid);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {

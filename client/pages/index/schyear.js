@@ -27,44 +27,39 @@ Page({
   addClick: function (e) {
     var fields = [{
       mode: 1,
-      label: '分类编号',
-      message: '输入分类编号',
-      name: 'id',
+      label: '年度年份',
+      message: '输入年度年份',
+      name: 'year',
       type: 'number',
-      maxlength: 2,
+      maxlength: 4,
     }, {
-      mode: 1,
-      label: '分类名称',
-      message: '输入分类名称',
-      name: 'name',
-      type: 'text',
-      maxlength: 2,
+      mode: 2,
+      label: '当前年度',
+      message: '输入当前年度',
+      name: 'is_current',
     }]
     var rules = {
-      id: {
+      year: {
         required: true,
         digits: true,
-        minlength: 1,
-        min: 1,
+        minlength: 4,
       },
-      name: {
+      is_current: {
         required: true,
-        chinese: true,
-        minlength: 2,
       },
     }
     var messages = {
-      id: {
-        required: '分类编号'
+      year: {
+        required: '年度年份'
       },
-      name: {
-        required: '分类名称'
+      is_current: {
+        required: '当前年度'
       },
     }
 
     var json = {}
-    json.title = '分类设置'
-    json.addurl = x5on.url.schyeartadd
+    json.title = '年度设置'
+    json.addurl = x5on.url.schyearadd
     json.fields = fields
     json.rules = rules
     json.messages = messages
