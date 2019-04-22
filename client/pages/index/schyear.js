@@ -5,7 +5,7 @@ Page({
 
   onLoad: function (e) {
     var that = this
-    x5on.prequest(x5on.url.typeset)
+    x5on.prequest(x5on.url.schyear)
       .then(membs => {
         that.setData({ membs })
       })
@@ -15,7 +15,7 @@ Page({
     let that = this
     let { removed, membs } = e.detail
     let uid = removed.uid
-    x5on.ppost(x5on.url.typesetdel, { uid })
+    x5on.ppost(x5on.url.schyeardel, { uid })
       .then(number => {
         that.setData({ membs })
       })
@@ -64,7 +64,7 @@ Page({
 
     var json = {}
     json.title = '分类设置'
-    json.addurl = x5on.url.typesetadd
+    json.addurl = x5on.url.schyeartadd
     json.fields = fields
     json.rules = rules
     json.messages = messages

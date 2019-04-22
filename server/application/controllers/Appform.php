@@ -12,9 +12,9 @@ class Appform extends CI_Controller {
   public function index() {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
-        // 模板
+        $result = "";
 
-        $this->json(['code' => 0, 'data' => []]);
+        $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
         $this->json(['code' => 1, 'data' => $e->getMessage()]);
       }
