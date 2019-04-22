@@ -14,6 +14,9 @@
 		</radio-group>
 	</view>
 </block>
+
+<comMemb membs="{{membs}}" title="年度列表" key="name" memo="id" bind:memberRemove="memberRemove" />
+
 <view class="weui-cells__tips x5ui-mini">
 	<button type="primary" size="mini" form-type="submit">添加</button>
 </view>

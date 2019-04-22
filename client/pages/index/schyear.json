@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "学校年度"
+  "navigationBarTitleText": "学校年度",
+  "usingComponents": {
+    "comMemb": "../../coms/comMemb"
+  }
 }
