@@ -1,6 +1,7 @@
 <?php
 namespace QCloud_WeApp_SDK\Mvv;
 
+use QCloud_WeApp_SDK\Model\x5on;
 use QCloud_WeApp_SDK\Model\xonSchStep;
 use QCloud_WeApp_SDK\Model\xovSchStep;
 use QCloud_WeApp_SDK\Model\xovSchYear;
@@ -36,6 +37,20 @@ class mvvSchStep
       $sch_id = $user_sch_group->sch_id;
 
       $result = xonSchStep::add($name, $code, $years_id, $graded_year, $recruit_end, $graduated);
+    });
+    return $result;
+  }
+
+  public static function edit($sch_admin_user_id, $uid, $graded_year, $recruit_end_string, $graduated_string) {
+    $result = [];
+    mvvUserSchoolGroup::schAdmin($sch_admin_user_id, function ($user_sch_group) use ($uid, $graded_year, $recruit_end_string, $graduated_string, &$result) {
+      $sch_id = $user_sch_group->sch_id;
+
+      $graduated = x5on::getBool($graduated_string);
+      $recruit_end = x5on::getBool($recruit_end_string);
+
+      xonSchStep::setsByUid(compact('graded_year', 'recruit_end', 'graduated'), $uid);
+      $result =  xovSchStep::getByUid($uid);
     });
     return $result;
   }

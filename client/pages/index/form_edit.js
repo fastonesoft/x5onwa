@@ -1,16 +1,18 @@
-// pages/index/form_edit.jsvar x5on = require('../x5on.js')
+// pages/index/form_edit.js
+var x5on = require('../x5on.js')
 
 Page({
 
   onLoad: function (e) {
     var data = JSON.parse(e.json)
-    let {title, editurl, fields, rules} = data
-    this.setData({ title, editurl, fields, rules })
+    let {uid, title, editurl, fields, rules} = data
+    this.setData({ uid, title, editurl, fields, rules })
   },
 
   formSubmit: function (e) {
     var that = this
     var form = e.detail
+    form.uid = this.data.uid
     x5on.ppost(that.data.editurl, form)
       .then(memb => {
         x5on.prevPage(page => {

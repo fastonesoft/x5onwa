@@ -124,6 +124,7 @@ var doUrl = {
   schstep: `${host}/weapp/schstep`,
   schstepadd: `${host}/weapp/schstep/add`,
   schstepdel: `${host}/weapp/schstep/del`,
+  schstepedit: `${host}/weapp/schstep/edit`,
   schstepyear: `${host}/weapp/schstep/year`,
 
 

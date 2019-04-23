@@ -59,6 +59,27 @@ class Schstep extends CI_Controller {
     });
   }
 
+  public function edit() {
+    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
+      try {
+        $param = $_POST;
+        $uid = $param['uid'];
+        $graded_year = $param['graded_year'];
+        $recruit_end = $param['recruit_end'];
+        $graduated = $param['graduated'];
+
+        $result = Mvv\mvvSchStep::edit($userinfor->unionId, $uid, $graded_year, $recruit_end, $graduated);
+
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
+
+
   public function del() {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {

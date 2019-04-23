@@ -24,6 +24,62 @@ Page({
       })
   },
 
+  memberClick: function (e) {
+    var memb = e.detail
+
+    var fields = [{
+      mode: 0,
+      name: 'name',
+      label: '分级名称',
+      value: memb.name,
+    }, {
+      mode: 0,
+      name: 'come_year',
+      label: '入学年度',
+      value: memb.come_year,
+    }, {
+      mode: 1,
+      name: 'graded_year',
+      label: '毕业年份',
+      message: '输入毕业年份',
+      type: 'number',
+      maxlength: 4,
+      value: memb.graded_year,
+    }, {
+      mode: 0,
+      name: 'recruit_end',
+      label: '是否招生',
+      bool: true,
+      value: memb.recruit_end,
+    }, {
+      mode: 0,
+      name: 'graduated',
+      label: '是否毕业',
+      bool: true,
+      value: memb.graduated,
+    }]
+    var rules = {
+      graded_year: {
+        required: true,
+        digits: true,
+        minlength: 4,
+      },
+      recruit_end: {
+        required: true,
+      },
+      graduated: {
+        required: true,
+      }
+    }
+    var json = {}
+    json.uid = memb.uid
+    json.title = '分级设置'
+    json.editurl = x5on.url.schstepedit
+    json.fields = fields
+    json.rules = rules
+    wx.navigateTo({ url: 'form_edit?json=' + JSON.stringify(json) })
+  },
+
   addClick: function (e) {
     var fields = [{
       mode: 1,
