@@ -40,18 +40,20 @@ Page({
       type: 'number',
       maxlength: 2,
     }, {
-      mode: 3,
-      name: 'years_id',
-      label: '当前年度',
-      url: x5on.url.schstepyear,
-      rangeKey: ''
-    }, {
       mode: 1,
       name: 'graded_year',
       label: '毕业年份',
       message: '输入毕业年份',
       type: 'number',
       maxlength: 4,
+    }, {
+      mode: 3,
+      name: 'years_id',
+      label: '当前年度',
+      url: x5on.url.schstepyear,
+      valueKey: 'id',
+      rangeKey: 'sch_year',
+      selectKey: 'sch_year',
     }, {
       mode: 2,
       name: 'recruit_end',
@@ -71,6 +73,7 @@ Page({
         required: true,
         digits: true,
         min: 1,
+        minlength: 2,
       },
       years_id: {
         required: true,

@@ -25,16 +25,6 @@ Page({
       .catch(error => {
         x5on.showError(that, error)
       })
-
-
-    // mode: 3,
-    // label: '选择测试1',
-    // name: 'selec1',
-    // url: x5on.url.typeset,
-    // picks: [{id: 0, name: '测试'}, {id: 1, name: '姓名'}],
-    // rangeKey: 'name',
-    // selectKey: 'name',
-    // valueKey: 'uid',
   },
 
 })
