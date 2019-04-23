@@ -1,5 +1,4 @@
 {
-  "navigationBarTitleText": "学科设置",
   "usingComponents": {
     "comMemb": "../../coms/comMemb"
   }
