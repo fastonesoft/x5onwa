@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "数据修改",
+  "usingComponents": {
+    "comForm": "../../coms/comForm"
+  }
+}

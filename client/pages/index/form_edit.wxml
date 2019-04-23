@@ -1,0 +1,4 @@
+<!--pages/index/form_edit.wxml-->
+<view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
+
+<comForm title="{{title}}" fields="{{fields}}" rules="{{rules}}" bind:formSubmit="formSubmit" />
