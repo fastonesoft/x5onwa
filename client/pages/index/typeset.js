@@ -53,14 +53,6 @@ Page({
         minlength: 2,
       },
     }
-    var messages = {
-      id: {
-        required: '分类编号'
-      },
-      name: {
-        required: '分类名称'
-      },
-    }
 
     var json = {}
     json.title = '分类设置'

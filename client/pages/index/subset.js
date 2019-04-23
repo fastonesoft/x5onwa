@@ -65,23 +65,11 @@ Page({
         minlength: 1,
       },
     }
-    var messages = {
-      id: {
-        required: '学科编号'
-      },
-      name: {
-        required: '学科名称'
-      },
-      short: {
-        required: '学科简称'
-      },
-    }
     var json = {}
     json.title = '学科设置'
     json.addurl = x5on.url.subsetadd
     json.fields = fields
     json.rules = rules
-    json.messages = messages
 
     wx.navigateTo({ url: 'form_add?json=' + JSON.stringify(json) })
   },

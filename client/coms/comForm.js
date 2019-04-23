@@ -7,7 +7,6 @@ Component({
     title: String,
     fields: Array,
     rules: Object,
-    messages: Object,
     mini: Boolean,
   },
 
@@ -20,7 +19,8 @@ Component({
       var that = this
       var oldform = {}
       Object.assign(oldform, e.detail.value, that.data.pickForm)
-      x5on.checkForm(oldform, that.data.rules, that.data.messages, form => {
+      var messages = x5on.message(that.data.fields)
+      x5on.checkForm(oldform, that.data.rules, messages, form => {
         that.triggerEvent('formSubmit', form)
       }, mes => {
         x5on.showError(that, mes)

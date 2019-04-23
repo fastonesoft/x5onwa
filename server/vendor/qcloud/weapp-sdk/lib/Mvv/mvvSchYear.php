@@ -32,7 +32,7 @@ class mvvSchYear
     mvvUserSchoolGroup::schAdmin($sch_admin_user_id, function ($user_sch_group) use ($sch_year_uid) {
       $sch_id = $user_sch_group->sch_id;
 
-      $sch_year = xonSchYear::checkByUid($sch_year_uid);
+      xonSchYear::checkByUid($sch_year_uid);
       $result = xonSchYear::delByUidCustom($sch_year_uid);
     });
     return $result;

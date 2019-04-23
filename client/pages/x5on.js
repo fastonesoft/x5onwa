@@ -120,6 +120,12 @@ var doUrl = {
   schyear: `${host}/weapp/schyear`,
   schyearadd: `${host}/weapp/schyear/add`,
   schyeardel: `${host}/weapp/schyear/del`,
+  // 学校分级
+  schstep: `${host}/weapp/schstep`,
+  schstepadd: `${host}/weapp/schstep/add`,
+  schstepdel: `${host}/weapp/schstep/del`,
+  schstepyear: `${host}/weapp/schstep/year`,
+
 
 
 
@@ -359,6 +365,18 @@ var doSetCheckboxex = function (arrs, e_detail_value_uids, checked_obj_name, suc
     arr[checked_obj_name] = checked
   }
   typeof success === 'function' && success(arrs)
+}
+
+var doMessage = function (fields) {
+  var res = {}
+  for (let field of fields) {
+    if (field.mode === 1 || field.mode === 3) {
+      var value = {}
+      value.required = field.label
+      res[field.name] = value
+    }
+  }
+  return res
 }
 
 /**
@@ -643,6 +661,7 @@ module.exports = {
   setArr: doSetArr,
   delArr: doDelArr,
 
+  message: doMessage,
   checkForm: x5va.checkForm,
   prevPage: doPrevPage,
 }

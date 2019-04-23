@@ -1,2 +1,11 @@
 <!--pages/index/schstep.wxml-->
-<text>pages/index/schstep.wxml</text>
+
+<comMemb membs="{{membs}}" title="分级列表" key="schs_steps" bind:memberRemove="memberRemove" />
+
+<view class="weui-cells__tips x5ui-mini">
+	<button type="primary" size="mini" bindtap="addClick">添加</button>
+</view>
+
+<view class="weui-btn-area">
+	<button type="primary" bindtap="returnClick">返回</button>
+</view>

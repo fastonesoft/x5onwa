@@ -5,8 +5,8 @@ Page({
 
   onLoad: function (e) {
     var data = JSON.parse(e.json)
-    let {title, addurl, fields, rules, messages} = data
-    this.setData({ title, addurl, fields, rules, messages })
+    let {title, addurl, fields, rules} = data
+    this.setData({ title, addurl, fields, rules })
   },
 
   formSubmit: function (e) {
