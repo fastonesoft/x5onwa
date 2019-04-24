@@ -74,7 +74,7 @@ Page({
     var json = {}
     json.uid = memb.uid
     json.title = '分级设置'
-    json.editurl = x5on.url.schstepedit
+    json.url = x5on.url.schstepedit
     json.fields = fields
     json.rules = rules
     wx.navigateTo({ url: 'form_edit?json=' + JSON.stringify(json) })
@@ -149,7 +149,7 @@ Page({
 
     var json = {}
     json.title = '分级设置'
-    json.addurl = x5on.url.schstepadd
+    json.url = x5on.url.schstepadd
     json.fields = fields
     json.rules = rules
 

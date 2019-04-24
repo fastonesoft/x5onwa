@@ -1,9 +1,9 @@
 <?php
 namespace QCloud_WeApp_SDK\Model;
 
-class xonSchEdit extends cAppinfo
+class xonSchEdu extends cAppinfo
 {
-  protected static $tableName = 'xonSchEdit';
+  protected static $tableName = 'xonSchEdu';
   protected static $tableTitle = '学校学制';
 
   public static function add($sch_id, $edu_id)
@@ -13,7 +13,7 @@ class xonSchEdit extends cAppinfo
 
     $uid = x5on::getUid();
     self::insert(compact('id', 'uid', 'sch_id', 'edu_id'));
-    return xovSchEdit::getById($id);
+    return xovSchEdu::getById($id);
   }
 
 }

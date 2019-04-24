@@ -5,20 +5,26 @@ Page({
 
   onLoad: function (e) {
     var data = JSON.parse(e.json)
-    let {title, addurl, fields, rules} = data
-    this.setData({ title, addurl, fields, rules })
+    this.setData(data)
   },
 
   formSubmit: function (e) {
     var that = this
     var form = e.detail
-    x5on.ppost(that.data.addurl, form)
+    x5on.ppost(that.data.url, form)
       .then(memb => {
         x5on.prevPage(page => {
-          var membs = page.data.membs
-          membs = x5on.add(membs, memb, 'id')
-          page.setData({ membs })
-          //
+          if (that.data.refresh_url) {
+            // 有刷新地址，就刷新
+            x5on.prequest(that.data.refresh_url)
+            .then(membs => {
+              page.setData({ membs })
+            })
+          } else {
+            var membs = page.data.membs
+            membs = x5on.add(membs, memb, 'id')
+            page.setData({ membs })
+          }
           wx.navigateBack()
         })
       })

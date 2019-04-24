@@ -120,6 +120,8 @@ var doUrl = {
   schyear: `${host}/weapp/schyear`,
   schyearadd: `${host}/weapp/schyear/add`,
   schyeardel: `${host}/weapp/schyear/del`,
+  schyearedit: `${host}/weapp/schyear/edit`,
+  
   // 学校分级
   schstep: `${host}/weapp/schstep`,
   schstepadd: `${host}/weapp/schstep/add`,
@@ -131,7 +133,7 @@ var doUrl = {
   scheduadd: `${host}/weapp/schedu/add`,
   schedudel: `${host}/weapp/schedu/del`,
   scheduedit: `${host}/weapp/schedu/edit`,
-  scheduselect: `${host}/weapp/schedu/select`,
+  scheduedu: `${host}/weapp/schedu/edu`,
 
 
 

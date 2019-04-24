@@ -56,7 +56,7 @@ Page({
 
     var json = {}
     json.title = '分类设置'
-    json.addurl = x5on.url.typesetadd
+    json.url = x5on.url.typesetadd
     json.fields = fields
     json.rules = rules
     json.messages = messages

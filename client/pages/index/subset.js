@@ -67,7 +67,7 @@ Page({
     }
     var json = {}
     json.title = '学科设置'
-    json.addurl = x5on.url.subsetadd
+    json.url = x5on.url.subsetadd
     json.fields = fields
     json.rules = rules
 

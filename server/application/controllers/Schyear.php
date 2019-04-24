@@ -41,6 +41,24 @@ class Schyear extends CI_Controller {
     });
   }
 
+  public function edit() {
+    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
+      try {
+        $param = $_POST;
+        $uid = $param['uid'];
+        $is_current = $param['is_current'];
+
+        $result = Mvv\mvvSchYear::edit($userinfor->unionId, $uid, $is_current);
+
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
+
   public function del() {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {

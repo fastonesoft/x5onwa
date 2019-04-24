@@ -29,10 +29,10 @@ Page({
       mode: 3,
       name: 'edu_id',
       label: '学制选择',
-      url: x5on.url.scheduselect,
+      url: x5on.url.scheduedu,
       valueKey: 'id',
-      rangeKey: 'edus_name',
-      selectKey: 'edus_name',
+      rangeKey: 'name',
+      selectKey: 'name',
     }]
     var rules = {
       edu_id: {
@@ -43,7 +43,7 @@ Page({
 
     var json = {}
     json.title = '学制设置'
-    json.addurl = x5on.url.scheduadd
+    json.url = x5on.url.scheduadd
     json.fields = fields
     json.rules = rules
 

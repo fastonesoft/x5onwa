@@ -24,6 +24,44 @@ Page({
       })
   },
 
+  editClick: function (e) {
+    var memb = e.detail
+    var fields = [{
+      mode: 0,
+      label: '年度年份',
+      value: memb.year,
+    }, {
+      mode: 2,
+      label: '当前年度',
+      name: 'is_current',
+      value: memb.is_current
+    }]
+    var rules = {
+      is_current: {
+        required: true,
+      },
+    }
+    var messages = {
+      year: {
+        required: '年度年份'
+      },
+      is_current: {
+        required: '当前年度'
+      },
+    }
+
+    var json = {}
+    json.uid = memb.uid
+    json.title = '年度设置'
+    json.url = x5on.url.schyearedit
+    json.fields = fields
+    json.rules = rules
+    json.messages = messages
+    json.refresh_url = x5on.url.schyear
+
+    wx.navigateTo({ url: 'form_edit?json=' + JSON.stringify(json) })
+  },
+
   addClick: function (e) {
     var fields = [{
       mode: 1,
@@ -35,7 +73,6 @@ Page({
     }, {
       mode: 2,
       label: '当前年度',
-      message: '输入当前年度',
       name: 'is_current',
     }]
     var rules = {
@@ -59,10 +96,11 @@ Page({
 
     var json = {}
     json.title = '年度设置'
-    json.addurl = x5on.url.schyearadd
+    json.url = x5on.url.schyearadd
     json.fields = fields
     json.rules = rules
     json.messages = messages
+    json.refresh_url = x5on.url.schyear
 
     wx.navigateTo({ url: 'form_add?json=' + JSON.stringify(json) })
   },
