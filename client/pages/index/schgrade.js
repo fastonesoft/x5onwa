@@ -1,66 +1,79 @@
 // pages/index/schgrade.js
+
+var x5on = require('../x5on.js')
+
 Page({
 
-  /**
-   * 页面的初始数据
-   */
-  data: {
-
+  onLoad: function (e) {
+    var that = this
+    x5on.prequest(x5on.url.schgrade)
+      .then(membs => {
+        that.setData({ membs })
+      })
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
+  removeClick: function (e) {
+    let that = this
+    let { removed, membs } = e.detail
+    let uid = removed.uid
+    x5on.ppost(x5on.url.schgradedel, { uid })
+      .then(number => {
+        that.setData({ membs })
+      })
+      .catch(error => {
+        console.log(error)
+      })
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
+  addClick: function (e) {
+    var fields = [{
+      mode: 3,
+      name: 'years_id',
+      label: '当前年度',
+      url: x5on.url.schgradeyear,
+      valueKey: 'id',
+      rangeKey: 'year',
+      selectKey: 'year',
+    }, {
+      mode: 3,
+      name: 'steps_id',
+      label: '学校分级',
+      url: x5on.url.schgradestep,
+      valueKey: 'id',
+      rangeKey: 'year',
+      selectKey: 'year',
+    }, {
+      mode: 3,
+      name: 'edus_id',
+      label: '学校学制',
+      url: x5on.url.schgradeedu,
+      valueKey: 'id',
+      rangeKey: 'year',
+      selectKey: 'year',
+    }]
+    var rules = {
+      years_id: {
+        required: true,
+      },
+      steps_id: {
+        required: true,
+      },
+      edus_id: {
+        required: true,
+      },
+    }
 
+    var json = {}
+    json.title = '年级设置'
+    json.url = x5on.url.schgradeadd
+    json.fields = fields
+    json.rules = rules
+
+    wx.navigateTo({ url: 'form_add?json=' + JSON.stringify(json) })
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
+  returnClick: function (e) {
+    wx.navigateBack()
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
+  
 })

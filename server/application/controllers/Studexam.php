@@ -16,8 +16,8 @@ class Studexam extends CI_Controller {
         $user = Model\xovUser::getById($user_id);
 
 
-        $recruit_end = 0;
-        $result = Model\xovSchoolStep::getsBy(compact('area_id', 'edu_type_id', 'recruit_end'));
+        $can_recruit = 0;
+        $result = Model\xovSchoolStep::getsBy(compact('area_id', 'edu_type_id', 'can_recruit'));
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {

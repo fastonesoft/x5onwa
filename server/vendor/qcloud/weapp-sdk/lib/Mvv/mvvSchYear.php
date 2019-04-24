@@ -18,33 +18,33 @@ class mvvSchYear
     return $result;
   }
 
-  public static function add($sch_admin_user_id, $year, $is_current) {
+  public static function add($sch_admin_user_id, $year, $current_year) {
     $result = [];
-    mvvUserSchoolGroup::schAdmin($sch_admin_user_id, function ($user_sch_group) use ($year, $is_current, &$result) {
+    mvvUserSchoolGroup::schAdmin($sch_admin_user_id, function ($user_sch_group) use ($year, $current_year, &$result) {
       $sch_id = $user_sch_group->sch_id;
 
-      $result = xonSchYear::add($sch_id, $year, $is_current);
+      $result = xonSchYear::add($sch_id, $year, $current_year);
     });
     return $result;
   }
 
-  public static function edit($sch_admin_user_id, $sch_year_uid, $is_current_string) {
+  public static function edit($sch_admin_user_id, $sch_year_uid, $current_year_string) {
     $result = [];
-    mvvUserSchoolGroup::schAdmin($sch_admin_user_id, function ($user_sch_group) use ($sch_year_uid, $is_current_string, &$result) {
+    mvvUserSchoolGroup::schAdmin($sch_admin_user_id, function ($user_sch_group) use ($sch_year_uid, $current_year_string, &$result) {
       $sch_id = $user_sch_group->sch_id;
 
       // 检查是否存在
       xonSchYear::checkByUid($sch_year_uid);
 
-      $is_current = x5on::getBool($is_current_string);
-      if ($is_current) {
+      $current_year = x5on::getBool($current_year_string);
+      if ($current_year) {
         // 若设置为当前，先清除原先的
-        $is_current = 0;
-        xonSchYear::setsBy(compact('is_current'), compact('sch_id'));
-        $is_current = 1;
+        $current_year = 0;
+        xonSchYear::setsBy(compact('current_year'), compact('sch_id'));
+        $current_year = 1;
       }
 
-      xonSchYear::setsByUid(compact('is_current'), $sch_year_uid);
+      xonSchYear::setsByUid(compact('current_year'), $sch_year_uid);
       $result = xovSchYear::getByUid($sch_year_uid);
     });
     return $result;

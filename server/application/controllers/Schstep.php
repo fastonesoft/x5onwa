@@ -44,11 +44,11 @@ class Schstep extends CI_Controller {
         $name = $param['name'];
         $code = $param['code'];
         $years_id = $param['years_id'];
-        $graded_year = $param['graded_year'];
-        $recruit_end = $param['recruit_end'];
+        $graduated_year = $param['graduated_year'];
+        $can_recruit = $param['can_recruit'];
         $graduated = $param['graduated'];
 
-        $result = Mvv\mvvSchStep::add($userinfor->unionId, $name, $code, $years_id, $graded_year, $recruit_end, $graduated);
+        $result = Mvv\mvvSchStep::add($userinfor->unionId, $name, $code, $years_id, $graduated_year, $can_recruit, $graduated);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -64,11 +64,11 @@ class Schstep extends CI_Controller {
       try {
         $param = $_POST;
         $uid = $param['uid'];
-        $graded_year = $param['graded_year'];
-        $recruit_end = $param['recruit_end'];
+        $graduated_year = $param['graduated_year'];
+        $can_recruit = $param['can_recruit'];
         $graduated = $param['graduated'];
 
-        $result = Mvv\mvvSchStep::edit($userinfor->unionId, $uid, $graded_year, $recruit_end, $graduated);
+        $result = Mvv\mvvSchStep::edit($userinfor->unionId, $uid, $graduated_year, $can_recruit, $graduated);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {

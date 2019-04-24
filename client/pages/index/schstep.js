@@ -39,18 +39,18 @@ Page({
       value: memb.come_year,
     }, {
       mode: 1,
-      name: 'graded_year',
+      name: 'graduated_year',
       label: '毕业年份',
       message: '输入毕业年份',
       type: 'number',
       maxlength: 4,
-      value: memb.graded_year,
+      value: memb.graduated_year,
     }, {
       mode: 2,
-      name: 'recruit_end',
+      name: 'can_recruit',
       label: '是否招生',
       bool: true,
-      value: memb.recruit_end,
+      value: memb.can_recruit,
     }, {
       mode: 2,
       name: 'graduated',
@@ -59,12 +59,12 @@ Page({
       value: memb.graduated,
     }]
     var rules = {
-      graded_year: {
+      graduated_year: {
         required: true,
         digits: true,
         minlength: 4,
       },
-      recruit_end: {
+      can_recruit: {
         required: true,
       },
       graduated: {
@@ -97,7 +97,7 @@ Page({
       maxlength: 2,
     }, {
       mode: 1,
-      name: 'graded_year',
+      name: 'graduated_year',
       label: '毕业年份',
       message: '输入毕业年份',
       type: 'number',
@@ -108,11 +108,11 @@ Page({
       label: '当前年度',
       url: x5on.url.schstepyear,
       valueKey: 'id',
-      rangeKey: 'sch_year',
-      selectKey: 'sch_year',
+      rangeKey: 'year',
+      selectKey: 'year',
     }, {
       mode: 2,
-      name: 'recruit_end',
+      name: 'can_recruit',
       label: '是否招生',
     }, {
       mode: 2,
@@ -134,12 +134,12 @@ Page({
       years_id: {
         required: true,
       },
-      graded_year: {
+      graduated_year: {
         required: true,
         digits: true,
         minlength: 4,
       },
-      recruit_end: {
+      can_recruit: {
         required: true,
       },
       graduated: {

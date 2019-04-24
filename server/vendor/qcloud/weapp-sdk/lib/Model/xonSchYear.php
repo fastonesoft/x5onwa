@@ -6,20 +6,20 @@ class xonSchYear extends cAppinfo
   protected static $tableName = 'xonSchYear';
   protected static $tableTitle = '学校年度';
 
-  public static function add($sch_id, $year, $is_current_string)
+  public static function add($sch_id, $year, $current_year_string)
   {
     $id = $sch_id . $year;
     self::existById($id);
 
-    $is_current = x5on::getBool($is_current_string);
-    if ($is_current) {
+    $current_year = x5on::getBool($current_year_string);
+    if ($current_year) {
       // 清除原来的当前年度
-      $is_current = 0;
-      self::setsBy(compact('is_current'), compact('sch_id'));
-      $is_current = 1;
+      $current_year = 0;
+      self::setsBy(compact('current_year'), compact('sch_id'));
+      $current_year = 1;
     }
     $uid = x5on::getUid();
-    self::insert(compact('id', 'uid', 'sch_id', 'year', 'is_current'));
+    self::insert(compact('id', 'uid', 'sch_id', 'year', 'current_year'));
     return xovSchYear::getById($id);
   }
 

@@ -33,11 +33,11 @@ Page({
     }, {
       mode: 2,
       label: '当前年度',
-      name: 'is_current',
-      value: memb.is_current
+      name: 'current_year',
+      value: memb.current_year
     }]
     var rules = {
-      is_current: {
+      current_year: {
         required: true,
       },
     }
@@ -45,7 +45,7 @@ Page({
       year: {
         required: '年度年份'
       },
-      is_current: {
+      current_year: {
         required: '当前年度'
       },
     }
@@ -73,7 +73,7 @@ Page({
     }, {
       mode: 2,
       label: '当前年度',
-      name: 'is_current',
+      name: 'current_year',
     }]
     var rules = {
       year: {
@@ -81,7 +81,7 @@ Page({
         digits: true,
         minlength: 4,
       },
-      is_current: {
+      current_year: {
         required: true,
       },
     }
@@ -89,7 +89,7 @@ Page({
       year: {
         required: '年度年份'
       },
-      is_current: {
+      current_year: {
         required: '当前年度'
       },
     }

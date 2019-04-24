@@ -134,6 +134,13 @@ var doUrl = {
   schedudel: `${host}/weapp/schedu/del`,
   scheduedit: `${host}/weapp/schedu/edit`,
   scheduedu: `${host}/weapp/schedu/edu`,
+  // 学校年级
+  schgrade: `${host}/weapp/schgrade`,
+  schgradeadd: `${host}/weapp/schgrade/add`,
+  schgradedel: `${host}/weapp/schgrade/del`,
+  schgradeyear: `${host}/weapp/schgrade/year`,
+  schgradestep: `${host}/weapp/schgrade/step`,
+  schgradeedu: `${host}/weapp/schgrade/edu`,
 
 
 

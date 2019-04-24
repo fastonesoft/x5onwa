@@ -11,14 +11,14 @@ class xonUserSchool extends cAppinfo
     self::existByCustom(compact('sch_id', 'user_id'), '用户学校已分配，不必重复设置');
 
     // 清除原来的学校当前记录
-    $is_current = 0;
-    self::setsBy(compact('is_current'), compact('user_id'));
+    $current_year = 0;
+    self::setsBy(compact('current_year'), compact('user_id'));
 
     // 设置添加的学校为当前记录
-    $is_current = 1;
+    $current_year = 1;
     $id = x5on::getUid();
     $uid = x5on::getUid();
-    self::insert(compact('id', 'uid', 'sch_id', 'user_id', 'is_current'));
+    self::insert(compact('id', 'uid', 'sch_id', 'user_id', 'current_year'));
     return $id;
   }
 }

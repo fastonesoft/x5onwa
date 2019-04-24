@@ -41,8 +41,8 @@ class Studreg extends CI_Controller
         $param = $_POST;
         $area_id = $param['area_id'];
         $edu_type_id = $param['edu_type_id'];
-        $recruit_end = 0;
-        $result = Model\xovSchoolStep::getsBy(compact('area_id', 'edu_type_id', 'recruit_end'));
+        $can_recruit = 0;
+        $result = Model\xovSchoolStep::getsBy(compact('area_id', 'edu_type_id', 'can_recruit'));
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {

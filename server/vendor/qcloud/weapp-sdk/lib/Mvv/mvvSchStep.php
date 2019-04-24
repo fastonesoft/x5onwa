@@ -25,31 +25,31 @@ class mvvSchStep
     mvvUserSchoolGroup::schAdmin($sch_admin_user_id, function ($user_sch_group) use (&$result) {
       $sch_id = $user_sch_group->sch_id;
 
-      $is_current = 1;
-      $result = xovSchYear::getsBy(compact('sch_id', 'is_current'));
+      $current_year = 1;
+      $result = xovSchYear::getsBy(compact('sch_id', 'current_year'));
     });
     return $result;
   }
 
-  public static function add($sch_admin_user_id, $name, $code, $years_id, $graded_year, $recruit_end, $graduated) {
+  public static function add($sch_admin_user_id, $name, $code, $years_id, $graduated_year, $can_recruit, $graduated) {
     $result = [];
-    mvvUserSchoolGroup::schAdmin($sch_admin_user_id, function ($user_sch_group) use ($name, $code, $years_id, $graded_year, $recruit_end, $graduated, &$result) {
+    mvvUserSchoolGroup::schAdmin($sch_admin_user_id, function ($user_sch_group) use ($name, $code, $years_id, $graduated_year, $can_recruit, $graduated, &$result) {
       $sch_id = $user_sch_group->sch_id;
 
-      $result = xonSchStep::add($name, $code, $years_id, $graded_year, $recruit_end, $graduated);
+      $result = xonSchStep::add($name, $code, $years_id, $graduated_year, $can_recruit, $graduated);
     });
     return $result;
   }
 
-  public static function edit($sch_admin_user_id, $uid, $graded_year, $recruit_end_string, $graduated_string) {
+  public static function edit($sch_admin_user_id, $uid, $graduated_year, $can_recruit_string, $graduated_string) {
     $result = [];
-    mvvUserSchoolGroup::schAdmin($sch_admin_user_id, function ($user_sch_group) use ($uid, $graded_year, $recruit_end_string, $graduated_string, &$result) {
+    mvvUserSchoolGroup::schAdmin($sch_admin_user_id, function ($user_sch_group) use ($uid, $graduated_year, $can_recruit_string, $graduated_string, &$result) {
       $sch_id = $user_sch_group->sch_id;
 
       $graduated = x5on::getBool($graduated_string);
-      $recruit_end = x5on::getBool($recruit_end_string);
+      $can_recruit = x5on::getBool($can_recruit_string);
 
-      xonSchStep::setsByUid(compact('graded_year', 'recruit_end', 'graduated'), $uid);
+      xonSchStep::setsByUid(compact('graduated_year', 'can_recruit', 'graduated'), $uid);
       $result =  xovSchStep::getByUid($uid);
     });
     return $result;
