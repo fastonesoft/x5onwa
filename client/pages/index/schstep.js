@@ -46,13 +46,13 @@ Page({
       maxlength: 4,
       value: memb.graded_year,
     }, {
-      mode: 0,
+      mode: 2,
       name: 'recruit_end',
       label: '是否招生',
       bool: true,
       value: memb.recruit_end,
     }, {
-      mode: 0,
+      mode: 2,
       name: 'graduated',
       label: '是否毕业',
       bool: true,
