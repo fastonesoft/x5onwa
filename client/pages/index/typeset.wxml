@@ -1,6 +1,6 @@
 <!--pages/index/typeset.wxml-->
 
-<comMemb membs="{{membs}}" title="分类列表" key="name" memo="id" bind:memberRemove="memberRemove" />
+<comMemb membs="{{membs}}" title="分类列表" key="name" memo="id" bind:removeClick="removeClick" />
 
 <view class="weui-cells__tips x5ui-mini">
 	<button type="primary" size="mini" bindtap="addClick">添加</button>

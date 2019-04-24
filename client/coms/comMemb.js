@@ -34,18 +34,18 @@ Component({
   },
 
   methods: {
-    memberRemove: function (e) {
+    removeClick: function (e) {
       var uid = e.currentTarget.dataset.uid
       var removed = x5on.getArrex(this.data.membs, 'uid', uid)
       var membs = x5on.delArr(this.data.membs, 'uid', uid)
       this.setData({ membs })
-      this.triggerEvent('memberRemove', { removed, membs })
+      this.triggerEvent('removeClick', { removed, membs })
     },
 
-    memberClick: function (e) {
+    editClick: function (e) {
       var uid = e.currentTarget.dataset.uid
       var memb = x5on.getArrex(this.data.membs, 'uid', uid)
-      this.triggerEvent('memberClick', memb)
+      this.triggerEvent('editClick', memb)
     }
   }
 })

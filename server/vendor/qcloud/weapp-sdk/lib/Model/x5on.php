@@ -192,4 +192,8 @@ class x5on
     return $true_string === 'true' ? 1 : 0;
   }
 
+  public static function setw($id, $width) {
+    return str_pad($id, $width, '0', STR_PAD_LEFT);
+  }
+
 }

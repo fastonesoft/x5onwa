@@ -11,7 +11,7 @@ Page({
       })
   },
 
-  memberRemove: function (e) {
+  removeClick: function (e) {
     let that = this
     let { removed, membs } = e.detail
     let uid = removed.uid
@@ -24,7 +24,7 @@ Page({
       })
   },
 
-  memberClick: function (e) {
+  editClick: function (e) {
     var memb = e.detail
 
     var fields = [{

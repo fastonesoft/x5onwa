@@ -131,7 +131,7 @@ var doUrl = {
   scheduadd: `${host}/weapp/schedu/add`,
   schedudel: `${host}/weapp/schedu/del`,
   scheduedit: `${host}/weapp/schedu/edit`,
-  scheduyear: `${host}/weapp/schedu/year`,
+  scheduselect: `${host}/weapp/schedu/select`,
 
 
 
