@@ -16,10 +16,17 @@ Page({
         x5on.prevPage(page => {
           if (that.data.refresh_url) {
             // 有刷新地址，就刷新
-            x5on.prequest(that.data.refresh_url)
-            .then(membs => {
-              page.setData({ membs })
-            })
+            if (that.data.data) {
+              x5on.ppost(that.data.refresh_url, that.data.data)
+              .then(membs => {
+                page.setData({ membs })
+              })
+            } else {
+              x5on.prequest(that.data.refresh_url)
+              .then(membs => {
+                page.setData({ membs })
+              })
+            }
           } else {
             var membs = page.data.membs
             membs = x5on.add(membs, memb, 'id')

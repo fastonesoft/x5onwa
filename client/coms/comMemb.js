@@ -9,6 +9,7 @@ Component({
     key: String,
     memo: String,
     url: String,
+    split: String,
   },
 
   lifetimes: {

@@ -2,11 +2,11 @@
 
 <comRadio radios="{{radios}}" title="学校年级" key="step_name" memo="grade_name" bind:radioChange="radioChange" />
 
-<comMemb membs="{{membs}}" key="cls_name" memo="cls_order" bind:editClick="editClick" bind:removeClick="removeClick" />
+<comMemb membs="{{membs}}" key="cls_name" split=" - " memo="cls_order" bind:editClick="editClick" bind:removeClick="removeClick" />
 
-<view class="weui-cells__tips x5ui-mini">
+<view class="weui-cells__tips x5ui-mini" wx:if="{{grade_id}}">
     <button type="primary" size="mini" bindtap="setClick">设置</button>
-    <button type="primary" size="mini" bindtap="addClick" wx:if="{{uid}}">添加</button>
+    <button type="primary" size="mini" bindtap="addClick">添加</button>
 </view>
 
 <view class="weui-btn-area">

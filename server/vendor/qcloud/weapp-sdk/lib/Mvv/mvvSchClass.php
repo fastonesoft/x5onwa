@@ -35,6 +35,16 @@ class mvvSchClass
     return $result;
   }
 
+  public static function adds($sch_admin_user_id, $grade_id, $nums) {
+    $result = 0;
+    mvvUserSchoolGroup::schAdmin($sch_admin_user_id, function ($user_sch_group) use ($grade_id, $nums, &$result) {
+      $sch_id = $user_sch_group->sch_id;
+
+      $result = xonClass::adds($grade_id, $nums);
+    });
+    return $result;
+  }
+
   public static function edit($sch_admin_user_id, $sch_class_uid, $num) {
     $result = [];
     mvvUserSchoolGroup::schAdmin($sch_admin_user_id, function ($user_sch_group) use ($sch_class_uid, $num, &$result) {

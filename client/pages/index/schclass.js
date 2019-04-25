@@ -16,9 +16,10 @@ Page({
     let that = this
     let { uid, radio } = e.detail
     let grade_id = radio.id
+    that.setData({ grade_id })
     x5on.ppost(x5on.url.schclass, { grade_id })
     .then(membs => {
-      that.setData({ uid, membs })
+      that.setData({ membs })
     })
     .catch(error => {
       console.log(error)
@@ -41,6 +42,10 @@ Page({
   editClick: function (e) {
     var memb = e.detail
     var fields = [{
+      mode: 0,
+      label: '班级条号',
+      value: memb.cls_order,
+    }, {
       mode: 1,
       name: 'num',
       label: '班级序号',
@@ -50,9 +55,6 @@ Page({
       maxlength: 2,
     }]
     var rules = {
-      uid: {
-        required: true,
-      },
       num: {
         required: true,
       },
@@ -65,18 +67,20 @@ Page({
     json.fields = fields
     json.rules = rules
     json.refresh_url = x5on.url.schclass
+    json.data = { grade_id: memb.grade_id }
 
     wx.navigateTo({ url: 'form_edit?json=' + JSON.stringify(json) })
   },
 
   addClick: function (e) {
+    var that = this
     var fields = [{
       mode: 1,
-      name: 'uid',
-      label: '班级编号',
-      message: '输入班级编号',
+      name: 'grade_id',
+      label: '年级编号',
       type: 'text',
-      maxlength: 36,
+      maxlength: 20,
+      value: that.data.grade_id,
       disabled: true,
     }, {
       mode: 1,
@@ -87,11 +91,13 @@ Page({
       maxlength: 2,
     }]
     var rules = {
-      uid: {
+      grade_id: {
         required: true,
       },
       num: {
         required: true,
+        digits: true,
+        min: 1,
       },
     }
 
@@ -100,6 +106,46 @@ Page({
     json.url = x5on.url.schclassadd
     json.fields = fields
     json.rules = rules
+
+    wx.navigateTo({ url: 'form_add?json=' + JSON.stringify(json) })
+  },
+
+  setClick: function (e) {
+    var that = this
+    var fields = [{
+      mode: 1,
+      name: 'grade_id',
+      label: '年级编号',
+      type: 'text',
+      maxlength: 20,
+      value: that.data.grade_id,
+      disabled: true,
+    }, {
+      mode: 1,
+      name: 'nums',
+      label: '班级总数',
+      message: '输入班级总数',
+      type: 'number',
+      maxlength: 2,
+    }]
+    var rules = {
+      grade_id: {
+        required: true,
+      },
+      nums: {
+        required: true,
+        digits: true,
+        min: 1,
+      },
+    }
+
+    var json = {}
+    json.title = '批量设置'
+    json.url = x5on.url.schclassadds
+    json.fields = fields
+    json.rules = rules
+    json.refresh_url = x5on.url.schclass
+    json.data = { grade_id: that.data.grade_id }
 
     wx.navigateTo({ url: 'form_add?json=' + JSON.stringify(json) })
   },

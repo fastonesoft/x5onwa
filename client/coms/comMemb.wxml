@@ -3,8 +3,16 @@
 	<view class="weui-cells__title">{{title}}</view>
 	<view class="weui-cells weui-cells_after-title">
 		<view class="weui-cell" wx:for="{{membs}}" wx:key="uid">
-			<view class="weui-cell__bd" data-uid="{{item.uid}}" bindtap="editClick" wx:if="{{memo}}">{{item[key]}}({{item[memo]}})</view>
-			<view class="weui-cell__bd" data-uid="{{item.uid}}" bindtap="editClick" wx:else>{{item[key]}}</view>
+			<block wx:if="{{split}}">
+				<view class="weui-cell__bd" data-uid="{{item.uid}}" bindtap="editClick" wx:if="{{memo}}">
+					{{item[key]}}{{split}}{{item[memo]}}</view>
+				<view class="weui-cell__bd" data-uid="{{item.uid}}" bindtap="editClick" wx:else>{{item[key]}}</view>
+			</block>
+			<block wx:else>
+				<view class="weui-cell__bd" data-uid="{{item.uid}}" bindtap="editClick" wx:if="{{memo}}">
+					{{item[key]}}({{item[memo]}})</view>
+				<view class="weui-cell__bd" data-uid="{{item.uid}}" bindtap="editClick" wx:else>{{item[key]}}</view>
+			</block>
 			<view class="weui-cell__ft">
 				<icon type="cancel" size="23" data-uid="{{item.uid}}" bindtap="removeClick"></icon>
 			</view>
