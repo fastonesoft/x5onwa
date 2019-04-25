@@ -41,14 +41,6 @@ Page({
         required: true,
       },
     }
-    var messages = {
-      year: {
-        required: '年度年份'
-      },
-      current_year: {
-        required: '当前年度'
-      },
-    }
 
     var json = {}
     json.uid = memb.uid
@@ -56,7 +48,6 @@ Page({
     json.url = x5on.url.schyearedit
     json.fields = fields
     json.rules = rules
-    json.messages = messages
     json.refresh_url = x5on.url.schyear
 
     wx.navigateTo({ url: 'form_edit?json=' + JSON.stringify(json) })
@@ -85,21 +76,12 @@ Page({
         required: true,
       },
     }
-    var messages = {
-      year: {
-        required: '年度年份'
-      },
-      current_year: {
-        required: '当前年度'
-      },
-    }
 
     var json = {}
     json.title = '年度设置'
     json.url = x5on.url.schyearadd
     json.fields = fields
     json.rules = rules
-    json.messages = messages
     json.refresh_url = x5on.url.schyear
 
     wx.navigateTo({ url: 'form_add?json=' + JSON.stringify(json) })

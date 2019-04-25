@@ -18,7 +18,7 @@ Page({
     let grade_id = radio.id
     x5on.ppost(x5on.url.schclass, { grade_id })
     .then(membs => {
-      that.setData({ membs })
+      that.setData({ uid, membs })
     })
     .catch(error => {
       console.log(error)
@@ -39,32 +39,64 @@ Page({
   },
   
   editClick: function (e) {
+    var memb = e.detail
+    var fields = [{
+      mode: 1,
+      name: 'num',
+      label: '班级序号',
+      message: '输入班级序号',
+      type: 'number',
+      value: memb.num,
+      maxlength: 2,
+    }]
+    var rules = {
+      uid: {
+        required: true,
+      },
+      num: {
+        required: true,
+      },
+    }
+    
+    var json = {}
+    json.uid = memb.uid
+    json.title = '班级设置'
+    json.url = x5on.url.schclassedit
+    json.fields = fields
+    json.rules = rules
+    json.refresh_url = x5on.url.schclass
 
+    wx.navigateTo({ url: 'form_edit?json=' + JSON.stringify(json) })
   },
 
   addClick: function (e) {
     var fields = [{
       mode: 1,
-      name: 'code',
-      label: '分级代号',
-      message: '输入分级代号',
+      name: 'uid',
+      label: '班级编号',
+      message: '输入班级编号',
+      type: 'text',
+      maxlength: 36,
+      disabled: true,
+    }, {
+      mode: 1,
+      name: 'num',
+      label: '班级序号',
+      message: '输入班级序号',
       type: 'number',
       maxlength: 2,
     }]
     var rules = {
-      years_id: {
+      uid: {
         required: true,
       },
-      steps_id: {
-        required: true,
-      },
-      edus_id: {
+      num: {
         required: true,
       },
     }
 
     var json = {}
-    json.title = '年级设置'
+    json.title = '班级设置'
     json.url = x5on.url.schclassadd
     json.fields = fields
     json.rules = rules

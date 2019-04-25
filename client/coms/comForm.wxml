@@ -19,7 +19,7 @@
 				</view>
 				<view class="weui-cell__bd">
 					<input class="weui-input" placeholder="{{item.message}}" name="{{item.name}}" type="{{item.type}}"
-						maxlength="{{item.maxlength}}" value="{{item.value}}" />
+						maxlength="{{item.maxlength}}" value="{{item.value}}" disabled="{{item.disabled}}" />
 				</view>
 			</view>
 			<view class="weui-cell weui-cell_switch" wx:if="{{item.mode==2}}">
