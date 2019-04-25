@@ -40,16 +40,16 @@ Page({
       label: '学校分级',
       url: x5on.url.schgradestep,
       valueKey: 'id',
-      rangeKey: 'year',
-      selectKey: 'year',
+      rangeKey: 'schs_steps',
+      selectKey: 'schs_steps',
     }, {
       mode: 3,
       name: 'edus_id',
       label: '学校学制',
       url: x5on.url.schgradeedu,
       valueKey: 'id',
-      rangeKey: 'year',
-      selectKey: 'year',
+      rangeKey: 'edus_name',
+      selectKey: 'edus_name',
     }]
     var rules = {
       years_id: {

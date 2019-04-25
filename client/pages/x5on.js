@@ -141,8 +141,12 @@ var doUrl = {
   schgradeyear: `${host}/weapp/schgrade/year`,
   schgradestep: `${host}/weapp/schgrade/step`,
   schgradeedu: `${host}/weapp/schgrade/edu`,
-
-
+  // 学校班级
+  schclass: `${host}/weapp/schclass`,
+  schclassadd: `${host}/weapp/schclass/add`,
+  schclassdel: `${host}/weapp/schclass/del`,
+  schclassedit: `${host}/weapp/schclass/edit`,
+  schclassadds: `${host}/weapp/schclass/adds`,
 
 
 

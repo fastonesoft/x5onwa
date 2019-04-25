@@ -4,15 +4,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 use QCloud_WeApp_SDK\Mvv;
 use QCloud_WeApp_SDK\Model;
 
-class Schgrade extends CI_Controller {
+class Schclass extends CI_Controller {
   /**
-   * 学校年级
+   * 学校班级
    */
-  const role_name = 'schgrade';
+  const role_name = 'schclass';
   public function index() {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
-        $result = Mvv\mvvSchGrade::grades($userinfor->unionId);
+        $param = $_POST;
+        $grade_id = $param['grade_id'];
+        $result = Mvv\mvvSchClass::classes($userinfor->unionId, $grade_id);
+
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -23,38 +26,14 @@ class Schgrade extends CI_Controller {
     });
   }
 
-  public function year() {
+  public function edit() {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
-        $result = Mvv\mvvSchGrade::year($userinfor->unionId);
+        $param = $_POST;
+        $uid = $param['uid'];
+        $num = $param['num'];
 
-        $this->json(['code' => 0, 'data' => $result]);
-      } catch (Exception $e) {
-        $this->json(['code' => 1, 'data' => $e->getMessage()]);
-      }
-    }, function ($error) {
-      $this->json($error);
-    });
-  }
-
-  public function step() {
-    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
-      try {
-        $result = Mvv\mvvSchGrade::steps($userinfor->unionId);
-
-        $this->json(['code' => 0, 'data' => $result]);
-      } catch (Exception $e) {
-        $this->json(['code' => 1, 'data' => $e->getMessage()]);
-      }
-    }, function ($error) {
-      $this->json($error);
-    });
-  }
-
-  public function edu() {
-    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
-      try {
-        $result = Mvv\mvvSchGrade::edus($userinfor->unionId);
+        $result = Mvv\mvvSchClass::edit($userinfor->unionId, $uid, $num);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -69,11 +48,10 @@ class Schgrade extends CI_Controller {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
         $param = $_POST;
-        $years_id = $param['years_id'];
-        $steps_id = $param['steps_id'];
-        $edus_id = $param['edus_id'];
+        $grade_id = $param['grade_id'];
+        $num = $param['num'];
 
-        $result = Mvv\mvvSchGrade::add($userinfor->unionId, $years_id, $steps_id, $edus_id);
+        $result = Mvv\mvvSchClass::add($userinfor->unionId, $grade_id, $num);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -89,7 +67,7 @@ class Schgrade extends CI_Controller {
       try {
         $param = $_POST;
         $uid = $param['uid'];
-        $result = Mvv\mvvSchGrade::del($userinfor->unionId, $uid);
+        $result = Mvv\mvvSchClass::del($userinfor->unionId, $uid);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {

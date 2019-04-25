@@ -97,5 +97,13 @@
       }
     ]
   },
-  "sitemapLocation": "sitemap.json"
+  "usingComponents": {
+    "comCheck": "../../coms/comCheck",
+    "comFind": "../../coms/comFind",
+    "comForm": "../../coms/comForm",
+    "comMemb": "../../coms/comMemb",
+    "comPick": "../../coms/comPick",
+    "comRadio": "../../coms/comRadio",
+    "comSubPick": "../../coms/comSubPick"
+  }
 }
