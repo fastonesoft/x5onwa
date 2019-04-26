@@ -12,7 +12,7 @@ class xonGradeStud extends cAppinfo
     xonGradeStud::existBy(compact('grade_id', 'stud_id'));
     // 无重复，添加
     $id = self::max('id', compact('grade_id'));
-    $id = x5on::getId($id, $grade_id, 4);
+    $id = x5on::getMaxId($id, $grade_id, 4);
     $uid = x5on::getUid();
     $same_group = 0;
     xonGradeStud::insert(compact('id', 'uid', 'grade_id', 'cls_id', 'stud_id', 'stud_type_id', 'stud_status_id', 'stud_auth', 'same_group', 'stud_code', 'stud_diploma'));

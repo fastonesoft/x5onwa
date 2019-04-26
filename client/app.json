@@ -59,6 +59,7 @@
     "pages/index/schgradestud",
     "pages/index/form_add",
     "pages/index/form_edit",
+    "pages/index/form_check",
     "pages/class/class",
     "pages/phone/phone"
   ],
