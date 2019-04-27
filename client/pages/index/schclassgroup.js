@@ -1,66 +1,76 @@
 // pages/index/schclassgroup.js
+
+var x5on = require('../x5on.js')
+
 Page({
 
-  /**
-   * 页面的初始数据
-   */
-  data: {
-
+  onLoad: function (e) {
+    var that = this
+    x5on.prequest(x5on.url.schgrade)
+      .then(radios => {
+        that.setData({ radios })
+      })
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
+  radioChange: function (e) {
+    let that = this
+    let { uid, radio } = e.detail
+    let grade_id = radio.id
+    that.setData({ grade_group_id: null })
+    x5on.ppost(x5on.url.schgradegroup, { grade_id })
+    .then(groups => {
+      that.setData({ groups })
+    })
+    .catch(error => {
+      console.log(error)
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  groupChange: function (e) {
+    let that = this
+    let { uid, radio } = e.detail
+    let grade_group_id = radio.id
+    that.setData({ grade_group_id })
+    x5on.ppost(x5on.url.schclassgroupclass, { grade_group_id })
+    .then(membs => {
+      that.setData({ membs })
+    })
+    .catch(error => {
+      console.log(error)
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
+  removeClick: function (e) {
+    let that = this
+    let { removed, membs } = e.detail
+    let uid = removed.uid
+    x5on.ppost(x5on.url.schclassgroupdel, { uid })
+      .then(number => {
+        that.setData({ membs })
+      })
+      .catch(error => {
+        console.log(error)
+      })
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
+  setClick: function (e) {
+    var that = this
 
+    var json = {}
+    json.title = '班级设置'
+    json.url_q = x5on.url.schclassgroupclass2div
+    json.key = 'cls_name'
+    json.url = x5on.url.schclassgroupadds
+    json.refresh_url = x5on.url.schclassgroupclass
+    json.data = { grade_group_id: that.data.grade_group_id }
+
+    console.log(json)
+
+    wx.navigateTo({ url: 'form_check?json=' + JSON.stringify(json) })
   },
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
+  returnClick: function (e) {
+    wx.navigateBack()
   },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
+  
 })

@@ -19,6 +19,7 @@ Page({
     that.setData({ grade_id })
     x5on.ppost(x5on.url.schgradegroup, { grade_id })
     .then(membs => {
+      console.log(membs)
       that.setData({ membs })
     })
     .catch(error => {
@@ -84,7 +85,6 @@ Page({
       label: '分组名称',
       message: '输入分组名称',
       type: 'text',
-      value: memb.name,
       maxlength: 10,
     }]
     var rules = {

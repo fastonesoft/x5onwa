@@ -66,8 +66,6 @@ Page({
     json.url = x5on.url.schclassedit
     json.fields = fields
     json.rules = rules
-    json.refresh_url = x5on.url.schclass
-    json.data = { grade_id: memb.grade_id }
 
     wx.navigateTo({ url: 'form_edit?json=' + JSON.stringify(json) })
   },
@@ -144,8 +142,6 @@ Page({
     json.url = x5on.url.schclassadds
     json.fields = fields
     json.rules = rules
-    json.refresh_url = x5on.url.schclass
-    json.data = { grade_id: that.data.grade_id }
 
     wx.navigateTo({ url: 'form_add?json=' + JSON.stringify(json) })
   },

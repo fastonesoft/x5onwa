@@ -16,12 +16,12 @@ use QCloud_WeApp_SDK\Model\xovSchYear;
 class mvvSchGradeGroup
 {
 
-  public static function classes($sch_admin_user_id, $grade_id) {
+  public static function groups($sch_admin_user_id, $grade_id) {
     $result = [];
     mvvUserSchoolGroup::schAdmin($sch_admin_user_id, function ($user_sch_group) use ($grade_id, &$result) {
       $sch_id = $user_sch_group->sch_id;
 
-      $result = xovClass::getsBy(compact('grade_id'));
+      $result = xonGradeGroup::getsBy(compact('grade_id'));
     });
     return $result;
   }
@@ -42,7 +42,9 @@ class mvvSchGradeGroup
       $sch_id = $user_sch_group->sch_id;
 
       xonGradeGroup::checkByUid($sch_grade_group_uid);
-      $result = xonGradeGroup::setsByUid(compact('name'), $sch_grade_group_uid);
+      xonGradeGroup::setsByUid(compact('name'), $sch_grade_group_uid);
+      // 返回记录，前端无刷新变更
+      $result = xonGradeGroup::getByUid($sch_grade_group_uid);
     });
     return $result;
   }

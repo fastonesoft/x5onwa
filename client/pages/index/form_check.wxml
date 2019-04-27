@@ -1,4 +1,4 @@
 <!--pages/index/form_check.wxml-->
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
-<comCheck url="{{url}}" checks="{{checks}}" title="{{title}}" key="{{key}}" memo="{{memo}}" checked="{{checked}}" bind:checkChange="checkChange" />
+<comCheck url="{{url_q}}" checks="{{checks}}" title="{{title}}" key="{{key}}" split="{{split}}" memo="{{memo}}" checked="{{checked}}" bind:checkChange="checkChange" />

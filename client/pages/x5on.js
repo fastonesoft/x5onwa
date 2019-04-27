@@ -152,6 +152,12 @@ var doUrl = {
   schgradegroupadd: `${host}/weapp/schgradegroup/add`,
   schgradegroupdel: `${host}/weapp/schgradegroup/del`,
   schgradegroupedit: `${host}/weapp/schgradegroup/edit`,
+  // 班级分组
+  schclassgroup: `${host}/weapp/schclassgroup`,
+  schclassgroupadds: `${host}/weapp/schclassgroup/adds`,
+  schclassgroupdel: `${host}/weapp/schclassgroup/del`,
+  schclassgroupclass: `${host}/weapp/schclassgroup/classes`,
+  schclassgroupclass2div: `${host}/weapp/schclassgroup/class2div`,
 
 
 
