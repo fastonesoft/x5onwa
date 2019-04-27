@@ -8,10 +8,15 @@ Page({
     this.setData(data)
   },
 
-  formSubmit: function (e) {
-    var that = this
+  checkChange: function (e) {
     var form = e.detail
-    x5on.ppost(that.data.url, form)
+    this.setData({ form })
+  },
+
+  updateClick: function (e) {
+    var that = this
+    var form = that.data.form
+    x5on.ppost(that.data.url, form.uids)
       .then(memb => {
         x5on.prevPage(page => {
           if (that.data.refresh_url) {

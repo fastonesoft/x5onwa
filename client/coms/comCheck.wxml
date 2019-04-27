@@ -17,7 +17,6 @@
 					<view class="weui-cell__bd" wx:if="{{key&&memo}}">{{item[key]}}({{item[memo]}})</view>
 					<view class="weui-cell__bd" wx:elif="{{key}}">{{item[key]}}</view>
 				</block>
-
 			</label>
 		</checkbox-group>
 	</view>

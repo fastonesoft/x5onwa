@@ -13,7 +13,7 @@ Component({
   },
 
   lifetimes: {
-    attached() {
+    ready() {
       var that = this
       !that.data.checked && that.setData({ checked: 'checked' })
       //
@@ -26,7 +26,7 @@ Component({
     },
   },
 
-  attached() {
+  ready() {
     var that = this
     !that.data.checked && that.setData({ checked: 'checked' })
     //

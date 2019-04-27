@@ -15,7 +15,7 @@ class xonClassGroup extends cAppinfo
     return self::getByUid($uid);
   }
 
-  public static function adds($grade_group_id, $cls_ids) {
+  public static function adds($grade_group_id, $cls_uids) {
     return 1;
   }
 

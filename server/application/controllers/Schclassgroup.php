@@ -62,9 +62,11 @@ class Schclassgroup extends CI_Controller {
       try {
         $param = $_POST;
         $grade_group_id = $param['grade_group_id'];
-        $cls_ids = $param['cls_ids'];
+        $uids = $param['uids'];
 
-        $result = Mvv\mvvSchClassGroup::adds($userinfor->unionId, $grade_group_id, $cls_ids);
+        var_dump($uids);
+
+        $result = Mvv\mvvSchClassGroup::adds($userinfor->unionId, $grade_group_id, $uids);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {

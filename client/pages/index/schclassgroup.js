@@ -16,7 +16,7 @@ Page({
     let that = this
     let { uid, radio } = e.detail
     let grade_id = radio.id
-    that.setData({ grade_group_id: null })
+    that.setData({ grade_id, grade_group_id: null })
     x5on.ppost(x5on.url.schgradegroup, { grade_id })
     .then(groups => {
       that.setData({ groups })
@@ -57,14 +57,14 @@ Page({
     var that = this
 
     var json = {}
-    json.title = '班级设置'
+    json.title = '班级选择'
     json.url_q = x5on.url.schclassgroupclass2div
+    json.data_q = { grade_id: that.data.grade_id }
     json.key = 'cls_name'
-    json.url = x5on.url.schclassgroupadds
-    json.refresh_url = x5on.url.schclassgroupclass
-    json.data = { grade_group_id: that.data.grade_group_id }
-
-    console.log(json)
+    json.url_u = x5on.url.schclassgroupadds
+    json.data_u = {}
+    json.url_r = x5on.url.schclassgroupclass
+    json.data_r = { grade_group_id: that.data.grade_group_id }
 
     wx.navigateTo({ url: 'form_check?json=' + JSON.stringify(json) })
   },

@@ -44,18 +44,17 @@ class mvvSchClassGroup
     mvvUserSchoolGroup::schAdmin($sch_admin_user_id, function ($user_sch_group) use ($grade_id, &$result) {
       $sch_id = $user_sch_group->sch_id;
 
-      $result = xovClassGroup2Divi::getsBySuff(compact('$grade_id'), 'order by num');
+      $result = xovClassGroup2Divi::getsBySuff(compact('grade_id'), 'order by num');
     });
     return $result;
   }
 
-
-  public static function adds($sch_admin_user_id, $grade_group_id, $cls_ids) {
+  public static function adds($sch_admin_user_id, $grade_group_id, $cls_uids) {
     $result = [];
-    mvvUserSchoolGroup::schAdmin($sch_admin_user_id, function ($user_sch_group) use ($grade_group_id, $cls_ids, &$result) {
+    mvvUserSchoolGroup::schAdmin($sch_admin_user_id, function ($user_sch_group) use ($grade_group_id, $cls_uids, &$result) {
       $sch_id = $user_sch_group->sch_id;
 
-      $result = xonClassGroup::adds($grade_group_id, $cls_ids);
+      $result = xonClassGroup::adds($grade_group_id, $cls_uids);
     });
     return $result;
   }

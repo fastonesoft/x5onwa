@@ -10,32 +10,55 @@ Component({
     memo: String,
     checked: String,
     url: String,
+    data: Object,
   },
 
   lifetimes: {
-    attached() {
+    ready() {
       var that = this
       !that.data.checked && that.setData({ checked: 'checked' })
       //
-      that.data.url && x5on.request({
-        url: that.data.url,
-        success(checks) {
-          that.setData({ checks })
-        }
-      })
+      if (that.data.url) {
+        !that.data.data && x5on.request({
+          url: that.data.url,
+          success(checks) {
+            console.log('------1-----')
+            that.setData({ checks })
+          }
+        })
+        that.data.data && x5on.post({
+          data: that.data.data,
+          url: that.data.url,
+          success(checks) {
+            console.log('------2-----')
+            that.setData({ checks })
+          }
+        })
+      }
     },
   },
 
-  attached() {
+  ready() {
     var that = this
     !that.data.checked && that.setData({ checked: 'checked' })
     //
-    that.data.url && x5on.request({
-      url: that.data.url,
-      success(checks) {
-        that.setData({ checks })
-      }
-    })
+    if (that.data.url) {
+      !that.data.data && x5on.request({
+        url: that.data.url,
+        success(checks) {
+          console.log(checks)
+          that.setData({ checks })
+        }
+      })
+      that.data.data && x5on.post({
+        data: that.data.data,
+        url: that.data.url,
+        success(checks) {
+          console.log(checks)
+          that.setData({ checks })
+        }
+      })
+    }
   },
 
   methods: {

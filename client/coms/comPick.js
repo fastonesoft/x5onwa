@@ -14,7 +14,7 @@ Component({
   },
 
   lifetimes: {
-    attached() {
+    ready() {
       var that = this
       that.data.url && x5on.request({
         url: that.data.url,
@@ -25,7 +25,7 @@ Component({
     },
   },
 
-  attached() {
+  ready() {
     var that = this
     that.data.url && x5on.request({
       url: that.data.url,
