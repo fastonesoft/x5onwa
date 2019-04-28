@@ -59,7 +59,6 @@ Page({
     json.url_u = x5on.url.typesetadd
     json.fields = fields
     json.rules = rules
-    json.messages = messages
 
     wx.navigateTo({ url: 'form_add?json=' + JSON.stringify(json) })
   },

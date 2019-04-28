@@ -15,7 +15,6 @@ Page({
       .then(memb => {
         x5on.prevPage(page => {
           if (that.data.url_r) {
-            // 有刷新地址，就刷新
             x5on.http(that.data.url_r, that.data.data_r)
             .then(membs => {
               page.setData({ membs })

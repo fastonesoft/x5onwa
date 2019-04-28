@@ -22,7 +22,7 @@ Page({
       that.setData({ groups })
     })
     .catch(error => {
-      console.log(error)
+      x5on.showError(that, error)
     })
   },
 
@@ -36,7 +36,7 @@ Page({
       that.setData({ membs })
     })
     .catch(error => {
-      console.log(error)
+      x5on.showError(that, error)
     })
   },
 
@@ -49,7 +49,7 @@ Page({
         that.setData({ membs })
       })
       .catch(error => {
-        console.log(error)
+        x5on.showError(that, error)
       })
   },
 
@@ -58,9 +58,9 @@ Page({
 
     var json = {}
     json.title = '班级选择'
+    json.key = 'cls_name'
     json.url_q = x5on.url.schclassgroupclass2div
     json.data_q = { grade_id: that.data.grade_id }
-    json.key = 'cls_name'
     json.url_u = x5on.url.schclassgroupadds
     json.data_u = { grade_group_id: that.data.grade_group_id }
     json.url_r = x5on.url.schclassgroupclass
@@ -70,13 +70,13 @@ Page({
     x5on.http(json.url_q, json.data_q)
     .then(res => {
       if (res.length === 0) {
-        reject('年级班级已全部分配')
+        throw '年级班级已全部分配'
       } else {
         wx.navigateTo({ url: 'form_check?json=' + JSON.stringify(json) })
       }
     })
-    .catch(mes => {
-      x5on.showError(that, mes)
+    .catch(error => {
+      x5on.showError(that, error)
     })
   },
 
