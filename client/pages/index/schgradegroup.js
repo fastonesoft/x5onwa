@@ -6,7 +6,7 @@ Page({
 
   onLoad: function (e) {
     var that = this
-    x5on.prequest(x5on.url.schgrade)
+    x5on.http(x5on.url.schgrade)
       .then(radios => {
         that.setData({ radios })
       })
@@ -17,7 +17,7 @@ Page({
     let { uid, radio } = e.detail
     let grade_id = radio.id
     that.setData({ grade_id })
-    x5on.ppost(x5on.url.schgradegroup, { grade_id })
+    x5on.http(x5on.url.schgradegroup, { grade_id })
     .then(membs => {
       console.log(membs)
       that.setData({ membs })
@@ -31,7 +31,7 @@ Page({
     let that = this
     let { removed, membs } = e.detail
     let uid = removed.uid
-    x5on.ppost(x5on.url.schgradegroupdel, { uid })
+    x5on.http(x5on.url.schgradegroupdel, { uid })
       .then(number => {
         that.setData({ membs })
       })
@@ -62,7 +62,7 @@ Page({
     var json = {}
     json.uid = memb.uid
     json.title = '分组设置'
-    json.url = x5on.url.schgradegroupedit
+    json.url_u = x5on.url.schgradegroupedit
     json.fields = fields
     json.rules = rules
 
@@ -100,7 +100,7 @@ Page({
 
     var json = {}
     json.title = '分组设置'
-    json.url = x5on.url.schgradegroupadd
+    json.url_u = x5on.url.schgradegroupadd
     json.fields = fields
     json.rules = rules
 

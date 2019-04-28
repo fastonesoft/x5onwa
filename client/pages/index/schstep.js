@@ -5,7 +5,7 @@ Page({
 
   onLoad: function (e) {
     var that = this
-    x5on.prequest(x5on.url.schstep)
+    x5on.http(x5on.url.schstep)
       .then(membs => {
         that.setData({ membs })
       })
@@ -15,7 +15,7 @@ Page({
     let that = this
     let { removed, membs } = e.detail
     let uid = removed.uid
-    x5on.ppost(x5on.url.schstepdel, { uid })
+    x5on.http(x5on.url.schstepdel, { uid })
       .then(number => {
         that.setData({ membs })
       })
@@ -74,9 +74,10 @@ Page({
     var json = {}
     json.uid = memb.uid
     json.title = '分级设置'
-    json.url = x5on.url.schstepedit
+    json.url_u = x5on.url.schstepedit
     json.fields = fields
     json.rules = rules
+    
     wx.navigateTo({ url: 'form_edit?json=' + JSON.stringify(json) })
   },
 
@@ -149,7 +150,7 @@ Page({
 
     var json = {}
     json.title = '分级设置'
-    json.url = x5on.url.schstepadd
+    json.url_u = x5on.url.schstepadd
     json.fields = fields
     json.rules = rules
 

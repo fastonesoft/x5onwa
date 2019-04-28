@@ -5,7 +5,7 @@ Page({
 
   onLoad: function (e) {
     var that = this
-    x5on.prequest(x5on.url.schyear)
+    x5on.http(x5on.url.schyear)
       .then(membs => {
         that.setData({ membs })
       })
@@ -15,7 +15,7 @@ Page({
     let that = this
     let { removed, membs } = e.detail
     let uid = removed.uid
-    x5on.ppost(x5on.url.schyeardel, { uid })
+    x5on.http(x5on.url.schyeardel, { uid })
       .then(number => {
         that.setData({ membs })
       })
@@ -45,10 +45,10 @@ Page({
     var json = {}
     json.uid = memb.uid
     json.title = '年度设置'
-    json.url = x5on.url.schyearedit
+    json.url_u = x5on.url.schyearedit
     json.fields = fields
     json.rules = rules
-    json.refresh_url = x5on.url.schyear
+    json.url_r = x5on.url.schyear
 
     wx.navigateTo({ url: 'form_edit?json=' + JSON.stringify(json) })
   },
@@ -79,10 +79,10 @@ Page({
 
     var json = {}
     json.title = '年度设置'
-    json.url = x5on.url.schyearadd
+    json.url_u = x5on.url.schyearadd
     json.fields = fields
     json.rules = rules
-    json.refresh_url = x5on.url.schyear
+    json.url_r = x5on.url.schyear
 
     wx.navigateTo({ url: 'form_add?json=' + JSON.stringify(json) })
   },

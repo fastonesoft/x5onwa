@@ -51,7 +51,8 @@ class mvvSchClass
       $sch_id = $user_sch_group->sch_id;
 
       xonClass::checkByUid($sch_class_uid);
-      $result = xonClass::setsByUid(compact('num'), $sch_class_uid);
+      xonClass::setsByUid(compact('num'), $sch_class_uid);
+      $result = xovClass::getByUid($sch_class_uid);
     });
     return $result;
   }

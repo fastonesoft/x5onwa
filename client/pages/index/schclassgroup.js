@@ -6,7 +6,7 @@ Page({
 
   onLoad: function (e) {
     var that = this
-    x5on.prequest(x5on.url.schgrade)
+    x5on.http(x5on.url.schgrade)
       .then(radios => {
         that.setData({ radios })
       })
@@ -17,7 +17,7 @@ Page({
     let { uid, radio } = e.detail
     let grade_id = radio.id
     that.setData({ grade_id, grade_group_id: null })
-    x5on.ppost(x5on.url.schgradegroup, { grade_id })
+    x5on.http(x5on.url.schgradegroup, { grade_id })
     .then(groups => {
       that.setData({ groups })
     })
@@ -31,7 +31,7 @@ Page({
     let { uid, radio } = e.detail
     let grade_group_id = radio.id
     that.setData({ grade_group_id })
-    x5on.ppost(x5on.url.schclassgroupclass, { grade_group_id })
+    x5on.http(x5on.url.schclassgroupclass, { grade_group_id })
     .then(membs => {
       that.setData({ membs })
     })
@@ -44,7 +44,7 @@ Page({
     let that = this
     let { removed, membs } = e.detail
     let uid = removed.uid
-    x5on.ppost(x5on.url.schclassgroupdel, { uid })
+    x5on.http(x5on.url.schclassgroupdel, { uid })
       .then(number => {
         that.setData({ membs })
       })
@@ -62,7 +62,7 @@ Page({
     json.data_q = { grade_id: that.data.grade_id }
     json.key = 'cls_name'
     json.url_u = x5on.url.schclassgroupadds
-    json.data_u = {}
+    json.data_u = { grade_group_id: that.data.grade_group_id }
     json.url_r = x5on.url.schclassgroupclass
     json.data_r = { grade_group_id: that.data.grade_group_id }
 

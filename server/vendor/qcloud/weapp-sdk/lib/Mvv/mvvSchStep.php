@@ -50,7 +50,7 @@ class mvvSchStep
       $can_recruit = x5on::getBool($can_recruit_string);
 
       xonSchStep::setsByUid(compact('graduated_year', 'can_recruit', 'graduated'), $uid);
-      $result =  xovSchStep::getByUid($uid);
+      $result = xovSchStep::getByUid($uid);
     });
     return $result;
   }

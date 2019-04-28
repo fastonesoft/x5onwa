@@ -19,20 +19,9 @@ Component({
       !that.data.checked && that.setData({ checked: 'checked' })
       //
       if (that.data.url) {
-        !that.data.data && x5on.request({
-          url: that.data.url,
-          success(checks) {
-            console.log('------1-----')
-            that.setData({ checks })
-          }
-        })
-        that.data.data && x5on.post({
-          data: that.data.data,
-          url: that.data.url,
-          success(checks) {
-            console.log('------2-----')
-            that.setData({ checks })
-          }
+        x5on.http(that.data.url, that.data.data)
+        .then(checks => {
+          that.setData({ checks })
         })
       }
     },
@@ -43,20 +32,9 @@ Component({
     !that.data.checked && that.setData({ checked: 'checked' })
     //
     if (that.data.url) {
-      !that.data.data && x5on.request({
-        url: that.data.url,
-        success(checks) {
-          console.log(checks)
-          that.setData({ checks })
-        }
-      })
-      that.data.data && x5on.post({
-        data: that.data.data,
-        url: that.data.url,
-        success(checks) {
-          console.log(checks)
-          that.setData({ checks })
-        }
+      x5on.http(that.data.url, that.data.data)
+      .then(checks => {
+        that.setData({ checks })
       })
     }
   },

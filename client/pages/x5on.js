@@ -625,6 +625,16 @@ var poPost = function (url, data, donshow) {
   })
 }
 
+var doHttp = function (url, data, donshow) {
+  data = data || {}
+  donshow = donshow || false
+  if (Object.keys(data).length === 0) {
+    return poRequest(url, donshow)
+  } else {
+    return poPost(url, data, donshow)
+  }
+}
+
 /**
  * 错误显示
  */
@@ -671,6 +681,7 @@ module.exports = {
   plogin: poLogin,
   prequest: poRequest,
   ppost: poPost,
+  http: doHttp,
 
   add: doAdd,
   sort: doSort,

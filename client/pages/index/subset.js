@@ -5,7 +5,7 @@ Page({
 
   onLoad: function (e) {
     var that = this
-    x5on.prequest(x5on.url.subset)
+    x5on.http(x5on.url.subset)
       .then(membs => {
         that.setData({ membs })
       })
@@ -15,7 +15,7 @@ Page({
     let that = this
     let { removed, membs } = e.detail
     let uid = removed.uid
-    x5on.ppost(x5on.url.subsetdel, { uid })
+    x5on.http(x5on.url.subsetdel, { uid })
       .then(number => {
         that.setData({ membs })
       })
@@ -67,7 +67,7 @@ Page({
     }
     var json = {}
     json.title = '学科设置'
-    json.url = x5on.url.subsetadd
+    json.url_u = x5on.url.subsetadd
     json.fields = fields
     json.rules = rules
 

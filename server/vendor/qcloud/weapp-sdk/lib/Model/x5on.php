@@ -170,6 +170,10 @@ class x5on
     return bin2hex(openssl_random_pseudo_bytes(16));
   }
 
+  public static function getUids($str, $split) {
+    return explode($split, $str);
+  }
+
   public static function getMaxId($id, $prev, $right_bit)
   {
     if ($id === null) {

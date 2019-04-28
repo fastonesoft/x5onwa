@@ -11,23 +11,16 @@ Page({
   formSubmit: function (e) {
     var that = this
     var form = e.detail
-    form.uid = this.data.uid
-    x5on.ppost(that.data.url, form)
+    form.uid = that.data.uid
+    x5on.http(that.data.url_u, form)
       .then(memb => {
         x5on.prevPage(page => {
-          if (that.data.refresh_url) {
+          if (that.data.url_r) {
             // 有刷新地址，就刷新
-            if (that.data.data) {
-              x5on.ppost(that.data.refresh_url, that.data.data)
+            x5on.http(that.data.url_r, that.data.data_r)
               .then(membs => {
                 page.setData({ membs })
               })
-            } else {
-              x5on.prequest(that.data.refresh_url)
-              .then(membs => {
-                page.setData({ membs })
-              })
-            }
           } else {
             var membs = page.data.membs
             membs = x5on.delArr(membs, 'id', memb.id)

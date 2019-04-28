@@ -6,7 +6,7 @@ Page({
 
   onLoad: function (e) {
     var that = this
-    x5on.prequest(x5on.url.schgrade)
+    x5on.http(x5on.url.schgrade)
       .then(radios => {
         that.setData({ radios })
       })
@@ -17,7 +17,7 @@ Page({
     let { uid, radio } = e.detail
     let grade_id = radio.id
     that.setData({ grade_id })
-    x5on.ppost(x5on.url.schclass, { grade_id })
+    x5on.http(x5on.url.schclass, { grade_id })
     .then(membs => {
       that.setData({ membs })
     })
@@ -30,7 +30,7 @@ Page({
     let that = this
     let { removed, membs } = e.detail
     let uid = removed.uid
-    x5on.ppost(x5on.url.schclassdel, { uid })
+    x5on.http(x5on.url.schclassdel, { uid })
       .then(number => {
         that.setData({ membs })
       })
@@ -63,7 +63,7 @@ Page({
     var json = {}
     json.uid = memb.uid
     json.title = '班级设置'
-    json.url = x5on.url.schclassedit
+    json.url_u = x5on.url.schclassedit
     json.fields = fields
     json.rules = rules
 
@@ -101,7 +101,7 @@ Page({
 
     var json = {}
     json.title = '班级设置'
-    json.url = x5on.url.schclassadd
+    json.url_u = x5on.url.schclassadd
     json.fields = fields
     json.rules = rules
 
@@ -139,9 +139,11 @@ Page({
 
     var json = {}
     json.title = '批量设置'
-    json.url = x5on.url.schclassadds
+    json.url_u = x5on.url.schclassadds
     json.fields = fields
     json.rules = rules
+    json.url_r = x5on.url.schclass
+    json.data_r = { grade_id: that.data.grade_id }
 
     wx.navigateTo({ url: 'form_add?json=' + JSON.stringify(json) })
   },

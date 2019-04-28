@@ -5,7 +5,7 @@ Page({
 
   onLoad: function (e) {
     var that = this
-    x5on.prequest(x5on.url.schedu)
+    x5on.http(x5on.url.schedu)
       .then(membs => {
         that.setData({ membs })
       })
@@ -15,7 +15,7 @@ Page({
     let that = this
     let { removed, membs } = e.detail
     let uid = removed.uid
-    x5on.ppost(x5on.url.schedudel, { uid })
+    x5on.http(x5on.url.schedudel, { uid })
       .then(number => {
         that.setData({ membs })
       })
@@ -43,7 +43,7 @@ Page({
 
     var json = {}
     json.title = '学制设置'
-    json.url = x5on.url.scheduadd
+    json.url_u = x5on.url.scheduadd
     json.fields = fields
     json.rules = rules
 

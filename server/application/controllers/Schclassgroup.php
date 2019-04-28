@@ -64,8 +64,6 @@ class Schclassgroup extends CI_Controller {
         $grade_group_id = $param['grade_group_id'];
         $uids = $param['uids'];
 
-        var_dump($uids);
-
         $result = Mvv\mvvSchClassGroup::adds($userinfor->unionId, $grade_group_id, $uids);
 
         $this->json(['code' => 0, 'data' => $result]);
