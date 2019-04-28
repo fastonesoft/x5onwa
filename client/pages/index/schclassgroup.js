@@ -16,7 +16,7 @@ Page({
     let that = this
     let { uid, radio } = e.detail
     let grade_id = radio.id
-    that.setData({ grade_id, grade_group_id: null })
+    that.setData({ grade_id, grade_group_id: null, membs: [] })
     x5on.http(x5on.url.schgradegroup, { grade_id })
     .then(groups => {
       that.setData({ groups })
@@ -66,7 +66,18 @@ Page({
     json.url_r = x5on.url.schclassgroupclass
     json.data_r = { grade_group_id: that.data.grade_group_id }
 
-    wx.navigateTo({ url: 'form_check?json=' + JSON.stringify(json) })
+    // 检测是否有数据
+    x5on.http(json.url_q, json.data_q)
+    .then(res => {
+      if (res.length === 0) {
+        reject('年级班级已全部分配')
+      } else {
+        wx.navigateTo({ url: 'form_check?json=' + JSON.stringify(json) })
+      }
+    })
+    .catch(mes => {
+      x5on.showError(that, mes)
+    })
   },
 
   returnClick: function (e) {

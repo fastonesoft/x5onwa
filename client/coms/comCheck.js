@@ -43,7 +43,6 @@ Component({
     checkChange: function (e) {
       var that = this
       var uids = e.detail.value
-
       x5on.setCheckboxex(that.data.checks, uids, that.data.checked, checks => {
         that.setData({ checks })
         x5on.getCheckboxex(that.data.checks, that.data.checked, checked => {
