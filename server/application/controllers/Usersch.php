@@ -100,7 +100,7 @@ class Usersch extends CI_Controller
       try {
         // 教师删除
         $param = $_POST;
-        $user_sch_uid = $param['user_sch_uid'];
+        $user_sch_uid = $param['uid'];
         Mvv\mvvUserSchool::del($userinfor->unionId, $user_sch_uid);
 
         $this->json(['code' => 0, 'data' => []]);

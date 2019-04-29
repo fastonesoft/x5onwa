@@ -13,3 +13,6 @@
 		</view>
 	</view>
 </view>
+<!--
+	<comPick title="标题" label="标签" name="字段名称" rangeKey="" selectKey="" valueKey="" url="" picks="{{}}" bind:pickChange="pickChange" />
+-->

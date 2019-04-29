@@ -15,7 +15,7 @@ Page({
     var that = this
     x5on.http(x5on.url.userschuser, e.detail)
     .then(users => {
-      users.length !== 0 && that.setData({ users })
+      users.length !== 0 && that.setData({ users, user_uid: null })
       users.length === 0 && x5on.showError(that, '没有找到你要的用户！')
     })
   },
@@ -31,7 +31,7 @@ Page({
     user_uid && x5on.http(x5on.url.userschreg, { user_uid })
     .then(members => {
       var users = x5on.delArr(that.data.users, 'uid', user_uid)
-      that.setData({ users, members })
+      that.setData({ users, members, user_uid: null })
     })
     .catch(error => {
       x5on.showError(that, error)
@@ -40,46 +40,25 @@ Page({
 
   memberSubmit: function (e) {
     var that = this
-    var rules = {
-      name: {
-        required: true,
-        chinese: true,
-        rangelength: [1, 3],
-      }
-    }
-    var messages = {
-      name: {
-        required: '成员姓名'
-      }
-    }
-    x5on.checkForm(e.detail.value, rules, messages, form => {
-      x5on.post({
-        url: x5on.url.userschmemfind,
-        data: form,
-        success(members) {
-          members.length !== 0 && that.setData({ members })
-          members.length === 0 && x5on.showError(that, '没有找到你要的学校成员！')
-        }
-      })
-    }, message => {
-      x5on.showError(that, message)
+    x5on.http(x5on.url.userschmemfind, e.detail)
+    .then(members => {
+      members.length !== 0 && that.setData({ members })
+      members.length === 0 && x5on.showError(that, '没有找到你要的用户！')
+    })
+    .catch(error => {
+      x5on.showError(that, error)
     })
   },
 
-  userschRemove: function (e) {
+  removeClick: function (e) {
     var that = this
-    var user_sch_uid = e.currentTarget.dataset.uid
-    x5on.post({
-      url: x5on.url.userschdel,
-      data: { user_sch_uid },
-      success() {
-        var members = x5on.delArr(that.data.members, 'uid', user_sch_uid)
-        that.setData({ members })
-      }
+    let { uid, membs } = e.detail
+
+    x5on.http(x5on.url.userschdel, { uid })
+    .then()
+    .catch(error => {
+      x5on.showError(that, error)
     })
   },
 
-  returnClick: function (e) {
-    wx.navigateBack()
-  },
 })

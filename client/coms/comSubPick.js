@@ -16,22 +16,18 @@ Component({
   lifetimes: {
     ready() {
       var that = this
-      that.data.url && x5on.request({
-        url: that.data.url,
-        success(picks) {
-          that.setData({ picks })
-        }
+      that.data.url && x5on.http(that.data.url)
+      .then(picks=>{
+        that.setData({ picks })
       })
     },
   },
 
   ready() {
     var that = this
-    that.data.url && x5on.request({
-      url: that.data.url,
-      success(picks) {
-        that.setData({ picks })
-      }
+    that.data.url && x5on.http(that.data.url)
+    .then(picks=>{
+      that.setData({ picks })
     })
   },
 

@@ -21,3 +21,4 @@
 		</radio-group>
 	</view>
 </view>
+<!-- <comRadio radios="{{users}}" key="name" memo="nick_name" bind:radioChange="radioChange" /> -->

@@ -5,63 +5,38 @@ Page({
 
   onLoad: function () {
     var that = this
-    x5on.request({
-      url: x5on.url.userdist,
-      success(groups) {
-        that.setData({ groups })
-      }
+    x5on.http(x5on.url.userdist)
+    .then(groups=>{
+      that.setData({ groups })
     })
   },
 
   findSubmit: function (e) {
     var that = this
-    var rules = {
-      name: {
-        required: true,
-        chinese: true,
-        rangelength: [1, 3],
-      }
-    }
-    var messages = {
-      name: {
-        required: '用户姓名'
-      }
-    }
-    x5on.checkForm(e.detail.value, rules, messages, form => {
-      x5on.post({
-        url: x5on.url.userdistuser,
-        data: form,
-        success(users) {
-          users.length !== 0 && that.setData({ users })
-          users.length === 0 && x5on.showError(that, '没有找到你要的用户！')
-        }
-      })
-    }, message => {
-      x5on.showError(that, message)
+    x5on.http(x5on.url.userdistuser, e.detail)
+    .then(users => {
+      users.length !== 0 && that.setData({ users, user_uid: null })
+      users.length === 0 && x5on.showError(that, '没有找到你要的用户！')
     })
   },
 
-  userChange: function (e) {
-    x5on.setRadio(this.data.users, e.detail.value, users => {
-      this.setData({ users })
-    })
+  radioChange: function (e) {
+    var user_uid = e.detail.uid
+    this.setData({ user_uid })
   },
 
-  groupChange: function (e) {
+  pickChange: function (e) {
     var that = this
-    x5on.setPick(e, groupIndex => {
-      that.setData({ groupIndex })
-      var group_uid = x5on.getUid(that.data.groups, groupIndex)
-      x5on.post({
-        url: x5on.url.userdistmember,
-        data: { group_uid },
-        success(members) {
-          that.setData({ members })
-        }
-      })
+    x5on.http(x5on.url.userdistmember, e.detail)
+    .then(members => {
+      that.setData({ members })
     })
   },
 
+
+
+
+  
   userdistSubmit: function (e) {
     var that = this
     var rules = {
