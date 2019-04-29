@@ -1,4 +1,4 @@
-/* coms/comForm.wxss */
+/* coms/formForm.wxss */
 @import "../pages/weui.wxss";
 
 .x5ui-mini { text-align: center; }

@@ -1,4 +1,4 @@
-<!--coms/comFind.wxml-->
+<!--coms/formFind.wxml-->
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
 <form bindsubmit="findSubmit">

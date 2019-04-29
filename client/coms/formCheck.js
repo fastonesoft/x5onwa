@@ -1,4 +1,4 @@
-// coms/comCheck.js
+// coms/formCheck.js
 var x5on = require('../pages/x5on.js')
 
 Component({
@@ -12,6 +12,7 @@ Component({
     split: String,
     memo: String,
     checked: String,
+    mini: Boolean,
   },
 
   lifetimes: {

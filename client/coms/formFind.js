@@ -1,4 +1,4 @@
-// coms/comFind.js
+// coms/formFind.js
 var x5on = require('../pages/x5on.js')
 
 Component({
@@ -20,11 +20,11 @@ Component({
       }
       var messages = {
         name: {
-          required: this.data.label
+          required: that.data.label
         }
       }
       x5on.checkForm(e.detail.value, rules, messages, form => {
-        this.triggerEvent('findSubmit', form)
+        that.triggerEvent('findSubmit', form)
       }, message => {
         x5on.showError(that, message)
       })

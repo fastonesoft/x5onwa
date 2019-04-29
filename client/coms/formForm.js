@@ -1,4 +1,4 @@
-// coms/comForm.js
+// coms/formForm.js
 var x5on = require('../pages/x5on.js')
 
 Component({

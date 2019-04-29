@@ -99,9 +99,9 @@
     ]
   },
   "usingComponents": {
-    "comCheck": "../../coms/comCheck",
-    "comFind": "../../coms/comFind",
-    "comForm": "../../coms/comForm",
+    "formCheck": "../../coms/formCheck",
+    "formFind": "../../coms/formFind",
+    "formForm": "../../coms/formForm",
     "comMemb": "../../coms/comMemb",
     "comPick": "../../coms/comPick",
     "comRadio": "../../coms/comRadio",
