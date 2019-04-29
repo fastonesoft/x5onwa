@@ -7,6 +7,7 @@ Component({
     title: String,
     radios: Array,
     key: String,
+    split: String,
     memo: String,
     checked: String,
     url: String,

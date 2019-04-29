@@ -20,35 +20,21 @@ Page({
     })
   },
 
-  userChange: function (e) {
-    x5on.setRadio(this.data.users, e.detail.value, users => {
-      this.setData({ users })
-    })
+  radioChange: function (e) {
+    var user_uid = e.detail.uid
+    this.setData({ user_uid })
   },
 
-  userschSubmit: function (e) {
+  userschClick: function (e) {
     var that = this
-    var rules = {
-      user_uid: {
-        required: true,
-      },
-    }
-    var messages = {
-      user_uid: {
-        required: '用户选择',
-      },
-    }
-    x5on.checkForm(e.detail.value, rules, messages, form => {
-      x5on.post({
-        url: x5on.url.userschreg,
-        data: form,
-        success(members) {
-          var users = x5on.delArr(that.data.users, 'uid', form.user_uid)
-          that.setData({ users, members })
-        }
-      })
-    }, message => {
-      x5on.showError(that, message)
+    var user_uid = that.data.user_uid
+    user_uid && x5on.http(x5on.url.userschreg, { user_uid })
+    .then(members => {
+      var users = x5on.delArr(that.data.users, 'uid', user_uid)
+      that.setData({ users, members })
+    })
+    .catch(error => {
+      x5on.showError(that, error)
     })
   },
 
