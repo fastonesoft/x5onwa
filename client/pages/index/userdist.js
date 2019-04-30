@@ -14,9 +14,9 @@ Page({
   findSubmit: function (e) {
     var that = this
     x5on.http(x5on.url.userdistuser, e.detail)
-    .then(users => {
-      users.length !== 0 && that.setData({ users, user_uid: null })
-      users.length === 0 && x5on.showError(that, '没有找到你要的用户！')
+    .then(sch_users => {
+      sch_users.length !== 0 && that.setData({ sch_users, user_uid: null })
+      sch_users.length === 0 && x5on.showError(that, '没有找到你要的用户！')
     })
   },
 
@@ -27,93 +27,51 @@ Page({
 
   pickChange: function (e) {
     var that = this
+    that.setData(e.detail)
     x5on.http(x5on.url.userdistmember, e.detail)
     .then(members => {
       that.setData({ members })
     })
   },
 
-
-
-
-  
   userdistSubmit: function (e) {
     var that = this
-    var rules = {
-      user_uid: {
-        required: true,
-      },
-      group: {
-        required: true,
-      }
-    }
-    var messages = {
-      user_uid: {
-        required: '用户选择',
-      },
-      group: {
-        required: '分组选择',
-        min: 0,
-      }
-    }
-    x5on.checkForm(e.detail.value, rules, messages, form => {
-      form.group_uid = x5on.getUid(that.data.groups, form.group)
-      x5on.post({
-        url: x5on.url.userdistadd,
-        data: form,
-        success(members) {
-          that.setData({ members })
-        }
-      })
-    }, message => {
-      x5on.showError(that, message)
+    var user_uid = that.data.user_uid
+    var group_uid = that.data.group_uid
+    group_uid && user_uid && x5on.http(x5on.url.userdistadd, { user_uid, group_uid })
+    .then(members=>{
+      that.setData({ members })
+    })
+    .catch(error=>{
+      x5on.showError(that, error)
     })
   },
 
-  userdistRemove: function (e) {
+  removeClick: function (e) {
     var that = this
-    var user_sch_group_uid = e.currentTarget.dataset.uid
-    x5on.post({
-      url: x5on.url.userdistdel,
-      data: { user_sch_group_uid },
-      success(members) {
-        that.setData({ members })
-      }
+    var user_sch_group_uid = e.detail.uid
+    x5on.http(x5on.url.userdistdel, { user_sch_group_uid })
+    .then(members=>{
+      that.setData({ members })
     })
+    .catch(error=>{
+      x5on.showError(that, error)
+    })
+
   },
 
   memberSubmit: function (e) {
     var that = this
-    var rules = {
-      name: {
-        required: true,
-        chinese: true,
-        rangelength: [1, 3],
-      }
-    }
-    var messages = {
-      name: {
-        required: '成员姓名'
-      }
-    }
-    x5on.checkForm(e.detail.value, rules, messages, form => {
-      var groupIndex = that.data.groupIndex
-      form.group_uid = x5on.getUid(that.data.groups, groupIndex)
-      x5on.post({
-        url: x5on.url.userdistmemfind,
-        data: form,
-        success(members) {
-          members.length !== 0 && that.setData({ members })
-          members.length === 0 && x5on.showError(that, '没有找到你要的分组成员！')
-        }
-      })
-    }, message => {
-      x5on.showError(that, message)
+    var name = e.detail.name
+    var group_uid = that.data.group_uid
+    group_uid && x5on.http(x5on.url.userdistdel, { name, group_uid })
+    .then(members=>{
+      members.length !== 0 && that.setData({ members })
+      members.length === 0 && x5on.showError(that, '没有找到你要的分组成员！')
     })
-  },
-
-  returnClick: function (e) {
-    wx.navigateBack()
+    .catch(error=>{
+      x5on.showError(that, error)
+    })
   },
   
 })

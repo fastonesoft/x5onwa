@@ -2,11 +2,11 @@
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
 <formFind title="教师查询" label="教师姓名" bind:findSubmit="findSubmit" />
-<comRadio radios="{{users}}" key="user_name" memo="nick_name" bind:radioChange="radioChange" />
+<comRadio radios="{{sch_users}}" key="user_name" memo="nick_name" bind:radioChange="radioChange" />
 <comPick label="分组选择" name="group_uid" rangeKey="name" selectKey="name" valueKey="uid" picks="{{groups}}"
   bind:pickChange="pickChange" />
 
-<view class="weui-btn-area">
+<view class="weui-btn-area" wx:if="{{user_uid && group_uid}}">
   <button type="primary" bindtap="userdistSubmit">提交</button>
 </view>
 

@@ -20,18 +20,16 @@ class mvvUserSchoolGroup
     $is_current = 1;
     xovUserSchoolGroupAll::checkByCustom(compact('user_id', 'is_current'), '不属于任何学校，无法操作');
 
-    // todo: 上面、下面，这种可能要变成xovUserSchoolGroupAll
-
     $group_id = x5on::GROUP_ADMIN_SCHOOL;
     $user_sch_group = xovUserSchoolGroupAll::checkByCustom(compact('user_id', 'group_id', 'is_current'), '不是学校管理员，无法操作');
     call_user_func($success, $user_sch_group);
   }
 
   // 学校分组教师分配
-  public static function dist($sch_admin_user_id, $user_sch_uid, $group_uid)
+  public static function dist($sch_admin_user_id, $sch_user_uid, $group_uid)
   {
     $result = [];
-    self::schAdmin($sch_admin_user_id, function ($user_sch_group) use ($user_sch_uid, $group_uid, &$result) {
+    self::schAdmin($sch_admin_user_id, function ($user_sch_group) use ($sch_user_uid, $group_uid, &$result) {
       $sch_id = $user_sch_group->sch_id;
 
       // 检测是否为当前学校的分组
@@ -40,7 +38,7 @@ class mvvUserSchoolGroup
       $group_id = $group->id;
 
       // 查询教师对应学校记录
-      $user_sch_id = xovUserSchool::checkUid2Id($user_sch_uid);
+      $user_sch_id = xovUserSchool::checkUid2Id($sch_user_uid);
 
       xonUserSchoolGroup::add($user_sch_id, $group_id);
       $result = xovUserSchoolGroup::getsBy(compact('sch_id', 'group_id'));
@@ -124,13 +122,13 @@ class mvvUserSchoolGroup
   }
 
   // 教师所属分组查询
-  public static function groups($sch_admin_user_id, $user_sch_uid)
+  public static function groups($sch_admin_user_id, $sch_user_uid)
   {
     $result = [];
-    self::schAdmin($sch_admin_user_id, function ($user_sch_group) use ($user_sch_uid, &$result) {
+    self::schAdmin($sch_admin_user_id, function ($user_sch_group) use ($sch_user_uid, &$result) {
       $sch_id = $user_sch_group->sch_id;
 
-      $user_sch = xovUserSchool::checkByUid($user_sch_uid);
+      $user_sch = xovUserSchool::checkByUid($sch_user_uid);
       $user_sch_id = $user_sch->id;
 
       $groups = mvvGroup::groupLess(x5on::GROUP_ADMIN_SCHOOL);
@@ -162,10 +160,10 @@ class mvvUserSchoolGroup
   }
 
   // 教师所属分组更新
-  public static function update($sch_admin_user_id, $user_sch_uid, $groups_json)
+  public static function update($sch_admin_user_id, $sch_user_uid, $groups_json)
   {
-    self::schAdmin($sch_admin_user_id, function ($user_sch_group) use ($user_sch_uid, $groups_json) {
-      $user_sch = xovUserSchool::checkByUid($user_sch_uid);
+    self::schAdmin($sch_admin_user_id, function ($user_sch_group) use ($sch_user_uid, $groups_json) {
+      $user_sch = xovUserSchool::checkByUid($sch_user_uid);
       $user_sch_id = $user_sch->id;
 
       $groups = mvvGroup::groupLess(x5on::GROUP_ADMIN_SCHOOL);
