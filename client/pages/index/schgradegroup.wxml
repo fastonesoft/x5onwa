@@ -4,10 +4,6 @@
 
 <comMemb membs="{{membs}}" key="name" bind:editClick="editClick" bind:removeClick="removeClick" />
 
-<view class="weui-cells__tips x5ui-mini" wx:if="{{grade_id}}">
-    <button type="primary" size="mini" bindtap="addClick">添加</button>
-</view>
-
-<view class="weui-btn-area">
-	<button type="primary" bindtap="returnClick">返回</button>
+<view class="weui-btn-area" wx:if="{{grade_id}}">
+	<button type="primary" bindtap="addClick">添加</button>
 </view>

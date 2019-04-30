@@ -2,10 +2,6 @@
 
 <comMemb membs="{{membs}}" title="学校年级" key="step_name" memo="grade_name" bind:removeClick="removeClick" />
 
-<view class="weui-cells__tips x5ui-mini">
-	<button type="primary" size="mini" bindtap="addClick">添加</button>
-</view>
-
 <view class="weui-btn-area">
-	<button type="primary" bindtap="returnClick">返回</button>
+	<button type="primary" bindtap="addClick">添加</button>
 </view>

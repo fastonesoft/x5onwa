@@ -1,11 +1,7 @@
 <!--pages/index/schyear.wxml-->
 
-<comMemb membs="{{membs}}" title="年度列表" key="schs_sch" memo="year" bind:editClick="editClick" bind:removeClick="removeClick" />
-
-<view class="weui-cells__tips x5ui-mini">
-	<button type="primary" size="mini" bindtap="addClick">添加</button>
-</view>
+<comMemb membs="{{membs}}" title="年度列表" key="year" selected="current_year" bind:editClick="editClick" bind:removeClick="removeClick" />
 
 <view class="weui-btn-area">
-	<button type="primary" bindtap="returnClick">返回</button>
+	<button type="primary" bindtap="addClick">添加</button>
 </view>

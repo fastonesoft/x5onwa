@@ -7,10 +7,6 @@
 
 <comMemb membs="{{membs}}" key="cls_name" bind:removeClick="removeClick" />
 
-<view class="weui-cells__tips x5ui-mini" wx:if="{{grade_group_id}}">
-    <button type="primary" size="mini" bindtap="setClick">设置</button>
-</view>
-
-<view class="weui-btn-area">
-	<button type="primary" bindtap="returnClick">返回</button>
+<view class="weui-btn-area" wx:if="{{grade_group_id}}">
+    <button type="primary" bindtap="setClick">设置</button>
 </view>

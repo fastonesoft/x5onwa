@@ -8,6 +8,7 @@ Component({
     title: String,
     key: String,
     memo: String,
+    selected: String,
     url: String,
     split: String,
   },
