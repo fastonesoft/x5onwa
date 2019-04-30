@@ -99,6 +99,7 @@
     ]
   },
   "usingComponents": {
+    "formSwitch": "../../coms/formSwitch",
     "formCheck": "../../coms/formCheck",
     "formFind": "../../coms/formFind",
     "formForm": "../../coms/formForm",

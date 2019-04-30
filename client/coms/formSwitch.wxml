@@ -1,0 +1,27 @@
+<!--coms/formSwitch.wxml-->
+<view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
+
+<form bindsubmit="formSubmit" wx:if="{{switchs.length>0}}">
+    <view class="weui-cells__title">{{title}}</view>
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_switch" wx:for="{{switchs}}" wx:key="uid">
+            <block wx:if="{{split}}">
+                <view class="weui-cell__bd" wx:if="{{key&&memo}}">{{item[key]}}{{split}}{{item[memo]}}</view>
+                <view class="weui-cell__bd" wx:elif="{{key}}">{{item[key]}}</view>
+            </block>
+            <block wx:else>
+                <view class="weui-cell__bd" wx:if="{{key&&memo}}">{{item[key]}}({{item[memo]}})</view>
+                <view class="weui-cell__bd" wx:elif="{{key}}">{{item[key]}}</view>
+            </block>
+            <view class="weui-cell__ft">
+                <switch name="{{item.uid}}" checked="{{item[checked]}}" />
+            </view>
+        </view>
+    </view>
+    <view class="weui-btn-area" wx:if="{{!mini}}">
+        <button type="primary" form-type="submit">提交</button>
+    </view>
+    <view class="weui-cells__tips x5ui-mini" wx:if="{{mini}}">
+        <button type="warn" size="mini" form-type="submit">提交</button>
+    </view>
+</form>

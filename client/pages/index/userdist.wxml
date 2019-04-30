@@ -10,5 +10,5 @@
   <button type="primary" bindtap="userdistSubmit">提交</button>
 </view>
 
-<formFind title="教师查询" label="教师姓名" bind:findSubmit="memberSubmit" wx:if="{{members.length>0}}" />
+<formFind title="成员查询" label="成员姓名" bind:findSubmit="memberSubmit" wx:if="{{members.length>0}}" />
 <comMemb membs="{{members}}" key="user_name" memo="nick_name" bind:removeClick="removeClick" />
