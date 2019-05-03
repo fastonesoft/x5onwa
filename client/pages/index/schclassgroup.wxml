@@ -1,7 +1,7 @@
 <!--pages/index/schclassgroup.wxml-->
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
-<comRadio radios="{{radios}}" title="班级分组" key="step_name" memo="grade_name" bind:radioChange="radioChange" />
+<comRadio radios="{{radios}}" title="班级分组" notitle="true" key="step_name" memo="grade_name" bind:radioChange="radioChange" />
 
 <comRadio radios="{{groups}}" key="name" bind:radioChange="groupChange" />
 

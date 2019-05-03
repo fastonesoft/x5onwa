@@ -1,0 +1,10 @@
+<!--coms/comRowPick.wxml-->
+<view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
+
+<picker bindchange="rowpickChange" name="{{name}}" range="{{picks}}" range-key="{{rangeKey}}"
+    disabled="{{!picks||picks.length==0}}">
+    <view class="weui-select weui-select_in-select-after">{{picks[selectIndex][selectKey]}}</view>
+</picker>
+
+<!-- <comRowPick name="name" url="url" data="{{data}}" picks="{{picks}}" rangeKey="key" selectKey="select"
+    valueKey="value" bind:rowpickChange="rowpickChange" /> -->

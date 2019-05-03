@@ -5,6 +5,7 @@ Component({
 
   properties: {
     title: String,
+    notitle: Boolean,
     radios: Array,
     key: String,
     split: String,

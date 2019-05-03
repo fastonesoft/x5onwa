@@ -2,7 +2,7 @@
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
 <form bindsubmit="formSubmit" wx:if="{{switchs.length>0}}">
-    <view class="weui-cells__title">{{title}}</view>
+    <view class="weui-cells__title" wx:if="{{!notitle}}">{{title}}</view>
     <view class="weui-cells weui-cells_after-title">
         <view class="weui-cell weui-cell_switch" wx:for="{{switchs}}" wx:key="uid">
             <block wx:if="{{split}}">

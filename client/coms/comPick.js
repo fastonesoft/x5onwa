@@ -6,6 +6,7 @@ Component({
   properties: {
     name: String,
     title: String,
+    notitle: Boolean,
     label: String,
     url: String,
     picks: Array,

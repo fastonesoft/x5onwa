@@ -1,6 +1,6 @@
 <!--pages/index/schgrade.wxml-->
 
-<comMemb membs="{{membs}}" title="学校年级" key="step_name" memo="grade_name" bind:removeClick="removeClick" />
+<comMemb membs="{{membs}}" title="学校年级" notitle="true" key="step_name" memo="grade_name" bind:removeClick="removeClick" />
 
 <view class="weui-btn-area">
 	<button type="primary" bindtap="addClick">添加</button>

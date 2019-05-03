@@ -39,7 +39,8 @@ class mvvSchGrade
     mvvUserSchoolGroup::schAdmin($sch_admin_user_id, function ($user_sch_group) use (&$result) {
       $sch_id = $user_sch_group->sch_id;
 
-      $result = xovSchStep::getsBy(compact('sch_id'));
+      $graduated = 0;
+      $result = xovSchStep::getsBy(compact('sch_id', 'graduated'));
     });
     return $result;
   }

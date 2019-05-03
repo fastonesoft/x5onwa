@@ -1,12 +1,12 @@
-// coms/comSubPick.js
+// coms/comRowPick.js
 var x5on = require('../pages/x5on.js')
 
 Component({
 
   properties: {
     name: String,
-    label: String,
     url: String,
+    data: Object,
     picks: Array,
     rangeKey: String,
     valueKey: String,
@@ -16,7 +16,7 @@ Component({
   lifetimes: {
     ready() {
       var that = this
-      that.data.url && x5on.http(that.data.url)
+      that.data.url && x5on.http(that.data.url, data)
       .then(picks=>{
         that.setData({ picks })
       })
@@ -25,14 +25,14 @@ Component({
 
   ready() {
     var that = this
-    that.data.url && x5on.http(that.data.url)
+    that.data.url && x5on.http(that.data.url, data)
     .then(picks=>{
       that.setData({ picks })
     })
   },
 
   methods: {
-    subpickChange: function (e) {
+    rowpickChange: function (e) {
       var that = this
       x5on.setPick(e, selectIndex => {
         that.setData({ selectIndex })
@@ -41,11 +41,10 @@ Component({
         if (name) {
           var picked = x5on.getArr(that.data.picks, selectIndex)
           var value = picked[that.data.valueKey]
-          that.triggerEvent('subpickChange', { [name]: value })
+          that.triggerEvent('rowpickChange', { [name]: value })
         } else {
           x5on.showError(that, '自定控件没有指定名称')
         }
-
       })
     }
   }

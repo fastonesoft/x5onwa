@@ -39,8 +39,8 @@ Page({
       label: '学校分级',
       url: x5on.url.schgradestep,
       valueKey: 'id',
-      rangeKey: 'schs_steps',
-      selectKey: 'schs_steps',
+      rangeKey: 'name',
+      selectKey: 'sch_step',
     }, {
       mode: 3,
       name: 'edus_id',

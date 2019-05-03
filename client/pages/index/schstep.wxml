@@ -1,6 +1,6 @@
 <!--pages/index/schstep.wxml-->
 
-<comMemb membs="{{membs}}" title="分级列表" key="schs_steps" bind:editClick="editClick" bind:removeClick="removeClick" />
+<comMemb membs="{{membs}}" title="分级列表" notitle="true" key="name" selected="graduated" bind:editClick="editClick" bind:removeClick="removeClick" />
 
 <view class="weui-btn-area">
 	<button type="primary" bindtap="addClick">添加</button>

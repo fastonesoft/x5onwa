@@ -1,6 +1,6 @@
 <!--coms/comRadio.wxml-->
 <view wx:if="{{radios.length>0}}">
-	<view class="weui-cells__title">{{title}}</view>
+	<view class="weui-cells__title" wx:if="{{!notitle}}">{{title}}</view>
 	<view class="weui-cells weui-cells_after-title">
 		<radio-group bindchange="radioChange">
 			<label class="weui-cell weui-check__label" wx:for="{{radios}}" wx:key="uid">

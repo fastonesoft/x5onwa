@@ -6,6 +6,7 @@ Component({
   properties: {
     membs: Array,
     title: String,
+    notitle: Boolean,
     key: String,
     memo: String,
     selected: String,

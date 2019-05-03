@@ -5,6 +5,7 @@ Component({
 
   properties: {
     title: String,
+    notitle: Boolean,
     fields: Array,
     rules: Object,
     mini: Boolean,

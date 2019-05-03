@@ -106,6 +106,7 @@
     "comMemb": "../../coms/comMemb",
     "comPick": "../../coms/comPick",
     "comRadio": "../../coms/comRadio",
+    "comRowPick": "../../coms/comRowPick",
     "comSubPick": "../../coms/comSubPick"
   }
 }

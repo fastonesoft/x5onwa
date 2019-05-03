@@ -8,6 +8,7 @@ Component({
     data: Object,
     switchs: Array,
     title: String,
+    notitle: Boolean,
     key: String,
     split: String,
     memo: String,

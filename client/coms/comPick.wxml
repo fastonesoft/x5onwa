@@ -1,5 +1,5 @@
 <!--Com/pick.wxml-->
-<view class="weui-cells__title">{{title}}</view>
+<view class="weui-cells__title" wx:if="{{notitle}}">{{title}}</view>
 <view class="weui-cells weui-cells_after-title">
 	<view class="weui-cell weui-cell_select">
 		<view class="weui-cell__hd weui-cell__hd_in-select-after">

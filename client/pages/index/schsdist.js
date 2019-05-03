@@ -5,70 +5,40 @@ Page({
 
 	onLoad: function (e) {
 		var that = this
-		x5on.request({
-			url: x5on.url.schsdist,
-			success(areas) {
-				that.setData({ areas })
-			}
+		x5on.http(x5on.url.schsdist)
+		.then(areas=>{
+			that.setData({ areas })
 		})
 	},
 
 	findSubmit: function (e) {
 		var that = this
-		var rules = {
-			name: {
-				required: true,
-				chinese: true,
-				rangelength: [1, 3],
-			}
-		}
-		var messages = {
-			name: {
-				required: '用户姓名'
-			}
-		}
-		x5on.checkForm(e.detail.value, rules, messages, form => {
-			x5on.post({
-				url: x5on.url.schsdistuser,
-				data: form,
-				success(users) {
-					that.setData({ users })
-					users.length === 0 && x5on.showError(that, '没有找到你要的用户！')
-				}
-			})
-		}, message => {
-			x5on.showError(that, message)
+		x5on.http(x5on.url.schsdistuser, e.detail)
+		.then(users=>{
+			users.length !== 0 && that.setData({ users })
+			users.length === 0 && x5on.showError(that, '没有找到你要的用户！')
+		})
+		.catch(error=>{
+			x5on.showError(that, error)
 		})
 	},
 
 	userChange: function (e) {
-		x5on.setRadio(this.data.users, e.detail.value, users => {
-			this.setData({ users })
-		})
+		console.log(e)
 	},
 
 	areaChange: function (e) {
+		console.log(e)
     var that = this
-    x5on.setPick(e, areaIndex => {
-			that.setData({ areaIndex })
-			var area_id = x5on.getId(that.data.areas, areaIndex)
-			//
-			x5on.post({
-				data: { area_id },
-        url: x5on.url.schsdistschs,
-        success(schs_members) {
-					schs_members.schsIndex = -1
-          that.setData(schs_members)
-        }
-      })
-    })
+		x5on.http(x5on.url.schsdistschs, e.detail)
+		.then(schs_members=>{
+			that.setData(schs_members)
+		})
   },
 	
   schsChange: function (e) {
-    var that = this
-    x5on.setPick(e, schsIndex => {
-      that.setData({ schsIndex })
-    })
+		var that = this
+		console.log(e)
   },
 
   schsdistSubmit: function (e) {
@@ -138,25 +108,16 @@ Page({
 
   schsdistRemove: function (e) {
     var that = this
-    var uid = e.currentTarget.dataset.uid
-    x5on.post({
-      url: x5on.url.schsdistdel,
-      data: { uid },
-			success(schs_members) {
-				schs_members.schsIndex = -1
-				that.setData(schs_members)
-			}
-    })
+		x5on.http(x5on.url.schsdistdel, e.detail)
+		.then(schs_members=>{
+			that.setData(schs_members)
+		})
   },
 
   addClick: function (e) {
 		var area_id = x5on.getId(this.data.areas, this.data.areaIndex)
 		area_id && wx.navigateTo({ url: '/pages/index/schs_add' })
 		!area_id && x5on.showError(this, '地区没有设置')
-  },
-
-  returnClick: function (e) {
-    wx.navigateBack()
   },
 
 })
