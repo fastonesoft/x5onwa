@@ -3,23 +3,14 @@
 
 <formFind title="用户查询" notitle="true" label="用户姓名" bind:findSubmit="findSubmit" />
 <comRadio radios="{{users}}" key="name" memo="nick_name" bind:radioChange="userChange" />
+<comPick title="集团设置" label="集团选择" name="area_id" rangeKey="city_name" selectKey="city_name" valueKey="id" url="" picks="{{areas}}"
+	bind:pickChange="areaChange" />
 
-<view class="weui-cells__title">集团设置</view>
-<view class="weui-cells weui-cells_after-title">
-	<view class="weui-cell weui-cell_select">
-		<view class="weui-cell__hd weui-cell__hd_in-select-after x5ui-btn_half">
-			<comRowPick name="area_id" picks="{{areas}}" rangeKey="city_name" selectKey="city_name" valueKey="id"
-				bind:rowpickChange="areaChange" />
-		</view>
-		<view class="weui-cell__bd weui-cell__hd_in-select-after">
-			<comRowPick name="schs_id" picks="{{schs}}" rangeKey="name" selectKey="name" valueKey="id"
-				bind:rowpickChange="schsChange" />
-		</view>
-	</view>
-</view>
+<comRadio radios="{{schs}}" key="name" bind:radioChange="schsChange" />
+
 <view class="weui-cells__tips x5ui-mini">
-	<button type="primary" size="mini" bindtap="addClick">添加</button>
-	<button type="warn" size="mini" form-type="submit">提交</button>
+	<button type="primary" size="mini" bindtap="addClick" wx:if="{{area_id}}">添加</button>
+	<button type="warn" size="mini" bindtap="schsdistClick" wx:if="{{user_uid && schs_uid}}">提交</button>
 </view>
 
 <formFind title="成员查询" notitle="true" label="成员姓名" bind:findSubmit="memberSubmit" wx:if="{{members.length>0}}" />

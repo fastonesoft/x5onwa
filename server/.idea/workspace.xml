@@ -53,8 +53,8 @@
       <file leaf-file-name="mvvSchGrade.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchGrade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="256">
-              <caret line="41" column="50" selection-start-line="41" selection-start-column="44" selection-end-line="41" selection-end-column="50" />
+            <state relative-caret-position="281">
+              <caret line="42" column="26" selection-start-line="42" selection-start-column="16" selection-end-line="42" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -173,7 +173,6 @@
         <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchYear.php" />
         <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/xovGrade.php" />
         <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/xovGradeCurrent.php" />
-        <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchGrade.php" />
         <option value="$PROJECT_DIR$/application/controllers/Schgrade.php" />
         <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/xonGrade.php" />
         <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/xonClass.php" />
@@ -191,6 +190,7 @@
         <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchClass.php" />
         <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/xonUserSchool.php" />
         <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvUserSchoolGroup.php" />
+        <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchGrade.php" />
       </list>
     </option>
   </component>
@@ -304,12 +304,12 @@
       <workItem from="1554945278457" duration="7781000" />
       <workItem from="1555917914748" duration="39101000" />
       <workItem from="1556525745464" duration="1666000" />
-      <workItem from="1556847925804" duration="246000" />
+      <workItem from="1556847925804" duration="918000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="249203000" />
+    <option name="totallyTimeSpent" value="249875000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -654,8 +654,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchGrade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="41" column="50" selection-start-line="41" selection-start-column="44" selection-end-line="41" selection-end-column="50" />
+        <state relative-caret-position="281">
+          <caret line="42" column="26" selection-start-line="42" selection-start-column="16" selection-end-line="42" selection-end-column="26" />
         </state>
       </provider>
     </entry>

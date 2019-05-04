@@ -24,12 +24,13 @@ Page({
 	},
 
 	userChange: function (e) {
-		console.log(e)
+		var user_uid = e.detail.uid
+		this.setData({ user_uid })
 	},
 
 	areaChange: function (e) {
-		console.log(e)
-    var that = this
+		var that = this
+		that.setData(e.detail)
 		x5on.http(x5on.url.schsdistschs, e.detail)
 		.then(schs_members=>{
 			that.setData(schs_members)
@@ -37,72 +38,29 @@ Page({
   },
 	
   schsChange: function (e) {
-		var that = this
-		console.log(e)
+		var schs_uid = e.detail.uid
+		this.setData({ schs_uid })
   },
 
-  schsdistSubmit: function (e) {
-    var that = this
-    var rules = {
-      user_uid: {
-        required: true,
-			},
-      schs: {
-				required: true,
-				min: 0,
-      },
-    }
-    var messages = {
-      user_uid: {
-        required: '用户选择'
-			},
-      schs: {
-        required: '集团名称'
-      },
-    }
-    x5on.checkForm(e.detail.value, rules, messages, form => {
-      form.schs_uid = x5on.getUid(that.data.schs, form.schs)
-      x5on.post({
-        url: x5on.url.schsdistdist,
-        data: form,
-        success(schs_members) {
-					schs_members.schsIndex = -1
-          that.setData(schs_members)
-        }
-      })
-    }, message => {
-      x5on.showError(that, message)
-    })
-
+  schsdistClick: function (e) {
+		var that = this
+		var user_uid = that.data.user_uid
+		var schs_uid = that.data.schs_uid
+		user_uid && schs_uid && x5on.http(x5on.url.schsdistdist, { user_uid, schs_uid })
+		.then(schs_members=>{
+			that.setData(schs_members)
+		})
 	},
 	
 	memberSubmit: function (e) {
 		var that = this
-		var rules = {
-			name: {
-				required: true,
-				chinese: true,
-				rangelength: [1, 3],
-			}
-		}
-		var messages = {
-			name: {
-				required: '成员姓名'
-			}
-		}
-		x5on.checkForm(e.detail.value, rules, messages, form => {
-			var areaIndex = that.data.areaIndex
-			form.area_id = x5on.getId(that.data.areas, areaIndex)
-			x5on.post({
-				url: x5on.url.schsdistmemfind,
-				data: form,
-				success(members) {
-					members.length !== 0 && that.setData({ members })
-					members.length === 0 && x5on.showError(that, '没有找到你要的集团成员！')
-				}
-			})
-		}, message => {
-			x5on.showError(that, message)
+		x5on.http(x5on.url.schsdistmemfind, e.detail)
+		.then(members=>{
+			members.length !== 0 && that.setData({ members })
+			members.length === 0 && x5on.showError(that, '没有找到你要的集团成员！')
+		})
+		.catch(error=>{
+			x5on.showError(that, error)
 		})
 	},
 
@@ -115,7 +73,7 @@ Page({
   },
 
   addClick: function (e) {
-		var area_id = x5on.getId(this.data.areas, this.data.areaIndex)
+		var area_id = this.data.area_id
 		area_id && wx.navigateTo({ url: '/pages/index/schs_add' })
 		!area_id && x5on.showError(this, '地区没有设置')
   },
