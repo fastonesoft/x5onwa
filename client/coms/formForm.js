@@ -29,12 +29,8 @@ Component({
     },
 
     subpickChange: function (e) {
-      // 传出pick值
-      var {name, value} = e.detail
-      // 收集数据
       var pickForm = this.data.pickForm
-      pickForm[name] = value
-      //
+      Object.assign(pickForm, e.detail)
       this.setData({ pickForm })
     }
   }

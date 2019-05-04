@@ -1,4 +1,6 @@
 <!--Com/pick.wxml-->
+<view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
+
 <view class="weui-cells__title" wx:if="{{notitle}}">{{title}}</view>
 <view class="weui-cells weui-cells_after-title">
 	<view class="weui-cell weui-cell_select">
@@ -13,6 +15,6 @@
 		</view>
 	</view>
 </view>
-<!--
-	<comPick title="标题" label="标签" name="字段名称" rangeKey="" selectKey="" valueKey="" url="" picks="{{}}" bind:pickChange="pickChange" />
--->
+
+<!-- <comPick title="标题" notitle="true" label="标签" name="字段名称" rangeKey="" selectKey="" valueKey="" url="" picks="{{}}"
+	bind:pickChange="pickChange" /> -->

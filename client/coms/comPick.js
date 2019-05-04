@@ -40,12 +40,13 @@ Component({
         that.setData({ selectIndex })
         //
         var name = that.data.name
-        var picked = x5on.getArr(that.data.picks, selectIndex)
-        var value = picked[that.data.valueKey]
-        //
-        var res = {}
-        res[name] = value
-        that.triggerEvent('pickChange', res)
+        if (name) {
+          var picked = x5on.getArr(that.data.picks, selectIndex)
+          var value = picked[that.data.valueKey]
+          that.triggerEvent('pickChange', { [name]: value })
+        } else {
+          x5on.showError(that, '控件没有指定名称')
+        }
       })
     }
   }
