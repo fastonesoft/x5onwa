@@ -124,6 +124,7 @@ Page({
     json.title = '年度设置'
 		json.url_u = x5on.url.schsdistadd
 		json.data_u = { area_id }
+		json.membsName = 'dddss'
     json.fields = fields
 		json.rules = rules
 		

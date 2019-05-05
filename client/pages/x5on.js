@@ -270,6 +270,7 @@ var doData = {
 
 // 数据对象添加
 var doAdd = function (arrs, arr, sort_field) {
+  arrs = arrs.length>=0 ? arrs : []
   arrs.push(arr)
   return doSort(arrs, sort_field)
 }

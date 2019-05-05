@@ -5,6 +5,7 @@ Page({
 
   onLoad: function (e) {
     var data = JSON.parse(e.json)
+    console.log(data)
     this.setData(data)
   },
 
@@ -18,12 +19,19 @@ Page({
           if (that.data.url_r) {
             x5on.http(that.data.url_r, that.data.data_r)
             .then(membs => {
-              page.setData({ membs })
+              var membsName = that.data.membsName
+              membsName ? page.setData({ [membsName]: membs }) : page.setData({ membs })
             })
           } else {
-            var membs = page.data.membs
-            membs = x5on.add(membs, memb, 'id')
-            page.setData({ membs })
+            var membsName = that.data.membsName
+            if (membsName) {
+              var membs = page.data[membsName]
+              membs = x5on.add(membs, memb, 'id')
+              page.setData({ [membsName]: membs })
+            } else {
+              page.setData({ membs })
+            }
+
           }
           wx.navigateBack()
         })
