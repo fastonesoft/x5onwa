@@ -71,9 +71,9 @@ Page({
       }
     }
     var json = {}
-    json.uid = memb.uid
     json.title = '分级设置'
     json.url_u = x5on.url.schstepedit
+    json.data_u = { uid: memb.uid }
     json.fields = fields
     json.rules = rules
     

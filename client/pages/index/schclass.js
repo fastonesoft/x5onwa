@@ -60,9 +60,9 @@ Page({
     }
     
     var json = {}
-    json.uid = memb.uid
     json.title = '班级设置'
     json.url_u = x5on.url.schclassedit
+    json.data_u = { uid: memb.uid }
     json.fields = fields
     json.rules = rules
 
