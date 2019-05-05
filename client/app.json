@@ -108,5 +108,6 @@
     "comRadio": "../../coms/comRadio",
     "comRowPick": "../../coms/comRowPick",
     "comSubPick": "../../coms/comSubPick"
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }

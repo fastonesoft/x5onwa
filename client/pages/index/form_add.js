@@ -11,7 +11,8 @@ Page({
   formSubmit: function (e) {
     var that = this
     var form = e.detail
-    x5on.http(that.data.url_u, form)
+    Object.assign(form, that.data.data_u)
+    that.data.url_u && x5on.http(that.data.url_u, form)
       .then(memb => {
         x5on.prevPage(page => {
           if (that.data.url_r) {
