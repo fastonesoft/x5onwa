@@ -3,10 +3,10 @@
 
 <formFind title="用户查询" notitle="true" label="用户姓名" bind:findSubmit="findSubmit" />
 <comRadio radios="{{users}}" key="name" memo="nick_name" bind:radioChange="userChange" />
-<comPick title="集团设置" label="集团选择" name="area_id" rangeKey="city_name" selectKey="city_name" valueKey="id" url="" picks="{{areas}}"
+<comPick title="地区设置" label="地区选择" name="area_id" rangeKey="city_name" selectKey="city_name" valueKey="id" picks="{{areas}}"
 	bind:pickChange="areaChange" />
 
-<comRadio radios="{{schs}}" key="name" memo="code" bind:radioChange="schsChange" />
+<comRadioMemb radios="{{schs}}" key="name" memo="code" bind:radioChange="schsChange" bind:removeClick="schsRemove" />
 
 <view class="weui-cells__tips x5ui-mini">
 	<button type="primary" size="mini" bindtap="addClick" wx:if="{{area_id}}">添加</button>

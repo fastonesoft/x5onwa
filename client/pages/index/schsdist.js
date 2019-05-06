@@ -40,7 +40,12 @@ Page({
   schsChange: function (e) {
 		var schs_uid = e.detail.uid
 		this.setData({ schs_uid })
-  },
+	},
+
+	schsRemove: function (e) {
+		var schs_uid = this.data.schs_uid
+		e.detail.uid === schs_uid && this.setData({ schs_uid: null })
+	},
 
   schsdistClick: function (e) {
 		var that = this
