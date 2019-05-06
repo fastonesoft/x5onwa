@@ -16,7 +16,7 @@ Page({
       .then(memb => {
         x5on.prevPage(page => {
           if (that.data.url_r) {
-            // 指定刷新地址，更新数据
+            // 指定刷新地址，更新数据（这个选项不能少，目的是为了应对有些记录添加会影响别的记录的情况）
             x5on.http(that.data.url_r, that.data.data_r)
             .then(membs => {
               var membsName = that.data.membsName
@@ -24,14 +24,15 @@ Page({
               membsName ? page.setData({ [membsName]: membs }) : page.setData(membs)
             })
           } else {
-            // 没有地址，必须要指定字段
+            // 没有地址，指定字段，更新字段
             var membsName = that.data.membsName
             if (membsName) {
               var membs = page.data[membsName]
               membs = x5on.add(membs, memb, 'id')
               page.setData({ [membsName]: membs })
             } else {
-              throw '没有指定数据字段、没有指定更新地址'
+              // 没有地址，没有字段，更新数据
+              page.setData(memb)
             }
           }
           wx.navigateBack()

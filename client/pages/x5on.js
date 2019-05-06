@@ -66,6 +66,7 @@ var doUrl = {
   // 集团分配
   schsdist: `${host}/weapp/schsdist`,
   schsdistadd: `${host}/weapp/schsdist/add`,
+  schsdistremove: `${host}/weapp/schsdist/remove`,
   schsdistuser: `${host}/weapp/schsdist/user`,
   schsdistdist: `${host}/weapp/schsdist/dist`,
   schsdistschs: `${host}/weapp/schsdist/schs`,

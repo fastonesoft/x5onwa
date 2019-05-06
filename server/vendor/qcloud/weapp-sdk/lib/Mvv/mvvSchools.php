@@ -34,6 +34,11 @@ class mvvSchools
     return $area_id;
   }
 
+  public static function remove($uid) {
+    xonSchools::checkByUid($uid);
+    return xonSchools::delByUidCustom($uid);
+  }
+
   public static function del($uid) {
     $schs = xovSchools::checkByUid($uid);
     $area_id = $schs->area_id;

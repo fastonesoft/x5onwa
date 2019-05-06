@@ -98,8 +98,26 @@ class Schsdist extends CI_Controller
         $area_id = $param['area_id'];
 
         // 集团添加
-        Model\xonSchools::add($code, $name, $full_name, $area_id);
-        $result = Mvv\mvvSchools::refresh($area_id);
+        $result = Model\xonSchools::add($code, $name, $full_name, $area_id);
+
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
+
+  public function remove()
+  {
+    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
+      try {
+        $param = $_POST;
+        $uid = $param['uid'];
+
+        // 集团删除
+        $result = Mvv\mvvSchools::remove($uid);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {

@@ -43,8 +43,17 @@ Page({
 	},
 
 	schsRemove: function (e) {
-		var schs_uid = this.data.schs_uid
-		e.detail.uid === schs_uid && this.setData({ schs_uid: null })
+		var that = this
+		var schs_uid = that.data.schs_uid
+		e.detail.uid === schs_uid && that.setData({ schs_uid: null })
+		//
+		x5on.http(x5on.url.schsdistremove, e.detail)
+		.then(number=>{
+			x5on.showSuccess('删除'+number+'条记录')
+		})
+		.catch(error=>{
+			x5on.showError(that, error)
+		})
 	},
 
   schsdistClick: function (e) {
@@ -129,7 +138,7 @@ Page({
     json.title = '年度设置'
 		json.url_u = x5on.url.schsdistadd
 		json.data_u = { area_id }
-		json.membsName = 'dddss'
+		json.membsName = 'schs'
     json.fields = fields
 		json.rules = rules
 		

@@ -1,5 +1,4 @@
 <!--coms/comRadioMemb.wxml-->
-<!--coms/comRadio.wxml-->
 <view wx:if="{{radios.length>0}}">
 	<view class="weui-cells__title" wx:if="{{!notitle}}">{{title}}</view>
 	<view class="weui-cells weui-cells_after-title">
@@ -23,7 +22,6 @@
 					</view>
 				</block>
 				<view class="weui-cell__ft weui-cell__ft_in-radio">
-
 					<icon type="circle" size="23" wx:if="{{!item[checked]}}"></icon>
 					<icon type="success" size="23" wx:if="{{item[checked]}}"></icon>
 				</view>
@@ -31,4 +29,3 @@
 		</radio-group>
 	</view>
 </view>
-<!-- <comRadio radios="{{users}}" key="name" memo="nick_name" bind:radioChange="radioChange" /> -->

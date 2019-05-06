@@ -14,6 +14,7 @@ class xonSchools extends cAppinfo
 
     $uid = x5on::getUid();
     $user_id = null;
-    return self::insert(compact('id', 'uid', 'code', 'name', 'full_name', 'area_id', 'user_id'));
+    self::insert(compact('id', 'uid', 'code', 'name', 'full_name', 'area_id', 'user_id'));
+    return xovSchools2Dist::getByUid($uid);
   }
 }

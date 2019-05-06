@@ -46,7 +46,7 @@ Component({
       var uid = e.currentTarget.dataset.uid
       var radios = x5on.delArr(this.data.radios, 'uid', uid)
       this.setData({ radios })
-      this.triggerEvent('removeClick', { uid, radios })
+      this.triggerEvent('removeClick', { uid })
     },
 
     radioChange: function (e) {
@@ -56,7 +56,7 @@ Component({
       x5on.setRadioex(that.data.radios, uid, that.data.checked, radios => {
         that.setData({ radios })
         var radio = x5on.getArrex(that.data.radios, 'uid', uid)
-        radio && that.triggerEvent('radioChange', { uid, radio })
+        radio && that.triggerEvent('radioChange', { uid })
       })
     }
   }
