@@ -6,7 +6,7 @@
 <comPick title="集团设置" label="集团选择" name="area_id" rangeKey="city_name" selectKey="city_name" valueKey="id" url="" picks="{{areas}}"
 	bind:pickChange="areaChange" />
 
-<comRadio radios="{{schs}}" key="name" bind:radioChange="schsChange" />
+<comRadio radios="{{schs}}" key="name" memo="code" bind:radioChange="schsChange" />
 
 <view class="weui-cells__tips x5ui-mini">
 	<button type="primary" size="mini" bindtap="addClick" wx:if="{{area_id}}">添加</button>

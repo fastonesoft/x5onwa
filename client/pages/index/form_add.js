@@ -29,6 +29,8 @@ Page({
               membs = x5on.add(membs, memb, 'id')
               page.setData({ [membsName]: membs })
             } else {
+              var membs = page.data.membs
+              membs = x5on.add(membs, memb, 'id')
               page.setData({ membs })
             }
 
