@@ -6,7 +6,8 @@ Component({
   properties: {
     name: String,
     label: String,
-    url: String,
+    url_q: String,
+    data_q: Object,
     picks: Array,
     rangeKey: String,
     valueKey: String,
@@ -16,7 +17,7 @@ Component({
   lifetimes: {
     ready() {
       var that = this
-      that.data.url && x5on.http(that.data.url)
+      that.data.url_q && x5on.http(that.data.url_q, that.data.data_q)
       .then(picks=>{
         that.setData({ picks })
       })
@@ -25,7 +26,7 @@ Component({
 
   ready() {
     var that = this
-    that.data.url && x5on.http(that.data.url)
+    that.data.url_q && x5on.http(that.data.url_q, that.data.data_q)
     .then(picks=>{
       that.setData({ picks })
     })
@@ -38,14 +39,16 @@ Component({
         that.setData({ selectIndex })
         //
         var name = that.data.name
-        if (name) {
+        var value = that.data.valueKey
+        var range = that.data.rangeKey
+        var select = that.data.selectKey
+        if (name && value && range && select) {
           var picked = x5on.getArr(that.data.picks, selectIndex)
-          var value = picked[that.data.valueKey]
+          var value = picked[value]
           that.triggerEvent('subpickChange', { [name]: value })
         } else {
-          x5on.showError(that, '控件没有指定名称')
+          x5on.showError(that, '没有指定控件名称、列表字段、选择字段、输出字段')
         }
-
       })
     }
   }

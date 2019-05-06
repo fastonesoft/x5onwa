@@ -2,6 +2,7 @@
 namespace QCloud_WeApp_SDK\Mvv;
 
 use QCloud_WeApp_SDK\Model\x5on;
+use QCloud_WeApp_SDK\Model\xonSchool;
 use QCloud_WeApp_SDK\Model\xonUserSchool;
 use QCloud_WeApp_SDK\Model\xonUserSchoolGroup;
 use QCloud_WeApp_SDK\Model\xovUser;
@@ -45,6 +46,12 @@ class mvvSchool
 
     // 返回数据
     return self::refresh($schs_id);
+  }
+
+  // 学校删除
+  public static function remove($sch_uid) {
+    xonSchool::checkByUid($sch_uid);
+    return xonSchool::delByUidCustom($sch_uid);
   }
 
   // 学校管理删除

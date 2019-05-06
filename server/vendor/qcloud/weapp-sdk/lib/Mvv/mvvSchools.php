@@ -49,7 +49,7 @@ class mvvSchools
     // 一、删除地区用户记录
     $user_id = null;
     xonSchools::setsByUid(compact('user_id'), $uid);
-    return $area_id;
+    return xovSchools2Dist::getsBy(compact('area_id'));
   }
 
   // 刷新客户端数据
@@ -58,6 +58,5 @@ class mvvSchools
     $members = xovSchoolsDist::getsBy(compact('area_id'));
     return compact('schs', 'members');
   }
-
 
 }

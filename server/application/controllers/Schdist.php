@@ -91,8 +91,26 @@ class Schdist extends CI_Controller
         $edu_type_id = $param['edu_type_id'];
 
         // 学校添加
-        Model\xonSchool::add($code, $name, $schs_id, $edu_type_id);
-        $result = Mvv\mvvSchool::refresh($schs_id);
+        $result = Model\xonSchool::add($code, $name, $schs_id, $edu_type_id);
+
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
+
+  public function remove()
+  {
+    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
+      try {
+        $param = $_POST;
+        $uid = $param['uid'];
+
+        // 学校删除
+        $result = Mvv\mvvSchool::remove($uid);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {

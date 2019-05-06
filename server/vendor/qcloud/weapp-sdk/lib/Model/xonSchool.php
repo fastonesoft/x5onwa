@@ -12,7 +12,7 @@ class xonSchool extends cAppinfo
     self::existByIdCustom($id, '学校编号不得重复');
 
     $uid = x5on::getUid();
-    self::existByUidCustom($uid, '内置编码有重复，请重试');
     self::insert(compact('id', 'uid', 'code', 'name', 'schs_id', 'edu_type_id'));
+    return xovSchool::getByUid($uid);
   }
 }

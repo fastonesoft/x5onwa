@@ -136,8 +136,7 @@ class Schsdist extends CI_Controller
         $uid = $param['uid'];
 
         // 集团分配用户删除
-        $area_id = Mvv\mvvSchools::del($uid);
-        $result = Mvv\mvvSchools::refresh($area_id);
+        $result = Mvv\mvvSchools::del($uid);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {

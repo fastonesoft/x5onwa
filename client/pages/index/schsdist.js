@@ -28,9 +28,10 @@ Page({
 		this.setData({ user_uid })
 	},
 
-	areaChange: function (e) {
+	areaPick: function (e) {
 		var that = this
 		that.setData(e.detail)
+		// e.detail => { area_id }
 		x5on.http(x5on.url.schsdistschs, e.detail)
 		.then(schs_members=>{
 			that.setData(schs_members)
@@ -49,14 +50,14 @@ Page({
 		//
 		x5on.http(x5on.url.schsdistremove, e.detail)
 		.then(number=>{
-			x5on.showSuccess('删除'+number+'条记录')
+			x5on.delSuccess(number)
 		})
 		.catch(error=>{
 			x5on.showError(that, error)
 		})
 	},
 
-  schsdistClick: function (e) {
+  updateClick: function (e) {
 		var that = this
 		var user_uid = that.data.user_uid
 		var schs_uid = that.data.schs_uid
@@ -81,8 +82,9 @@ Page({
 		})
 	},
 
-  schsdistRemove: function (e) {
-    var that = this
+  memberRemove: function (e) {
+		var that = this
+		// e.detail => { uid }
 		x5on.http(x5on.url.schsdistdel, e.detail)
 		.then(schs_members=>{
 			that.setData(schs_members)
@@ -129,21 +131,21 @@ Page({
       full_name: {
         required: true,
         chinese: true,
-        minlength: 2,
+        minlength: 4,
         maxlength: 50,
       },
     }
 
     var json = {}
-    json.title = '年度设置'
+    json.title = '集团设置'
 		json.url_u = x5on.url.schsdistadd
 		json.data_u = { area_id }
-		json.membsName = 'schs'
+		json.arrsName = 'schs'
     json.fields = fields
 		json.rules = rules
 		
 		area_id && wx.navigateTo({ url: 'form_add?json=' + JSON.stringify(json) })
-		!area_id && x5on.showError(that, '集团设置没有选择')
+		!area_id && x5on.showError(that, '地区设置没有选择')
   },
 
 })

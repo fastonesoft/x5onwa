@@ -76,6 +76,7 @@ var doUrl = {
   // 学校注册
   schdist: `${host}/weapp/schdist`,
   schdistadd: `${host}/weapp/schdist/add`,
+  schdistremove: `${host}/weapp/schdist/remove`,
   schdistedutype: `${host}/weapp/schdist/edutype`,
   schdistuser: `${host}/weapp/schdist/user`,
   schdistdist: `${host}/weapp/schdist/dist`,
@@ -401,7 +402,7 @@ var doSetCheckboxex = function (arrs, e_detail_value_uids, checked_obj_name, suc
   typeof success === 'function' && success(arrs)
 }
 
-var doMessage = function (fields) {
+var doFormMessage = function (fields) {
   var res = {}
   for (let field of fields) {
     if (field.mode === 1 || field.mode === 3) {
@@ -661,6 +662,14 @@ var doSuccess = function (message) {
   util.showSuccess(message);
 };
 
+var doDelSuccess = function (number) {
+  doSuccess('删除'+number+'条记录')
+}
+
+var doUpdateSuccess = function (number) {
+  doSuccess('更新'+number+'条记录')
+}
+
 var doPrevPage = function (success) {
   var pages = getCurrentPages();
   var prevPage = pages[pages.length - 2];
@@ -672,22 +681,29 @@ module.exports = {
   url: doUrl,
   data: doData,
 
+  // 登录权限
   auth: doAuth,
   login: doLogin,
   check: doCheck,
   request: doRequest,
   post: doPost,
-  showError: doShowError,
-  showSuccess: doSuccess,
 
   plogin: poLogin,
   prequest: poRequest,
   ppost: poPost,
   http: doHttp,
 
+  // 提示信息
+  showError: doShowError,
+  showSuccess: doSuccess,
+  delSuccess: doDelSuccess,
+  updateSuccess: doUpdateSuccess,
+
+  // 数据相关
   add: doAdd,
   sort: doSort,
 
+  // 控件操作
   getId: doGetId,
   getUid: doGetUid,
   getValue: doGetValue,
@@ -706,7 +722,8 @@ module.exports = {
   setArr: doSetArr,
   delArr: doDelArr,
 
-  message: doMessage,
+  // 窗体相关
+  message: doFormMessage,
   checkForm: x5va.checkForm,
   prevPage: doPrevPage,
 }

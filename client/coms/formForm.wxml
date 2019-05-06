@@ -29,8 +29,8 @@
 				</view>
 			</view>
 			<comSubPick name="{{item.name}}" label="{{item.label}}" rangeKey="{{item.rangeKey}}"
-				valueKey="{{item.valueKey}}" selectKey="{{item.selectKey}}" url="{{item.url}}" picks="{{item.picks}}"
-				bind:subpickChange="subpickChange" wx:if="{{item.mode==3}}" />
+				valueKey="{{item.valueKey}}" selectKey="{{item.selectKey}}" url_q="{{item.url}}" data_q="{{item.data}}"
+				picks="{{item.picks}}" bind:subpickChange="subpickChange" wx:if="{{item.mode==3}}" />
 		</block>
 	</view>
 	<view class="weui-btn-area" wx:if="{{!mini}}">
