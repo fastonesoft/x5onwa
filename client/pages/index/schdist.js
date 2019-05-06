@@ -40,14 +40,14 @@ Page({
 	},
 
 	schosChange: function (e) {
-		var schos_uid = e.detail.uid
-		this.setData({ schos_uid })
+		var sch_uid = e.detail.uid
+		this.setData({ sch_uid })
 	},
 
 	schosRemove: function(e) {
 		var that = this
-		var schos_uid = that.data.schos_uid
-		e.detail.uid === schos_uid && that.setData({ schos_uid: null })
+		var sch_uid = that.data.sch_uid
+		e.detail.uid === sch_uid && that.setData({ sch_uid: null })
 		//
 		x5on.http(x5on.url.schdistremove, e.detail)
 		.then(number=>{
@@ -60,58 +60,20 @@ Page({
 
 	updateClick: function (e) {
 		var that = this
-		var rules = {
-			user_uid: {
-				required: true,
-			},
-			sch: {
-				required: true,
-				min: 0,
-			},
-		}
-		var messages = {
-			user_uid: {
-				required: '用户选择'
-			},
-			sch: {
-				required: '学校名称'
-			},
-		}
-		x5on.checkForm(e.detail.value, rules, messages, form => {
-			form.sch_uid = x5on.getUid(that.data.schos, form.sch)
-			x5on.post({
-				url: x5on.url.schdistdist,
-				data: form,
-				success(schos_members) {
-					schos_members.schoIndex = -1
-					that.setData(schos_members)
-				}
-			})
-		}, message => {
-			x5on.showError(that, message)
-		})
-
-
-		var that = this
 		var user_uid = that.data.user_uid
-		var schs_uid = that.data.schs_uid
-		user_uid && schs_uid && x5on.http(x5on.url.schsdistdist, { user_uid, schs_uid })
+		var sch_uid = that.data.sch_uid
+		user_uid && sch_uid && x5on.http(x5on.url.schdistdist, { user_uid, sch_uid })
 		.then(schs_members=>{
-			schs_members.schs_uid = null
+			schs_members.sch_uid = null
 			that.setData(schs_members)
 		})
 	},
 
 	memberRemove: function (e) {
 		var that = this
-		var uid = e.currentTarget.dataset.uid
-		x5on.post({
-			url: x5on.url.schdistdel,
-			data: { uid },
-			success(schos_members) {
-				schos_members.schoIndex = -1
-				that.setData(schos_members)
-			}
+		x5on.http(x5on.url.schdistdel, e.detail)
+		.then(schos_members=>{
+			that.setData(schos_members)
 		})
 	},
 

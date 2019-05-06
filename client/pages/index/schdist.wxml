@@ -10,7 +10,7 @@
 
 <view class="weui-cells__tips x5ui-mini">
 	<button type="primary" size="mini" bindtap="addClick" wx:if="{{schs_id}}">添加</button>
-	<button type="warn" size="mini" bindtap="updateClick" wx:if="{{user_uid && schos_uid}}">提交</button>
+	<button type="warn" size="mini" bindtap="updateClick" wx:if="{{user_uid && sch_uid}}">提交</button>
 </view>
 
 <comMemb membs="{{members}}" notitle="true" key="sch_name" split=" - " memo="user_name" bind:removeClick="memberRemove" />
