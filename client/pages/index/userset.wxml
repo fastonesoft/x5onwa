@@ -1,37 +1,8 @@
 <!--pages/index/userset.wxml-->
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
-<form bindsubmit="usersetSubmit" wx:if="{{notconfirmed}}">
-  <view class="weui-cells__title">信息修改</view>
-  <view class="weui-cells weui-cells_after-title">
-    <view class="weui-cell weui-cell_input">
-      <view class="weui-cell__hd">
-        <view class="weui-label">用户姓名</view>
-      </view>
-      <view class="weui-cell__bd">
-        <input class="weui-input" placeholder="输入您的姓名" name="name" value="{{name}}" type="text" maxlength="4" />
-      </view>
-    </view>
-    <view class="weui-cell weui-cell_input">
-      <view class="weui-cell__hd">
-        <view class="weui-label">手机号码</view>
-      </view>
-      <view class="weui-cell__bd">
-        <input class="weui-input" placeholder="输入您的手机号码" name="mobil" value="{{mobil}}" type="number" maxlength="11" />
-      </view>
-    </view>
-  </view>
-  <view class="weui-btn-area">
-    <button type="primary" form-type="submit">提交</button>
-  </view>
-</form>
-
 <comList title="个人信息" notitle="true" obj="{{user}}" mes="{{mes}}" />
 
-<view class="weui-cells__tips x5ui-mini" wx:if="{{!user.confirmed}}">
+<view class="weui-cells__tips x5ui-mini" wx:if="{{user.notconfirmed}}">
     <button type="primary" size="mini" bindtap="setClick">设置</button>
-</view>
-
-<view class="weui-btn-area">
-  <button type="primary" bindtap="returnClick">返回</button>
 </view>

@@ -19,23 +19,21 @@ Page({
     that.setData({ grade_id })
     x5on.http(x5on.url.schgradegroup, { grade_id })
     .then(membs => {
-      console.log(membs)
       that.setData({ membs })
     })
     .catch(error => {
-      console.log(error)
+      x5on.showError(that, error)
     })
   },
 
   removeClick: function (e) {
     let that = this
-    let { uid, membs } = e.detail
-    x5on.http(x5on.url.schgradegroupdel, { uid })
+    x5on.http(x5on.url.schgradegroupdel, e.detail)
       .then(number => {
         that.setData({ membs })
       })
       .catch(error => {
-        console.log(error)
+        x5on.showError(that, error)
       })
   },
   

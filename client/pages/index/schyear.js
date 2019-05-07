@@ -7,15 +7,13 @@ Page({
     var that = this
     x5on.http(x5on.url.schyear)
       .then(membs => {
-        console.log('----2---')
         that.setData({ membs })
       })
   },
 
   removeClick: function (e) {
     let that = this
-    let { uid, membs } = e.detail
-    x5on.http(x5on.url.schyeardel, { uid })
+    x5on.http(x5on.url.schyeardel, e.detail)
       .then(number => {
         that.setData({ membs })
       })

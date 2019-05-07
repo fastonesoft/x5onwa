@@ -58,8 +58,4 @@ Page({
     wx.navigateTo({ url: 'form_edit?json=' + JSON.stringify(json) })
   },
 
-  returnClick: function (e) {
-    wx.navigateBack()
-  }
-
 })

@@ -1,0 +1,25 @@
+<!--coms/comMema.wxml-->
+<block wx:if="{{memas.length>0}}">
+	<view class="weui-cells__title" wx:if="{{!notitle}}">{{title}}</view>
+	<view class="weui-cells weui-cells_after-title">
+		<view class="weui-cell" wx:for="{{memas}}" wx:key="uid">
+			<block wx:if="{{split}}">
+				<view class="weui-cell__bd" data-uid="{{item.uid}}" bindtap="gotoClick" wx:if="{{memo}}">
+					{{item[key]}}{{split}}{{item[memo]}}
+				</view>
+				<view class="weui-cell__bd" data-uid="{{item.uid}}" bindtap="gotoClick" wx:else>{{item[key]}}
+				</view>
+			</block>
+			<block wx:else>
+				<view class="weui-cell__bd" data-uid="{{item.uid}}" bindtap="gotoClick" wx:if="{{memo}}">
+					{{item[key]}}({{item[memo]}})
+				</view>
+				<view class="weui-cell__bd" data-uid="{{item.uid}}" bindtap="gotoClick" wx:else>{{item[key]}}
+				</view>
+			</block>
+			<view class="weui-cell__ft">
+				<icon type="success_circle" size="23" wx:if="{{item[selected]}}"></icon>
+			</view>
+		</view>
+	</view>
+</block>

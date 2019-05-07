@@ -52,9 +52,7 @@ Page({
 
   removeClick: function (e) {
     var that = this
-    let { uid, membs } = e.detail
-
-    x5on.http(x5on.url.userschdel, { uid })
+    x5on.http(x5on.url.userschdel, e.detail)
     .then()
     .catch(error => {
       x5on.showError(that, error)

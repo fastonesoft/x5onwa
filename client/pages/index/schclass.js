@@ -22,19 +22,18 @@ Page({
       that.setData({ membs })
     })
     .catch(error => {
-      console.log(error)
+      x5on.showError(that, error)
     })
   },
 
   removeClick: function (e) {
     let that = this
-    let { uid, membs } = e.detail
-    x5on.http(x5on.url.schclassdel, { uid })
+    x5on.http(x5on.url.schclassdel, e.detail)
       .then(number => {
         that.setData({ membs })
       })
       .catch(error => {
-        console.log(error)
+        x5on.showError(that, error)
       })
   },
   

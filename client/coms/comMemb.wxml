@@ -5,20 +5,23 @@
 		<view class="weui-cell" wx:for="{{membs}}" wx:key="uid">
 			<block wx:if="{{split}}">
 				<view class="weui-cell__bd" data-uid="{{item.uid}}" bindtap="editClick" wx:if="{{memo}}">
-					{{item[key]}}{{split}}{{item[memo]}}<block wx:if="{{item[selected]}}">　</block><icon type="success_no_circle" size="20" wx:if="{{item[selected]}}"></icon>
+					{{item[key]}}{{split}}{{item[memo]}}<block wx:if="{{item[selected]}}">　</block>
+					<icon type="success_no_circle" size="20" wx:if="{{item[selected]}}"></icon>
 				</view>
-				<view class="weui-cell__bd" data-uid="{{item.uid}}" bindtap="editClick" wx:else>{{item[key]}}<block wx:if="{{item[selected]}}">　</block><icon
-						type="success_no_circle" size="20" wx:if="{{item[selected]}}"></icon>
+				<view class="weui-cell__bd" data-uid="{{item.uid}}" bindtap="editClick" wx:else>{{item[key]}}<block
+						wx:if="{{item[selected]}}">　</block>
+					<icon type="success_no_circle" size="20" wx:if="{{item[selected]}}"></icon>
 				</view>
 			</block>
 			<block wx:else>
 				<view class="weui-cell__bd" data-uid="{{item.uid}}" bindtap="editClick" wx:if="{{memo}}">
-					{{item[key]}}({{item[memo]}})<block wx:if="{{item[selected]}}">　</block><icon type="success_no_circle" size="20" wx:if="{{item[selected]}}"></icon>
+					{{item[key]}}({{item[memo]}})<block wx:if="{{item[selected]}}">　</block>
+					<icon type="success_no_circle" size="20" wx:if="{{item[selected]}}"></icon>
 				</view>
-				<view class="weui-cell__bd" data-uid="{{item.uid}}" bindtap="editClick" wx:else>{{item[key]}}<block wx:if="{{item[selected]}}">　</block><icon
-						type="success_no_circle" size="20" wx:if="{{item[selected]}}"></icon>
+				<view class="weui-cell__bd" data-uid="{{item.uid}}" bindtap="editClick" wx:else>{{item[key]}}<block
+						wx:if="{{item[selected]}}">　</block>
+					<icon type="success_no_circle" size="20" wx:if="{{item[selected]}}"></icon>
 				</view>
-
 			</block>
 			<view class="weui-cell__ft">
 				<icon type="cancel" size="23" data-uid="{{item.uid}}" bindtap="removeClick"></icon>

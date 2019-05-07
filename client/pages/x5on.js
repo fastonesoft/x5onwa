@@ -402,6 +402,7 @@ var doSetCheckboxex = function (arrs, e_detail_value_uids, checked_obj_name, suc
   typeof success === 'function' && success(arrs)
 }
 
+/* 将fields数组中对象的mode为1、3的字段文字标签组织成message对象 */
 var doFormMessage = function (fields) {
   var res = {}
   for (let field of fields) {
@@ -414,6 +415,7 @@ var doFormMessage = function (fields) {
   return res
 }
 
+/* 用mes对象字段的文字标签来标识obj对象当中同字段的内容 */
 var doObjMessage = function(obj, mes) {
   var res = []
   for (var key in mes) {

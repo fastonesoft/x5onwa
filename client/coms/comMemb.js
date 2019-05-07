@@ -5,13 +5,13 @@ Component({
 
   properties: {
     membs: Array,
+    url: String,
     title: String,
     notitle: Boolean,
     key: String,
+    split: String,
     memo: String,
     selected: String,
-    url: String,
-    split: String,
   },
 
   lifetimes: {
@@ -37,7 +37,7 @@ Component({
       var uid = e.currentTarget.dataset.uid
       var membs = x5on.delArr(this.data.membs, 'uid', uid)
       this.setData({ membs })
-      this.triggerEvent('removeClick', { uid, membs })
+      this.triggerEvent('removeClick', { uid })
     },
 
     editClick: function (e) {

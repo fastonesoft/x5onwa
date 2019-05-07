@@ -42,8 +42,7 @@ Page({
 
   removeClick: function (e) {
     let that = this
-    let { uid, membs } = e.detail
-    x5on.http(x5on.url.schclassgroupdel, { uid })
+    x5on.http(x5on.url.schclassgroupdel, e.detail)
       .then(number => {
         that.setData({ membs })
       })

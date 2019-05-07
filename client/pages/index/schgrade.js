@@ -14,13 +14,12 @@ Page({
 
   removeClick: function (e) {
     let that = this
-    let { uid, membs } = e.detail
-    x5on.http(x5on.url.schgradedel, { uid })
+    x5on.http(x5on.url.schgradedel, e.detail)
       .then(number => {
         that.setData({ membs })
       })
       .catch(error => {
-        console.log(error)
+        x5on.showError(that, error)
       })
   },
 

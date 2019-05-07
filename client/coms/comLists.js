@@ -1,23 +1,20 @@
 // coms/comLists.js
+var x5on = require('../pages/x5on.js')
+
 Component({
-  /**
-   * 组件的属性列表
-   */
+
   properties: {
-
+    lists: Object,
+    mes: Object,
+    title: String,
+    notitle: Boolean,
   },
 
-  /**
-   * 组件的初始数据
-   */
-  data: {
-
+  observers: {
+    'lists, mes': function (lists, mes) {
+      var lists = x5on.objMessage(obj, mes)
+      this.setData({ lists })
+    }
   },
 
-  /**
-   * 组件的方法列表
-   */
-  methods: {
-
-  }
 })

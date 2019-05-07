@@ -1,4 +1,5 @@
 <!--pages/index/schgrade.wxml-->
+<view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
 <comMemb membs="{{membs}}" title="学校年级" notitle="true" key="step_name" memo="grade_name" bind:removeClick="removeClick" />
 
