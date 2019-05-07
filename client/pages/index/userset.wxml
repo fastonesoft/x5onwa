@@ -26,19 +26,12 @@
   </view>
 </form>
 
-<block wx:if="{{confirmed}}">
-  <view class="weui-cells__title">个人信息</view>
-  <view class="weui-cells weui-cells_after-title">
-    <view class="weui-cell">
-      <view class="weui-cell__bd">用户姓名</view>
-      <view class="weui-cell__ft">{{name}}</view>
-    </view>
-    <view class="weui-cell">
-      <view class="weui-cell__bd">手机号码</view>
-      <view class="weui-cell__ft">{{mobil}}</view>
-    </view>
-  </view>
-  <view class="weui-btn-area">
-    <button type="primary" bindtap="returnClick">返回</button>
-  </view>
-</block>
+<comList title="个人信息" notitle="true" obj="{{user}}" mes="{{mes}}" />
+
+<view class="weui-cells__tips x5ui-mini" wx:if="{{!user.confirmed}}">
+    <button type="primary" size="mini" bindtap="setClick">设置</button>
+</view>
+
+<view class="weui-btn-area">
+  <button type="primary" bindtap="returnClick">返回</button>
+</view>

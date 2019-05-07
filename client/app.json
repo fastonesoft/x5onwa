@@ -101,6 +101,8 @@
     "formFind": "../../coms/formFind",
     "formForm": "../../coms/formForm",
     "comMemb": "../../coms/comMemb",
+    "comList": "../../coms/comList",
+    "comLists": "../../coms/comLists",
     "comPick": "../../coms/comPick",
     "comRadio": "../../coms/comRadio",
     "comRadioMemb": "../../coms/comRadioMemb",

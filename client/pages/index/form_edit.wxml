@@ -1,4 +1,4 @@
 <!--pages/index/form_edit.wxml-->
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
-<formForm title="{{title}}" fields="{{fields}}" rules="{{rules}}" bind:formSubmit="formSubmit" />
+<formForm title="{{title}}" notitle="{{notitle}}" fields="{{fields}}" rules="{{rules}}" bind:formSubmit="formSubmit" />

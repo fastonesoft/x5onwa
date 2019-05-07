@@ -7,6 +7,7 @@ Page({
     var that = this
     x5on.http(x5on.url.schyear)
       .then(membs => {
+        console.log('----2---')
         that.setData({ membs })
       })
   },

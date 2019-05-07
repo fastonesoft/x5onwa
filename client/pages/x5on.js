@@ -414,6 +414,20 @@ var doFormMessage = function (fields) {
   return res
 }
 
+var doObjMessage = function(obj, mes) {
+  var res = []
+  for (var key in mes) {
+    for (var key_obj in obj) {
+      if (key_obj === key) {
+        var re = { name: mes[key], value: obj[key] }
+        res.push(re)
+        break
+      }
+    }
+  }
+  return res
+}
+
 /**
  * 关于错误代码
  * -1    ：   系统级出错代码，与登录有关，由系统检测
@@ -723,6 +737,7 @@ module.exports = {
   delArr: doDelArr,
 
   // 窗体相关
+  objMessage: doObjMessage,
   message: doFormMessage,
   checkForm: x5va.checkForm,
   prevPage: doPrevPage,

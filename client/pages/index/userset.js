@@ -3,19 +3,37 @@ var x5on = require('../x5on.js')
 
 Page({
 
-  onLoad: function () {
+  onLoad: function (e) {
     var that = this
-    x5on.request({
-      url: x5on.url.userset,
-      success(users) {
-        users.notconfirmed = !users.confirmed
-        that.setData(users)
+    x5on.http(x5on.url.userset)
+    .then(user=>{
+      var mes = {
+        name: '用户姓名',
+        mobil: '手机号码',
       }
+      that.setData({ mes, user })
     })
   },
 
-  usersetSubmit: function (e) {
-    var that = this
+  setClick: function (e) {
+    var user = this.data.user
+    var fields = [{
+      mode: 1,
+      label: '用户姓名',
+      message: '输入用户姓名',
+      name: 'name',
+      value: user.name,
+      type: 'text',
+      maxlength: 4,
+    }, {
+      mode: 1,
+      label: '手机号码',
+      message: '输入手机号码',
+      name: 'mobil',
+      value: user.mobil,
+      type: 'number',
+      maxlength: 11,
+    }]
     var rules = {
       name: {
         required: true,
@@ -24,29 +42,20 @@ Page({
       },
       mobil: {
         required: true,
+        minlength: 11,
         tel: true,
       }
     }
-    var messages = {
-      name: {
-        required: '用户姓名'
-      },
-      mobil: {
-        required: '手机号码'
-      }
-    }
-    x5on.checkForm(e.detail.value, rules, messages, form => {
-      x5on.post({
-        url: x5on.url.usersetupdate,
-        data: form,
-        success(users) {
-          users.notconfirmed = !users.confirmed
-          that.setData(users)
-        }
-      })
-    }, error => {
-      x5on.showError(that, error)
-    })
+
+    var json = {}
+    json.title = '信息变更'
+    json.notitle = true
+    json.url_u = x5on.url.usersetupdate
+    json.arrsName = 'user'
+    json.fields = fields
+    json.rules = rules
+
+    wx.navigateTo({ url: 'form_edit?json=' + JSON.stringify(json) })
   },
 
   returnClick: function (e) {

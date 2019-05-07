@@ -15,8 +15,7 @@ class Userset extends CI_Controller
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
         // 返回用户信息
-        $user_id = $userinfor->unionId;
-        $result = Model\xonUser::checkById($user_id);
+        $result = Model\xonUser::checkById($userinfor->unionId);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
