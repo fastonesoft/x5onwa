@@ -10,11 +10,4 @@ Component({
     notitle: Boolean,
   },
 
-  observers: {
-    'lists, mes': function (lists, mes) {
-      var lists = x5on.objMessage(obj, mes)
-      this.setData({ lists })
-    }
-  },
-
 })

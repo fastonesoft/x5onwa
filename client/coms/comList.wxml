@@ -1,6 +1,8 @@
 <!--coms/comList.wxml-->
 <block wx:if="{{list.length>0}}">
-    <view class="weui-cells__title" wx:if="{{!notitle}}">{{title}}</view>
+    <view class="weui-cells__title">
+        <block wx:if="{{!notitle}}">{{title}}</block>
+    </view>
     <view class="weui-cells weui-cells_after-title">
         <view class="weui-cell" wx:for="{{list}}" wx:key="name">
             <view class="weui-cell__bd">{{item.name}}</view>

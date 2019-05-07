@@ -3,6 +3,8 @@
 
 <comList title="个人信息" notitle="true" obj="{{user}}" mes="{{mes}}" />
 
+<comLists title="个人信息" lists="{{users}}" mes="{{mes}}" />
+
 <view class="weui-cells__tips x5ui-mini" wx:if="{{user.notconfirmed}}">
     <button type="primary" size="mini" bindtap="setClick">设置</button>
 </view>
