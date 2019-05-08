@@ -3,19 +3,26 @@
 namespace QCloud_WeApp_SDK\Mvv;
 
 use QCloud_WeApp_SDK\Model\x5on;
-use QCloud_WeApp_SDK\Model\xonSchool;
+use QCloud_WeApp_SDK\Model\xonSchStep;
 use QCloud_WeApp_SDK\Model\xonStudReg;
+use QCloud_WeApp_SDK\Model\xovChild;
+use QCloud_WeApp_SDK\Model\xovSchStep;
 
 class mvvStudreg
 {
-
   // 报名注册
-  public static function reg($user_id, $child_id, $sch_id, $edu_type_id)
+  public static function reg($user_id, $child_uid, $steps_uid)
   {
-    xonStudReg::existByCustom(compact('child_id', 'edu_type_id'), '同类学校只能报一个');
-    // 保存
-    $uid = x5on::getUid();
-    xonStudReg::insert(compact('uid', 'child_id', 'sch_id', 'user_id', 'edu_type_id'));
+    // 注册学校相关信息
+    $step = xovSchStep::checkByUidCustom($steps_uid, '没有找到编号对应学校年级');
+    $sch_id = $step->sch_id;
+    $steps_id = $step->id;
+    $edu_type_id = $step->edu_type_id;
+
+    $child = xovChild::checkByUidCustom($child_uid, '没有找到编号对应孩子信息');
+    $child_id = $child->id;
+
+    return xonStudReg::add($user_id, $child_id, $sch_id, $edu_type_id, $steps_id);
   }
 
   // 确认报名

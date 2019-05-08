@@ -16,5 +16,5 @@
 	</view>
 </view>
 
-<!-- <comPick title="标题" notitle="true" label="标签" name="字段名称" rangeKey="" selectKey="" valueKey="" url="" picks="{{}}"
+<!-- <comPick title="标题" notitle="{{true}}" label="标签" name="字段名称" rangeKey="" selectKey="" valueKey="" url="" picks="{{}}"
 	bind:pickChange="pickChange" /> -->

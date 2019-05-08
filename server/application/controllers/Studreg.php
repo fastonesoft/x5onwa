@@ -18,13 +18,13 @@ class Studreg extends CI_Controller
         $user_id = $userinfor->unionId;
         $my_user_id = $user_id;
         $childs = Model\xovUserChilds::getsBy(compact('user_id'));
+        // 地级市开头的形式
         $area_type = 2;
         $areas = Model\xovAreas::getsBy(compact('area_type'));
-        $edutypes = Model\xonEduType::gets();
         // 用户孩子的报名信息
         $studregs = Model\xovUserChildsReg::getsBy(compact('my_user_id'));
 
-        $this->json(['code' => 0, 'data' => compact('childs', 'areas', 'edutypes', 'studregs')]);
+        $this->json(['code' => 0, 'data' => compact('childs', 'areas', 'studregs')]);
       } catch (Exception $e) {
         $this->json(['code' => 1, 'data' => $e->getMessage()]);
       }
@@ -40,9 +40,8 @@ class Studreg extends CI_Controller
       try {
         $param = $_POST;
         $area_id = $param['area_id'];
-        $edu_type_id = $param['edu_type_id'];
-        $can_recruit = 0;
-        $result = Model\xovSchoolStep::getsBy(compact('area_id', 'edu_type_id', 'can_recruit'));
+        $can_recruit = 1;
+        $result = Model\xovSchStep::getsBy(compact('area_id', 'can_recruit'));
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -59,16 +58,10 @@ class Studreg extends CI_Controller
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
         $param = $_POST;
-        $steps_id = $param['steps_id'];
-        $child_id = $param['child_id'];
+        $steps_uid = $param['steps_uid'];
+        $child_uid = $param['child_uid'];
 
-        // 注册学校相关信息
-        $step = Model\xovSchoolStep::checkByIdCustom($steps_id, '没有找到编号对应学校');
-        $sch_id = $step->sch_id;
-        $edu_type_id = $step->edu_type_id;
-
-        $user_id = $userinfor->unionId;
-        $result = Model\xonStudReg::add($user_id, $child_id, $sch_id, $edu_type_id, $steps_id);
+        $result = Mvv\mvvStudreg::reg($userinfor->unionId, $child_uid, $steps_uid);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {

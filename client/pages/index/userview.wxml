@@ -1,7 +1,7 @@
 <!--pages/index/userview.wxml-->
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
-<formFind title="教师查询" notitle="true" label="教师姓名" bind:findSubmit="findSubmit" />
+<formFind title="教师查询" notitle="{{true}}" label="教师姓名" bind:findSubmit="findSubmit" />
 <comRadio radios="{{sch_users}}" key="user_name" memo="nick_name" bind:radioChange="radioChange" />
 
 <formSwitch switchs="{{groups}}" title="分组设置" key="name" checked="has_role" bind:formSubmit="formSubmit" />

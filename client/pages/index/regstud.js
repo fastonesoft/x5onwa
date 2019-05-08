@@ -3,18 +3,37 @@ var x5on = require('../x5on.js')
 
 Page({
 
-  data: {
-    areaIndex: 0,
-  },
-
   onLoad: function () {
     var that = this
-    x5on.request({
-      url: x5on.url.regstud,
-      success(childs_areas_edutypes_studregs) {
-        that.setData(childs_areas_edutypes_studregs)
-      }
+    x5on.http(x5on.url.regstud)
+    .then(childs_areas_edutypes_studregs=>{
+      that.setData(childs_areas_edutypes_studregs)
     })
+    .catch(error=>{
+      x5on.showError(that, error)
+    })
+  },
+
+  childChange: function(e) {
+    var child_uid = e.detail.uid
+    this.setData({ child_uid })
+  },
+
+  
+  pickChange: function(e) {
+    var that = this
+    x5on.http(x5on.url.regstudstep, e.detail)
+    .then(schs=>{
+      that.setData({ schs })
+    })
+    .catch(error=>{
+      x5on.showError(that, error)
+    })
+  },
+
+  schChange: function(e) {
+    var sch_uid = e.detail.uid
+    this.setData({ sch_uid })
   },
 
   schoolQuery: function (formValue) {

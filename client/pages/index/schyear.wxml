@@ -1,6 +1,6 @@
 <!--pages/index/schyear.wxml-->
 
-<comMemb membs="{{membs}}" title="年度列表" notitle="true" key="year" selected="current_year" bind:editClick="editClick" bind:removeClick="removeClick" />
+<comMemb membs="{{membs}}" title="年度列表" notitle="{{true}}" key="year" selected="current_year" bind:editClick="editClick" bind:removeClick="removeClick" />
 
 <view class="weui-btn-area">
 	<button type="primary" bindtap="addClick">添加</button>

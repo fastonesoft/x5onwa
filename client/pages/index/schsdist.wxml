@@ -1,7 +1,7 @@
 <!--pages/index/schsdist.wxml-->
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
-<formFind title="用户查询" notitle="true" label="用户姓名" bind:findSubmit="findSubmit" />
+<formFind title="用户查询" notitle="{{true}}" label="用户姓名" bind:findSubmit="findSubmit" />
 <comRadio radios="{{users}}" key="name" memo="nick_name" bind:radioChange="userChange" />
 <comPick title="地区设置" label="地区选择" name="area_id" rangeKey="city_name" selectKey="city_name" valueKey="id" picks="{{areas}}"
 	bind:pickChange="areaPick" />
@@ -13,5 +13,5 @@
 	<button type="warn" size="mini" bindtap="updateClick" wx:if="{{user_uid && schs_uid}}">提交</button>
 </view>
 
-<formFind title="成员查询" notitle="true" label="成员姓名" bind:findSubmit="memberSubmit" wx:if="{{members.length>0}}" />
+<formFind title="成员查询" notitle="{{true}}" label="成员姓名" bind:findSubmit="memberSubmit" wx:if="{{members.length>0}}" />
 <comMemb membs="{{members}}" key="name" split=" - " memo="user_name" bind:removeClick="memberRemove" />

@@ -1,7 +1,7 @@
 <!--pages/index/schdist.wxml-->
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
-<formFind title="用户查询" notitle="true" label="用户姓名" bind:findSubmit="findSubmit" />
+<formFind title="用户查询" notitle="{{true}}" label="用户姓名" bind:findSubmit="findSubmit" />
 <comRadio radios="{{users}}" key="name" memo="nick_name" bind:radioChange="userChange" />
 <comPick title="集团设置" label="集团选择" name="schs_id" rangeKey="name" selectKey="name" valueKey="id" picks="{{schs}}"
 	bind:pickChange="schsPick" />
@@ -13,4 +13,4 @@
 	<button type="warn" size="mini" bindtap="updateClick" wx:if="{{user_uid && sch_uid}}">提交</button>
 </view>
 
-<comMemb membs="{{members}}" notitle="true" key="sch_name" split=" - " memo="user_name" bind:removeClick="memberRemove" />
+<comMemb membs="{{members}}" notitle="{{true}}" key="sch_name" split=" - " memo="user_name" bind:removeClick="memberRemove" />

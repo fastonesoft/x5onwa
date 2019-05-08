@@ -1,6 +1,6 @@
 <!--pages/index/schclass.wxml-->
 
-<comRadio radios="{{radios}}" title="学校年级" notitle="true" key="step_name" memo="grade_name" bind:radioChange="radioChange" />
+<comRadio radios="{{radios}}" title="学校年级" notitle="{{true}}" key="step_name" memo="grade_name" bind:radioChange="radioChange" />
 
 <comMemb membs="{{membs}}" key="cls_name" split=" - " memo="cls_order" bind:editClick="editClick" bind:removeClick="removeClick" />
 

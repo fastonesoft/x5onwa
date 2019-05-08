@@ -1,62 +1,15 @@
 <!-- pages/index/regstud.wxml -->
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
-<comRadio radios="{{childs}}" key="child_name" memo="nick_name" bind:radioChange="radioChange" />
+<comRadio notitle="{{true}}" radios="{{childs}}" key="child_name" bind:radioChange="childChange" />
+<comPick title="地区学校" label="地区选择" name="area_id" rangeKey="city_name" selectKey="city_name" valueKey="id" picks="{{areas}}"
+  bind:pickChange="pickChange" />
+<comRadio radios="{{schs}}" key="schs_steps" bind:radioChange="schChange" />
 
-<view class="weui-cells__title">地区类型</view>
-<view class="weui-cells weui-cells_after-title">
-  <view class="weui-cell weui-cell_select">
-    <view class="weui-cell__hd weui-cell__hd_in-select-after x5ui-btn_half">
-      <picker bindchange="areaChange" name="area" value="{{areaIndex}}" range="{{areas}}" range-key="city_name"
-        disabled="{{!areas||areas.length==0||areas.length==1}}">
-        <view class="weui-select weui-select_in-select-after">{{areas[areaIndex].city_name}}</view>
-      </picker>
-    </view>
-    <view class="weui-cell__bd weui-cell__hd_in-select-after">
-      <picker bindchange="edutypeChange" name="edutype" value="{{edutypeIndex}}" range="{{edutypes}}" range-key="name"
-        disabled="{{!edutypes||edutypes.length==0}}">
-        <view class="weui-select weui-select_in-select-after">{{edutypes[edutypeIndex].name}}</view>
-      </picker>
-    </view>
-  </view>
-</view>
 
-<form bindsubmit="regstudSubmit">
-  <view class="weui-cells__title">报名学校</view>
-  <view class="weui-cells weui-cells_after-title">
-    <view class="weui-cell weui-cell_select">
-      <view class="weui-cell__hd weui-cell__hd_in-select-after">
-        <view class="weui-label">学校选择</view>
-      </view>
-      <view class="weui-cell__bd">
-        <picker bindchange="stepChange" name="step" value="{{stepIndex}}" range="{{steps}}" range-key="schs_sch"
-          disabled="{{!steps||steps.length==0}}">
-          <view class="weui-select weui-select_in-select-after">{{steps[stepIndex].schs_steps}}</view>
-        </picker>
-      </view>
-    </view>
-  </view>
 
-  <view class="weui-cells__title">报名学生</view>
-  <view class="weui-cells weui-cells_after-title">
-    <view class="weui-cell weui-cell_select">
-      <view class="weui-cell__hd weui-cell__hd_in-select-after">
-        <view class="weui-label">学生选择</view>
-      </view>
-      <view class="weui-cell__bd">
-        <picker bindchange="childChange" name="child" value="{{childIndex}}" range="{{childs}}" range-key="child_name"
-          disabled="{{!childs||childs.length==0}}">
-          <view class="weui-select weui-select_in-select-after">
-            {{childs[childIndex].child_name}}
-          </view>
-        </picker>
-      </view>
-    </view>
-  </view>
-  <view class="weui-btn-area">
-    <button type="primary" form-type="submit">报名</button>
-  </view>
-</form>
+
+
 
 <block wx:if="{{studregs.length>0}}">
   <view class="weui-cells__title">报名信息</view>
@@ -77,16 +30,13 @@
 
     </view>
     <view class="weui-cells__tips x5ui-mini">
-      <button data-uid="{{item.uid}}" type="primary" size="mini" wx:if="{{!item.confirmed}}"
-        bindtap="checkClick">
+      <button data-uid="{{item.uid}}" type="primary" size="mini" wx:if="{{!item.confirmed}}" bindtap="checkClick">
         确认
       </button>
-      <button data-uid="{{item.uid}}" type="warn" size="mini" wx:if="{{!item.confirmed}}"
-        bindtap="cancelClick">
+      <button data-uid="{{item.uid}}" type="warn" size="mini" wx:if="{{!item.confirmed}}" bindtap="cancelClick">
         取消
       </button>
-      <button data-uid="{{item.child_uid}}" type="default" size="mini" wx:if="{{item.confirmed}}"
-        bindtap="regedClick">
+      <button data-uid="{{item.child_uid}}" type="default" size="mini" wx:if="{{item.confirmed}}" bindtap="regedClick">
         详细信息
       </button>
     </view>
