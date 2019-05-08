@@ -11,6 +11,7 @@ Page({
         name: '用户姓名',
         mobil: '手机号码',
       }
+      user.notconfirmed = !user.confirmed
       that.setData({ mes, user })
     })
   },

@@ -52,7 +52,7 @@ class Userset extends CI_Controller
 
   public function role()
   {
-    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
+    Mvv\mvvLogin::check(self::role_name, function ($userinfor) { 
       try {
         $user_id = $userinfor->unionId;
         // 获取用户及学校权限

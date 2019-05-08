@@ -8,6 +8,7 @@ Component({
     mes: Object,
     title: String,
     notitle: Boolean,
+    notitletext: Boolean,
   },
 
   observers: {

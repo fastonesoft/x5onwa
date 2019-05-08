@@ -1,4 +1,6 @@
 <!--coms/comLists.wxml-->
-<block wx:for="{{lists}}" wx:key="*this" wx:for-index="index">
-    <comList title="{{title}}" notitle="{{index}}" obj="{{item}}" mes="{{mes}}" />
+<block wx:for="{{lists}}" wx:key="" wx:for-index="index">
+    <comList title="{{title}}" notitletext="{{index}}" obj="{{item}}" mes="{{mes}}" />
 </block>
+
+<!-- <comLists title="个人信息" notitle="true" lists="{{users}}" mes="{{mes}}" /> -->
