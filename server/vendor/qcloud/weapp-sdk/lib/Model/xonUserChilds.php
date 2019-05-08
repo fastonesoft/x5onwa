@@ -12,5 +12,6 @@ class xonUserChilds extends cAppinfo
 
     $uid = x5on::getUid();
     self::insert(compact('uid', 'user_id', 'child_id', 'relation_id'));
+    return $uid;
   }
 }

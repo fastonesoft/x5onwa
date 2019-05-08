@@ -28,8 +28,14 @@ Page({
             var arrsName = that.data.arrsName
             if (arrsName) {
               var arrs = page.data[arrsName]
-              arrs = x5on.add(arrs, item, 'id')
-              page.setData({ [arrsName]: arrs })
+              if (Array.isArray(arrs)) {
+                // 检测是否为数组，是数组，删除原始，插入新值
+                arrs = x5on.add(arrs, item, 'id')
+                page.setData({ [arrsName]: arrs })
+              } else {
+                // 不是数组，直接更新字段
+                page.setData({ [arrsName]: result })
+              }
             } else {
               // 没有地址，没有字段，更新数据
               page.setData(item)

@@ -11,4 +11,4 @@
     </view>
 </block>
 
-<!-- <comList title="{{title}}" notitletext="{{index}}" obj="{{item}}" mes="{{mes}}" /> -->
+<!-- <comList title="{{title}}" notitle="{{notitle}}" notitletext="{{index}}" obj="{{item}}" mes="{{mes}}" /> -->
