@@ -1,53 +1,8 @@
 <!-- pages/index/userchilds.wxml -->
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
-<comLists title="我的孩子" notitle="false" lists="{{userchilds}}" mes="{{mes}}" />
+<comLists title="我的孩子" notitle="{{true}}" lists="{{userchilds}}" mes="{{mes}}" />
 
 <view class="weui-cells__tips x5ui-mini" wx:if="{{userchilds.length<2}}">
     <button type="primary" size="mini" bindtap="addClick">添加</button>
 </view>
-
-<form bindsubmit="userchildSubmit" wx:if="{{userchilds.length<2}}">
-  <view class="weui-cells__title">孩子信息</view>
-  <view class="weui-cells weui-cells_after-title">
-    <view class="weui-cell weui-cell_input">
-      <view class="weui-cell__hd">
-        <view class="weui-label">孩子姓名</view>
-      </view>
-      <view class="weui-cell__bd">
-        <input class="weui-input" placeholder="请输入孩子姓名" name="name" type="text" maxlength="4" />
-      </view>
-      <view class="weui-cell__ft" wx:if="{{error.name}}">
-        <icon type="warn" size="23"></icon>
-      </view>
-    </view>
-    <view class="weui-cell weui-cell_input">
-      <view class="weui-cell__hd">
-        <view class="weui-label">身份证号</view>
-      </view>
-      <view class="weui-cell__bd">
-        <input class="weui-input" placeholder="请输入孩子身份证号" name="idc" type="idcard" maxlength="18" />
-      </view>
-      <view class="weui-cell__ft" wx:if="{{error.idc}}">
-        <icon type="warn" size="23"></icon>
-      </view>
-    </view>
-  </view>
-  <view class="weui-cells__title">亲子关系</view>
-  <view class="weui-cells weui-cells_after-title">
-    <view class="weui-cell weui-cell_select">
-      <view class="weui-cell__hd weui-cell__hd_in-select-after">
-        <view class="weui-label">亲子称谓</view>
-      </view>
-      <view class="weui-cell__bd">
-        <picker name="relation" bindchange="relationChange" value="{{relationIndex}}" range="{{relations}}" range-key="name"
-          disabled="{{!relations||relations.length==0}}">
-          <view class="weui-select weui-select_in-select-after">{{relations[relationIndex].name}}</view>
-        </picker>
-      </view>
-    </view>
-  </view>
-  <view class="weui-btn-area">
-    <button type="primary" form-type="submit">提交</button>
-  </view>
-</form>

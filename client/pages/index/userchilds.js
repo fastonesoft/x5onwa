@@ -17,12 +17,6 @@ Page({
     .catch(error=>{
       x5on.showError(that, error)
     })
-    // x5on.request({
-    //   url: x5on.url.userchildsrelation,
-    //   success(relations) {
-    //     that.setData({ relations })
-    //   }
-    // })
   },
 
   addClick: function(e) {
@@ -77,62 +71,5 @@ Page({
 
     wx.navigateTo({ url: 'form_add?json=' + JSON.stringify(json) })
   },
-
-  relationChange: function (e) {
-    x5on.setPick(e, relationIndex => {
-      this.setData({ relationIndex })
-    })
-  },
-
-  userchildSubmit: function (e) {
-    var that = this
-    var rules = {
-      name: {
-        required: true,
-        chinese: true,
-        rangelength: [2, 4],
-      },
-      idc: {
-        required: true,
-        idcard: true,
-        idcardrange: [7, 18],
-      },
-      relation: {
-        required: true,
-        min: 0,
-      }
-    }
-    var messages = {
-      name: {
-        required: '孩子姓名'
-      },
-      idc: {
-        required: '身份证号'
-      },
-      relation: {
-        required: '亲子称谓'
-      }
-    }
-    x5on.checkForm(e.detail.value, rules, messages, (form, error) => {
-      form.relation_id = x5on.getId(that.data.relations, form.relation)
-      x5on.post({
-        url: x5on.url.userchildsreg,
-        data: form,
-        success(userchilds) {
-          that.setData({ userchilds, error })
-        },
-        fail() {
-          that.setData({ error })
-        }
-      })
-    }, (message, error) => {
-      that.setData({ error })
-      x5on.showError(that, message)
-    })
-  },
-
-  returnClick: function (e) {
-    wx.navigateBack()
-  }
 
 })

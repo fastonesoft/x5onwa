@@ -3,4 +3,4 @@
     <comList title="{{title}}" notitle="{{notitle}}" notitletext="{{index}}" obj="{{item}}" mes="{{mes}}" />
 </block>
 
-<!-- <comLists title="我的孩子" notitle="true" lists="{{userchilds}}" mes="{{mes}}" /> -->
+<!-- <comLists title="我的孩子" notitle="{{true}}" lists="{{userchilds}}" mes="{{mes}}" /> -->
