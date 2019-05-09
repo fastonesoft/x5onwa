@@ -21,7 +21,9 @@ class xonStudReg extends cAppinfo
     xonStudReg::existByCustom(compact('child_id', 'edu_type_id'), '同一学段学校不得重复报名');
 
     $uid = x5on::getUid();
-    xonStudReg::insert(compact('uid', 'user_id', 'child_id', 'sch_id', 'edu_type_id', 'steps_id'));
+    // 默认为非指标生
+    $stud_auth = 0;
+    xonStudReg::insert(compact('uid', 'user_id', 'child_id', 'sch_id', 'edu_type_id', 'steps_id', 'stud_auth'));
 
     return xovStudReg::getByUid($uid);
   }

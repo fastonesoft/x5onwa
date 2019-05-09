@@ -8,8 +8,8 @@ Page({
     x5on.http(x5on.url.userset)
     .then(user=>{
       var mes = {
-        name: '用户姓名',
-        mobil: '手机号码',
+        name: { label: '用户姓名', type: 0 },
+        mobil: { label: '手机号码', type: 0 },
       }
       user.notconfirmed = !user.confirmed
       that.setData({ mes, user })

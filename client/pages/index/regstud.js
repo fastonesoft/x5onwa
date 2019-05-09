@@ -5,6 +5,13 @@ Page({
 
   onLoad: function () {
     var that = this
+    var mes = {
+      edu_type_name: { label: '学校类型', type: 0 },
+      schs_steps: { label: '学校分级', type: 0 },
+      child_name: { label: '报名学生', type: 0 },
+    }
+    that.setData({ mes })
+    //
     x5on.http(x5on.url.regstud)
     .then(childs_areas_edutypes_studregs=>{
       that.setData(childs_areas_edutypes_studregs)
@@ -24,7 +31,7 @@ Page({
     var that = this
     x5on.http(x5on.url.regstudstep, e.detail)
     .then(steps=>{
-      that.setData({ steps })
+      that.setData({ steps, steps_uid: null })
     })
     .catch(error=>{
       x5on.showError(that, error)
