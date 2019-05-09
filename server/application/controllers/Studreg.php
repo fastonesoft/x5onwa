@@ -22,7 +22,7 @@ class Studreg extends CI_Controller
         $area_type = 2;
         $areas = Model\xovAreas::getsBy(compact('area_type'));
         // 用户孩子的报名信息
-        $studregs = Model\xovUserChildsReg::getsBy(compact('my_user_id'));
+        $studregs = Model\xovStudRegUser::getsBy(compact('my_user_id'));
 
         $this->json(['code' => 0, 'data' => compact('childs', 'areas', 'studregs')]);
       } catch (Exception $e) {
@@ -93,27 +93,14 @@ class Studreg extends CI_Controller
     });
   }
 
-  public function studenroll()
+  public function enroll()
   {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
         $param = $_POST;
         $uid = $param['uid'];
 
-        // 根据孩子编号，获取学生相关信息，包括二维码
-        $qrcode_data = Model\x5on::getQrcodeBase64($uid);
 
-        // 一、基本信息
-        $child = Model\xonChild::checkByUid($uid);
-        $child_id = $child->id;
-
-        // 二、用户孩子"已确认"的报名信息
-        $my_user_id = $userinfor->unionId;
-        $confirmed = 1;
-        $studregs = Model\xovUserChildsReg::getsBy(compact('my_user_id', 'confirmed'));
-
-        // 三、录取信息
-        $students = Model\xovStudent::getsBy(compact('child_id'));
 
         $this->json(['code' => 0, 'data' => compact('qrcode_data', 'child', 'students', 'studregs')]);
       } catch (Exception $e) {

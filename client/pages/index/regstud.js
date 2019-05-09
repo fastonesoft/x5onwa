@@ -9,6 +9,7 @@ Page({
       edu_type_name: { label: '学校类型', type: 0 },
       schs_steps: { label: '学校分级', type: 0 },
       child_name: { label: '报名学生', type: 0 },
+      passed: { label: '审核通过', type: 1 },
     }
     that.setData({ mes })
     //

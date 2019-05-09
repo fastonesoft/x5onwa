@@ -3,10 +3,13 @@
 namespace QCloud_WeApp_SDK\Mvv;
 
 use QCloud_WeApp_SDK\Model\x5on;
+use QCloud_WeApp_SDK\Model\xonChild;
 use QCloud_WeApp_SDK\Model\xonSchStep;
 use QCloud_WeApp_SDK\Model\xonStudReg;
 use QCloud_WeApp_SDK\Model\xovChild;
 use QCloud_WeApp_SDK\Model\xovSchStep;
+use QCloud_WeApp_SDK\Model\xovStudent;
+use QCloud_WeApp_SDK\Model\xovStudRegUser;
 use QCloud_WeApp_SDK\Model\xovUserChilds;
 
 class mvvStudreg
@@ -24,6 +27,18 @@ class mvvStudreg
     $child_id = $user_child->child_id;
 
     return xonStudReg::add($user_id, $child_id, $sch_id, $edu_type_id, $steps_id);
+  }
+
+  public static function enroll($my_user_id, $uid) {
+    // 根据孩子编号，检测是否是我的孩子
+    $stud_reg = xovStudRegUser::checkBy(compact('my_user_id', 'uid'));
+    $child_id = $stud_reg->child_id;
+
+    // 根据孩子编号，获取学生相关信息，包括二维码
+    $qrcode_data = x5on::getQrcodeBase64($uid);
+
+    // 录取信息
+    $students = xovStudent::getsBy(compact('child_id'));
   }
 
   // 取消报名

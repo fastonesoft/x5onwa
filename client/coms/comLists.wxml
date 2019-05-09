@@ -2,8 +2,10 @@
 <block wx:for="{{lists}}" wx:key="" wx:for-index="index">
     <comList title="{{title}}" notitle="{{notitle}}" notitletext="{{index}}" obj="{{item}}" mes="{{mes}}" />
     <view class="weui-cells__tips x5ui-mini" wx:if="{{detail}}">
-        <button type="default" size="mini" data-uid="{{item.uid}}" bindtap="detailClick">详细信息</button>
+        <button class="weui-btn mini-btn" type="primary" size="mini" data-uid="{{item[selectKey]}}"
+            bindtap="detailClick">详细</button>
     </view>
+    <view class="weui-cells__tips" wx:if="{{tips}}">{{tips}}</view>
 </block>
 
-<!-- <comLists title="我的孩子" notitle="{{true}}" detail="{{1}}" lists="{{userchilds}}" mes="{{mes}}" /> -->
+<!-- <comLists title="报名信息" notitle="{{0}}" selectKey="child_uid" detail="{{1}}" lists="{{studregs}}" mes="{{mes}}" bind:detailClick="detailClick" /> -->

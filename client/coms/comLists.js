@@ -9,6 +9,8 @@ Component({
     title: String,
     notitle: Boolean,
     detail: Boolean,
+    selectKey: String,
+    tips: String,
   },
 
   methods: {
