@@ -2,12 +2,16 @@
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
 <comRadio notitle="{{true}}" radios="{{childs}}" key="child_name" bind:radioChange="childChange" />
-<comPick title="地区学校" label="地区选择" name="area_id" rangeKey="city_name" selectKey="city_name" valueKey="id" picks="{{areas}}"
-  bind:pickChange="pickChange" />
-<comRadio radios="{{schs}}" key="schs_steps" bind:radioChange="schChange" />
+<comPick title="地区学校" label="地区选择" name="area_id" rangeKey="city_name" selectKey="city_name" valueKey="id"
+  picks="{{areas}}" bind:pickChange="pickChange" />
+<comRadio radios="{{steps}}" key="schs_steps" bind:radioChange="stepChange" />
 
 
-
+<view class="weui-cells__tips x5ui-mini">
+  <button type="primary" size="mini" wx:if="{{child_uid&&steps_uid}}" bindtap="checkClick">
+    确认
+  </button>
+</view>
 
 
 
@@ -27,10 +31,9 @@
         <view class="weui-cell__bd">报名学生</view>
         <view class="weui-cell__ft">{{item.child_name}}</view>
       </view>
-
     </view>
     <view class="weui-cells__tips x5ui-mini">
-      <button data-uid="{{item.uid}}" type="primary" size="mini" wx:if="{{!item.confirmed}}" bindtap="checkClick">
+      <button data-uid="{{item.uid}}" type="primary" size="mini" wx:if="{{!item.confirmed}}" bindtap="checkClick11">
         确认
       </button>
       <button data-uid="{{item.uid}}" type="warn" size="mini" wx:if="{{!item.confirmed}}" bindtap="cancelClick">

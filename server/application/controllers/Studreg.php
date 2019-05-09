@@ -72,27 +72,6 @@ class Studreg extends CI_Controller
     });
   }
 
-  // 确认报名
-  public function check()
-  {
-    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
-      try {
-        $param = $_POST;
-        $stud_reg_uid = $param['uid'];
-
-        // 根据用户及注册编号，确认注册信息
-        $user_id = $userinfor->unionId;
-        Mvv\mvvStudreg::checked($user_id, $stud_reg_uid);
-
-        $this->json(['code' => 0, 'data' => $stud_reg_uid]);
-      } catch (Exception $e) {
-        $this->json(['code' => 1, 'data' => $e->getMessage()]);
-      }
-    }, function ($error) {
-      $this->json($error);
-    });
-  }
-
   // 取消报名
   public function cancel()
   {

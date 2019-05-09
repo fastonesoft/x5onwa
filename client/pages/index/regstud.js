@@ -23,17 +23,32 @@ Page({
   pickChange: function(e) {
     var that = this
     x5on.http(x5on.url.regstudstep, e.detail)
-    .then(schs=>{
-      that.setData({ schs })
+    .then(steps=>{
+      that.setData({ steps })
     })
     .catch(error=>{
       x5on.showError(that, error)
     })
   },
 
-  schChange: function(e) {
-    var sch_uid = e.detail.uid
-    this.setData({ sch_uid })
+  stepChange: function(e) {
+    var steps_uid = e.detail.uid
+    this.setData({ steps_uid })
+  },
+
+  checkClick: function(e) {
+    var that = this
+    var steps_uid = that.data.steps_uid
+    var child_uid = that.data.child_uid
+    steps_uid && child_uid && x5on.http(x5on.url.regstudreg, { steps_uid, child_uid })
+    .then(studreg=>{
+      var studregs = that.data.studregs
+      studregs.push(studreg)
+      that.setData({ studregs })
+    })
+    .catch(error=>{
+      x5on.showError(that, error)
+    })
   },
 
   schoolQuery: function (formValue) {
@@ -72,39 +87,6 @@ Page({
     })
   },
 
-  areaChange: function (e) {
-    x5on.setPick(e, areaIndex => {
-      this.setData({ areaIndex })
-      //
-      var form = {}
-      form.area = areaIndex
-      form.edutype = this.data.edutypeIndex
-      this.schoolQuery(form)
-    })
-  },
-
-  edutypeChange: function (e) {
-    x5on.setPick(e, edutypeIndex => {
-      this.setData({ edutypeIndex })
-      //
-      var form = {}
-      form.area = this.data.areaIndex
-      form.edutype = edutypeIndex
-      this.schoolQuery(form)
-    })
-  },
-
-  stepChange: function (e) {
-    x5on.setPick(e, stepIndex => {
-      this.setData({ stepIndex })
-    })
-  },
-
-  childChange: function (e) {
-    x5on.setPick(e, childIndex => {
-      this.setData({ childIndex })
-    })
-  },
 
   regstudSubmit: function (e) {
     var that = this
@@ -143,18 +125,16 @@ Page({
     })
   },
 
-  checkClick: function (e) {
-    var that = this
-    x5on.post({
-      data: e.currentTarget.dataset,
-      url: x5on.url.regstudcheck,
-      success(stud_reg_uid) {
-        var studregs = x5on.setArr(that.data.studregs, 'uid', stud_reg_uid, {
-          confirmed: 1
-        })
-        that.setData({ studregs })
-      }
-    })
+  checkClick11: function (e) {
+    var mes = {
+      child_name: { label: '孩子姓名', type: 0 },
+      child_idc: { label: '身份证号', type: 0 },
+      child_relation: { label: '亲子关系', type: 0 },
+    }
+
+    for (var me in mes) {
+      console.log(me)
+    }
   },
 
   cancelClick: function (e) {
@@ -177,9 +157,5 @@ Page({
       url: `/pages/index/studenroll?uid=${e.currentTarget.dataset.uid}`
     })
   },
-
-  returnClick: function (e) {
-    wx.navigateBack()
-  }
 
 })

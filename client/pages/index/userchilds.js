@@ -8,9 +8,9 @@ Page({
     x5on.http(x5on.url.userchilds)
     .then(userchilds=>{
       var mes = {
-        child_name: '孩子姓名',
-        child_idc: '身份证号',
-        child_relation: '亲子关系',
+        child_name: { label: '孩子姓名', type: 0 },
+        child_idc: { label: '身份证号', type: 0 },
+        child_relation: { label: '亲子关系', type: 0 },
       }
       that.setData({ mes, userchilds })
     })

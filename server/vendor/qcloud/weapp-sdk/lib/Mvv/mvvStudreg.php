@@ -7,6 +7,7 @@ use QCloud_WeApp_SDK\Model\xonSchStep;
 use QCloud_WeApp_SDK\Model\xonStudReg;
 use QCloud_WeApp_SDK\Model\xovChild;
 use QCloud_WeApp_SDK\Model\xovSchStep;
+use QCloud_WeApp_SDK\Model\xovUserChilds;
 
 class mvvStudreg
 {
@@ -14,23 +15,15 @@ class mvvStudreg
   public static function reg($user_id, $child_uid, $steps_uid)
   {
     // 注册学校相关信息
-    $step = xovSchStep::checkByUidCustom($steps_uid, '没有找到编号对应学校年级');
-    $sch_id = $step->sch_id;
-    $steps_id = $step->id;
-    $edu_type_id = $step->edu_type_id;
+    $steps = xovSchStep::checkByUidCustom($steps_uid, '没有找到编号对应学校年级');
+    $sch_id = $steps->sch_id;
+    $steps_id = $steps->id;
+    $edu_type_id = $steps->edu_type_id;
 
-    $child = xovChild::checkByUidCustom($child_uid, '没有找到编号对应孩子信息');
-    $child_id = $child->id;
+    $user_child = xovUserChilds::checkByUidCustom($child_uid, '没有找到编号对应孩子信息');
+    $child_id = $user_child->child_id;
 
     return xonStudReg::add($user_id, $child_id, $sch_id, $edu_type_id, $steps_id);
-  }
-
-  // 确认报名
-  public static function checked($user_id, $uid)
-  {
-    $confirmed = 1;
-    xonStudReg::checkByCustom(compact('user_id', 'uid'), '不是本人报名，不能确认');
-    xonStudReg::setsBy(compact('confirmed'), compact('user_id', 'uid'));
   }
 
   // 取消报名

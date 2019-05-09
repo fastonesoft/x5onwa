@@ -421,7 +421,7 @@ var doObjMessage = function(obj, mes) {
   for (var key in mes) {
     for (var key_obj in obj) {
       if (key_obj === key) {
-        var re = { name: mes[key], value: obj[key] }
+        var re = { name: mes[key].label, value: obj[key], type: mes[key].type }
         res.push(re)
         break
       }
