@@ -8,6 +8,13 @@ Component({
     mes: Object,
     title: String,
     notitle: Boolean,
+    detail: Boolean,
   },
+
+  methods: {
+    detailClick: function(e) {
+      this.triggerEvent('detailClick', e.currentTarget.dataset)
+    }
+  }
 
 })

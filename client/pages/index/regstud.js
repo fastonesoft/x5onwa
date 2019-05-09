@@ -58,6 +58,13 @@ Page({
     })
   },
 
+
+  detailClick: function(e) {
+    wx.navigateTo({
+      url: `/pages/index/studenroll?uid=${e.detail.uid}`
+    })
+  },
+
   schoolQuery: function (formValue) {
     var that = this
     var rules = {
@@ -132,17 +139,7 @@ Page({
     })
   },
 
-  checkClick11: function (e) {
-    var mes = {
-      child_name: { label: '孩子姓名', type: 0 },
-      child_idc: { label: '身份证号', type: 0 },
-      child_relation: { label: '亲子关系', type: 0 },
-    }
 
-    for (var me in mes) {
-      console.log(me)
-    }
-  },
 
   cancelClick: function (e) {
     var that = this
@@ -159,10 +156,6 @@ Page({
     })
   },
 
-  regedClick: function (e) {
-    wx.navigateTo({
-      url: `/pages/index/studenroll?uid=${e.currentTarget.dataset.uid}`
-    })
-  },
+
 
 })

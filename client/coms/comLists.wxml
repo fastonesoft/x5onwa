@@ -1,6 +1,9 @@
 <!--coms/comLists.wxml-->
 <block wx:for="{{lists}}" wx:key="" wx:for-index="index">
     <comList title="{{title}}" notitle="{{notitle}}" notitletext="{{index}}" obj="{{item}}" mes="{{mes}}" />
+    <view class="weui-cells__tips x5ui-mini" wx:if="{{detail}}">
+        <button type="default" size="mini" data-uid="{{item.uid}}" bindtap="detailClick">详细信息</button>
+    </view>
 </block>
 
-<!-- <comLists title="我的孩子" notitle="{{true}}" lists="{{userchilds}}" mes="{{mes}}" /> -->
+<!-- <comLists title="我的孩子" notitle="{{true}}" detail="{{1}}" lists="{{userchilds}}" mes="{{mes}}" /> -->
