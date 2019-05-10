@@ -26,7 +26,8 @@ class mvvStudreg
     $user_child = xovUserChilds::checkByUidCustom($child_uid, '没有找到编号对应孩子信息');
     $child_id = $user_child->child_id;
 
-    return xonStudReg::add($user_id, $child_id, $sch_id, $edu_type_id, $steps_id);
+    $stud_reg = xonStudReg::add($user_id, $child_id, $sch_id, $edu_type_id, $steps_id);
+    return x5on::addQrcode($stud_reg, 'uid');
   }
 
   public static function enroll($my_user_id, $uid) {

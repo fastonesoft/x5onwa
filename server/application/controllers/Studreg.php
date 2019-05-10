@@ -23,6 +23,7 @@ class Studreg extends CI_Controller
         $areas = Model\xovAreas::getsBy(compact('area_type'));
         // 用户孩子的报名信息
         $studregs = Model\xovStudRegUser::getsBy(compact('my_user_id'));
+        $studregs = Model\x5on::addsQrcode($studregs, 'uid');
 
         $this->json(['code' => 0, 'data' => compact('childs', 'areas', 'studregs')]);
       } catch (Exception $e) {

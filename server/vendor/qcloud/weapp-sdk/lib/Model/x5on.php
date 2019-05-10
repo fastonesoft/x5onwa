@@ -106,6 +106,21 @@ class x5on
     if (!$res) throw new Exception($message);
   }
 
+  // 给数组添加一个二维码图片字段
+  public static function addsQrcode($arrs, $keyName) {
+    foreach ($arrs as $arr) {
+      $json = json_decode(json_encode($arr), true);
+      $arr->qrcode = x5on::getQrcodeBase64($json[$keyName]);
+    }
+    return $arrs;
+  }
+
+  public static function addQrcode($obj, $keyName) {
+    $json = json_decode(json_encode($obj), true);
+    $obj->qrcode = x5on::getQrcodeBase64($json[$keyName]);
+    return $obj;
+  }
+
   public static function checkIdc($idcard, $more_than, $less_than)
   {
     $idc = strtoupper($idcard);

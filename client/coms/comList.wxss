@@ -7,5 +7,5 @@
     justify-content: center;
     flex-flow: column;
 }
-.qrcode { width: 400rpx; height: 400rpx; }
-  
+.qrcode { width: 260rpx; height: 260rpx; }
+.weui-cells_after-title { margin-bottom:0.3em; }

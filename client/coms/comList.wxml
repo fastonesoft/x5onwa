@@ -1,25 +1,27 @@
 <!--coms/comList.wxml-->
 <block wx:if="{{list.length>0}}">
-    <view class="weui-cells__title" wx:if="{{!notitle&&!notitletext}}">
-        {{title}}
-    </view>
-    <view class="weui-cells weui-cells_after-title">
-        <view class="weui-cell" wx:for="{{list}}" wx:key="name">
-            <view class="weui-cell__bd">{{item.name}}</view>
-            <view class="weui-cell__ft">
-                <block wx:if="{{!item.type}}">{{item.value}}</block>
-                <block wx:elif="{{item.type===1}}">
-                    <icon type="circle" size="23" wx:if="{{!item.value}}"></icon>
-                    <icon type="success" size="23" wx:if="{{item.value}}"></icon>
-                </block>
-                <block wx:else>
-                    <view class="qrcode-area">
-                        <image class="qrcode" src="data:image/png;base64,{{item.value}}"></image>
-                    </view>
-                </block>
-            </view>
-        </view>
-    </view>
+	<view class="weui-cells__title" wx:if="{{!notitle&&!notitletext}}">
+		{{title}}
+	</view>
+	<view class="weui-cells weui-cells_after-title">
+		<block wx:for="{{list}}" wx:key="name">
+			<view class="weui-cell" wx:if="{{!item.disable}}">
+				<view class="weui-cell__bd">{{item.name}}</view>
+				<view class="weui-cell__ft">
+					<block wx:if="{{!item.type}}">{{item.value}}</block>
+					<block wx:elif="{{item.type===1}}">
+						<icon type="circle" size="23" wx:if="{{!item.value}}"></icon>
+						<icon type="success" size="23" wx:if="{{item.value}}"></icon>
+					</block>
+					<block wx:elif="{{item.type===2}}">
+						<view class="qrcode-area">
+							<image class="qrcode" src="data:image/png;base64,{{item.value}}"></image>
+						</view>
+					</block>
+				</view>
+			</view>
+		</block>
+	</view>
 </block>
 
 <!-- <comList title="{{title}}" notitle="{{notitle}}" notitletext="{{index}}" obj="{{item}}" mes="{{mes}}" /> -->

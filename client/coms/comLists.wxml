@@ -5,7 +5,7 @@
         <button class="weui-btn mini-btn" type="primary" size="mini" data-uid="{{item[selectKey]}}"
             bindtap="detailClick">详细</button>
     </view>
-    <view class="weui-cells__tips" wx:if="{{tips}}">{{tips}}</view>
 </block>
+<view class="weui-cells__tips" wx:if="{{lists.length>0 && tips}}">{{tips}}</view>
 
 <!-- <comLists title="报名信息" notitle="{{0}}" selectKey="child_uid" detail="{{1}}" lists="{{studregs}}" mes="{{mes}}" bind:detailClick="detailClick" /> -->
