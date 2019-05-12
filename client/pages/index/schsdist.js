@@ -16,10 +16,10 @@ Page({
 		x5on.http(x5on.url.schsdistuser, e.detail)
 		.then(users=>{
 			users.length !== 0 && that.setData({ users, user_uid: null })
-			users.length === 0 && x5on.showError(that, '没有找到你要的用户！')
+			users.length === 0 && x5on.showError('没有找到你要的用户！')
 		})
 		.catch(error=>{
-			x5on.showError(that, error)
+			x5on.showError(error)
 		})
 	},
 
@@ -53,7 +53,7 @@ Page({
 			x5on.delSuccess(number)
 		})
 		.catch(error=>{
-			x5on.showError(that, error)
+			x5on.showError(error)
 		})
 	},
 
@@ -75,10 +75,10 @@ Page({
 		area_id && x5on.http(x5on.url.schsdistmemfind, e.detail)
 		.then(members=>{
 			members.length !== 0 && that.setData({ members })
-			members.length === 0 && x5on.showError(that, '没有找到你要的集团成员！')
+			members.length === 0 && x5on.showError('没有找到你要的集团成员！')
 		})
 		.catch(error=>{
-			x5on.showError(that, error)
+			x5on.showError(error)
 		})
 	},
 
@@ -145,7 +145,7 @@ Page({
 		json.rules = rules
 		
 		area_id && wx.navigateTo({ url: 'form_add?json=' + JSON.stringify(json) })
-		!area_id && x5on.showError(that, '地区设置没有选择')
+		!area_id && x5on.showError('地区设置没有选择')
   },
 
 })

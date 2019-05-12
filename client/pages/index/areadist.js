@@ -26,11 +26,11 @@ Page({
         data: form,
         success(users) {
           that.setData({ users })
-          users.length === 0 && x5on.showError(that, '没有找到你要的用户！')
+          users.length === 0 && x5on.showError('没有找到你要的用户！')
         }
       })
     }, message => {
-      x5on.showError(that, message)
+      x5on.showError(message)
     })
   },
 
@@ -101,7 +101,7 @@ Page({
         }
       })
     }, message => {
-      x5on.showError(that, message)
+      x5on.showError(message)
     })
 
   },
@@ -128,11 +128,11 @@ Page({
         data: form,
         success(members) {
           members.length !== 0 && that.setData({ members })
-          members.length === 0 && x5on.showError(that, '没有找到你要的地区成员！')
+          members.length === 0 && x5on.showError('没有找到你要的地区成员！')
         }
       })
     }, message => {
-      x5on.showError(that, message)
+      x5on.showError(message)
     })
   },
 

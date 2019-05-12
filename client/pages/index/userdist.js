@@ -16,7 +16,7 @@ Page({
     x5on.http(x5on.url.userdistuser, e.detail)
     .then(sch_users => {
       sch_users.length !== 0 && that.setData({ sch_users, user_uid: null })
-      sch_users.length === 0 && x5on.showError(that, '没有找到你要的用户！')
+      sch_users.length === 0 && x5on.showError('没有找到你要的用户！')
     })
   },
 
@@ -43,7 +43,7 @@ Page({
       that.setData({ members })
     })
     .catch(error=>{
-      x5on.showError(that, error)
+      x5on.showError(error)
     })
   },
 
@@ -55,7 +55,7 @@ Page({
       that.setData({ members })
     })
     .catch(error=>{
-      x5on.showError(that, error)
+      x5on.showError(error)
     })
 
   },
@@ -67,10 +67,10 @@ Page({
     group_uid && x5on.http(x5on.url.userdistdel, { name, group_uid })
     .then(members=>{
       members.length !== 0 && that.setData({ members })
-      members.length === 0 && x5on.showError(that, '没有找到你要的分组成员！')
+      members.length === 0 && x5on.showError('没有找到你要的分组成员！')
     })
     .catch(error=>{
-      x5on.showError(that, error)
+      x5on.showError(error)
     })
   },
   

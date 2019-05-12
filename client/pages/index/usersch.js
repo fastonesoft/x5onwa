@@ -34,7 +34,7 @@ Page({
       that.setData({ users, members, user_uid: null })
     })
     .catch(error => {
-      x5on.showError(that, error)
+      x5on.showError(error)
     })
   },
 
@@ -43,10 +43,10 @@ Page({
     x5on.http(x5on.url.userschmemfind, e.detail)
     .then(members => {
       members.length !== 0 && that.setData({ members })
-      members.length === 0 && x5on.showError(that, '没有找到你要的用户！')
+      members.length === 0 && x5on.showError('没有找到你要的用户！')
     })
     .catch(error => {
-      x5on.showError(that, error)
+      x5on.showError(error)
     })
   },
 
@@ -55,7 +55,7 @@ Page({
     x5on.http(x5on.url.userschdel, e.detail)
     .then()
     .catch(error => {
-      x5on.showError(that, error)
+      x5on.showError(error)
     })
   },
 

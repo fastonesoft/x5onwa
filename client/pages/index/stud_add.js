@@ -56,7 +56,7 @@ Page({
         }
       })
     }, error => {
-      x5on.showError(that, error)
+      x5on.showError(error)
     })
   }
 

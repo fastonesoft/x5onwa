@@ -106,7 +106,7 @@ Page({
         }
       })
     }, message => {
-      x5on.showError(that, message)
+      x5on.showError(message)
     })
   },
 

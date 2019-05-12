@@ -47,7 +47,7 @@ Component({
           var value = picked[value]
           that.triggerEvent('subpickChange', { [name]: value })
         } else {
-          x5on.showError(that, '没有指定控件名称、列表字段、选择字段、输出字段')
+          x5on.showError('没有指定控件名称、列表字段、选择字段、输出字段')
         }
       })
     }

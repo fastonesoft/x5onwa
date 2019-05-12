@@ -19,7 +19,7 @@ Page({
       that.setData(childs_areas_studregs)
     })
     .catch(error=>{
-      x5on.showError(that, error)
+      x5on.showError(error)
     })
   },
 
@@ -35,7 +35,7 @@ Page({
       that.setData({ steps, steps_uid: null })
     })
     .catch(error=>{
-      x5on.showError(that, error)
+      x5on.showError(error)
     })
   },
 
@@ -55,7 +55,7 @@ Page({
       that.setData({ studregs })
     })
     .catch(error=>{
-      x5on.showError(that, error)
+      x5on.showError(error)
     })
   },
 
@@ -67,7 +67,7 @@ Page({
 
   deleteClick: function(e) {
     var that = this
-    x5on.http(x5on.url.regstuddel, e.detail.uid)
+    x5on.http(x5on.url.regstudcancel, e.detail)
     .then(number=>{
       x5on.delSuccess(number)
 
@@ -76,7 +76,7 @@ Page({
       that.setData({ studregs })
     })
     .catch(error=>{
-      x5on.showError(that, error)
+      x5on.showError(error)
     })
   },
 

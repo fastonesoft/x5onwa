@@ -43,7 +43,7 @@ Page({
         }
       })
     }, mes => {
-      x5on.showError(that, mes)
+      x5on.showError(mes)
     })
   }
 

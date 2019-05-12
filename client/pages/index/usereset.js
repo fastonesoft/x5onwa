@@ -23,11 +23,11 @@ Page({
         data: form,
         success(users) {
           that.setData({ users, user: null })
-          users.length === 0 && x5on.showError(that, '没有找到你要的用户！')
+          users.length === 0 && x5on.showError('没有找到你要的用户！')
         }
       })
     }, message => {
-      x5on.showError(that, message)
+      x5on.showError(message)
     })
   },
 
@@ -63,7 +63,7 @@ Page({
         }
       })
     }, message => {
-      x5on.showError(that, message)
+      x5on.showError(message)
     })
   },
 

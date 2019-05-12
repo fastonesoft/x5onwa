@@ -88,7 +88,7 @@ var doUrl = {
   regstudstep: `${host}/weapp/studreg/step`,
   regstudreg: `${host}/weapp/studreg/reg`,
   regstudcheck: `${host}/weapp/studreg/check`,
-  regstuddel: `${host}/weapp/studreg/del`,
+  regstudcancel: `${host}/weapp/studreg/cancel`,
 
   // 班级分管
   mydivi: `${host}/weapp/mydivi`,
@@ -657,19 +657,19 @@ var doHttp = function (url, data, donshow) {
  * 错误显示
  */
 var doShowError = function (message) {
-  var that = doCurPage
-  console.log(that)
-  // 有错显示
-  that.setData({
-    errorShow: true,
-    errorMessage: message
+  console.log(message)
+  doCurPage(page=>{
+    page.setData({
+      errorShow: true,
+      errorMessage: message
+    })
+    setTimeout(function () {
+      page.setData({
+        errorShow: false,
+        errorMessage: null
+      });
+    }, 3000);
   })
-  setTimeout(function () {
-    that.setData({
-      errorShow: false,
-      errorMessage: '错误提示'
-    });
-  }, 3000);
 };
 
 /**
@@ -687,14 +687,15 @@ var doUpdateSuccess = function (number) {
   doSuccess('更新'+number+'条记录')
 }
 
-var doPrevPage = function (success) {
-  var pages = getCurrentPages();
-  var prevPage = pages[pages.length - 2];
-  success(prevPage)
+var doCurPage = function (success) {
+  doIndexPage(success, 1)
 }
-var doCurPage = function() {
+var doPrevPage = function (success) {
+  doIndexPage(success, 2)
+}
+var doIndexPage = function(success, index) {
   var pages = getCurrentPages();
-  return pages[pages.length - 1];
+  pages.length>index && success(pages[pages.length - index])
 }
 
 // 对外接口

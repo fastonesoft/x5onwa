@@ -64,7 +64,7 @@ Page({
     var gradeIndex = this.data.gradeIndex
     var classIndex = this.data.classIndex
     if (!gradeIndex || !classIndex || classIndex == -1 || gradeIndex == -1) {
-      x5on.showError(that, '年级选择、目标班级不得为空')
+      x5on.showError('年级选择、目标班级不得为空')
       return
     }
     var grade_id = grades[gradeIndex].id
@@ -79,7 +79,7 @@ Page({
           var grade_stud_uid = ''
           that.setData({ studmoves, studchanges, grade_stud_uid })
           if (studmoves.length === 0) {
-            x5on.showError(that, '没有找到你要的学生！')
+            x5on.showError('没有找到你要的学生！')
           }
         }
       })
@@ -156,7 +156,7 @@ Page({
     var that = this
     var data = e.detail.value
     if (!data.movestud_uid || data.changestud_uids.length === 0) {
-      x5on.showError(that, '选择调动、交换的学生')
+      x5on.showError('选择调动、交换的学生')
       return
     }
 

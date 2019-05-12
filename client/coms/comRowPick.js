@@ -43,7 +43,7 @@ Component({
           var value = picked[that.data.valueKey]
           that.triggerEvent('rowpickChange', { [name]: value })
         } else {
-          x5on.showError(that, '控件没有指定名称')
+          x5on.showError('控件没有指定名称')
         }
       })
     }

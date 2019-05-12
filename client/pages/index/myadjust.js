@@ -54,7 +54,7 @@ Page({
     var gradeIndex = this.data.gradeIndex
     var classIndex = this.data.classIndex
     if (!gradeIndex || !classIndex || classIndex == -1 || gradeIndex == -1) {
-      x5on.showError(that, '年级选择、目标班级不得为空')
+      x5on.showError('年级选择、目标班级不得为空')
       return
     }
     var btn_show = false
@@ -70,7 +70,7 @@ Page({
           var students = result.data
           that.setData({ students })
           if (students.length === 0) {
-            x5on.showError(that, '没有找到你要的学生！')
+            x5on.showError('没有找到你要的学生！')
           }
         }
       })
@@ -84,7 +84,7 @@ Page({
     var students = []
     this.setData({ classIndex, students })
     if (!classIndex || classIndex == -1) {
-      x5on.showError(that, '目标班级、调动学生必须设置！')
+      x5on.showError('目标班级、调动学生必须设置！')
       return
     }
     var cls_id = this.data.classes[classIndex].cls_id
@@ -132,7 +132,7 @@ Page({
     var classIndex = this.data.classIndex
     var grade_stud_uid = e.detail.value.grade_stud_uid
     if (!classIndex || classIndex == -1 || !grade_stud_uid) {
-      x5on.showError(that, '目标班级、调动学生必须设置！')
+      x5on.showError('目标班级、调动学生必须设置！')
       return
     }
     var cls_id = this.data.classes[classIndex].cls_id
@@ -151,7 +151,7 @@ Page({
     var that = this
     var grade_stud_uid = this.data.grade_stud_uid
     if (grade_stud_uid.length == 0) {
-      x5on.showError(that, '不是同班学生选择，无法提交')
+      x5on.showError('不是同班学生选择，无法提交')
       return
     }
     x5on.post({

@@ -15,7 +15,7 @@ Page({
       that.setData({ mes, userchilds })
     })
     .catch(error=>{
-      x5on.showError(that, error)
+      x5on.showError(error)
     })
   },
 

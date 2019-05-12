@@ -33,11 +33,11 @@ Page({
         data: form,
         success(teachs) {
           teachs.length !== 0 && that.setData({ teachs })
-          teachs.length === 0 && x5on.showError(that, '没有找到你要的教师！')
+          teachs.length === 0 && x5on.showError('没有找到你要的教师！')
         }
       })
     }, message => {
-      x5on.showError(that, message)
+      x5on.showError(message)
     })
   },
 
@@ -107,7 +107,7 @@ Page({
         }
       })
     }, mes => {
-      x5on.showError(that, mes)
+      x5on.showError(mes)
     })
   },
 

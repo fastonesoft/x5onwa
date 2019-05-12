@@ -108,7 +108,7 @@ Page({
         }
       })
     }, error => {
-      x5on.showError(that, error)
+      x5on.showError(error)
     })
   },
 
@@ -137,7 +137,7 @@ Page({
     x5on.getRadio(this.data.students, stud => {
       wx.navigateTo({ url: 'stud_modi?uid=' + stud.uid })
     }, () => {
-      x5on.showError(that, '没有选中相关学生')
+      x5on.showError('没有选中相关学生')
     })
   },
 
@@ -147,7 +147,7 @@ Page({
     x5on.getRadio(this.data.students, stud => {
       wx.navigateTo({ url: 'stud_auth?uid=' + stud.uid })
     }, () => {
-      x5on.showError(that, '没有选中相关学生')
+      x5on.showError('没有选中相关学生')
     })
   },
 
@@ -162,7 +162,7 @@ Page({
     x5on.getRadio(this.data.students, stud => {
       wx.navigateTo({ url: 'stud_move?uid=' + stud.uid })
     }, () => {
-      x5on.showError(that, '没有选中相关学生')
+      x5on.showError('没有选中相关学生')
     })
   },
 
@@ -186,7 +186,7 @@ Page({
       url: x5on.url.gradestudtask,
       data: form,
       success: tasks => {
-        tasks.length === 0 && x5on.showError(that, '本年度没有要回校的学生')
+        tasks.length === 0 && x5on.showError('本年度没有要回校的学生')
         tasks.length !== 0 && wx.navigateTo({ url: 'stud_back?tasks=' + JSON.stringify(tasks) })
       }
     })
@@ -202,7 +202,7 @@ Page({
       url: x5on.url.gradestudtask,
       data: form,
       success: tasks => {
-        tasks.length === 0 && x5on.showError(that, '本年度没有要复学的学生')
+        tasks.length === 0 && x5on.showError('本年度没有要复学的学生')
         tasks.length !== 0 && wx.navigateTo({ url: 'stud_return?tasks=' + JSON.stringify(tasks) })
       }
     })
@@ -224,7 +224,7 @@ Page({
     x5on.getRadio(this.data.students, stud => {
       wx.navigateTo({ url: 'stud_down?uid=' + stud.uid })
     }, () => {
-      x5on.showError(that, '没有选中相关学生')
+      x5on.showError('没有选中相关学生')
     })
   },
 
@@ -234,7 +234,7 @@ Page({
     x5on.getRadio(this.data.students, stud => {
       wx.navigateTo({ url: 'stud_out?uid=' + stud.uid })
     }, () => {
-      x5on.showError(that, '没有选中相关学生')
+      x5on.showError('没有选中相关学生')
     })
   },
 
@@ -244,7 +244,7 @@ Page({
     x5on.getRadio(this.data.students, stud => {
       wx.navigateTo({ url: 'stud_leave?uid=' + stud.uid })
     }, () => {
-      x5on.showError(that, '没有选中相关学生')
+      x5on.showError('没有选中相关学生')
     })
   },
 
@@ -254,7 +254,7 @@ Page({
     x5on.getRadio(this.data.students, stud => {
       wx.navigateTo({ url: 'stud_temp?uid=' + stud.uid })
     }, () => {
-      x5on.showError(that, '没有选中相关学生')
+      x5on.showError('没有选中相关学生')
     })
   },
 

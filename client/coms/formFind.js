@@ -27,7 +27,7 @@ Component({
       x5on.checkForm(e.detail.value, rules, messages, form => {
         that.triggerEvent('findSubmit', form)
       }, message => {
-        x5on.showError(that, message)
+        x5on.showError(message)
       })
     },
   }

@@ -51,7 +51,7 @@ Page({
         }
       });
     }, () => {
-      x5on.showError(that, '拒绝授权，获取微信用户信息失败')
+      x5on.showError('拒绝授权，获取微信用户信息失败')
     })
   },
 
@@ -89,7 +89,7 @@ Page({
         }
       })
     }, error => {
-      x5on.showError(that, error)
+      x5on.showError(error)
     })
   },
 
