@@ -88,8 +88,7 @@ var doUrl = {
   regstudstep: `${host}/weapp/studreg/step`,
   regstudreg: `${host}/weapp/studreg/reg`,
   regstudcheck: `${host}/weapp/studreg/check`,
-  regstudcancel: `${host}/weapp/studreg/cancel`,
-  regstudstudenroll: `${host}/weapp/studreg/studenroll`,
+  regstuddel: `${host}/weapp/studreg/del`,
 
   // 班级分管
   mydivi: `${host}/weapp/mydivi`,
@@ -657,7 +656,9 @@ var doHttp = function (url, data, donshow) {
 /**
  * 错误显示
  */
-var doShowError = function (that, message) {
+var doShowError = function (message) {
+  var that = doCurPage
+  console.log(that)
   // 有错显示
   that.setData({
     errorShow: true,
@@ -690,6 +691,10 @@ var doPrevPage = function (success) {
   var pages = getCurrentPages();
   var prevPage = pages[pages.length - 2];
   success(prevPage)
+}
+var doCurPage = function() {
+  var pages = getCurrentPages();
+  return pages[pages.length - 1];
 }
 
 // 对外接口

@@ -8,7 +8,10 @@ Component({
     mes: Object,
     title: String,
     notitle: Boolean,
-    detail: Boolean,
+    ok: String,
+    detail: String,
+    delete: String,
+    canDelete: String,
     selectKey: String,
     tips: String,
   },
@@ -16,6 +19,10 @@ Component({
   methods: {
     detailClick: function(e) {
       this.triggerEvent('detailClick', e.currentTarget.dataset)
+    },
+
+    deleteClick: function(e) {
+      this.triggerEvent('deleteClick', e.currentTarget.dataset)
     }
   }
 

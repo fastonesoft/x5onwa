@@ -15,8 +15,8 @@ Page({
     that.setData({ mes })
     //
     x5on.http(x5on.url.regstud)
-    .then(childs_areas_edutypes_studregs=>{
-      that.setData(childs_areas_edutypes_studregs)
+    .then(childs_areas_studregs=>{
+      that.setData(childs_areas_studregs)
     })
     .catch(error=>{
       x5on.showError(that, error)
@@ -27,7 +27,6 @@ Page({
     var child_uid = e.detail.uid
     this.setData({ child_uid })
   },
-
   
   pickChange: function(e) {
     var that = this
@@ -60,88 +59,26 @@ Page({
     })
   },
 
-
   detailClick: function(e) {
     wx.navigateTo({
       url: `/pages/index/studenroll?uid=${e.detail.uid}`
     })
   },
 
-  schoolQuery: function (formValue) {
+  deleteClick: function(e) {
     var that = this
-    var rules = {
-      area: {
-        required: true,
-      },
-      edutype: {
-        required: true,
-      },
-    }
-    var messages = {
-      area: {
-        required: '报名地区'
-      },
-      edutype: {
-        required: '学校类型'
-      }
-    }
-    x5on.checkForm(formValue, rules, messages, form => {
-      form.area_id = x5on.getId(that.data.areas, form.area)
-      form.edu_type_id = x5on.getId(that.data.edutypes, form.edutype)
-      x5on.post({
-        url: x5on.url.regstudstep,
-        data: form,
-        success(steps) {
-          that.setData({
-            steps,
-            stepIndex: -1
-          })
-        }
-      })
-    }, message => {
-      x5on.showError(that, message)
+    x5on.http(x5on.url.regstuddel, e.detail.uid)
+    .then(number=>{
+      x5on.delSuccess(number)
+
+      var studregs = that.data.studregs
+      x5on.delArr(studregs, 'uid', e.detail.uid)
+      that.setData({ studregs })
+    })
+    .catch(error=>{
+      x5on.showError(that, error)
     })
   },
-
-
-  regstudSubmit: function (e) {
-    var that = this
-    var rules = {
-      step: {
-        required: true,
-        min: 0,
-      },
-      child: {
-        required: true,
-        min: 0,
-      }
-    }
-    var messages = {
-      step: {
-        required: '学校选择'
-      },
-      child: {
-        required: '孩子选择'
-      }
-    }
-    x5on.checkForm(e.detail.value, rules, messages, form => {
-      form.steps_id = x5on.getId(that.data.steps, form.step)
-      form.child_id = x5on.getValue(that.data.childs, form.child, 'child_id')
-      x5on.post({
-        url: x5on.url.regstudreg,
-        data: form,
-        success(studreg) {
-          var studregs = that.data.studregs
-          studregs.push(studreg)
-          that.setData({ studregs })
-        }
-      })
-    }, message => {
-      x5on.showError(that, message)
-    })
-  },
-
-
 
   cancelClick: function (e) {
     var that = this

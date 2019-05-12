@@ -6,14 +6,27 @@ use QCloud_WeApp_SDK\Model\x5on;
 use QCloud_WeApp_SDK\Model\xonChild;
 use QCloud_WeApp_SDK\Model\xonSchStep;
 use QCloud_WeApp_SDK\Model\xonStudReg;
+use QCloud_WeApp_SDK\Model\xovAreas;
 use QCloud_WeApp_SDK\Model\xovChild;
 use QCloud_WeApp_SDK\Model\xovSchStep;
 use QCloud_WeApp_SDK\Model\xovStudent;
+use QCloud_WeApp_SDK\Model\xovStudReg;
 use QCloud_WeApp_SDK\Model\xovStudRegUser;
 use QCloud_WeApp_SDK\Model\xovUserChilds;
 
 class mvvStudreg
 {
+  public static function child_area_reged($user_id, $my_user_id) {
+    $childs = xovUserChilds::getsBy(compact('user_id'));
+    // 地级市开头的形式
+    $area_type = 2;
+    $areas = xovAreas::getsBy(compact('area_type'));
+    // 用户孩子的报名信息
+    $studregs = xovStudRegUser::getsBy(compact('my_user_id'));
+    $studregs = x5on::addsQrcode($studregs, 'uid');
+    return compact('childs', 'areas', 'studregs');
+  }
+
   // 报名注册
   public static function reg($user_id, $child_uid, $steps_uid)
   {
@@ -30,25 +43,13 @@ class mvvStudreg
     return x5on::addQrcode($stud_reg, 'uid');
   }
 
-  public static function enroll($my_user_id, $uid) {
-    // 根据孩子编号，检测是否是我的孩子
-    $stud_reg = xovStudRegUser::checkBy(compact('my_user_id', 'uid'));
-    $child_id = $stud_reg->child_id;
-
-    // 根据孩子编号，获取学生相关信息，包括二维码
-    $qrcode_data = x5on::getQrcodeBase64($uid);
-
-    // 录取信息
-    $students = xovStudent::getsBy(compact('child_id'));
-  }
-
   // 取消报名
-  public static function cancel($user_id, $uid)
+  public static function del($user_id, $uid)
   {
-    $confirmed = 1;
     xonStudReg::checkByCustom(compact('user_id', 'uid'), '不是本人报名，不能取消');
-    xonStudReg::existByCustom(compact('user_id', 'uid', 'confirmed'), '已经确认，不能取消');
-    xonStudReg::delBy(compact('user_id', 'uid'));
+    $candel = 1;
+    xonStudReg::existByCustom(compact('user_id', 'uid', 'candel'), '已经审核，不能取消');
+    return xonStudReg::delBy(compact('user_id', 'uid'));
   }
 
   // 确认重置

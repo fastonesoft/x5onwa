@@ -16,7 +16,7 @@ Page({
     x5on.http(x5on.url.userschuser, e.detail)
     .then(users => {
       users.length !== 0 && that.setData({ users, user_uid: null })
-      users.length === 0 && x5on.showError(that, '没有找到你要的用户！')
+      users.length === 0 && x5on.showError('没有找到你要的用户！')
     })
   },
 

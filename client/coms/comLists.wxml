@@ -1,9 +1,13 @@
 <!--coms/comLists.wxml-->
 <block wx:for="{{lists}}" wx:key="" wx:for-index="index">
     <comList title="{{title}}" notitle="{{notitle}}" notitletext="{{index}}" obj="{{item}}" mes="{{mes}}" />
-    <view class="weui-cells__tips x5ui-mini" wx:if="{{detail}}">
-        <button class="weui-btn mini-btn" type="primary" size="mini" data-uid="{{item[selectKey]}}"
-            bindtap="detailClick">详细</button>
+    <view class="weui-cells__tips x5ui-mini">
+            <button class="weui-btn mini-btn" type="primary" size="mini" data-uid="{{item[selectKey]}}"
+            bindtap="okClick" wx:if="{{ok}}">{{ok}}</button>
+        <button class="weui-btn mini-btn" type="default" size="mini" data-uid="{{item[selectKey]}}"
+            bindtap="detailClick" wx:if="{{detail}}">{{detail}}</button>
+        <button class="weui-btn mini-btn" type="warn" size="mini" data-uid="{{item[selectKey]}}" bindtap="deleteClick"
+            wx:if="{{delete && item[canDelete]}}">{{delete}}</button>
     </view>
 </block>
 <view class="weui-cells__tips" wx:if="{{lists.length>0 && tips}}">{{tips}}</view>
