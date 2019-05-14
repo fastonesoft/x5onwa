@@ -1,5 +1,5 @@
 <!--coms/comLists.wxml-->
-<block wx:for="{{lists}}" wx:key="" wx:for-index="index">
+<view wx:for="{{lists}}" wx:key="" wx:for-index="index">
     <comList title="{{title}}" notitle="{{notitle}}" notitletext="{{index}}" obj="{{item}}" mes="{{mes}}" />
     <view class="weui-cells__tips x5ui-mini">
         <button class="weui-btn mini-btn" type="default" size="mini" data-uid="{{item[selectKey]}}"
@@ -9,7 +9,7 @@
         <button class="weui-btn mini-btn" type="warn" size="mini" data-uid="{{item[selectKey]}}" bindtap="delClick"
             wx:if="{{del && item[canDel]}}">{{del}}</button>
     </view>
-</block>
+</view>
 <view class="weui-cells__tips" wx:if="{{lists.length>0 && tips}}">{{tips}}</view>
 
 <!-- <comLists title="报名信息" selectKey="uid" tips="" ok="报名表格" del="删除" ref="刷新" canOk="examed" canDel="candel"
