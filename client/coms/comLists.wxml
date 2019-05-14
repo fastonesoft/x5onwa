@@ -12,4 +12,6 @@
 </block>
 <view class="weui-cells__tips" wx:if="{{lists.length>0 && tips}}">{{tips}}</view>
 
-<!-- <comLists title="报名信息" notitle="{{0}}" selectKey="child_uid" detail="{{1}}" lists="{{studregs}}" mes="{{mes}}" bind:detailClick="detailClick" /> -->
+<!-- <comLists title="报名信息" selectKey="uid" tips="" ok="报名表格" del="删除" ref="刷新" canOk="examed" canDel="candel"
+  canRef="examed" lists="{{studregs}}" mes="{{mes}}" bind:refClick="refClick" bind:delClick="delClick"
+  bind:okClick="okClick" /> -->

@@ -63,9 +63,7 @@ Page({
     var that = this
     x5on.http(x5on.url.regstudref, e.detail)
     .then(studreg=>{
-      var studregs = that.data.studregs
-      x5on.delArr(studregs, 'uid', e.detail.uid)
-      studregs.push(studreg)
+      var studregs = x5on.setArr(that.data.studregs, 'uid', e.detail.uid, studreg)
       that.setData({ studregs })
     })
     .catch(error=>{
@@ -82,9 +80,7 @@ Page({
     x5on.http(x5on.url.regstudcancel, e.detail)
     .then(number=>{
       x5on.delSuccess(number)
-
-      var studregs = that.data.studregs
-      x5on.delArr(studregs, 'uid', e.detail.uid)
+      var studregs = x5on.delArr(that.data.studregs, 'uid', e.detail.uid)
       that.setData({ studregs })
     })
     .catch(error=>{

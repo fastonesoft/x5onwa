@@ -28,7 +28,6 @@ Component({
     },
 
     refClick: function(e) {
-      console.log('-------------1---')
       this.triggerEvent('refClick', e.currentTarget.dataset)
     },
   }
