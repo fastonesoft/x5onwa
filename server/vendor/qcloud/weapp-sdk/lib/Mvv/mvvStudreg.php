@@ -43,6 +43,11 @@ class mvvStudreg
     return x5on::addQrcode($stud_reg, 'uid');
   }
 
+  public static function ref($stud_reg_uid) {
+    $stud_reg = xovStudReg::checkByUidCustom($stud_reg_uid, '没有找到对应学生报名记录');
+    return x5on::addQrcode($stud_reg, 'uid');
+  }
+
   // 取消报名
   public static function del($user_id, $uid)
   {

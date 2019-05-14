@@ -87,6 +87,7 @@ var doUrl = {
   regstud: `${host}/weapp/studreg`,
   regstudstep: `${host}/weapp/studreg/step`,
   regstudreg: `${host}/weapp/studreg/reg`,
+  regstudref: `${host}/weapp/studreg/ref`,
   regstudcheck: `${host}/weapp/studreg/check`,
   regstudcancel: `${host}/weapp/studreg/cancel`,
 

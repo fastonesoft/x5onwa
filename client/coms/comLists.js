@@ -9,21 +9,28 @@ Component({
     title: String,
     notitle: Boolean,
     ok: String,
-    detail: String,
-    delete: String,
-    canDelete: String,
+    del: String,
+    ref: String,
+    canOk: String,
+    canDel: String,
+    canRef: String,
     selectKey: String,
     tips: String,
   },
 
   methods: {
-    detailClick: function(e) {
-      this.triggerEvent('detailClick', e.currentTarget.dataset)
+    okClick: function(e) {
+      this.triggerEvent('okClick', e.currentTarget.dataset)
     },
 
-    deleteClick: function(e) {
-      this.triggerEvent('deleteClick', e.currentTarget.dataset)
-    }
+    delClick: function(e) {
+      this.triggerEvent('delClick', e.currentTarget.dataset)
+    },
+
+    refClick: function(e) {
+      console.log('-------------1---')
+      this.triggerEvent('refClick', e.currentTarget.dataset)
+    },
   }
 
 })

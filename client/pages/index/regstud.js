@@ -59,13 +59,25 @@ Page({
     })
   },
 
-  detailClick: function(e) {
-    wx.navigateTo({
-      url: `/pages/index/studenroll?uid=${e.detail.uid}`
+  refClick: function(e) {
+    var that = this
+    x5on.http(x5on.url.regstudref, e.detail)
+    .then(studreg=>{
+      var studregs = that.data.studregs
+      x5on.delArr(studregs, 'uid', e.detail.uid)
+      studregs.push(studreg)
+      that.setData({ studregs })
+    })
+    .catch(error=>{
+      x5on.showError(error)
     })
   },
 
-  deleteClick: function(e) {
+  okClick: function(e) {
+
+  },
+
+  delClick: function(e) {
     var that = this
     x5on.http(x5on.url.regstudcancel, e.detail)
     .then(number=>{

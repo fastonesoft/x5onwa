@@ -10,5 +10,6 @@
   <button type="primary" size="mini" wx:if="{{child_uid&&steps_uid}}" bindtap="checkClick">确认</button>
 </view>
 
-<comLists title="报名信息" selectKey="uid" tips="" canDelete="candel" delete="删除" lists="{{studregs}}"
-  mes="{{mes}}" bind:deleteClick="deleteClick" />
+<comLists title="报名信息" selectKey="uid" tips="" ok="报名表格" del="删除" ref="刷新" canOk="examed" canDel="examed"
+  canRef="examed" lists="{{studregs}}" mes="{{mes}}" bind:refClick="refClick" bind:delClick="delClick"
+  bind:okClick="okClick" />

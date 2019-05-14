@@ -66,6 +66,26 @@ class Studreg extends CI_Controller
     });
   }
 
+  // 报名记录刷新
+  public function ref()
+  {
+    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
+      try {
+        $param = $_POST;
+        $stud_reg_uid = $param['uid'];
+
+        $result = Mvv\mvvStudreg::ref($stud_reg_uid);
+
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
+
+
   // 取消报名
   public function cancel()
   {
