@@ -1,0 +1,15 @@
+<!--pages/index/form.wxml-->
+<view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
+
+<comPick notitle="{{1}}" label="分类选择" name="type_id" rangeKey="name" selectKey="name" valueKey="id" picks="{{types}}"
+  bind:pickChange="pickChange" />
+<comPick notitle="{{1}}" label="分级选择" name="steps_id" rangeKey="sch_step" selectKey="sch_step" valueKey="id"
+  picks="{{steps}}" bind:pickChange="pickChange" />
+<comPick notitle="{{1}}" label="年度选择" name="years_id" rangeKey="year" selectKey="year" valueKey="id" picks="{{years}}"
+  bind:pickChange="pickChange" />
+
+<comMemb membs="{{members}}" key="user_name" memo="nick_name" bind:removeClick="removeClick" />
+
+<view class="weui-btn-area">
+  <button type="primary" bindtap="addClick">添加</button>
+</view>

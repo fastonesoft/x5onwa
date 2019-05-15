@@ -160,7 +160,9 @@ var doUrl = {
   schclassgroupdel: `${host}/weapp/schclassgroup/del`,
   schclassgroupclass: `${host}/weapp/schclassgroup/classes`,
   schclassgroupclass2div: `${host}/weapp/schclassgroup/class2div`,
-
+  // 年度表单
+  schform: `${host}/weapp/schform`,
+  schformforms: `${host}/weapp/schform/forms`,
 
 
 

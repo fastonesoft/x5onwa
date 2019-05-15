@@ -54,6 +54,8 @@
     "pages/index/schgradegroup",
     "pages/index/schclassgroup",
     "pages/index/schgradestud",
+    "pages/index/schform",
+    
     "pages/index/form_add",
     "pages/index/form_edit",
     "pages/index/form_check",
