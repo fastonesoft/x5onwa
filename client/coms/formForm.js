@@ -16,6 +16,13 @@ Component({
   },
 
   methods: {
+    
+    subpickChange: function (e) {
+      var pickForm = this.data.pickForm
+      Object.assign(pickForm, e.detail)
+      this.setData({ pickForm })
+    },
+    
     formSubmit: function (e) {
       var that = this
       var oldform = {}
@@ -28,10 +35,5 @@ Component({
       })
     },
 
-    subpickChange: function (e) {
-      var pickForm = this.data.pickForm
-      Object.assign(pickForm, e.detail)
-      this.setData({ pickForm })
-    }
   }
 })

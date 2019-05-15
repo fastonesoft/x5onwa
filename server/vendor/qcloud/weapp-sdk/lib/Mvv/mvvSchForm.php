@@ -1,7 +1,6 @@
 <?php
 namespace QCloud_WeApp_SDK\Mvv;
 
-use function PHPSTORM_META\type;
 use QCloud_WeApp_SDK\Model\xonForm;
 use QCloud_WeApp_SDK\Model\xonType;
 use QCloud_WeApp_SDK\Model\xonSchYear;
@@ -40,7 +39,7 @@ class mvvSchForm
     mvvUserSchoolGroup::schAdmin($sch_admin_user_id, function ($user_sch_group) use ($title, $type_id, $steps_id, $years_id, &$result) {
       $sch_id = $user_sch_group->sch_id;
 
-      $result = xonForm::add($title, $type_id, $steps_id, $years_id));
+      $result = xonForm::add($title, $type_id, $steps_id, $years_id);
     });
     return $result;
   }
