@@ -164,7 +164,8 @@ var doUrl = {
   schform: `${host}/weapp/schform`,
   schformforms: `${host}/weapp/schform/forms`,
   schformdel: `${host}/weapp/schform/del`,
-
+  schformadd: `${host}/weapp/schform/add`,
+  schformedit: `${host}/weapp/schform/edit`,
 
 
 

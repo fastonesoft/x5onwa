@@ -15,6 +15,7 @@ Page({
     let that = this
     x5on.http(x5on.url.schstepdel, e.detail)
       .then(number => {
+                // todo,是不是有问题
         that.setData({ membs })
       })
       .catch(error => {
@@ -71,6 +72,7 @@ Page({
     }
     var json = {}
     json.title = '分级设置'
+    json.notitle = true
     json.url_u = x5on.url.schstepedit
     json.data_u = { uid: memb.uid }
     json.fields = fields
@@ -148,6 +150,7 @@ Page({
 
     var json = {}
     json.title = '分级设置'
+    json.notitle = true
     json.url_u = x5on.url.schstepadd
     json.fields = fields
     json.rules = rules

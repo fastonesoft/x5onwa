@@ -44,6 +44,7 @@ Page({
     let that = this
     x5on.http(x5on.url.schclassgroupdel, e.detail)
       .then(number => {
+                // todo,是不是有问题
         that.setData({ membs })
       })
       .catch(error => {
@@ -56,6 +57,7 @@ Page({
 
     var json = {}
     json.title = '班级选择'
+    json.notitle = true
     json.key = 'cls_name'
     json.url_q = x5on.url.schclassgroupclass2div
     json.data_q = { grade_id: that.data.grade_id }

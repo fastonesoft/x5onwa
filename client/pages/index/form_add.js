@@ -12,6 +12,7 @@ Page({
     var that = this
     var form = e.detail
     Object.assign(form, that.data.data_u)
+    console.log(form)
     that.data.url_u && x5on.http(that.data.url_u, form)
       .then(item => {
         x5on.prevPage(page => {

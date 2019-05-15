@@ -72,6 +72,10 @@ Page({
     x5on.http(x5on.url.schformdel, e.detail)
     .then(number=>{
       x5on.delSuccess(number)
+      //
+      var forms = that.data.forms
+      forms = x5on.delArr(forms, 'uid', e.detail.uid)
+      that.setData({ forms })
     })
     .catch(error=>{
       x5on.showError(error)
@@ -80,10 +84,81 @@ Page({
 
   addClick: function(e) {
     var that = this
-    var data = that.data.data
-    data.
+    var fields = [{
+      mode: 1,
+      label: '表单名称',
+      message: '输入表单名称',
+      name: 'title',
+      type: 'text',
+      maxlength: 20,
+    }, {
+      mode: 2,
+      label: '是否启用',
+      name: 'notfixed',
+    }]
+    var rules = {
+      title: {
+        required: true,
+        chinese: true,
+        minlength: 4,
+        maxlength: 20,
+      },
+      notfixed: {
+        required: true,
+      },
+    }
 
+    var json = {}
+    json.title = '表单设置'
+    json.notitle = true
+    json.url_u = x5on.url.schformadd
+    json.data_u = that.data.data
+    json.arrsName = 'forms'
+    json.fields = fields
+    json.rules = rules
+
+    wx.navigateTo({ url: 'form_add?json=' + JSON.stringify(json) })
   },
 
+  editClick: function(e) {
+    var memb = e.detail
+    var that = this
+    var fields = [{
+      mode: 1,
+      label: '表单名称',
+      message: '输入表单名称',
+      name: 'title',
+      value: memb.title,
+      type: 'text',
+      maxlength: 20,
+    }, {
+      mode: 2,
+      label: '是否启用',
+      name: 'notfixed',
+      value: memb.notfixed,
+    }]
+    var rules = {
+      title: {
+        required: true,
+        chinese: true,
+        minlength: 4,
+        maxlength: 20,
+      },
+      notfixed: {
+        required: true,
+      },
+    }
+
+    var json = {}
+    json.title = '表单设置'
+    json.notitle = true
+    json.url_u = x5on.url.schformedit
+    json.data_u = { uid: memb.uid }
+    json.arrsName = 'forms'
+    json.fields = fields
+    json.rules = rules
+
+    wx.navigateTo({ url: 'form_edit?json=' + JSON.stringify(json) })
+  },
 
 })

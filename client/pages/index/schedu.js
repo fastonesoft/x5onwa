@@ -15,6 +15,7 @@ Page({
     let that = this
     x5on.http(x5on.url.schedudel, e.detail)
       .then(number => {
+                // todo,是不是有问题
         that.setData({ membs })
       })
       .catch(error => {
@@ -41,6 +42,7 @@ Page({
 
     var json = {}
     json.title = '学制设置'
+    json.notitle = true
     json.url_u = x5on.url.scheduadd
     json.fields = fields
     json.rules = rules

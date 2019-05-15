@@ -1,6 +1,7 @@
 <?php
 namespace QCloud_WeApp_SDK\Mvv;
 
+use QCloud_WeApp_SDK\Model\x5on;
 use QCloud_WeApp_SDK\Model\xonForm;
 use QCloud_WeApp_SDK\Model\xonType;
 use QCloud_WeApp_SDK\Model\xonSchYear;
@@ -34,12 +35,13 @@ class mvvSchForm
     return $result;
   }
 
-  public static function add($sch_admin_user_id, $title, $type_id, $steps_id, $years_id) {
+  public static function add($sch_admin_user_id, $title, $notfixed_string, $type_id, $steps_id, $years_id) {
     $result = [];
-    mvvUserSchoolGroup::schAdmin($sch_admin_user_id, function ($user_sch_group) use ($title, $type_id, $steps_id, $years_id, &$result) {
+    mvvUserSchoolGroup::schAdmin($sch_admin_user_id, function ($user_sch_group) use ($title, $notfixed_string, $type_id, $steps_id, $years_id, &$result) {
       $sch_id = $user_sch_group->sch_id;
 
-      $result = xonForm::add($title, $type_id, $steps_id, $years_id);
+      $notfixed = x5on::getBool($notfixed_string);
+      $result = xonForm::add($title, $notfixed, $type_id, $steps_id, $years_id);
     });
     return $result;
   }
@@ -51,6 +53,19 @@ class mvvSchForm
 
       xonForm::checkByUid($uid);
       $result = xonForm::delByUid($uid);
+    });
+    return $result;
+  }
+
+  public static function edit($sch_admin_user_id, $uid, $title, $notfixed_string) {
+    $result = 0;
+    mvvUserSchoolGroup::schAdmin($sch_admin_user_id, function ($user_sch_group) use ($uid, $title, $notfixed_string, &$result) {
+      $sch_id = $user_sch_group->sch_id;
+
+      xonForm::checkByUid($uid);
+      $notfixed = x5on::getBool($notfixed_string);
+      xonForm::setsByUid(compact('title', 'notfixed'), $uid);
+      $result = xonForm::getByUid($uid);
     });
     return $result;
   }

@@ -137,7 +137,8 @@ Page({
     }
 
     var json = {}
-    json.title = '集团设置'
+		json.title = '集团设置'
+		json.notitle = true
 		json.url_u = x5on.url.schsdistadd
 		json.data_u = { area_id }
 		json.arrsName = 'schs'

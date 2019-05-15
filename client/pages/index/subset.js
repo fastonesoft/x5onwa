@@ -15,6 +15,7 @@ Page({
     let that = this
     x5on.http(x5on.url.subsetdel, e.detail)
       .then(number => {
+                // todo,是不是有问题
         that.setData({ membs })
       })
       .catch(error => {
@@ -65,6 +66,7 @@ Page({
     }
     var json = {}
     json.title = '学科设置'
+    json.notitle = true
     json.url_u = x5on.url.subsetadd
     json.fields = fields
     json.rules = rules

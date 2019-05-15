@@ -123,7 +123,8 @@ Page({
     }
 
     var json = {}
-    json.title = '学校设置'
+		json.title = '学校设置'
+		json.notitle = true
 		json.url_u = x5on.url.schdistadd
 		json.data_u = { schs_id }
 		json.arrsName = 'schos'

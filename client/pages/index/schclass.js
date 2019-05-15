@@ -30,6 +30,7 @@ Page({
     let that = this
     x5on.http(x5on.url.schclassdel, e.detail)
       .then(number => {
+        // todo,是不是有问题
         that.setData({ membs })
       })
       .catch(error => {
@@ -60,6 +61,7 @@ Page({
     
     var json = {}
     json.title = '班级设置'
+    json.notitle = true
     json.url_u = x5on.url.schclassedit
     json.data_u = { uid: memb.uid }
     json.fields = fields
@@ -99,6 +101,7 @@ Page({
 
     var json = {}
     json.title = '班级设置'
+    json.notitle = true
     json.url_u = x5on.url.schclassadd
     json.fields = fields
     json.rules = rules
@@ -137,6 +140,7 @@ Page({
 
     var json = {}
     json.title = '批量设置'
+    json.notitle = true
     json.url_u = x5on.url.schclassadds
     json.fields = fields
     json.rules = rules
