@@ -55,24 +55,35 @@ Page({
   },
 
   formSubmit: function(e) {
-    console.log(e)
-  },
-
-  pickChange: function(e) {
     var that = this
-    that.setData(e.detail)
-    //
-    var type_id = that.data.type_id
-    var years_id = that.data.years_id
-    var steps_id = that.data.steps_id
-    type_id && years_id && steps_id && x5on.http(x5on.url.schformforms, { type_id, years_id, steps_id })
+    var data = e.detail
+    that.setData({ data })
+    x5on.http(x5on.url.schformforms, data)
     .then(forms=>{
       that.setData({ forms })
     })
     .catch(error=>{
       x5on.showError(error)
     })
-  }
-  
+  },
+
+  removeClick: function(e) {
+    var that = this
+    x5on.http(x5on.url.schformdel, e.detail)
+    .then(number=>{
+      x5on.delSuccess(number)
+    })
+    .catch(error=>{
+      x5on.showError(error)
+    })
+  },
+
+  addClick: function(e) {
+    var that = this
+    var data = that.data.data
+    data.
+
+  },
+
 
 })

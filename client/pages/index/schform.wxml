@@ -1,16 +1,10 @@
 <!--pages/index/form.wxml-->
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
-<formForm notitle="{{1}}" fields="{{fields}}" rules="{{rules}}" bind:formSubmit="formSubmit" />
+<formForm notitle="{{1}}" fields="{{fields}}" rules="{{rules}}" submitName="查询" bind:formSubmit="formSubmit" />
 
-<comPick notitle="{{1}}" label="分类选择" name="type_id" rangeKey="name" selectKey="name" valueKey="id" picks="{{types}}"
-  bind:pickChange="pickChange" />
-<comPick notitle="{{1}}" label="分级选择" name="steps_id" rangeKey="sch_step" selectKey="sch_step" valueKey="id"
-  picks="{{steps}}" bind:pickChange="pickChange" />
-<comPick notitle="{{1}}" label="年度选择" name="years_id" rangeKey="year" selectKey="year" valueKey="id" picks="{{years}}"
-  bind:pickChange="pickChange" />
-  <comMemb membs="{{forms}}" key="user_name" memo="nick_name" bind:removeClick="removeClick" />
-  <button class="weui-btn mini-btn" type="primary" size="mini" bindtap="addClick" wx:if="{{type_id&&steps_id&&years_id}}">添加</button>
+<comMemb notitle="{{1}}" membs="{{forms}}" key="title" bind:removeClick="removeClick" />
 
-
-
+<view class="weui-cells__tips x5ui-mini" wx:if="{{forms}}">
+  <button type="primary" size="mini" bindtap="addClick">添加</button>
+</view>

@@ -9,6 +9,7 @@ Component({
     fields: Array,
     rules: Object,
     mini: Boolean,
+    submitName: String,
   },
 
   data: {

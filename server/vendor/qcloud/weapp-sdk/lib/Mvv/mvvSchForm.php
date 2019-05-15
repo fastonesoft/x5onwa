@@ -44,5 +44,15 @@ class mvvSchForm
     return $result;
   }
 
+  public static function del($sch_admin_user_id, $uid) {
+    $result = 0;
+    mvvUserSchoolGroup::schAdmin($sch_admin_user_id, function ($user_sch_group) use ($uid, &$result) {
+      $sch_id = $user_sch_group->sch_id;
+
+      xonForm::checkByUid($uid);
+      $result = xonForm::delByUid($uid);
+    });
+    return $result;
+  }
 
 }

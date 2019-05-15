@@ -163,6 +163,7 @@ var doUrl = {
   // 年度表单
   schform: `${host}/weapp/schform`,
   schformforms: `${host}/weapp/schform/forms`,
+  schformdel: `${host}/weapp/schform/del`,
 
 
 
