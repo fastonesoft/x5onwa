@@ -1,3 +1,5 @@
 <!--pages/index/form_check.wxml-->
+<view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
+
 <formCheck url="{{url_q}}" data="{{data_q}}" checks="{{checks}}" title="{{title}}" notitle="{{notitle}}" key="{{key}}" split="{{split}}"
     memo="{{memo}}" checked="{{checked}}" mini="{{mini}}" bind:formSubmit="formSubmit" />
