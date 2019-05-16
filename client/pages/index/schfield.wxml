@@ -1,0 +1,7 @@
+<!--pages/index/schfield.wxml-->
+<view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
+
+<comPick title="分级设置" notitle="{{true}}" label="分级选择" name="steps_id" rangeKey="sch_step" selectKey="sch_step"
+    valueKey="id" picks="{{steps}}" bind:pickChange="pickChange" />
+
+<comRadio radios="{{forms}}" title="表单设置" notitle="{{0}}" key="form_name" bind:radioChange="radioChange" />

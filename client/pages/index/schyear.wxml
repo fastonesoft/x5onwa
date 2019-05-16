@@ -1,4 +1,5 @@
 <!--pages/index/schyear.wxml-->
+<view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
 <comMemb membs="{{membs}}" title="年度列表" notitle="{{true}}" key="year" selected="current_year" bind:editClick="editClick" bind:removeClick="removeClick" />
 

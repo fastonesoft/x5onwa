@@ -15,11 +15,14 @@ Page({
     let that = this
     x5on.http(x5on.url.subsetdel, e.detail)
       .then(number => {
-                // todo,是不是有问题
+        x5on.delSuccess(number)
+        var membs = that.data.membs
+        membs = x5on.delArr(membs, 'uid', e.detail.uid)
+        //
         that.setData({ membs })
       })
       .catch(error => {
-        console.log(error)
+        x5on.showError(error)
       })
   },
 
@@ -72,10 +75,6 @@ Page({
     json.rules = rules
 
     wx.navigateTo({ url: 'form_add?json=' + JSON.stringify(json) })
-  },
-
-  returnClick: function (e) {
-    wx.navigateBack()
   },
 
 })

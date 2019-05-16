@@ -166,6 +166,12 @@ var doUrl = {
   schformdel: `${host}/weapp/schform/del`,
   schformadd: `${host}/weapp/schform/add`,
   schformedit: `${host}/weapp/schform/edit`,
+  // 表单字段
+  schfield: `${host}/weapp/schfield`,
+  schfieldforms: `${host}/weapp/schfield/forms`,
+  schfielddel: `${host}/weapp/schfield/del`,
+  schfieldadd: `${host}/weapp/schfield/add`,
+  schfieldedit: `${host}/weapp/schfield/edit`,
 
 
 

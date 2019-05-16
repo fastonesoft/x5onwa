@@ -1,4 +1,5 @@
 <!--pages/index/schstep.wxml-->
+<view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
 <comMemb membs="{{membs}}" title="分级列表" notitle="{{true}}" key="name" selected="graduated" bind:editClick="editClick" bind:removeClick="removeClick" />
 

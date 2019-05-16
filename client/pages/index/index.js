@@ -19,7 +19,6 @@ Page({
           url: x5on.url.usersetrole,
           success(result) {
             // 重新组织数据
-            console.log(result)
             var types = result.types
             var cores = result.cores
             var roles = []

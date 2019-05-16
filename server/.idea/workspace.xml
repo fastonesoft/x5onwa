@@ -14,31 +14,63 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="mvvMyDivi.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvMyDivi.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="506">
-              <caret line="71" column="41" selection-start-line="71" selection-start-column="41" selection-end-line="71" selection-end-column="41" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Schform.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Schform.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/controllers/Schform.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="73" column="35" lean-forward="true" selection-start-line="73" selection-start-column="35" selection-end-line="73" selection-end-column="35" />
+            <state relative-caret-position="703">
+              <caret line="86" column="64" lean-forward="false" selection-start-line="86" selection-start-column="64" selection-end-line="86" selection-end-column="64" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mvvSchForm.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchForm.php">
+      <file leaf-file-name="Schfield.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/controllers/Schfield.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="185">
-              <caret line="59" column="25" selection-start-line="59" selection-start-column="25" selection-end-line="59" selection-end-column="25" />
+            <state relative-caret-position="627">
+              <caret line="40" column="3" lean-forward="true" selection-start-line="40" selection-start-column="3" selection-end-line="40" selection-end-column="3" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Schgrade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/controllers/Schgrade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="247">
+              <caret line="14" column="37" lean-forward="true" selection-start-line="14" selection-start-column="37" selection-end-line="14" selection-end-column="37" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mvvSchGrade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchGrade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="266">
+              <caret line="20" column="59" lean-forward="true" selection-start-line="20" selection-start-column="59" selection-end-line="20" selection-end-column="59" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Schclass.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/application/controllers/Schclass.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mvvSchField.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchField.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="209">
+              <caret line="11" column="87" lean-forward="false" selection-start-line="11" selection-start-column="87" selection-end-line="11" selection-end-column="87" />
               <folding>
-                <element signature="e#39#71#0#PHP" expanded="true" />
+                <element signature="e#39#74#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -93,9 +125,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/xonSchYear.php" />
-        <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/xonSchoolYear.php" />
-        <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/xonSchStep.php" />
         <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/xovSchStep.php" />
         <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/xovSchEdit.php" />
         <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/xonSchEdit.php" />
@@ -103,9 +132,7 @@
         <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/xonEdu.php" />
         <option value="$PROJECT_DIR$/application/controllers/Schstep.php" />
         <option value="$PROJECT_DIR$/application/controllers/Schedu.php" />
-        <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchEdu.php" />
         <option value="$PROJECT_DIR$/application/controllers/Schyear.php" />
-        <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchYear.php" />
         <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/xovGrade.php" />
         <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/xovGradeCurrent.php" />
         <option value="$PROJECT_DIR$/application/controllers/Schgrade.php" />
@@ -113,18 +140,13 @@
         <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/xonClass.php" />
         <option value="$PROJECT_DIR$/application/controllers/Schclass.php" />
         <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/xonGradeGroup.php" />
-        <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchGradeGroup.php" />
         <option value="$PROJECT_DIR$/application/controllers/Schgradegroup.php" />
         <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/xovClassGroupDivi.php" />
         <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/xovClassGroup2Divi.php" />
-        <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchClassGroup.php" />
         <option value="$PROJECT_DIR$/application/controllers/Schclassgroup.php" />
         <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/xonClassGroup.php" />
-        <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchStep.php" />
-        <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchClass.php" />
         <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/xonUserSchool.php" />
         <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvUserSchoolGroup.php" />
-        <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchGrade.php" />
         <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/xonSchools.php" />
         <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchools.php" />
         <option value="$PROJECT_DIR$/application/controllers/Schsdist.php" />
@@ -144,6 +166,16 @@
         <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchForm.php" />
         <option value="$PROJECT_DIR$/application/controllers/Schform.php" />
         <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/xonForm.php" />
+        <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchYear.php" />
+        <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchGradeGroup.php" />
+        <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchClass.php" />
+        <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchClassGroup.php" />
+        <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchEdu.php" />
+        <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchGrade.php" />
+        <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchStep.php" />
+        <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/xovForm.php" />
+        <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchField.php" />
+        <option value="$PROJECT_DIR$/application/controllers/Schfield.php" />
       </list>
     </option>
   </component>
@@ -156,7 +188,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="PhpWorkspaceProjectConfiguration">
+  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true">
     <include_path>
       <path value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk" />
       <path value="$PROJECT_DIR$/vendor/qcloud/cos-sdk-v5" />
@@ -187,51 +219,82 @@
     </entry>
   </component>
   <component name="ProjectView">
-    <navigator proportions="" version="1">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="server" type="462c0819:PsiDirectoryNode" />
+              <item name="server" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="server" type="462c0819:PsiDirectoryNode" />
-              <item name="vendor" type="462c0819:PsiDirectoryNode" />
+              <item name="server" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="application" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="server" type="462c0819:PsiDirectoryNode" />
-              <item name="vendor" type="462c0819:PsiDirectoryNode" />
-              <item name="qcloud" type="462c0819:PsiDirectoryNode" />
+              <item name="server" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="application" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="controllers" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="server" type="462c0819:PsiDirectoryNode" />
-              <item name="vendor" type="462c0819:PsiDirectoryNode" />
-              <item name="qcloud" type="462c0819:PsiDirectoryNode" />
-              <item name="weapp-sdk" type="462c0819:PsiDirectoryNode" />
+              <item name="server" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="vendor" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="server" type="462c0819:PsiDirectoryNode" />
-              <item name="vendor" type="462c0819:PsiDirectoryNode" />
-              <item name="qcloud" type="462c0819:PsiDirectoryNode" />
-              <item name="weapp-sdk" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
+              <item name="server" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="vendor" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="qcloud" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="server" type="462c0819:PsiDirectoryNode" />
-              <item name="vendor" type="462c0819:PsiDirectoryNode" />
-              <item name="qcloud" type="462c0819:PsiDirectoryNode" />
-              <item name="weapp-sdk" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-              <item name="Mvv" type="462c0819:PsiDirectoryNode" />
+              <item name="server" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="vendor" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="qcloud" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="weapp-sdk" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="server" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="vendor" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="qcloud" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="weapp-sdk" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="lib" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="server" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="vendor" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="qcloud" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="weapp-sdk" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="lib" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Model" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="server" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="vendor" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="qcloud" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="weapp-sdk" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="lib" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Mvv" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
           </expand>
           <select />
@@ -264,6 +327,9 @@
       </list>
     </option>
   </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -286,37 +352,35 @@
       <workItem from="1557501085869" duration="2000" />
       <workItem from="1557658255309" duration="4455000" />
       <workItem from="1557892713819" duration="782000" />
-      <workItem from="1557915152088" duration="380000" />
-      <workItem from="1557923963015" duration="3610000" />
+      <workItem from="1557915152088" duration="3843000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="288281000" />
+    <option name="totallyTimeSpent" value="288134000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19894099" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.24962178" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="right" id="Database" order="3" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15885417" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -329,65 +393,9 @@
     <breakpoint-manager>
       <option name="time" value="4" />
     </breakpoint-manager>
+    <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/xonEdu.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="6" column="38" selection-start-line="6" selection-start-column="38" selection-end-line="6" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/Schclass.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="513">
-          <caret line="28" column="61" selection-start-line="28" selection-start-column="51" selection-end-line="28" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mysql/Mysql.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="106" column="69" selection-start-line="106" selection-start-column="69" selection-end-line="106" selection-end-column="69" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/Schgradegroup.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="16" column="38" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/xovClassGroupDivi.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="6" column="40" selection-start-line="6" selection-start-column="40" selection-end-line="6" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/xovClassGroup2Divi.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="6" column="37" selection-start-line="6" selection-start-column="37" selection-end-line="6" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/Schclassgroup.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1235">
-          <caret line="66" column="43" selection-start-line="66" selection-start-column="43" selection-end-line="66" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/xovSchStep.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="6" column="40" selection-start-line="6" selection-start-column="40" selection-end-line="6" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/xonSchoolStep.php" />
     <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/xonSchEdu.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="266">
@@ -398,28 +406,28 @@
     <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/xonSchStep.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="57">
-          <caret line="3" column="33" selection-start-line="3" selection-start-column="25" selection-end-line="3" selection-end-column="33" />
+          <caret line="3" column="33" lean-forward="false" selection-start-line="3" selection-start-column="25" selection-end-line="3" selection-end-column="33" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/xonSchYear.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="152">
-          <caret line="8" column="25" selection-start-line="8" selection-start-column="25" selection-end-line="8" selection-end-column="25" />
+          <caret line="8" column="25" lean-forward="false" selection-start-line="8" selection-start-column="25" selection-end-line="8" selection-end-column="25" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/xonGrade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="266">
-          <caret line="14" selection-start-line="14" selection-end-line="14" selection-end-column="36" />
+          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="36" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/xonGradeGroup.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
-          <caret line="9" column="25" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="25" />
+          <caret line="9" column="25" lean-forward="false" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="25" />
         </state>
       </provider>
     </entry>
@@ -430,87 +438,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/Schyear.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="589">
-          <caret line="32" column="35" lean-forward="true" selection-start-line="32" selection-start-column="35" selection-end-line="32" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchYear.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="717">
-          <caret line="47" column="33" selection-start-line="47" selection-start-column="33" selection-end-line="47" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchStep.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="703">
-          <caret line="52" column="16" lean-forward="true" selection-start-line="52" selection-start-column="16" selection-end-line="52" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/xonClassGroup.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
-          <caret line="17" column="25" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchClass.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="874">
-          <caret line="54" column="51" selection-start-line="54" selection-start-column="51" selection-end-line="54" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchGradeGroup.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="475">
-          <caret line="34" column="7" lean-forward="true" selection-start-line="34" selection-start-column="7" selection-end-line="34" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvUserSchoolGroup.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="589">
-          <caret line="37" column="29" lean-forward="true" selection-start-line="37" selection-start-column="29" selection-end-line="37" selection-end-column="29" />
+          <caret line="17" column="25" lean-forward="false" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="25" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/Userdist.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="831">
-          <caret line="51" column="46" selection-start-line="51" selection-start-column="42" selection-end-line="51" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvUserSchool.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="18" column="25" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
+          <caret line="51" column="46" lean-forward="false" selection-start-line="51" selection-start-column="42" selection-end-line="51" selection-end-column="46" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/Usersch.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="831">
-          <caret line="54" column="39" selection-start-line="54" selection-start-column="39" selection-end-line="54" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchGrade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="281">
-          <caret line="43" column="7" lean-forward="true" selection-start-line="43" selection-start-column="7" selection-end-line="43" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchools.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="836">
-          <caret line="55" column="25" selection-start-line="55" selection-start-column="25" selection-end-line="55" selection-end-column="25" />
+          <caret line="54" column="39" lean-forward="false" selection-start-line="54" selection-start-column="39" selection-end-line="54" selection-end-column="39" />
         </state>
       </provider>
     </entry>
@@ -521,31 +466,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/Schgrade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="42" column="37" selection-start-line="42" selection-start-column="37" selection-end-line="42" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/Schstep.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="247">
-          <caret line="14" column="40" selection-start-line="14" selection-start-column="40" selection-end-line="14" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchClassGroup.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="831">
-          <caret line="56" column="52" selection-start-line="56" selection-start-column="52" selection-end-line="56" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvUser.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="166">
-          <caret line="13" column="25" selection-start-line="13" selection-start-column="25" selection-end-line="13" selection-end-column="25" />
+          <caret line="14" column="40" lean-forward="false" selection-start-line="14" selection-start-column="40" selection-end-line="14" selection-end-column="40" />
         </state>
       </provider>
     </entry>
@@ -553,123 +477,309 @@
     <entry file="file://$PROJECT_DIR$/application/controllers/Userset.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="437">
-          <caret line="54" column="64" selection-start-line="54" selection-start-column="64" selection-end-line="54" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchool.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="684">
-          <caret line="65" column="50" selection-start-line="65" selection-start-column="39" selection-end-line="65" selection-end-column="50" />
+          <caret line="54" column="64" lean-forward="false" selection-start-line="54" selection-start-column="64" selection-end-line="54" selection-end-column="64" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/vAppinfo.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
-          <caret line="191" column="25" selection-start-line="191" selection-start-column="25" selection-end-line="191" selection-end-column="25" />
+          <caret line="191" column="25" lean-forward="false" selection-start-line="191" selection-start-column="25" selection-end-line="191" selection-end-column="25" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/Schdist.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="660">
-          <caret line="151" column="34" selection-start-line="151" selection-start-column="34" selection-end-line="151" selection-end-column="34" />
+          <caret line="151" column="34" lean-forward="false" selection-start-line="151" selection-start-column="34" selection-end-line="151" selection-end-column="34" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvMyDivi.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="506">
-          <caret line="71" column="41" selection-start-line="71" selection-start-column="41" selection-end-line="71" selection-end-column="41" />
+        <state relative-caret-position="0">
+          <caret line="71" column="41" lean-forward="false" selection-start-line="71" selection-start-column="41" selection-end-line="71" selection-end-column="41" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/xonStudReg.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="152">
-          <caret line="8" column="25" selection-start-line="8" selection-start-column="25" selection-end-line="8" selection-end-column="25" />
+          <caret line="8" column="25" lean-forward="false" selection-start-line="8" selection-start-column="25" selection-end-line="8" selection-end-column="25" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/Appform.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="228">
-          <caret line="13" column="11" selection-start-line="13" selection-start-column="11" selection-end-line="13" selection-end-column="11" />
+          <caret line="13" column="11" lean-forward="false" selection-start-line="13" selection-start-column="11" selection-end-line="13" selection-end-column="11" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/Studreg.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="128">
-          <caret line="53" selection-start-line="53" selection-end-line="53" selection-end-column="24" />
+          <caret line="53" column="0" lean-forward="false" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="24" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/cSessionInfo.php">
-      <provider selected="true" editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/x5on.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-3192">
-          <caret line="7" column="6" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchEdu.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="10" selection-start-line="10" selection-end-line="19" />
+          <caret line="7" column="6" lean-forward="false" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/Schedu.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="874">
-          <caret line="62" column="33" selection-start-line="62" selection-start-column="33" selection-end-line="62" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvStudreg.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="551">
-          <caret line="45" column="45" selection-start-line="45" selection-start-column="45" selection-end-line="45" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvArea.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-300" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/cAppinfo.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="281">
-          <caret line="35" column="25" selection-start-line="35" selection-start-column="25" selection-end-line="35" selection-end-column="25" />
+          <caret line="62" column="33" lean-forward="false" selection-start-line="62" selection-start-column="33" selection-end-line="62" selection-end-column="33" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/xonForm.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="13" column="79" lean-forward="true" selection-start-line="13" selection-start-column="79" selection-end-line="13" selection-end-column="79" />
+        <state relative-caret-position="266">
+          <caret line="14" column="30" lean-forward="false" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchForm.php">
+    <entry file="file://$PROJECT_DIR$/application/controllers/Schyear.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="59" column="25" selection-start-line="59" selection-start-column="25" selection-end-line="59" selection-end-column="25" />
+        <state relative-caret-position="608">
+          <caret line="66" column="35" lean-forward="false" selection-start-line="66" selection-start-column="35" selection-end-line="66" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/cAppinfo.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="589">
+          <caret line="69" column="25" lean-forward="false" selection-start-line="69" selection-start-column="25" selection-end-line="69" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/Schgradegroup.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="546">
+          <caret line="68" column="42" lean-forward="false" selection-start-line="68" selection-start-column="42" selection-end-line="68" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchClass.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="646">
+          <caret line="61" column="105" lean-forward="true" selection-start-line="61" selection-start-column="105" selection-end-line="61" selection-end-column="105" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchClassGroup.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="679">
+          <caret line="63" column="115" lean-forward="false" selection-start-line="63" selection-start-column="115" selection-end-line="63" selection-end-column="115" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchEdu.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="565">
+          <caret line="43" column="107" lean-forward="false" selection-start-line="43" selection-start-column="107" selection-end-line="43" selection-end-column="107" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchGradeGroup.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="589">
+          <caret line="53" column="110" lean-forward="true" selection-start-line="53" selection-start-column="110" selection-end-line="53" selection-end-column="110" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchool.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="684">
+          <caret line="65" column="50" lean-forward="false" selection-start-line="65" selection-start-column="39" selection-end-line="65" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchools.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="907">
+          <caret line="55" column="25" lean-forward="false" selection-start-line="55" selection-start-column="25" selection-end-line="55" selection-end-column="25" />
           <folding>
-            <element signature="e#39#71#0#PHP" expanded="true" />
+            <marker date="1557188887986" expanded="true" signature="1208:1537" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchStep.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="665">
+          <caret line="59" column="108" lean-forward="false" selection-start-line="59" selection-start-column="108" selection-end-line="59" selection-end-column="108" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvStudreg.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="45" column="45" lean-forward="false" selection-start-line="45" selection-start-column="45" selection-end-line="45" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSubSet.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvUser.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="52">
+          <caret line="13" column="25" lean-forward="false" selection-start-line="13" selection-start-column="25" selection-end-line="13" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvTypeSet.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvUsereset.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvUserSchool.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-608">
+          <caret line="18" column="25" lean-forward="false" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvUserSchoolGroup.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-152">
+          <caret line="37" column="29" lean-forward="true" selection-start-line="37" selection-start-column="29" selection-end-line="37" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvYear.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvStudent.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchYear.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="760">
+          <caret line="54" column="103" lean-forward="true" selection-start-line="54" selection-start-column="103" selection-end-line="54" selection-end-column="103" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/Schform.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="73" column="35" lean-forward="true" selection-start-line="73" selection-start-column="35" selection-end-line="73" selection-end-column="35" />
+        <state relative-caret-position="703">
+          <caret line="86" column="64" lean-forward="false" selection-start-line="86" selection-start-column="64" selection-end-line="86" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/xovForm.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="6" column="38" lean-forward="false" selection-start-line="6" selection-start-column="38" selection-end-line="6" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchField.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="11" column="87" lean-forward="false" selection-start-line="11" selection-start-column="87" selection-end-line="11" selection-end-column="87" />
+          <folding>
+            <element signature="e#39#74#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchForm.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="26" column="0" lean-forward="true" selection-start-line="26" selection-start-column="0" selection-end-line="35" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/Schfield.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="627">
+          <caret line="40" column="3" lean-forward="true" selection-start-line="40" selection-start-column="3" selection-end-line="40" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/Schgrade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="14" column="37" lean-forward="true" selection-start-line="14" selection-start-column="37" selection-end-line="14" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchGrade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="20" column="59" lean-forward="true" selection-start-line="20" selection-start-column="59" selection-end-line="20" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/Schclass.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

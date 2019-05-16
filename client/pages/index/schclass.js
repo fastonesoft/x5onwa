@@ -7,17 +7,15 @@ Page({
   onLoad: function (e) {
     var that = this
     x5on.http(x5on.url.schgrade)
-      .then(radios => {
-        that.setData({ radios })
+      .then(grades => {
+        that.setData({ grades })
       })
   },
 
-  radioChange: function (e) {
+  pickChange: function (e) {
     let that = this
-    let { uid, radio } = e.detail
-    let grade_id = radio.id
-    that.setData({ grade_id })
-    x5on.http(x5on.url.schclass, { grade_id })
+    that.setData(e.detail)
+    x5on.http(x5on.url.schclass, e.detail)
     .then(membs => {
       that.setData({ membs })
     })
@@ -30,7 +28,10 @@ Page({
     let that = this
     x5on.http(x5on.url.schclassdel, e.detail)
       .then(number => {
-        // todo,是不是有问题
+        x5on.delSuccess(number)
+        var membs = that.data.membs
+        membs = x5on.delArr(membs, 'uid', e.detail.uid)
+        //
         that.setData({ membs })
       })
       .catch(error => {
@@ -64,6 +65,7 @@ Page({
     json.notitle = true
     json.url_u = x5on.url.schclassedit
     json.data_u = { uid: memb.uid }
+    json.arrsName = 'membs'
     json.fields = fields
     json.rules = rules
 
@@ -103,6 +105,7 @@ Page({
     json.title = '班级设置'
     json.notitle = true
     json.url_u = x5on.url.schclassadd
+    json.arrsName = 'membs'
     json.fields = fields
     json.rules = rules
 
@@ -142,6 +145,7 @@ Page({
     json.title = '批量设置'
     json.notitle = true
     json.url_u = x5on.url.schclassadds
+    json.arrsName = 'membs'
     json.fields = fields
     json.rules = rules
     json.url_r = x5on.url.schclass
@@ -150,8 +154,4 @@ Page({
     wx.navigateTo({ url: 'form_add?json=' + JSON.stringify(json) })
   },
 
-  returnClick: function (e) {
-    wx.navigateBack()
-  },
-  
 })

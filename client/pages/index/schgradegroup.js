@@ -30,7 +30,10 @@ Page({
     let that = this
     x5on.http(x5on.url.schgradegroupdel, e.detail)
       .then(number => {
-                // todo,是不是有问题
+        x5on.delSuccess(number)
+        var membs = that.data.membs
+        membs = x5on.delArr(membs, 'uid', e.detail.uid)
+        //
         that.setData({ membs })
       })
       .catch(error => {
@@ -62,6 +65,7 @@ Page({
     json.notitle = true
     json.url_u = x5on.url.schgradegroupedit
     json.data_u = { uid: memb.uid }
+    json.arrsName = 'membs'
     json.fields = fields
     json.rules = rules
 
@@ -101,6 +105,7 @@ Page({
     json.title = '分组设置'
     json.notitle = true
     json.url_u = x5on.url.schgradegroupadd
+    json.arrsName = 'membs'
     json.fields = fields
     json.rules = rules
 

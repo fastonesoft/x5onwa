@@ -33,6 +33,12 @@ Component({
     })
   },
 
+  observers: {
+    'picks': function (picks) {
+      this.setData({ selectIndex: -1 })
+    }
+  },
+
   methods: {
     pickChange: function (e) {
       var that = this

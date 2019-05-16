@@ -44,7 +44,10 @@ Page({
     let that = this
     x5on.http(x5on.url.schclassgroupdel, e.detail)
       .then(number => {
-                // todo,是不是有问题
+        x5on.delSuccess(number)
+        var membs = that.data.membs
+        membs = x5on.delArr(membs, 'uid', e.detail.uid)
+        //
         that.setData({ membs })
       })
       .catch(error => {
@@ -78,10 +81,6 @@ Page({
     .catch(error => {
       x5on.showError(error)
     })
-  },
-
-  returnClick: function (e) {
-    wx.navigateBack()
   },
   
 })

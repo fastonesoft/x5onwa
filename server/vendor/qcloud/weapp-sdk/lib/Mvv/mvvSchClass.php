@@ -59,7 +59,7 @@ class mvvSchClass
 
   public static function del($sch_admin_user_id, $sch_class_uid) {
     $result = [];
-    mvvUserSchoolGroup::schAdmin($sch_admin_user_id, function ($user_sch_group) use ($sch_class_uid) {
+    mvvUserSchoolGroup::schAdmin($sch_admin_user_id, function ($user_sch_group) use ($sch_class_uid, &$result) {
       $sch_id = $user_sch_group->sch_id;
 
       xonClass::checkByUid($sch_class_uid);

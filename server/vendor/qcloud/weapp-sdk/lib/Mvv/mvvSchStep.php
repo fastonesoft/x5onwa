@@ -57,7 +57,7 @@ class mvvSchStep
 
   public static function del($sch_admin_user_id, $sch_step_uid) {
     $result = [];
-    mvvUserSchoolGroup::schAdmin($sch_admin_user_id, function ($user_sch_group) use ($sch_step_uid) {
+    mvvUserSchoolGroup::schAdmin($sch_admin_user_id, function ($user_sch_group) use ($sch_step_uid, &$result) {
       $sch_id = $user_sch_group->sch_id;
 
       xonSchStep::checkByUid($sch_step_uid);

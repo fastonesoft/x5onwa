@@ -1,4 +1,5 @@
 <!--pages/index/subset.wxml-->
+<view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
 <comMemb membs="{{membs}}" title="学科列表" notitle="{{true}}" key="name" memo="id" bind:removeClick="removeClick" />
 

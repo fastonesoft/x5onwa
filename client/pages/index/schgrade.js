@@ -16,7 +16,10 @@ Page({
     let that = this
     x5on.http(x5on.url.schgradedel, e.detail)
       .then(number => {
-                // todo,是不是有问题
+        x5on.delSuccess(number)
+        var membs = that.data.membs
+        membs = x5on.delArr(membs, 'uid', e.detail.uid)
+        //
         that.setData({ membs })
       })
       .catch(error => {
@@ -66,14 +69,11 @@ Page({
     json.title = '年级设置'
     json.notitle = true
     json.url_u = x5on.url.schgradeadd
+    json.arrsName = 'membs'
     json.fields = fields
     json.rules = rules
 
     wx.navigateTo({ url: 'form_add?json=' + JSON.stringify(json) })
-  },
-
-  returnClick: function (e) {
-    wx.navigateBack()
   },
   
 })
