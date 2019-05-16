@@ -7,15 +7,14 @@ Page({
   onLoad: function (e) {
     var that = this
     x5on.http(x5on.url.schgrade)
-      .then(radios => {
-        that.setData({ radios })
+      .then(grades => {
+        that.setData({ grades })
       })
   },
 
-  radioChange: function (e) {
+  pickChange: function (e) {
     let that = this
-    let { uid, radio } = e.detail
-    let grade_id = radio.id
+    let grade_id = e.detail.grade_id
     that.setData({ grade_id, grade_group_id: null, membs: [] })
     x5on.http(x5on.url.schgradegroup, { grade_id })
     .then(groups => {

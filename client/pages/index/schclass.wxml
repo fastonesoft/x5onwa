@@ -1,7 +1,7 @@
 <!--pages/index/schclass.wxml-->
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
-<comPick title="学校年级" notitle="{{true}}" label="年级选择" name="grade_id" rangeKey="schs_steps" selectKey="schs_steps"
+<comPick title="学校年级" notitle="{{true}}" label="年级选择" name="grade_id" rangeKey="steps_grade" selectKey="steps_grade"
     valueKey="id" picks="{{grades}}" bind:pickChange="pickChange" />
 
 <comMemb membs="{{membs}}" key="cls_name" split=" - " memo="cls_order" bind:editClick="editClick" bind:removeClick="removeClick" />

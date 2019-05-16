@@ -1,3 +1,3 @@
 <!--pages/index/form_check.wxml-->
-<formCheck url="{{url_q}}" data="{{data_q}}" checks="{{checks}}" title="{{title}}" key="{{key}}" split="{{split}}"
+<formCheck url="{{url_q}}" data="{{data_q}}" checks="{{checks}}" title="{{title}}" notitle="{{notitle}}" key="{{key}}" split="{{split}}"
     memo="{{memo}}" checked="{{checked}}" mini="{{mini}}" bind:formSubmit="formSubmit" />
