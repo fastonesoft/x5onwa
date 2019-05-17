@@ -15,6 +15,8 @@ Page({
         valueKey: 'id',
         rangeKey: 'name',
         selectKey: 'name',
+        itemClick: 'itemClick',
+        itemData: 'asdfasdf',
       }, {
         mode: 3,
         label: '分级选择',
@@ -159,6 +161,10 @@ Page({
     json.rules = rules
 
     wx.navigateTo({ url: 'form_edit?json=' + JSON.stringify(json) })
+  },
+
+  itemChange: function(e) {
+    console.log('---'+e)
   },
 
 })

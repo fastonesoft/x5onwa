@@ -24,5 +24,9 @@ Page({
         x5on.showError(error)
       })
   },
+
+  formChange: function(e) {
+    console.log(e.detail)
+  },
   
 })

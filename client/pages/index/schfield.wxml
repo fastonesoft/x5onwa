@@ -4,6 +4,7 @@
 <comPick title="分级设置" notitle="{{true}}" label="分级选择" name="steps_id" rangeKey="sch_step" selectKey="sch_step"
     valueKey="id" picks="{{steps}}" bind:pickChange="pickChange" />
 
-<comRadio radios="{{forms}}" title="表单设置" notitle="{{0}}" key="form_name" bind:radioChange="radioChange" />
+<comPick title="表单设置" label="表单选择" name="form_id" rangeKey="form_name" selectKey="form_name"
+    valueKey="id" picks="{{forms}}" bind:pickChange="formChange" />
 
 <comMemb membs="{{fields}}" key="cls_name" split=" - " memo="cls_order" bind:editClick="editClick" bind:removeClick="removeClick" />
