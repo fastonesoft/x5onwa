@@ -11,6 +11,7 @@ Page({
   formSubmit: function (e) {
     var that = this
     var form = e.detail
+    console.log(form)
     Object.assign(form, that.data.data_u)
     that.data.url_u && x5on.http(that.data.url_u, form)
       .then(result => {

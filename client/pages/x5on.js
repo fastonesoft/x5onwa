@@ -169,6 +169,8 @@ var doUrl = {
   // 表单字段
   schfield: `${host}/weapp/schfield`,
   schfieldforms: `${host}/weapp/schfield/forms`,
+  schfieldfields: `${host}/weapp/schfield/fields`,
+  schfieldmodes: `${host}/weapp/schfield/modes`,
   schfielddel: `${host}/weapp/schfield/del`,
   schfieldadd: `${host}/weapp/schfield/add`,
   schfieldedit: `${host}/weapp/schfield/edit`,

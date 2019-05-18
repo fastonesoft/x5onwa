@@ -1,7 +1,10 @@
 <?php
 namespace QCloud_WeApp_SDK\Mvv;
 
+use QCloud_WeApp_SDK\Model\xonFormField;
+use QCloud_WeApp_SDK\Model\xonMode;
 use QCloud_WeApp_SDK\Model\xovForm;
+use QCloud_WeApp_SDK\Model\xovFormField;
 use QCloud_WeApp_SDK\Model\xovSchStep;
 
 class mvvSchField
@@ -28,5 +31,44 @@ class mvvSchField
     return $result;
   }
 
+  public static function fields($sch_admin_user_id, $form_id) {
+    $result = [];
+    mvvUserSchoolGroup::schAdmin($sch_admin_user_id, function ($user_sch_group) use ($form_id, &$result) {
+      $sch_id = $user_sch_group->sch_id;
 
+      $result = xovFormField::getsBy(compact('form_id'));
+    });
+    return $result;
+  }
+
+  public static function modes($sch_admin_user_id) {
+    $result = [];
+    mvvUserSchoolGroup::schAdmin($sch_admin_user_id, function ($user_sch_group) use (&$result) {
+      $sch_id = $user_sch_group->sch_id;
+
+      $result = xonMode::gets();
+    });
+    return $result;
+  }
+
+  public static function add($sch_admin_user_id, $form_id, $mode, $name, $label) {
+    $result = [];
+    mvvUserSchoolGroup::schAdmin($sch_admin_user_id, function ($user_sch_group) use ($form_id, $mode, $name, $label, &$result) {
+      $sch_id = $user_sch_group->sch_id;
+
+      $result = xonFormField::add($form_id, $mode, $name, $label);
+    });
+    return $result;
+  }
+
+  public static function del($sch_admin_user_id, $uid) {
+    $result = [];
+    mvvUserSchoolGroup::schAdmin($sch_admin_user_id, function ($user_sch_group) use ($uid, &$result) {
+      $sch_id = $user_sch_group->sch_id;
+
+      xonFormField::checkByUid($uid);
+      $result = xonFormField::delByUid($uid);
+    });
+    return $result;
+  }
 }

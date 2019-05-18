@@ -52,6 +52,8 @@ class x5va {
         date: '请输入有效的日期，格式XXXX-XX-XX',
         number: '请输入有效的数字',
         digits: '请输入有效的非负整数',
+        iden: '请输入有效的英文标识符',
+        english: '请输入有效的英文字符',
         chinese: '请输入有效的中文字符',
         idcard: '请输入18位的有效身份证',
         idcardrange: this.formatTpl('年龄不在 {0} 到 {1} 之间'),
@@ -114,6 +116,14 @@ class x5va {
        */
       digits(value) {
         return that.optional(value) || /^\d+$/.test(value)
+      },
+      // 验证标识符
+      iden(value) {
+        return that.optional(value) || /^\w+$/.test(value)
+      },
+      // 验证英文
+      english(value) {
+        return that.optional(value) || /^[a-zA-Z]+$/.test(value)
       },
       /**
        * 验证中文

@@ -4,7 +4,12 @@
 <comPick title="分级设置" notitle="{{true}}" label="分级选择" name="steps_id" rangeKey="sch_step" selectKey="sch_step"
     valueKey="id" picks="{{steps}}" bind:pickChange="pickChange" />
 
-<comPick title="表单设置" label="表单选择" name="form_id" rangeKey="form_name" selectKey="form_name"
-    valueKey="id" picks="{{forms}}" bind:pickChange="formChange" />
+<comPick title="表单设置" label="表单选择" name="form_id" rangeKey="form_name" selectKey="form_name" valueKey="id"
+    picks="{{forms}}" bind:pickChange="formChange" />
 
-<comMemb membs="{{fields}}" key="cls_name" split=" - " memo="cls_order" bind:editClick="editClick" bind:removeClick="removeClick" />
+<comMemb notitle="{{0}}" membs="{{fields}}" key="label" memo="mode_name" bind:editClick="editClick"
+    bind:removeClick="removeClick" />
+
+<view class="weui-cells__tips x5ui-mini" wx:if="{{canadd}}">
+    <button type="primary" size="mini" bindtap="addClick">添加</button>
+</view>

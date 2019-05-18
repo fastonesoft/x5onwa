@@ -40,17 +40,47 @@ class Schfield extends CI_Controller {
     });
   }
 
+  public function fields() {
+    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
+      try {
+        $param = $_POST;
+        $form_id = $param['form_id'];
+
+        $result = Mvv\mvvSchField::fields($userinfor->unionId, $form_id);
+
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
+
+  public function modes() {
+    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
+      try {
+        $result = Mvv\mvvSchField::modes($userinfor->unionId);
+
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
+
   public function add() {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
         $param = $_POST;
-        $title = $param['title'];
-        $notfixed = $param['notfixed'];
-        $type_id = $param['type_id'];
-        $steps_id = $param['steps_id'];
-        $years_id = $param['years_id'];
+        $mode = $param['mode'];
+        $name = $param['name'];
+        $label = $param['label'];
+        $form_id = $param['form_id'];
 
-        $result = Mvv\mvvSchForm::add($userinfor->unionId, $title, $notfixed, $type_id, $steps_id, $years_id);
+        $result = Mvv\mvvSchField::add($userinfor->unionId, $form_id, $mode, $name, $label);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -69,7 +99,7 @@ class Schfield extends CI_Controller {
         $title = $param['title'];
         $notfixed = $param['notfixed'];
 
-        $result = Mvv\mvvSchForm::edit($userinfor->unionId, $uid, $title, $notfixed);
+        $result = Mvv\mvvSchField::edit($userinfor->unionId, $uid, $title, $notfixed);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -87,7 +117,7 @@ class Schfield extends CI_Controller {
         $param = $_POST;
         $uid = $param['uid'];
 
-        $result = Mvv\mvvSchForm::del($userinfor->unionId, $uid);
+        $result = Mvv\mvvSchField::del($userinfor->unionId, $uid);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
