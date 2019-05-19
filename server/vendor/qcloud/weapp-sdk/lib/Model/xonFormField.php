@@ -8,8 +8,8 @@ class xonFormField extends cAppinfo
 
   public static function add($form_id, $mode, $name, $label)
   {
-    self::existBy(compact('form_id', 'name'));
-    self::existBy(compact('form_id', 'label'));
+    self::existByCustom(compact('form_id', 'name'), '字段编码已存在');
+    self::existByCustom(compact('form_id', 'label'), '字段名称已存在');
 
     $max_id = self::max('id', compact('form_id'));
     $id = x5on::getMaxId($max_id, $form_id, 2);

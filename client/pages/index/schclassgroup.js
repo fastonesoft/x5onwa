@@ -27,10 +27,8 @@ Page({
 
   groupChange: function (e) {
     let that = this
-    let { uid, radio } = e.detail
-    let grade_group_id = radio.id
-    that.setData({ grade_group_id })
-    x5on.http(x5on.url.schclassgroupclass, { grade_group_id })
+    that.setData(e.detail)
+    x5on.http(x5on.url.schclassgroupclass, e.detail)
     .then(membs => {
       that.setData({ membs })
     })

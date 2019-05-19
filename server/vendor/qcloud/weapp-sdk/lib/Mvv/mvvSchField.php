@@ -71,4 +71,16 @@ class mvvSchField
     });
     return $result;
   }
+
+  public static function edit($sch_admin_user_id, $uid, $name, $label) {
+    $result = [];
+    mvvUserSchoolGroup::schAdmin($sch_admin_user_id, function ($user_sch_group) use ($uid, $name, $label, &$result) {
+      $sch_id = $user_sch_group->sch_id;
+
+      xonFormField::checkByUid($uid);
+      xonFormField::setsByUid(compact('name', 'label'), $uid);
+      $result = xovFormField::getByUid($uid);
+    });
+    return $result;
+  }
 }

@@ -4,7 +4,7 @@
 <comPick title="学校年级" notitle="{{true}}" label="年级选择" name="grade_id" rangeKey="steps_grade" selectKey="steps_grade"
     valueKey="id" picks="{{grades}}" bind:pickChange="pickChange" />
 
-<comMemb membs="{{membs}}" key="cls_name" split=" - " memo="cls_order" bind:editClick="editClick" bind:removeClick="removeClick" />
+<comMemb title="班级列表" membs="{{membs}}" key="cls_name" split=" - " memo="cls_order" bind:editClick="editClick" bind:removeClick="removeClick" />
 
 <view class="weui-cells__tips x5ui-mini" wx:if="{{grade_id}}">
     <button type="primary" size="mini" bindtap="setClick">设置</button>

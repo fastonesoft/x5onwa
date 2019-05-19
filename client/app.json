@@ -55,6 +55,7 @@
     "pages/index/schgradestud",
     "pages/index/schform",
     "pages/index/schfield",
+    "pages/index/schrule",
 
     "pages/index/form_add",
     "pages/index/form_edit",

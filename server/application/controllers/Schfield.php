@@ -96,10 +96,10 @@ class Schfield extends CI_Controller {
       try {
         $param = $_POST;
         $uid = $param['uid'];
-        $title = $param['title'];
-        $notfixed = $param['notfixed'];
+        $name = $param['name'];
+        $label = $param['label'];
 
-        $result = Mvv\mvvSchField::edit($userinfor->unionId, $uid, $title, $notfixed);
+        $result = Mvv\mvvSchField::edit($userinfor->unionId, $uid, $name, $label);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {

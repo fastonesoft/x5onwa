@@ -2,9 +2,10 @@
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
 <comPick title="学校年级" notitle="{{true}}" label="年级选择" name="grade_id" rangeKey="steps_grade" selectKey="steps_grade"
-	valueKey="id" picks="{{grades}}" bind:pickChange="pickChange" />
+    valueKey="id" picks="{{grades}}" bind:pickChange="pickChange" />
 
-<comRadio radios="{{groups}}" key="name" bind:radioChange="groupChange" />
+<comPick title="分组设置" notitle="{{0}}" label="分组选择" name="grade_group_id" rangeKey="name" selectKey="name" valueKey="id"
+    picks="{{groups}}" bind:pickChange="groupChange" />
 
 <comMemb membs="{{membs}}" key="cls_name" bind:removeClick="removeClick" />
 
