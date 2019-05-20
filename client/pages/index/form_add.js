@@ -11,6 +11,11 @@ Page({
   formSubmit: function (e) {
     var that = this
     var form = e.detail
+    var jsonField = that.data.jsonField
+    // 存在，没有指定属性字段 => { id: '11', value: 12 }
+    jsonField && jsonField === 'none' && 
+    // 存在，指定属性字段 => name: { id: '11', value: 12 }
+    jsonField && jsonField !== 'none' && 
     Object.assign(form, that.data.data_u)
     console.log(form)
     that.data.url_u && x5on.http(that.data.url_u, form)
@@ -21,8 +26,9 @@ Page({
             x5on.http(that.data.url_r, that.data.data_r)
             .then(arrs => {
               var arrsName = that.data.arrsName
-              // 指定字段，则更新字段；没有字段，则更新数据
-              arrsName ? page.setData({ [arrsName]: arrs }) : page.setData(arrs)
+              // 指定字段，则更新字段；
+              // 没有字段，则不更新数据
+              arrsName && page.setData({ [arrsName]: arrs })
             })
           } else {
             // 没有地址，指定字段，更新字段
@@ -38,8 +44,8 @@ Page({
                 page.setData({ [arrsName]: result })
               }
             } else {
-              // 没有地址，没有字段，更新数据
-              page.setData(item)
+              // 没有地址，没有字段，不更新数据
+              // page.setData(item)
             }
           }
           wx.navigateBack()

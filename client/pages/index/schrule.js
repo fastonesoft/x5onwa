@@ -30,7 +30,7 @@ Page({
     var that = this
     x5on.http(x5on.url.schfieldfields, e.detail)
       .then(fields => {
-        that.setData({ canadd: false, form_id: e.detail.form_id, fields })
+        that.setData({ field_id: null, form_id: e.detail.form_id, fields })
       })
       .catch(error=>{
         x5on.showError(error)
@@ -39,7 +39,7 @@ Page({
 
   fieldChange: function(e) {
     var that = this
-    that.setData({ canadd: true })
+    that.setData(e.detail)
   },
 
   addClick: function(e) {

@@ -11,7 +11,7 @@
 <comPick notitle="{{0}}" label="字段选择" name="field_id" rangeKey="label" selectKey="label" valueKey="id"
     picks="{{fields}}" bind:pickChange="fieldChange" />
 
-<view class="weui-cells__tips x5ui-mini" wx:if="{{canadd}}">
+<view class="weui-cells__tips x5ui-mini" wx:if="{{field_id}}">
     <button type="primary" size="mini" bindtap="fieldClick">字段</button>
     <button type="primary" size="mini" bindtap="ruleClick">规则</button>
 </view>

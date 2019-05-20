@@ -60,6 +60,7 @@ Page({
     json.title = '分类设置'
     json.notitle = true
     json.url_u = x5on.url.typesetadd
+    json.arrsName = 'membs'
     json.fields = fields
     json.rules = rules
 

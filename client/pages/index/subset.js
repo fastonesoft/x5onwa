@@ -71,6 +71,7 @@ Page({
     json.title = '学科设置'
     json.notitle = true
     json.url_u = x5on.url.subsetadd
+    json.arrsName = 'membs'
     json.fields = fields
     json.rules = rules
 

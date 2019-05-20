@@ -20,8 +20,9 @@ Page({
             x5on.http(that.data.url_r, that.data.data_r)
               .then(arrs => {
                 var arrsName = that.data.arrsName
-                // 指定字段，则更新字段；没有字段，则更新数据
-                arrsName ? page.setData({ [arrsName]: arrs }) : page.setData(arrs)
+                // 指定字段，则更新字段
+                // 没有字段，则不更新数据
+                arrsName && page.setData({ [arrsName]: arrs })
               })
           } else {
             // 没有地址，指定字段，更新字段
@@ -38,7 +39,7 @@ Page({
               }
             } else {
               // 没有地址，没有字段，更新数据
-              page.setData(result)
+              // page.setData(result)
             }
           }
           wx.navigateBack()
