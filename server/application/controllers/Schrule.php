@@ -9,15 +9,16 @@ class Schrule extends CI_Controller {
    * 字段规则
    */
   const role_name = 'schrule';
-  public function add() {
+  public function index() {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
+        // 规则数据提交
         $param = $_POST;
-        $mode = $param['uid'];
-        $field_name = $param['field_name'];
-        $value = $param[$field_name];
+        $uid = $param['uid'];
+        $update = $param['update'];
+        $value = $param[$update];
 
-        $result = Mvv\mvvSchField::add($userinfor->unionId, $form_id, $mode, $name, $label);
+        $result = Mvv\mvvSchRule::add($userinfor->unionId, $uid, $update, $value);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {

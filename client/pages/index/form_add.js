@@ -17,11 +17,11 @@ Page({
     var formData = e.detail
     // 存在，没有指定属性字段 json = JSON.stringif( { id: '11', value: 12 } )
     field && (
-      formData = { field: JSON.stringify(formData) }
+      formData = { update: 'field', field: JSON.stringify(formData) }
     )
     // 存在，指定属性字段 => name: { id: '11', value: 12 }
     rule && (
-      formData = { rule: JSON.stringify(x5on.delRule(formData)) }
+      formData = { update: 'rule', rule: JSON.stringify(x5on.delRule(formData)) }
     )
     // 不存在，则封装数据与参数
     Object.assign(data, formData)

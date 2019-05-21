@@ -174,6 +174,8 @@ var doUrl = {
   schfielddel: `${host}/weapp/schfield/del`,
   schfieldadd: `${host}/weapp/schfield/add`,
   schfieldedit: `${host}/weapp/schfield/edit`,
+  // 字段规则
+  schrule: `${host}/weapp/schrule/`,
 
 
 
@@ -309,6 +311,7 @@ var doGetIndexe = function (arrs, obj_name, obj_value) {
     var arr = arrs[i]
     if (arr[obj_name] === obj_value) return i
   }
+  return -1
 }
 // 根据索引获取编号
 var doGetId = function (arrs, index) {
@@ -422,6 +425,18 @@ var doFormMessage = function (fields) {
       var value = {}
       value.required = field.label
       res[field.name] = value
+    }
+  }
+  return res
+}
+
+/* 获取picks控件初值列表 */
+var doFormPickDefault = function(fields) {
+  var res = {}
+  for (let field of fields) {
+    if (field.mode === 3 && field.value) {
+      let name = field.name
+      res[name] = field.value
     }
   }
   return res
@@ -756,6 +771,7 @@ module.exports = {
   getArr: doGetArr,
   getArrex: doGetArrex,
   getIndex: doGetIndex,
+  getIndexe: doGetIndexe,
   getRadio: doGetRadio,
   getRadioex: doGetRadioex,
   getCheckbox: doGetCheckbox,
@@ -771,6 +787,8 @@ module.exports = {
   // 窗体相关
   objMessage: doObjMessage,
   message: doFormMessage,
+  formPickDefault: doFormPickDefault,
+  
   checkForm: x5va.checkForm,
   prevPage: doPrevPage,
   delRule: doDelRule,

@@ -9,6 +9,7 @@ Component({
     url_q: String,
     data_q: Object,
     picks: Array,
+    value: String,
     rangeKey: String,
     valueKey: String,
     selectKey: String,
@@ -30,6 +31,13 @@ Component({
     .then(picks=>{
       that.setData({ picks })
     })
+  },
+
+  observers: {
+    'picks, value': function (picks, value) {
+      var selectIndex = x5on.getIndexe(picks, this.data.valueKey, value)
+      this.setData({ selectIndex })
+    }
   },
 
   methods: {

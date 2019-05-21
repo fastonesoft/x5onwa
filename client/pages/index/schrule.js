@@ -42,9 +42,10 @@ Page({
     that.setData({ field: e.detail })
   },
 
-  addClick: function(e) {
+  fieldClick: function(e) {
     var that = this
     var field = that.data.field
+    var value = JSON.parse(field.field)
     if (field.mode === 1) {
       var fields = [{
         mode: 1,
@@ -53,6 +54,7 @@ Page({
         message: '输入提示信息',
         type: 'text',
         maxlength: 10,
+        value: value && value.message ? value.message : null,
       }, {
         mode: 1,
         name: 'maxlength',
@@ -60,6 +62,7 @@ Page({
         message: '输入最大长度',
         type: 'number',
         maxlength: 4,
+        value: value && value.maxlength ? value.maxlength : null,
       }, {
         mode: 3,
         name: 'type',
@@ -68,6 +71,7 @@ Page({
         rangeKey: 'name',
         selectKey: 'name',
         valueKey: 'name',
+        value: value && value.type ? value.type : null,
       }]
       var rules = {
         message: {
@@ -85,27 +89,26 @@ Page({
           required: true,
         },
       }
-    
+
       var json = {}
       json.title = '字段设置'
       json.notitle = true
-      json.url_u = x5on.url.schfieldadd
-      json.data_u = { uid: field.uid, field_name: 'field' }
+      json.url_u = x5on.url.schrule
+      json.data_u = { uid: field.uid, field: 'field' }
+      json.arrsName = 'fields'
       json.field = true
       json.rule = false
       json.fields = fields
       json.rules = rules
   
-      wx.navigateTo({ url: 'form_add?json=' + JSON.stringify(json) })
+      wx.navigateTo({ url: 'form_edit?json=' + JSON.stringify(json) })
     }
     
 
   },
 
-  editClick: function(e) {
-    var field = e.detail
-
-    
+  ruleClick: function(e) {
+    var field = e.detail    
     var json = {}
     json.title = '字段设置'
     json.notitle = true
@@ -119,6 +122,3 @@ Page({
   },
   
 })
-
-
-
