@@ -10,15 +10,22 @@ Page({
 
   formSubmit: function (e) {
     var that = this
-    var form = e.detail
-    var jsonField = that.data.jsonField
-    // 存在，没有指定属性字段 => { id: '11', value: 12 }
-    jsonField && jsonField === 'none' && 
+    var data = that.data.data_u
+    var rule = that.data.rule
+    var field = that.data.field
+
+    var formData = e.detail
+    // 存在，没有指定属性字段 json = JSON.stringif( { id: '11', value: 12 } )
+    field && (
+      formData = { field: JSON.stringify(formData) }
+    )
     // 存在，指定属性字段 => name: { id: '11', value: 12 }
-    jsonField && jsonField !== 'none' && 
-    Object.assign(form, that.data.data_u)
-    console.log(form)
-    that.data.url_u && x5on.http(that.data.url_u, form)
+    rule && (
+      formData = { rule: JSON.stringify(x5on.delRule(formData)) }
+    )
+    // 不存在，则封装数据与参数
+    Object.assign(data, formData)
+    that.data.url_u && x5on.http(that.data.url_u, data)
       .then(item => {
         x5on.prevPage(page => {
           if (that.data.url_r) {

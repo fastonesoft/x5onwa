@@ -442,6 +442,17 @@ var doObjMessage = function(obj, mes) {
   return res
 }
 
+/* 将对象中的空值清除 */
+var doDelRule = function(ruleObj) {
+  var res = {}
+  for (var key in ruleObj) {
+    ruleObj[key] && (
+      res[key] = ruleObj[key]
+    )
+  }
+  return res
+}
+
 /**
  * 关于错误代码
  * -1    ：   系统级出错代码，与登录有关，由系统检测
@@ -762,4 +773,5 @@ module.exports = {
   message: doFormMessage,
   checkForm: x5va.checkForm,
   prevPage: doPrevPage,
+  delRule: doDelRule,
 }
