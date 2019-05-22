@@ -57,6 +57,9 @@
     "pages/index/schfield",
     "pages/index/schrule",
 
+    "pages/index/syskey",
+    "pages/index/sysvalue",
+
     "pages/index/form_add",
     "pages/index/form_edit",
     "pages/index/form_check",

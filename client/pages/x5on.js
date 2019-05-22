@@ -177,6 +177,13 @@ var doUrl = {
   // 字段规则
   schrule: `${host}/weapp/schrule/`,
 
+  // 系统键值
+  syskey: `${host}/weapp/syskey`,
+  syskeyadd: `${host}/weapp/syskey/add`,
+  syskeydel: `${host}/weapp/syskey/del`,
+  syskeyedit: `${host}/weapp/syskey/edit`,
+
+
 
 
 
@@ -788,7 +795,7 @@ module.exports = {
   objMessage: doObjMessage,
   message: doFormMessage,
   formPickDefault: doFormPickDefault,
-  
+
   checkForm: x5va.checkForm,
   prevPage: doPrevPage,
   delRule: doDelRule,

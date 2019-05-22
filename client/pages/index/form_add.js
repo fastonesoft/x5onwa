@@ -10,16 +10,16 @@ Page({
 
   formSubmit: function (e) {
     var that = this
-    var data = that.data.data_u
+    var data = that.data.data_u || {}
     var rule = that.data.rule
     var field = that.data.field
 
     var formData = e.detail
-    // 存在，没有指定属性字段 json = JSON.stringif( { id: '11', value: 12 } )
+    // 存在，字段
     field && (
       formData = { update: 'field', field: JSON.stringify(formData) }
     )
-    // 存在，指定属性字段 => name: { id: '11', value: 12 }
+    // 存在，规则
     rule && (
       formData = { update: 'rule', rule: JSON.stringify(x5on.delRule(formData)) }
     )
