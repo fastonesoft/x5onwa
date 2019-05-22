@@ -9,8 +9,8 @@ class mvvSysValue
     return xonSysValue::getsBy(compact('key_id'));
   }
 
-  public static function add($id, $key_id, $value, $valuex) {
-    return xonSysValue::add($id, $key_id, $value, $valuex);
+  public static function add($key_id, $code, $value, $valuex) {
+    return xonSysValue::add($key_id, $code, $value, $valuex);
   }
 
   public static function edit($uid, $name) {

@@ -26,8 +26,8 @@ Component({
     
     formSubmit: function (e) {
       var that = this
+      // 获取picks控件初值列表
       var oldform = x5on.formPickDefault(that.data.fields)
-      console.log(oldform)
       Object.assign(oldform, e.detail.value, that.data.pickForm)
       var messages = x5on.message(that.data.fields)
       x5on.checkForm(oldform, that.data.rules, messages, form => {

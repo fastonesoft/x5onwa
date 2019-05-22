@@ -708,7 +708,6 @@ var doHttp = function (url, data, donshow) {
  * 错误显示
  */
 var doShowError = function (message) {
-  console.log(message)
   doCurPage(page=>{
     page.setData({
       errorShow: true,

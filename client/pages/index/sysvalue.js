@@ -24,7 +24,6 @@ Page({
     })
   },
 
-
   removeClick: function (e) {
     let that = this
     x5on.http(x5on.url.sysvaluedel, e.detail)
@@ -39,68 +38,48 @@ Page({
         x5on.showError(error)
       })
   },
-  
-  editClick: function (e) {
-    var memb = e.detail
-    var fields = [{
-      mode: 1,
-      name: 'name',
-      label: '键值名称',
-      message: '输入键值名称',
-      type: 'text',
-      maxlength: 20,
-      value: memb.name,
-    }]
-    var rules = {
-      name: {
-        required: true,
-        chinese: true,
-        minlength: 4,
-        maxlength: 20,
-      },
-    }
-    
-    var json = {}
-    json.title = '键值设置'
-    json.notitle = true
-    json.url_u = x5on.url.sysvalueedit
-    json.data_u = { uid: memb.uid }
-    json.arrsName = 'membs'
-    json.fields = fields
-    json.rules = rules
-
-    wx.navigateTo({ url: 'form_edit?json=' + JSON.stringify(json) })
-  },
 
   addClick: function (e) {
     var that = this
     var fields = [{
       mode: 1,
-      name: 'id',
-      label: '键值编号',
-      message: '输入键值编号',
+      name: 'code',
+      label: '列表序号',
+      message: '输入列表序号',
       type: 'text',
       maxlength: 10,
     }, {
       mode: 1,
-      name: 'name',
-      label: '键值名称',
-      message: '输入键值名称',
+      name: 'value',
+      label: '列表值',
+      message: '输入列表值',
       type: 'text',
-      maxlength: 20,
+      maxlength: 50,
+    }, {
+      mode: 1,
+      name: 'valuex',
+      label: '列表补充',
+      message: '输入列表补充',
+      type: 'text',
+      maxlength: 50,
     }]
     var rules = {
-      id: {
+      code: {
         required: true,
-        english: true,
-        minlength: 4,
+        digits: true,
+        minlength: 1,
         maxlength: 10,
       },
-      name: {
+      value: {
         required: true,
         chinese: true,
-        minlength: 4,
-        maxlength: 20,
+        minlength: 1,
+        maxlength: 50,
+      },
+      valuex: {
+        required: false,
+        chinese: true,
+        maxlength: 50,
       },
     }
 
@@ -108,6 +87,7 @@ Page({
     json.title = '键值设置'
     json.notitle = true
     json.url_u = x5on.url.sysvalueadd
+    json.data_u = { key_id: that.data.key_id }
     json.arrsName = 'membs'
     json.fields = fields
     json.rules = rules

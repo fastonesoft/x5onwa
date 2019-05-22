@@ -29,11 +29,11 @@ class Sysvalue extends CI_Controller {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
         $param = $_POST;
-        $id = $param['id'];
         $key_id = $param['key_id'];
+        $code = $param['code'];
         $value = $param['value'];
-        $valuex = $param['valuex'];
-        $result = Mvv\mvvSysValue::add($id, $key_id, $value, $valuex);
+        $valuex = isset($param['valuex']) ? $param['valuex'] : null;
+        $result = Mvv\mvvSysValue::add($key_id, $code, $value, $valuex);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
