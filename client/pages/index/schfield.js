@@ -48,8 +48,8 @@ Page({
       selectKey: 'name',
     }, {
       mode: 1,
-      label: '字段编码',
-      message: '输入字段编码',
+      label: '字段代码',
+      message: '输入字段代码，英文字母',
       name: 'name',
       type: 'text',
       maxlength: 10,
@@ -60,6 +60,13 @@ Page({
       name: 'label',
       type: 'text',
       maxlength: 10,
+    }, {
+      mode: 1,
+      label: '字段序号',
+      message: '输入字段序号',
+      name: 'orde',
+      type: 'number',
+      maxlength: 2,
     }]
     var rules = {
       mode: {
@@ -76,6 +83,11 @@ Page({
         chinese: true,
         minlength: 4,
         maxlength: 20,
+      },
+      orde: {
+        required: true,
+        digits: true,
+        maxlength: 2,
       },
     }
 
@@ -110,20 +122,28 @@ Page({
     var field = e.detail
     var fields = [{
       mode: 1,
-      label: '字段编码',
-      message: '输入字段编码',
+      label: '字段代码',
+      message: '输入字段代码，英文字母',
       name: 'name',
       type: 'text',
-      value: field.name,
       maxlength: 10,
+      value: field.name,
     }, {
       mode: 1,
       label: '字段名称',
       message: '输入字段名称',
       name: 'label',
       type: 'text',
-      value: field.label,
       maxlength: 10,
+      value: field.label,
+    }, {
+      mode: 1,
+      label: '字段序号',
+      message: '输入字段序号',
+      name: 'orde',
+      type: 'number',
+      maxlength: 2,
+      value: field.orde,
     }]
     var rules = {
       name: {
@@ -137,6 +157,11 @@ Page({
         chinese: true,
         minlength: 4,
         maxlength: 20,
+      },
+      orde: {
+        required: true,
+        digits: true,
+        maxlength: 2,
       },
     }
     var json = {}

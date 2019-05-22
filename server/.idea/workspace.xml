@@ -23,16 +23,16 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Schfield.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Schfield.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/controllers/Schfield.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="356">
-              <caret line="82" column="36" selection-start-line="82" selection-start-column="36" selection-end-line="82" selection-end-column="36" />
+            <state relative-caret-position="250">
+              <caret line="83" column="37" selection-start-line="83" selection-start-column="37" selection-end-line="83" selection-end-column="37" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mvvSysValue.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="mvvSysValue.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSysValue.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="200">
@@ -44,8 +44,8 @@
       <file leaf-file-name="Sysvalue.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/controllers/Sysvalue.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="35" column="37" lean-forward="true" selection-start-line="35" selection-start-column="37" selection-end-line="35" selection-end-column="37" />
+            <state relative-caret-position="280">
+              <caret line="31" column="35" lean-forward="true" selection-start-line="31" selection-start-column="35" selection-end-line="31" selection-end-column="35" />
             </state>
           </provider>
         </entry>
@@ -55,6 +55,15 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="231">
               <caret line="11" column="42" lean-forward="true" selection-start-line="11" selection-start-column="42" selection-end-line="11" selection-end-column="42" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mvvSchField.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchField.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="185">
+              <caret line="53" column="25" selection-start-line="53" selection-start-column="25" selection-end-line="53" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -146,9 +155,6 @@
         <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/xovForm.php" />
         <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/xonMode.php" />
         <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/xovFormField.php" />
-        <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/xonFormField.php" />
-        <option value="$PROJECT_DIR$/application/controllers/Schfield.php" />
-        <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchField.php" />
         <option value="$PROJECT_DIR$/application/controllers/Schrule.php" />
         <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchRule.php" />
         <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/SysKey.php" />
@@ -159,6 +165,9 @@
         <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSysValue.php" />
         <option value="$PROJECT_DIR$/application/controllers/Sysvalue.php" />
         <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/xonSysValue.php" />
+        <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchField.php" />
+        <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/xonFormField.php" />
+        <option value="$PROJECT_DIR$/application/controllers/Schfield.php" />
       </list>
     </option>
   </component>
@@ -282,12 +291,12 @@
       <workItem from="1558089916192" duration="3968000" />
       <workItem from="1558266514390" duration="1443000" />
       <workItem from="1558333614590" duration="4354000" />
-      <workItem from="1558528498845" duration="4064000" />
+      <workItem from="1558528498845" duration="4986000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="310257000" />
+    <option name="totallyTimeSpent" value="311179000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -596,20 +605,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/xonMode.php" />
     <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/xovFormField.php" />
-    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/xonFormField.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="8" column="25" selection-start-line="8" selection-start-column="25" selection-end-line="8" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchField.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="331">
-          <caret line="58" column="32" lean-forward="true" selection-start-line="58" selection-start-column="32" selection-end-line="58" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchForm.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="506">
@@ -631,13 +626,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/Schfield.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="356">
-          <caret line="82" column="36" selection-start-line="82" selection-start-column="36" selection-end-line="82" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/xonSysValue.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="325">
@@ -645,17 +633,38 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/Sysvalue.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="35" column="37" lean-forward="true" selection-start-line="35" selection-start-column="37" selection-end-line="35" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSysValue.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
           <caret line="17" column="21" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/xonFormField.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="393">
+          <caret line="16" column="79" selection-start-line="16" selection-start-column="79" selection-end-line="16" selection-end-column="79" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/Sysvalue.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="31" column="35" lean-forward="true" selection-start-line="31" selection-start-column="35" selection-end-line="31" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchField.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="185">
+          <caret line="53" column="25" selection-start-line="53" selection-start-column="25" selection-end-line="53" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/Schfield.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="83" column="37" selection-start-line="83" selection-start-column="37" selection-end-line="83" selection-end-column="37" />
         </state>
       </provider>
     </entry>

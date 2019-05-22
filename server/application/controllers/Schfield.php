@@ -78,9 +78,10 @@ class Schfield extends CI_Controller {
         $mode = $param['mode'];
         $name = $param['name'];
         $label = $param['label'];
+        $orde = $param['orde'];
         $form_id = $param['form_id'];
 
-        $result = Mvv\mvvSchField::add($userinfor->unionId, $form_id, $mode, $name, $label);
+        $result = Mvv\mvvSchField::add($userinfor->unionId, $form_id, $mode, $name, $label, $orde);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {

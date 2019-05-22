@@ -51,12 +51,12 @@ class mvvSchField
     return $result;
   }
 
-  public static function add($sch_admin_user_id, $form_id, $mode, $name, $label) {
+  public static function add($sch_admin_user_id, $form_id, $mode, $name, $label, $orde) {
     $result = [];
-    mvvUserSchoolGroup::schAdmin($sch_admin_user_id, function ($user_sch_group) use ($form_id, $mode, $name, $label, &$result) {
+    mvvUserSchoolGroup::schAdmin($sch_admin_user_id, function ($user_sch_group) use ($form_id, $mode, $name, $label, $orde, &$result) {
       $sch_id = $user_sch_group->sch_id;
 
-      $result = xonFormField::add($form_id, $mode, $name, $label);
+      $result = xonFormField::add($form_id, $mode, $name, $label, $orde);
     });
     return $result;
   }
