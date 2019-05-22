@@ -15,7 +15,7 @@ Page({
   pickChange: function (e) {
     let that = this
     that.setData(e.detail)
-    x5on.http(x5on.url.schclass, e.detail)
+    x5on.http(x5on.url.sysvalue, e.detail)
     .then(membs => {
       that.setData({ membs })
     })

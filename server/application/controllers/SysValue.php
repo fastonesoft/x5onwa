@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 use QCloud_WeApp_SDK\Mvv;
 use QCloud_WeApp_SDK\Model;
 
-class SysValue extends CI_Controller {
+class Sysvalue extends CI_Controller {
   /**
    * 系统键值
    */
@@ -12,20 +12,10 @@ class SysValue extends CI_Controller {
   public function index() {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
-        $result = Mvv\mvvSysKey::keys();
-        $this->json(['code' => 0, 'data' => $result]);
-      } catch (Exception $e) {
-        $this->json(['code' => 1, 'data' => $e->getMessage()]);
-      }
-    }, function ($error) {
-      $this->json($error);
-    });
-  }
+        $param = $_POST;
+        $key_id = $param['key_id'];
+        $result = Mvv\mvvSysValue::values($key_id);
 
-  public function values() {
-    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
-      try {
-        $result = Mvv\mvvSysKey::keys();
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
         $this->json(['code' => 1, 'data' => $e->getMessage()]);
@@ -40,8 +30,10 @@ class SysValue extends CI_Controller {
       try {
         $param = $_POST;
         $id = $param['id'];
-        $name = $param['name'];
-        $result = Mvv\mvvSysKey::add($id, $name);
+        $key_id = $param['key_id'];
+        $value = $param['value'];
+        $valuex = $param['valuex'];
+        $result = Mvv\mvvSysValue::add($id, $key_id, $value, $valuex);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -58,7 +50,7 @@ class SysValue extends CI_Controller {
         $param = $_POST;
         $uid = $param['uid'];
         $name = $param['name'];
-        $result = Mvv\mvvSysKey::edit($uid, $name);
+        $result = Mvv\mvvSysValue::edit($uid, $name);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -74,7 +66,7 @@ class SysValue extends CI_Controller {
       try {
         $param = $_POST;
         $uid = $param['uid'];
-        $result = Mvv\mvvSysKey::del($uid);
+        $result = Mvv\mvvSysValue::del($uid);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
