@@ -46,8 +46,11 @@ Page({
     var that = this
     var field = that.data.field
     var value = JSON.parse(field.field)
+    
+    var rules = {}
+    var fields = []
     if (field.mode === 1) {
-      var fields = [{
+      fields = [{
         mode: 1,
         name: 'message',
         label: '输入提示',
@@ -73,7 +76,7 @@ Page({
         valueKey: 'name',
         value: value && value.type ? value.type : null,
       }]
-      var rules = {
+      rules = {
         message: {
           required: true,
           chinese: true,
@@ -89,22 +92,26 @@ Page({
           required: true,
         },
       }
-
-      var json = {}
-      json.title = '字段设置'
-      json.notitle = true
-      json.url_u = x5on.url.schrule
-      json.data_u = { uid: field.uid, field: 'field' }
-      json.arrsName = 'fields'
-      json.field = true
-      json.rule = false
-      json.fields = fields
-      json.rules = rules
-  
-      wx.navigateTo({ url: 'form_edit?json=' + JSON.stringify(json) })
     }
-    
 
+    if (field.mode === 2) {
+      x5on.showError('选择框不必设置相关字段')
+      return
+    }
+
+
+    var json = {}
+    json.title = '字段设置'
+    json.notitle = true
+    json.url_u = x5on.url.schrule
+    json.data_u = { uid: field.uid, field: 'field' }
+    json.arrsName = 'fields'
+    json.field = true
+    json.rule = false
+    json.fields = fields
+    json.rules = rules
+
+    wx.navigateTo({ url: 'form_edit?json=' + JSON.stringify(json) })
   },
 
   ruleClick: function(e) {

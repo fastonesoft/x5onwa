@@ -15,8 +15,6 @@ Page({
         valueKey: 'id',
         rangeKey: 'name',
         selectKey: 'name',
-        itemClick: 'itemClick',
-        itemData: 'asdfasdf',
       }, {
         mode: 3,
         label: '分级选择',
