@@ -22,6 +22,19 @@ class SysValue extends CI_Controller {
     });
   }
 
+  public function values() {
+    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
+      try {
+        $result = Mvv\mvvSysKey::keys();
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
+
   public function add() {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {

@@ -4,6 +4,6 @@
 <comMemb membs="{{membs}}" title="系统键值" notitle="{{true}}" key="name" memo="id" bind:editClick="editClick"
     bind:removeClick="removeClick" />
 
-    <view class="weui-btn-area">
-        <button type="primary" bindtap="addClick">添加</button>
-    </view>
+<view class="weui-btn-area">
+    <button type="primary" bindtap="addClick">添加</button>
+</view>

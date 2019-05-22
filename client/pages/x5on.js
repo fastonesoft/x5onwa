@@ -183,6 +183,11 @@ var doUrl = {
   syskeydel: `${host}/weapp/syskey/del`,
   syskeyedit: `${host}/weapp/syskey/edit`,
 
+  // 键值设置
+  sysvalue: `${host}/weapp/sysvalue`,
+  sysvalueadd: `${host}/weapp/sysvalue/add`,
+  sysvaluedel: `${host}/weapp/sysvalue/del`,
+  sysvalueedit: `${host}/weapp/sysvalue/edit`,
 
 
 

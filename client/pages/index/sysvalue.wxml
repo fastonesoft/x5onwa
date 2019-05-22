@@ -1,2 +1,11 @@
 <!--pages/index/sysvalue.wxml-->
-<text>pages/index/sysvalue.wxml</text>
+<view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
+
+<comPick title="系统键值" notitle="{{true}}" label="键值选择" name="name" rangeKey="name" selectKey="name"
+    valueKey="id" picks="{{keys}}" bind:pickChange="pickChange" />
+<comMemb membs="{{membs}}" title="键值设置" notitle="{{true}}" key="name" memo="id" bind:editClick="editClick"
+    bind:removeClick="removeClick" />
+
+<view class="weui-btn-area">
+    <button type="primary" bindtap="addClick">添加</button>
+</view>

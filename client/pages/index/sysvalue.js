@@ -1,66 +1,118 @@
 // pages/index/sysvalue.js
+
+var x5on = require('../x5on.js')
+
 Page({
 
-  /**
-   * 页面的初始数据
-   */
-  data: {
-
+  onLoad: function (e) {
+    var that = this
+    x5on.http(x5on.url.syskey)
+      .then(keys => {
+        that.setData({ keys })
+      })
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
+  pickChange: function (e) {
+    let that = this
+    that.setData(e.detail)
+    x5on.http(x5on.url.schclass, e.detail)
+    .then(membs => {
+      that.setData({ membs })
+    })
+    .catch(error => {
+      x5on.showError(error)
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
 
+  removeClick: function (e) {
+    let that = this
+    x5on.http(x5on.url.sysvaluedel, e.detail)
+      .then(number => {
+        x5on.delSuccess(number)
+        var membs = that.data.membs
+        membs = x5on.delArr(membs, 'uid', e.detail.uid)
+        //
+        that.setData({ membs })
+      })
+      .catch(error => {
+        x5on.showError(error)
+      })
+  },
+  
+  editClick: function (e) {
+    var memb = e.detail
+    var fields = [{
+      mode: 1,
+      name: 'name',
+      label: '键值名称',
+      message: '输入键值名称',
+      type: 'text',
+      maxlength: 20,
+      value: memb.name,
+    }]
+    var rules = {
+      name: {
+        required: true,
+        chinese: true,
+        minlength: 4,
+        maxlength: 20,
+      },
+    }
+    
+    var json = {}
+    json.title = '键值设置'
+    json.notitle = true
+    json.url_u = x5on.url.sysvalueedit
+    json.data_u = { uid: memb.uid }
+    json.arrsName = 'membs'
+    json.fields = fields
+    json.rules = rules
+
+    wx.navigateTo({ url: 'form_edit?json=' + JSON.stringify(json) })
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
+  addClick: function (e) {
+    var that = this
+    var fields = [{
+      mode: 1,
+      name: 'id',
+      label: '键值编号',
+      message: '输入键值编号',
+      type: 'text',
+      maxlength: 10,
+    }, {
+      mode: 1,
+      name: 'name',
+      label: '键值名称',
+      message: '输入键值名称',
+      type: 'text',
+      maxlength: 20,
+    }]
+    var rules = {
+      id: {
+        required: true,
+        english: true,
+        minlength: 4,
+        maxlength: 10,
+      },
+      name: {
+        required: true,
+        chinese: true,
+        minlength: 4,
+        maxlength: 20,
+      },
+    }
 
+    var json = {}
+    json.title = '键值设置'
+    json.notitle = true
+    json.url_u = x5on.url.sysvalueadd
+    json.arrsName = 'membs'
+    json.fields = fields
+    json.rules = rules
+
+    wx.navigateTo({ url: 'form_add?json=' + JSON.stringify(json) })
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })
