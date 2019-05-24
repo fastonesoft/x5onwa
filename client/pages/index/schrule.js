@@ -99,6 +99,67 @@ Page({
       return
     }
 
+    if (field.mode === 3) {
+      fields = [{
+        mode: 1,
+        name: 'rangeKey',
+        label: '列表字段',
+        message: '输入列表字段',
+        type: 'text',
+        maxlength: 20,
+        value: value && value.rangeKey ? value.rangeKey : null,
+      }, {
+        mode: 1,
+        name: 'selectKey',
+        label: '选中字段',
+        message: '输入选中字段',
+        type: 'text',
+        maxlength: 20,
+        value: value && value.selectKey ? value.selectKey : null,
+      }, {
+        mode: 1,
+        name: 'valueKey',
+        label: '返回值字段',
+        message: '输入返回值字段',
+        type: 'text',
+        maxlength: 20,
+        value: value && value.valueKey ? value.valueKey : null,
+      }, {
+        mode: 1,
+        name: 'url',
+        label: '请求地址',
+        message: '输入请求地址',
+        type: 'text',
+        maxlength: 100,
+        value: x5on.url.sysvalue,
+        disabled: true,
+      }, {
+        mode: 3,
+        name: 'type',
+        label: '输入类型',
+        picks: [{name: 'text'}, {name: 'number'}, {name: 'idcard'}],
+        rangeKey: 'name',
+        selectKey: 'name',
+        valueKey: 'name',
+        value: value && value.type ? value.type : null,
+      }]
+      rules = {
+        message: {
+          required: true,
+          chinese: true,
+          minlength: 4,
+          maxlength: 20,
+        },
+        maxlength: {
+          required: true,
+          digits: true,
+          min: 1,
+        },
+        type: {
+          required: true,
+        },
+      }
+    }
 
     var json = {}
     json.title = '字段设置'

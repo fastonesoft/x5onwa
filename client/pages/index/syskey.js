@@ -48,13 +48,13 @@ Page({
       id: {
         required: true,
         english: true,
-        minlength: 4,
+        minlength: 2,
         maxlength: 10,
       },
       name: {
         required: true,
         chinese: true,
-        minlength: 4,
+        minlength: 2,
         maxlength: 20,
       },
     }
@@ -85,7 +85,7 @@ Page({
       name: {
         required: true,
         chinese: true,
-        minlength: 4,
+        minlength: 2,
         maxlength: 20,
       },
     }
