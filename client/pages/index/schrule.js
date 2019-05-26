@@ -126,37 +126,33 @@ Page({
         value: value && value.valueKey ? value.valueKey : null,
       }, {
         mode: 1,
-        name: 'url',
-        label: '请求地址',
-        message: '输入请求地址',
+        name: 'data',
+        label: '请求参数',
+        message: '输入请求参数，key_id',
         type: 'text',
         maxlength: 100,
-        value: x5on.url.sysvalue,
-        disabled: true,
-      }, {
-        mode: 3,
-        name: 'type',
-        label: '输入类型',
-        picks: [{name: 'text'}, {name: 'number'}, {name: 'idcard'}],
-        rangeKey: 'name',
-        selectKey: 'name',
-        valueKey: 'name',
-        value: value && value.type ? value.type : null,
+        value: value && value.data ? value.data : null,
       }]
       rules = {
-        message: {
+        rangeKey: {
           required: true,
-          chinese: true,
-          minlength: 4,
+          english: true,
           maxlength: 20,
         },
-        maxlength: {
+        selectKey: {
           required: true,
-          digits: true,
-          min: 1,
+          english: true,
+          maxlength: 20,
         },
-        type: {
+        valueKey: {
           required: true,
+          english: true,
+          maxlength: 20,
+        },
+        data: {
+          required: true,
+          english: true,
+          maxlength: 50,
         },
       }
     }
@@ -176,17 +172,122 @@ Page({
   },
 
   ruleClick: function(e) {
-    var field = e.detail    
+    var that = this
+    var field = that.data.field
+    var value = JSON.parse(field.rule)
+    
+    var fields = [{
+      mode: 2,
+      label: '必须字段',
+      name: 'required',
+      value: value && value.required ? value.required : false,
+    }, {
+      mode: 2,
+      label: '手机号码',
+      name: 'tel',
+      value: value && value.tel ? value.tel : false,
+    }, {
+      mode: 2,
+      label: '日期',
+      name: 'date',
+      value: value && value.date ? value.date : false,
+    }, {
+      mode: 2,
+      label: '数字',
+      name: 'number',
+      value: value && value.number ? value.number : false,
+    }, {
+      mode: 2,
+      label: '非负整数',
+      name: 'digits',
+      value: value && value.digits ? value.digits : false,
+    }, {
+      mode: 2,
+      label: '英文标识符',
+      name: 'iden',
+      value: value && value.iden ? value.iden : false,
+    }, {
+      mode: 2,
+      label: '英文字符',
+      name: 'english',
+      value: value && value.english ? value.english : false,
+    }, {
+      mode: 2,
+      label: '中文字符',
+      name: 'chinese',
+      value: value && value.chinese ? value.chinese : false,
+    }, {
+      mode: 2,
+      label: '身份证号',
+      name: 'idcard',
+      value: value && value.idcard ? value.idcard : false,
+    }, {
+      mode: 2,
+      label: '手机号码验证字段',
+      name: 'tel',
+      value: value && value.tel ? value.tel : false,
+    }, {
+      mode: 2,
+      label: '手机号码验证字段',
+      name: 'tel',
+      value: value && value.tel ? value.tel : false,
+    }, {
+      mode: 2,
+      label: '手机号码验证字段',
+      name: 'tel',
+      value: value && value.tel ? value.tel : false,
+    }, {
+      mode: 2,
+      label: '手机号码验证字段',
+      name: 'tel',
+      value: value && value.tel ? value.tel : false,
+    }, {
+      mode: 2,
+      label: '手机号码验证字段',
+      name: 'tel',
+      value: value && value.tel ? value.tel : false,
+    }]
+
+    // date: '请输入有效的日期，格式XXXX-XX-XX',
+    // : '请输入有效的数字',
+    // : '请输入有效的非负整数',
+    // : '请输入有效的英文标识符',
+    // : '请输入有效的英文字符',
+    // : '请输入有效的中文字符',
+    // : '请输入18位的有效身份证',
+    // idcardrange: this.formatTpl('年龄不在 {0} 到 {1} 之间'),
+    // equalTo: this.formatTpl('输入值必须和 {0} 相同'),
+    // contains: this.formatTpl('输入值必须包含 {0}'),
+    // minlength: this.formatTpl('最少输入 {0} 个字符'),
+    // maxlength: this.formatTpl('最多输入 {0} 个字符'),
+    // rangelength: this.formatTpl('字段长度在 {0} 到 {1} 之间的字符'),
+    // min: this.formatTpl('请输入不小于 {0} 的数值'),
+    // max: this.formatTpl('请输入不大于 {0} 的数值'),
+    // range: this.formatTpl('请输入范围在 {0} 到 {1} 之间的数值'),
+    // custom: '请输入满足条件的有效数据',
+
+    var rules = {
+      required: {
+        required: '是否必须'
+      },
+      tel: {
+        required: '手机号码'
+      }
+    }
+
     var json = {}
     json.title = '字段设置'
     json.notitle = true
-    json.url_u = x5on.url.schfieldedit
-    json.data_u = { uid: field.uid }
+    json.url_u = x5on.url.schrule
+    json.data_u = { uid: field.uid, field: 'rule' }
     json.arrsName = 'fields'
+    json.field = false
+    json.rule = true
     json.fields = fields
     json.rules = rules
-    
+
     wx.navigateTo({ url: 'form_edit?json=' + JSON.stringify(json) })
   },
   
 })
+
