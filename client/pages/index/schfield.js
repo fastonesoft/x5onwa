@@ -74,7 +74,7 @@ Page({
       },
       name: {
         required: true,
-        iden: true,
+        english: true,
         minlength: 4,
         maxlength: 20,
       },
@@ -148,7 +148,7 @@ Page({
     var rules = {
       name: {
         required: true,
-        iden: true,
+        english: true,
         minlength: 4,
         maxlength: 20,
       },

@@ -222,57 +222,96 @@ Page({
       name: 'idcard',
       value: value && value.idcard ? value.idcard : false,
     }, {
-      mode: 2,
-      label: '手机号码验证字段',
-      name: 'tel',
-      value: value && value.tel ? value.tel : false,
+      mode: 1,
+      label: '最小长度',
+      name: 'minlength',
+      message: '输入最小长度',
+      type: 'number',
+      maxlength: 5,
+      value: value && value.minlength ? value.minlength : null,
     }, {
-      mode: 2,
-      label: '手机号码验证字段',
-      name: 'tel',
-      value: value && value.tel ? value.tel : false,
+      mode: 1,
+      label: '最大长度',
+      name: 'maxlength',
+      message: '输入最大长度',
+      type: 'number',
+      maxlength: 5,
+      value: value && value.maxlength ? value.maxlength : null,
     }, {
-      mode: 2,
-      label: '手机号码验证字段',
-      name: 'tel',
-      value: value && value.tel ? value.tel : false,
+      mode: 1,
+      label: '最小值',
+      name: 'min',
+      message: '输入最小值',
+      type: 'number',
+      maxlength: 20,
+      value: value && value.min ? value.min : null,
     }, {
-      mode: 2,
-      label: '手机号码验证字段',
-      name: 'tel',
-      value: value && value.tel ? value.tel : false,
+      mode: 1,
+      label: '最大值',
+      name: 'max',
+      message: '输入最大值',
+      type: 'number',
+      maxlength: 20,
+      value: value && value.max ? value.max : null,
     }, {
-      mode: 2,
-      label: '手机号码验证字段',
-      name: 'tel',
-      value: value && value.tel ? value.tel : false,
+      mode: 1,
+      label: '自定义',
+      name: 'custom',
+      message: '输入自定义正则表达式',
+      type: 'text',
+      maxlength: 100,
+      value: value && value.custom ? value.custom : null,
     }]
 
-    // date: '请输入有效的日期，格式XXXX-XX-XX',
-    // : '请输入有效的数字',
-    // : '请输入有效的非负整数',
-    // : '请输入有效的英文标识符',
-    // : '请输入有效的英文字符',
-    // : '请输入有效的中文字符',
-    // : '请输入18位的有效身份证',
     // idcardrange: this.formatTpl('年龄不在 {0} 到 {1} 之间'),
     // equalTo: this.formatTpl('输入值必须和 {0} 相同'),
     // contains: this.formatTpl('输入值必须包含 {0}'),
-    // minlength: this.formatTpl('最少输入 {0} 个字符'),
-    // maxlength: this.formatTpl('最多输入 {0} 个字符'),
     // rangelength: this.formatTpl('字段长度在 {0} 到 {1} 之间的字符'),
-    // min: this.formatTpl('请输入不小于 {0} 的数值'),
-    // max: this.formatTpl('请输入不大于 {0} 的数值'),
     // range: this.formatTpl('请输入范围在 {0} 到 {1} 之间的数值'),
-    // custom: '请输入满足条件的有效数据',
 
     var rules = {
       required: {
-        required: '是否必须'
+        required: true
       },
       tel: {
-        required: '手机号码'
-      }
+        required: true
+      },
+      date: {
+        required: true
+      },
+      number: {
+        required: true
+      },
+      digits: {
+        required: true
+      },
+      iden: {
+        required: true
+      },
+      english: {
+        required: true
+      },
+      chinese: {
+        required: true
+      },
+      idcard: {
+        required: true
+      },
+      minlength: {
+        digits: true
+      },
+      maxlength: {
+        digits: true
+      },
+      min: {
+        digits: true
+      },
+      max: {
+        digits: true
+      },
+      custom: {
+        char: true
+      },
     }
 
     var json = {}

@@ -52,6 +52,7 @@ class x5va {
         date: '请输入有效的日期，格式XXXX-XX-XX',
         number: '请输入有效的数字',
         digits: '请输入有效的非负整数',
+        char: '请输入键盘可见字符',
         iden: '请输入有效的英文标识符',
         english: '请输入有效的英文字符',
         chinese: '请输入有效的中文字符',
@@ -120,6 +121,10 @@ class x5va {
       // 验证标识符
       iden(value) {
         return that.optional(value) || /^\w+$/.test(value)
+      },
+      // 所有可显示字符
+      char(value) {
+        return that.optional(value) || /^([\x20-\x7f][^\\])+$/.test(value)
       },
       // 验证英文
       english(value) {
