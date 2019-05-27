@@ -54,7 +54,7 @@ class mvvGroupRole
         // 有记录，没权限，删除
         $result++;
         $uid = $group_role->uid;
-        xonGroupRole::delByUid($uid);
+        xonGroupRole::delByUidCustom($uid);
       }
       if ($group_role === null && $has_role) {
         // 没记录，有权限，添加

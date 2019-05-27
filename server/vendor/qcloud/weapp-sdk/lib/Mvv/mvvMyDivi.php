@@ -81,7 +81,7 @@ class mvvMyDivi
       $sch_id = $user_sch_group->sch_id;
       xonClassDivi::existByUid($class_div_uid);
 
-      $result = xonClassDivi::delByUid($class_div_uid);
+      $result = xonClassDivi::delByUidCustom($class_div_uid);
     });
     return $result;
   }

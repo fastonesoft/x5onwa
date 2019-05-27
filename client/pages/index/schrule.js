@@ -218,6 +218,11 @@ Page({
       value: value && value.chinese ? value.chinese : false,
     }, {
       mode: 2,
+      label: '中英文字符',
+      name: 'char',
+      value: value && value.char ? value.char : false,
+    }, {
+      mode: 2,
       label: '身份证号',
       name: 'idcard',
       value: value && value.idcard ? value.idcard : false,
@@ -255,11 +260,11 @@ Page({
       value: value && value.max ? value.max : null,
     }, {
       mode: 1,
-      label: '自定义',
+      label: '自定义规则',
       name: 'custom',
       message: '输入自定义正则表达式',
       type: 'text',
-      maxlength: 100,
+      maxlength: 200,
       value: value && value.custom ? value.custom : null,
     }]
 
@@ -292,6 +297,9 @@ Page({
         required: true
       },
       chinese: {
+        required: true
+      },
+      char: {
         required: true
       },
       idcard: {

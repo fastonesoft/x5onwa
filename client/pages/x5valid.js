@@ -118,13 +118,13 @@ class x5va {
       digits(value) {
         return that.optional(value) || /^\d+$/.test(value)
       },
-      // 验证标识符
+      // 验证标识符a-zA-Z_0-9
       iden(value) {
         return that.optional(value) || /^\w+$/.test(value)
       },
-      // 所有可显示字符
+      // 所有可显示字符+汉字
       char(value) {
-        return that.optional(value) || /^([\x20-\x7f][^\\])+$/.test(value)
+        return that.optional(value) || /^[\x20-\x7f\u4e00-\u9fa5]+$/.test(value)
       },
       // 验证英文
       english(value) {

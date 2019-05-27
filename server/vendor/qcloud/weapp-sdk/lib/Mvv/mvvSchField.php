@@ -67,7 +67,7 @@ class mvvSchField
       $sch_id = $user_sch_group->sch_id;
 
       xonFormField::checkByUid($uid);
-      $result = xonFormField::delByUid($uid);
+      $result = xonFormField::delByUidCustom($uid);
     });
     return $result;
   }

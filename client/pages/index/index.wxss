@@ -30,7 +30,7 @@
   display: flex;
   flex-flow: column wrap;
   align-items: center;
-  align-content: flex-start;
+  align-content: space-around;
   justify-content: center;
 }
 

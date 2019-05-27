@@ -96,7 +96,7 @@ class mvvUserSchoolGroup
       $group_id = $user_sch_group_del->group_id;
 
       // 删除当前组教师记录
-      xonUserSchoolGroup::delByUid($user_sch_group_uid);
+      xonUserSchoolGroup::delByUidCustom($user_sch_group_uid);
 
       // 当前组教师列表
       $result = xovUserSchoolGroup::getsBy(compact('sch_id', 'group_id'));

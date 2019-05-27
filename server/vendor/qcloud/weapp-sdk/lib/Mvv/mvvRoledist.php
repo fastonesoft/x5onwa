@@ -57,7 +57,7 @@ class mvvRoledist
     $usergroup = xonUserGroup::checkByUid($uid);
     $group_id = $usergroup->group_id;
 
-    xonUserGroup::delByUid($uid);
+    xonUserGroup::delByUidCustom($uid);
     return xovUserGroup::getsBy(compact('group_id'));
   }
 
