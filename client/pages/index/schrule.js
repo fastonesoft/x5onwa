@@ -169,6 +169,7 @@ Page({
     json.rules = rules
 
     wx.navigateTo({ url: 'form_edit?json=' + JSON.stringify(json) })
+    that.setData({ field: null })
   },
 
   ruleClick: function(e) {
@@ -188,12 +189,12 @@ Page({
       value: value && value.tel ? value.tel : false,
     }, {
       mode: 2,
-      label: '日期',
+      label: '日期，XXXX-XX-XX',
       name: 'date',
       value: value && value.date ? value.date : false,
     }, {
       mode: 2,
-      label: '数字',
+      label: '数字，可以是负数',
       name: 'number',
       value: value && value.number ? value.number : false,
     }, {
@@ -203,14 +204,14 @@ Page({
       value: value && value.digits ? value.digits : false,
     }, {
       mode: 2,
-      label: '英文标识符',
-      name: 'iden',
-      value: value && value.iden ? value.iden : false,
-    }, {
-      mode: 2,
       label: '英文字符',
       name: 'english',
       value: value && value.english ? value.english : false,
+    }, {
+      mode: 2,
+      label: '英文标识符',
+      name: 'iden',
+      value: value && value.iden ? value.iden : false,
     }, {
       mode: 2,
       label: '中文字符',
@@ -244,17 +245,17 @@ Page({
       value: value && value.maxlength ? value.maxlength : null,
     }, {
       mode: 1,
-      label: '最小值',
+      label: '最小数值',
       name: 'min',
-      message: '输入最小值',
+      message: '输入数值最小值',
       type: 'number',
       maxlength: 20,
       value: value && value.min ? value.min : null,
     }, {
       mode: 1,
-      label: '最大值',
+      label: '最大数值',
       name: 'max',
-      message: '输入最大值',
+      message: '输入数值最大值',
       type: 'number',
       maxlength: 20,
       value: value && value.max ? value.max : null,
@@ -334,6 +335,7 @@ Page({
     json.rules = rules
 
     wx.navigateTo({ url: 'form_edit?json=' + JSON.stringify(json) })
+    that.setData({ field: null })
   },
   
 })

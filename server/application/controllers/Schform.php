@@ -100,5 +100,22 @@ class Schform extends CI_Controller {
     });
   }
 
+  public function fields() {
+    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
+      try {
+        $param = $_POST;
+        $uid = $param['uid'];
+
+        $result = Mvv\mvvSchForm::fields($userinfor->unionId, $uid);
+
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
+
 
 }

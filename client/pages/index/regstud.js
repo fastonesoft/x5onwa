@@ -96,13 +96,9 @@ Page({
       success(stud_reg_uid) {
         var studregs = that.data.studregs
         x5on.delArr(studregs, 'uid', stud_reg_uid)
-        that.setData({
-          studregs
-        })
+        that.setData({ studregs })
       }
     })
   },
-
-
 
 })
