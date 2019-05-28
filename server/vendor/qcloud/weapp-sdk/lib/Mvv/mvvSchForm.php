@@ -70,4 +70,17 @@ class mvvSchForm
     return $result;
   }
 
+  public static function fields($sch_admin_user_id, $uid) {
+    $result = 0;
+    mvvUserSchoolGroup::schAdmin($sch_admin_user_id, function ($user_sch_group) use ($uid, $title, $notfixed_string, &$result) {
+      $sch_id = $user_sch_group->sch_id;
+
+      xonForm::checkByUid($uid);
+      $notfixed = x5on::getBool($notfixed_string);
+      xonForm::setsByUid(compact('title', 'notfixed'), $uid);
+      $result = xonForm::getByUid($uid);
+    });
+    return $result;
+  }
+
 }

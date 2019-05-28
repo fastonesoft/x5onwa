@@ -88,17 +88,4 @@ Page({
     })
   },
 
-  cancelClick: function (e) {
-    var that = this
-    x5on.post({
-      data: e.currentTarget.dataset,
-      url: x5on.url.regstudcancel,
-      success(stud_reg_uid) {
-        var studregs = that.data.studregs
-        x5on.delArr(studregs, 'uid', stud_reg_uid)
-        that.setData({ studregs })
-      }
-    })
-  },
-
 })

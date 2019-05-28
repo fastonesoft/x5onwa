@@ -14,11 +14,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Schform.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Schform.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/controllers/Schform.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="679">
-              <caret line="108" column="68" lean-forward="false" selection-start-line="108" selection-start-column="67" selection-end-line="108" selection-end-column="68" />
+            <state relative-caret-position="565">
+              <caret line="108" column="28" lean-forward="false" selection-start-line="108" selection-start-column="28" selection-end-line="108" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -29,6 +29,16 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="323">
               <caret line="18" column="33" lean-forward="true" selection-start-line="18" selection-start-column="33" selection-end-line="18" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mvvSchForm.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchForm.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="584">
+              <caret line="70" column="3" lean-forward="true" selection-start-line="70" selection-start-column="3" selection-end-line="70" selection-end-column="3" />
               <folding />
             </state>
           </provider>
@@ -132,8 +142,8 @@
         <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchField.php" />
         <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/xonFormField.php" />
         <option value="$PROJECT_DIR$/application/controllers/Schfield.php" />
-        <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchForm.php" />
         <option value="$PROJECT_DIR$/application/controllers/Schform.php" />
+        <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchForm.php" />
       </list>
     </option>
   </component>
@@ -305,12 +315,12 @@
       <workItem from="1557992893244" duration="1774000" />
       <workItem from="1558089916192" duration="3968000" />
       <workItem from="1558266514390" duration="1443000" />
-      <workItem from="1558333614590" duration="7939000" />
+      <workItem from="1558333614590" duration="9165000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="309778000" />
+    <option name="totallyTimeSpent" value="311004000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -654,14 +664,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchForm.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="641">
-          <caret line="67" column="40" lean-forward="false" selection-start-line="67" selection-start-column="40" selection-end-line="67" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/Schfield.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="622">
@@ -680,8 +682,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/Schform.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="679">
-          <caret line="108" column="68" lean-forward="false" selection-start-line="108" selection-start-column="67" selection-end-line="108" selection-end-column="68" />
+        <state relative-caret-position="565">
+          <caret line="108" column="28" lean-forward="false" selection-start-line="108" selection-start-column="28" selection-end-line="108" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchForm.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="584">
+          <caret line="70" column="3" lean-forward="true" selection-start-line="70" selection-start-column="3" selection-end-line="70" selection-end-column="3" />
           <folding />
         </state>
       </provider>
