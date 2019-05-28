@@ -24,8 +24,7 @@ Page({
   },
 
   childChange: function(e) {
-    var child_uid = e.detail.uid
-    this.setData({ child_uid })
+    this.setData(e.detail)
   },
   
   pickChange: function(e) {
