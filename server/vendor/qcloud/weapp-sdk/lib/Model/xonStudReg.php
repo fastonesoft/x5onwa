@@ -23,7 +23,8 @@ class xonStudReg extends cAppinfo
     $uid = x5on::getUid();
     // 默认为非指标生
     $stud_auth = 0;
-    xonStudReg::insert(compact('uid', 'user_id', 'child_id', 'sch_id', 'edu_type_id', 'steps_id', 'stud_auth'));
+    $confirmed = 0;
+    xonStudReg::insert(compact('uid', 'user_id', 'child_id', 'sch_id', 'edu_type_id', 'steps_id', 'confirmed', 'stud_auth'));
 
     return xovStudReg::getByUid($uid);
   }

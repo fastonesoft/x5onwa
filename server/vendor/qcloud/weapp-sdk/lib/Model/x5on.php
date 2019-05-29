@@ -110,14 +110,14 @@ class x5on
   public static function addsQrcode($arrs, $keyName) {
     foreach ($arrs as $arr) {
       $json = json_decode(json_encode($arr), true);
-      $arr->qrcode = x5on::getQrcodeBase64($json[$keyName]);
+      $arr->confirmed && $arr->qrcode = x5on::getQrcodeBase64($json[$keyName]);
     }
     return $arrs;
   }
 
   public static function addQrcode($obj, $keyName) {
     $json = json_decode(json_encode($obj), true);
-    $obj->qrcode = x5on::getQrcodeBase64($json[$keyName]);
+    $obj->confirmed && $obj->qrcode = x5on::getQrcodeBase64($json[$keyName]);
     return $obj;
   }
 

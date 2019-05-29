@@ -9,6 +9,8 @@ Page({
       edu_type_name: { label: '学校类型', type: 0 },
       child_name: { label: '报名学生', type: 0 },
       schs_steps: { label: '报名学校', type: 0 },
+      examed: { label: '初审', type: 1 },
+      rexamed: { label: '复核', type: 1 },
       passed: { label: '审核通过', type: 1 },
       qrcode: { label: '审核二维码', type: 2, disable: 0 },
     }
@@ -51,7 +53,7 @@ Page({
     .then(studreg=>{
       var studregs = that.data.studregs
       studregs.push(studreg)
-      that.setData({ studregs })
+      that.setData({ studregs, steps: [], steps_uid: null })
     })
     .catch(error=>{
       x5on.showError(error)
