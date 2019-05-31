@@ -8,9 +8,7 @@
   picks="{{areas}}" bind:pickChange="pickChange" />
 <comRadio radios="{{steps}}" key="schs_steps" bind:radioChange="stepChange" />
 
-<view class="weui-btn-area" wx:if="{{child_uid&&steps_uid}}">
-  <button type="primary" bindtap="checkClick">确认</button>
-</view>
+<comBtn canShow="{{child_uid&&steps_uid}}" title="确认" bind:buttonClick="checkClick" />
 
 <comLists title="报名信息" lists="{{studregs}}" mes="{{mes}}" selectKey="uid" tips="" ref="刷新" ok="报名表格" del="删除"
   canRef="canref" canOk="canok" canDel="candel" bind:refClick="refClick" bind:delClick="delClick"
