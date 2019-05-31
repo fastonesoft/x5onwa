@@ -106,6 +106,8 @@
     "formCheck": "../../coms/formCheck",
     "formFind": "../../coms/formFind",
     "formForm": "../../coms/formForm",
+    "comBtn": "../../coms/comBtn",
+    "comBtnMini": "../../coms/comBtnMini",
     "comMemb": "../../coms/comMemb",
     "comList": "../../coms/comList",
     "comLists": "../../coms/comLists",

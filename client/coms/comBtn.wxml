@@ -1,0 +1,5 @@
+<!--coms/comBtn.wxml-->
+<view class="weui-btn-area" wx:if="{{canShow}}">
+    <button type="primary" bindtap="buttonClick">{{title}}</button>
+</view>
+<!--只作为一个功能使用，不涉及具体数据-->

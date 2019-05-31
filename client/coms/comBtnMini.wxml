@@ -1,0 +1,9 @@
+<!--coms/comBtnMini.wxml-->
+<view class="weui-cells__tips x5ui-mini" wx:if="{{canShow}}">
+    <button class="weui-btn mini-btn" type="default" size="mini" data-uid="{{uid}}" bindtap="defaultClick"
+        wx:if="{{default && canDefault}}">{{default}}</button>
+    <button class="weui-btn mini-btn" type="primary" size="mini" data-uid="{{uid}}" bindtap="primaryClick"
+        wx:if="{{primary && canPrimary}}">{{primary}}</button>
+    <button class="weui-btn mini-btn" type="warn" size="mini" data-uid="{{uid}}" bindtap="warnClick"
+        wx:if="{{warn && canWarn}}">{{warn}}</button>
+</view>

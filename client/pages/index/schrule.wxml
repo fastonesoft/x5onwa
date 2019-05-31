@@ -10,7 +10,5 @@
 
 <comRadio radios="{{fields}}" notitle="{{0}}" key="label" memo="mode_name" bind:radioChange="fieldChange" />
 
-<view class="weui-cells__tips x5ui-mini" wx:if="{{field}}">
-    <button type="primary" size="mini" bindtap="fieldClick">字段</button>
-    <button type="primary" size="mini" bindtap="ruleClick">规则</button>
-</view>
+<comBtnMini canShow="{{field}}" primary="字段" warn="规则" canPrimary="{{1}}" canWarn="{{1}}" bind:primaryClick="fieldClick"
+    bind:warnClick="ruleClick" />
