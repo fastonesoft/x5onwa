@@ -16,7 +16,7 @@ class Schvalue extends CI_Controller {
         $form_id = $param['form_id'];
 
         // 用户级数据获取，不是管理级
-        $result = Mvv\mvvSchForm::fields($userinfor->unionId, $form_id);
+        $result = Mvv\mvvSchValue::fields($userinfor->unionId, $form_id);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
