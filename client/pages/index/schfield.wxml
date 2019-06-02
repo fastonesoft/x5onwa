@@ -10,6 +10,4 @@
 <comMemb notitle="{{0}}" membs="{{fields}}" key="label" memo="mode_name" bind:editClick="editClick"
     bind:removeClick="removeClick" />
 
-<view class="weui-cells__tips x5ui-mini" wx:if="{{canadd}}">
-    <button type="primary" size="mini" bindtap="addClick">添加</button>
-</view>
+<comBtn title="添加" canShow="{{canadd}}" bind:buttonClick="addClick" />

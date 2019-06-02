@@ -1,10 +1,8 @@
 <!--pages/index/form.wxml-->
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
-<formForm notitle="{{1}}" fields="{{fields}}" rules="{{rules}}" mini="{{1}}" submitName="查询" bind:formSubmit="formSubmit" />
+<formForm notitle="{{1}}" fields="{{fields}}" rules="{{rules}}" mini="{{0}}" submitName="查询" bind:formSubmit="formSubmit" />
 
 <comMemb title="表单列表" membs="{{forms}}" key="title" selected="notfixed" bind:editClick="editClick" bind:removeClick="removeClick" />
 
-<view class="weui-cells__tips x5ui-mini" wx:if="{{forms}}">
-  <button type="primary" size="mini" bindtap="addClick">添加</button>
-</view>
+<comBtn title="添加" canShow="{{forms}}" bind:buttonClick="addClick" />
