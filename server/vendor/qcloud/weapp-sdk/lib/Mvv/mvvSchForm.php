@@ -5,6 +5,8 @@ use QCloud_WeApp_SDK\Model\x5on;
 use QCloud_WeApp_SDK\Model\xonForm;
 use QCloud_WeApp_SDK\Model\xonType;
 use QCloud_WeApp_SDK\Model\xonSchYear;
+use QCloud_WeApp_SDK\Model\xovFormField;
+use QCloud_WeApp_SDK\Model\xovFormValue;
 use QCloud_WeApp_SDK\Model\xovSchStep;
 
 class mvvSchForm
@@ -70,17 +72,9 @@ class mvvSchForm
     return $result;
   }
 
-  public static function fields($sch_admin_user_id, $uid) {
-    $result = 0;
-    mvvUserSchoolGroup::schAdmin($sch_admin_user_id, function ($user_sch_group) use ($uid, $title, $notfixed_string, &$result) {
-      $sch_id = $user_sch_group->sch_id;
-
-      xonForm::checkByUid($uid);
-      $notfixed = x5on::getBool($notfixed_string);
-      xonForm::setsByUid(compact('title', 'notfixed'), $uid);
-      $result = xonForm::getByUid($uid);
-    });
-    return $result;
+  public static function fields($user_id, $form_id) {
+    // 用户级表单字段
+    return xovFormValue::getsBy(compact('user_id', 'form_id'));
   }
 
 }

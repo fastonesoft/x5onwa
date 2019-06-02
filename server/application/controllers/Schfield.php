@@ -6,7 +6,7 @@ use QCloud_WeApp_SDK\Model;
 
 class Schfield extends CI_Controller {
   /**
-   * 模板名称
+   * 表单字段
    */
   const role_name = 'schfield';
   public function index() {

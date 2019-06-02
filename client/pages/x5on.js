@@ -174,6 +174,10 @@ var doUrl = {
   schfielddel: `${host}/weapp/schfield/del`,
   schfieldadd: `${host}/weapp/schfield/add`,
   schfieldedit: `${host}/weapp/schfield/edit`,
+
+  // 表单数据
+  schvalue: `${host}/weapp/schvalue`,
+
   // 字段规则
   schrule: `${host}/weapp/schrule/`,
 
