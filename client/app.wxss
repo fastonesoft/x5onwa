@@ -34,4 +34,6 @@ page { background: #F6F6F6; font-size: 16px; margin-bottom: 1em; }
 .weui-select { text-align: left; }
 .weui-cell_vcode .weui-input { padding-right: 20rpx; }
 
+/* 手动添加到weui.wxss */
 switch { transform: scale(0.7); -webkit-transform: scale(0.7); }
+.weui-btn-area button { font-size: 16px; }
