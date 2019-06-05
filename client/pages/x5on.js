@@ -162,6 +162,7 @@ var doUrl = {
   schclassgroupclass2div: `${host}/weapp/schclassgroup/class2div`,
   // 年度表单
   schform: `${host}/weapp/schform`,
+  schformyears: `${host}/weapp/schform/years`,
   schformforms: `${host}/weapp/schform/forms`,
   schformdel: `${host}/weapp/schform/del`,
   schformadd: `${host}/weapp/schform/add`,

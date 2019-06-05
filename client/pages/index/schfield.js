@@ -49,7 +49,7 @@ Page({
     }, {
       mode: 1,
       label: '字段代码',
-      message: '输入字段代码，英文字母',
+      message: '输入字段代码，a-zA-Z_0-9',
       name: 'name',
       type: 'text',
       maxlength: 10,
@@ -74,7 +74,7 @@ Page({
       },
       name: {
         required: true,
-        english: true,
+        iden: true,
         minlength: 4,
         maxlength: 20,
       },
@@ -123,7 +123,7 @@ Page({
     var fields = [{
       mode: 1,
       label: '字段代码',
-      message: '输入字段代码，英文字母',
+      message: '输入字段代码，a-zA-Z_0-9',
       name: 'name',
       type: 'text',
       maxlength: 10,
@@ -148,7 +148,7 @@ Page({
     var rules = {
       name: {
         required: true,
-        english: true,
+        iden: true,
         minlength: 4,
         maxlength: 20,
       },

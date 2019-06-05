@@ -6,47 +6,8 @@ Page({
   onLoad: function(e) {
     var that = this
     x5on.http(x5on.url.schform)
-    .then(res=>{
-      var fields = [{
-        mode: 3,
-        label: '分类选择',
-        name: 'type_id',
-        picks: res.types,
-        valueKey: 'id',
-        rangeKey: 'name',
-        selectKey: 'name',
-      }, {
-        mode: 3,
-        label: '分级选择',
-        name: 'steps_id',
-        picks: res.steps,
-        valueKey: 'id',
-        rangeKey: 'sch_step',
-        selectKey: 'sch_step',
-      }, {
-        mode: 3,
-        label: '年度选择',
-        name: 'years_id',
-        picks: res.years,
-        valueKey: 'id',
-        rangeKey: 'year',
-        selectKey: 'year',
-      }]
-      var rules = {
-        type_id: {
-          required: true,
-          min: 0,
-        },
-        steps_id: {
-          required: true,
-          min: 0,
-        },
-        years_id: {
-          required: true,
-          min: 0,
-        }
-      }
-      that.setData({ fields, rules })
+    .then(steps_types=>{
+      that.setData(steps_types)
     })
     .catch(error=>{
       x5on.showError(error)
@@ -54,11 +15,30 @@ Page({
 
   },
 
-  formSubmit: function(e) {
+  stepChange: function(e) {
     var that = this
-    var data = e.detail
-    that.setData({ data })
-    x5on.http(x5on.url.schformforms, data)
+    var steps_id = e.detail.steps_id
+    that.setData({ steps_id, years_id: null })
+    // 取分级年度
+    x5on.http(x5on.url.schformyears, { steps_id: e.detail.steps_id })
+    .then(years=>{
+      that.setData({ years })
+    })
+    .catch(error=>{
+      x5on.showError(error)
+    })
+  },
+
+  pickChange: function(e) {
+    this.setData(e.detail)
+  },
+
+  findClick: function(e) {
+    var that = this
+    var steps_id = that.data.steps_id
+    var years_id = that.data.years_id
+    var type_id = that.data.type_id
+    x5on.http(x5on.url.schformforms, { steps_id, years_id, type_id })
     .then(forms=>{
       that.setData({ forms })
     })
@@ -99,7 +79,7 @@ Page({
     var rules = {
       title: {
         required: true,
-        chinese: true,
+        char: true,
         minlength: 4,
         maxlength: 20,
       },
@@ -140,7 +120,7 @@ Page({
     var rules = {
       title: {
         required: true,
-        chinese: true,
+        char: true,
         minlength: 4,
         maxlength: 20,
       },
@@ -159,10 +139,6 @@ Page({
     json.rules = rules
 
     wx.navigateTo({ url: 'form_edit?json=' + JSON.stringify(json) })
-  },
-
-  itemChange: function(e) {
-    console.log('---'+e)
   },
 
 })

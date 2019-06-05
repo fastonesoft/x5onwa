@@ -12,7 +12,7 @@ class Schform extends CI_Controller {
   public function index() {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
-        $result = Mvv\mvvSchForm::types($userinfor->unionId);
+        $result = Mvv\mvvSchForm::steps_types($userinfor->unionId);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -22,6 +22,24 @@ class Schform extends CI_Controller {
       $this->json($error);
     });
   }
+
+  public function years() {
+    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
+      try {
+        $param = $_POST;
+        $steps_id = $param['steps_id'];
+
+        $result = Mvv\mvvSchForm::years($userinfor->unionId, $steps_id);
+
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
+
 
   public function forms() {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {

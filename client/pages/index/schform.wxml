@@ -1,8 +1,16 @@
 <!--pages/index/form.wxml-->
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
-<formForm notitle="{{1}}" fields="{{fields}}" rules="{{rules}}" mini="{{0}}" submitName="查询" bind:formSubmit="formSubmit" />
+<comPick notitle="{{1}}" label="分级选择" name="steps_id" rangeKey="sch_step" selectKey="sch_step"
+  valueKey="id" picks="{{steps}}" bind:pickChange="stepChange" />
+<comPick notitle="{{0}}" label="年度选择" name="years_id" rangeKey="year" selectKey="year" valueKey="id"
+  picks="{{years}}" bind:pickChange="pickChange" />
+<comPick notitle="{{0}}" label="分类选择" name="type_id" rangeKey="name" selectKey="name" valueKey="id"
+  picks="{{types}}" bind:pickChange="pickChange" />
 
-<comMemb title="表单列表" membs="{{forms}}" key="title" selected="notfixed" bind:editClick="editClick" bind:removeClick="removeClick" />
+<comBtn title="查询" canShow="{{steps_id&&years_id&&type_id}}" bind:buttonClick="findClick" />
+
+<comMemb title="表单列表" membs="{{forms}}" key="title" selected="notfixed" bind:editClick="editClick"
+  bind:removeClick="removeClick" />
 
 <comBtn title="添加" canShow="{{forms}}" bind:buttonClick="addClick" />
