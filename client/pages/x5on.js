@@ -178,6 +178,7 @@ var doUrl = {
 
   // 表单数据
   schvalue: `${host}/weapp/schvalue`,
+  // schvaluefields: `${host}/weapp/schvalue/fields`,
 
   // 字段规则
   schrule: `${host}/weapp/schrule/`,

@@ -73,7 +73,15 @@ Page({
   },
 
   okClick: function(e) {
+    var that = this
+    x5on.http(x5on.url.schvalue, e.detail)
+    .then(values=>{
+      console.log(values)
 
+    })
+    .catch(error=>{
+      x5on.showError(error)
+    })
   },
 
   delClick: function(e) {

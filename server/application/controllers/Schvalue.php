@@ -13,10 +13,10 @@ class Schvalue extends CI_Controller {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
         $param = $_POST;
-        $form_id = $param['form_id'];
+        $reg_stud_uid = $param['uid'];
 
         // 用户级数据获取，不是管理级
-        $result = Mvv\mvvSchValue::fields($userinfor->unionId, $form_id);
+        $result = Mvv\mvvSchValue::fields($userinfor->unionId, $reg_stud_uid);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
