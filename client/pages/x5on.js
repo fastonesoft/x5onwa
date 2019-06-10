@@ -500,13 +500,21 @@ var doFieldsRules = function(formfields, values) {
     // fields\value
     value = doGetArrex(values, 'field_id', field.id)
     res.value = value ? value.value : null
+    // switch
+    if (res.mode==2) {
+      res.value = res.value && res.value==='true'
+    }
+    // pick
+    if(res.mode==3) {
+      res.url = doUrl.sysvalue
+      res.data = { key_id: res.data }
+    }
+    //
     fields.push(res)
-
     // rules
     var rule = JSON.parse(field.rule) || {}
     rules[res.name] = rule
   }
-  console.log(fields)
   return { fields, rules }
 }
 

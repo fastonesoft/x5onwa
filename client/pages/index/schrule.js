@@ -130,7 +130,7 @@ Page({
         label: '请求参数',
         message: '输入请求参数，key_id',
         type: 'text',
-        maxlength: 100,
+        maxlength: 10,
         value: value && value.data ? value.data : null,
       }]
       rules = {
@@ -152,7 +152,7 @@ Page({
         data: {
           required: true,
           english: true,
-          maxlength: 50,
+          maxlength: 10,
         },
       }
     }
@@ -322,9 +322,6 @@ Page({
         char: true
       },
     }
-
-    console.log(value)
-    console.log(fields)
 
     var json = {}
     json.title = '字段设置'
