@@ -12,7 +12,7 @@ Page({
       examed: { label: '初审', type: 1 },
       rexamed: { label: '复核', type: 1 },
       passed: { label: '审核通过', type: 1 },
-      qrcode: { label: '审核二维码', type: 2, disable: 0 },
+      qrcode: { label: '审核二维码', type: 2 },
     }
     that.setData({ mes })
     //
@@ -47,8 +47,7 @@ Page({
 
   checkClick: function(e) {
     var that = this
-    var steps_uid = that.data.steps_uid
-    var child_uid = that.data.child_uid
+    var { steps_uid, child_uid } = that.data
     steps_uid && child_uid && x5on.http(x5on.url.regstudreg, { steps_uid, child_uid })
     .then(studreg=>{
       var studregs = that.data.studregs
@@ -75,9 +74,21 @@ Page({
   okClick: function(e) {
     var that = this
     x5on.http(x5on.url.schvalue, e.detail)
-    .then(values=>{
-      console.log(values)
+    .then(fields_values=>{
+      var { fields, values } = fields_values
+      var { fields, rules } = x5on.fieldsRules(fields, values)
 
+      var json = {}
+      json.title = '报表表格'
+      json.notitle = true
+      json.url_u = x5on.url.schvalueadd
+      // e.detail => { uid: xxx }
+      json.data_u = e.detail
+      json.arrsName = 'studregs'
+      json.fields = fields
+      json.rules = rules
+      
+      wx.navigateTo({ url: 'form_edit?json=' + JSON.stringify(json) })
     })
     .catch(error=>{
       x5on.showError(error)

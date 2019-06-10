@@ -16,13 +16,14 @@ use QCloud_WeApp_SDK\Model\xovUserChilds;
 
 class mvvStudreg
 {
-  public static function child_area_reged($user_id, $my_user_id) {
+  public static function child_area_reged($user_id) {
     $childs = xovUserChilds::getsBy(compact('user_id'));
     // 地级市开头的形式
     $area_type = 2;
     $areas = xovAreas::getsBy(compact('area_type'));
     // 用户孩子的报名信息
-    $studregs = xovStudRegUser::getsBy(compact('my_user_id'));
+    $login_user_id = $user_id;
+    $studregs = xovStudRegUser::getsBy(compact('login_user_id'));
     $studregs = x5on::addsQrcode($studregs, 'uid');
     return compact('childs', 'areas', 'studregs');
   }
@@ -42,18 +43,23 @@ class mvvStudreg
     return xonStudReg::add($user_id, $child_id, $sch_id, $edu_type_id, $steps_id);
   }
 
-  public static function ref($stud_reg_uid) {
-    $stud_reg = xovStudReg::checkByUidCustom($stud_reg_uid, '没有找到对应学生报名记录');
+  public static function ref($login_user_id, $uid) {
+    // uid => reg_stud_uid
+    $stud_reg = xovStudRegUser::checkByCustom(compact('login_user_id', 'uid'), '没有找到对应学生的报名记录');
     return x5on::addQrcode($stud_reg, 'uid');
   }
 
   // 取消报名
-  public static function del($user_id, $uid)
+  public static function del($login_user_id, $uid)
   {
-    xonStudReg::checkByCustom(compact('user_id', 'uid'), '不是本人报名，不能删除');
+    xovStudRegUser::checkByCustom(compact('login_user_id', 'uid'), '不是本人报名，不能删除');
     $candel = 1;
-    xovStudReg::checkByCustom(compact('user_id', 'uid', 'candel'), '已经审核，不能删除');
-    return xonStudReg::delBy(compact('user_id', 'uid'));
+    xovStudRegUser::checkByCustom(compact('login_user_id', 'uid', 'candel'), '已经审核，不能删除');
+    // 一、删除报名数据
+    mvvSchValue::del($login_user_id, $uid);
+
+    // 二、删除报名记录
+    return xonStudReg::delByUid($uid);
   }
 
   

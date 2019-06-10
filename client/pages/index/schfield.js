@@ -48,13 +48,6 @@ Page({
       selectKey: 'name',
     }, {
       mode: 1,
-      label: '字段代码',
-      message: '输入字段代码，a-zA-Z_0-9',
-      name: 'name',
-      type: 'text',
-      maxlength: 10,
-    }, {
-      mode: 1,
       label: '字段名称',
       message: '输入字段名称',
       name: 'label',
@@ -71,12 +64,6 @@ Page({
     var rules = {
       mode: {
         required: true,
-      },
-      name: {
-        required: true,
-        iden: true,
-        minlength: 4,
-        maxlength: 20,
       },
       label: {
         required: true,
@@ -122,14 +109,6 @@ Page({
     var field = e.detail
     var fields = [{
       mode: 1,
-      label: '字段代码',
-      message: '输入字段代码，a-zA-Z_0-9',
-      name: 'name',
-      type: 'text',
-      maxlength: 10,
-      value: field.name,
-    }, {
-      mode: 1,
       label: '字段名称',
       message: '输入字段名称',
       name: 'label',
@@ -146,12 +125,6 @@ Page({
       value: field.orde,
     }]
     var rules = {
-      name: {
-        required: true,
-        iden: true,
-        minlength: 4,
-        maxlength: 20,
-      },
       label: {
         required: true,
         chinese: true,

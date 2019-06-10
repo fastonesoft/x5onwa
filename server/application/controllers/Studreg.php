@@ -16,7 +16,7 @@ class Studreg extends CI_Controller
       try {
         // 返回报名孩子与学校列表
         $user_id = $userinfor->unionId;
-        $result = Mvv\mvvStudreg::child_area_reged($user_id, $user_id);
+        $result = Mvv\mvvStudreg::child_area_reged($user_id);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -74,7 +74,7 @@ class Studreg extends CI_Controller
         $param = $_POST;
         $stud_reg_uid = $param['uid'];
 
-        $result = Mvv\mvvStudreg::ref($stud_reg_uid);
+        $result = Mvv\mvvStudreg::ref($userinfor->unionId, $stud_reg_uid);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -84,7 +84,6 @@ class Studreg extends CI_Controller
       $this->json($error);
     });
   }
-
 
   // 取消报名
   public function cancel()

@@ -76,12 +76,11 @@ class Schfield extends CI_Controller {
       try {
         $param = $_POST;
         $mode = $param['mode'];
-        $name = $param['name'];
         $label = $param['label'];
         $orde = $param['orde'];
         $form_id = $param['form_id'];
 
-        $result = Mvv\mvvSchField::add($userinfor->unionId, $form_id, $mode, $name, $label, $orde);
+        $result = Mvv\mvvSchField::add($userinfor->unionId, $form_id, $mode, $label, $orde);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -97,11 +96,10 @@ class Schfield extends CI_Controller {
       try {
         $param = $_POST;
         $uid = $param['uid'];
-        $name = $param['name'];
         $label = $param['label'];
         $orde = $param['orde'];
 
-        $result = Mvv\mvvSchField::edit($userinfor->unionId, $uid, $name, $label, $orde);
+        $result = Mvv\mvvSchField::edit($userinfor->unionId, $uid, $label, $orde);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {

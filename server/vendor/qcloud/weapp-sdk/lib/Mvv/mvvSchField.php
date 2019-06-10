@@ -51,12 +51,12 @@ class mvvSchField
     return $result;
   }
 
-  public static function add($sch_admin_user_id, $form_id, $mode, $name, $label, $orde) {
+  public static function add($sch_admin_user_id, $form_id, $mode, $label, $orde) {
     $result = [];
-    mvvUserSchoolGroup::schAdmin($sch_admin_user_id, function ($user_sch_group) use ($form_id, $mode, $name, $label, $orde, &$result) {
+    mvvUserSchoolGroup::schAdmin($sch_admin_user_id, function ($user_sch_group) use ($form_id, $mode, $label, $orde, &$result) {
       $sch_id = $user_sch_group->sch_id;
 
-      $result = xonFormField::add($form_id, $mode, $name, $label, $orde);
+      $result = xonFormField::add($form_id, $mode, $label, $orde);
     });
     return $result;
   }
@@ -72,13 +72,13 @@ class mvvSchField
     return $result;
   }
 
-  public static function edit($sch_admin_user_id, $uid, $name, $label, $orde) {
+  public static function edit($sch_admin_user_id, $uid, $label, $orde) {
     $result = [];
-    mvvUserSchoolGroup::schAdmin($sch_admin_user_id, function ($user_sch_group) use ($uid, $name, $label, $orde, &$result) {
+    mvvUserSchoolGroup::schAdmin($sch_admin_user_id, function ($user_sch_group) use ($uid, $label, $orde, &$result) {
       $sch_id = $user_sch_group->sch_id;
 
       xonFormField::checkByUid($uid);
-      xonFormField::setsByUid(compact('name', 'label', 'orde'), $uid);
+      xonFormField::setsByUid(compact('label', 'orde'), $uid);
       $result = xovFormField::getByUid($uid);
     });
     return $result;

@@ -26,6 +26,7 @@ class xonStudReg extends cAppinfo
     $confirmed = 0;
     xonStudReg::insert(compact('uid', 'user_id', 'child_id', 'sch_id', 'edu_type_id', 'steps_id', 'confirmed', 'stud_auth'));
 
-    return xovStudReg::getByUid($uid);
+    $login_user_id = $user_id;
+    return xovStudRegUser::getBy(compact('uid', 'login_user_id'));
   }
 }

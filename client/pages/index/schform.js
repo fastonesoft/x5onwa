@@ -35,9 +35,7 @@ Page({
 
   findClick: function(e) {
     var that = this
-    var steps_id = that.data.steps_id
-    var years_id = that.data.years_id
-    var type_id = that.data.type_id
+    var { steps_id, years_id, type_id } = that.data
     x5on.http(x5on.url.schformforms, { steps_id, years_id, type_id })
     .then(forms=>{
       that.setData({ forms })
@@ -92,7 +90,7 @@ Page({
     json.title = '表单设置'
     json.notitle = true
     json.url_u = x5on.url.schformadd
-    json.data_u = that.data.data
+    json.data_u = that.data
     json.arrsName = 'forms'
     json.fields = fields
     json.rules = rules

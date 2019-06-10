@@ -40,7 +40,6 @@ class Schform extends CI_Controller {
     });
   }
 
-
   public function forms() {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {

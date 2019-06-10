@@ -26,4 +26,21 @@ class Schvalue extends CI_Controller {
       $this->json($error);
     });
   }
+
+  public function add() {
+    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
+      try {
+        $param = $_POST;
+
+        // 用户级数据获取，不是管理级
+        $result = Mvv\mvvSchValue::add($userinfor->unionId, $param);
+
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
 }

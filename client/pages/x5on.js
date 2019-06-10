@@ -178,7 +178,7 @@ var doUrl = {
 
   // 表单数据
   schvalue: `${host}/weapp/schvalue`,
-  // schvaluefields: `${host}/weapp/schvalue/fields`,
+  schvalueadd: `${host}/weapp/schvalue/add`,
 
   // 字段规则
   schrule: `${host}/weapp/schrule/`,
@@ -360,9 +360,10 @@ var doDelArr = function (arrs, obj_name, obj_value) {
 // 变更数组索引obj_value的对象，sets字段的值
 var doSetArr = function (arrs, obj_name, obj_value, obj_sets) {
   var index = doGetIndexe(arrs, obj_name, obj_value)
-  for (var key in obj_sets) {
-    arrs[index].hasOwnProperty(key) && (arrs[index][key] = obj_sets[key])
-  }
+  // for (var key in obj_sets) {
+  //   arrs[index].hasOwnProperty(key) && (arrs[index][key] = obj_sets[key])
+  // }
+  arrs.splice(index, 1, obj_sets)
   return arrs
 }
 
@@ -484,6 +485,29 @@ var doDelRule = function(ruleObj) {
     )
   }
   return res
+}
+
+/* 将返回的字段数组，拼装成fields数组、rules对象 */
+var doFieldsRules = function(formfields, values) {
+  var fields = []
+  var rules = {}
+  for(var field of formfields) {
+    // fields
+    var res = JSON.parse(field.field) || {}
+    res.mode = field.mode
+    res.name = field.id
+    res.label = field.label
+    // fields\value
+    value = doGetArrex(values, 'field_id', field.id)
+    res.value = value ? value.value : null
+    fields.push(res)
+
+    // rules
+    var rule = JSON.parse(field.rule) || {}
+    rules[res.name] = rule
+  }
+  console.log(fields)
+  return { fields, rules }
 }
 
 /**
@@ -717,7 +741,7 @@ var doShowError = function (message) {
   doCurPage(page=>{
     page.setData({
       errorShow: true,
-      errorMessage: message
+      errorMessage: typeof message==='string' ? message : '出错啦'
     })
     setTimeout(function () {
       page.setData({
@@ -809,4 +833,5 @@ module.exports = {
   checkForm: x5va.checkForm,
   prevPage: doPrevPage,
   delRule: doDelRule,
+  fieldsRules: doFieldsRules,
 }

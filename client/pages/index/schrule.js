@@ -323,6 +323,9 @@ Page({
       },
     }
 
+    console.log(value)
+    console.log(fields)
+
     var json = {}
     json.title = '字段设置'
     json.notitle = true

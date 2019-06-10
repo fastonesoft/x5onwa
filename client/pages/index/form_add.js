@@ -15,7 +15,6 @@ Page({
     var field = that.data.field
 
     var formData = e.detail
-    console.log(formData)
     // 存在，字段
     field && (
       formData = { update: 'field', field: JSON.stringify(formData) }
