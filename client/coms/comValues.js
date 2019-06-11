@@ -5,11 +5,6 @@ Component({
     values: Array,
     title: String,
     notitle: Boolean,
-    notitletext: Boolean,
-    valueKey: String,
   },
 
-  methods: {
-
-  }
 })

@@ -1,25 +1,22 @@
 <!--coms/comValues.wxml-->
-<block wx:if="{{values.length>0}}">
-	<view class="weui-cells__title" wx:if="{{!notitle&&!notitletext}}">
-		{{title}}
-	</view>
+<view wx:if="{{values.length>0}}">
+	<view class="weui-cells__title" wx:if="{{!notitle}}">{{title}}</view>
 	<view class="weui-cells weui-cells_after-title">
-		<block wx:for="{{values}}" wx:key="*this">
-			<view class="weui-cell">
+		<block wx:for="{{values}}" wx:key="name">
+			<view class="weui-cell weui-cell_switch" wx:if="{{item.mode==2}}">
 				<view class="weui-cell__bd">{{item.label}}</view>
 				<view class="weui-cell__ft">
-					<block wx:if="{{!item.mode||item.mode==1}}">{{item[valueKey]}}</block>
-					<block wx:elif="{{item.mode==2}}">
-						<icon type="circle" size="23" wx:if="{{!item.value}}"></icon>
-						<icon type="success" size="23" wx:if="{{item.value}}"></icon>
-					</block>
-					<block wx:elif="{{item.mode==3}}">
-						<view class="qrcode-area">
-							<image class="qrcode" src="data:image/png;base64,{{item.value}}"></image>
-						</view>
-					</block>
+					<switch name="{{item.name}}" checked="{{item.value}}" disabled="{{1}}" />
+				</view>
+			</view>
+			<view class="weui-cell" wx:else>
+				<view class="weui-cell__bd">{{item.label}}</view>
+				<view class="weui-cell__ft" wx:if="{{!item.bool}}">{{item.value}}</view>
+				<view class="weui-cell__ft" wx:else>
+					<icon type="success" size="23" wx:if="{{item.value}}"></icon>
+					<icon type="cancel" size="23" wx:else></icon>
 				</view>
 			</view>
 		</block>
 	</view>
-</block>
+</view>

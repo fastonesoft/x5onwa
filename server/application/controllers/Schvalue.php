@@ -15,7 +15,7 @@ class Schvalue extends CI_Controller {
         $param = $_POST;
         $reg_stud_uid = $param['uid'];
 
-        // 用户级数据获取，不是管理级
+        // 根据注册学生编号，列出表单字段、用户表单数据
         $result = Mvv\mvvSchValue::fields($userinfor->unionId, $reg_stud_uid);
 
         $this->json(['code' => 0, 'data' => $result]);
@@ -32,7 +32,7 @@ class Schvalue extends CI_Controller {
       try {
         $param = $_POST;
 
-        // 用户级数据获取，不是管理级
+        // 表单数据添加
         $result = Mvv\mvvSchValue::add($userinfor->unionId, $param);
 
         $this->json(['code' => 0, 'data' => $result]);
@@ -47,7 +47,7 @@ class Schvalue extends CI_Controller {
   public function forms() {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
-        // 用户级数据获取，不是管理级
+        // 用户表单
         $result = Mvv\mvvSchValue::forms($userinfor->unionId);
 
         $this->json(['code' => 0, 'data' => $result]);
@@ -65,7 +65,7 @@ class Schvalue extends CI_Controller {
         $param = $_POST;
         $form_id = $param['form_id'];
 
-        // 用户级数据获取，不是管理级
+        // 表单数据
         $result = Mvv\mvvSchValue::values($userinfor->unionId, $form_id);
 
         $this->json(['code' => 0, 'data' => $result]);

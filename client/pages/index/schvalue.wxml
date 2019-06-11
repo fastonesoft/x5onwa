@@ -3,3 +3,5 @@
 
 <comPick title="表单设置" notitle="{{true}}" label="用户表单" name="form_id" rangeKey="form_name" selectKey="form_name"
     valueKey="form_id" picks="{{forms}}" bind:pickChange="pickChange" />
+
+<comValues title="表单数据" notitle="{{0}}" values="{{fields}}" />

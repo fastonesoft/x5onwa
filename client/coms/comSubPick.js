@@ -13,6 +13,7 @@ Component({
     rangeKey: String,
     valueKey: String,
     selectKey: String,
+    disabled: Boolean,
   },
 
   lifetimes: {

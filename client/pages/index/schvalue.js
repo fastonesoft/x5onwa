@@ -13,6 +13,19 @@ Page({
 		.catch(error=>{
 			x5on.showError(error)
 		})
-	}
+	},
 
+	pickChange: function(e) {
+		var that = this
+		x5on.http(x5on.url.schvaluevalues, e.detail)
+		.then(fields_values=>{
+		  var { fields, values } = fields_values
+		  var { fields, rules } = x5on.fieldsRules(fields, values)
+		  //
+		  that.setData({ fields })	
+		})
+		.catch(error=>{
+		  x5on.showError(error)
+		})
+	}
 })
