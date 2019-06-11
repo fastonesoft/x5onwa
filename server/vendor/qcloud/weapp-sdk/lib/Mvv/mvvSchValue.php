@@ -3,9 +3,11 @@ namespace QCloud_WeApp_SDK\Mvv;
 
 use QCloud_WeApp_SDK\Model\x5on;
 use QCloud_WeApp_SDK\Model\xonForm;
+use QCloud_WeApp_SDK\Model\xonFormField;
 use QCloud_WeApp_SDK\Model\xonFormValue;
 use QCloud_WeApp_SDK\Model\xonStudReg;
 use QCloud_WeApp_SDK\Model\xovFormField;
+use QCloud_WeApp_SDK\Model\xovFormUser;
 use QCloud_WeApp_SDK\Model\xovFormValue;
 use QCloud_WeApp_SDK\Model\xovStudReg;
 use QCloud_WeApp_SDK\Model\xovStudRegUser;
@@ -67,6 +69,17 @@ class mvvSchValue
     foreach ($values as $value) {
       xonFormValue::delByUid($value->uid);
     }
+  }
+
+  public static function forms($user_id) {
+    return xovFormUser::getsBy(compact('user_id'));
+  }
+
+  public static function values($user_id, $form_id) {
+    $fields = xonFormField::getsBySuff(compact('form_id'), 'order by orde');
+    // 用户级表单字段
+    $values = xovFormValue::getsBy(compact('user_id', 'form_id'));
+    return compact('fields', 'values');
   }
 
 }

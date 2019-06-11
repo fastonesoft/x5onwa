@@ -43,4 +43,37 @@ class Schvalue extends CI_Controller {
       $this->json($error);
     });
   }
+
+  public function forms() {
+    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
+      try {
+        // 用户级数据获取，不是管理级
+        $result = Mvv\mvvSchValue::forms($userinfor->unionId);
+
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
+
+  public function values() {
+    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
+      try {
+        $param = $_POST;
+        $form_id = $param['form_id'];
+
+        // 用户级数据获取，不是管理级
+        $result = Mvv\mvvSchValue::values($userinfor->unionId, $form_id);
+
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
 }
