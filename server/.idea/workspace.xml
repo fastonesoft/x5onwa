@@ -192,7 +192,7 @@
       <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-1" />
     <option name="width" value="1346" />
     <option name="height" value="688" />
@@ -338,12 +338,12 @@
       <workItem from="1558089916192" duration="3968000" />
       <workItem from="1558266514390" duration="1443000" />
       <workItem from="1558333614590" duration="15430000" />
-      <workItem from="1560256023613" duration="726000" />
+      <workItem from="1560256023613" duration="1321000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="338635000" />
+    <option name="totallyTimeSpent" value="339230000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />

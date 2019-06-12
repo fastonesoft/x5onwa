@@ -109,3 +109,11 @@
     </view>
   </block>
 </block>
+
+
+
+
+<comPick title="招生设置" notitle="{{true}}" label="招生年级" name="steps_id" rangeKey="schs_steps" selectKey="schs_steps"
+    valueKey="id" picks="{{steps}}" bind:pickChange="stepsChange" />
+
+<comValues title="报名数据" notitle="{{0}}" values="{{fields}}" />
