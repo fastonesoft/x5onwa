@@ -12,12 +12,8 @@ class Studexam extends CI_Controller {
   public function index() {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
-        $user_id = $userinfor->unionId;
-        $user = Model\xovUser::getById($user_id);
-
-
-        $can_recruit = 0;
-        $result = Model\xovSchoolStep::getsBy(compact('area_id', 'edu_type_id', 'can_recruit'));
+        // 地区选择、学生类别
+        $result = Mvv\mvvStudexam::step_auth($userinfor->unionId);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {

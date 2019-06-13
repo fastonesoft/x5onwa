@@ -13,6 +13,16 @@ use QCloud_WeApp_SDK\Model\xovUserSchoolGroupAll;
 class mvvUserSchoolGroup
 {
 
+  // 检测是否注册学校
+  public static function schUser($user_id, $success)
+  {
+    // 查找用户对应学校，有多重设置，返回第一个
+    $is_current = 1;
+    $user_sch_group = xovUserSchoolGroupAll::checkByCustom(compact('user_id', 'is_current'), '不属于任何学校，无法操作');
+
+    call_user_func($success, $user_sch_group);
+  }
+
   // 检测是否学校管理员
   public static function schAdmin($user_id, $success)
   {
@@ -172,9 +182,5 @@ class mvvUserSchoolGroup
       $result = self::doGroups($user_sch_id, $groups, $groups_json);
     });
   }
-
-
-
-
 
 }

@@ -1,131 +1,14 @@
 <!--pages/index/regexam.wxml-->
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
-<view class="weui-article">
-  <view class="weui-article__h1">新生报名审核</view>
-</view>
 
-<comPick title="地区设置" notitle="{{1}}" label="地区选择" name="area_id" rangeKey="city_name" selectKey="city_name" valueKey="id"
-  picks="{{areas}}" bind:pickChange="areaChange" />
-<comRadio radios="{{steps}}" key="schs_steps" bind:radioChange="stepChange" />
-  
-<comPick notitle="{{0}}" label="学生类别" name="stud_auth" rangeKey="name" selectKey="name"
-    valueKey="id" picks="{{auths}}" bind:pickChange="authChange" />
+<comPick title="学校分级" notitle="{{1}}" label="分级选择" name="step_id" rangeKey="schs_steps" selectKey="schs_steps"
+  valueKey="id" picks="{{steps}}" bind:pickChange="stepChange" />
+
+<comPick notitle="{{0}}" label="学生类别" name="stud_auth" rangeKey="name" selectKey="name" valueKey="id" picks="{{auths}}"
+  bind:pickChange="authChange" />
 
 <comBtn canShow="{{1}}" title="报名识别" bind:buttonClick="scanClick" />
 
 <comValues title="报名数据" notitle="{{0}}" values="{{fields}}" />
 
 <comBtn canShow="{{1}}" title="确认" bind:buttonClick="examClick" />
-
-
-<view class="weui-cells__title">学校设置</view>
-<view class="weui-cells weui-cells_after-title">
-  <view class="weui-cell weui-cell_select">
-    <view class="weui-cell__hd weui-cell__hd_in-select-after">
-      <view class="weui-label">学校分级</view>
-    </view>
-    <view class="weui-cell__bd">
-      <picker bindchange="stepChange" name="step" value="{{stepIndex}}" range="{{steps}}" range-key="schs_steps"
-        disabled="{{!steps||steps.length==0}}">
-        <view class="weui-select weui-select_in-select-after">{{steps[stepIndex].schs_steps}}</view>
-      </picker>
-    </view>
-  </view>
-</view>
-
-<block wx:if="{{exam}}">
-  <view class="weui-cells__title">审核信息</view>
-  <view class="weui-cells weui-cells_after-title">
-    <view class="weui-cell">
-      <view class="weui-cell__bd">报名总数</view>
-      <view class="weui-cell__ft">{{exam.total}}</view>
-    </view>
-    <view class="weui-cell">
-      <view class="weui-cell__bd">男生人数</view>
-      <view class="weui-cell__ft">{{exam.male}}</view>
-    </view>
-    <view class="weui-cell">
-      <view class="weui-cell__bd">女生人数</view>
-      <view class="weui-cell__ft">{{exam.female}}</view>
-    </view>
-    <view class="weui-cell">
-      <view class="weui-cell__bd">指标生</view>
-      <view class="weui-cell__ft">{{exam.auth}}</view>
-    </view>
-    <view class="weui-cell">
-      <view class="weui-cell__bd">非指标生</view>
-      <view class="weui-cell__ft">{{exam.notauth}}</view>
-    </view>
-  </view>
-</block>
-
-<view class="weui-btn-area">
-  <button type="primary" bindtap="scanClick">报名识别</button>
-</view>
-
-
-<block wx:if="{{studreg}}">
-  <view class="weui-cells__title">报名信息</view>
-  <view class="weui-cells weui-cells_after-title">
-    <view class="weui-cell">
-      <view class="weui-cell__bd">学校分级</view>
-      <view class="weui-cell__ft">{{studreg.schs_steps}}</view>
-    </view>
-    <view class="weui-cell">
-      <view class="weui-cell__bd">报名学生</view>
-      <view class="weui-cell__ft">{{studreg.child_name}}</view>
-    </view>
-  </view>
-  <view class="weui-cells__title">指标设置</view>
-  <view class="weui-cells weui-cells_after-title">
-    <view class="weui-cell weui-cell_select">
-      <view class="weui-cell__hd weui-cell__hd_in-select-after">
-        <view class="weui-label">是否指标</view>
-      </view>
-      <view class="weui-cell__bd">
-        <picker bindchange="authChange" name="auth" value="{{authIndex}}" range="{{auths}}" range-key="auths_name"
-          disabled="{{!auths||auths.length==0}}">
-          <view class="weui-select weui-select_in-select-after">{{auths[authIndex].auths_name}}</view>
-        </picker>
-      </view>
-    </view>
-  </view>
-  <view class="weui-cells__tips x5ui-mini">
-    <button data-uid="{{item.uid}}" type="primary" size="mini" bindtap="checkClick">
-      确认
-    </button>
-    <button data-uid="{{item.uid}}" type="warn" size="mini" bindtap="cancelClick">
-      取消
-    </button>
-  </view>
-
-  <view class="qrcode-area">
-    <image class="qrcode" src="data:image/png;base64,{{qrcode_data}}"></image>
-  </view>
-
-
-  <block wx:if="{{not_passed}}">
-    <view class="x5ui-column">
-      <view class="x5ui-half-btn">
-        <view class="weui-btn-area">
-          <button type="primary" bindtap="passClick">审核通过</button>
-        </view>
-      </view>
-      <view class="x5ui-half-btn">
-        <view class="weui-btn-area">
-          <button type="warn" bindtap="cancelClick">撤消</button>i
-        </view>
-      </view>
-    </view>
-  </block>
-
-
-  <block wx:if="{{passed}}">
-    <view class="weui-btn-area">
-      <button type="primary" bindtap="nextClick">下一个</button>
-    </view>
-  </block>
-</block>
-
-
-

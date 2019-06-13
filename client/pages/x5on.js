@@ -198,9 +198,6 @@ var doUrl = {
   sysvaluedel: `${host}/weapp/sysvalue/del`,
   sysvalueedit: `${host}/weapp/sysvalue/edit`,
 
-
-
-
   // 审核
   studexam: `${host}/weapp/studexam`,
   studexampass: `${host}/weapp/studexam/pass`,
@@ -208,6 +205,9 @@ var doUrl = {
   studconfirm: `${host}/weapp/studconfirm`,
   studconfirmpass: `${host}/weapp/studconfirm/pass`,
   studconfirmcancel: `${host}/weapp/studconfirm/cancel`,
+
+
+
 
 
 

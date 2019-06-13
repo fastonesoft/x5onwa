@@ -28,6 +28,11 @@ class mvvStudreg
     return compact('childs', 'areas', 'studregs');
   }
 
+  public static function step($area_id) {
+    $can_recruit = 1;
+    return xovSchStep::getsBy(compact('area_id', 'can_recruit'));
+  }
+
   // 报名注册
   public static function reg($user_id, $child_uid, $steps_uid)
   {
