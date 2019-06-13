@@ -3,6 +3,8 @@ var x5on = require('../x5on.js')
 
 Page({
 
+  
+
   scanClick: function (e) {
     var that = this
     x5on.check({

@@ -1,5 +1,22 @@
 <!--pages/index/regexam.wxml-->
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
+<view class="weui-article">
+  <view class="weui-article__h1">新生报名审核</view>
+</view>
+
+<comPick title="地区设置" notitle="{{1}}" label="地区选择" name="area_id" rangeKey="city_name" selectKey="city_name" valueKey="id"
+  picks="{{areas}}" bind:pickChange="areaChange" />
+<comRadio radios="{{steps}}" key="schs_steps" bind:radioChange="stepChange" />
+  
+<comPick notitle="{{0}}" label="学生类别" name="stud_auth" rangeKey="name" selectKey="name"
+    valueKey="id" picks="{{auths}}" bind:pickChange="authChange" />
+
+<comBtn canShow="{{1}}" title="报名识别" bind:buttonClick="scanClick" />
+
+<comValues title="报名数据" notitle="{{0}}" values="{{fields}}" />
+
+<comBtn canShow="{{1}}" title="确认" bind:buttonClick="examClick" />
+
 
 <view class="weui-cells__title">学校设置</view>
 <view class="weui-cells weui-cells_after-title">
@@ -112,8 +129,3 @@
 
 
 
-
-<comPick title="招生设置" notitle="{{true}}" label="招生年级" name="steps_id" rangeKey="schs_steps" selectKey="schs_steps"
-    valueKey="id" picks="{{steps}}" bind:pickChange="stepsChange" />
-
-<comValues title="报名数据" notitle="{{0}}" values="{{fields}}" />

@@ -4,7 +4,7 @@
 <comPick title="地区学校" notitle="{{1}}" label="孩子选择" name="child_uid" rangeKey="child_name" selectKey="child_name"
   valueKey="uid" picks="{{childs}}" bind:pickChange="childChange" />
 
-<comPick title="地区学校" label="地区选择" name="area_id" rangeKey="city_name" selectKey="city_name" valueKey="id"
+<comPick title="地区设置" label="地区选择" name="area_id" rangeKey="city_name" selectKey="city_name" valueKey="id"
   picks="{{areas}}" bind:pickChange="pickChange" />
 <comRadio radios="{{steps}}" key="schs_steps" bind:radioChange="stepChange" />
 
