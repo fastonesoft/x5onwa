@@ -1,14 +1,14 @@
 <!--pages/index/regexam.wxml-->
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
-<comPick title="学校分级" notitle="{{1}}" label="分级选择" name="step_id" rangeKey="schs_steps" selectKey="schs_steps"
-  valueKey="id" picks="{{steps}}" bind:pickChange="stepChange" />
+<comPick title="学校分级" notitle="{{1}}" label="年级选择" name="step_id" rangeKey="schs_steps" selectKey="schs_steps"
+  valueKey="id" picks="{{steps}}" bind:pickChange="pickChange" />
 
 <comPick notitle="{{0}}" label="学生类别" name="stud_auth" rangeKey="name" selectKey="name" valueKey="id" picks="{{auths}}"
-  bind:pickChange="authChange" />
+  bind:pickChange="pickChange" />
 
-<comBtn canShow="{{1}}" title="报名识别" bind:buttonClick="scanClick" />
+<comBtn canShow="{{step_id && stud_auth>=0 && fields.length==0}}" title="报名识别" bind:buttonClick="scanClick" />
 
 <comValues title="报名数据" notitle="{{0}}" values="{{fields}}" />
 
-<comBtn canShow="{{1}}" title="确认" bind:buttonClick="examClick" />
+<comBtn canShow="{{fields.length>0}}" title="确认" bind:buttonClick="examClick" />

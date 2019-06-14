@@ -3,6 +3,10 @@ var x5on = require('../x5on.js')
 
 Page({
 
+  data: {
+    fields: [],
+  },
+
 	onLoad: function(e) {
 		var that = this
 		x5on.http(x5on.url.studexam)
@@ -12,30 +16,33 @@ Page({
 		.catch(error=>{
 			x5on.showError(error)
 		})
-	},
+  },
 
-  scanClick: function (e) {
-    var that = this
-    x5on.check({
-      success: () => {
-        wx.scanCode({
-          onlyFromCamera: true,
-          success: (res) => {
-            var uid = res.result
-            x5on.post({
-              url: x5on.url.studexam,
-              data: { uid },
-              success: function (result) {
-                var data = result.data
-                data.scanned = true
-                that.setData(data)
-              }
-            })
-          }
-        })
+  pickChange: function(e) {
+    this.setData(e.detail)
+  },
+  
+  scanClick: function(e) {
+    var fields = []
+
+    wx.scanCode({
+      onlyFromCamera: true,
+      success: (res) => {
+        var uid = res.result
+        //
+        console.log(res) 
       }
     })
+    
+    this.setData({ fields })
   },
+
+  examClick: function(e) {
+    var fields = []
+    this.setData({ fields })
+  },
+
+
 
   passClick: function (e) {
     var that = this

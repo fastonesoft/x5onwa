@@ -24,6 +24,21 @@ class Studexam extends CI_Controller {
     });
   }
 
+  public function index() {
+    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
+      try {
+        // 地区选择、学生类别
+        $result = Mvv\mvvStudexam::step_auth($userinfor->unionId);
+
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
+
 
 
 
