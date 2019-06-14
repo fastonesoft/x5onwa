@@ -23,18 +23,26 @@ Page({
   },
   
   scanClick: function(e) {
-    var fields = []
-
+    var that = this
     wx.scanCode({
       onlyFromCamera: true,
       success: (res) => {
         var uid = res.result
-        //
-        console.log(res) 
+        console.log(uid)
+        // 请求表单数据
+        x5on.http(x5on.url.studexamfields, { uid })
+        .then(fields_values=>{
+          console.log(fields_values)
+          var { fields, values } = fields_values
+          var { fields, rules } = x5on.fieldsRules(fields, values)
+          // 显示
+          that.setData({ fields })	
+        })
+        .catch(error=>{
+          x5on.showError(error)
+        })
       }
     })
-    
-    this.setData({ fields })
   },
 
   examClick: function(e) {

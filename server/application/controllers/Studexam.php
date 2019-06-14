@@ -24,11 +24,13 @@ class Studexam extends CI_Controller {
     });
   }
 
-  public function index() {
+  public function fields() {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
-        // 地区选择、学生类别
-        $result = Mvv\mvvStudexam::step_auth($userinfor->unionId);
+        // 根据报名学生编号，获取报名表格
+        $param = $_POST;
+        $stud_reg_uid = $param['uid'];
+        $result = Mvv\mvvStudexam::fields($userinfor->unionId, $stud_reg_uid);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {

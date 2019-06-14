@@ -200,6 +200,8 @@ var doUrl = {
 
   // 审核
   studexam: `${host}/weapp/studexam`,
+  studexamfields: `${host}/weapp/studexam/fields`,
+
   studexampass: `${host}/weapp/studexam/pass`,
   studexamcancel: `${host}/weapp/studexam/cancel`,
   studconfirm: `${host}/weapp/studconfirm`,
@@ -749,6 +751,7 @@ var doHttp = function (url, data, donshow) {
  * 错误显示
  */
 var doShowError = function (message) {
+  console.log(message)
   doCurPage(page=>{
     page.setData({
       errorShow: true,
