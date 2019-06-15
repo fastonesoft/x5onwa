@@ -1,0 +1,11 @@
+<!--pages/index/form_lists.wxml-->
+
+<comList notitle="{{0}}" obj="{{obj}}" mes="{{mes}}" wx:if="{{mode=='obj'}}"/>
+
+<view wx:for="{{lists}}" wx:key="" wx:if="{{mode=='lists'}}">
+    <comList obj="{{item}}" mes="{{mes}}"/>
+</view>
+
+<comValues notitle="{{0}}" values="{{values}}" wx:if="{{mode=='values'}}"/>
+
+<comBtn canShow="{{1}}" title="返回" bind:buttonClick="returnClick" />

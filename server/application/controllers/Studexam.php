@@ -30,7 +30,8 @@ class Studexam extends CI_Controller {
         // 根据报名学生编号，获取报名表格
         $param = $_POST;
         $stud_reg_uid = $param['uid'];
-        $result = Mvv\mvvStudexam::fields($userinfor->unionId, $stud_reg_uid);
+        $step_id = $param['step_id'];
+        $result = Mvv\mvvStudexam::fields($userinfor->unionId, $stud_reg_uid, $step_id);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {

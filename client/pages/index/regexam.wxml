@@ -9,6 +9,11 @@
 
 <comBtn canShow="{{step_id && stud_auth>=0 && fields.length==0}}" title="报名识别" bind:buttonClick="scanClick" />
 
-<comValues title="报名数据" notitle="{{0}}" values="{{fields}}" />
 
-<comBtn canShow="{{fields.length>0}}" title="确认" bind:buttonClick="examClick" />
+<comLists title="报名信息" notitle="{{0}}" lists="{{regstuds}}" mes="{{mes}}" selectKey="uid" tips="" ref="关闭"
+  canRef="confirmed" bind:refClick="closeClick" />
+
+<comValues title="报名数据" notitle="{{1}}" values="{{fields}}" />
+
+<comBtnMini canShow="{{fields.length>0}}" primary="确认" canPrimary="{{fields.length>0}}" warn="退回"
+  canWarn="{{fields.length>0}}" bind:primaryClick="primaryClick" bind:warnClick="warnClick" />

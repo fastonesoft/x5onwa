@@ -1,6 +1,6 @@
 <!--coms/comLists.wxml-->
 <view wx:for="{{lists}}" wx:key="" wx:for-index="index">
-    <comList title="{{title}}" notitle="{{notitle}}" notitletext="{{index}}" obj="{{item}}" mes="{{mes}}" />
+    <comList title="{{title}}" notitle="{{notitle}}" obj="{{item}}" mes="{{mes}}" />
     <view class="weui-cells__tips x5ui-mini">
         <button class="weui-btn mini-btn" type="default" size="mini" data-uid="{{item[selectKey]}}"
             bindtap="refClick" wx:if="{{ref && item[canRef]}}">{{ref}}</button>

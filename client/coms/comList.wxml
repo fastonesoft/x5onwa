@@ -1,5 +1,5 @@
 <!--coms/comList.wxml-->
-<block wx:if="{{list.length>0}}">
+<view wx:if="{{list.length>0}}">
 	<view class="weui-cells__title" wx:if="{{!notitle}}">{{title}}</view>
 	<view class="weui-cells weui-cells_after-title">
 		<block wx:for="{{list}}" wx:key="name">
@@ -20,6 +20,6 @@
 			</view>
 		</block>
 	</view>
-</block>
+</view>
 
 <!-- <comList title="{{title}}" notitle="{{notitle}}" notitletext="{{index}}" obj="{{item}}" mes="{{mes}}" /> -->
