@@ -9,7 +9,8 @@ Page({
       edu_type_name: { label: '学校类型', type: 0 },
       child_name: { label: '报名学生', type: 0 },
       schs_steps: { label: '报名学校', type: 0 },
-      passed: { label: '审核通过', type: 1 },
+      examed: { label: '通过初审', type: 1 },
+      rexamed: { label: '通过复核', type: 1 },
       qrcode: { label: '审核二维码', type: 2 },
     }
     that.setData({ mes })

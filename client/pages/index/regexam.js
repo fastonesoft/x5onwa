@@ -4,16 +4,14 @@ var x5on = require('../x5on.js')
 Page({
 
   data: {
-    fields: [],
+    regstuds: [],
   },
 
 	onLoad: function(e) {
     var that = this
     var mes = {
-      edu_type_name: { label: '学校类型', type: 0 },
       child_name: { label: '报名学生', type: 0 },
       schs_steps: { label: '报名学校', type: 0 },
-      passed: { label: '审核通过', type: 1 },
       qrcode: { label: '审核二维码', type: 2 },
     }
     that.setData({ mes })
@@ -58,24 +56,23 @@ Page({
   },
 
 
-  primaryClick: function(e) {
+  examClick: function(e) {
     // 提交确认
-    // todo
 
-    // 显示结果
-    var json = {}
-    json.mode = ''
-    // e.detail => { uid: xxx }
-    json.data_u = e.detail
-    json.arrsName = 'studregs'
-    json.fields = fields
-    json.rules = rules
-    
-    wx.navigateTo({ url: 'form_lists?json=' + JSON.stringify(json) })
+    // 显示结果：一、打开学生关闭按钮，二、清除表格数据
+    var { regstuds } = this.data
+    if (regstuds.length>0) {
+      regstuds[0].canClose = 1
+      this.setData({ regstuds })
+    }
+    this.setData({ fields: [] })
   },
 
-  warnClick: function(e) {
-    console.log('warn')
+  rejectClick: function(e) {
+    // 提交数据
+
+    // 清除显示
+    this.setData({ regstuds: [], fields: [] })
   },
 
 
