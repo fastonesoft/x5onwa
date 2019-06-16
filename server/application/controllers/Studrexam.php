@@ -42,4 +42,39 @@ class Studrexam extends CI_Controller {
     });
   }
 
+
+  public function rexam() {
+    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
+      try {
+        // 根据报名学生编号，审核
+        $param = $_POST;
+        $stud_reg_uid = $param['uid'];
+        $result = Mvv\mvvStudrexam::rexam($userinfor->unionId, $stud_reg_uid);
+
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
+
+  public function reject() {
+    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
+      try {
+        // 根据报名学生编号，退回
+        $param = $_POST;
+        $stud_reg_uid = $param['uid'];
+        $result = Mvv\mvvStudrexam::reject($userinfor->unionId, $stud_reg_uid);
+
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
+
 }

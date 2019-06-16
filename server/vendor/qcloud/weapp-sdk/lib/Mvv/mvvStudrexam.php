@@ -1,6 +1,10 @@
 <?php
 namespace QCloud_WeApp_SDK\Mvv;
 
+use QCloud_WeApp_SDK\Model\xonStudReg;
+use QCloud_WeApp_SDK\Model\xovSchStep;
+use QCloud_WeApp_SDK\Model\xovStudReg;
+
 class mvvStudrexam
 {
 

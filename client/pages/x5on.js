@@ -198,15 +198,16 @@ var doUrl = {
   sysvaluedel: `${host}/weapp/sysvalue/del`,
   sysvalueedit: `${host}/weapp/sysvalue/edit`,
 
-  // 审核
+  // 初核
   studexam: `${host}/weapp/studexam`,
   studexamfields: `${host}/weapp/studexam/fields`,
-
-  studexampass: `${host}/weapp/studexam/pass`,
-  studexamcancel: `${host}/weapp/studexam/cancel`,
-  studconfirm: `${host}/weapp/studconfirm`,
-  studconfirmpass: `${host}/weapp/studconfirm/pass`,
-  studconfirmcancel: `${host}/weapp/studconfirm/cancel`,
+  studexamexam: `${host}/weapp/studexam/exam`,
+  studexamreject: `${host}/weapp/studexam/reject`,
+  // 复核
+  studrexam: `${host}/weapp/studrexam`,
+  studrexamfields: `${host}/weapp/studrexam/fields`,
+  studrexamrexam: `${host}/weapp/studrexam/rexam`,
+  studrexamreject: `${host}/weapp/studrexam/reject`,
 
 
 

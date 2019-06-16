@@ -103,7 +103,7 @@ class mvvStudexam
   // 将用户确认信息退回
   public static function reject($sch_user_id, $reg_stud_uid) {
     $result = 0;
-    mvvUserSchoolGroup::schUser($sch_user_id, function ($user_sch_group) use ($sch_user_id, $reg_stud_uid, $stud_auth, &$result) {
+    mvvUserSchoolGroup::schUser($sch_user_id, function ($user_sch_group) use ($sch_user_id, $reg_stud_uid, &$result) {
       $sch_id = $user_sch_group->sch_id;
 
       $uid = $reg_stud_uid;

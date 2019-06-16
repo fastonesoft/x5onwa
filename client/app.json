@@ -4,7 +4,7 @@
     "pages/index/index",
     "pages/index/regstud",
     "pages/index/regexam",
-    "pages/index/regconfirm",
+    "pages/index/regrexam",
     "pages/index/roleset",
     "pages/index/rolegroup",
     "pages/index/userset",
