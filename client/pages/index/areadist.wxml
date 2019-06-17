@@ -1,22 +1,13 @@
 <!--pages/index/areatypedist.wxml-->
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
-<form bindsubmit="findSubmit">
-	<view class="weui-cells__title">用户查询</view>
-	<view class="weui-cells weui-cells_after-title">
-		<view class="weui-cell weui-cell_input weui-cell_vcode">
-			<view class="weui-cell__hd">
-				<view class="weui-label">用户姓名</view>
-			</view>
-			<view class="weui-cell__bd">
-				<input class="weui-input" placeholder="请输入用户姓名" name="name" type="text" maxlength="4" />
-			</view>
-			<view class="weui-cell__ft">
-				<button type="normal" form-type="submit">查询</button>
-			</view>
-		</view>
-	</view>
-</form>
+<formFind title="用户查询" notitle="{{true}}" label="用户姓名" bind:findSubmit="findSubmit" />
+<comRadio radios="{{users}}" key="name" memo="nick_name" bind:radioChange="userChange" />
+<comPick title="地区设置" label="地区选择" name="area_id" rangeKey="city_name" selectKey="city_name" valueKey="id" picks="{{areas}}"
+	bind:pickChange="areaChange" />
+
+	<formFind title="成员查询" notitle="{{true}}" label="成员姓名" bind:findSubmit="memberSubmit" wx:if="{{members.length>0}}" />
+		<comMemb membs="{{members}}" key="name" split=" - " memo="user_name" bind:removeClick="memberRemove" />
 
 <form bindsubmit="areadistSubmit">
 	<view wx:if="{{users.length>0}}">

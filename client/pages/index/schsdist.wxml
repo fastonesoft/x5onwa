@@ -4,7 +4,7 @@
 <formFind title="用户查询" notitle="{{true}}" label="用户姓名" bind:findSubmit="findSubmit" />
 <comRadio radios="{{users}}" key="name" memo="nick_name" bind:radioChange="userChange" />
 <comPick title="地区设置" label="地区选择" name="area_id" rangeKey="city_name" selectKey="city_name" valueKey="id" picks="{{areas}}"
-	bind:pickChange="areaPick" />
+	bind:pickChange="areaChange" />
 
 <comRadioMemb radios="{{schs}}" key="name" memo="code" bind:radioChange="schsChange" bind:removeClick="schsRemove" />
 

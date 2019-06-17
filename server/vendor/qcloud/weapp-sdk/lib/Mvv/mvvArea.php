@@ -39,7 +39,8 @@ class mvvArea
     xonArea::setsByUid(compact('user_id'), $uid);
   }
 
-  public static function refresh($area_type) {
+  public static function refresh() {
+    $area_type = 2;
     $areas = xovAreas2Dist::getsBy(compact('area_type'));
     $members = xovAreasDist::getsBy(compact('area_type'));
     return compact('areas', 'members');

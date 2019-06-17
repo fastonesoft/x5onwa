@@ -13,7 +13,7 @@ Page({
       child_name: { label: '报名学生', type: 0 },
       schs_steps: { label: '报名学校', type: 0 },
       qrcode: { label: '审核二维码', type: 2 },
-      stud_auth: { label: '学生分类', type: 1 },
+      stud_auth: { label: '是否指标生', type: 1 },
     }
     that.setData({ mes })
     

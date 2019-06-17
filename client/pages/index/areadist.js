@@ -7,60 +7,30 @@ Page({
   },
 
   findSubmit: function (e) {
-    var that = this
-    var rules = {
-      name: {
-        required: true,
-        chinese: true,
-        rangelength: [1, 3],
-      }
-    }
-    var messages = {
-      name: {
-        required: '用户姓名'
-      }
-    }
-    x5on.checkForm(e.detail.value, rules, messages, form => {
-      x5on.post({
-        url: x5on.url.areadistuser,
-        data: form,
-        success(users) {
-          that.setData({ users })
-          users.length === 0 && x5on.showError('没有找到你要的用户！')
-        }
-      })
-    }, message => {
-      x5on.showError(message)
-    })
+		var that = this
+		x5on.http(x5on.url.schsdistuser, e.detail)
+		.then(users=>{
+			users.length !== 0 && that.setData({ users, user_uid: null })
+			users.length === 0 && x5on.showError('没有找到你要的用户！')
+		})
+		.catch(error=>{
+			x5on.showError(error)
+		})
   },
 
   userChange: function (e) {
-    x5on.setRadio(this.data.users, e.detail.value, users => {
-      this.setData({ users })
-    })
-  },
-
-  areatypeChange: function (e) {
-    var that = this
-    x5on.setPick(e, areatypeIndex => {
-      that.setData({ areatypeIndex })
-      //
-      x5on.post({
-        url: x5on.url.areadist,
-        data: { area_type: areatypeIndex },
-        success(areas_members) {
-          areas_members.areaIndex = -1
-          that.setData(areas_members)
-        }
-      })
-    })
+		var user_uid = e.detail.uid
+		this.setData({ user_uid })
   },
 
   areaChange: function (e) {
-    var that = this
-    x5on.setPick(e, areaIndex => {
-      that.setData({ areaIndex })
-    })
+		var that = this
+		that.setData(e.detail)
+		// e.detail => { area_id }
+		x5on.http(x5on.url.schsdistschs, e.detail)
+		.then(schs_members=>{
+			that.setData(schs_members)
+		})
   },
 
   areadistSubmit: function (e) {

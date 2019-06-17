@@ -31,7 +31,7 @@ class Studrexam extends CI_Controller {
         $param = $_POST;
         $stud_reg_uid = $param['uid'];
         $step_id = $param['step_id'];
-        $result = Mvv\mvvStudexam::fields($userinfor->unionId, $stud_reg_uid, $step_id);
+        $result = Mvv\mvvStudrexam::fields($userinfor->unionId, $stud_reg_uid, $step_id);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {

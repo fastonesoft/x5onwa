@@ -28,7 +28,7 @@ Page({
 		this.setData({ user_uid })
 	},
 
-	areaPick: function (e) {
+	areaChange: function (e) {
 		var that = this
 		that.setData(e.detail)
 		// e.detail => { area_id }
