@@ -14,6 +14,7 @@ class xonArea extends cAppinfo
     //
     $uid = x5on::getUid();
     $user_id = null;
-    return self::insert(compact('id', 'uid', 'name', 'user_id'));
+    self::insert(compact('id', 'uid', 'name', 'user_id'));
+    return xovAreas2Dist::getByUid($uid);
   }
 }

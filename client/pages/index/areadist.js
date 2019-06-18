@@ -3,7 +3,7 @@ var x5on = require('../x5on.js')
 Page({
 
   data: {
-    areatypes: [{id: 0, name: '省份'}, {id: 1, name: '地市'}, {id: 2, name: '区县'}]
+    areatypes: [{id: 1, name: '省份'}, {id: 2, name: '地市'}, {id: 3, name: '区县'}]
   },
 
   findSubmit: function (e) {
@@ -23,111 +23,89 @@ Page({
 		this.setData({ user_uid })
   },
 
-  areaChange: function (e) {
-		var that = this
-		that.setData(e.detail)
-		// e.detail => { area_id }
-		x5on.http(x5on.url.schsdistschs, e.detail)
-		.then(schs_members=>{
-			that.setData(schs_members)
+  typeChange: function(e) {
+    var that = this
+    // e.detail => { area_type }
+    that.setData(e.detail)
+    that.setData({ area_uid: null })
+		x5on.http(x5on.url.areadist, e.detail)
+		.then(areas_members=>{
+      that.setData(areas_members)
 		})
+		.catch(error=>{
+			x5on.showError(error)
+		})
+  },
+
+  areaChange: function (e) {
+		var area_uid = e.detail.uid
+		this.setData({ area_uid })
+  },
+
+  addClick: function (e) {
+    var fields = [{
+      mode: 1,
+      label: '地区编号',
+      message: '输入地区编号',
+      name: 'id',
+      type: 'number',
+      maxlength: 6,
+    }, {
+      mode: 1,
+      label: '地区名称',
+      message: '输入地区名称',
+      name: 'name',
+      type: 'text',
+      maxlength: 20,
+    }]
+    var rules = {
+      id: {
+        required: true,
+        digits: true,
+        minlength: 6,
+      },
+      name: {
+        required: true,
+        chinese: true,
+        minlength: 2,
+      },
+    }
+
+    var json = {}
+    json.title = '地区设置'
+    json.notitle = true
+    json.url_u = x5on.url.areadistadd
+    json.arrsName = 'areas'
+    json.fields = fields
+    json.rules = rules
+
+    wx.navigateTo({ url: 'form_add?json=' + JSON.stringify(json) })
   },
 
   areadistSubmit: function (e) {
     var that = this
-    var rules = {
-      user_uid: {
-        required: true,
-      },
-      area: {
-        required: true,
-        min: 0,
-      },
-      areatype: {
-        required: true,
-        min: 0,
-      }
-    }
-    var messages = {
-      user_uid: {
-        required: '用户选择'
-      },
-      area: {
-        required: '地区设置'
-      },
-      areatype: {
-        required: '地区类型'
-      }
-    }
-    x5on.checkForm(e.detail.value, rules, messages, form => {
-      form.area_uid = x5on.getUid(that.data.areas, form.area)
-      form.area_type = x5on.getId(that.data.areatypes, form.areatype)
-      x5on.post({
-        url: x5on.url.areadistdist,
-        data: form,
-        success(areas_members) {
-          areas_members.areaIndex = -1
-          that.setData(areas_members)
-        }
-      })
-    }, message => {
-      x5on.showError(message)
-    })
-
-  },
-
-  memberSubmit: function (e) {
-    var that = this
-    var rules = {
-      name: {
-        required: true,
-        chinese: true,
-        rangelength: [1, 3],
-      }
-    }
-    var messages = {
-      name: {
-        required: '成员姓名'
-      }
-    }
-    x5on.checkForm(e.detail.value, rules, messages, form => {
-      var areatypeIndex = that.data.areatypeIndex
-      form.area_type = x5on.getId(that.data.areatypes, areatypeIndex)
-      x5on.post({
-        url: x5on.url.areadistmemfind,
-        data: form,
-        success(members) {
-          members.length !== 0 && that.setData({ members })
-          members.length === 0 && x5on.showError('没有找到你要的地区成员！')
-        }
-      })
-    }, message => {
-      x5on.showError(message)
-    })
+    var { area_type, user_uid, area_uid } = that.data
+    area_type && user_uid && area_uid && x5on.http(x5on.url.areadistdist, { area_type, user_uid, area_uid })
+		.then(areas_members=>{
+      that.setData(areas_members)
+      that.setData( { user_uid: null, area_uid: null, users: [] })
+		})
+		.catch(error=>{
+			x5on.showError(error)
+		})
   },
 
   areadistRemove: function (e) {
     var that = this
-    var form = {}
-    var areatypeIndex = that.data.areatypeIndex
-    form.uid = e.currentTarget.dataset.uid
-    form.area_type = x5on.getId(that.data.areatypes, areatypeIndex)
-    x5on.post({
-      url: x5on.url.areadistdel,
-      data: form,
-      success(areas_members) {
-        areas_members.areaIndex = -1
-        that.setData(areas_members)
-      }
-    })
-  },
-
-  addClick: function (e) {
-    wx.navigateTo({ url: '/pages/index/area_add' })
-  },
-
-  returnClick: function (e) {
-    wx.navigateBack()
+    var uid = e.detail.uid
+    var { area_type } = that.data
+    area_type && x5on.http(x5on.url.areadistdel, { area_type, uid })
+		.then(areas_members=>{
+      that.setData(areas_members)
+		})
+		.catch(error=>{
+			x5on.showError(error)
+		})
   },
 
 })

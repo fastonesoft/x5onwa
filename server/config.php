@@ -20,15 +20,14 @@ $config = [
      * 若使用了腾讯云微信小程序解决方案
      * 开发环境下，MySQL 的初始密码为您的微信小程序 AppID
      */
-//    'mysql' => [
-//        'host' => 'localhost',
-//        'port' => 3306,
-//        'user' => 'root',
-//        'db'   => 'cAuth2',
-//        'pass' => 'wxdca8673d324d4384',
-//        'char' => 'utf8mb4'
-//    ],
-
+    'mysql' => [
+        'host' => 'localhost',
+        'port' => 3306,
+        'user' => 'root',
+        'db'   => 'cAuth2',
+        'pass' => 'wxdca8673d324d4384',
+        'char' => 'utf8mb4'
+    ],
 
     'cos' => [
         /**

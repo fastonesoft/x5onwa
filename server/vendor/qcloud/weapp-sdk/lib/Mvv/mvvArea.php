@@ -13,10 +13,8 @@ class mvvArea
 {
 
   public static function dist($user_uid, $area_uid) {
-    $user = xovUser::checkByUid($user_uid);
-    $user_id = $user->id;
-    $area = xovAreas::checkByUid($area_uid);
-    $area_id = $area->id;
+    $user_id = xovUser::checkUid2Id($user_uid);
+    $area_id = xovAreas::checkUid2Id($area_uid);
 
     // 检测是否已分配
     xovAreasDist::existByIdCustom($area_id, '地区已分配管理，请删除再重试');
@@ -39,8 +37,7 @@ class mvvArea
     xonArea::setsByUid(compact('user_id'), $uid);
   }
 
-  public static function refresh() {
-    $area_type = 2;
+  public static function refresh($area_type) {
     $areas = xovAreas2Dist::getsBy(compact('area_type'));
     $members = xovAreasDist::getsBy(compact('area_type'));
     return compact('areas', 'members');
