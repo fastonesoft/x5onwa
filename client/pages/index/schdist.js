@@ -94,8 +94,8 @@ Page({
       type: 'text',
       maxlength: 20,
     }, {
-      mode: 3,
-      label: '学制类型',
+			mode: 3,
+			label: '学制类型',
 			name: 'edu_type_id',
 			url: x5on.url.schdistedutype,
 			data: {},

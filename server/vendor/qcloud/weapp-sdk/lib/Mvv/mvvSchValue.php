@@ -60,14 +60,15 @@ class mvvSchValue
     $type_id = 1;
     $notfixed = 1;
 
-    // 取表单数据
-    $form = xonForm::checkByCustom(compact('steps_id', 'years_id', 'type_id', 'notfixed'), '没有发现要填报的表格');
-    $form_id = $form->id;
-
-    // 获取已填报的字段
-    $values = xovFormValue::getsBy(compact('user_id', 'form_id'));
-    foreach ($values as $value) {
-      xonFormValue::delByUid($value->uid);
+    // 取表单数据，删除数据
+    $form = xonForm::getBy(compact('steps_id', 'years_id', 'type_id', 'notfixed'));
+    if ($form !== null) {
+      $form_id = $form->id;
+      // 获取已填报的字段
+      $values = xovFormValue::getsBy(compact('user_id', 'form_id'));
+      foreach ($values as $value) {
+        xonFormValue::delByUid($value->uid);
+      }
     }
   }
 

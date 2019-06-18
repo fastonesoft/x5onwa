@@ -11,4 +11,4 @@
 <comBtnMini canShow="{{1}}" primary="添加" canPrimary="{{area_id}}" warn="提交" canWarn="{{user_uid && schs_uid}}"
 	bind:primaryClick="addClick" bind:warnClick="updateClick" />
 
-<comMemb membs="{{members}}" key="name" split=" - " memo="user_name" bind:removeClick="memberRemove" />
+<comMemb notitle="{{1}}" membs="{{members}}" key="name" split=" - " memo="user_name" bind:removeClick="memberRemove" />

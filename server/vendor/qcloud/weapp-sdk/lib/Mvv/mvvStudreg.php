@@ -19,7 +19,7 @@ class mvvStudreg
   public static function child_area_reged($user_id) {
     $childs = xovUserChilds::getsBy(compact('user_id'));
     // 地级市开头的形式
-    $area_type = 2;
+    $area_type = 3;
     $areas = xovAreas::getsBy(compact('area_type'));
     // 用户孩子的报名信息
     $login_user_id = $user_id;
@@ -65,70 +65,6 @@ class mvvStudreg
 
     // 二、删除报名记录
     return xonStudReg::delByUid($uid);
-  }
-
-  
-
-
-
-
-
-
-
-  public static function setStudExamUser($uid, $exam_user_id)
-  {
-    $res = dbs::row('xonStudReg', ['*'], compact('uid'));
-    if ($res !== null) {
-      if ($res->exam_user_id !== null) throw new Exception("已经通过审核，无须再审");
-      // 未审核，标识一下
-      dbs::update('xonStudReg', compact('exam_user_id'), compact('uid'));
-    } else {
-      throw new Exception("未找到编号对应报名记录");
-    }
-  }
-
-  public static function checkStudExamCancel($uid)
-  {
-    $res = dbs::row('xonStudReg', ['*'], compact('uid'));
-    if ($res !== null) {
-      if ($res->exam_user_id !== null) throw new Exception("已经通过审核，无法撤消");
-    } else {
-      throw new Exception("未找到编号对应报名记录");
-    }
-  }
-
-  public static function delStudExamUser($uid)
-  {
-    $res = dbs::row('xonStudReg', ['*'], compact('uid'));
-    if ($res !== null) {
-      if ($res->confirm_user_id !== null) throw new Exception("已经确认，不能撤消");
-      $exam_user_id = null;
-      dbs::update('xonStudReg', compact('exam_user_id'), compact('uid'));
-    } else {
-      throw new Exception("未找到编号对应报名记录");
-    }
-  }
-
-  public static function setStudConfirmUser($uid, $confirm_user_id)
-  {
-    $res = dbs::row('xonStudReg', ['*'], compact('uid'));
-    if ($res !== null) {
-      if ($res->exam_user_id === null) throw new Exception("未通过审核，无法确认");
-      if ($res->confirm_user_id !== null) throw new Exception("已经确认，不必重复操作");
-      dbs::update('xonStudReg', compact('confirm_user_id'), compact('uid'));
-    } else {
-      throw new Exception("未找到编号对应报名记录");
-    }
-  }
-
-  public static function checkStudConfirmCancel($uid)
-  {
-    $res = dbs::row('xonStudReg', ['*'], compact('uid'));
-    if ($res !== null) {
-      if ($res->confirm_user_id !== null) throw new Exception("已经通过审核，无法撤消");
-    } else {
-      throw new Exception("未找到编号对应报名记录");
-    }
   }
 
 }
