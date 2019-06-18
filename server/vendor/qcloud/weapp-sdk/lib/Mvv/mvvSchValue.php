@@ -6,6 +6,7 @@ use QCloud_WeApp_SDK\Model\xonForm;
 use QCloud_WeApp_SDK\Model\xonFormField;
 use QCloud_WeApp_SDK\Model\xonFormValue;
 use QCloud_WeApp_SDK\Model\xonStudReg;
+use QCloud_WeApp_SDK\Model\xonSysValue;
 use QCloud_WeApp_SDK\Model\xovFormField;
 use QCloud_WeApp_SDK\Model\xovFormUser;
 use QCloud_WeApp_SDK\Model\xovFormValue;
@@ -81,6 +82,10 @@ class mvvSchValue
     // 用户级表单字段
     $values = xovFormValue::getsBy(compact('user_id', 'form_id'));
     return compact('fields', 'values');
+  }
+
+  public static function key($key_id) {
+    return xonSysValue::getsBy(compact('key_id'));
   }
 
 }

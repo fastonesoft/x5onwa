@@ -90,14 +90,14 @@ Page({
       mode: 1,
       name: 'name',
       label: '分级名称',
-      message: '输入分级名称',
+      message: '输入分级名称：2011级',
       type: 'text',
       maxlength: 10,
     }, {
       mode: 1,
       name: 'code',
       label: '分级代号',
-      message: '输入分级代号',
+      message: '输入分级代号：01',
       type: 'number',
       maxlength: 2,
     }, {

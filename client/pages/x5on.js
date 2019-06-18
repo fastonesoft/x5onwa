@@ -179,6 +179,7 @@ var doUrl = {
 
   // 表单数据
   schvalue: `${host}/weapp/schvalue`,
+  schvaluekey: `${host}/weapp/schvalue/key`,
   schvalueadd: `${host}/weapp/schvalue/add`,
   schvalueforms: `${host}/weapp/schvalue/forms`,
   schvaluefields: `${host}/weapp/schvalue/fields`,
@@ -513,7 +514,7 @@ var doFieldsRules = function(formfields, values) {
     }
     // pick
     if(res.mode==3) {
-      res.url = doUrl.sysvalue
+      res.url = doUrl.schvaluekey
       res.data = { key_id: res.data }
     }
     //

@@ -30,8 +30,8 @@ class mvvSchools
     if ($user_group === null) {
       xonUserGroup::addSchs($user_id, $group_id);
     }
-    // 返回地区编码，以方便查询
-    return $area_id;
+    // 根据地区编码，返回本地区集团的分配情况
+    return self::refresh($area_id);
   }
 
   public static function remove($uid) {
@@ -49,7 +49,7 @@ class mvvSchools
     // 一、删除地区用户记录
     $user_id = null;
     xonSchools::setsByUid(compact('user_id'), $uid);
-    return xovSchools2Dist::getsBy(compact('area_id'));
+    return self::refresh($area_id);
   }
 
   // 刷新客户端数据

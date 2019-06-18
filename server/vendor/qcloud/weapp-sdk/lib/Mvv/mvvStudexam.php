@@ -37,7 +37,7 @@ class mvvStudexam
       $sch_id = $user_sch_group->sch_id;
 
       // 获取regstud记录
-      $reg_stud = xovStudReg::getByUid($reg_stud_uid);
+      $reg_stud = xovStudReg::checkByUidCustom($reg_stud_uid, '没有找到二维码对应学生信息');
       // 获取其它辅助信息
       $steps_id = $reg_stud->steps_id;
       $years_id = $reg_stud->years_id;

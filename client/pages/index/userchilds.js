@@ -33,7 +33,7 @@ Page({
       label: '身份证号',
       message: '输入身份证号',
       name: 'idc',
-      type: 'text',
+      type: 'idcard',
       maxlength: 18,
     }, {
       mode: 3,

@@ -36,6 +36,7 @@ Page({
 		x5on.http(x5on.url.schdistsch, e.detail)
 		.then(schos_members=>{
 			that.setData(schos_members)
+			that.setData({ sch_uid: null })
 		})
 	},
 
@@ -60,12 +61,11 @@ Page({
 
 	updateClick: function (e) {
 		var that = this
-		var user_uid = that.data.user_uid
-		var sch_uid = that.data.sch_uid
+		var { user_uid, sch_uid } = that.data
 		user_uid && sch_uid && x5on.http(x5on.url.schdistdist, { user_uid, sch_uid })
 		.then(schs_members=>{
-			schs_members.sch_uid = null
 			that.setData(schs_members)
+			that.setData({ user_uid: null, sch_uid: null, users: [] })
 		})
 	},
 

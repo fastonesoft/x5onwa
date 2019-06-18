@@ -30,6 +30,8 @@ $config = [
         'char' => 'utf8mb4'
     ],
 
+
+
     'cos' => [
         /**
          * 区域

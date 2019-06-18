@@ -55,9 +55,7 @@ class Schsdist extends CI_Controller
         $schs_uid = $param['schs_uid'];
 
         // 集团分配、添加用户进组
-        $area_id = Mvv\mvvSchools::dist($user_uid, $schs_uid);
-        // 根据地区编码，返回本地区集团的分配情况
-        $result = Mvv\mvvSchools::refresh($area_id);
+        $result = Mvv\mvvSchools::dist($user_uid, $schs_uid);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -146,26 +144,5 @@ class Schsdist extends CI_Controller
       $this->json($error);
     });
   }
-
-  public function memfind()
-  {
-    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
-      try {
-        $param = $_POST;
-        $area_id = $param['area_id'];
-        $user_name = Model\x5on::getLike($param['name']);
-
-        // 已分配用户查询
-        $result = Model\xovSchoolsDist::likes(compact('area_id', 'user_name'));
-
-        $this->json(['code' => 0, 'data' => $result]);
-      } catch (Exception $e) {
-        $this->json(['code' => 1, 'data' => $e->getMessage()]);
-      }
-    }, function ($error) {
-      $this->json($error);
-    });
-  }
-
 
 }

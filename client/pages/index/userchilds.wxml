@@ -3,6 +3,4 @@
 
 <comLists title="我的孩子" notitle="{{true}}" lists="{{userchilds}}" mes="{{mes}}" />
 
-<view class="weui-cells__tips x5ui-mini" wx:if="{{userchilds.length<2}}">
-    <button type="primary" size="mini" bindtap="addClick">添加</button>
-</view>
+<comBtn canShow="{{userchilds.length<2}}" title="添加" bind:buttonClick="addClick" />
