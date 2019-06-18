@@ -58,6 +58,7 @@ var doUrl = {
   // 地区分配
   areadist: `${host}/weapp/areadist`,
   areadistadd: `${host}/weapp/areadist/add`,
+  areadistremove: `${host}/weapp/areadist/remove`,
   areadistuser: `${host}/weapp/areadist/user`,
   areadistdist: `${host}/weapp/areadist/dist`,
   areadistdel: `${host}/weapp/areadist/del`,

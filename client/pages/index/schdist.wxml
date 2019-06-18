@@ -8,9 +8,7 @@
 
 <comRadioMemb radios="{{schos}}" key="name" memo="code" bind:radioChange="schosChange" bind:removeClick="schosRemove" />
 
-<view class="weui-cells__tips x5ui-mini">
-	<button type="primary" size="mini" bindtap="addClick" wx:if="{{schs_id}}">添加</button>
-	<button type="warn" size="mini" bindtap="updateClick" wx:if="{{user_uid && sch_uid}}">提交</button>
-</view>
+<comBtnMini canShow="{{1}}" primary="添加" canPrimary="{{schs_id}}" warn="提交" canWarn="{{user_uid && sch_uid}}"
+	bind:primaryClick="addClick" bind:warnClick="updateClick" />
 
 <comMemb membs="{{members}}" notitle="{{true}}" key="sch_name" split=" - " memo="user_name" bind:removeClick="memberRemove" />

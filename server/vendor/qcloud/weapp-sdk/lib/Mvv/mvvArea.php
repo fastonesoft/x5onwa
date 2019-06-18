@@ -26,6 +26,13 @@ class mvvArea
     xonUserGroup::addArea($user_id, $group_id);
   }
 
+  // 地区删除
+  public static function remove($uid) {
+    xonArea::checkByUid($uid);
+    return xonArea::delByUidCustom($uid);
+  }
+
+  // 删除地区用户
   public static function del($uid) {
     $area = xovAreas::checkByUid($uid);
     // 二、删除地区管理组用户记录

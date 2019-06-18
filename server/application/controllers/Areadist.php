@@ -89,6 +89,25 @@ class Areadist extends CI_Controller
     });
   }
 
+  public function remove()
+  {
+    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
+      try {
+        $param = $_POST;
+        $uid = $param['uid'];
+
+        // 地区删除
+        $result = Mvv\mvvArea::remove($uid);
+
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
+
   public function del()
   {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {

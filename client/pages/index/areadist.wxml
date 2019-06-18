@@ -6,7 +6,8 @@
 
 <comPick title="地区设置" label="地区分类" name="area_type" rangeKey="name" selectKey="name" valueKey="id" picks="{{areatypes}}"
 	bind:pickChange="typeChange" />
-<comRadio radios="{{areas}}" key="city_name" bind:radioChange="areaChange" />
+
+<comRadioMemb radios="{{areas}}" key="city_name" bind:radioChange="areaChange" bind:removeClick="areaRemove" />
 
 <comBtnMini canShow="{{1}}" primary="添加" canPrimary="{{1}}" warn="提交" canWarn="{{area_type && user_uid && area_uid}}"
 	bind:primaryClick="addClick" bind:warnClick="areadistSubmit" />

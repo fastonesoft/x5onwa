@@ -42,6 +42,16 @@ Page({
 		this.setData({ area_uid })
   },
 
+  areaRemove: function (e) {
+		x5on.http(x5on.url.areadistremove, e.detail)
+		.then(number=>{
+			x5on.delSuccess(number)
+		})
+		.catch(error=>{
+			x5on.showError(error)
+		})
+  },
+
   addClick: function (e) {
     var fields = [{
       mode: 1,

@@ -45,7 +45,7 @@ Page({
 
 	schsRemove: function (e) {
 		var that = this
-		var schs_uid = that.data.schs_uid
+		var { schs_uid } = that.data
 		e.detail.uid === schs_uid && that.setData({ schs_uid: null })
 		//
 		x5on.http(x5on.url.schsdistremove, e.detail)
@@ -68,20 +68,6 @@ Page({
 		})
 	},
 	
-	memberSubmit: function (e) {
-		var that = this
-		var area_id = that.data.area_id
-		e.detail.area_id = that.data.area_id
-		area_id && x5on.http(x5on.url.schsdistmemfind, e.detail)
-		.then(members=>{
-			members.length !== 0 && that.setData({ members })
-			members.length === 0 && x5on.showError('没有找到你要的集团成员！')
-		})
-		.catch(error=>{
-			x5on.showError(error)
-		})
-	},
-
   memberRemove: function (e) {
 		var that = this
 		// e.detail => { uid }
