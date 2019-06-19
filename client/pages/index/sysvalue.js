@@ -13,7 +13,7 @@ Page({
   },
 
   pickChange: function (e) {
-    let that = this
+    var that = this
     that.setData(e.detail)
     x5on.http(x5on.url.sysvalue, e.detail)
     .then(membs => {
@@ -72,7 +72,7 @@ Page({
       },
       value: {
         required: true,
-        chinese: true,
+        char: true,
         minlength: 1,
         maxlength: 50,
       },

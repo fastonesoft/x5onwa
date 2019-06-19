@@ -64,7 +64,7 @@ class mvvStudexam
       $form = xonForm::checkByCustom(compact('steps_id', 'years_id', 'type_id', 'notfixed'), '没有发现要填报的表格');
       $form_id = $form->id;
 
-      $fields = xovFormField::getsBySuff(compact('form_id'), 'order by orde');
+      $fields = xovFormField::getsBySuff(compact('form_id'), 'order by orde, id');
       // 用户级表单字段
       $values = xovFormValue::getsBy(compact('user_id', 'form_id'));
 

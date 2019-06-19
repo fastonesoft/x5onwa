@@ -36,7 +36,7 @@ class mvvSchField
     mvvUserSchoolGroup::schAdmin($sch_admin_user_id, function ($user_sch_group) use ($form_id, &$result) {
       $sch_id = $user_sch_group->sch_id;
 
-      $result = xovFormField::getsBy(compact('form_id'));
+      $result = xovFormField::getsBySuff(compact('form_id'), 'order by orde, id');
     });
     return $result;
   }

@@ -50,15 +50,12 @@ Page({
         data: value,
         success(number) {
           x5on.showSuccess('更新' + number + '条记录')
+          that.setData({ roles: [] })
         }
       })
     }, (message, error) => {
       x5on.showError(message)
     })
   },
-
-  returnClick: function (e) {
-    wx.navigateBack()
-  }
 
 })
