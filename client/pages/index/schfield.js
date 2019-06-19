@@ -52,7 +52,7 @@ Page({
       message: '输入字段名称',
       name: 'label',
       type: 'text',
-      maxlength: 10,
+      maxlength: 6,
     }, {
       mode: 1,
       label: '字段序号',
@@ -69,7 +69,7 @@ Page({
         required: true,
         chinese: true,
         minlength: 4,
-        maxlength: 20,
+        maxlength: 6,
       },
       orde: {
         required: true,
@@ -113,7 +113,7 @@ Page({
       message: '输入字段名称',
       name: 'label',
       type: 'text',
-      maxlength: 10,
+      maxlength: 6,
       value: field.label,
     }, {
       mode: 1,
@@ -129,7 +129,7 @@ Page({
         required: true,
         chinese: true,
         minlength: 4,
-        maxlength: 20,
+        maxlength: 6,
       },
       orde: {
         required: true,

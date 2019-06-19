@@ -194,12 +194,12 @@ Page({
       value: value && value.date ? value.date : false,
     }, {
       mode: 2,
-      label: '数字，可以是负数',
+      label: '实数：整数、小数',
       name: 'number',
       value: value && value.number ? value.number : false,
     }, {
       mode: 2,
-      label: '非负整数',
+      label: '单纯数字',
       name: 'digits',
       value: value && value.digits ? value.digits : false,
     }, {
