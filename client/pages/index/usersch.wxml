@@ -4,9 +4,7 @@
 <formFind title="用户查询" notitle="{{true}}" label="用户姓名" bind:findSubmit="findSubmit" />
 <comRadio radios="{{users}}" key="name" memo="nick_name" bind:radioChange="radioChange" />
 
-<view class="weui-btn-area" wx:if="{{user_uid}}">
-  <button type="primary" bindtap="userschClick">提交</button>
-</view>
+<comBtn canShow="{{user_uid}}" title="提交" bind:buttonClick="userschClick" />
 
 <formFind title="教师查询" label="教师姓名" bind:findSubmit="memberSubmit" wx:if="{{members.length>0}}" />
-<comMemb membs="{{members}}" key="user_name" memo="nick_name" bind:removeClick="removeClick" />
+<comMemb title="注册教师列表" membs="{{members}}" key="user_name" memo="nick_name" bind:removeClick="removeClick" />

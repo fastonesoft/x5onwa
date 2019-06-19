@@ -8,7 +8,7 @@ Page({
     x5on.http(x5on.url.userdistuser, e.detail)
     .then(sch_users => {
       sch_users.length !== 0 && that.setData({ sch_users, user_sch_uid: null, groups: [] })
-      sch_users.length === 0 && x5on.showError('没有找到你要的用户！')
+      sch_users.length === 0 && x5on.showError('没有找到你要的教师！')
     })
   },
 

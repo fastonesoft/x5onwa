@@ -16,7 +16,7 @@ Page({
     x5on.http(x5on.url.userdistuser, e.detail)
     .then(sch_users => {
       sch_users.length !== 0 && that.setData({ sch_users, user_uid: null })
-      sch_users.length === 0 && x5on.showError('没有找到你要的用户！')
+      sch_users.length === 0 && x5on.showError('没有找到你要的教师！')
     })
   },
 
@@ -36,11 +36,10 @@ Page({
 
   userdistSubmit: function (e) {
     var that = this
-    var user_uid = that.data.user_uid
-    var group_uid = that.data.group_uid
+    var { user_uid, group_uid } = that.data
     group_uid && user_uid && x5on.http(x5on.url.userdistadd, { user_uid, group_uid })
     .then(members=>{
-      that.setData({ members })
+      that.setData({ members, user_uid: null, sch_users: [] })
     })
     .catch(error=>{
       x5on.showError(error)
@@ -58,20 +57,6 @@ Page({
       x5on.showError(error)
     })
 
-  },
-
-  memberSubmit: function (e) {
-    var that = this
-    var name = e.detail.name
-    var group_uid = that.data.group_uid
-    group_uid && x5on.http(x5on.url.userdistdel, { name, group_uid })
-    .then(members=>{
-      members.length !== 0 && that.setData({ members })
-      members.length === 0 && x5on.showError('没有找到你要的分组成员！')
-    })
-    .catch(error=>{
-      x5on.showError(error)
-    })
   },
   
 })

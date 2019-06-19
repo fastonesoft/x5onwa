@@ -6,9 +6,6 @@
 <comPick label="分组选择" name="group_uid" rangeKey="name" selectKey="name" valueKey="uid" picks="{{groups}}"
   bind:pickChange="pickChange" />
 
-<view class="weui-btn-area" wx:if="{{user_uid && group_uid}}">
-  <button type="primary" bindtap="userdistSubmit">提交</button>
-</view>
+<comBtn canShow="{{user_uid && group_uid}}" title="提交" bind:buttonClick="userdistSubmit" />
 
-<formFind title="成员查询" label="成员姓名" bind:findSubmit="memberSubmit" wx:if="{{members.length>0}}" />
-<comMemb membs="{{members}}" key="user_name" memo="nick_name" bind:removeClick="removeClick" />
+<comMemb title="成员列表" membs="{{members}}" key="user_name" memo="nick_name" bind:removeClick="removeClick" />
