@@ -1,22 +1,7 @@
 <!--pages/index/usereset.wxml-->
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
-<form bindsubmit="findSubmit">
-	<view class="weui-cells__title">用户查询</view>
-	<view class="weui-cells weui-cells_after-title">
-		<view class="weui-cell weui-cell_input weui-cell_vcode">
-			<view class="weui-cell__hd">
-				<view class="weui-label">用户姓名</view>
-			</view>
-			<view class="weui-cell__bd">
-				<input class="weui-input" placeholder="请输入用户姓名" name="name" confirm-type="done" type="text" maxlength="4" />
-			</view>
-			<view class="weui-cell__ft">
-				<button type="normal" form-type="submit">查询</button>
-			</view>
-		</view>
-	</view>
-</form>
+<formFind title="用户查询" notitle="{{true}}" label="用户姓名" bind:findSubmit="findSubmit" />
 
 <block wx:if="{{users.length>0}}">
 	<view class="weui-cells__title">用户选择</view>
