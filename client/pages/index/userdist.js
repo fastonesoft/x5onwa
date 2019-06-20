@@ -39,7 +39,8 @@ Page({
     var { user_uid, group_uid } = that.data
     group_uid && user_uid && x5on.http(x5on.url.userdistadd, { user_uid, group_uid })
     .then(members=>{
-      that.setData({ members, user_uid: null, sch_users: [] })
+      var sch_users = x5on.delArr(that.data.sch_users, 'uid', user_uid)
+      that.setData({ sch_users, members, user_uid: null })
     })
     .catch(error=>{
       x5on.showError(error)

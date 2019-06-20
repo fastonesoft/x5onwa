@@ -21,6 +21,12 @@ class mvvUsereset
       $sch_id = $sch_admin_user->sch_id;
       $result = xovUser::likesBy(compact('sch_id'), compact('name'));
     }, $find_name);
+
+
+    $result = 
+    mvvUserSchoolGroup::admin($user_id, function () {
+
+    });
     return $result;
   }
 

@@ -2,6 +2,7 @@
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
 <formFind title="用户查询" notitle="{{true}}" label="用户姓名" bind:findSubmit="findSubmit" />
+<comRadio radios="{{users}}" key="user_name" memo="nick_name" bind:radioChange="userChange" />
 
 <block wx:if="{{users.length>0}}">
 	<view class="weui-cells__title">用户选择</view>

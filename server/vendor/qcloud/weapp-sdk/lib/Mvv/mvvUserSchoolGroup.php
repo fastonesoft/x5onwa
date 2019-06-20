@@ -4,6 +4,7 @@ namespace QCloud_WeApp_SDK\Mvv;
 
 use QCloud_WeApp_SDK\Model\x5on;
 use QCloud_WeApp_SDK\Model\xonGroup;
+use QCloud_WeApp_SDK\Model\xonUserGroup;
 use QCloud_WeApp_SDK\Model\xonUserSchoolGroup;
 use QCloud_WeApp_SDK\Model\xovUser;
 use QCloud_WeApp_SDK\Model\xovUserSchool;
@@ -33,6 +34,14 @@ class mvvUserSchoolGroup
     $group_id = x5on::GROUP_ADMIN_SCHOOL;
     $user_sch_group = xovUserSchoolGroupAll::checkByCustom(compact('user_id', 'group_id', 'is_current'), '不是学校管理员，无法操作');
     call_user_func($success, $user_sch_group);
+  }
+
+  // 检测是否系统管理员
+  public static function admin($user_id, $success)
+  {
+    $group_id = x5on::GROUP_ADMIN;
+    xonUserGroup::checkByCustom(compact('user_id', 'group_id'), '不是系统管理员，无法操作');
+    call_user_func($success);
   }
 
   // 学校分组教师分配
