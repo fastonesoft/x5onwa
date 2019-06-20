@@ -58,7 +58,7 @@ Page({
         url: x5on.url.useresetupdate,
         data: form,
         success(number) {
-          x5on.showSuccess(`更新${number}条记录`)
+          x5on.updateSuccess(number)
           that.setData({ users: [], user: null })
         }
       })

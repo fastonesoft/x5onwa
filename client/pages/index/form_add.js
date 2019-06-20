@@ -26,7 +26,7 @@ Page({
     // 不存在，则封装数据与参数
     Object.assign(data, formData)
     that.data.url_u && x5on.http(that.data.url_u, data)
-      .then(item => {
+      .then(result => {
         x5on.prevPage(page => {
           if (that.data.url_r) {
             // 指定刷新地址，更新数据（这个选项不能少，目的是为了应对有些记录添加会影响别的记录的情况）
@@ -44,7 +44,7 @@ Page({
               var arrs = page.data[arrsName]
               if (Array.isArray(arrs)) {
                 // 检测是否为数组，是数组，删除原始，插入新值
-                arrs = x5on.add(arrs, item, 'id')
+                arrs = x5on.add(arrs, result, 'id')
                 page.setData({ [arrsName]: arrs })
               } else {
                 // 不是数组，直接更新字段

@@ -10,7 +10,7 @@ Page({
 
   formSubmit: function (e) {
     var that = this
-    var data = that.data.data_u
+    var data = that.data.data_u || {}
     var rule = that.data.rule
     var field = that.data.field
 
