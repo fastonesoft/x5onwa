@@ -16,43 +16,52 @@ Page({
   },
 
   userChange: function (e) {
-    var that = this
-    x5on.setRadio(that.data.users, e.detail.value, users => {
-      x5on.getRadio(that.data.users, user => {
-        that.setData({ users, user })
-      }, () => {
-        that.setData({ users, user: null })
-      })
-    })
-  },
-
-  userSubmit: function (e) {
-    var that = this
+    var user = e.detail
+    var fields = [{
+      mode: 0,
+      label: '用户姓名',
+      value: user.name,
+    }, {
+      mode: 0,
+      label: '手机号码',
+      value: user.mobil,
+    }, {
+      mode: 2,
+      label: '是否确认',
+      name: 'confirmed',
+      value: user.confirmed
+    }, {
+      mode: 2,
+      label: '冻结帐号',
+      name: 'fixed',
+      value: user.fixed
+    }]
     var rules = {
       confirmed: {
         required: true,
       },
       fixed: {
         required: true,
-      }
+      },
     }
-    x5on.checkForm(e.detail.value, rules, {}, form => {
-      form.uid = that.data.user.uid
-      x5on.post({
-        url: x5on.url.useresetupdate,
-        data: form,
-        success(number) {
-          x5on.updateSuccess(number)
-          that.setData({ users: [], user: null })
-        }
-      })
-    }, message => {
-      x5on.showError(message)
-    })
+    // 显示
+    this.setData({ user, fields, rules })
   },
 
-  returnClick: function (e) {
-    wx.navigateBack()
-  }
+  userSubmit: function (e) {
+    var that = this
+    var { user } = that.data
+    e.detail.uid = user.uid
+    //
+    x5on.http(x5on.url.useresetupdate, e.detail)
+    .then(number=>{
+      x5on.updateSuccess(number)
+      var users = x5on.delArr(that.data.users, 'uid', user.uid)
+      that.setData({ users, user: null, fields: [], rules: [] })
+    })
+    .catch(error=>{
+      x5on.showError(error)
+    })
+  },
 
 })

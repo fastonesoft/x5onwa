@@ -5,6 +5,4 @@
     picks="{{keys}}" bind:pickChange="pickChange" />
 <comMemb membs="{{membs}}" title="键值设置" notitle="{{0}}" key="value" memo="code" bind:removeClick="removeClick" />
 
-<view class="weui-btn-area" wx:if="{{key_id}}">
-    <button type="primary" bindtap="addClick">添加</button>
-</view>
+<comBtn canShow="{{key_id}}" title="添加" bind:buttonClick="addClick" />

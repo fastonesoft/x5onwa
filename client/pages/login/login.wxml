@@ -67,8 +67,6 @@
   </view>
 </block>
 
-<block wx:if="{{user.fixed}}">
-  <view class="weui-cells__tips x5ui-color_red">
-    帐号已冻结，具体原因，请联系管理员！
-  </view>
-</block>
+<view class="weui-cells__tips x5ui-color_red" wx:if="{{user.fixed}}">
+  帐号已冻结，具体原因，请联系管理员！
+</view>

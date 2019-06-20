@@ -3,6 +3,4 @@
 
 <comMemb membs="{{membs}}" title="分类列表" notitle="{{true}}" key="name" memo="id" bind:removeClick="removeClick" />
 
-<view class="weui-btn-area">
-	<button type="primary" bindtap="addClick">添加</button>
-</view>
+<comBtn canShow="{{1}}" title="添加" bind:buttonClick="addClick" />

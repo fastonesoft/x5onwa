@@ -10,31 +10,24 @@ use QCloud_WeApp_SDK\Model\xovUserSchoolGroup;
 class mvvUsereset
 {
 
-  public static function user($user_id, $find_name)
+  public static function user($admin_user_id, $find_name)
   {
-    global $result;
-    mvvUser::admins($user_id, function ($name) {
-      global $result;
+    $result = [];
+    mvvUserSchoolGroup::admin($admin_user_id, function () use ($find_name, &$result) {
+      $name = $find_name;
       $result = xovUser::likes(compact('name'));
-    }, function ($sch_admin_user, $name) {
-      global $result;
-      $sch_id = $sch_admin_user->sch_id;
-      $result = xovUser::likesBy(compact('sch_id'), compact('name'));
-    }, $find_name);
-
-
-    $result = 
-    mvvUserSchoolGroup::admin($user_id, function () {
-
     });
     return $result;
   }
 
-  public static function update($user_uid, $confirmed, $fixed)
+  public static function update($admin_user_id, $user_uid, $confirmed, $fixed)
   {
-    xonUser::checkByUid($user_uid);
-    return xonUser::setsByUid(compact('confirmed', 'fixed'), $user_uid);
+    $result = 0;
+    mvvUserSchoolGroup::admin($admin_user_id, function () use ($user_uid, $confirmed, $fixed, &$result) {
+      xonUser::checkByUid($user_uid);
+      $result = xonUser::setsByUid(compact('confirmed', 'fixed'), $user_uid);
+    });
+    return $result;
   }
-
 
 }

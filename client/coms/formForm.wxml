@@ -1,7 +1,7 @@
 <!--coms/formForm.wxml-->
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
-<form bindsubmit="formSubmit">
+<form bindsubmit="formSubmit" wx:if="{{fields.length>0}}">
 	<view class="weui-cells__title" wx:if="{{!notitle}}">{{title}}</view>
 	<view class="weui-cells weui-cells_after-title">
 		<block wx:for="{{fields}}" wx:key="name">

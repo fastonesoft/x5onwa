@@ -17,12 +17,10 @@ class Usereset extends CI_Controller
         /**
          * 用户查询
          * 系统管理员 => 重置所有用户
-         * 学校管理员 => 重置学校用户
          */
         $param = $_POST;
         $name = $param['name'];
-        $user_id = $userinfor->unionId;
-        $result = Mvv\mvvUsereset::user($user_id, Model\x5on::getLike($name));
+        $result = Mvv\mvvUsereset::user($userinfor->unionId, Model\x5on::getLike($name));
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -45,7 +43,7 @@ class Usereset extends CI_Controller
         $user_uid = $param['uid'];
         $fixed = $param['fixed'];
         $confirmed = $param['confirmed'];
-        $result = Mvv\mvvUsereset::update($user_uid, Model\x5on::getBool($confirmed), Model\x5on::getBool($fixed));
+        $result = Mvv\mvvUsereset::update($userinfor->unionId, $user_uid, Model\x5on::getBool($confirmed), Model\x5on::getBool($fixed));
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
