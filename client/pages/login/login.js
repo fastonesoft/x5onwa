@@ -1,10 +1,13 @@
 //index.js
 var x5on = require('../x5on.js')
 
+var app = getApp()
+
 Page({
 
   onShow: function () {
     var that = this
+    console.log(app)
     // 授权检测登录
     x5on.check({
       success() {

@@ -1,12 +1,17 @@
 //app.js
-var session = require('./vendor/wafer2-client-sdk/lib/session.js')
 var qcloud = require('./vendor/wafer2-client-sdk/index')
-var config = require('./config')
 var x5on = require('./pages/x5on.js')
 
 App
 ({
+
+  data: {
+    value: 'asdfasdfadf',
+  },
+
   onLaunch: function () {
     qcloud.setLoginUrl(x5on.url.login);
   },
+
+
 })
