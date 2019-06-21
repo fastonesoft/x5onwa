@@ -1,5 +1,6 @@
 // index.js
 var x5on = require('../x5on.js');
+var app = getApp()
 
 Page({
   data: {
@@ -10,6 +11,8 @@ Page({
   },
 
   onShow: function () {
+    app.globalData.user && app.globalData.user.fixed && wx.switchTab({ url: '/pages/login/login' })
+    
     var that = this
     // 检测登录
     x5on.check({

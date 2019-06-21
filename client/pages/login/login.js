@@ -7,7 +7,6 @@ Page({
 
   onShow: function () {
     var that = this
-    console.log(app)
     // 授权检测登录
     x5on.check({
       success() {
@@ -18,10 +17,42 @@ Page({
             // 显示用户信息
             user_schs.reged = true
             that.setData(user_schs)
+            // 记录状态
+            app.globalData.user = user_schs.user
           },
           fail() {
+            // 注册字段
+            var fields = [{
+              mode: 1,
+              label: '用户姓名',
+              message: '输入用户姓名',
+              name: 'name',
+              type: 'text',
+              maxlength: 4,
+            }, {
+              mode: 2,
+              label: '手机号码',
+              message: '输入手机号码',
+              name: 'mobil',
+              type: 'number',
+              maxlength: 11,
+            }]
+            var rules = {
+              name: {
+                required: true,
+                minlength: 2,
+                maxlength: 4,
+                chinese: true,
+              },
+              mobil: {
+                required: true,
+                minlength: 11,
+                maxlength: 11,
+                tel: true,
+              },
+            }
             // 显示注册信息
-            that.setData({ notreg: true })
+            that.setData({ notreg: true, fields, rules })
           }
         })
       },

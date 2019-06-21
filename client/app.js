@@ -5,8 +5,8 @@ var x5on = require('./pages/x5on.js')
 App
 ({
 
-  data: {
-    value: 'asdfasdfadf',
+  globalData: {
+    user: null,
   },
 
   onLaunch: function () {

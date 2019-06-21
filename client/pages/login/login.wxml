@@ -8,11 +8,9 @@
     <open-data class="userinfo-nickname" type="userNickName"></open-data>
   </view>
 </view>
-<block wx:if="{{notauth}}">
-  <view class="weui-btn-area">
-    <button class="x5ui-btn_half" type="warn" open-type="getUserInfo" bindgetuserinfo="bindAuth">授权登录</button>
-  </view>
-</block>
+<view class="weui-btn-area" wx:if="{{notauth}}">
+  <button class="x5ui-btn_half" type="warn" open-type="getUserInfo" bindgetuserinfo="bindAuth">授权登录</button>
+</view>
 
 <form bindsubmit="regSubmit" wx:if="{{notreg}}">
   <view class="weui-cells weui-cells_after-title">
@@ -37,6 +35,8 @@
     <button type="primary" form-type="submit">提交</button>
   </view>
 </form>
+
+<formForm title="用户信息" notitle="{{1}}" fields="{{fields}}" rules="{{rules}}" bind:formSubmit="regSubmit" wx:if="{{notreg}}" />
 
 <block wx:if="{{reged}}">
   <view class="weui-cells weui-cells_after-title">
