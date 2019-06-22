@@ -8,48 +8,14 @@
     <open-data class="userinfo-nickname" type="userNickName"></open-data>
   </view>
 </view>
+
 <view class="weui-btn-area" wx:if="{{notauth}}">
   <button class="x5ui-btn_half" type="warn" open-type="getUserInfo" bindgetuserinfo="bindAuth">授权登录</button>
 </view>
 
-<form bindsubmit="regSubmit" wx:if="{{notreg}}">
-  <view class="weui-cells weui-cells_after-title">
-    <view class="weui-cell weui-cell_input">
-      <view class="weui-cell__hd">
-        <view class="weui-label">用户姓名</view>
-      </view>
-      <view class="weui-cell__bd">
-        <input class="weui-input" placeholder="输入您的姓名" name="name" type="text" maxlength="4" />
-      </view>
-    </view>
-    <view class="weui-cell weui-cell_input">
-      <view class="weui-cell__hd">
-        <view class="weui-label">手机号码</view>
-      </view>
-      <view class="weui-cell__bd">
-        <input class="weui-input" placeholder="输入您的手机号码" name="mobil" type="number" maxlength="11" />
-      </view>
-    </view>
-  </view>
-  <view class="weui-btn-area">
-    <button type="primary" form-type="submit">提交</button>
-  </view>
-</form>
+<formForm title="用户注册" notitle="{{1}}" fields="{{fields}}" rules="{{rules}}" bind:formSubmit="regSubmit" wx:if="{{notreg}}" />
 
-<formForm title="用户信息" notitle="{{1}}" fields="{{fields}}" rules="{{rules}}" bind:formSubmit="regSubmit" wx:if="{{notreg}}" />
-
-<block wx:if="{{reged}}">
-  <view class="weui-cells weui-cells_after-title">
-    <view class="weui-cell">
-      <view class="weui-cell__bd">用户姓名</view>
-      <view class="weui-cell__ft">{{user.name}}</view>
-    </view>
-    <view class="weui-cell">
-      <view class="weui-cell__bd">手机号码</view>
-      <view class="weui-cell__ft">{{user.mobil}}</view>
-    </view>
-  </view>
-</block>
+<comList title="用户信息" notitle="{{true}}" obj="{{user}}" mes="{{mes}}" wx:if="{{reged}}"/>
 
 <block wx:if="{{userschs.length>0}}">
   <view class="weui-cells__title">注册学校</view>

@@ -754,20 +754,23 @@ var doHttp = function (url, data, donshow) {
  * 错误显示
  */
 var doShowError = function (message) {
-  console.log(message)
   doCurPage(page=>{
-    page.setData({
-      errorShow: true,
-      errorMessage: typeof message==='string' ? message : '出错啦'
-    })
-    setTimeout(function () {
-      page.setData({
-        errorShow: false,
-        errorMessage: null
-      });
-    }, 3000);
+    doShowErrorLocal(page, message)
   })
-};
+}
+
+var doShowErrorLocal = function(that, message) {
+  that.setData({
+    errorShow: true,
+    errorMessage: typeof message==='string' ? message : '出错啦'
+  })
+  setTimeout(function () {
+    that.setData({
+      errorShow: false,
+      errorMessage: null
+    });
+  }, 3000);
+}
 
 /**
  * 成功提示
@@ -814,6 +817,7 @@ module.exports = {
 
   // 提示信息
   showError: doShowError,
+  showErrorLocal: doShowErrorLocal,
   showSuccess: doSuccess,
   delSuccess: doDelSuccess,
   updateSuccess: doUpdateSuccess,

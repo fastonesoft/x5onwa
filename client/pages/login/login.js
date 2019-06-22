@@ -14,9 +14,15 @@ Page({
           donshow: true,
           url: x5on.url.user,
           success(user_schs) {
+            // 显示格式
+            var mes = {
+              name: { label: '用户姓名', type: 0 },
+              mobil: { label: '手机号码', type: 0 },
+            }
             // 显示用户信息
             user_schs.reged = true
             that.setData(user_schs)
+            that.setData({ mes })
             // 记录状态
             app.globalData.user = user_schs.user
           },
@@ -25,14 +31,14 @@ Page({
             var fields = [{
               mode: 1,
               label: '用户姓名',
-              message: '输入用户姓名',
+              message: '输入您的姓名',
               name: 'name',
               type: 'text',
               maxlength: 4,
             }, {
-              mode: 2,
+              mode: 1,
               label: '手机号码',
-              message: '输入手机号码',
+              message: '输入您的手机号码',
               name: 'mobil',
               type: 'number',
               maxlength: 11,
@@ -91,40 +97,21 @@ Page({
 
   regSubmit: function (e) {
     var that = this
-    var rules = {
-      name: {
-        required: true,
-        chinese: true,
-        rangelength: [2, 4],
-      },
-      mobil: {
-        required: true,
-        tel: true,
+
+    console.log(e.detail)
+
+    x5on.post({
+      url: x5on.url.userreg,
+      data: form,
+      success(user) {
+        var users = {}
+        users.user = user
+        users.reged = true
+        users.notreg = false
+        that.setData(users)
       }
-    }
-    var messages = {
-      name: {
-        required: '用户姓名'
-      },
-      mobil: {
-        required: '手机号码'
-      }
-    }
-    x5on.checkForm(e.detail.value, rules, messages, form => {
-      x5on.post({
-        url: x5on.url.userreg,
-        data: form,
-        success(user) {
-          var users = {}
-          users.user = user
-          users.reged = true
-          users.notreg = false
-          that.setData(users)
-        }
-      })
-    }, error => {
-      x5on.showError(error)
     })
+
   },
 
   userschsChange: function (e) {
