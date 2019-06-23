@@ -1,4 +1,5 @@
 // coms/comRadioMemb.js
+// 带删除的radio
 
 var x5on = require('../pages/x5on.js')
 

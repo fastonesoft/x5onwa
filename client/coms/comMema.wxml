@@ -4,21 +4,26 @@
 	<view class="weui-cells weui-cells_after-title">
 		<view class="weui-cell" wx:for="{{memas}}" wx:key="uid">
 			<block wx:if="{{split}}">
-				<view class="weui-cell__bd" data-uid="{{item.uid}}" bindtap="gotoClick" wx:if="{{memo}}">
+				<view class="weui-cell__bd" data-uid="{{item.uid}}" bindtap="editClick" wx:if="{{memo}}">
 					{{item[key]}}{{split}}{{item[memo]}}
 				</view>
-				<view class="weui-cell__bd" data-uid="{{item.uid}}" bindtap="gotoClick" wx:else>{{item[key]}}
+				<view class="weui-cell__bd" data-uid="{{item.uid}}" bindtap="editClick" wx:else>{{item[key]}}
 				</view>
 			</block>
 			<block wx:else>
-				<view class="weui-cell__bd" data-uid="{{item.uid}}" bindtap="gotoClick" wx:if="{{memo}}">
+				<view class="weui-cell__bd" data-uid="{{item.uid}}" bindtap="editClick" wx:if="{{memo}}">
 					{{item[key]}}({{item[memo]}})
 				</view>
-				<view class="weui-cell__bd" data-uid="{{item.uid}}" bindtap="gotoClick" wx:else>{{item[key]}}
+				<view class="weui-cell__bd" data-uid="{{item.uid}}" bindtap="editClick" wx:else>{{item[key]}}
 				</view>
 			</block>
 			<view class="weui-cell__ft">
-				<icon type="success_circle" size="23" wx:if="{{item[selected]}}"></icon>
+				<block wx:for="{{selects}}" wx:key="*this" wx:for-item="selected">
+					<icon class="mema-margin_left" type="success" size="23" wx:if="{{item[selected]}}"></icon>
+					<icon class="mema-margin_left" type="circle" size="23" wx:else></icon>
+				</block>
+				<icon class="mema-margin_left" type="cancel" size="23" data-uid="{{item.uid}}" bindtap="removeClick"
+					wx:if="{{remove}}"></icon>
 			</view>
 		</view>
 	</view>

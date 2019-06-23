@@ -6,7 +6,7 @@
 			<view class="weui-cell" wx:if="{{!item.disable}}">
 				<view class="weui-cell__bd">{{item.name}}</view>
 				<view class="weui-cell__ft">
-					<block wx:if="{{!item.type}}">{{item.value}}</block>
+					<block wx:if="{{!item.type}}">{{item.value?item.value:''}}</block>
 					<block wx:elif="{{item.type===1}}">
 						<icon type="circle" size="23" wx:if="{{!item.value}}"></icon>
 						<icon type="success" size="23" wx:if="{{item.value}}"></icon>

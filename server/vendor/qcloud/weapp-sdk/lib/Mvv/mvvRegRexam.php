@@ -9,7 +9,7 @@ use QCloud_WeApp_SDK\Model\xovFormValue;
 use QCloud_WeApp_SDK\Model\xovSchStep;
 use QCloud_WeApp_SDK\Model\xovStudReg;
 
-class mvvStudrexam
+class mvvRegRexam
 {
 
   // 审核年级列表

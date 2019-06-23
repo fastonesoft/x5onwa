@@ -7,6 +7,12 @@ Page({
 
   onShow: function () {
     var that = this
+    // 显示格式
+    var mes = {
+      name: { label: '用户姓名', type: 0 },
+      mobil: { label: '手机号码', type: 0 },
+    }
+    that.setData({ mes })
     // 授权检测登录
     x5on.check({
       success() {
@@ -14,15 +20,10 @@ Page({
           donshow: true,
           url: x5on.url.user,
           success(user_schs) {
-            // 显示格式
-            var mes = {
-              name: { label: '用户姓名', type: 0 },
-              mobil: { label: '手机号码', type: 0 },
-            }
             // 显示用户信息
             user_schs.reged = true
+            user_schs.notreg = false
             that.setData(user_schs)
-            that.setData({ mes })
             // 记录状态
             app.globalData.user = user_schs.user
           },
@@ -58,7 +59,7 @@ Page({
               },
             }
             // 显示注册信息
-            that.setData({ notreg: true, fields, rules })
+            that.setData({ user: null, reged: false, notreg: true, fields, rules })
           }
         })
       },
@@ -97,35 +98,24 @@ Page({
 
   regSubmit: function (e) {
     var that = this
-
-    console.log(e.detail)
-
-    x5on.post({
-      url: x5on.url.userreg,
-      data: form,
-      success(user) {
-        var users = {}
-        users.user = user
-        users.reged = true
-        users.notreg = false
-        that.setData(users)
-      }
+    x5on.http(x5on.url.userreg, e.detail)
+    .then(user=>{
+      that.setData({ user, reged: true, notreg: false })
     })
-
+    .catch(error=>{
+      x5on.showError(error)
+    })
   },
 
   userschsChange: function (e) {
-    var that = this
-    x5on.setRadioex(that.data.userschs, e.detail.value, 'is_current', userschs => {
-      that.setData({ userschs })
-      // 切换学校
-      x5on.post({
-        url: x5on.url.usersetchange,
-        data: { uid: e.detail.value },
-        success(sch_members) {
-          x5on.showSuccess('切换成功')
-        }
-      })
+    // 切换学校
+    var { uid } = e.detail
+    x5on.http(x5on.url.usersetchange, { uid })
+    .then(res=>{
+      x5on.showSuccess('切换成功')
+    })
+    .catch(error=>{
+      x5on.showError(error)
     })
   },
 

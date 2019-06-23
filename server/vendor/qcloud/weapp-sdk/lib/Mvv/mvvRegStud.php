@@ -14,7 +14,7 @@ use QCloud_WeApp_SDK\Model\xovStudReg;
 use QCloud_WeApp_SDK\Model\xovStudRegUser;
 use QCloud_WeApp_SDK\Model\xovUserChilds;
 
-class mvvStudreg
+class mvvRegStud
 {
   public static function child_area_reged($user_id) {
     $childs = xovUserChilds::getsBy(compact('user_id'));

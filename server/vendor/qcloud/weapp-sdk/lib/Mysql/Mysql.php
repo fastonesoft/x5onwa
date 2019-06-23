@@ -115,7 +115,7 @@ class Mysql
     list($condition, $execValues) = array_values(self::conditionProcess($conditions, 'and'));
 
     // 拼接 SQL 语句
-    $sql = "SELECT $funcName( $fieldName ) as value FROM `$tableName`";
+    $sql = "SELECT $funcName($fieldName) as value FROM `$tableName`";
 
     // 如果有条件则拼接 WHERE 关键则
     if ($condition) {

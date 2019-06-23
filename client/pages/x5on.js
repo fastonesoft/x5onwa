@@ -84,14 +84,6 @@ var doUrl = {
   schdistsch: `${host}/weapp/schdist/sch`,
   schdistdel: `${host}/weapp/schdist/del`,
 
-  // 报名
-  regstud: `${host}/weapp/studreg`,
-  regstudstep: `${host}/weapp/studreg/step`,
-  regstudreg: `${host}/weapp/studreg/reg`,
-  regstudref: `${host}/weapp/studreg/ref`,
-  regstudcheck: `${host}/weapp/studreg/check`,
-  regstudcancel: `${host}/weapp/studreg/cancel`,
-
   // 班级分管
   mydivi: `${host}/weapp/mydivi`,
   mydiviclsdiv: `${host}/weapp/mydivi/clsdiv`,
@@ -200,18 +192,28 @@ var doUrl = {
   sysvaluedel: `${host}/weapp/sysvalue/del`,
   sysvalueedit: `${host}/weapp/sysvalue/edit`,
 
+  // 报名
+  regstud: `${host}/weapp/regstud`,
+  regstudstep: `${host}/weapp/regstud/step`,
+  regstudreg: `${host}/weapp/regstud/reg`,
+  regstudref: `${host}/weapp/regstud/ref`,
+  regstudcheck: `${host}/weapp/regstud/check`,
+  regstudcancel: `${host}/weapp/regstud/cancel`,
   // 初核
-  studexam: `${host}/weapp/studexam`,
-  studexamfields: `${host}/weapp/studexam/fields`,
-  studexamexam: `${host}/weapp/studexam/exam`,
-  studexamreject: `${host}/weapp/studexam/reject`,
+  regexam: `${host}/weapp/regexam`,
+  regexamfields: `${host}/weapp/regexam/fields`,
+  regexamexam: `${host}/weapp/regexam/exam`,
+  regexamreject: `${host}/weapp/regexam/reject`,
   // 复核
-  studrexam: `${host}/weapp/studrexam`,
-  studrexamfields: `${host}/weapp/studrexam/fields`,
-  studrexamrexam: `${host}/weapp/studrexam/rexam`,
-  studrexamreject: `${host}/weapp/studrexam/reject`,
-
-
+  regrexam: `${host}/weapp/regrexam`,
+  regrexamfields: `${host}/weapp/regrexam/fields`,
+  regrexamrexam: `${host}/weapp/regrexam/rexam`,
+  regrexamreject: `${host}/weapp/regrexam/reject`,
+  // 查询
+  regquery: `${host}/weapp/regquery`,
+  regquerycount: `${host}/weapp/regquery/count`,
+  regquerystud: `${host}/weapp/regquery/stud`,
+  regqueryparent: `${host}/weapp/regquery/parent`,
 
 
 

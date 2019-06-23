@@ -16,7 +16,7 @@ Page({
     }
     that.setData({ mes })
     
-		x5on.http(x5on.url.studexam)
+		x5on.http(x5on.url.regexam)
 		.then(steps_auths=>{
 			that.setData(steps_auths)
 		})
@@ -37,7 +37,7 @@ Page({
         var uid = res.result
         // 请求表单数据
         var { step_id } = that.data
-        x5on.http(x5on.url.studexamfields, { uid, step_id })
+        x5on.http(x5on.url.regexamfields, { uid, step_id })
         .then(regstuds_fields_values=>{
           var { regstuds, fields, values } = regstuds_fields_values
           var { fields, rules } = x5on.fieldsRules(fields, values)
@@ -60,7 +60,7 @@ Page({
     var that = this
     var { uid, stud_auth, regstuds } = that.data
     // 提交确认
-    x5on.http(x5on.url.studexamexam, { uid, stud_auth })
+    x5on.http(x5on.url.regexamexam, { uid, stud_auth })
     .then(number=>{
       // 显示结果：一、打开学生关闭按钮，二、清除表格数据
       if (regstuds.length>0) {
@@ -78,7 +78,7 @@ Page({
     var that = this
     var { uid } = that.data
     // 提交确认
-    x5on.http(x5on.url.studexamreject, { uid })
+    x5on.http(x5on.url.regexamreject, { uid })
     .then(number=>{
       // 清除显示
       this.setData({ regstuds: [], fields: [] })

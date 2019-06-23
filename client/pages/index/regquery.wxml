@@ -1,0 +1,17 @@
+<!--pages/index/regquery.wxml-->
+<view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
+
+<comPick title="学校分级" notitle="{{1}}" label="年级选择" name="steps_id" rangeKey="schs_steps" selectKey="schs_steps"
+    valueKey="id" picks="{{steps}}" bind:pickChange="pickChange" />
+<comPick title_notshow="学生类别" notitle="{{0}}" label="学生类别" name="stud_auth" rangeKey="name" selectKey="name" valueKey="id" picks="{{auths}}"
+    bind:pickChange="pickChange" />
+
+<comList title_notshow="报名信息" notitle="{{0}}" obj="{{count}}" mes="{{mes}}" />
+
+<formFind title="报名查询" notitle="{{0}}" label="学生姓名" bind:findSubmit="findSubmit" wx:if="{{steps_id}}" />
+<comRadio radios="{{regstuds}}" key="child_name" memo="auth_name" bind:radioChange="studChange" />
+
+<comList title="审核信息" notitle="{{0}}" obj="{{regstud}}" mes="{{mes_user}}" />
+
+<comLists title="监护人信息" notitle="{{0}}" lists="{{userchilds}}" mes="{{mes_child}}" />
+

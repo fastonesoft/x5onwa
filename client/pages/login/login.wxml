@@ -17,21 +17,7 @@
 
 <comList title="用户信息" notitle="{{true}}" obj="{{user}}" mes="{{mes}}" wx:if="{{reged}}"/>
 
-<block wx:if="{{userschs.length>0}}">
-  <view class="weui-cells__title">注册学校</view>
-  <view class="weui-cells weui-cells_after-title">
-    <radio-group name="uid" bindchange="userschsChange">
-      <label class="weui-cell weui-check__label" wx:for="{{userschs}}" wx:key="uid">
-        <radio class="weui-check" value="{{item.uid}}" checked="{{item.is_current}}" />
-        <view class="weui-cell__bd">{{item.schs_sch}}</view>
-        <view class="weui-cell__ft weui-cell__ft_in-radio">
-          <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.is_current}}"></icon>
-          <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{item.is_current}}"></icon>
-        </view>
-      </label>
-    </radio-group>
-  </view>
-</block>
+<comRadio title="注册学校" radios="{{userschs}}" key="schs_sch" checked="is_current" bind:radioChange="userschsChange" />
 
 <view class="weui-cells__tips x5ui-color_red" wx:if="{{user.fixed}}">
   帐号已冻结，具体原因，请联系管理员！

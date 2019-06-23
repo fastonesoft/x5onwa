@@ -11,7 +11,7 @@ use QCloud_WeApp_SDK\Model\xovFormValue;
 use QCloud_WeApp_SDK\Model\xovSchStep;
 use QCloud_WeApp_SDK\Model\xovStudReg;
 
-class mvvStudexam
+class mvvRegExam
 {
 
   // 学校分级、学生类别

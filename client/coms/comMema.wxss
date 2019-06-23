@@ -1,2 +1,4 @@
 /* coms/comMema.wxss */
 @import "../pages/weui.wxss";
+
+.mema-margin_left { margin-left: 10px; }

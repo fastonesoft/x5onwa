@@ -13,6 +13,7 @@ Component({
     split: String,
     memo: String,
     selected: String,
+    remove: Boolean,
   },
 
   lifetimes: {
@@ -33,11 +34,25 @@ Component({
     })
   },
 
+  observers: {
+    'selected': function (selected) {
+      var selects = selected.split(',')
+      this.setData({ selects })
+    }
+  },
+
   methods: {
-    gotoClick: function (e) {
+    editClick: function (e) {
       var uid = e.currentTarget.dataset.uid
       var mema = x5on.getArrex(this.data.memas, 'uid', uid)
-      this.triggerEvent('gotoClick', mema)
-    }
+      this.triggerEvent('editClick', mema)
+    },
+
+    removeClick: function (e) {
+      var uid = e.currentTarget.dataset.uid
+      var memas = x5on.delArr(this.data.memas, 'uid', uid)
+      this.setData({ memas })
+      this.triggerEvent('removeClick', { uid })
+    },
   }
 })

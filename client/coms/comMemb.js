@@ -1,4 +1,7 @@
 // coms/comMember.js
+// 单个选择显示
+
+
 var x5on = require('../pages/x5on.js')
 
 Component({
