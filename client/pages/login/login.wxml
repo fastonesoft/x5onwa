@@ -15,7 +15,7 @@
 
 <formForm title="用户注册" notitle="{{1}}" fields="{{fields}}" rules="{{rules}}" bind:formSubmit="regSubmit" wx:if="{{notreg}}" />
 
-<comList title="用户信息" notitle="{{true}}" obj="{{user}}" mes="{{mes}}" wx:if="{{reged}}"/>
+<comList title="用户信息" notitle="{{true}}" obj="{{user}}" mes="{{mes}}" />
 
 <comRadio title="注册学校" radios="{{userschs}}" key="schs_sch" checked="is_current" bind:radioChange="userschsChange" />
 

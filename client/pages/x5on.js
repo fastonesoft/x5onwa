@@ -797,7 +797,7 @@ var doPrevPage = function (success) {
 }
 var doIndexPage = function(success, index) {
   var pages = getCurrentPages();
-  pages.length>index && success(pages[pages.length - index])
+  pages.length>=index && success(pages[pages.length - index])
 }
 
 // 对外接口

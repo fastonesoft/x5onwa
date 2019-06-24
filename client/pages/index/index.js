@@ -12,6 +12,7 @@ Page({
 
   onShow: function () {
     if (!app.globalData.user || app.globalData.user && app.globalData.user.fixed) {
+      this.setData({ types: [], roles: [] })
       wx.switchTab({ url: '/pages/login/login' })
       return
     }

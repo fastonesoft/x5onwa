@@ -46,31 +46,21 @@ Page({
     // 授权检测登录
     x5on.check({
       success() {
-        console.log('check-success')
-        x5on.request({
-          donshow: true,
-          url: x5on.url.user,
-          success(user_schs) {
+        x5on.http(x5on.url.user, {}, true)
+        .then(user_schs=>{
             // 显示用户信息
-            user_schs.reged = true
-            user_schs.notreg = false
             that.setData(user_schs)
-            // 记录状态
+            that.setData({ notreg: false, notauth: false })
             app.globalData.user = user_schs.user
-          },
-          fail() {
-            console.log(44)
-            // 显示注册信息
-            that.setData({ user: null, reged: false, notreg: true })
-            // 记录状态
+        })
+        .catch(error=>{
+            that.setData({ user: null, userschs: [], notreg: true, notauth: false })
             app.globalData.user = null
-          }
         })
       },
       fail() {
-        console.log('check-fail')
-        // 显示授权按钮
-        that.setData({ notauth: true })
+        that.setData({ user: null, userschs: [], notreg: false, notauth: true })
+        app.globalData.user = null
       }
     });
   },
@@ -78,22 +68,22 @@ Page({
   bindAuth: function (e) {
     var that = this
     x5on.auth('scope.userInfo', () => {
+      // 授权成功，检测是
       x5on.login({
         auth: e.detail,
         success(res) {
           that.setData({ notauth: false })
           // 授权，检测是否已注册
           x5on.http(x5on.url.user, {}, true)
-          .then(user=>{
-            console.log(user)
+          .then(user_schs=>{
             // 注册，显示用户信息
-            user.reged = true
-            that.setData(user)
-            // 记录状态
-            app.globalData.user = user
+            that.setData(user_schs)
+            that.setData({ notreg: false })
+            app.globalData.user = user_schs.user
           })
           .catch(error=>{
-            that.setData({ notreg: true })
+            that.setData({ user: null, userschs: [], notreg: true })
+            app.globalData.user = null
           })
         }
       });
@@ -106,12 +96,12 @@ Page({
     var that = this
     x5on.http(x5on.url.userreg, e.detail)
     .then(user=>{
-      that.setData({ user, reged: true, notreg: false })
-      // 记录状态
+      that.setData({ user, notreg: false, notauth: false })
       app.globalData.user = user
     })
     .catch(error=>{
       x5on.showError(error)
+      app.globalData.user = null
     })
   },
 
