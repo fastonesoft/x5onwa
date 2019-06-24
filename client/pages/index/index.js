@@ -11,7 +11,10 @@ Page({
   },
 
   onShow: function () {
-    app.globalData.user && app.globalData.user.fixed && wx.switchTab({ url: '/pages/login/login' })
+    if (!app.globalData.user || app.globalData.user && app.globalData.user.fixed) {
+      wx.switchTab({ url: '/pages/login/login' })
+      return
+    }
     
     var that = this
     // 检测登录

@@ -12,10 +12,41 @@ Page({
       name: { label: '用户姓名', type: 0 },
       mobil: { label: '手机号码', type: 0 },
     }
-    that.setData({ mes })
+    // 注册字段
+    var fields = [{
+      mode: 1,
+      label: '用户姓名',
+      message: '输入您的姓名',
+      name: 'name',
+      type: 'text',
+      maxlength: 4,
+    }, {
+      mode: 1,
+      label: '手机号码',
+      message: '输入您的手机号码',
+      name: 'mobil',
+      type: 'number',
+      maxlength: 11,
+    }]
+    var rules = {
+      name: {
+        required: true,
+        minlength: 2,
+        maxlength: 4,
+        chinese: true,
+      },
+      mobil: {
+        required: true,
+        minlength: 11,
+        maxlength: 11,
+        tel: true,
+      },
+    }
+    that.setData({ mes, fields, rules })
     // 授权检测登录
     x5on.check({
       success() {
+        console.log('check-success')
         x5on.request({
           donshow: true,
           url: x5on.url.user,
@@ -28,42 +59,16 @@ Page({
             app.globalData.user = user_schs.user
           },
           fail() {
-            // 注册字段
-            var fields = [{
-              mode: 1,
-              label: '用户姓名',
-              message: '输入您的姓名',
-              name: 'name',
-              type: 'text',
-              maxlength: 4,
-            }, {
-              mode: 1,
-              label: '手机号码',
-              message: '输入您的手机号码',
-              name: 'mobil',
-              type: 'number',
-              maxlength: 11,
-            }]
-            var rules = {
-              name: {
-                required: true,
-                minlength: 2,
-                maxlength: 4,
-                chinese: true,
-              },
-              mobil: {
-                required: true,
-                minlength: 11,
-                maxlength: 11,
-                tel: true,
-              },
-            }
+            console.log(44)
             // 显示注册信息
-            that.setData({ user: null, reged: false, notreg: true, fields, rules })
+            that.setData({ user: null, reged: false, notreg: true })
+            // 记录状态
+            app.globalData.user = null
           }
         })
       },
       fail() {
+        console.log('check-fail')
         // 显示授权按钮
         that.setData({ notauth: true })
       }
@@ -76,18 +81,19 @@ Page({
       x5on.login({
         auth: e.detail,
         success(res) {
-          // 登录成功，检测用户
-          x5on.request({
-            donshow: true,
-            url: x5on.url.user,
-            success(users) {
-              users.notauth = false
-              users.reged = true
-              that.setData(users)
-            },
-            fail() {
-              that.setData({ notauth: false, notreg: true })
-            }
+          that.setData({ notauth: false })
+          // 授权，检测是否已注册
+          x5on.http(x5on.url.user, {}, true)
+          .then(user=>{
+            console.log(user)
+            // 注册，显示用户信息
+            user.reged = true
+            that.setData(user)
+            // 记录状态
+            app.globalData.user = user
+          })
+          .catch(error=>{
+            that.setData({ notreg: true })
           })
         }
       });
@@ -101,6 +107,8 @@ Page({
     x5on.http(x5on.url.userreg, e.detail)
     .then(user=>{
       that.setData({ user, reged: true, notreg: false })
+      // 记录状态
+      app.globalData.user = user
     })
     .catch(error=>{
       x5on.showError(error)
