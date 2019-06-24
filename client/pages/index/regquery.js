@@ -14,6 +14,7 @@ Page({
     var mes_user = {
       exam_user_name: { label: '初审', type: 0 },
       rexam_user_name: { label: '复核', type: 0 },
+      passed: { label: '通过审核', type: 1 },
     }
     var mes_child = {
       child_relation: { label: '称谓', type: 0 },
