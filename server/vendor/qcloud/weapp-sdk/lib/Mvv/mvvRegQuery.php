@@ -18,24 +18,24 @@ class mvvRegQuery
     mvvUserSchoolGroup::schUser($sch_user_id, function ($user_sch_group) use ($steps_id, $stud_auth, &$result) {
       $sch_id = $user_sch_group->sch_id;
       if ($stud_auth === null) {
-        $examed = 1;
-        $total = xovStudReg::count(compact('steps_id', 'examed'));
+        $passed = 1;
+        $total = xovStudReg::count(compact('steps_id', 'passed'));
         $sex_num = 0;
-        $female = xovStudReg::count(compact('steps_id', 'examed', 'sex_num'));
+        $female = xovStudReg::count(compact('steps_id', 'passed', 'sex_num'));
         $sex_num = 1;
-        $male = xovStudReg::count(compact('steps_id', 'examed', 'sex_num'));
-        $examed = 0;
-        $notexam = xovStudReg::count(compact('steps_id', 'examed'));
+        $male = xovStudReg::count(compact('steps_id', 'passed', 'sex_num'));
+        $passed = 0;
+        $notexam = xovStudReg::count(compact('steps_id', 'passed'));
         $result = compact('total', 'female', 'male', 'notexam');
       } else {
-        $examed = 1;
-        $total = xovStudReg::count(compact('steps_id', 'stud_auth', 'examed'));
+        $passed = 1;
+        $total = xovStudReg::count(compact('steps_id', 'stud_auth', 'passed'));
         $sex_num = 0;
-        $female = xovStudReg::count(compact('steps_id', 'stud_auth', 'examed', 'sex_num'));
+        $female = xovStudReg::count(compact('steps_id', 'stud_auth', 'passed', 'sex_num'));
         $sex_num = 1;
-        $male = xovStudReg::count(compact('steps_id', 'stud_auth', 'examed', 'sex_num'));
-        $examed = 0;
-        $notexam = xovStudReg::count(compact('steps_id', 'examed'));
+        $male = xovStudReg::count(compact('steps_id', 'stud_auth', 'passed', 'sex_num'));
+        $passed = 0;
+        $notexam = xovStudReg::count(compact('steps_id', 'passed'));
         $result = compact('total', 'female', 'male', 'notexam');
       }
     });

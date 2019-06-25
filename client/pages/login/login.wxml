@@ -9,12 +9,12 @@
   </view>
 </view>
 
-<view class="weui-btn-area" wx:if="{{notauth}}">
-  <button class="x5ui-btn_half" type="warn" open-type="getUserInfo" bindgetuserinfo="bindAuth">授权登录</button>
-</view>
-
 <view class="weui-footer x5on-copyright_right">
     <view class="weui-footer__text">v2.1.5</view>
+</view>
+
+<view class="weui-btn-area" wx:if="{{notauth}}">
+  <button class="x5ui-btn_half" type="warn" open-type="getUserInfo" bindgetuserinfo="bindAuth">授权登录</button>
 </view>
 
 <formForm title="用户注册" notitle="{{1}}" fields="{{fields}}" rules="{{rules}}" bind:formSubmit="regSubmit" wx:if="{{notreg}}" />
