@@ -1,7 +1,9 @@
 <?php
 namespace QCloud_WeApp_SDK\Mvv;
 
+use QCloud_WeApp_SDK\Model\xovFormField;
 use QCloud_WeApp_SDK\Model\xovFormUser;
+use QCloud_WeApp_SDK\Model\xovFormValue;
 use QCloud_WeApp_SDK\Model\xovStudReg;
 use QCloud_WeApp_SDK\Model\xovUserChilds;
 
@@ -58,50 +60,35 @@ class mvvRegQuery
     mvvUserSchoolGroup::schUser($sch_user_id, function ($user_sch_group) use ($child_uid, &$result) {
       $sch_id = $user_sch_group->sch_id;
 
-      // 根据学生编号查询出父母的相关注册信息
-      $result = xovUserChilds::getsBy(compact('child_uid'));
-    });
-    return $result;
-  }
-
-  //
-  public static function fields($sch_user_id, $reg_stud_uid, $reg_steps_id) {
-    $result = [];
-    mvvUserSchoolGroup::schUser($sch_user_id, function ($user_sch_group) use ($sch_user_id, $reg_stud_uid, $reg_steps_id, &$result) {
-      $sch_id = $user_sch_group->sch_id;
-
       // 获取regstud记录
-      $reg_stud = xovStudReg::checkByUidCustom($reg_stud_uid, '没有找到二维码对应学生信息');
-      // 获取其它辅助信息
-      $steps_id = $reg_stud->steps_id;
-      $years_id = $reg_stud->years_id;
-      $user_id = $reg_stud->user_id;
-      $exam_user_id = $reg_stud->exam_user_id;
-      // “报名”的分类编号
-      $type_id = 1;
-
-      // 取表单数据
-      $form = xovFormUser::checkByCustom(compact('steps_id', 'years_id', 'type_id', 'user_id'), '没有发现要填报的表格');
-
-      $form_id = $form->id;
-
-      $fields = xovFormField::getsBySuff(compact('form_id'), 'order by orde, id');
-      // 用户级表单字段
-      $values = xovFormValue::getsBy(compact('user_id', 'form_id'));
-
-      // 查询uid编号对应学生，数组形式返回
-      $regstuds = xovStudReg::getsByUid($reg_stud_uid);
-
-      // 添加二维码信息
-      $regstuds = x5on::addsQrcode($regstuds, 'uid');
-
-      $result = compact('regstuds', 'fields', 'values');
+      $reg_stud = xovStudReg::getBy(compact('child_uid'));
+      if ($reg_stud !== null) {
+        // 获取其它辅助信息
+        $user_id = $reg_stud->user_id;
+        $steps_id = $reg_stud->steps_id;
+        $years_id = $reg_stud->years_id;
+        // “报名”的分类编号
+        $type_id = 1;
+        // 取表单数据
+        $form = xovFormUser::getBy(compact('user_id', 'steps_id', 'years_id', 'type_id'));
+        if ($form !== null) {
+          $form_id = $form->form_id;
+          $fields = xovFormField::getsBySuff(compact('form_id'), 'order by orde, id');
+          // 用户级表单字段
+          $values = xovFormValue::getsBy(compact('user_id', 'form_id'));
+        } else {
+          $fields = [];
+          $values = [];
+        }
+      } else {
+        $fields = [];
+        $values = [];
+      }
+      // 根据学生编号查询出父母的相关注册信息
+      $userchilds = xovUserChilds::getsBy(compact('child_uid'));
+      $result = compact('userchilds', 'fields', 'values');
     });
     return $result;
   }
-
-
-
-
 
 }

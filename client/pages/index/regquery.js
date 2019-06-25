@@ -61,7 +61,7 @@ Page({
 
     x5on.http(x5on.url.regquerystud, e.detail)
     .then(regstuds=>{
-      that.setData({ regstuds, regstud: null, userchilds: [] })
+      that.setData({ regstuds, regstud: null, userchilds: [], fields: [] })
     })
     .catch(error=>{
       x5on.showError(error)
@@ -73,8 +73,11 @@ Page({
     that.setData({ regstud: e.detail })
     //
     x5on.http(x5on.url.regqueryparent, e.detail)
-    .then(userchilds=>{
-      that.setData({ userchilds })
+    .then(userchilds_fields_values=>{
+      var { userchilds, fields, values } = userchilds_fields_values
+      var { fields, rules } = x5on.fieldsRules(fields, values)
+      // 显示
+      that.setData({ userchilds, fields })	
     })
     .catch(error=>{
       x5on.showError(error)
