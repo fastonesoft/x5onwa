@@ -18,16 +18,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               redirect_uri: "https://www.x5on.cn/oauth",
               state: "web",
               style: "black",
-              href: "https://www.x5on.cn/content/codesite.css"
+              href: "https://www.x5on.cn/content/codesite.css?v=" + Math.random()
           });
       });
 
   </script>
 
+  <style type="text/css">
+    .contain {  }
+    #login_code { margin: 50px auto; text-align: center; }
+  </style>
+
 </head>
 <body>
-<div id="login_code" style="height: 600px; width: 800px;">
-
+<div class="contain">
+  <div id="login_code">
+  </div>
 </div>
 </body>
 </html>
