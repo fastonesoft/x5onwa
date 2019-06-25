@@ -25,6 +25,7 @@ class mvvRegRexam
     return $result;
   }
 
+  // 根据学生报名编号、分级，查询报名信息
   public static function fields($sch_user_id, $reg_stud_uid, $reg_steps_id) {
     $result = [];
     mvvUserSchoolGroup::schUser($sch_user_id, function ($user_sch_group) use ($sch_user_id, $reg_stud_uid, $reg_steps_id, &$result) {
@@ -76,7 +77,6 @@ class mvvRegRexam
     });
     return $result;
   }
-
 
   // 报名信息复核
   public static function rexam($sch_user_id, $reg_stud_uid) {

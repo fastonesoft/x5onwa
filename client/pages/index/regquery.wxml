@@ -15,3 +15,6 @@
 
 <comLists title="监护人信息" notitle="{{0}}" lists="{{userchilds}}" mes="{{mes_child}}" />
 
+<comValues title="报名数据" notitle="{{0}}" values="{{fields}}" />
+
+

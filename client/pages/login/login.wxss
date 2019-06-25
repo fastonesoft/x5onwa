@@ -38,3 +38,5 @@ page {
   font-size: 17px;
   color: #e6a800;
 }
+
+.x5on-copyright_right { text-align: right; }

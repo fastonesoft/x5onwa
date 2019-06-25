@@ -42,7 +42,6 @@ class Regrexam extends CI_Controller {
     });
   }
 
-
   public function rexam() {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
