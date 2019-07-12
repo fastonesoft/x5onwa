@@ -1,6 +1,6 @@
 <!-- pages/index/userchilds.wxml -->
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
-<comLists title="我的孩子" notitle="{{true}}" lists="{{userchilds}}" mes="{{mes}}" />
+<comLists title_not_show="我的孩子" notitle="{{true}}" lists="{{userchilds}}" mes="{{mes}}" />
 
 <comBtn canShow="{{userchilds.length<2}}" title="添加" bind:buttonClick="addClick" />
