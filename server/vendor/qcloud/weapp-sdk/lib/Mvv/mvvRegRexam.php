@@ -69,7 +69,9 @@ class mvvRegRexam
 
       // 查询uid编号对应学生，数组形式返回
       $regstuds = xovStudReg::getsByUid($reg_stud_uid);
-      $regstuds->stud_auth = $regstuds->stud_auth === 1;
+      foreach ($regstuds as $regstud) {
+        $regstud->stud_auth = $regstud->stud_auth === 1;
+      }
 
       // 添加二维码信息
       $regstuds = x5on::addsQrcode($regstuds, 'uid');
