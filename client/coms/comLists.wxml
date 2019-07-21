@@ -2,11 +2,11 @@
 <view wx:for="{{lists}}" wx:key="" wx:for-index="index">
     <comList title="{{!index?title:''}}" notitle="{{!index?notitle:0}}" obj="{{item}}" mes="{{mes}}" />
     <view class="weui-cells__tips x5ui-mini">
-        <button class="weui-btn mini-btn" type="default" size="mini" data-uid="{{item[selectKey]}}"
+        <button class="weui-btn" type="default" size="mini" data-uid="{{item[selectKey]}}"
             bindtap="refClick" wx:if="{{ref && item[canRef]}}">{{ref}}</button>
-        <button class="weui-btn mini-btn" type="primary" size="mini" data-uid="{{item[selectKey]}}" bindtap="okClick"
+        <button class="weui-btn" type="primary" size="mini" data-uid="{{item[selectKey]}}" bindtap="okClick"
             wx:if="{{ok && item[canOk]}}">{{ok}}</button>
-        <button class="weui-btn mini-btn" type="warn" size="mini" data-uid="{{item[selectKey]}}" bindtap="delClick"
+        <button class="weui-btn" type="warn" size="mini" data-uid="{{item[selectKey]}}" bindtap="delClick"
             wx:if="{{del && item[canDel]}}">{{del}}</button>
     </view>
 </view>

@@ -1,5 +1,6 @@
 /* coms/comBtnMini.wxss */
-@import "../pages/weui.wxss";
+.weui-cells__tips{margin-top:.3em;color:#999;padding-left:15px;padding-right:15px;font-size:14px}
+.weui-btn{margin-top:0}
 
 .x5ui-mini { text-align: center; }
 .x5ui-mini button { margin-top: 0px; margin-right: 20rpx; }

@@ -7,18 +7,18 @@
 				<radio class="weui-check" value="{{item.uid}}" checked="{{item[checked]}}" />
 				<block wx:if="{{split}}">
 					<view class="weui-cell__bd" wx:if="{{key&&memo}}">{{item[key]}}{{split}}{{item[memo]}}
-						<icon type="cancel" size="23" data-uid="{{item.uid}}" bindtap="removeClick"></icon>
+						<view class="remove-icon" data-uid="{{item.uid}}" bindtap="removeClick"></view>
 					</view>
 					<view class="weui-cell__bd" wx:elif="{{key}}">{{item[key]}}
-						<icon type="cancel" size="23" data-uid="{{item.uid}}" bindtap="removeClick"></icon>
+						<view class="remove-icon" data-uid="{{item.uid}}" bindtap="removeClick"></view>
 					</view>
 				</block>
 				<block wx:else>
 					<view class="weui-cell__bd" wx:if="{{key&&memo}}">{{item[key]}}({{item[memo]}})
-						<icon type="cancel" size="23" data-uid="{{item.uid}}" bindtap="removeClick"></icon>
+						<view class="remove-icon" data-uid="{{item.uid}}" bindtap="removeClick"></view>
 					</view>
 					<view class="weui-cell__bd" wx:elif="{{key}}">{{item[key]}}
-						<icon type="cancel" size="23" data-uid="{{item.uid}}" bindtap="removeClick"></icon>
+						<view class="remove-icon" data-uid="{{item.uid}}" bindtap="removeClick"></view>
 					</view>
 				</block>
 				<view class="weui-cell__ft weui-cell__ft_in-radio">

@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 use QCloud_WeApp_SDK\Mvv;
 use QCloud_WeApp_SDK\Model;
 
-class Appform extends CI_Controller {
+class App extends CI_Controller {
   /**
    * 模板名称
    */

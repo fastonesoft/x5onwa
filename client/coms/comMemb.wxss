@@ -1,2 +1,3 @@
 /* coms/comMember.wxss */
+@import "../pages/remove.wxss";
 @import "../pages/weui.wxss";

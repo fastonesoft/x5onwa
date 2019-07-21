@@ -1,5 +1,6 @@
 /* coms/comList.wxss */
 @import "../pages/weui.wxss";
+
 .qrcode-area {
     display: flex;
     align-items: center;
@@ -8,4 +9,3 @@
     flex-flow: column;
 }
 .qrcode { width: 260rpx; height: 260rpx; }
-.weui-cells_after-title { margin-bottom:0.3em; }

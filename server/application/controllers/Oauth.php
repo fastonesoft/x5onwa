@@ -26,6 +26,8 @@ class Oauth extends CI_Controller {
 
       // 返回信息
       $this->json(['code' => 0, 'data' => $infoArray]);
+    } else {
+      $this->json(['code' => 0, 'data' => null]);
     }
   }
 

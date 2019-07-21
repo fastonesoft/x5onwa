@@ -22,8 +22,8 @@
 					<icon class="mema-margin_left" type="success" size="23" wx:if="{{item[selected]}}"></icon>
 					<icon class="mema-margin_left" type="circle" size="23" wx:else></icon>
 				</block>
-				<icon class="mema-margin_left" type="cancel" size="23" data-uid="{{item.uid}}" bindtap="removeClick"
-					wx:if="{{remove}}"></icon>
+				<view class="mema-margin_left remove-icon" data-uid="{{item.uid}}" bindtap="removeClick"
+					wx:if="{{remove}}"></view>
 			</view>
 		</view>
 	</view>

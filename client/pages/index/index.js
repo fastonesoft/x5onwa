@@ -5,8 +5,8 @@ var app = getApp()
 Page({
   data: {
     imgUrls: [
-      'http://wafer-1253456186.cossh.myqcloud.com/569045613.jpg',
-      'http://wafer-1253456186.cossh.myqcloud.com/860039340.jpg',
+      'https://www.x5on.cn/content/images/569045613.jpg',
+      'https://www.x5on.cn/content/images/860039340.jpg',
     ]
   },
 
