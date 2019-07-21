@@ -2,6 +2,10 @@
 var x5on = require('../pages/x5on.js')
 
 Component({
+  
+  options: {
+    styleIsolation: 'apply-shared'
+  },
 
   properties: {
     lists: Object,

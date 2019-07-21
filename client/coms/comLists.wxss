@@ -1,6 +1,1 @@
 /* coms/comLists.wxss */
-@import "../pages/weui.wxss";
-
-.x5ui-mini { text-align: center; }
-.x5ui-mini button { padding: 0 14px; margin-top: 0px; margin-right: 20rpx; }
-.x5ui-mini button:last-child { margin-right: 0px; }

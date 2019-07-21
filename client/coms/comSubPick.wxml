@@ -1,8 +1,8 @@
 <!--coms/comSubPick.wxml-->
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
-<view class="weui-cell weui-cell_select weui-cells_before">
-    <view class="weui-cell__hd weui-cell__hd_in-select-after">
+<view class="weui-cell weui-cells_before">
+    <view class="weui-cell__hd">
         <view class="weui-label">{{label}}</view>
     </view>
     <view class="weui-cell__bd">

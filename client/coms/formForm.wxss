@@ -1,6 +1,3 @@
 /* coms/formForm.wxss */
 @import "../pages/weui.wxss";
 
-.x5ui-mini { text-align: center; }
-.x5ui-mini button { margin-top: 0px; margin-right: 20rpx; }
-.x5ui-mini button:last-child { margin-right: 0px; }

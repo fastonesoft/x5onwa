@@ -1,6 +1,10 @@
 // coms/comBtnMini.js
 Component({
 
+  options: {
+    styleIsolation: 'apply-shared'
+  },
+
   properties: {
     uid: Object,
     canShow: Boolean,

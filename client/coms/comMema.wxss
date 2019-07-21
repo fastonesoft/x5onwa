@@ -1,5 +1,1 @@
 /* coms/comMema.wxss */
-@import "../pages/weui.wxss";
-@import "../pages/remove.wxss";
-
-.mema-margin_left { margin-left: 10px; }

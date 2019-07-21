@@ -1,11 +1,1 @@
 /* coms/comList.wxss */
-@import "../pages/weui.wxss";
-
-.qrcode-area {
-    display: flex;
-    align-items: center;
-    align-content: flex-start;
-    justify-content: center;
-    flex-flow: column;
-}
-.qrcode { width: 260rpx; height: 260rpx; }

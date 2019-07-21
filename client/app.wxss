@@ -1,19 +1,19 @@
 @import "./pages/weui.wxss";
+@import "./pages/remove.wxss";
 page { background: #F6F6F6; font-size: 16px; margin-bottom: 1em; }
 
 .qrcode-area {
   display: flex;
-  margin-top: 30rpx;
   align-items: center;
   align-content: flex-start;
   justify-content: center;
   flex-flow: column;
-  }
-.qrcode { width: 400rpx; height: 400rpx; }
+}
+.qrcode { width: 260rpx; height: 260rpx; }
 
 .x5ui-column { display: flex; flex-flow: row wrap; }
 .x5ui-mini { text-align: center; }
-.x5ui-mini button { margin-top: 0px; margin-right: 20rpx; }
+.x5ui-mini button { padding: 0 15px; margin-top: 0px; margin-right: 20px; }
 .x5ui-mini button:last-child { margin-right: 0px; }
 
 .x5ui-panel { display: flex; flex-flow: row; font-size: 13px; color:#999; border-bottom: solid 1px #D9D9D9; padding-bottom: 5px; margin: 10px 10px 5px 10px; }
@@ -32,7 +32,16 @@ page { background: #F6F6F6; font-size: 16px; margin-bottom: 1em; }
 .weui-select { text-align: left; }
 .weui-cell_vcode .weui-input { padding-right: 20rpx; }
 
-/* 手动添加到weui.wxss */
+/* 将switch缩到.7，常用按钮减大小 */
 switch { transform: scale(0.7); -webkit-transform: scale(0.7); }
 .weui-btn-area button { font-size: 16px; }
 
+/* comSubPicker */
+.weui-cells_before{margin-left:15px;padding:0;border-top:1rpx solid #d9d9d9}
+
+/* comMema */
+.mema-margin_left { margin-left: 10px; }
+
+/* comList mini */
+.weui-cells__tips{margin-top:.3em;color:#999;padding-left:15px;padding-right:15px;font-size:14px}
+.weui-cells__tips .weui-btn{margin-top:0}
