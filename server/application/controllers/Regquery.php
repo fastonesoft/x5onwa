@@ -80,4 +80,22 @@ class Regquery extends CI_Controller {
     });
   }
 
+  public function arbi() {
+    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
+      try {
+        // 报名学生查询
+        $param = $_POST;
+        $child_uid = $param['uid'];
+
+        $result = Mvv\mvvRegQuery::arbi($userinfor->unionId, $child_uid);
+
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
+
 }

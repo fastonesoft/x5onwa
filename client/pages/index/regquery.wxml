@@ -17,7 +17,7 @@
 
 <comValues title="报名数据" notitle="{{0}}" values="{{fields}}" />
 
-<comBtnMini canShow="{{field}}" primary="仲裁" warn="重审" canPrimary="{{1}}" canWarn="{{1}}" bind:primaryClick="arbiClick"
+<comBtnMini canShow="{{fields.length>0}}" primary="仲裁" warn="重审" canPrimary="{{1}}" canWarn="{{1}}" bind:primaryClick="arbiClick"
     bind:warnClick="retrialClick" />
 
 
