@@ -12,7 +12,7 @@
 		"autoAudits": false
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.6.0",
+	"libVersion": "2.6.6",
 	"appid": "wxdca8673d324d4384",
 	"projectname": "校务在线",
 	"debugOptions": {

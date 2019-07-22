@@ -84,4 +84,12 @@ Page({
     })
   },
 
+  arbiClick: function(e) {
+    
+  },
+
+  retrialClick: function(e) {
+    
+  },
+  
 })
