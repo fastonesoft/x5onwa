@@ -22,6 +22,7 @@ Component({
     },
 
     primaryClick: function(e) {
+      console.log(this.data.uid)
       this.triggerEvent('primaryClick', e.currentTarget.dataset)
     },
 

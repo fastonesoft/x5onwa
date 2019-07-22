@@ -72,6 +72,7 @@ Page({
     var that = this
     var regstud = e.detail
     var { uid } = e.detail
+    console.log(regstud)
     that.setData({ regstud })
     //
     x5on.http(x5on.url.regqueryparent, { uid })
@@ -93,5 +94,5 @@ Page({
   retryClick: function(e) {
     console.log(e.detail)
   },
-  
+
 })
