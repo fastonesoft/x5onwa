@@ -70,9 +70,11 @@ Page({
 
   studChange: function(e) {
     var that = this
-    that.setData({ regstud: e.detail })
+    var regstud = e.detail
+    var { uid } = e.detail
+    that.setData({ regstud })
     //
-    x5on.http(x5on.url.regqueryparent, e.detail)
+    x5on.http(x5on.url.regqueryparent, { uid })
     .then(userchilds_fields_values=>{
       var { userchilds, fields, values } = userchilds_fields_values
       var { fields, rules } = x5on.fieldsRules(fields, values)
@@ -85,11 +87,11 @@ Page({
   },
 
   arbiClick: function(e) {
-    
+    console.log(e.detail)
   },
 
-  retrialClick: function(e) {
-    
+  retryClick: function(e) {
+    console.log(e.detail)
   },
   
 })

@@ -67,9 +67,9 @@ class Regquery extends CI_Controller {
       try {
         // 报名学生查询
         $param = $_POST;
-        $child_uid = $param['child_uid'];
+        $stud_reg_uid = $param['uid'];
 
-        $result = Mvv\mvvRegQuery::parent($userinfor->unionId, $child_uid);
+        $result = Mvv\mvvRegQuery::parent($userinfor->unionId, $stud_reg_uid);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -83,11 +83,29 @@ class Regquery extends CI_Controller {
   public function arbi() {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
-        // 报名学生查询
+        // 报名学生仲裁
         $param = $_POST;
-        $child_uid = $param['uid'];
+        $stud_reg_uid = $param['uid'];
 
-        $result = Mvv\mvvRegQuery::arbi($userinfor->unionId, $child_uid);
+        $result = Mvv\mvvRegQuery::arbi($userinfor->unionId, $stud_reg_uid);
+
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
+
+  public function retrial() {
+    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
+      try {
+        // 报名学生重审
+        $param = $_POST;
+        $stud_reg_uid = $param['uid'];
+
+        $result = Mvv\mvvRegQuery::retry($userinfor->unionId, $stud_reg_uid);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
