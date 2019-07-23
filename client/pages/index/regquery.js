@@ -17,12 +17,7 @@ Page({
       qrcode: { label: '二维码', type: 2 },
       passed: { label: '通过审核', type: 1 },
     }
-    var mes_child = {
-      child_relation: { label: '称谓', type: 0 },
-      user_name: { label: '姓名', type: 0 },
-      mobil: { label: '手机号码', type: 0 },
-    }
-    that.setData({ mes, mes_user, mes_child })
+    that.setData({ mes, mes_user })
     //
 		x5on.http(x5on.url.regquery)
 		.then(steps_auths=>{
@@ -60,7 +55,7 @@ Page({
     var { steps_id } = that.data
     e.detail.steps_id = steps_id
     // 清除
-    that.setData({ regstuds: [], regstud: null, userchilds: [], fields: [] })
+    that.setData({ regstuds: [], regstud: null, fields: [] })
 
     x5on.http(x5on.url.regquerystud, e.detail)
     .then(regstuds=>{
@@ -75,16 +70,17 @@ Page({
     var that = this
     var regstud = e.detail
     var { uid } = e.detail
-    that.setData({ regstud, userchilds: [], fields: [], rules: [] })
-    //
+    // 显示学生信息
+    that.setData({ regstud })
     x5on.http(x5on.url.regqueryparent, { uid })
-    .then(userchilds_fields_values=>{
-      var { userchilds, fields, values } = userchilds_fields_values
+    .then(fields_values=>{
+      var { fields, values } = fields_values
       var { fields, rules } = x5on.fieldsRules(fields, values)
-      // 显示
-      that.setData({ userchilds, fields, rules })	
+      // 显示家长信息
+      that.setData({ fields, rules, no_title: true })
     })
     .catch(error=>{
+      that.setData({ regstud: null })
       x5on.showError(error)
     })
   },
@@ -96,18 +92,28 @@ Page({
     var json = {}
     json.title = '报表表格'
     json.notitle = true
-    json.url_u = x5on.url.regqueryarbiup
+    json.url_u = x5on.url.regqueryarbi
     // e.detail => { uid: xxx }
     json.data_u = e.detail
-    json.arrsName = 'studregs'
     json.fields = fields
     json.rules = rules
     
     wx.navigateTo({ url: 'form_edit?json=' + JSON.stringify(json) })
+
+    // 关闭数据显示
+    that.setData({ fields: [], rules: [], no_title: false })
   },
 
   retryClick: function(e) {
-    console.log(e.detail)
+    var that = this
+    x5on.http(x5on.url.regqueryretry, e.detail)
+    .then(number=>{
+      // 关闭数据显示
+      that.setData({ fields: [], rules: [], no_title: false })
+    })
+    .catch(error=>{
+      x5on.showError(error)
+    })
   },
 
 })

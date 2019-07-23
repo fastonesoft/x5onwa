@@ -2,6 +2,8 @@
 namespace QCloud_WeApp_SDK\Mvv;
 
 use QCloud_WeApp_SDK\Model\x5on;
+use QCloud_WeApp_SDK\Model\xonFormField;
+use QCloud_WeApp_SDK\Model\xonFormValue;
 use QCloud_WeApp_SDK\Model\xonStudReg;
 use QCloud_WeApp_SDK\Model\xovFormField;
 use QCloud_WeApp_SDK\Model\xovFormUser;
@@ -69,43 +71,6 @@ class mvvRegQuery
       $user_id = $reg_stud->user_id;
       $steps_id = $reg_stud->steps_id;
       $years_id = $reg_stud->years_id;
-      $child_uid = $reg_stud->child_uid;
-
-      // 根据学生编号查询出父母的相关注册信息
-      $userchilds = xovUserChilds::getsBy(compact('child_uid'));
-
-      // “报名”的分类编号
-      $type_id = 1;
-      // 取表单数据
-      $form = xovFormUser::getBy(compact('user_id', 'steps_id', 'years_id', 'type_id'));
-      if ($form !== null) {
-        $form_id = $form->form_id;
-        $fields = xovFormField::getsBySuff(compact('form_id'), 'order by orde, id');
-        // 用户级表单字段
-        $values = xovFormValue::getsBy(compact('user_id', 'form_id'));
-      } else {
-        $fields = [];
-        $values = [];
-      }
-
-      $result = compact('userchilds', 'fields', 'values');
-    });
-    return $result;
-  }
-
-  // 仲裁报名学生数据，后期审核专用
-  public static function arbi($sch_user_id, $stud_reg_uid) {
-    $result = [];
-    mvvUserSchoolGroup::schUser($sch_user_id, function ($user_sch_group) use ($stud_reg_uid, &$result) {
-      $sch_id = $user_sch_group->sch_id;
-
-      // 获取regstud记录
-      $reg_stud = xovStudReg::checkByUid($stud_reg_uid);
-      // 获取其它辅助信息
-      $user_id = $reg_stud->user_id;
-      $steps_id = $reg_stud->steps_id;
-      $years_id = $reg_stud->years_id;
-      $child_uid = $reg_stud->child_uid;
 
       // “报名”的分类编号
       $type_id = 1;
@@ -135,22 +100,25 @@ class mvvRegQuery
       // 处理字段数据
       $uid = $param['uid'];
       unset($param['uid']);
-      // 获取字段->获取表单->获取所有字段
-      $field_id_one = count($param) ? $param[0] : null;
+      // 查询注册用户信息
+      $reg_stud = xonStudReg::checkByUid($uid);
+      $user_id = $reg_stud->user_id;
 
-      // 一、添加数据
-      foreach ($param as $field_id => $value) {
+      // 获取字段->获取表单->获取所有字段
+      reset($param);
+      $first_field_id = key($param);
+      $form_field = xonFormField::checkById($first_field_id);
+      $form_id = $form_field->form_id;
+      $fields = xonFormField::getsBy(compact('form_id'));
+
+      // 获取所有字段及其值，提交修改
+      foreach ($fields as $field) {
+        $field_id = $field->id;
+        $value = isset($param[$field_id]) ? $param[$field_id] : null;
         xonFormValue::add($user_id, $field_id, $value);
       }
-      // 二、变更状态
-      $confirmed = 1;
-      xonStudReg::setsByUid(compact('confirmed'), $uid);
-      // 三、返回当前用户数据
-      $login_user_id = $user_id;
-      $studregs = xovStudRegUser::getBy(compact('login_user_id', 'uid'));
-      return x5on::addQrcode($studregs, 'uid');
     });
-    return $result;
+    return 1;
   }
 
   // 重审，清除报名学生资料的所有审核信息，包括：初审、复核、指标状态

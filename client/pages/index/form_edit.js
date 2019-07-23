@@ -34,6 +34,7 @@ Page({
                 var arrsName = that.data.arrsName
                 // 指定字段，则更新字段
                 // 没有字段，则不更新数据
+                // 主动刷新上一页面数据：指定arrsName、url_r两个参数
                 arrsName && page.setData({ [arrsName]: arrs })
               })
           } else {
@@ -50,7 +51,7 @@ Page({
                 page.setData({ [arrsName]: result })
               }
             } else {
-              // 没有地址，没有字段，更新数据
+              // 没有地址，没有字段，直接用服务器端的数据更新
               // page.setData(result)
             }
           }
