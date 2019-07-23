@@ -215,6 +215,7 @@ var doUrl = {
   regquerystud: `${host}/weapp/regquery/stud`,
   regqueryparent: `${host}/weapp/regquery/parent`,
   regqueryarbi: `${host}/weapp/regquery/arbi`,
+  regqueryarbiup: `${host}/weapp/regquery/arbiup`,
   regqueryretry: `${host}/weapp/regquery/retry`,
 
 

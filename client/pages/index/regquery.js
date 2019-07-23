@@ -96,7 +96,7 @@ Page({
     var json = {}
     json.title = '报表表格'
     json.notitle = true
-    json.url_u = x5on.url.schvalueadd
+    json.url_u = x5on.url.regqueryarbiup
     // e.detail => { uid: xxx }
     json.data_u = e.detail
     json.arrsName = 'studregs'

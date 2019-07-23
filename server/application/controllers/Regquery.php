@@ -98,6 +98,24 @@ class Regquery extends CI_Controller {
     });
   }
 
+  public function arbiup() {
+    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
+      try {
+        // 仲裁提交
+        $param = $_POST;
+
+        // 表单数据添加
+        $result = Mvv\mvvRegQuery::arbiup($userinfor->unionId, $param);
+
+        $this->json(['code' => 0, 'data' => $result]);
+      } catch (Exception $e) {
+        $this->json(['code' => 1, 'data' => $e->getMessage()]);
+      }
+    }, function ($error) {
+      $this->json($error);
+    });
+  }
+
   public function retrial() {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {
