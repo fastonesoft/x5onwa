@@ -17,10 +17,11 @@
       <file leaf-file-name="mvvRegQuery.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvRegQuery.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="935">
-              <caret line="124" column="58" selection-start-line="124" selection-start-column="45" selection-end-line="124" selection-end-column="58" />
+            <state relative-caret-position="175">
+              <caret line="92" selection-start-line="92" selection-end-line="92" />
               <folding>
                 <element signature="e#39#71#0#PHP" expanded="true" />
+                <element signature="e#2107#3219#0#PHP" />
               </folding>
             </state>
           </provider>
@@ -35,41 +36,32 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Regquery.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Regquery.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/controllers/Regquery.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="158">
-              <caret line="81" selection-start-line="81" selection-end-line="81" />
-              <folding>
-                <element signature="n#stud#0;n#Regquery#0;n#!!top" />
-              </folding>
+            <state relative-caret-position="350">
+              <caret line="15" column="38" lean-forward="true" selection-start-line="15" selection-start-column="38" selection-end-line="15" selection-end-column="38" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mvvRegExam.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvRegExam.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="125">
-              <caret line="16" selection-start-line="16" selection-end-line="31" selection-end-column="3" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Regarbi.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Regarbi.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/controllers/Regarbi.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="50">
-              <caret line="15" column="30" lean-forward="true" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="30" />
+            <state relative-caret-position="-319">
+              <caret line="52" column="32" selection-start-line="52" selection-start-column="22" selection-end-line="52" selection-end-column="32" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mvvRegRetry.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvRegRetry.php">
+      <file leaf-file-name="mvvRegArbi.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvRegArbi.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="331">
-              <caret line="14" column="58" lean-forward="true" selection-start-line="14" selection-start-column="58" selection-end-line="14" selection-end-column="58" />
+            <state relative-caret-position="675">
+              <caret line="97" column="7" lean-forward="true" selection-start-line="97" selection-start-column="7" selection-end-line="97" selection-end-column="7" />
+              <folding>
+                <element signature="e#39#71#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -123,7 +115,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSysValue.php" />
         <option value="$PROJECT_DIR$/application/controllers/Sysvalue.php" />
         <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/xonSysValue.php" />
         <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/x5on.php" />
@@ -169,10 +160,11 @@
         <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/xonFormField.php" />
         <option value="$PROJECT_DIR$/application/controllers/Schvalue.php" />
         <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/xonFormValue.php" />
-        <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvRegQuery.php" />
         <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvRegRetry.php" />
         <option value="$PROJECT_DIR$/application/controllers/Regquery.php" />
         <option value="$PROJECT_DIR$/application/controllers/Regretry.php" />
+        <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvRegQuery.php" />
+        <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvRegArbi.php" />
         <option value="$PROJECT_DIR$/application/controllers/Regarbi.php" />
       </list>
     </option>
@@ -338,15 +330,16 @@
       <workItem from="1560902408313" duration="4805000" />
       <workItem from="1561003505627" duration="1646000" />
       <workItem from="1561384588127" duration="9637000" />
-      <workItem from="1563852104163" duration="12506000" />
+      <workItem from="1563852104163" duration="13552000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="434398000" />
+    <option name="totallyTimeSpent" value="435444000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18835099" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -381,7 +374,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/application/controllers/Studreg.php" />
     <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvStudreg.php" />
     <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvSchField.php">
       <provider selected="true" editor-type-id="text-editor">
@@ -634,16 +626,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvRegQuery.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="935">
-          <caret line="124" column="58" selection-start-line="124" selection-start-column="45" selection-end-line="124" selection-end-column="58" />
-          <folding>
-            <element signature="e#39#71#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/Appmenu.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -654,16 +636,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/Regquery.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
-          <caret line="81" selection-start-line="81" selection-end-line="81" />
-          <folding>
-            <element signature="n#stud#0;n#Regquery#0;n#!!top" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/Regretry.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="185">
@@ -671,17 +643,45 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvRegExam.php">
+    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvRegQuery.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="16" selection-start-line="16" selection-end-line="31" selection-end-column="3" />
+        <state relative-caret-position="175">
+          <caret line="92" selection-start-line="92" selection-end-line="92" />
+          <folding>
+            <element signature="e#39#71#0#PHP" expanded="true" />
+            <element signature="e#2107#3219#0#PHP" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvRegArbi.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="675">
+          <caret line="97" column="7" lean-forward="true" selection-start-line="97" selection-start-column="7" selection-end-line="97" selection-end-column="7" />
+          <folding>
+            <element signature="e#39#71#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/Regarbi.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="50">
-          <caret line="15" column="30" lean-forward="true" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="30" />
+        <state relative-caret-position="-319">
+          <caret line="52" column="32" selection-start-line="52" selection-start-column="22" selection-end-line="52" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvRegExam.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-625">
+          <caret line="17" column="25" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/Regquery.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="15" column="38" lean-forward="true" selection-start-line="15" selection-start-column="38" selection-end-line="15" selection-end-column="38" />
         </state>
       </provider>
     </entry>

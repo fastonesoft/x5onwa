@@ -214,8 +214,12 @@ var doUrl = {
   regquerycount: `${host}/weapp/regquery/count`,
   regquerystud: `${host}/weapp/regquery/stud`,
   regqueryparent: `${host}/weapp/regquery/parent`,
-  regqueryarbi: `${host}/weapp/regquery/arbi`,
   regqueryretry: `${host}/weapp/regquery/retry`,
+  // 仲裁
+  regarbi: `${host}/weapp/regarbi`,
+  regarbistud: `${host}/weapp/regarbi/stud`,
+  regarbiparent: `${host}/weapp/regarbi/parent`,
+  regarbiarbi: `${host}/weapp/regarbi/arbi`,
 
 
 

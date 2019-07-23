@@ -91,36 +91,6 @@ class mvvRegQuery
     return $result;
   }
 
-  // 仲裁结果提交
-  public static function arbiup($sch_user_id, $param) {
-    $result = 0;
-    mvvUserSchoolGroup::schUser($sch_user_id, function ($user_sch_group) use ($param, &$result) {
-      $sch_id = $user_sch_group->sch_id;
-
-      // 处理字段数据
-      $uid = $param['uid'];
-      unset($param['uid']);
-      // 查询注册用户信息
-      $reg_stud = xonStudReg::checkByUid($uid);
-      $user_id = $reg_stud->user_id;
-
-      // 获取字段->获取表单->获取所有字段
-      reset($param);
-      $first_field_id = key($param);
-      $form_field = xonFormField::checkById($first_field_id);
-      $form_id = $form_field->form_id;
-      $fields = xonFormField::getsBy(compact('form_id'));
-
-      // 获取所有字段及其值，提交修改
-      foreach ($fields as $field) {
-        $field_id = $field->id;
-        $value = isset($param[$field_id]) ? $param[$field_id] : null;
-        xonFormValue::add($user_id, $field_id, $value);
-      }
-    });
-    return 1;
-  }
-
   // 重审，清除报名学生资料的所有审核信息，包括：初审、复核、指标状态
   public static function retry($sch_user_id, $stud_reg_uid) {
     $result = 0;

@@ -32,7 +32,7 @@ class Regarbi extends CI_Controller {
         $steps_id = $param['steps_id'];
         $child_name = Model\x5on::getLike($param['name']);
 
-        $result = Mvv\mvvRegQuery::stud($userinfor->unionId, $steps_id, $child_name);
+        $result = Mvv\mvvRegArbi::stud($userinfor->unionId, $steps_id, $child_name);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -50,7 +50,7 @@ class Regarbi extends CI_Controller {
         $param = $_POST;
         $stud_reg_uid = $param['uid'];
 
-        $result = Mvv\mvvRegQuery::parent($userinfor->unionId, $stud_reg_uid);
+        $result = Mvv\mvvRegArbi::parent($userinfor->unionId, $stud_reg_uid);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -67,7 +67,7 @@ class Regarbi extends CI_Controller {
         // 仲裁提交
         $param = $_POST;
         // 表单数据添加
-        $result = Mvv\mvvRegQuery::arbiup($userinfor->unionId, $param);
+        $result = Mvv\mvvRegArbi::arbiup($userinfor->unionId, $param);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -77,6 +77,5 @@ class Regarbi extends CI_Controller {
       $this->json($error);
     });
   }
-
 
 }
