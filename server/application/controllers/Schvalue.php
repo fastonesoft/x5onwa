@@ -77,7 +77,6 @@ class Schvalue extends CI_Controller {
     });
   }
 
-
   public function key() {
     Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
       try {

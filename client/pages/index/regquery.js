@@ -14,6 +14,7 @@ Page({
     var mes_user = {
       exam_user_name: { label: '初审', type: 0 },
       rexam_user_name: { label: '复核', type: 0 },
+      qrcode: { label: '二维码', type: 2 },
       passed: { label: '通过审核', type: 1 },
     }
     var mes_child = {
@@ -58,10 +59,12 @@ Page({
     var that = this
     var { steps_id } = that.data
     e.detail.steps_id = steps_id
+    // 清除
+    that.setData({ regstuds: [], regstud: null, userchilds: [], fields: [] })
 
     x5on.http(x5on.url.regquerystud, e.detail)
     .then(regstuds=>{
-      that.setData({ regstuds, regstud: null, userchilds: [], fields: [] })
+      that.setData({ regstuds })
     })
     .catch(error=>{
       x5on.showError(error)
@@ -72,15 +75,14 @@ Page({
     var that = this
     var regstud = e.detail
     var { uid } = e.detail
-    console.log(regstud)
-    that.setData({ regstud })
+    that.setData({ regstud, userchilds: [], fields: [], rules: [] })
     //
     x5on.http(x5on.url.regqueryparent, { uid })
     .then(userchilds_fields_values=>{
       var { userchilds, fields, values } = userchilds_fields_values
       var { fields, rules } = x5on.fieldsRules(fields, values)
       // 显示
-      that.setData({ userchilds, fields })	
+      that.setData({ userchilds, fields, rules })	
     })
     .catch(error=>{
       x5on.showError(error)
@@ -88,7 +90,20 @@ Page({
   },
 
   arbiClick: function(e) {
-    console.log(e.detail)
+    var that = this
+    var { fields, rules } = that.data
+
+    var json = {}
+    json.title = '报表表格'
+    json.notitle = true
+    json.url_u = x5on.url.schvalueadd
+    // e.detail => { uid: xxx }
+    json.data_u = e.detail
+    json.arrsName = 'studregs'
+    json.fields = fields
+    json.rules = rules
+    
+    wx.navigateTo({ url: 'form_edit?json=' + JSON.stringify(json) })
   },
 
   retryClick: function(e) {

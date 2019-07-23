@@ -315,22 +315,22 @@ var doData = {
 }
 
 // 数据对象添加
-var doAdd = function (arrs, arr, sort_field) {
+var doAdd = function (arrs, arr) {
   arrs = Array.isArray(arrs) ? arrs : []
   arrs.push(arr)
-  return doSort(arrs, sort_field)
-}
-// 数据对象排序
-var doSort = function (arrs, sort_field) {
-  arrs.sort(function (a, b) {
-    if (a[sort_field]<b[sort_field]) {
-      return -1
-    } else {
-      return 1
-    }
-  })
   return arrs
 }
+// // 数据对象排序
+// var doSort = function (arrs, sort_field) {
+//   arrs.sort(function (a, b) {
+//     if (a[sort_field]<b[sort_field]) {
+//       return -1
+//     } else {
+//       return 1
+//     }
+//   })
+//   return arrs
+// }
 
 // 根据编号获取索引值
 var doGetIndex = function (arrs, id_value) {
@@ -828,7 +828,6 @@ module.exports = {
 
   // 数据相关
   add: doAdd,
-  sort: doSort,
 
   // 控件操作
   getId: doGetId,

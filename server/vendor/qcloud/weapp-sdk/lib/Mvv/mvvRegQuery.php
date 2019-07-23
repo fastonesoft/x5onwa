@@ -1,6 +1,7 @@
 <?php
 namespace QCloud_WeApp_SDK\Mvv;
 
+use QCloud_WeApp_SDK\Model\x5on;
 use QCloud_WeApp_SDK\Model\xonStudReg;
 use QCloud_WeApp_SDK\Model\xovFormField;
 use QCloud_WeApp_SDK\Model\xovFormUser;
@@ -50,7 +51,8 @@ class mvvRegQuery
       $sch_id = $user_sch_group->sch_id;
 
       // 审核、未审核的报名学生，均可以查询出来
-      $result = xovStudReg::likesBy(compact('steps_id'), compact('child_name'));
+      $stud_regs = xovStudReg::likesBy(compact('steps_id'), compact('child_name'));
+      $result = x5on::addsQrcode($stud_regs, 'uid');
     });
     return $result;
   }

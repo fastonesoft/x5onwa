@@ -6,7 +6,7 @@ Component({
   },
 
   properties: {
-    uid: Object,
+    uid: String,
     canShow: Boolean,
     canDefault: Boolean,
     canPrimary: Boolean,
@@ -22,7 +22,6 @@ Component({
     },
 
     primaryClick: function(e) {
-      console.log(this.data.uid)
       this.triggerEvent('primaryClick', e.currentTarget.dataset)
     },
 
