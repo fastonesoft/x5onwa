@@ -6,6 +6,7 @@ Component({
   },
 
   properties: {
+    type: String,
     title: String,
     canShow: Boolean,
   },

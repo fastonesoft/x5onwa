@@ -13,7 +13,6 @@
 
 <comValues title="报名数据" notitle="{{0}}" values="{{fields}}" />
 
-<comBtnMini canShow="{{fields.length>0}}" uid="{{regstud.uid}}" primary="仲裁" warn="重审" canPrimary="{{1}}" canWarn="{{1}}" bind:primaryClick="arbiClick"
-    bind:warnClick="retryClick" />
+<comBtnMini canShow="{{fields.length>0}}" uid="{{regstud.uid}}" warn="重审" canWarn="{{1}}" bind:warnClick="retryClick" />
 
 <comList title="审核信息" notitle="{{no_title}}" obj="{{regstud}}" mes="{{mes_user}}" />

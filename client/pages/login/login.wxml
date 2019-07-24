@@ -10,7 +10,7 @@
 </view>
 
 <view class="weui-footer x5on-copyright_right">
-    <view class="weui-footer__text">v2.1.6</view>
+    <view class="weui-footer__text">v2.1.7</view>
 </view>
 
 <view class="weui-btn-area" wx:if="{{notauth}}">

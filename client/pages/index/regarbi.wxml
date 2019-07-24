@@ -1,4 +1,4 @@
-<!--pages/index/regretry.wxml-->
+<!--pages/index/regarbi.wxml-->
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
 <comPick title="学校分级" notitle="{{1}}" label="年级选择" name="steps_id" rangeKey="schs_steps" selectKey="schs_steps"
@@ -7,6 +7,4 @@
 <formFind title="报名查询" notitle="{{0}}" label="学生姓名" bind:findSubmit="findSubmit" wx:if="{{steps_id}}" />
 <comRadio radios="{{regstuds}}" key="child_name" memo="auth_name" bind:radioChange="studChange" />
 
-<comValues title="报名数据" notitle="{{0}}" values="{{fields}}" />
-
-<comBtnMini canShow="{{fields.length>0}}" uid="{{regstud.uid}}" primary="仲裁" canPrimary="{{1}}" bind:primaryClick="arbiClick" />
+<comBtn canShow="{{uid}}" title="仲裁" bind:buttonClick="arbiClick" />
