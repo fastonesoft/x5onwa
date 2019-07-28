@@ -2,7 +2,7 @@
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
 <formFind title="教师查询" notitle="{{true}}" label="教师姓名" bind:findSubmit="findSubmit" />
-<comRadio radios="{{sch_users}}" key="user_name" memo="nick_name" bind:radioChange="radioChange" />
+<comRadio radios="{{sch_users}}" name="user_uid" valueKey="uid" key="user_name" memo="nick_name" bind:radioChange="radioChange" />
 <comPick label="分组选择" name="group_uid" rangeKey="name" selectKey="name" valueKey="uid" picks="{{groups}}"
   bind:pickChange="pickChange" />
 

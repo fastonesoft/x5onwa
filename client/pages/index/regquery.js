@@ -17,6 +17,7 @@ Page({
       exam_user_name: { label: '初审', type: 0 },
       rexam_user_name: { label: '复核', type: 0 },
       passed: { label: '通过审核', type: 1 },
+      group_num: { label: '报名分组', type: 0 },
     }
     that.setData({ mes, mes_user })
     //

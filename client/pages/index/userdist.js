@@ -21,8 +21,7 @@ Page({
   },
 
   radioChange: function (e) {
-    var user_uid = e.detail.uid
-    this.setData({ user_uid })
+    this.setData(e.detail)
   },
 
   pickChange: function (e) {

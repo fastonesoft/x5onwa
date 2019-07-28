@@ -1,0 +1,7 @@
+<!--pages/index/childset.wxml-->
+<view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
+
+<formFind title="孩子查询" notitle="{{1}}" label="孩子姓名" bind:findSubmit="findSubmit" />
+<comRadio radios="{{childs}}" key="idc" split="-" memo="name" bind:radioChange="radioChange" />
+
+<comBtn canShow="{{child}}" title="提交" bind:buttonClick="buttonClick" />

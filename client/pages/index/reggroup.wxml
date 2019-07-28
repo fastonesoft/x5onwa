@@ -1,0 +1,15 @@
+<!--pages/index/reggroup.wxml-->
+<view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
+
+<comPick title="学校分级" notitle="{{1}}" label="年级选择" name="steps_id" rangeKey="schs_steps" selectKey="schs_steps"
+  valueKey="id" picks="{{steps}}" bind:pickChange="pickChange" />
+
+<comPick notitle="{{0}}" label="分组选择" name="group_name" rangeKey="name" selectKey="name" valueKey="id" picks="{{groups}}"
+  bind:pickChange="pickChange" />
+
+<formFind title="报名查询" notitle="{{0}}" label="学生姓名" bind:findSubmit="findSubmit" wx:if="{{steps_id && group_name}}" />
+<comRadio radios="{{regstuds}}" key="child_name" memo="group_num" bind:radioChange="studChange" />
+
+<comBtn canShow="{{steps_id && group_name && regstud}}" title="提交" bind:buttonClick="groupClick" />
+
+<comList title_notshow="分组信息" notitle="{{0}}" obj="{{studgroup}}" mes="{{mes}}" />

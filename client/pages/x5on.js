@@ -220,8 +220,14 @@ var doUrl = {
   regarbistud: `${host}/weapp/regarbi/stud`,
   regarbiparent: `${host}/weapp/regarbi/parent`,
   regarbiarbi: `${host}/weapp/regarbi/arbi`,
+  // 分组
+  reggroup: `${host}/weapp/reggroup`,
+  reggroupstud: `${host}/weapp/reggroup/stud`,
+  reggroupgroup: `${host}/weapp/reggroup/group`,
 
-
+  // 孩子设置
+  childset: `${host}/weapp/childset`,
+  childsetupdate: `${host}/weapp/childset/update`,
 
 
   // 同班设置
@@ -795,6 +801,18 @@ var doUpdateSuccess = function (number) {
   doSuccess('更新'+number+'条记录')
 }
 
+var doConfirm = function(title, content, confirm, cancel) {
+  wx.showModal({
+    title: title,
+    content: content,
+    success (res) {
+      res.confirm && confirm && confirm();
+      res.cancel && cancel && cancel();
+    }
+  })
+}
+
+// page页面相关操作
 var doCurPage = function (success) {
   doIndexPage(success, 1)
 }
@@ -829,6 +847,7 @@ module.exports = {
   showSuccess: doSuccess,
   delSuccess: doDelSuccess,
   updateSuccess: doUpdateSuccess,
+  confirm: doConfirm,
 
   // 数据相关
   add: doAdd,

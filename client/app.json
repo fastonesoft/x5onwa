@@ -2,12 +2,16 @@
   "pages": [
     "pages/login/login",
     "pages/index/index",
+
+    "pages/index/childset",
+    
     "pages/index/regstud",
     "pages/index/regexam",
     "pages/index/regrexam",
     "pages/index/regquery",
     "pages/index/regarbi",
-
+    "pages/index/reggroup",
+    
     "pages/index/roleset",
     "pages/index/rolegroup",
     "pages/index/userset",

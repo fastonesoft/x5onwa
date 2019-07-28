@@ -8,6 +8,8 @@ Component({
   },
 
   properties: {
+    name: String,
+    valueKey: String,
     title: String,
     notitle: Boolean,
     radios: Array,
@@ -52,7 +54,13 @@ Component({
       x5on.setRadioex(that.data.radios, uid, that.data.checked, radios => {
         that.setData({ radios })
         var radio = x5on.getArrex(that.data.radios, 'uid', uid)
-        that.triggerEvent('radioChange', radio)
+        var name = that.data.name
+        var key = that.data.valueKey
+        if (name && key && radio.hasOwnProperty(key)) {
+          that.triggerEvent('radioChange', { [name]: radio[key] })
+        } else {
+          that.triggerEvent('radioChange', radio)
+        }
       })
     }
   }

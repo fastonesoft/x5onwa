@@ -10,7 +10,7 @@
 </view>
 
 <view class="weui-footer x5on-copyright_right">
-    <view class="weui-footer__text">v2.1.7</view>
+    <view class="weui-footer__text">v2.1.8</view>
 </view>
 
 <view class="weui-btn-area" wx:if="{{notauth}}">
@@ -21,7 +21,7 @@
 
 <comList title="用户信息" notitle="{{true}}" obj="{{user}}" mes="{{mes}}" />
 
-<comRadio title="注册学校" radios="{{userschs}}" key="schs_sch" checked="is_current" bind:radioChange="userschsChange" />
+<comRadio title="注册学校" radios="{{userschs}}" name="uid" valueKey="uid" key="schs_sch" checked="is_current" bind:radioChange="userschsChange" />
 
 <view class="weui-cells__tips x5ui-color_red" wx:if="{{user.fixed}}">
   帐号已冻结，具体原因，请联系管理员！

@@ -15,7 +15,7 @@
 			</block>
 			<block wx:else>
 				<view class="weui-cell__bd" data-uid="{{item.uid}}" bindtap="editClick" wx:if="{{memo}}">
-					{{item[key]}}({{item[memo]}})<block wx:if="{{item[selected]}}">　</block>
+					{{item[key]}}{{item[memo]?'('+item[memo]+')':''}}<block wx:if="{{item[selected]}}">　</block>
 					<icon type="success_no_circle" size="20" wx:if="{{item[selected]}}"></icon>
 				</view>
 				<view class="weui-cell__bd" data-uid="{{item.uid}}" bindtap="editClick" wx:else>{{item[key]}}<block

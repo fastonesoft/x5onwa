@@ -12,7 +12,7 @@
 			</block>
 			<block wx:else>
 				<view class="weui-cell__bd" data-uid="{{item.uid}}" bindtap="editClick" wx:if="{{memo}}">
-					{{item[key]}}({{item[memo]}})
+					{{item[key]}}{{item[memo]?'('+item[memo]+')':''}}
 				</view>
 				<view class="weui-cell__bd" data-uid="{{item.uid}}" bindtap="editClick" wx:else>{{item[key]}}
 				</view>

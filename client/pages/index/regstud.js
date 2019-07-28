@@ -40,8 +40,7 @@ Page({
   },
 
   stepChange: function(e) {
-    var steps_uid = e.detail.uid
-    this.setData({ steps_uid })
+    this.setData(e.detail)
   },
 
   checkClick: function(e) {

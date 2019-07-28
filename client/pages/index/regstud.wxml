@@ -6,7 +6,7 @@
 
 <comPick title="地区设置" label="地区选择" name="area_id" rangeKey="city_name" selectKey="city_name" valueKey="id"
   picks="{{areas}}" bind:pickChange="pickChange" />
-<comRadio radios="{{steps}}" key="schs_steps" bind:radioChange="stepChange" />
+<comRadio radios="{{steps}}" name="steps_uid" valueKey="uid" key="schs_steps" bind:radioChange="stepChange" />
 
 <comBtn canShow="{{child_uid&&steps_uid}}" title="确认" bind:buttonClick="checkClick" />
 

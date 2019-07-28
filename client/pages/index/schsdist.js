@@ -24,8 +24,7 @@ Page({
 	},
 
 	userChange: function (e) {
-		var user_uid = e.detail.uid
-		this.setData({ user_uid })
+		this.setData(e.detail)
 	},
 
 	areaChange: function (e) {
@@ -40,8 +39,7 @@ Page({
   },
 	
   schsChange: function (e) {
-		var schs_uid = e.detail.uid
-		this.setData({ schs_uid })
+		this.setData(e.detail)
 	},
 
 	schsRemove: function (e) {

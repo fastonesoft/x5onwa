@@ -9,6 +9,7 @@ Component({
   },
 
   properties: {
+    name: String,
     title: String,
     notitle: Boolean,
     radios: Array,
@@ -17,6 +18,7 @@ Component({
     memo: String,
     checked: String,
     url: String,
+    valueKey: String,
   },
 
   lifetimes: {
@@ -59,8 +61,14 @@ Component({
 
       x5on.setRadioex(that.data.radios, uid, that.data.checked, radios => {
         that.setData({ radios })
+        var name = that.data.name
+        var key = that.data.valueKey
         var radio = x5on.getArrex(that.data.radios, 'uid', uid)
-        radio && that.triggerEvent('radioChange', radio)
+        if (name && key && radio.hasOwnProperty(key)) {
+          that.triggerEvent('radioChange', { [name]: radio[key] })
+        } else {
+          that.triggerEvent('radioChange', radio)
+        }
       })
     }
   }

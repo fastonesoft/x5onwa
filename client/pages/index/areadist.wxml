@@ -2,12 +2,12 @@
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
 <formFind title="用户查询" notitle="{{1}}" label="用户姓名" bind:findSubmit="findSubmit" />
-<comRadio radios="{{users}}" key="name" memo="nick_name" bind:radioChange="userChange" />
+<comRadio radios="{{users}}" name="user_uid" valueKey="uid" key="name" memo="nick_name" bind:radioChange="radioChange" />
 
 <comPick title="地区设置" label="地区分类" name="area_type" rangeKey="name" selectKey="name" valueKey="id" picks="{{areatypes}}"
 	bind:pickChange="typeChange" />
 
-<comRadioMemb radios="{{areas}}" key="city_name" bind:radioChange="areaChange" bind:removeClick="areaRemove" />
+<comRadioMemb radios="{{areas}}" name="area_uid" valueKey="uid" key="city_name" bind:radioChange="radioChange" bind:removeClick="areaRemove" />
 
 <comBtnMini canShow="{{1}}" primary="添加" canPrimary="{{1}}" warn="提交" canWarn="{{area_type && user_uid && area_uid}}"
 	bind:primaryClick="addClick" bind:warnClick="areadistSubmit" />

@@ -18,9 +18,8 @@ Page({
 		})
   },
 
-  userChange: function (e) {
-		var user_uid = e.detail.uid
-		this.setData({ user_uid })
+  radioChange: function (e) {
+		this.setData(e.detail)
   },
 
   typeChange: function(e) {
@@ -35,11 +34,6 @@ Page({
 		.catch(error=>{
 			x5on.showError(error)
 		})
-  },
-
-  areaChange: function (e) {
-		var area_uid = e.detail.uid
-		this.setData({ area_uid })
   },
 
   areaRemove: function (e) {

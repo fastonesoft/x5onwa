@@ -38,8 +38,7 @@ Page({
   },
 
   fieldChange: function(e) {
-    var that = this
-    that.setData({ field: e.detail })
+    this.setData({ field: e.detail })
   },
 
   fieldClick: function(e) {

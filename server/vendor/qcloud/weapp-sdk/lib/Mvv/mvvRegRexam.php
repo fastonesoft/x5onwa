@@ -82,13 +82,13 @@ class mvvRegRexam
   }
 
   // 报名信息复核
-  public static function rexam($sch_user_id, $reg_stud_uid) {
+  public static function rexam($sch_user_id, $stud_reg_uid, $steps_id, $group_name) {
     $result = 0;
-    mvvUserSchoolGroup::schUser($sch_user_id, function ($user_sch_group) use ($sch_user_id, $reg_stud_uid, &$result) {
+    mvvUserSchoolGroup::schUser($sch_user_id, function ($user_sch_group) use ($sch_user_id, $stud_reg_uid, $steps_id, $group_name, &$result) {
       $sch_id = $user_sch_group->sch_id;
 
       // 一、检测报名记录是否确认
-      $uid = $reg_stud_uid;
+      $uid = $stud_reg_uid;
       $confirmed = 1;
       xovStudReg::checkByCustom(compact('uid', 'confirmed'), '报名信息未确认，无法审核');
 
@@ -100,9 +100,15 @@ class mvvRegRexam
       $rexamed = 1;
       xovStudReg::existByCustom(compact('uid', 'rexamed'), '报名信息确认通过，无需再审');
 
-      // 三、没有确认，通过确认
+      // 四、查看分组最大值
+      $ord = xonStudReg::max('group_ord', compact('steps_id', 'group_name'));
+      $group_ord = x5on::getMaxId($ord, '', 3);
+
+      // 五、没有确认，通过确认
       $rexam_user_id = $sch_user_id;
-      $result = xonStudReg::setsByUid(compact('stud_auth', 'rexam_user_id'), $reg_stud_uid);
+      xonStudReg::setsByUid(compact('rexam_user_id', 'group_name', 'group_ord'), $stud_reg_uid);
+      $regstuds = xovStudReg::getsByUid($stud_reg_uid);
+      $result = x5on::addsQrcode($regstuds, 'uid');
     });
     return $result;
   }

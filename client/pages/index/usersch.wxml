@@ -2,7 +2,7 @@
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
 <formFind title="用户查询" notitle="{{true}}" label="用户姓名" bind:findSubmit="findSubmit" />
-<comRadio radios="{{users}}" key="name" memo="nick_name" bind:radioChange="radioChange" />
+<comRadio radios="{{users}}" name="user_uid" valueKey="uid" key="name" memo="nick_name" bind:radioChange="radioChange" />
 
 <comBtn canShow="{{user_uid}}" title="提交" bind:buttonClick="userschClick" />
 

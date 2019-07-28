@@ -106,9 +106,7 @@ Page({
   },
 
   userschsChange: function (e) {
-    // 切换学校
-    var { uid } = e.detail
-    x5on.http(x5on.url.usersetchange, { uid })
+    x5on.http(x5on.url.usersetchange, e.detail)
     .then(res=>{
       x5on.showSuccess('切换成功')
     })

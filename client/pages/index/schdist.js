@@ -25,8 +25,7 @@ Page({
 	},
 
 	userChange: function (e) {
-		var user_uid = e.detail.uid
-		this.setData({ user_uid })
+		this.setData(e.detail)
 	},
 
 	schsPick: function (e) {
@@ -41,8 +40,7 @@ Page({
 	},
 
 	schosChange: function (e) {
-		var sch_uid = e.detail.uid
-		this.setData({ sch_uid })
+		this.setData(e.detail)
 	},
 
 	schosRemove: function(e) {

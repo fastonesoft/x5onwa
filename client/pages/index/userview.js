@@ -14,10 +14,10 @@ Page({
 
   radioChange: function (e) {
     var that = this
-    var user_sch_uid = e.detail.uid
-    x5on.http(x5on.url.userview, { user_sch_uid })
+    that.setData(e.detail)
+    x5on.http(x5on.url.userview, e.detail)
     .then(groups=>{
-      that.setData({ user_sch_uid, groups })
+      that.setData({ groups })
     })
   },
 

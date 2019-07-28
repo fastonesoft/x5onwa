@@ -7,7 +7,7 @@
 <comPick notitle="{{0}}" label="学生类别" name="stud_auth" rangeKey="name" selectKey="name" valueKey="id" picks="{{auths}}"
   bind:pickChange="pickChange" />
 
-<comBtn canShow="{{step_id && stud_auth>=0 && regstuds.length==0}}" title="报名识别" bind:buttonClick="scanClick" />
+<comBtn canShow="{{step_id && stud_auth && regstuds.length==0}}" title="报名识别" bind:buttonClick="scanClick" />
 
 <comLists title="报名信息" notitle="{{0}}" lists="{{regstuds}}" mes="{{mes}}" selectKey="uid" tips="" ref="关闭"
   canRef="canClose" bind:refClick="closeClick" />

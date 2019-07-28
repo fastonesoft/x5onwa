@@ -10,7 +10,7 @@
 					<view class="weui-cell__bd" wx:elif="{{key}}">{{item[key]}}</view>
 				</block>
 				<block wx:else>
-					<view class="weui-cell__bd" wx:if="{{key&&memo}}">{{item[key]}}({{item[memo]}})</view>
+					<view class="weui-cell__bd" wx:if="{{key&&memo}}">{{item[key]}}{{item[memo]?'('+item[memo]+')':''}}</view>
 					<view class="weui-cell__bd" wx:elif="{{key}}">{{item[key]}}</view>
 				</block>
 				<view class="weui-cell__ft weui-cell__ft_in-radio">

@@ -34,8 +34,7 @@ Page({
   },
 
   studChange: function(e) {
-    var { uid } = e.detail
-    this.setData({ uid })
+    this.setData(e.detail)
   },
 
   arbiClick: function(e) {
