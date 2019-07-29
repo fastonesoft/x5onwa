@@ -6,22 +6,15 @@
 			<label class="weui-cell weui-check__label" wx:for="{{radios}}" wx:key="uid">
 				<radio class="weui-check" value="{{item.uid}}" checked="{{item[checked]}}" />
 				<block wx:if="{{split}}">
-					<view class="weui-cell__bd" wx:if="{{key&&memo}}">{{item[key]}}{{split}}{{item[memo]}}
-						<view class="remove-icon" data-uid="{{item.uid}}" bindtap="removeClick"></view>
-					</view>
-					<view class="weui-cell__bd" wx:elif="{{key}}">{{item[key]}}
-						<view class="remove-icon" data-uid="{{item.uid}}" bindtap="removeClick"></view>
-					</view>
+					<view class="weui-cell__bd" wx:if="{{key&&memo}}">{{item[key]}}{{split}}{{item[memo]}}</view>
+					<view class="weui-cell__bd" wx:elif="{{key}}">{{item[key]}}</view>
 				</block>
 				<block wx:else>
-					<view class="weui-cell__bd" wx:if="{{key&&memo}}">{{item[key]}}{{item[memo]?'('+item[memo]+')':''}}
-						<view class="remove-icon" data-uid="{{item.uid}}" bindtap="removeClick"></view>
-					</view>
-					<view class="weui-cell__bd" wx:elif="{{key}}">{{item[key]}}
-						<view class="remove-icon" data-uid="{{item.uid}}" bindtap="removeClick"></view>
-					</view>
+					<view class="weui-cell__bd" wx:if="{{key&&memo}}">{{item[key]}}{{item[memo]?'('+item[memo]+')':''}}</view>
+					<view class="weui-cell__bd" wx:elif="{{key}}">{{item[key]}}</view>
 				</block>
 				<view class="weui-cell__ft weui-cell__ft_in-radio">
+					<view class="remove-icon" data-uid="{{item.uid}}" bindtap="removeClick"></view>
 					<icon type="circle" size="23" wx:if="{{!item[checked]}}"></icon>
 					<icon type="success" size="23" wx:if="{{item[checked]}}"></icon>
 				</view>
