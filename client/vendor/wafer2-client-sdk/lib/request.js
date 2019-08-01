@@ -88,6 +88,70 @@ console.log(data)
 
 };
 
+function post(options) {
+    var requireLogin = options.login;
+    var success = options.success || noop;
+    var fail = options.fail || noop;
+    var complete = options.complete || noop;
+    var originHeader = options.header || {};
+
+    // 成功回调
+    var callSuccess = function () {
+        success.apply(null, arguments);
+        complete.apply(null, arguments);
+    };
+
+    // 失败回调
+    var callFail = function (error) {
+        fail.call(null, error);
+        complete.call(null, error);
+    };
+
+    if (requireLogin) {
+        doRequestWithLogin();
+    } else {
+        doRequest();
+    }
+
+    // 登录后再请求
+    function doRequestWithLogin() {
+        loginLib.loginWithCode({ success: doRequest, fail: callFail });
+    }
+
+    // 实际进行请求的方法
+    function doRequest() {
+        var authHeader = {}
+
+        var session = Session.get();
+    
+        if (session) {
+            authHeader = buildAuthHeader(session.skey);
+        }
+
+        wx.request(utils.extend({}, options, {
+            header: utils.extend({}, originHeader, authHeader),
+
+            success: function (response) {
+                var data = response.data;
+                // 查错的时候开
+console.log(data)
+                if ((data && data.code === -1) || response.statusCode === 401) {
+                    Session.clear();
+                    callFail(data.data);
+                } else {
+                    callSuccess.apply(null, arguments);
+                }
+            },
+
+            fail: callFail,
+            complete: noop,
+        }));
+    };
+
+};
+
+
 module.exports = {
     request: request,
+    post: post,
 };

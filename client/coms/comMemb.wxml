@@ -24,7 +24,7 @@
 				</view>
 			</block>
 			<view class="weui-cell__ft">
-				<view class="remove-icon" data-uid="{{item.uid}}" bindtap="removeClick"></view>
+				<icon class="remove-icon" data-uid="{{item.uid}}" bindtap="removeClick"></icon>
 			</view>
 		</view>
 	</view>

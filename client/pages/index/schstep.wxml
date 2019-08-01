@@ -1,7 +1,7 @@
 <!--pages/index/schstep.wxml-->
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
-<comMema memas="{{membs}}" title="分级列表" notitle="{{true}}" key="name" selected="can_recruit,graduated"
+<comMembs membs="{{membs}}" title="分级列表" notitle="{{true}}" key="name" selected="can_recruit,graduated"
     bind:editClick="editClick" remove="{{1}}" bind:removeClick="removeClick" />
 
 <comBtn canShow="{{1}}" title="添加" bind:buttonClick="addClick" />

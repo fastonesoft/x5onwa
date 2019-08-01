@@ -30,7 +30,7 @@ page { background: #F6F6F6; font-size: 16px; margin-bottom: 1em; }
 /* weui */
 .weui-input { text-align: left; }
 .weui-select { text-align: left; }
-.weui-cell_vcode .weui-input { padding-right: 20rpx; }
+.weui-cell_vcode .weui-input { padding-right: 20px; }
 
 /* 将switch缩到.7，常用按钮减大小 */
 switch { transform: scale(0.7); -webkit-transform: scale(0.7); }
@@ -39,9 +39,10 @@ switch { transform: scale(0.7); -webkit-transform: scale(0.7); }
 /* comSubPicker */
 .weui-cells_before{margin-left:15px;padding:0;border-top:1rpx solid #d9d9d9}
 
-/* comMema */
-.mema-margin_left { margin-left: 10px; }
-
 /* comList mini */
 .weui-cells__tips{margin-top:.3em;color:#999;padding-left:15px;padding-right:15px;font-size:14px}
 .weui-cells__tips .weui-btn{margin-top:0}
+
+/* comMembs,icon */
+.weui-cell__ft icon {margin-left: 8px;}
+.weui-cell__ft icon:first-child {margin-left: 0px;}

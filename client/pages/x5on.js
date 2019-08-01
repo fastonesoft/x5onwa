@@ -379,13 +379,11 @@ var doDelArr = function (arrs, obj_name, obj_value) {
   arrs.splice(index, 1)
   return arrs;
 }
-// 变更数组索引obj_value的对象，sets字段的值
-var doSetArr = function (arrs, obj_name, obj_value, obj_sets) {
+// 变更数组索引obj_value的对象
+var doSetArr = function (arrs, obj_name, obj_value, new_arr) {
   var index = doGetIndexe(arrs, obj_name, obj_value)
-  // for (var key in obj_sets) {
-  //   arrs[index].hasOwnProperty(key) && (arrs[index][key] = obj_sets[key])
-  // }
-  arrs.splice(index, 1, obj_sets)
+  // 删除index位置的对象，用new_arr来取代
+  arrs.splice(index, 1, new_arr)
   return arrs
 }
 
@@ -725,7 +723,7 @@ var poRequest = function (url, donshow) {
 var poPost = function (url, data, donshow) {
   return new Promise((resolve, reject) => {
     util.showBusy('正在提交...')
-    qcloud.request({
+    qcloud.post({
       url: url,
       data: data,
       method: 'POST',
@@ -806,8 +804,8 @@ var doConfirm = function(title, content, confirm, cancel) {
     title: title,
     content: content,
     success (res) {
-      res.confirm && confirm && confirm();
-      res.cancel && cancel && cancel();
+      res.confirm && typeof confirm === 'function' && confirm();
+      res.cancel && typeof cancel === 'function' && cancel();
     }
   })
 }

@@ -12,6 +12,7 @@ var exports = module.exports = {
     Session,
     clearSession: Session.clear,
 
+    post: request.post,
     request: request.request,
     RequestError: request.RequestError,
 

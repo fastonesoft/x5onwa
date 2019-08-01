@@ -1,8 +1,8 @@
-<!--coms/comMema.wxml-->
-<block wx:if="{{memas.length>0}}">
+<!--coms/comMembs.wxml-->
+<block wx:if="{{membs.length>0}}">
 	<view class="weui-cells__title" wx:if="{{!notitle}}">{{title}}</view>
 	<view class="weui-cells weui-cells_after-title">
-		<view class="weui-cell" wx:for="{{memas}}" wx:key="uid">
+		<view class="weui-cell" wx:for="{{membs}}" wx:key="uid">
 			<block wx:if="{{split}}">
 				<view class="weui-cell__bd" data-uid="{{item.uid}}" bindtap="editClick" wx:if="{{memo}}">
 					{{item[key]}}{{split}}{{item[memo]}}
@@ -18,12 +18,12 @@
 				</view>
 			</block>
 			<view class="weui-cell__ft">
-				<block wx:for="{{selects}}" wx:key="*this" wx:for-item="selected">
-					<icon class="mema-margin_left" type="success" size="23" wx:if="{{item[selected]}}"></icon>
-					<icon class="mema-margin_left" type="circle" size="23" wx:else></icon>
+				<block wx:for="{{selects}}" wx:key="*this" wx:for-item="itemName">
+					<icon type="success" size="23" wx:if="{{item[itemName]}}"></icon>
+					<icon type="circle" size="23" wx:else></icon>
 				</block>
-				<view class="mema-margin_left remove-icon" data-uid="{{item.uid}}" bindtap="removeClick"
-					wx:if="{{remove}}"></view>
+				<icon class="remove-icon" data-uid="{{item.uid}}" bindtap="removeClick"
+					wx:if="{{remove}}"></icon>
 			</view>
 		</view>
 	</view>
