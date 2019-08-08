@@ -107,7 +107,13 @@ class mvvRegRexam
       // 五、没有确认，通过确认
       $rexam_user_id = $sch_user_id;
       xonStudReg::setsByUid(compact('rexam_user_id', 'group_name', 'group_ord'), $stud_reg_uid);
+
       $regstuds = xovStudReg::getsByUid($stud_reg_uid);
+      // 指标状态变更，!= 1，为假
+      // todo: 以后放到库中，前端变换字段名称
+      foreach ($regstuds as $regstud) {
+        $regstud->stud_auth = $regstud->stud_auth === 1;
+      }
       $result = x5on::addsQrcode($regstuds, 'uid');
     });
     return $result;

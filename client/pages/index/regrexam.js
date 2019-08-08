@@ -27,7 +27,7 @@ Page({
       child_name: { label: '报名学生', type: 0 },
       schs_steps: { label: '报名学校', type: 0 },
       qrcode: { label: '审核二维码', type: 2 },
-      stud_auth: { label: '是否指标生', type: 1 },
+      is_auth: { label: '是否指标生', type: 1 },
       group_num: { label: '分组编号', type: 0 },
     }
     that.setData({ mes })

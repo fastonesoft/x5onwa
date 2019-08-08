@@ -18,7 +18,16 @@
         <entry file="file://$PROJECT_DIR$/application/controllers/Reggroup.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="175">
-              <caret line="29" selection-start-line="29" selection-end-line="34" selection-end-column="85" />
+              <caret line="29" column="14" selection-start-line="29" selection-start-column="14" selection-end-line="29" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Regexam.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/controllers/Regexam.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="956">
+              <caret line="51" column="37" selection-start-line="51" selection-start-column="37" selection-end-line="51" selection-end-column="37" />
             </state>
           </provider>
         </entry>
@@ -32,29 +41,29 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="Regrexam.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/controllers/Regrexam.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="225">
+              <caret line="52" column="39" selection-start-line="52" selection-start-column="39" selection-end-line="52" selection-end-column="39" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mvvRegRexam.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvRegRexam.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="310">
+              <caret line="114" column="56" lean-forward="true" selection-start-line="114" selection-start-column="56" selection-end-line="114" selection-end-column="56" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="mvvRoleset.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvRoleset.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="175">
               <caret line="7" column="25" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Childset.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/application/controllers/Childset.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6">
-              <caret line="31" column="15" selection-start-line="31" selection-start-column="15" selection-end-line="31" selection-end-column="15" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="mvvChildSet.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvChildSet.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="606">
-              <caret line="27" column="56" selection-start-line="27" selection-start-column="56" selection-end-line="27" selection-end-column="56" />
             </state>
           </provider>
         </entry>
@@ -154,11 +163,11 @@
         <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvRegArbi.php" />
         <option value="$PROJECT_DIR$/application/controllers/Regrexam.php" />
         <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mysql/Mysql.php" />
-        <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvRegRexam.php" />
         <option value="$PROJECT_DIR$/application/controllers/Reggroup.php" />
         <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvRegGroup.php" />
         <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvChildSet.php" />
         <option value="$PROJECT_DIR$/application/controllers/Childset.php" />
+        <option value="$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvRegRexam.php" />
       </list>
     </option>
   </component>
@@ -180,7 +189,7 @@
       <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-1" />
     <option name="width" value="1346" />
     <option name="height" value="688" />
@@ -323,15 +332,15 @@
       <workItem from="1560902408313" duration="4805000" />
       <workItem from="1561003505627" duration="1646000" />
       <workItem from="1561384588127" duration="9637000" />
-      <workItem from="1563852104163" duration="33462000" />
+      <workItem from="1563852104163" duration="35689000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="455354000" />
+    <option name="totallyTimeSpent" value="457581000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18835099" />
@@ -476,13 +485,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/Regexam.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="608">
-          <caret line="51" column="37" selection-start-line="51" selection-start-column="37" selection-end-line="51" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Model/cAppinfo.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="297">
@@ -574,13 +576,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/Regrexam.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="52" column="39" selection-start-line="52" selection-start-column="39" selection-end-line="52" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvRegQuery.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="185">
@@ -588,13 +583,6 @@
           <folding>
             <element signature="e#39#71#0#PHP" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvRegRexam.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="104" column="35" selection-start-line="104" selection-start-column="35" selection-end-line="104" selection-end-column="35" />
         </state>
       </provider>
     </entry>
@@ -678,13 +666,6 @@
     <entry file="file://$PROJECT_DIR$/application/controllers/App.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/Reggroup.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="29" selection-start-line="29" selection-end-line="34" selection-end-column="85" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/Roleset.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="275">
@@ -692,10 +673,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvRoleset.php">
+    <entry file="file://$PROJECT_DIR$/application/controllers/Childset.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="7" column="25" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
+        <state relative-caret-position="381">
+          <caret line="31" column="15" selection-start-line="31" selection-start-column="15" selection-end-line="31" selection-end-column="15" />
         </state>
       </provider>
     </entry>
@@ -706,10 +687,38 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/Childset.php">
+    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvRoleset.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6">
-          <caret line="31" column="15" selection-start-line="31" selection-start-column="15" selection-end-line="31" selection-end-column="15" />
+        <state relative-caret-position="175">
+          <caret line="7" column="25" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/Reggroup.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="29" column="14" selection-start-line="29" selection-start-column="14" selection-end-line="29" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/Regexam.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="956">
+          <caret line="51" column="37" selection-start-line="51" selection-start-column="37" selection-end-line="51" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/Regrexam.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="52" column="39" selection-start-line="52" selection-start-column="39" selection-end-line="52" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/qcloud/weapp-sdk/lib/Mvv/mvvRegRexam.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="310">
+          <caret line="114" column="56" lean-forward="true" selection-start-line="114" selection-start-column="56" selection-end-line="114" selection-end-column="56" />
         </state>
       </provider>
     </entry>
