@@ -20,6 +20,11 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('welcome_message');
+	  \QCloud_WeApp_SDK\Mvv\mvvWebLogin::login(function () {
+      // 跳转首页
+      $this->load->view('home.html');
+    }, function () {
+      $this->load->view('weixin_login');
+    });
 	}
 }

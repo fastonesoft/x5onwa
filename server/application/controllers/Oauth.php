@@ -26,12 +26,14 @@ class Oauth extends CI_Controller {
 
       // 记录登录
       session_start();
-      if (! isset($_SESSION[Model\x5on::SESSION_WEB_LOGIN])) {
+      $userinfor = isset($_SESSION[Model\x5on::SESSION_WEB_LOGIN]) ? $_SESSION[Model\x5on::SESSION_WEB_LOGIN] : null;
+
+      if (! $userinfor) {
         $_SESSION[Model\x5on::SESSION_WEB_LOGIN] = $infoArray;
       }
       // 跳转首页
       $this->load->helper('url');
-      redirect('/app');
+      redirect('/');
     } else {
       $this->json(['code' => 0, 'data' => null]);
     }
