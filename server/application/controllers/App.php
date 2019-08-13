@@ -6,13 +6,11 @@ use QCloud_WeApp_SDK\Model;
 
 class App extends CI_Controller {
   /**
-   * 模板名称
+   * 应用首页
    */
-  const role_name = 'schcode';
   public function index() {
-    Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
+    Mvv\mvvWebLogin::login(function () {
       try {
-        $result = "";
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {

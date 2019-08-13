@@ -24,8 +24,14 @@ class Oauth extends CI_Controller {
       $infoResult = file_get_contents($infoUrl);
       $infoArray = json_decode($infoResult, true);
 
-      // 返回信息
-      $this->json(['code' => 0, 'data' => $infoArray]);
+      // 记录登录
+      session_start();
+      if (! isset($_SESSION[Model\x5on::SESSION_WEB_LOGIN])) {
+        $_SESSION[Model\x5on::SESSION_WEB_LOGIN] = $infoArray;
+      }
+      // 跳转首页
+      $this->load->helper('url');
+      redirect('/app');
     } else {
       $this->json(['code' => 0, 'data' => null]);
     }
