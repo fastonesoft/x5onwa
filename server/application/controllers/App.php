@@ -9,15 +9,6 @@ class App extends CI_Controller {
    * 应用首页
    */
   public function index() {
-    Mvv\mvvWebLogin::login(function () {
-      try {
 
-        $this->json(['code' => 0, 'data' => $result]);
-      } catch (Exception $e) {
-        $this->json(['code' => 1, 'data' => $e->getMessage()]);
-      }
-    }, function ($error) {
-      $this->json($error);
-    });
   }
 }

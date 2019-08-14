@@ -6,11 +6,9 @@ use QCloud_WeApp_SDK\Model\x5on;
 
 class mvvWebLogin
 {
-  public static function login($success, $fail)
-  {
-    // 登录检测
-    session_start();
-    $userinfor = isset($_SESSION[x5on::SESSION_WEB_LOGIN]) ? $_SESSION[x5on::SESSION_WEB_LOGIN] : null;
+
+  public static function login_ci($that, $success, $fail) {
+    $userinfor = $that->session->userdata(x5on::SESSION_WEB_LOGIN);
     if ($userinfor) {
       call_user_func($success, $userinfor);
     } else {

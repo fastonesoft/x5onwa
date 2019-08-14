@@ -39,6 +39,7 @@ class x5on
 
   // 登录记录
   const SESSION_WEB_LOGIN = 'session-web-login';
+  const SESSION_TIME_OUT = 7200;
 
   // 给数组元素添加编号
   public static function addIndex($arr)

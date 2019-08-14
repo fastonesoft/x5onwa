@@ -4,9 +4,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 use QCloud_WeApp_SDK\Mvv;
 use QCloud_WeApp_SDK\Model;
 
-class Oauth extends CI_Controller {
+class Oauth extends CI_Controller
+{
 
-  public function index() {
+  public function index()
+  {
     $code = $_GET["code"];
     $appid = "wxecca347b5d64f5c3";
     $secret = "46c045d9a492fd5108b37d40a1e295be";
@@ -24,18 +26,14 @@ class Oauth extends CI_Controller {
       $infoResult = file_get_contents($infoUrl);
       $infoArray = json_decode($infoResult, true);
 
-      // 记录登录
-      session_start();
-      $userinfor = isset($_SESSION[Model\x5on::SESSION_WEB_LOGIN]) ? $_SESSION[Model\x5on::SESSION_WEB_LOGIN] : null;
+      // 登录记录
+      $this->session->set_userdata(Model\x5on::SESSION_WEB_LOGIN, $infoArray);
 
-      if (! $userinfor) {
-        $_SESSION[Model\x5on::SESSION_WEB_LOGIN] = $infoArray;
-      }
       // 跳转首页
       $this->load->helper('url');
-      redirect('/');
+      redirect('/','refresh');
     } else {
-      $this->json(['code' => 0, 'data' => null]);
+      $this->json(['code' => 0, 'data' => 0]);
     }
   }
 
