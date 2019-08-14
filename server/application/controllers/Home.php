@@ -25,10 +25,7 @@ class Home extends CI_Controller
   public function index()
   {
     Mvv\mvvWebLogin::login_ci($this, function ($userinfor) {
-      // 跳转首页
-//      $this->load->helper('url');
-//      redirect('/index.html', 'refresh');\
-      $this->json(['code' => 0, 'data' => $userinfor]);
+      $this->load->view('index.html');
     }, function () {
       $this->load->view('weixin_login');
     });
@@ -38,8 +35,7 @@ class Home extends CI_Controller
   {
     try {
       $this->session->sess_destroy();
-
-      $this->json(['code' => 0, 'data' => '已退出登录！']);
+      $this->load->view('js_to_home');
     } catch (Exception $e) {
       $this->json(['code' => 1, 'data' => $e->getMessage()]);
     }

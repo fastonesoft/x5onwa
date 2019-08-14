@@ -54,3 +54,4 @@ $route['404_override'] = 'home';
 $route['translate_uri_dashes'] = FALSE;
 $route['weapp'] = '/';
 $route['weapp/(.+)'] = '$1';
+$route['vue(:any)'] = '/';

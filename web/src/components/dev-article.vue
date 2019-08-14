@@ -9,13 +9,13 @@
                     <Row>
                         <i-col span="21" class="title">
                             <Menu mode="horizontal" :active-name="activeName">
-                                <MenuItem name="/home" to="/home" replace>
+                                <MenuItem name="/vuehome" to="/vuehome" replace>
                                     首页
                                 </MenuItem>
-                                <MenuItem name="/about" to="/about" replace>
+                                <MenuItem name="/vueabout" to="/vueabout" replace>
                                     介绍
                                 </MenuItem>
-                                <MenuItem name="/data" to="/data" replace>
+                                <MenuItem name="/vuedata" to="/vuedata" replace>
                                     数据采集
                                 </MenuItem>
                             </Menu>
@@ -91,14 +91,14 @@
                         title: '系统设置',
                         items: [
                             {
-                                name: '/home',
-                                to: '/home',
+                                name: '/vuehome',
+                                to: '/vuehome',
                                 icon: 'md-document',
                                 title: '权限分配'
                             },
                             {
-                                name: '/about',
-                                to: '/about',
+                                name: '/vueabout',
+                                to: '/vueabout',
                                 icon: 'md-chatbubbles',
                                 title: '表单设计'
                             },
@@ -108,8 +108,8 @@
                         title: '数据采集',
                         items: [
                             {
-                                name: '/data',
-                                to: '/data',
+                                name: '/vuedata',
+                                to: '/vuedata',
                                 icon: 'md-calendar',
                                 title: '数据列表'
                             },
@@ -119,8 +119,8 @@
                         title: '税费测算',
                         items: [
                             {
-                                name: '/count',
-                                to: '/count',
+                                name: '/vuecount',
+                                to: '/vuecount',
                                 icon: 'md-analytics',
                                 title: '测算列表'
                             },
@@ -130,8 +130,8 @@
                         title: '协作成果',
                         items: [
                             {
-                                name: '/result',
-                                to: '/result',
+                                name: '/vueresult',
+                                to: '/vueresult',
                                 icon: 'md-barcode',
                                 title: '成果列表'
                             },
@@ -150,13 +150,16 @@
                     case 'set':
                         break;
                     case 'logout': {
-                        $.ajax({
-                            method: 'get',
-                            url: '/home/logout'
-                        }).then(res => {
-                            this.$Message.info(res.data.data);
-                            this.$router.replace('https://x5on.cn/');
-                        });
+                        // $.ajax({
+                        //     method: 'get',
+                        //     url: '/vuehome/logout'
+                        // }).then(res => {
+                        //     this.$Message.info(res.data.data);
+                        //     window.location.replace('/');
+                        // });
+                        // this.$router.replace('https://x5on.cn/vuehome/logout');
+                        this.$Message.info('退出登录');
+                        window.location.replace('https://x5on.cn/home/logout');
                         break;
                     }
                 }
