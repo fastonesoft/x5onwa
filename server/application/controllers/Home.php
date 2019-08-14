@@ -24,9 +24,11 @@ class Home extends CI_Controller
    */
   public function index()
   {
-    Mvv\mvvWebLogin::login_ci($this, function () {
+    Mvv\mvvWebLogin::login_ci($this, function ($userinfor) {
       // 跳转首页
-      $this->load->view('home.html');
+//      $this->load->helper('url');
+//      redirect('/index.html', 'refresh');\
+      $this->json(['code' => 0, 'data' => $userinfor]);
     }, function () {
       $this->load->view('weixin_login');
     });

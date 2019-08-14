@@ -146,17 +146,16 @@
                 this.$store.isCollaped = val;
             },
             downMenuClick(name) {
-                this.$Message.info(name);
                 switch (name) {
-                    case 'set': break;
+                    case 'set':
+                        break;
                     case 'logout': {
                         $.ajax({
                             method: 'get',
                             url: '/home/logout'
-                        }).then(res=>{
-                            window.console.log(res);
-                            this.$router.replace('/');
-                            this.$Message.info(res.data);
+                        }).then(res => {
+                            this.$Message.info(res.data.data);
+                            this.$router.replace('https://x5on.cn/');
                         });
                         break;
                     }
@@ -293,6 +292,7 @@
     .margin-top8 {
         margin-top: 8px;
     }
+
     .margin-top16 {
         margin-top: 16px;
     }

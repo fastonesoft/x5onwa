@@ -31,7 +31,7 @@ class Oauth extends CI_Controller
 
       // 跳转首页
       $this->load->helper('url');
-      redirect('/');
+      redirect('/app', 'refresh');
     } else {
       $this->json(['code' => 0, 'data' => 0]);
     }
