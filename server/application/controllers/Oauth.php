@@ -27,7 +27,7 @@ class Oauth extends CI_Controller
       $infoArray = json_decode($infoResult, true);
 
       // 登录记录
-      $this->session->set_userdata(Model\x5on::SESSION_WEB_LOGIN, $infoArray);
+      $this->session->set_tempdata(Model\x5on::SESSION_WEB_LOGIN, $infoArray);
       $this->load->view('js_to_home');
 
       // 跳转首页

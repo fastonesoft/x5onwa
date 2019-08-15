@@ -150,13 +150,7 @@
                     case 'set':
                         break;
                     case 'logout': {
-                        // $.ajax({
-                        //     method: 'get',
-                        //     url: '/vuehome/logout'
-                        // }).then(res => {
-                        //     this.$Message.info(res.data.data);
-                        //     window.location.replace('/');
-                        // });
+
                         // this.$router.replace('https://x5on.cn/vuehome/logout');
                         this.$Message.info('退出登录');
                         window.location.replace('https://x5on.cn/home/logout');
@@ -168,6 +162,13 @@
         },
 
         created() {
+            // 读取登录信息
+            $.ajax({
+                method: 'get',
+                url: 'https://x5on.cn/home/user'
+            }).then(res => {
+                window.console.log(res)
+            });
             // 菜单活动页面记录
             this.activeName = this.$route.path
         },

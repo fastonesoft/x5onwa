@@ -31,10 +31,19 @@ class Home extends CI_Controller
     });
   }
 
+  public function user() {
+    Mvv\mvvWebLogin::login_ci($this, function ($userinfor) {
+      $this->json(['code' => 1, 'data' => $userinfor]);
+    }, function () {
+      $this->json(['code' => -1, 'data' => '没有登录，无法操作！']);
+    });
+  }
+
   public function logout()
   {
     try {
-      $this->session->sess_destroy();
+      $this->session->unset_tempdata(Model\x5on::SESSION_WEB_LOGIN);
+
       $this->load->view('js_to_home');
     } catch (Exception $e) {
       $this->json(['code' => 1, 'data' => $e->getMessage()]);
