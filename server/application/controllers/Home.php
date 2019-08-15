@@ -42,7 +42,8 @@ class Home extends CI_Controller
   public function logout()
   {
     try {
-      $this->session->unset_tempdata(Model\x5on::SESSION_WEB_LOGIN);
+      $this->session->unset_userdata(Model\x5on::SESSION_WEB_LOGIN);
+      $this->session->sess_destroy();
 
       $this->load->view('js_to_home');
     } catch (Exception $e) {

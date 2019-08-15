@@ -8,7 +8,7 @@ class mvvWebLogin
 {
 
   public static function login_ci($that, $success, $fail) {
-    $userinfor = $that->session->tempdata(x5on::SESSION_WEB_LOGIN);
+    $userinfor = $that->session->userdata(x5on::SESSION_WEB_LOGIN);
     if ($userinfor !== null) {
       call_user_func($success, $userinfor);
     } else {

@@ -9,7 +9,8 @@ class App extends CI_Controller {
    * 应用首页
    */
   public function index() {
-    $ddd = $this->session->tempdata();
+//    $ddd = $this->session->tempdata();
+    $ddd = APPPATH;
     $this->json(['code' => 1, 'data' => $ddd]);
   }
 }
