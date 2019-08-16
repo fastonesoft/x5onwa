@@ -24,10 +24,6 @@ export default new Router({
       {
           path: '/',
           redirect: '/vuehome'
-      },
-      {
-          path: '*',
-          redirect: '/vuehome'
       }
   ]
 })

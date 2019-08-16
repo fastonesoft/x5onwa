@@ -24,7 +24,7 @@
                             <Row>
                                 <i-col span="12">
                                     <Dropdown @on-click="downMenuClick">
-                                        <Avatar icon="ios-person"/>
+                                        <Avatar :src="userHead"/>
                                         <DropdownMenu slot="list">
                                             <DropdownItem name="set">
                                                 设置
@@ -47,18 +47,18 @@
         </Header>
         <Layout>
             <Sider
-                class="sider"
-                v-model="isCollaped"
-                :width="leftWidth"
-                :class="{'sider-hide': isCollaped}"
-                @on-collapse="siderCollapse"
-                collapsible
+                    class="sider"
+                    v-model="isCollaped"
+                    :width="leftWidth"
+                    :class="{'sider-hide': isCollaped}"
+                    @on-collapse="siderCollapse"
+                    collapsible
             >
                 <Menu
-                    class="sider-menu"
-                    theme="dark"
-                    :width="leftWidth"
-                    :active-name="activeName"
+                        class="sider-menu"
+                        theme="dark"
+                        :width="leftWidth"
+                        :active-name="activeName"
                 >
                     <MenuGroup v-for="menu in menus" :title="menu.title" :key="menu.title">
                         <MenuItem v-for="item in menu.items" :name="item.name" :to="item.to" :key="item.name" replace>
@@ -76,8 +76,6 @@
 </template>
 
 <script>
-    import $ from '../libs/utils';
-
     export default {
         data() {
             return {
@@ -148,10 +146,14 @@
             downMenuClick(name) {
                 switch (name) {
                     case 'set':
+                        window.console.log(this.$);
+                        this.$.get('/app')
+                            .then(res => {
+                                window.console.log(res.data.data);
+                                this.$Message.info(res.data.data);
+                            });
                         break;
                     case 'logout': {
-
-                        // this.$router.replace('https://x5on.cn/vuehome/logout');
                         this.$Message.info('退出登录');
                         window.location.replace('https://x5on.cn/home/logout');
                         break;
@@ -162,13 +164,12 @@
         },
 
         created() {
-            // 读取登录信息
-            $.ajax({
-                method: 'get',
-                url: 'https://x5on.cn/home/user'
-            }).then(res => {
-                window.console.log(res)
-            });
+            window.console.log(this.$);
+            this.$.get('/home/user')
+                .then(res => {
+                    window.console.log(res.data.data);
+                    this.userHead = res.data.data.headimgurl;
+                });
             // 菜单活动页面记录
             this.activeName = this.$route.path
         },

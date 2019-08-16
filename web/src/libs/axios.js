@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-let util = {};
-util.ajax = axios.create({
+let axio = axios.create({
+    withCredentials: true,
     baseURL: 'https://x5on.cn/',
     timeout: 30000,
 });
 
-export default util;
+export default axio;

@@ -32,6 +32,9 @@ class Home extends CI_Controller
   }
 
   public function user() {
+    header('Access-Control-Allow-Credentials: true');
+    header('Access-Control-Allow-Origin: http://localhost:8080');
+
     Mvv\mvvWebLogin::login_ci($this, function ($userinfor) {
       $this->json(['code' => 1, 'data' => $userinfor]);
     }, function () {
