@@ -9,8 +9,7 @@ class App extends CI_Controller {
    * 应用首页
    */
   public function index() {
-    header('Access-Control-Allow-Credentials: true');
-    header('Access-Control-Allow-Origin: http://localhost:8080');
+    Model\x5on::outCros();
 
     $ddd = APPPATH;
     $this->json(['code' => 1, 'data' => $ddd]);

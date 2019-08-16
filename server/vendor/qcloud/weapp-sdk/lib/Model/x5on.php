@@ -41,6 +41,9 @@ class x5on
   const SESSION_WEB_LOGIN = 'session-web-login';
   const SESSION_TIME_OUT = 7200;
 
+  // 跨域标志
+  const CROS = 1;
+
   // 给数组元素添加编号
   public static function addIndex($arr)
   {
@@ -218,6 +221,13 @@ class x5on
 
   public static function setw($id, $width) {
     return str_pad($id, $width, '0', STR_PAD_LEFT);
+  }
+
+  public static function outCros() {
+    if (self::CROS) {
+      header('Access-Control-Allow-Credentials: true');
+      header('Access-Control-Allow-Origin: http://localhost:8080');
+    }
   }
 
 }

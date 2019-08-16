@@ -4,11 +4,12 @@ import router from './router'
 import store from './store'
 import './plugins/iview.js'
 
-import axio from './libs/axios'
+import axios from './libs/axios'
 
 import devArticle from './components/dev-article.vue'
 
-Vue.prototype.$ = axio;
+// 跨域
+Vue.prototype.$ = location.hostname === 'localhost' ? axios.axio_local : axios.axio;
 
 Vue.config.productionTip = false;
 

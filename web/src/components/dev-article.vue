@@ -47,18 +47,18 @@
         </Header>
         <Layout>
             <Sider
-                    class="sider"
-                    v-model="isCollaped"
-                    :width="leftWidth"
-                    :class="{'sider-hide': isCollaped}"
-                    @on-collapse="siderCollapse"
-                    collapsible
+                class="sider"
+                v-model="isCollaped"
+                :width="leftWidth"
+                :class="{'sider-hide': isCollaped}"
+                @on-collapse="siderCollapse"
+                collapsible
             >
                 <Menu
-                        class="sider-menu"
-                        theme="dark"
-                        :width="leftWidth"
-                        :active-name="activeName"
+                    class="sider-menu"
+                    theme="dark"
+                    :width="leftWidth"
+                    :active-name="activeName"
                 >
                     <MenuGroup v-for="menu in menus" :title="menu.title" :key="menu.title">
                         <MenuItem v-for="item in menu.items" :name="item.name" :to="item.to" :key="item.name" replace>
@@ -79,6 +79,7 @@
     export default {
         data() {
             return {
+                userHead: '',
                 activeName: this.$route.path,
                 count: 62,
                 isCollaped: this.$store.isCollaped,
@@ -146,10 +147,8 @@
             downMenuClick(name) {
                 switch (name) {
                     case 'set':
-                        window.console.log(this.$);
                         this.$.get('/app')
                             .then(res => {
-                                window.console.log(res.data.data);
                                 this.$Message.info(res.data.data);
                             });
                         break;
@@ -164,11 +163,10 @@
         },
 
         created() {
-            window.console.log(this.$);
             this.$.get('/home/user')
                 .then(res => {
-                    window.console.log(res.data.data);
-                    this.userHead = res.data.data.headimgurl;
+                    let imgurl = res.data.data.headimgurl;
+                    this.userHead = imgurl ? imgurl.replace('http://', 'https://') : '';
                 });
             // 菜单活动页面记录
             this.activeName = this.$route.path
