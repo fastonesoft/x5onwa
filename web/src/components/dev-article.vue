@@ -151,7 +151,7 @@
                         break;
                     case 'logout': {
                         this.$Message.info('退出登录');
-                        window.location.replace('https://x5on.cn/app/logout');
+                        window.location.replace('https://x5on.cn/applogin/logout');
                         break;
                     }
                 }

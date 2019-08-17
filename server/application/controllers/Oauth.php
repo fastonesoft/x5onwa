@@ -28,6 +28,7 @@ class Oauth extends CI_Controller
 
       // 登录记录
       $this->session->set_userdata(Model\x5on::SESSION_WEB_LOGIN, $infoArray);
+
       $this->load->view('js_to_home');
 
       // 跳转首页

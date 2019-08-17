@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 use \QCloud_WeApp_SDK\Model;
 use \QCloud_WeApp_SDK\Mvv;
 
-class App extends CI_Controller
+class App extends X5_Controller
 {
 
   /**
@@ -22,45 +22,46 @@ class App extends CI_Controller
    * map to /index.php/welcome/<method_name>
    * @see https://codeigniter.com/user_guide/general/urls.html
    */
+//  public function index()
+//  {
+//    Mvv\mvvWebLogin::login_ci($this, function ($userinfor) {
+//      $this->load->view('index.html');
+//    }, function () {
+//      $this->load->view('weixin_login');
+//    });
+//  }
+//
+//  public function user()
+//  {
+//    Model\x5on::outCros();
+//
+//    Mvv\mvvWebLogin::login_ci($this, function ($userinfor) {
+//      $this->json(['code' => 1, 'data' => $userinfor]);
+//    }, function () {
+//      $this->json(['code' => -1, 'data' => '没有登录，无法获取用户信息']);
+//    });
+//  }
+//
+//  public function menus() {
+//    Model\x5on::outCros();
+//
+//    Mvv\mvvWebLogin::login_ci($this, function ($userinfor) {
+//      $this->json(['code' => 1, 'data' => $userinfor]);
+//    }, function () {
+//      $this->json(['code' => -1, 'data' =>  '没有登录，无法获取菜单列表']);
+//    });
+//  }
+
   public function index()
   {
-    Mvv\mvvWebLogin::login_ci($this, function ($userinfor) {
-      $this->load->view('index.html');
-    }, function () {
-      $this->load->view('weixin_login');
-    });
+    $this->load->view('index.html');
   }
 
-  public function user()
-  {
-    Model\x5on::outCros();
-
-    Mvv\mvvWebLogin::login_ci($this, function ($userinfor) {
-      $this->json(['code' => 1, 'data' => $userinfor]);
-    }, function () {
-      $this->json(['code' => -1, 'data' => '没有登录，无法获取用户信息']);
-    });
+  public function test() {
+    $query = $this->db->query('select * from xonEdu');
+    $res = $query->result_array();
+    $this->json(['code' => -1, 'data' =>  $res]);
   }
 
-  public function menus() {
-    Model\x5on::outCros();
 
-    Mvv\mvvWebLogin::login_ci($this, function ($userinfor) {
-      $this->json(['code' => 1, 'data' => $userinfor]);
-    }, function () {
-      $this->json(['code' => -1, 'data' =>  '没有登录，无法获取菜单列表']);
-    });
-  }
-
-  public function logout()
-  {
-    try {
-      $this->session->unset_userdata(Model\x5on::SESSION_WEB_LOGIN);
-      $this->session->sess_destroy();
-
-      $this->load->view('js_to_home');
-    } catch (Exception $e) {
-      $this->json(['code' => 1, 'data' => $e->getMessage()]);
-    }
-  }
 }
