@@ -9,7 +9,9 @@ import axios from './libs/axios'
 import devArticle from './components/dev-article.vue'
 
 // 跨域
-Vue.prototype.$ = location.hostname === 'localhost' ? axios.axio_local : axios.axio;
+Vue.prototype.$ = axios.ajax;
+Vue.prototype.$.all = axios.all;
+Vue.prototype.$.spread = axios.spread;
 
 Vue.config.productionTip = false;
 

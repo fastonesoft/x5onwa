@@ -47,18 +47,18 @@
         </Header>
         <Layout>
             <Sider
-                class="sider"
-                v-model="isCollaped"
-                :width="leftWidth"
-                :class="{'sider-hide': isCollaped}"
-                @on-collapse="siderCollapse"
-                collapsible
+                    class="sider"
+                    v-model="isCollaped"
+                    :width="leftWidth"
+                    :class="{'sider-hide': isCollaped}"
+                    @on-collapse="siderCollapse"
+                    collapsible
             >
                 <Menu
-                    class="sider-menu"
-                    theme="dark"
-                    :width="leftWidth"
-                    :active-name="activeName"
+                        class="sider-menu"
+                        theme="dark"
+                        :width="leftWidth"
+                        :active-name="activeName"
                 >
                     <MenuGroup v-for="menu in menus" :title="menu.title" :key="menu.title">
                         <MenuItem v-for="item in menu.items" :name="item.name" :to="item.to" :key="item.name" replace>
@@ -147,14 +147,11 @@
             downMenuClick(name) {
                 switch (name) {
                     case 'set':
-                        this.$.get('/app')
-                            .then(res => {
-                                this.$Message.info(res.data.data);
-                            });
+
                         break;
                     case 'logout': {
                         this.$Message.info('退出登录');
-                        window.location.replace('https://x5on.cn/home/logout');
+                        window.location.replace('https://x5on.cn/app/logout');
                         break;
                     }
                 }
@@ -163,13 +160,24 @@
         },
 
         created() {
-            this.$.get('/home/user')
-                .then(res => {
-                    let imgurl = res.data.data.headimgurl;
-                    this.userHead = imgurl ? imgurl.replace('http://', 'https://') : '';
-                });
-            // 菜单活动页面记录
-            this.activeName = this.$route.path
+            let that = this;
+            // 一、菜单活动页面记录
+            this.activeName = this.$route.path;
+
+            // 二、请求微信登录头像
+            that.$.all([that.$.gets('/app/user'), that.$.gets('/app/menus')])
+                .then(that.$.spread(function (res_head, res_menu) {
+                    window.console.log(res_head)
+                    window.console.log(res_menu)
+                    // 登录头像
+                    let imgurl = res_head.headimgurl;
+                    that.userHead = imgurl ? imgurl.replace('http://', 'https://') : '';
+                    // 菜单数据
+                    that.menus = res_menu;
+                }))
+                .catch(() => {
+                    that.$Message.info('网络是否畅通？');
+                })
         },
     }
 </script>
