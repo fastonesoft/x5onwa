@@ -42,7 +42,7 @@ class x5on
   const SESSION_TIME_OUT = 7200;
 
   // 跨域标志
-  const CROS = 1;
+  const CORS = 1;
 
   // 给数组元素添加编号
   public static function addIndex($arr)
@@ -223,8 +223,8 @@ class x5on
     return str_pad($id, $width, '0', STR_PAD_LEFT);
   }
 
-  public static function outCros() {
-    if (self::CROS) {
+  public static function outCors() {
+    if (self::CORS) {
       header('Access-Control-Allow-Credentials: true');
       header('Access-Control-Allow-Origin: http://localhost:8080');
     }

@@ -151,7 +151,11 @@
                         break;
                     case 'logout': {
                         this.$Message.info('退出登录');
-                        window.location.replace('https://x5on.cn/applogin/logout');
+                        this.$.gets('/applogin/logout')
+                            .then(res => {
+                                // 这里必须这样刷新
+                                window.location.replace('https://x5on.cn/applogin');
+                            })
                         break;
                     }
                 }
@@ -164,20 +168,37 @@
             // 一、菜单活动页面记录
             this.activeName = this.$route.path;
 
-            // 二、请求微信登录头像
-            that.$.all([that.$.gets('/app/user'), that.$.gets('/app/menus')])
-                .then(that.$.spread(function (res_head, res_menu) {
-                    window.console.log(res_head)
-                    window.console.log(res_menu)
-                    // 登录头像
-                    let imgurl = res_head.headimgurl;
-                    that.userHead = imgurl ? imgurl.replace('http://', 'https://') : '';
-                    // 菜单数据
-                    that.menus = res_menu;
-                }))
-                .catch(() => {
-                    that.$Message.info('网络是否畅通？');
+            this.$.get('/appmenu/menus')
+                .then(res=>{
+                    window.console.log(res);
                 })
+
+            // this.$.gets('/appmenu/user')
+            //     .then(res => {
+            //         let imgurl = res.headimgurl;
+            //         that.userHead = imgurl ? imgurl.replace('http://', 'https://') : '';
+            //     })
+            //
+            // this.$.gets('/appmenu/menus')
+            //     .then(res => {
+            //         // 菜单数据
+            //         that.menus = res;
+            //     })
+
+            // 二、请求微信登录头像
+            // that.$.all([that.$.gets('/appmenu/user'), that.$.gets('/appmenu/menus')])
+            //     .then(that.$.spread(function (res_head, res_menu) {
+            //         window.console.log(res_head)
+            //         window.console.log(res_menu)
+            //         // 登录头像
+            //         let imgurl = res_head.headimgurl;
+            //         that.userHead = imgurl ? imgurl.replace('http://', 'https://') : '';
+            //         // 菜单数据
+            //         that.menus = res_menu;
+            //     }))
+            //     .catch(() => {
+            //         that.$Message.info('网络是否畅通？');
+            //     })
         },
     }
 </script>
