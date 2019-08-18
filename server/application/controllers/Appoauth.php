@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 use QCloud_WeApp_SDK\Mvv;
 use QCloud_WeApp_SDK\Model;
 
-class Oauth extends CI_Controller
+class Appoauth extends CI_Controller
 {
 
     public function index()
@@ -28,6 +28,8 @@ class Oauth extends CI_Controller
 
             // 登录记录
             $this->session->set_userdata(Model\x5on::SESSION_WEB_LOGIN, $infoArray);
+            session_write_close();
+
             // 这里不能更改
             $this->load->view('js_to_home');
         } else {

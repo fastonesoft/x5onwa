@@ -25,7 +25,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         id: "login_code",
         appid: "wxecca347b5d64f5c3",
         scope: "snsapi_login",
-        redirect_uri: "https://www.x5on.cn/oauth",
+        redirect_uri: "https://www.x5on.cn/appoauth",
         state: "web",
         style: "black",
         href: "https://www.x5on.cn/content/codesite.css?v=" + Math.random()

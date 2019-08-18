@@ -21,7 +21,7 @@ ajax.gets = function (url, data) {
                 } else {
                     resolve(res.data.data)
                 }
-            }).catch(error => {
+            }).catch(() => {
                 reject('数据请求失败')
             })
         })
@@ -35,7 +35,7 @@ ajax.gets = function (url, data) {
                 } else {
                     resolve(res.data.data)
                 }
-            }).catch(error => {
+            }).catch(() => {
                 reject('数据请求失败')
             })
         })
@@ -52,7 +52,7 @@ ajax.posts = function (url, data) {
             } else {
                 resolve(res.data.data)
             }
-        }).catch(error => {
+        }).catch(() => {
             reject('数据提交失败')
         })
     })
