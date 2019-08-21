@@ -22,8 +22,8 @@ export default new Router({
             component: () => import('./views/Mystud.vue')
         },
         {
-            path: '/vuedata',
-            name: '/vuedata',
+            path: '/vuemyadjust',
+            name: '/vuemyadjust',
             component: () => import('./views/Data.vue')
         },
         {

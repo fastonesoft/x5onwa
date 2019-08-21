@@ -52,29 +52,6 @@ class mvvAppmenu
         $result = self::roles($roles, $myroles, $myroleschs);
 
         return $result;
-
-        // 构造网页菜单
-//        $types = xonType::gets();
-//        $result = [];
-//        foreach ($types as $type) {
-//            $items = [];
-//            foreach ($menu_roles as $role) {
-//                if ($role->type_id === $type->id) {
-//                    $item = (object)array();
-//                    $item->name = '/vue'. $role->name;
-//                    $item->to = $item->name;
-//                    $item->icon = 'md-document';
-//                    $item->title = $role->title;
-//                    array_push($items, $item);
-//                }
-//            }
-//            $menu = (object)array();
-//            $menu->title = $type->name;
-//            $menu->items = $items;
-//
-//            array_push($result, $menu);
-//        }
-//
     }
 
 }

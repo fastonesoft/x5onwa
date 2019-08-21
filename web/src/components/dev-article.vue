@@ -41,18 +41,18 @@
         </Header>
         <Layout>
             <Sider
-                class="sider"
-                v-model="isCollaped"
-                :width="leftWidth"
-                :class="{'sider-hide': isCollaped}"
-                @on-collapse="siderCollapse"
-                collapsible
+                    class="sider"
+                    v-model="isCollaped"
+                    :width="leftWidth"
+                    :class="{'sider-hide': isCollaped}"
+                    @on-collapse="siderCollapse"
+                    collapsible
             >
                 <Menu
-                    class="sider-menu"
-                    theme="dark"
-                    :width="leftWidth"
-                    :active-name="activeName"
+                        class="sider-menu"
+                        theme="dark"
+                        :width="leftWidth"
+                        :active-name="activeName"
                 >
                     <MenuGroup v-for="menu in menus" :title="menu.title" :key="menu.title">
                         <MenuItem v-for="item in menu.items" :name="item.name" :to="item.to" :key="item.name" replace>
@@ -86,13 +86,19 @@
                             name: '/vuemyclass',
                             to: '/vuemyclass',
                             icon: 'md-document',
-                            title: '我的班级',
+                            title: '班主任',
                         },
                         {
                             name: '/vuemystud',
                             to: '/vuemystud',
                             icon: 'md-document',
-                            title: '我的学生',
+                            title: '现班级',
+                        },
+                        {
+                            name: '/vuemyadjust',
+                            to: '/vuemyadjust',
+                            icon: 'md-document',
+                            title: '分班前',
                         },
                     ]
                 }]
@@ -127,26 +133,26 @@
             // 一、菜单活动页面记录
             this.activeName = this.$route.path;
 
-            window.console.log(that.menus)
-
             // 二、请求微信登录头像
             that.$.gets('/appmenu/menus')
                 .then(res => {
-                    // 菜单数据
-                    let roles = '';
-                    res.forEach(item => {
-                        roles += '/vue' + item.name + ',';
-                    });
 
-                    that.menus.forEach(menu=>{
-                        let index = 0;
-                        menu.items.forEach(item=>{
-                            roles.indexOf(item.name) === -1 && menu.items.splice(index, 1);
-                            index++;
-                        })
-                    });
+                        // 菜单数据
+                        let roles = '';
+                        res.forEach(item => {
+                            roles += '/vue' + item.name + ',';
+                        });
 
-                }).catch(error => {
+                        for (let m_index = that.menus.length - 1; m_index >= 0; m_index--) {
+                            let menu = that.menus[m_index];
+                            for (let index = menu.items.length - 1; index >= 0; index--) {
+                                roles.indexOf(menu.items[index].name) === -1 && menu.items.splice(index, 1);
+                            }
+                            !menu.items.length && that.menus.splice(m_index, 1)
+                        }
+
+                    }
+                ).catch(error => {
                 that.$Message.info(error);
             });
             that.$.gets('/appmenu/user')
