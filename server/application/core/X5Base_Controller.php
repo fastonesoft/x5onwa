@@ -1,4 +1,5 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 use \QCloud_WeApp_SDK\Model;
 
@@ -7,6 +8,7 @@ class X5Base_Controller extends CI_Controller
 
     // 用户信息
     public $userinfor = null;
+
     public function __construct()
     {
         parent::__construct();

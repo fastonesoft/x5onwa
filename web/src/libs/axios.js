@@ -14,7 +14,6 @@ ajax.gets = function (url, data) {
     if (!data) {
         return new Promise(function (resolve, reject) {
             ajax.get(url).then(res => {
-                window.console.log(res)
                 if (res.data && res.data.code) {
                     // code != 0 => error
                     reject(res.data.data)
@@ -28,7 +27,6 @@ ajax.gets = function (url, data) {
     } else {
         return new Promise(function (resolve, reject) {
             ajax.get(url, {params: data}).then(res => {
-                window.console.log(res)
                 if (res.data && res.data.code) {
                     // code != 0 => error
                     reject(res.data.data)

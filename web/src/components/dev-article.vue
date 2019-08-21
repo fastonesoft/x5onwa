@@ -169,10 +169,11 @@
             this.activeName = this.$route.path;
 
             // 二、请求微信登录头像
-            that.$.all([that.$.gets('/appmenu/user'), that.$.gets('/appmenu/menus')])
+            that.$.all([that.$.gets('/appmenu/user'), that.$.gets('/appmenu/tables')])
                 .then(that.$.spread(function (res_head, res_menu) {
                     // 菜单数据
-                    that.menus = res_menu;
+                    window.console.log(res_menu);
+                    // that.menus = res_menu;
                     // 登录头像
                     let imgurl = res_head && res_head.headimgurl ? res_head.headimgurl : null;
                     that.userHead = imgurl ? imgurl.replace('http://', 'https://') : '';

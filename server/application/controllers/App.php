@@ -28,14 +28,4 @@ class App extends X5_Controller
         $this->load->view('index.html');
     }
 
-
-
-
-//  public function test() {
-//    $query = $this->db->query('select * from xonEdu');
-//    $res = $query->result_array();
-//    $this->json(['code' => -1, 'data' =>  $res]);
-//  }
-
-
 }
