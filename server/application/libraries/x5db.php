@@ -1,52 +1,37 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class x5db
+class X5db
 {
-    protected $CI;
+    protected $x5;
 
     public function __construct()
     {
-        $CI =& get_instance();
-        $this->CI->load->database();
+        $this->x5 =& get_instance();
     }
 
-    protected function x5databases()
+    public function x5tables()
     {
-        $query = $this->CI->db->query('show databases;');
-        $result = $query->result_array();
-        return $result;
+        return $this->x5->db->list_tables();
     }
 
-    protected function x5tables()
+    public function x5table_exists($tableName)
     {
-        $query = $this->CI->db->query('show tables;');
-        $result = $query->result_array();
-        return $result;
-    }
-
-    protected function x5checkTable($tableName)
-    {
-        $tables = $this->x5tables();
-
-        $exist = false;
-        foreach ($tables as $key => $value) {
-            if ($value === $tableName) {
-                $exist = true;
-                break;
-            }
+        if (!$this->x5->db->table_exists($tableName)) {
+            throw new Exception('数据表不存在！');
         }
-        if (!$exist) throw new Exception('数据表不存在！');
     }
 
     public function x5gets($tableName)
     {
-        $this->x5checkTable($tableName);
+        $this->x5table_exists($tableName);
 
-        $query = $this->CI->db->get($tableName);
+        $query = $this->x5->db->get($tableName);
         return $query->result_array();
     }
 
-    public function x5getsByCondition($tableName, )
+    public function x5getsByCondition($tableName, $condition) {
+
+    }
 
 
 }

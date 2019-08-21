@@ -47,18 +47,18 @@
         </Header>
         <Layout>
             <Sider
-                class="sider"
-                v-model="isCollaped"
-                :width="leftWidth"
-                :class="{'sider-hide': isCollaped}"
-                @on-collapse="siderCollapse"
-                collapsible
+                    class="sider"
+                    v-model="isCollaped"
+                    :width="leftWidth"
+                    :class="{'sider-hide': isCollaped}"
+                    @on-collapse="siderCollapse"
+                    collapsible
             >
                 <Menu
-                    class="sider-menu"
-                    theme="dark"
-                    :width="leftWidth"
-                    :active-name="activeName"
+                        class="sider-menu"
+                        theme="dark"
+                        :width="leftWidth"
+                        :active-name="activeName"
                 >
                     <MenuGroup v-for="menu in menus" :title="menu.title" :key="menu.title">
                         <MenuItem v-for="item in menu.items" :name="item.name" :to="item.to" :key="item.name" replace>
@@ -169,9 +169,10 @@
             this.activeName = this.$route.path;
 
             // 二、请求微信登录头像
-            that.$.all([that.$.gets('/appmenu/user'), that.$.gets('/appmenu/tables')])
+            that.$.all([that.$.gets('/appmenu/menus'), that.$.gets('/appmenu/tables')])
                 .then(that.$.spread(function (res_head, res_menu) {
                     // 菜单数据
+                    window.console.log(res_head);
                     window.console.log(res_menu);
                     // that.menus = res_menu;
                     // 登录头像
@@ -179,8 +180,8 @@
                     that.userHead = imgurl ? imgurl.replace('http://', 'https://') : '';
 
                 }))
-                .catch(() => {
-                    that.$Message.info('网络是否畅通？');
+                .catch(error => {
+                    that.$Message.info(error);
                 })
         },
     }

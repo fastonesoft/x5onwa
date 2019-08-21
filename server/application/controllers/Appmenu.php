@@ -11,14 +11,22 @@ class Appmenu extends X5Dev_Controller
 
     public function menus()
     {
-        $result = $this->gets('xonEdu');
-
-        $this->json(['code' => 0, 'data' => compact('result')]);
+        try {
+            $result = $this->db->get('xonEdu');
+            $this->json(['code' => 0, 'data' => $result]);
+        } catch (Exception $e) {
+            $this->json(['code' => 1, 'data' => $e->getMessage()]);
+        }
     }
 
-    public function tables() {
-
-        $this->json(['code' => 0, 'data' => $result]);
+    public function tables()
+    {
+        try {
+            $result = $this->x5db->x5gets('xonEdu1');
+            $this->json(['code' => 0, 'data' => $result]);
+        } catch (Exception $e) {
+            $this->json(['code' => 1, 'data' => $e->getMessage()]);
+        }
     }
 
 

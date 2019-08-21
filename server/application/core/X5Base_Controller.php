@@ -31,7 +31,6 @@ class X5Dev_Controller extends X5Base_Controller
 
 }
 
-
 class X5_Controller extends X5Base_Controller
 {
 
