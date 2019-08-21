@@ -12,12 +12,6 @@
                                 <MenuItem name="/vuehome" to="/vuehome" replace>
                                     首页
                                 </MenuItem>
-                                <MenuItem name="/vueabout" to="/vueabout" replace>
-                                    介绍
-                                </MenuItem>
-                                <MenuItem name="/vuedata" to="/vuedata" replace>
-                                    数据采集
-                                </MenuItem>
                             </Menu>
                         </i-col>
                         <i-col span="3">
@@ -47,18 +41,18 @@
         </Header>
         <Layout>
             <Sider
-                    class="sider"
-                    v-model="isCollaped"
-                    :width="leftWidth"
-                    :class="{'sider-hide': isCollaped}"
-                    @on-collapse="siderCollapse"
-                    collapsible
+                class="sider"
+                v-model="isCollaped"
+                :width="leftWidth"
+                :class="{'sider-hide': isCollaped}"
+                @on-collapse="siderCollapse"
+                collapsible
             >
                 <Menu
-                        class="sider-menu"
-                        theme="dark"
-                        :width="leftWidth"
-                        :active-name="activeName"
+                    class="sider-menu"
+                    theme="dark"
+                    :width="leftWidth"
+                    :active-name="activeName"
                 >
                     <MenuGroup v-for="menu in menus" :title="menu.title" :key="menu.title">
                         <MenuItem v-for="item in menu.items" :name="item.name" :to="item.to" :key="item.name" replace>
@@ -85,58 +79,23 @@
                 isCollaped: this.$store.isCollaped,
                 menuDark: false,
                 leftWidth: '200',
-                menus: [
-                    {
-                        title: '系统设置',
-                        items: [
-                            {
-                                name: '/vuehome',
-                                to: '/vuehome',
-                                icon: 'md-document',
-                                title: '权限分配'
-                            },
-                            {
-                                name: '/vueabout',
-                                to: '/vueabout',
-                                icon: 'md-chatbubbles',
-                                title: '表单设计'
-                            },
-                        ]
-                    },
-                    {
-                        title: '数据采集',
-                        items: [
-                            {
-                                name: '/vuedata',
-                                to: '/vuedata',
-                                icon: 'md-calendar',
-                                title: '数据列表'
-                            },
-                        ]
-                    },
-                    {
-                        title: '税费测算',
-                        items: [
-                            {
-                                name: '/vuecount',
-                                to: '/vuecount',
-                                icon: 'md-analytics',
-                                title: '测算列表'
-                            },
-                        ]
-                    },
-                    {
-                        title: '协作成果',
-                        items: [
-                            {
-                                name: '/vueresult',
-                                to: '/vueresult',
-                                icon: 'md-barcode',
-                                title: '成果列表'
-                            },
-                        ]
-                    },
-                ]
+                menus: [{
+                    title: '分班设置',
+                    items: [
+                        {
+                            name: '/vuemyclass',
+                            to: '/vuemyclass',
+                            icon: 'md-document',
+                            title: '我的班级',
+                        },
+                        {
+                            name: '/vuemystud',
+                            to: '/vuemystud',
+                            icon: 'md-document',
+                            title: '我的学生',
+                        },
+                    ]
+                }]
             };
         },
 
@@ -147,7 +106,7 @@
             downMenuClick(name) {
                 switch (name) {
                     case 'set':
-
+                        this.$Message.info('系统设置');
                         break;
                     case 'logout': {
                         this.$Message.info('退出登录');
@@ -168,21 +127,37 @@
             // 一、菜单活动页面记录
             this.activeName = this.$route.path;
 
-            // 二、请求微信登录头像
-            that.$.all([that.$.gets('/appmenu/menus'), that.$.gets('/appmenu/tables')])
-                .then(that.$.spread(function (res_head, res_menu) {
-                    // 菜单数据
-                    window.console.log(res_head);
-                    window.console.log(res_menu);
-                    // that.menus = res_menu;
-                    // 登录头像
-                    let imgurl = res_head && res_head.headimgurl ? res_head.headimgurl : null;
-                    that.userHead = imgurl ? imgurl.replace('http://', 'https://') : '';
+            window.console.log(that.menus)
 
-                }))
-                .catch(error => {
-                    that.$Message.info(error);
-                })
+            // 二、请求微信登录头像
+            that.$.gets('/appmenu/menus')
+                .then(res => {
+                    // 菜单数据
+                    let roles = '';
+                    res.forEach(item => {
+                        roles += '/vue' + item.name + ',';
+                    });
+
+                    that.menus.forEach(menu=>{
+                        let index = 0;
+                        menu.items.forEach(item=>{
+                            roles.indexOf(item.name) === -1 && menu.items.splice(index, 1);
+                            index++;
+                        })
+                    });
+
+                }).catch(error => {
+                that.$Message.info(error);
+            });
+            that.$.gets('/appmenu/user')
+                .then(head => {
+                    // 登录头像
+                    let imgurl = head && head.headimgurl ? head.headimgurl : null;
+                    that.userHead = imgurl ? imgurl.replace('http://', 'https://') : '';
+                }).catch(error => {
+                that.$Message.info(error);
+            });
+
         },
     }
 </script>

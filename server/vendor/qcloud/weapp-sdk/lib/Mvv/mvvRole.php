@@ -35,7 +35,7 @@ class mvvRole
         }
       }
       $roles[$k]->has_role = $has_role;
-      if ($roles[$k]->has_role || $roles[$k]->can_show) {
+      if ($roles[$k]->has_role) {
         array_push($result, $roles[$k]);
       }
     }

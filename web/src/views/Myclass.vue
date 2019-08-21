@@ -1,12 +1,12 @@
 <template>
-    <dev-article>
-
-    </dev-article>
+      <dev-article>
+      Myclass
+  </dev-article>
 </template>
 
 <script>
     export default {
-        name: "Home"
+        name: "Myclass"
     }
 </script>
 
