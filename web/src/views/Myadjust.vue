@@ -13,16 +13,8 @@
                     </Table>
                     <Row class="margin-top16">
                         <i-col span="12" class="hidden-nowrap align-left">
-                            <Form :model="form" class="formline" inline>
-                                <FormItem label="姓名">
-                                    <Input v-model="form.stud_name" placeholder="学生姓名，2-4个中文字符"/>
-                                </FormItem>
-                            </Form>
-                            <Button type="primary" :loading="isFind" @click="studFind">查询</Button>
-                            <Button class="margin-left8" type="error" :loading="isPrint" @click="studPrint">打印
-                            </Button>
-                            <Icon type="md-arrow-round-down" title="数据下载" class="margin-left32" size="24"
-                                  @click="downLoad"/>
+                            <Button type="primary" :loading="isPrint" @click="studPrint">打印</Button>
+
                         </i-col>
                         <i-col span="12" class="hidden-nowrap align-right">
                             <Page :total="datas.length" :page-size="50" :page-size-opts="[50,100]" show-sizer transfer/>
@@ -56,10 +48,9 @@
 
 <script>
     export default {
-        name: "Myclass",
+        name: "Myadjust",
         data() {
             return {
-                isFind: false,
                 isPrint: false,
                 tableLoading: false,
                 form: {
@@ -138,8 +129,8 @@
                         align: 'center',
                     },
                     {
-                        title: '班级',
-                        key: 'class_name'
+                        title: '原班级',
+                        key: 'cls_name_old'
                     },
                     {
                         title: '姓名',
@@ -149,60 +140,37 @@
                         title: '性别',
                         key: 'stud_sex'
                     },
-
                     {
-                        title: '总分',
-                        key: 'total'
-                    },
-
-                    {
-                        title: '原班级',
-                        key: 'cls_name_old'
+                        title: '现班级',
+                        key: 'cls_name'
                     },
                 ],
                 datas: [
                     {
-                        class_name: '九年级（1）班',
+                        cls_name: '九年级（1）班',
                         stud_name: '陈可毅',
                         stud_sex: '男',
-                        total: 100,
-                        cls_name_old: '八年级（2）班',
+                        cls_name_old: '八年级（1）班',
                     },
                     {
-                        class_name: '九年级（1）班',
+                        cls_name: '九年级（1）班',
                         stud_name: '石彧诚',
                         stud_sex: '男',
-                        total: 120,
-                        cls_name_old: '八年级（1）班',
+                        cls_name_old: '八年级（2）班',
                     },
                 ]
             }
         },
         methods: {
-            studFind() {
-                if (this.isFind) return;
+            studPrint() {
+                if (this.isPrint) return;
 
                 if (this.grade_id === '') {
                     this.$Message.error('请选择对应年级');
                     return;
                 }
 
-                this.isFind = true;
-            },
-            studPrint() {
-                if (this.isPrint) return;
-
-                if (this.grade_id === '') {
-                    this.$Message.info('请选择对应年级');
-                    return;
-                }
-
                 this.isPrint = true;
-            },
-            downLoad() {
-                this.$refs.selection.exportCsv({
-                    filename: '班主任'
-                });
             },
 
         }
@@ -218,10 +186,6 @@
 
     .formline >>> .ivu-form-item-label {
         display: none;
-    }
-
-    .ivu-form-item {
-        margin-bottom: 0px;
     }
 
 </style>

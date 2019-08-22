@@ -24,7 +24,7 @@ export default new Router({
         {
             path: '/vuemyadjust',
             name: '/vuemyadjust',
-            component: () => import('./views/Data.vue')
+            component: () => import('./views/Myadjust.vue')
         },
         {
             path: '/',

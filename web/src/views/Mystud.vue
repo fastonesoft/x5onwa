@@ -4,12 +4,12 @@
             <Tabs value="table">
                 <TabPane label="数据列表" name="table">
                     <Table
-                            :columns="cols"
-                            :data="datas"
-                            :loading="tableLoading"
-                            ref="selection"
-                            size="small"
-                            border stripe>
+                        :columns="cols"
+                        :data="datas"
+                        :loading="tableLoading"
+                        ref="selection"
+                        size="small"
+                        border stripe>
                     </Table>
                     <Row class="margin-top16">
                         <i-col span="12" class="hidden-nowrap align-left">
@@ -26,16 +26,16 @@
                     <Row class="hidden-nowrap">
                         <Select v-model="grade_id" placeholder="年级选择..." style="width:100px" transfer>
                             <Option
-                                    v-for="item in gradeList"
-                                    :value="item.grade_id"
-                                    :key="item.grade_id">{{ item.grade_name }}
+                                v-for="item in gradeList"
+                                :value="item.grade_id"
+                                :key="item.grade_id">{{ item.grade_name }}
                             </Option>
                         </Select>
                         <Select v-model="cls_id" placeholder="班级选择..." style="width:130px; margin-left: 8px;" transfer>
                             <Option
-                                    v-for="item in clsList"
-                                    :value="item.cls_id"
-                                    :key="item.cls_id">{{ item.cls_name }}
+                                v-for="item in clsList"
+                                :value="item.cls_id"
+                                :key="item.cls_id">{{ item.cls_name }}
                             </Option>
                         </Select>
                     </Row>
@@ -130,7 +130,7 @@
                     },
                     {
                         title: '班级',
-                        key: 'class_name'
+                        key: 'cls_name'
                     },
                     {
                         title: '姓名',
@@ -140,24 +140,23 @@
                         title: '性别',
                         key: 'stud_sex'
                     },
-
                     {
-                        title: '总分',
-                        key: 'total'
+                        title: '原班级',
+                        key: 'cls_name_old'
                     },
                 ],
                 datas: [
                     {
-                        class_name: '九年级（1）班级',
+                        cls_name: '九年级（1）班',
                         stud_name: '陈可毅',
                         stud_sex: '男',
-                        total: 100,
+                        cls_name_old: '八年级（2）班',
                     },
                     {
-                        class_name: '九年级（1）班级',
+                        cls_name: '九年级（1）班',
                         stud_name: '石彧诚',
                         stud_sex: '男',
-                        total: 120,
+                        cls_name_old: '八年级（2）班',
                     },
                 ]
             }
