@@ -178,7 +178,7 @@ class Myadjust extends CI_Controller {
         $cls_id = $student->cls_id;
         $request_cls_id = $student->request_cls_id;
         $grade_id = $student->grade_id;
-        $stud_sex_num = $student->stud_sex_num;
+        $sex_num = $student->sex_num;
         $class_in_mydivision = Model\xovClass::classIdMyDivision($user_id, $grade_id, $cls_id);
         if ( $class_in_mydivision ) {
           // 查询交换学生数据
@@ -186,7 +186,7 @@ class Myadjust extends CI_Controller {
           $samesex = Model\xonDivisionSet::getSamesexByGradeId($grade_id);
           $section = Model\xonDivisionSet::getSectionByGradeId($grade_id);
           $limit_num = Model\xonDivisionSet::getLimitnumByGradeId($grade_id);
-          $exchangestuds = Model\xovGradeDivisionStud::getStudSumNotMovedByValue($request_cls_id, $value, $section, $godown, $samesex, $stud_sex_num, $limit_num);
+          $exchangestuds = Model\xovGradeDivisionStud::getStudSumNotMovedByValue($request_cls_id, $value, $section, $godown, $samesex, $sex_num, $limit_num);
         }
         $student = [$student];
         $result = compact('student', 'qrcode_data', 'exchangestuds', 'class_in_mydivision');
@@ -273,7 +273,7 @@ class Myadjust extends CI_Controller {
         $section = Model\xonDivisionSet::getSectionByGradeId($grade_id);
         $limit_num = Model\xonDivisionSet::getLimitnumByGradeId($grade_id);
 
-        $result = Model\xovGradeDivisionStud::getStudSumNotMovedByValue($move->request_cls_id, $move->value, $section, $godown, $samesex, $move->stud_sex_num, $limit_num);
+        $result = Model\xovGradeDivisionStud::getStudSumNotMovedByValue($move->request_cls_id, $move->value, $section, $godown, $samesex, $move->sex_num, $limit_num);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {

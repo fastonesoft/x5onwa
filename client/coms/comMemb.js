@@ -29,14 +29,6 @@ Component({
     },
   },
 
-  ready() {
-    var that = this
-    that.data.url && x5on.http(that.data.url)
-    .then(membs=>{
-      that.setData({ membs })
-    })
-  },
-
   methods: {
     removeClick: function (e) {
       var uid = e.currentTarget.dataset.uid

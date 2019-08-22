@@ -27,14 +27,6 @@ Component({
     },
   },
 
-  ready() {
-    var that = this
-    that.data.url && x5on.http(that.data.url, data)
-    .then(picks=>{
-      that.setData({ picks })
-    })
-  },
-
   methods: {
     rowpickChange: function (e) {
       var that = this

@@ -32,16 +32,6 @@ Component({
     },
   },
 
-  ready() {
-    var that = this
-    !that.data.checked && that.setData({ checked: 'checked' })
-    //
-    that.data.url && x5on.http(that.data.url, that.data.data)
-    .then(checks => {
-      that.setData({ checks })
-    })
-  },
-
   methods: {
     checkChange: function (e) {
       var that = this

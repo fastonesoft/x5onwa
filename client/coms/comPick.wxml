@@ -8,7 +8,7 @@
 			<view class="weui-label">{{label}}</view>
 		</view>
 		<view class="weui-cell__bd">
-			<picker bindchange="pickChange" name="{{name}}" range="{{picks}}" range-key="{{rangeKey}}"
+			<picker bindchange="pickChange" name="{{name}}" value="{{selectIndex}}" range="{{picks}}" range-key="{{rangeKey}}"
 				disabled="{{!picks||picks.length==0}}">
 				<view class="weui-select weui-select_in-select-after">{{picks[selectIndex][selectKey]}}</view>
 			</picker>

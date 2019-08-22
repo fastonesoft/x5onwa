@@ -4,112 +4,72 @@ var x5on = require('../x5on.js')
 Page({
 
   data: {
-    comeshow: false,
-    grades: [],
-    classes: [],
-    students: [],
+    comeshow: 1,
   },
 
   onLoad: function (options) {
     var that = this
-    x5on.request({
-      url: x5on.url.gradestudgrade,
-      success: grades => {
-        that.setData({ grades })
-      }
+    x5on.http(x5on.url.gradestudgrade)
+    .then(grades=>{
+      that.setData({ grades })
+    })
+    .catch(error=>{
+      x5on.showError(error)
     })
   },
 
-  getGradeid: function () {
-    var grades = this.data.grades
-    var gradeIndex = this.data.gradeIndex
-    if (grades && grades.length > 0 && gradeIndex && gradeIndex > -1) {
-      return grades[gradeIndex].id
-    }
-    return null
-  },
-
-  getClsid: function () {
-    var classes = this.data.classes
-    var classIndex = this.data.classIndex
-    if (classes && classes.length > 0 && classIndex && classIndex > -1) {
-      return classes[classIndex].id
-    }
-    return null
-  },
-
-  gradeChange: function (e) {
+  gradeChange: function(e) {
     var that = this
-    var students = []
-    var classIndex = -1
-    var gradeIndex = e.detail.value
-    var comeshow = false
-    that.setData({ gradeIndex, classIndex, students, comeshow })
-    //
-    var grade_id = that.getGradeid()
-    x5on.post({
-      url: x5on.url.gradestudclass,
-      data: { grade_id },
-      success: classes => {
-        that.setData({ classes })
-      }
+    that.setData(e.detail)
+
+    x5on.http(x5on.url.gradestudclass, e.detail)
+    .then(classes=>{
+      that.setData({ classes })
+    })
+    .catch(error=>{
+      x5on.showError(error)
     })
   },
 
-  classChange: function (e) {
+  classChange: function(e) {
     var that = this
-    x5on.pickChange(e, classIndex => {
-      that.setData({ classIndex })
-      // 
-      var cls_id = that.getClsid()
-      var grade_id = that.getGradeid()
-      x5on.post({
-        url: x5on.url.gradestudcls,
-        data: { grade_id, cls_id },
-        success: students => {
-          var male = 0, female = 0
-          students.forEach(student => {
-            student.stud_sex_num ? male++ : female++
-          })
-          var comeshow = students.length !== 0
-          that.setData({ students, comeshow, male, female })
-        }
+    that.setData(e.detail)
+
+    const { grade_id, cls_id } = that.data
+    x5on.http(x5on.url.gradestudcls, { grade_id, cls_id })
+    .then(students=>{
+
+      var male = 0, female = 0
+      students.forEach(student => {
+        student.stud_sex_num ? male++ : female++
       })
+      var comeshow = students.length !== 0
+      that.setData({ students, comeshow, male, female })
+    })
+    .catch(error=>{
+      x5on.showError(error)
     })
   },
 
   findSubmit: function (e) {
     var that = this
-    var rules = {
-      stud_name: {
-        required: true,
-        chinese: true,
-        rangelength: [1, 3],
-      }
-    }
-    var messages = {
-      stud_name: {
-        required: '学生姓名'
-      }
-    }
-    x5on.checkForm(e, rules, messages, form => {
-      form.cls_id = that.getClsid()
-      form.grade_id = that.getGradeid()
-      x5on.post({
-        url: x5on.url.gradestudquery,
-        data: form,
-        success: students => {
-          var male = 0, female = 0
-          students.forEach(student => {
-            student.stud_sex_num ? male++ : female++
-          })
-          var comeshow = students.length === 0 ? false : that.data.comeshow
-          that.setData({ students, comeshow, male, female })
-        }
+
+    const { grade_id, cls_id } = that.data
+    let form = Object.assign({ grade_id, cls_id }, e.detail)
+
+    x5on.http(x5on.url.gradestudquery, form)
+    .then(students=>{
+      var male = 0, female = 0
+      students.forEach(student => {
+        student.stud_sex_num ? male++ : female++
       })
-    }, error => {
+      var comeshow = students.length === 0 ? false : that.data.comeshow
+      that.setData({ students, comeshow, male, female })
+    })
+    .catch(error=>{
       x5on.showError(error)
     })
+
   },
 
   studentsChange: function (e) {

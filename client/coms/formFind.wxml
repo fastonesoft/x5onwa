@@ -9,7 +9,7 @@
         <view class="weui-label">{{label}}</view>
       </view>
       <view class="weui-cell__bd">
-        <input class="weui-input" placeholder="请输入{{label}}" name="name" type="text" maxlength="4" />
+        <input class="weui-input" placeholder="请输入{{label}}" name="{{name?name:'name'}}" type="text" maxlength="4" />
       </view>
       <view class="weui-cell__ft">
         <button type="normal" form-type="submit">查询</button>

@@ -35,18 +35,6 @@ Component({
     },
   },
 
-  ready() {
-    var that = this
-    !that.data.checked && that.setData({ checked: 'checked' })
-    //
-    that.data.url && x5on.request({
-      url: that.data.url,
-      success(radios) {
-        that.setData({ radios })
-      }
-    })
-  },
-
   methods: {
     removeClick: function (e) {
       var uid = e.currentTarget.dataset.uid

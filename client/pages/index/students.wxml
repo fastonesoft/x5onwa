@@ -1,57 +1,22 @@
 <!--pages/index/students.wxml-->
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
-<form bindsubmit="findSubmit">
-  <view class="weui-cells__title">年级设置</view>
-  <view class="weui-cells weui-cells_after-title">
-    <view class="weui-cell weui-cell_select">
-      <view class="weui-cell__hd weui-cell__hd_in-select-after">
-        <view class="weui-label">年级选择</view>
-      </view>
-      <view class="weui-cell__bd">
-        <picker bindchange="gradeChange" name="grade_id" value="{{gradeIndex}}" range="{{grades}}" range-key="grade_name" disabled="{{!grades || grades.length===0}}">
-          <view class="weui-select weui-select_in-select-after">{{grades[gradeIndex].grade_name}}</view>
-        </picker>
-      </view>
-    </view>
-  </view>
+<comPick title="年级设置" notitle="{{true}}" label="年级选择" name="grade_id" rangeKey="grade_name" selectKey="grade_name"
+  valueKey="id" picks="{{grades}}" bind:pickChange="gradeChange" />
 
-  <view class="weui-cells__title">班级设置</view>
-  <view class="weui-cells weui-cells_after-title">
-    <view class="weui-cell weui-cell_select">
-      <view class="weui-cell__hd weui-cell__hd_in-select-after">
-        <view class="weui-label">班级选择</view>
-      </view>
-      <view class="weui-cell__bd">
-        <picker bindchange="classChange" name="cls_id" value="{{classIndex}}" range="{{classes}}" range-key="cls_name" disabled="{{!classes || classes.length===0}}">
-          <view class="weui-select weui-select_in-select-after">{{classes[classIndex].cls_name}}</view>
-        </picker>
-      </view>
-    </view>
-  </view>
+<comPick title="班级设置" notitle="{{0}}" label="班级选择" name="cls_id" rangeKey="cls_name" selectKey="cls_name" valueKey="id"
+  picks="{{classes}}" bind:pickChange="classChange" />
 
-  <view class="weui-cells__title">学生查询</view>
-  <view class="weui-cells weui-cells_after-title">
-    <view class="weui-cell weui-cell_input weui-cell_vcode">
-      <view class="weui-cell__hd">
-        <view class="weui-label">学生姓名</view>
-      </view>
-      <view class="weui-cell__bd">
-        <input class="weui-input" placeholder="输入学生姓名" name="stud_name" type="text" maxlength="4" />
-      </view>
-      <view class="weui-cell__ft">
-        <button type="normal" form-type="submit">查询</button>
-      </view>
-    </view>
-  </view>
-</form>
+<formFind title="孩子设置" notitle="{{0}}" label="孩子姓名" name="stud_name" bind:findSubmit="findSubmit" />
+
+
 
 <view class="students-images-area" wx:if="{{comeshow}}">
   <image class="students_images" src="/images/index/stud_add.png" bindtap="studaddClick"></image>
   <image class="students_images" src="/images/index/stud_come.png" bindtap="studcomeClick"></image>
   <image class="students_images" src="/images/index/stud_read.png" bindtap="studreadClick"></image>
   <image class="students_images" src="/images/index/stud_repetition.png" bindtap="studrepetClick"></image>
-  
+
   <image class="students_split"></image>
   <image class="students_images" src="/images/index/stud_modi.png" bindtap="studmodiClick"></image>
   <image class="students_images" src="/images/index/stud_auth.png" bindtap="studauthClick"></image>

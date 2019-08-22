@@ -723,7 +723,7 @@ var poRequest = function (url, donshow) {
 var poPost = function (url, data, donshow) {
   return new Promise((resolve, reject) => {
     util.showBusy('正在提交...')
-    qcloud.post({
+    qcloud.request({
       url: url,
       data: data,
       method: 'POST',

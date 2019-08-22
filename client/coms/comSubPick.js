@@ -30,14 +30,6 @@ Component({
     },
   },
 
-  ready() {
-    var that = this
-    that.data.url_q && x5on.http(that.data.url_q, that.data.data_q)
-    .then(picks=>{
-      that.setData({ picks })
-    })
-  },
-
   observers: {
     'picks, value': function (picks, value) {
       var selectIndex = x5on.getIndexe(picks, this.data.valueKey, value)

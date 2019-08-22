@@ -75,11 +75,11 @@ class Mytuning extends CI_Controller {
         $all = $param['all'];
         $value = $param['value'];
         $cls_id = $param['cls_id'];
-        $stud_sex_num = $param['stud_sex_num'];
+        $sex_num = $param['sex_num'];
 
         $grade_id = Model\xonClass::getGradeIdByClassId($cls_id);
         $section = Model\xonDivisionSet::getSectionByGradeId($grade_id);
-        $result = Model\xovGradeDivisionStud::getStudSumByValue($cls_id, $value, $all, $section, $stud_sex_num);
+        $result = Model\xovGradeDivisionStud::getStudSumByValue($cls_id, $value, $all, $section, $sex_num);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {

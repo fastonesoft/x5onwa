@@ -34,18 +34,6 @@ Component({
     },
   },
 
-  ready() {
-    var that = this
-    !that.data.checked && that.setData({ checked: 'checked' })
-    //
-    that.data.url && x5on.request({
-      url: that.data.url,
-      success(radios) {
-        that.setData({ radios })
-      }
-    })
-  },
-
   methods: {
     radioChange: function (e) {
       var that = this

@@ -29,14 +29,6 @@ Component({
     },
   },
 
-  ready() {
-    var that = this
-    that.data.url && x5on.http(that.data.url)
-    .then(picks=>{
-      that.setData({ picks })
-    })
-  },
-
   observers: {
     'picks': function (picks) {
       this.setData({ selectIndex: -1 })
