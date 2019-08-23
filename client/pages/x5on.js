@@ -84,33 +84,6 @@ var doUrl = {
   schdistsch: `${host}/weapp/schdist/sch`,
   schdistdel: `${host}/weapp/schdist/del`,
 
-  // 班级分管
-  mydivi: `${host}/weapp/mydivi`,
-  mydiviclsdiv: `${host}/weapp/mydivi/clsdiv`,
-  mydiviteachs: `${host}/weapp/mydivi/teachs`,
-  mydividist: `${host}/weapp/mydivi/dist`,
-  mydiviremove: `${host}/weapp/mydivi/remove`,
-
-  // 权限设置
-  roleset: `${host}/weapp/roleset`,
-  rolesetupdate: `${host}/weapp/roleset/update`,
-
-  // 分组权限
-  rolegroup: `${host}/weapp/rolegroup`,
-  rolegrouprole: `${host}/weapp/rolegroup/role`,
-  rolegroupupdate: `${host}/weapp/rolegroup/update`,
-
-
-
-
-  // 分类设置
-  typeset: `${host}/weapp/typeset`,
-  typesetadd: `${host}/weapp/typeset/add`,
-  typesetdel: `${host}/weapp/typeset/del`,
-  // 学科设置
-  subset: `${host}/weapp/subset`,
-  subsetadd: `${host}/weapp/subset/add`,
-  subsetdel: `${host}/weapp/subset/del`,
   // 学校年度
   schyear: `${host}/weapp/schyear`,
   schyearadd: `${host}/weapp/schyear/add`,
@@ -228,6 +201,42 @@ var doUrl = {
   // 孩子设置
   childset: `${host}/weapp/childset`,
   childsetupdate: `${host}/weapp/childset/update`,
+
+  //学生录取
+  studin: `${host}/weapp/studin`,
+
+
+
+
+
+//-----------------------------------
+  // 班级分管
+  mydivi: `${host}/weapp/mydivi`,
+  mydiviclsdiv: `${host}/weapp/mydivi/clsdiv`,
+  mydiviteachs: `${host}/weapp/mydivi/teachs`,
+  mydividist: `${host}/weapp/mydivi/dist`,
+  mydiviremove: `${host}/weapp/mydivi/remove`,
+  
+  // 权限设置
+  roleset: `${host}/weapp/roleset`,
+  rolesetupdate: `${host}/weapp/roleset/update`,
+
+  // 分组权限
+  rolegroup: `${host}/weapp/rolegroup`,
+  rolegrouprole: `${host}/weapp/rolegroup/role`,
+  rolegroupupdate: `${host}/weapp/rolegroup/update`,
+
+  // 分类设置
+  typeset: `${host}/weapp/typeset`,
+  typesetadd: `${host}/weapp/typeset/add`,
+  typesetdel: `${host}/weapp/typeset/del`,
+  // 学科设置
+  subset: `${host}/weapp/subset`,
+  subsetadd: `${host}/weapp/subset/add`,
+  subsetdel: `${host}/weapp/subset/del`,
+  
+
+
 
 
   // 同班设置

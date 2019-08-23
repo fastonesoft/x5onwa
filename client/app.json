@@ -11,7 +11,7 @@
     "pages/index/regquery",
     "pages/index/regarbi",
     "pages/index/reggroup",
-    
+
     "pages/index/roleset",
     "pages/index/rolegroup",
     "pages/index/userset",
@@ -26,6 +26,10 @@
     "pages/index/areadist",
     "pages/index/schsdist",
     "pages/index/schdist",
+
+    "pages/index/studin",
+    "pages/index/studinto",
+    "pages/index/studup",
     "pages/index/stud_add",
     "pages/index/stud_modi",
     "pages/index/stud_auth",
@@ -40,6 +44,7 @@
     "pages/index/stud_down",
     "pages/index/stud_temp",
     "pages/index/stud_back",
+    
     "pages/index/myrename",
     "pages/index/myexchange",
     "pages/index/myexqrcode",
