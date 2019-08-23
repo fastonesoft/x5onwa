@@ -29,4 +29,24 @@ class mvvStudIn
         return $result;
     }
 
+    public static function query($sch_user_id, $steps_id, $child_name) {
+        $result = [];
+        mvvUserSchoolGroup::schUser($sch_user_id, function ($user_sch_group) use ($steps_id, $child_name, &$result) {
+            $sch_id = $user_sch_group->sch_id;
+
+            $result = xovStudRegNotIn::likesBySuff(compact('steps_id'), compact('child_name'), 'order by child_name, child_id');
+        });
+        return $result;
+    }
+
+    public static function update($sch_user_id, $param) {
+        $result = [];
+        mvvUserSchoolGroup::schUser($sch_user_id, function ($user_sch_group) use ($param, &$result) {
+            $sch_id = $user_sch_group->sch_id;
+
+            $result = xovStudRegNotIn::likesBySuff(compact('steps_id'), compact('child_name'), 'order by child_name, child_id');
+        });
+        return $result;
+    }
+
 }

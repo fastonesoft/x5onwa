@@ -42,14 +42,26 @@ Page({
 		.catch(error => {
 			x5on.showError(error)
 		})
-},
+	},
 
+	findSubmit: function(e) {
+		const that = this
+		const { steps_id } = that.data
+		Object.assign(e.detail, { steps_id })
 
-	formSubmit: function(e) {
+		x5on.http(x5on.url.studinquery, e.detail)
+		.then(notins => {
+			that.setData({ notins })
+		})
+		.catch(error => {
+			x5on.showError(error)
+		})
+	},
+
+	checkSubmit: function(e) {
 		const that = this
 		const { steps_id } = that.data
 		Object.assign(e.detail, { steps_id })
 	},
-
 
 })

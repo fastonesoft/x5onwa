@@ -45,4 +45,44 @@ class Studin extends CI_Controller
             $this->json($error);
         });
     }
+
+    public function query()
+    {
+        Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
+            try {
+                // 未录取查询
+                $param = $_POST;
+                $steps_id = $param['steps_id'];
+                $child_name = Model\x5on::getLike($param['child_name']);
+
+                $result = Mvv\mvvStudIn::query($userinfor->unionId, $steps_id, $child_name);
+
+                $this->json(['code' => 0, 'data' => $result]);
+            } catch (Exception $e) {
+                $this->json(['code' => 1, 'data' => $e->getMessage()]);
+            }
+        }, function ($error) {
+            $this->json($error);
+        });
+    }
+
+    public function update()
+    {
+        Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
+            try {
+                // 未录取查询
+                $param = $_POST;
+
+
+                $result = Mvv\mvvStudIn::update($userinfor->unionId, $param);
+
+                $this->json(['code' => 0, 'data' => $result]);
+            } catch (Exception $e) {
+                $this->json(['code' => 1, 'data' => $e->getMessage()]);
+            }
+        }, function ($error) {
+            $this->json($error);
+        });
+    }
+
 }

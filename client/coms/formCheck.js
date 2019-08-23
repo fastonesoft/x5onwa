@@ -32,12 +32,6 @@ Component({
     },
   },
 
-  observers: {
-    'checks': function (checks) {
-      this.setData({ checks })
-    }
-  },
-
   methods: {
     checkChange: function (e) {
       var that = this
