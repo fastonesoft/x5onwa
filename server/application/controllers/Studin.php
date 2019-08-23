@@ -70,11 +70,13 @@ class Studin extends CI_Controller
     {
         Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
             try {
-                // 未录取查询
+                // 录取
                 $param = $_POST;
+                // 分级信息
+                $steps_id = $param['steps_id'];
+                $uids = $param['uids'];
 
-
-                $result = Mvv\mvvStudIn::update($userinfor->unionId, $param);
+                $result = Mvv\mvvStudIn::update($userinfor->unionId, $steps_id, $uids);
 
                 $this->json(['code' => 0, 'data' => $result]);
             } catch (Exception $e) {

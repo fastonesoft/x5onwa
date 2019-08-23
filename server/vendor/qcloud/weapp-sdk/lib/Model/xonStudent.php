@@ -6,6 +6,17 @@ class xonStudent extends cAppinfo
   protected static $tableName = 'xonStudent';
   protected static $tableTitle = '录取学生';
 
+  public static function addStudIn($id, $child_id, $sch_id, $steps_id) {
+      $uid = x5on::getUid();
+      $come_date = date('Y-m-d');
+
+      self::insert(compact('id', 'uid', 'child_id', 'sch_id', 'steps_id', 'come_date'));
+  }
+
+
+
+
+  // 可以要修改 或 废弃
   public static function add ($child_id, $step_id, $come_date) {
     // 检测当前年级对应学校
     $step = xonStep::checkById($step_id);

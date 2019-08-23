@@ -44,6 +44,9 @@ class x5on
   // 跨域标志
   const CORS = 1;
 
+  // 每场分组人数
+    const HALL_SIZE = 36;
+
   // 给数组元素添加编号
   public static function addIndex($arr)
   {
@@ -207,6 +210,34 @@ class x5on
       return $prev . str_pad($right, $right_bit, '0', STR_PAD_LEFT);
     }
   }
+
+    public static function getMaxIdex($id, $prev, $bit, $left_bit, $right_bit, $max_value)
+    {
+        if ($bit !== $left_bit + $right_bit) throw new Exception('编号设置有误');
+
+        if ($id === null) {
+            return $prev . str_pad('1', $bit, '0', STR_PAD_LEFT);
+        } else {
+            $right = substr($id, -$bit);
+            $str_left = substr($right, $left_bit);
+            $str_right = substr($right, -$right_bit);
+
+            var_dump($right);
+            var_dump($str_left);
+            var_dump($str_right);
+
+            $str_right++;
+            if ($str_right >= $max_value) {
+                $str_right = 1;
+                $str_left++;
+            }
+
+            var_dump($str_left);
+            var_dump($str_right);
+
+            return $prev . str_pad($str_left, $left_bit, '0', STR_PAD_LEFT) . str_pad($str_right, $right_bit, '0', STR_PAD_LEFT);
+        }
+    }
 
   public static function getLike($like)
   {

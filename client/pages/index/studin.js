@@ -61,7 +61,21 @@ Page({
 	checkSubmit: function(e) {
 		const that = this
 		const { steps_id } = that.data
-		Object.assign(e.detail, { steps_id })
+		let form = Object.assign({ steps_id }, e.detail)
+
+		x5on.http(x5on.url.studinupdate, form)
+		.then(number => {
+			x5on.updateSuccess(number)
+			// 清除选中
+			let { notins } = that.data
+			notins = x5on.delArrs(notins, 'uid', e.detail.uids)
+			that.setData({ notins })
+		})
+		.catch(error => {
+			x5on.showError(error)
+		})
+
+		
 	},
 
 })
