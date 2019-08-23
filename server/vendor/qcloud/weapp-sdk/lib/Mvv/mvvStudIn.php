@@ -1,6 +1,7 @@
 <?php
 namespace QCloud_WeApp_SDK\Mvv;
 
+use QCloud_WeApp_SDK\Model\xovSchStep;
 use QCloud_WeApp_SDK\Model\xovStudRegNotIn;
 
 class mvvStudIn
@@ -23,7 +24,7 @@ class mvvStudIn
         mvvUserSchoolGroup::schUser($sch_user_id, function ($user_sch_group) use ($steps_id, &$result) {
             $sch_id = $user_sch_group->sch_id;
 
-            $result = xovStudRegNotIn::getsBy(compact('steps_id'));
+            $result = xovStudRegNotIn::getsBySuff(compact('steps_id'), 'order by child_name, child_id');
         });
         return $result;
     }

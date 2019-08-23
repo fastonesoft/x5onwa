@@ -1,29 +1,27 @@
 <!--coms/formCheck.wxml-->
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
-<form bindsubmit="formSubmit">
-	<block wx:if="{{checks.length>0}}">
-		<view class="weui-cells__title" wx:if="{{!notitle}}">{{title}}</view>
-		<view class="weui-cells weui-cells_after-title">
-			<checkbox-group name="uids" bindchange="checkChange">
-				<label class="weui-cell weui-check__label" wx:for="{{checks}}" wx:key="uid">
-					<checkbox class="weui-check" value="{{item.uid}}" checked="{{item[checked]}}" />
-					<view class="weui-cell__hd weui-check__hd_in-checkbox">
-						<icon type="circle" size="23" wx:if="{{!item[checked]}}"></icon>
-						<icon type="success" size="23" wx:if="{{item[checked]}}"></icon>
-					</view>
-					<block wx:if="{{split}}">
-						<view class="weui-cell__bd" wx:if="{{key&&memo}}">{{item[key]}}{{split}}{{item[memo]}}</view>
-						<view class="weui-cell__bd" wx:elif="{{key}}">{{item[key]}}</view>
-					</block>
-					<block wx:else>
-						<view class="weui-cell__bd" wx:if="{{key&&memo}}">{{item[key]}}{{item[memo]?'('+item[memo]+')':''}}</view>
-						<view class="weui-cell__bd" wx:elif="{{key}}">{{item[key]}}</view>
-					</block>
-				</label>
-			</checkbox-group>
-		</view>
-	</block>
+<form bindsubmit="formSubmit" wx:if="{{checks.length>0}}">
+	<view class="weui-cells__title" wx:if="{{!notitle}}">{{title}}</view>
+	<view class="weui-cells weui-cells_after-title">
+		<checkbox-group name="uids" bindchange="checkChange">
+			<label class="weui-cell weui-check__label" wx:for="{{checks}}" wx:key="uid">
+				<checkbox class="weui-check" value="{{item.uid}}" checked="{{item[checked]}}" />
+				<view class="weui-cell__hd weui-check__hd_in-checkbox">
+					<icon type="circle" size="23" wx:if="{{!item[checked]}}"></icon>
+					<icon type="success" size="23" wx:if="{{item[checked]}}"></icon>
+				</view>
+				<block wx:if="{{split}}">
+					<view class="weui-cell__bd" wx:if="{{key&&memo}}">{{item[key]}}{{split}}{{item[memo]}}</view>
+					<view class="weui-cell__bd" wx:elif="{{key}}">{{item[key]}}</view>
+				</block>
+				<block wx:else>
+					<view class="weui-cell__bd" wx:if="{{key&&memo}}">{{item[key]}}{{item[memo]?'('+item[memo]+')':''}}</view>
+					<view class="weui-cell__bd" wx:elif="{{key}}">{{item[key]}}</view>
+				</block>
+			</label>
+		</checkbox-group>
+	</view>
 	<view class="weui-btn-area" wx:if="{{!mini}}">
 		<button type="primary" form-type="submit">提交</button>
 	</view>

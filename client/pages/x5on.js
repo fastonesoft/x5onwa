@@ -204,6 +204,8 @@ var doUrl = {
 
   //学生录取
   studin: `${host}/weapp/studin`,
+  studinnotin: `${host}/weapp/studin/notin`,
+
 
 
 

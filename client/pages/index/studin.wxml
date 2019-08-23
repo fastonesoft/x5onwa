@@ -1,5 +1,10 @@
 <!--pages/index/studin.wxml-->
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
-<comPick title="学校分级" notitle="{{1}}" label="年级选择" name="step_id" rangeKey="schs_steps" selectKey="schs_steps"
+<comPick title="学校分级" notitle="{{1}}" label="年级选择" name="steps_id" rangeKey="schs_steps" selectKey="schs_steps"
   valueKey="id" picks="{{steps}}" bind:pickChange="pickChange" />
+
+
+<formCheck checks="{{notins}}" title="通过审核" notitle="{{0}}" key="child_name" memo="auth_name" bind:formSubmit="formSubmit" />
+
+    <formForm title="分组设置" notitle="{{0}}" fields="{{fields}}" rules="{{rules}}" bind:formSubmit="formSubmit" />
