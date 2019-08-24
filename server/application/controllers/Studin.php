@@ -46,27 +46,7 @@ class Studin extends CI_Controller
         });
     }
 
-    public function query()
-    {
-        Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
-            try {
-                // 未录取查询
-                $param = $_POST;
-                $steps_id = $param['steps_id'];
-                $child_name = Model\x5on::getLike($param['child_name']);
-
-                $result = Mvv\mvvStudIn::query($userinfor->unionId, $steps_id, $child_name);
-
-                $this->json(['code' => 0, 'data' => $result]);
-            } catch (Exception $e) {
-                $this->json(['code' => 1, 'data' => $e->getMessage()]);
-            }
-        }, function ($error) {
-            $this->json($error);
-        });
-    }
-
-    public function update()
+    public function enter()
     {
         Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
             try {
@@ -76,7 +56,7 @@ class Studin extends CI_Controller
                 $steps_id = $param['steps_id'];
                 $uids = $param['uids'];
 
-                $result = Mvv\mvvStudIn::update($userinfor->unionId, $steps_id, $uids);
+                $result = Mvv\mvvStudIn::enter($userinfor->unionId, $steps_id, $uids);
 
                 $this->json(['code' => 0, 'data' => $result]);
             } catch (Exception $e) {
@@ -86,5 +66,47 @@ class Studin extends CI_Controller
             $this->json($error);
         });
     }
+
+    public function query()
+    {
+        Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
+            try {
+                // 未录取查询
+                $param = $_POST;
+                $steps_id = $param['steps_id'];
+                $stud_name = Model\x5on::getLike($param['stud_name']);
+
+                $result = Mvv\mvvStudIn::query($userinfor->unionId, $steps_id, $stud_name);
+
+                $this->json(['code' => 0, 'data' => $result]);
+            } catch (Exception $e) {
+                $this->json(['code' => 1, 'data' => $e->getMessage()]);
+            }
+        }, function ($error) {
+            $this->json($error);
+        });
+    }
+
+    public function out()
+    {
+        Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
+            try {
+                // 录取删除
+                $param = $_POST;
+                // 分级信息
+                $steps_id = $param['steps_id'];
+                $uids = $param['uids'];
+
+                $result = Mvv\mvvStudIn::out($userinfor->unionId, $steps_id, $uids);
+
+                $this->json(['code' => 0, 'data' => $result]);
+            } catch (Exception $e) {
+                $this->json(['code' => 1, 'data' => $e->getMessage()]);
+            }
+        }, function ($error) {
+            $this->json($error);
+        });
+    }
+
 
 }

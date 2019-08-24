@@ -6,11 +6,11 @@ class xonStudent extends cAppinfo
   protected static $tableName = 'xonStudent';
   protected static $tableTitle = '录取学生';
 
-  public static function addStudIn($id, $child_id, $sch_id, $steps_id) {
+  public static function addStudIn($id, $child_id, $sch_id, $steps_id, $come_auth) {
       $uid = x5on::getUid();
       $come_date = date('Y-m-d');
 
-      self::insert(compact('id', 'uid', 'child_id', 'sch_id', 'steps_id', 'come_date'));
+      self::insert(compact('id', 'uid', 'child_id', 'sch_id', 'steps_id', 'come_auth', 'come_date'));
   }
 
 

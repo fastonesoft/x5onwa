@@ -206,7 +206,7 @@ var doUrl = {
   studin: `${host}/weapp/studin`,
   studinnotin: `${host}/weapp/studin/notin`,
   studinquery: `${host}/weapp/studin/query`,
-  studinupdate: `${host}/weapp/studin/update`,
+  studinenter: `${host}/weapp/studin/enter`,
 
 
 
@@ -391,10 +391,9 @@ var doDelArr = function (arrs, obj_name, obj_value) {
   arrs.splice(index, 1)
   return arrs;
 }
-// 批量删除数组元素
+// 批量删除checks数组元素
 var doDelArrs = function(arrs, obj_name, obj_values) {
   obj_values.forEach(uid => {
-    console.log(uid)
     arrs = doDelArr(arrs, obj_name, uid)
   });
   return arrs;

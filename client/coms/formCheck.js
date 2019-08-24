@@ -18,6 +18,8 @@ Component({
     memo: String,
     checked: String,
     mini: Boolean,
+    types: String,
+    name: String,
   },
 
   lifetimes: {

@@ -4,6 +4,7 @@ namespace QCloud_WeApp_SDK\Mvv;
 use QCloud_WeApp_SDK\Model\x5on;
 use QCloud_WeApp_SDK\Model\xonFormField;
 use QCloud_WeApp_SDK\Model\xonFormValue;
+use QCloud_WeApp_SDK\Model\xonStudent;
 use QCloud_WeApp_SDK\Model\xonStudReg;
 use QCloud_WeApp_SDK\Model\xovFormField;
 use QCloud_WeApp_SDK\Model\xovFormUser;
@@ -99,6 +100,15 @@ class mvvRegQuery
 
       // 获取regstud记录
       $reg_stud = xovStudReg::checkByUid($stud_reg_uid);
+
+      // 检测是否已录取，已录取，不能重审
+        $child_id = $reg_stud->child_id;
+        $stud_sch_id = $reg_stud->sch_id;
+        $steps_id = $reg_stud->steps_id;
+
+        if ($sch_id !== $stud_sch_id) throw new \Exception('不是本校学校，不能审核');
+
+        xonStudent::existByCustom(compact('steps_id', 'child_id'), '该学生已录取，不能重置');
 
       // 清除指标、初审、复核
       $stud_auth = 0;

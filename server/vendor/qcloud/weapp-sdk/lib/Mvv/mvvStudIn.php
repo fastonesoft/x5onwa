@@ -5,6 +5,7 @@ use QCloud_WeApp_SDK\Model\x5on;
 use QCloud_WeApp_SDK\Model\xonStudent;
 use QCloud_WeApp_SDK\Model\xonStudReg;
 use QCloud_WeApp_SDK\Model\xovSchStep;
+use QCloud_WeApp_SDK\Model\xovStudent;
 use QCloud_WeApp_SDK\Model\xovStudRegNotIn;
 
 class mvvStudIn
@@ -32,17 +33,17 @@ class mvvStudIn
         return $result;
     }
 
-    public static function query($sch_user_id, $steps_id, $child_name) {
+    public static function query($sch_user_id, $steps_id, $stud_name) {
         $result = [];
-        mvvUserSchoolGroup::schUser($sch_user_id, function ($user_sch_group) use ($steps_id, $child_name, &$result) {
+        mvvUserSchoolGroup::schUser($sch_user_id, function ($user_sch_group) use ($steps_id, $stud_name, &$result) {
             $sch_id = $user_sch_group->sch_id;
 
-            $result = xovStudRegNotIn::likesBySuff(compact('steps_id'), compact('child_name'), 'order by child_name, child_id');
+            $result = xovStudent::likesBySuff(compact('steps_id'), compact('stud_name'), 'order by id');
         });
         return $result;
     }
 
-    public static function update($sch_user_id, $steps_id, $reg_stud_uids_string) {
+    public static function enter($sch_user_id, $steps_id, $reg_stud_uids_string) {
         $result = [];
         mvvUserSchoolGroup::schUser($sch_user_id, function ($user_sch_group) use ($steps_id, $reg_stud_uids_string, &$result) {
             $sch_id = $user_sch_group->sch_id;
@@ -58,13 +59,31 @@ class mvvStudIn
                 $child_id = $stud_reg->child_id;
                 $reg_sch_id = $stud_reg->sch_id;
                 $reg_steps_id = $stud_reg->steps_id;
-
+                $come_auth = $stud_reg->stud_auth;
 
                 // 检测是否是本校学生
                 if ($sch_id !== $reg_sch_id) throw new \Exception('录取学校与学生记录不符');
 
                 // 保存信息
-                xonStudent::addStudIn($id, $child_id, $sch_id, $steps_id);
+                xonStudent::addStudIn($id, $child_id, $sch_id, $steps_id, $come_auth);
+                $count++;
+            }
+
+            $result = $count;
+        });
+        return $result;
+    }
+
+    public static function out($sch_user_id, $steps_id, $stud_uids_string) {
+        $result = [];
+        mvvUserSchoolGroup::schUser($sch_user_id, function ($user_sch_group) use ($steps_id, $stud_uids_string, &$result) {
+            $sch_id = $user_sch_group->sch_id;
+
+            // 一、删除录取记录
+            $count = 0;
+            $stud_uids = x5on::getUids($stud_uids_string, ',');
+            foreach ($stud_uids as $stud_uid) {
+
                 $count++;
             }
 

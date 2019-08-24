@@ -50,8 +50,8 @@ Page({
 		Object.assign(e.detail, { steps_id })
 
 		x5on.http(x5on.url.studinquery, e.detail)
-		.then(notins => {
-			that.setData({ notins })
+		.then(ins => {
+			that.setData({ ins })
 		})
 		.catch(error => {
 			x5on.showError(error)
@@ -63,7 +63,7 @@ Page({
 		const { steps_id } = that.data
 		let form = Object.assign({ steps_id }, e.detail)
 
-		x5on.http(x5on.url.studinupdate, form)
+		x5on.http(x5on.url.studinenter, form)
 		.then(number => {
 			x5on.updateSuccess(number)
 			// 清除选中
@@ -74,8 +74,6 @@ Page({
 		.catch(error => {
 			x5on.showError(error)
 		})
-
-		
 	},
 
 })

@@ -3,9 +3,9 @@
 
 <comPick title="学校分级" notitle="{{1}}" label="年级选择" name="steps_id" rangeKey="schs_steps" selectKey="schs_steps"
     valueKey="id" picks="{{steps}}" bind:pickChange="pickChange" />
-
-<formFind title="孩子设置" notitle="{{0}}" label="孩子姓名" name="child_name" bind:findSubmit="findSubmit"
-    wx:if="{{steps_id}}" />
-
 <formCheck checks="{{notins}}" title="通过审核" notitle="{{0}}" key="child_name" memo="auth_name"
+    bind:formSubmit="checkSubmit" />
+
+<formFind title="学生设置" notitle="{{0}}" label="学生姓名" name="stud_name" bind:findSubmit="findSubmit" wx:if="{{steps_id}}" />
+<formCheck checks="{{ins}}" title="录取学生" notitle="{{0}}" key="stud_name" memo="auth_name" types="warn" name="删除"
     bind:formSubmit="checkSubmit" />
