@@ -7,5 +7,5 @@
     bind:formSubmit="checkSubmit" />
 
 <formFind title="学生设置" notitle="{{0}}" label="学生姓名" name="stud_name" bind:findSubmit="findSubmit" wx:if="{{steps_id}}" />
-<formCheck checks="{{ins}}" title="录取学生" notitle="{{0}}" key="stud_name" memo="auth_name" types="warn" name="删除"
-    bind:formSubmit="checkSubmit" />
+<formCheck checks="{{ins}}" title="录取学生" notitle="{{0}}" key="stud_idc" split="-" memo="stud_name" types="warn" name="删除"
+    bind:formSubmit="delSubmit" />

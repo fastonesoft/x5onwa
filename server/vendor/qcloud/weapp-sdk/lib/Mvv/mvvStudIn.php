@@ -2,6 +2,7 @@
 namespace QCloud_WeApp_SDK\Mvv;
 
 use QCloud_WeApp_SDK\Model\x5on;
+use QCloud_WeApp_SDK\Model\xonGradeStud;
 use QCloud_WeApp_SDK\Model\xonStudent;
 use QCloud_WeApp_SDK\Model\xonStudReg;
 use QCloud_WeApp_SDK\Model\xovSchStep;
@@ -29,16 +30,6 @@ class mvvStudIn
             $sch_id = $user_sch_group->sch_id;
 
             $result = xovStudRegNotIn::getsBySuff(compact('steps_id'), 'order by child_name, child_id');
-        });
-        return $result;
-    }
-
-    public static function query($sch_user_id, $steps_id, $stud_name) {
-        $result = [];
-        mvvUserSchoolGroup::schUser($sch_user_id, function ($user_sch_group) use ($steps_id, $stud_name, &$result) {
-            $sch_id = $user_sch_group->sch_id;
-
-            $result = xovStudent::likesBySuff(compact('steps_id'), compact('stud_name'), 'order by id');
         });
         return $result;
     }
@@ -74,6 +65,16 @@ class mvvStudIn
         return $result;
     }
 
+    public static function query($sch_user_id, $steps_id, $stud_name) {
+        $result = [];
+        mvvUserSchoolGroup::schUser($sch_user_id, function ($user_sch_group) use ($steps_id, $stud_name, &$result) {
+            $sch_id = $user_sch_group->sch_id;
+
+            $result = xovStudent::likesBySuff(compact('steps_id'), compact('stud_name'), 'order by id');
+        });
+        return $result;
+    }
+
     public static function out($sch_user_id, $steps_id, $stud_uids_string) {
         $result = [];
         mvvUserSchoolGroup::schUser($sch_user_id, function ($user_sch_group) use ($steps_id, $stud_uids_string, &$result) {
@@ -84,6 +85,16 @@ class mvvStudIn
             $stud_uids = x5on::getUids($stud_uids_string, ',');
             foreach ($stud_uids as $stud_uid) {
 
+                // 检测学生编号
+                $student = xovStudent::checkByUid($stud_uid);
+
+                // 判断学生是否已分级
+                $stud_id = $student->id;
+                $stud_name = $student->stud_name;
+                xonGradeStud::existByIdCustom($stud_id, $stud_name.'，已分配年级，无法删除');
+
+                // 删除
+                xonStudent::delByUid($stud_uid);
                 $count++;
             }
 

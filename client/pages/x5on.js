@@ -207,6 +207,7 @@ var doUrl = {
   studinnotin: `${host}/weapp/studin/notin`,
   studinquery: `${host}/weapp/studin/query`,
   studinenter: `${host}/weapp/studin/enter`,
+  studinout: `${host}/weapp/studin/out`,
 
 
 

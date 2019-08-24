@@ -76,4 +76,21 @@ Page({
 		})
 	},
 
+	delSubmit: function(e) {
+		const that = this
+		const { steps_id } = that.data
+		let form = Object.assign({ steps_id }, e.detail)
+
+		x5on.http(x5on.url.studinout, form)
+		.then(number => {
+			x5on.updateSuccess(number)
+			// 清除选中
+			let { ins } = that.data
+			ins = x5on.delArrs(ins, 'uid', e.detail.uids)
+			that.setData({ ins })
+		})
+		.catch(error => {
+			x5on.showError(error)
+		})
+	},
 })
