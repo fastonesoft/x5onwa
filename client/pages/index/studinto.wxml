@@ -1,2 +1,6 @@
 <!--pages/index/studinto.wxml-->
-<text>pages/index/studinto.wxml</text>
+<view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
+
+<comPick title="学校分级" notitle="{{1}}" label="年级选择" name="steps_id" rangeKey="schs_steps" selectKey="schs_steps"
+    valueKey="id" picks="{{steps}}" bind:pickChange="pickChange" />
+<comList title_notshow="分级信息" notitle="{{0}}" obj="{{students}}" mes="{{mes}}" />
