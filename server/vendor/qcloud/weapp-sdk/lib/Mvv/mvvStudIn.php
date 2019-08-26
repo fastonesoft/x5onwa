@@ -91,7 +91,7 @@ class mvvStudIn
                 // 判断学生是否已分级
                 $stud_id = $student->id;
                 $stud_name = $student->stud_name;
-                xonGradeStud::existByIdCustom($stud_id, $stud_name.'，已分配年级，无法删除');
+                xonGradeStud::existByCustom(compact('stud_id'), $stud_name.'，已分配年级，无法删除');
 
                 // 删除
                 xonStudent::delByUid($stud_uid);

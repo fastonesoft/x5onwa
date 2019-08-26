@@ -202,16 +202,21 @@ var doUrl = {
   childset: `${host}/weapp/childset`,
   childsetupdate: `${host}/weapp/childset/update`,
 
-  //学生录取
+  // 学生录取
   studin: `${host}/weapp/studin`,
   studinnotin: `${host}/weapp/studin/notin`,
   studinquery: `${host}/weapp/studin/query`,
   studinenter: `${host}/weapp/studin/enter`,
   studinout: `${host}/weapp/studin/out`,
 
+  // 学生分级
+  studinto: `${host}/weapp/studinto`,
+  studintocount: `${host}/weapp/studinto/count`,
+  studintoenter: `${host}/weapp/studinto/enter`,
+  studintoquery: `${host}/weapp/studinto/query`,
+  studintoout: `${host}/weapp/studinto/out`,
 
-
-
+  
 
 //-----------------------------------
   // 班级分管
@@ -297,17 +302,18 @@ var doUrl = {
 
   // 学生学籍
   gradestud: `${host}/weapp/gradestud`,
-  gradestudgrade: `${host}/weapp/gradestud/grade`,
   gradestudclass: `${host}/weapp/gradestud/classes`,
   gradestudcls: `${host}/weapp/gradestud/studcls`,
-  gradestuduid: `${host}/weapp/gradestud/uid`,
   gradestudquery: `${host}/weapp/gradestud/query`,
-  gradestudadd: `${host}/weapp/gradestud/add`,
   gradestudtype: `${host}/weapp/gradestud/type`,
-  gradestudstatus: `${host}/weapp/gradestud/status`,
+  gradestudstatusin: `${host}/weapp/gradestud/statusin`,
+  gradestudauth: `${host}/weapp/gradestud/auth`,
+
+
+  gradestuduid: `${host}/weapp/gradestud/uid`,
+  gradestudadd: `${host}/weapp/gradestud/add`,
   gradestudmove: `${host}/weapp/gradestud/move`,
   gradestudmodi: `${host}/weapp/gradestud/modi`,
-  gradestudauth: `${host}/weapp/gradestud/auth`,
   gradestudcome: `${host}/weapp/gradestud/come`,
   gradestudrepet: `${host}/weapp/gradestud/repet`,
   gradestudread: `${host}/weapp/gradestud/read`,

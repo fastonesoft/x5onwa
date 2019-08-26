@@ -9,7 +9,14 @@ Page({
 
   onLoad: function (options) {
     var that = this
-    x5on.http(x5on.url.gradestudgrade)
+    var mes = {
+      total: { label: '总人数', type: 0 },
+      female: { label: '：女生', type: 0 },
+      male: { label: '：男生', type: 0 },
+    }
+    that.setData({ mes })
+
+    x5on.http(x5on.url.gradestud)
     .then(grades=>{
       that.setData({ grades })
     })
@@ -23,8 +30,10 @@ Page({
     that.setData(e.detail)
 
     x5on.http(x5on.url.gradestudclass, e.detail)
-    .then(classes=>{
-      that.setData({ classes })
+    .then(classes_counts=>{
+      that.setData(classes_counts)
+      // 清除班级编号残留
+      that.setData({ cls_id: null })
     })
     .catch(error=>{
       x5on.showError(error)
@@ -35,16 +44,14 @@ Page({
     var that = this
     that.setData(e.detail)
 
-    const { grade_id, cls_id } = that.data
-    x5on.http(x5on.url.gradestudcls, { grade_id, cls_id })
-    .then(students=>{
-
+    x5on.http(x5on.url.gradestudcls, e.detail)
+    .then(studs=>{
       var male = 0, female = 0
-      students.forEach(student => {
-        student.stud_sex_num ? male++ : female++
+      studs.forEach(stud => {
+        stud.sex_num ? male++ : female++
       })
-      var comeshow = students.length !== 0
-      that.setData({ students, comeshow, male, female })
+      var counts = { total: studs.length, male, female }
+      that.setData({ studs, counts })    
     })
     .catch(error=>{
       x5on.showError(error)
@@ -53,24 +60,103 @@ Page({
 
   findSubmit: function (e) {
     var that = this
-
     const { grade_id, cls_id } = that.data
     let form = Object.assign({ grade_id, cls_id }, e.detail)
 
+    !grade_id && delete form.grade_id
+    !cls_id && delete form.cls_id
+
     x5on.http(x5on.url.gradestudquery, form)
-    .then(students=>{
+    .then(studs=>{
       var male = 0, female = 0
-      students.forEach(student => {
-        student.stud_sex_num ? male++ : female++
+      studs.forEach(stud => {
+        stud.sex_num ? male++ : female++
       })
-      var comeshow = students.length === 0 ? false : that.data.comeshow
-      that.setData({ students, comeshow, male, female })
+      var counts = { total: studs.length, male, female }
+      that.setData({ studs, counts })    
     })
     .catch(error=>{
       x5on.showError(error)
     })
-
   },
+
+  addClick: function(e) {
+    var value = null
+    var fields = [{
+      mode: 1,
+      label: '学生姓名',
+      message: '输入学生姓名',
+      name: 'stud_name',
+      type: 'text',
+      maxlength: 4,
+    }, {
+      mode: 1,
+      label: '身份证号',
+      message: '输入身份证号',
+      name: 'stud_idc',
+      type: 'idcard',
+      maxlength: 18,
+    }, {
+      mode: 3,
+      name: 'type_id',
+      label: '学生来源',
+      url: x5on.url.gradestudtype,
+      valueKey: 'id',
+      rangeKey: 'name',
+      selectKey: 'name',
+      value: value && value.type_id ? value.type_id : null,
+    }, {
+      mode: 3,
+      name: 'status_id',
+      label: '学籍状态',
+      url: x5on.url.gradestudstatusin,
+      valueKey: 'id',
+      rangeKey: 'name',
+      selectKey: 'name',
+      value: value && value.status_id ? value.status_id : null,
+    }, {
+      mode: 3,
+      name: 'stud_auth',
+      label: '学籍状态',
+      url: x5on.url.gradestudauth,
+      valueKey: 'id',
+      rangeKey: 'name',
+      selectKey: 'name',
+      value: value && value.stud_auth ? value.stud_auth : null,
+    }]
+    var rules = {
+      stud_name: {
+        required: true,
+        chinese: true,
+        minlength: 2,
+      },
+      stud_idc: {
+        required: true,
+        idcard: true,
+        minlength: 18,
+      },
+      type_id: {
+        required: true,
+      },
+      status_id: {
+        required: true,
+      },
+      stud_auth: {
+        required: true,
+      },
+    }
+    var json = {}
+    json.title = '年度学生'
+    json.notitle = true
+    json.url_u = x5on.url.subsetadd
+    json.arrsName = 'studs'
+    json.fields = fields
+    json.rules = rules
+
+    wx.navigateTo({ url: 'form_add?json=' + JSON.stringify(json) })
+  },
+
+
 
   studentsChange: function (e) {
     x5on.setRadio(this.data.students, e.detail.value, students => {

@@ -1,57 +1,14 @@
 <!--pages/index/students.wxml-->
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
-<comPick title="年级设置" notitle="{{true}}" label="年级选择" name="grade_id" rangeKey="grade_name" selectKey="grade_name"
+<comPick title="年级设置" notitle="{{1}}" label="年级选择" name="grade_id" rangeKey="steps_grade" selectKey="steps_grade"
   valueKey="id" picks="{{grades}}" bind:pickChange="gradeChange" />
+<comPick title_notshow="班级设置" notitle="{{0}}" label="班级选择" name="cls_id" rangeKey="cls_name" selectKey="cls_name"
+  valueKey="id" picks="{{classes}}" bind:pickChange="classChange" />
+<formFind title_notshow="学生设置" notitle="{{0}}" label="学生姓名" name="stud_name" bind:findSubmit="findSubmit" />
 
-<comPick title="班级设置" notitle="{{0}}" label="班级选择" name="cls_id" rangeKey="cls_name" selectKey="cls_name" valueKey="id"
-  picks="{{classes}}" bind:pickChange="classChange" />
+<comList title_notshow="统计信息" notitle="{{0}}" obj="{{counts}}" mes="{{mes}}" />
 
-<formFind title="孩子设置" notitle="{{0}}" label="孩子姓名" name="stud_name" bind:findSubmit="findSubmit" />
-
-
-
-<view class="students-images-area" wx:if="{{comeshow}}">
-  <image class="students_images" src="/images/index/stud_add.png" bindtap="studaddClick"></image>
-  <image class="students_images" src="/images/index/stud_come.png" bindtap="studcomeClick"></image>
-  <image class="students_images" src="/images/index/stud_read.png" bindtap="studreadClick"></image>
-  <image class="students_images" src="/images/index/stud_repetition.png" bindtap="studrepetClick"></image>
-
-  <image class="students_split"></image>
-  <image class="students_images" src="/images/index/stud_modi.png" bindtap="studmodiClick"></image>
-  <image class="students_images" src="/images/index/stud_auth.png" bindtap="studauthClick"></image>
-  <image class="students_images" src="/images/index/stud_move.png" bindtap="studmoveClick"></image>
-  <image class="students_images" src="/images/index/stud_jump.png" bindtap="studjumpClick"></image>
-
-  <image class="students_split"></image>
-  <image class="students_images" src="/images/index/stud_back.png" bindtap="studbackClick"></image>
-  <image class="students_images" src="/images/index/stud_return.png" bindtap="studreturnClick"></image>
-
-  <image class="students_split"></image>
-  <image class="students_images" src="/images/index/stud_down.png" bindtap="studdownClick"></image>
-  <image class="students_images" src="/images/index/stud_out.png" bindtap="studoutClick"></image>
-  <image class="students_images" src="/images/index/stud_leave.png" bindtap="studleaveClick"></image>
-  <image class="students_images" src="/images/index/stud_temp.png" bindtap="studtempClick"></image>
-  <image class="students_split"></image>
-  <image class="students_images_big" src="/images/index/stud_notin.png" bindtap="studnotinClick"></image>
-</view>
-
-<form wx:if="{{students.length>0}}">
-  <view class="weui-cells__title" wx:if="{{!comeshow}}">学生列表</view>
-  <view class="weui-cells weui-cells_after-title">
-    <radio-group name="stud_name" bindchange="studentsChange">
-      <label class="weui-cell weui-check__label" wx:for="{{students}}" wx:key="uid">
-        <radio class="weui-check" value="{{item.uid}}" checked="{{item.checked}}" />
-        <view class="weui-cell__bd" data-uid="{{item.uid}}" bindtap="studentClick">
-          {{item.cls_name}} - {{item.stud_name}}({{item.stud_sex}})
-        </view>
-        <view class="weui-cell__ft weui-cell__ft_in-radio">
-          <image class="students_images" src="/images/index/{{item.ico_name}}.png" wx:if="{{item.ico_name}}"></image>
-          <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.checked}}"></icon>
-          <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{item.checked}}"></icon>
-        </view>
-      </label>
-    </radio-group>
-  </view>
-  <view class="weui-cells__tips" wx:if="{{comeshow}}">总人数：{{students.length}}，男生：{{male}}，女生：{{female}}</view>
-</form>
+<comMemb title="年级学生" membs="{{studs}}" key="cls_name" split=" - " memo="stud_name" bind:editClick="editClick"
+  bind:removeClick="removeClick" />
+<comBtn canShow="{{grade_id&&cls_id}}" title="添加" bind:buttonClick="addClick" />

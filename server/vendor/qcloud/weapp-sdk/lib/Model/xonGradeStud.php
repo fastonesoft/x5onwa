@@ -6,7 +6,7 @@ class xonGradeStud extends cAppinfo
   protected static $tableName = 'xonGradeStud';
   protected static $tableTitle = '年度学生';
 
-  public static function add ($grade_id, $cls_id, $stud_id, $stud_type_id, $stud_status_id, $stud_auth, $stud_code, $stud_diploma) {
+  public static function add ($grade_id, $cls_id, $stud_id, $type_id, $status_id, $stud_auth, $stud_code, $stud_diploma) {
     // 检测
     $grade = xonGrade::checkById($grade_id);
     xonGradeStud::existBy(compact('grade_id', 'stud_id'));
@@ -15,7 +15,7 @@ class xonGradeStud extends cAppinfo
     $id = x5on::getMaxId($id, $grade_id, 4);
     $uid = x5on::getUid();
     $same_group = 0;
-    xonGradeStud::insert(compact('id', 'uid', 'grade_id', 'cls_id', 'stud_id', 'stud_type_id', 'stud_status_id', 'stud_auth', 'same_group', 'stud_code', 'stud_diploma'));
+    xonGradeStud::insert(compact('id', 'uid', 'grade_id', 'cls_id', 'stud_id', 'type_id', 'status_id', 'stud_auth', 'same_group', 'stud_code', 'stud_diploma'));
     return $id;
   }
 
