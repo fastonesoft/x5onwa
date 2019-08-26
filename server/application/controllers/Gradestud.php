@@ -134,12 +134,12 @@ class Gradestud extends CI_Controller
                 $grade_id = $param['grade_id'];
                 $stud_idc = $param['stud_idc'];
                 $stud_name = $param['stud_name'];
-                $come_date = $param['come_date'];
+                $come_date = date('Y-m-d');
                 $type_id = $param['type_id'];
                 $status_id = $param['status_id'];
                 $stud_auth = $param['stud_auth'];
                 // 添加学生
-                $result = Mvv\mvvGradeStud::addNoExam($grade_id, $cls_id, $stud_name, $stud_idc, $type_id, $status_id, $stud_auth, $come_date);
+                $result = Mvv\mvvGradeStud::addNoExam($user->unionId, $grade_id, $cls_id, $stud_name, $stud_idc, $type_id, $status_id, $stud_auth, $come_date);
                 $this->json(['code' => 0, 'data' => $result]);
             } catch (Exception $e) {
                 $this->json(['code' => 1, 'data' => $e->getMessage()]);
@@ -247,7 +247,7 @@ class Gradestud extends CI_Controller
                 $stud_trans_name = $param['stud_trans_name'];
                 $stud_auth = $param['stud_auth'] === 'true' ? 1 : 0;
                 //
-                $result = Mvv\mvvGradeStud::addNoExam($grade_id, $cls_id, $stud_name, $stud_idc, $type_id, $status_id, $stud_auth, $come_date);
+                $result = Mvv\mvvGradeStud::addNoExam($user->unionId, $grade_id, $cls_id, $stud_name, $stud_idc, $type_id, $status_id, $stud_auth, $come_date);
                 $this->json(['code' => 0, 'data' => $result]);
             } catch (Exception $e) {
                 $this->json(['code' => 1, 'data' => $e->getMessage()]);
@@ -271,7 +271,7 @@ class Gradestud extends CI_Controller
                 $status_id = $param['status_id'];
                 $stud_auth = $param['stud_auth'] === 'true' ? 1 : 0;
                 //
-                $result = Mvv\mvvGradeStud::addNoExam($grade_id, $cls_id, $stud_name, $stud_idc, $type_id, $status_id, $stud_auth, $come_date);
+                $result = Mvv\mvvGradeStud::addNoExam($user->unionId, $grade_id, $cls_id, $stud_name, $stud_idc, $type_id, $status_id, $stud_auth, $come_date);
                 $this->json(['code' => 0, 'data' => $result]);
             } catch (Exception $e) {
                 $this->json(['code' => 1, 'data' => $e->getMessage()]);
@@ -295,7 +295,7 @@ class Gradestud extends CI_Controller
                 $status_id = $param['status_id'];
                 $stud_auth = $param['stud_auth'] === 'true' ? 1 : 0;
                 //
-                $result = Mvv\mvvGradeStud::addNoExam($grade_id, $cls_id, $stud_name, $stud_idc, $type_id, $status_id, $stud_auth, $come_date);
+                $result = Mvv\mvvGradeStud::addNoExam($user->unionId, $grade_id, $cls_id, $stud_name, $stud_idc, $type_id, $status_id, $stud_auth, $come_date);
                 $this->json(['code' => 0, 'data' => $result]);
             } catch (Exception $e) {
                 $this->json(['code' => 1, 'data' => $e->getMessage()]);

@@ -7,6 +7,7 @@ use QCloud_WeApp_SDK\Model\xonChild;
 use QCloud_WeApp_SDK\Model\xonGrade;
 use QCloud_WeApp_SDK\Model\xonGradeStud;
 use QCloud_WeApp_SDK\Model\xonGradeStudTask;
+use QCloud_WeApp_SDK\Model\xonSchStep;
 use QCloud_WeApp_SDK\Model\xonStudAuth;
 use QCloud_WeApp_SDK\Model\xonStudent;
 use QCloud_WeApp_SDK\Model\xonStudStatus;
@@ -113,8 +114,30 @@ class mvvGradeStud
         return $result;
     }
 
+    public static function addNoExam($sch_user_id, $grade_id, $cls_id, $stud_name, $stud_idc, $type_id, $status_id, $stud_auth, $come_date)
+    {
+        $result = [];
+        mvvUserSchoolGroup::schUser($sch_user_id, function ($user_sch_group) use ($grade_id, $cls_id, $stud_name, $stud_idc, $type_id, $status_id, $stud_auth, $come_date, &$result) {
+            $sch_id = $user_sch_group->sch_id;
 
+            // 添加孩子表
+            xonChild::add($stud_idc, $stud_name);
+            // 通过grade_id找出steps_id，并添加录取学生表
+            $grade = xonGrade::getById($grade_id);
+            $steps_id = $grade->steps_id;
 
+            // 检测是否为招生分级，如果招生，则不能以这种方式添加学生记录
+            $can_recruit = 1;
+            $id = $steps_id;
+            xonSchStep::existByCustom(compact('id', 'can_recruit'), '招生年级不能以这种方式添加学生');
+            $stud_id = xonStudent::add($stud_idc, $steps_id, $stud_auth, $come_date);
+
+            // 添加年度学生
+            $uid = xonGradeStud::add($grade_id, $cls_id, $stud_id, $type_id, $status_id, $stud_auth);
+            $result = xovGradeStud::getsByUid($uid);
+        });
+        return $result;
+    }
 
 
     /**
@@ -171,18 +194,6 @@ class mvvGradeStud
         return xovGradeStud::getsByUid($grade_stud_uid);
     }
 
-    public static function addNoExam($grade_id, $cls_id, $stud_name, $stud_idc, $type_id, $status_id, $stud_auth, $come_date)
-    {
-        // 添加孩子表
-        xonChild::add($stud_idc, $stud_name);
-        // 通过grade_id找出step_id，并添加录取学生表
-        $grade = xonGrade::getById($grade_id);
-        $step_id = $grade->step_id;
-        $stud_id = xonStudent::add($stud_idc, $step_id, $come_date);
-        // 添加年度学生
-        $uid = xonGradeStud::add($grade_id, $cls_id, $stud_id, $type_id, $status_id, $stud_auth);
-        return xovGradeStud::getsByUid($uid);
-    }
 
     /**
      * 作为任务管理的统一添加方法
@@ -248,7 +259,7 @@ class mvvGradeStud
         $task = xovGradeStudTask::checkByUid($uid);
         xonGradeStudTask::setsByUid(compact('has_done'), $uid);
         $grade = xonGrade::checkById($grade_id);
-        $step_id = $grade->step_id;
+        $steps_id = $grade->steps_id;
         // 新学生信息
         $stud_id = $task->stud_id;
         $type_id = $task->type_id;
@@ -260,7 +271,7 @@ class mvvGradeStud
         // 添加新年度记录
         $grade_stud_id = xonGradeStud::add($grade_id, $cls_id, $stud_id, $type_id, $status_id, $stud_auth, $stud_code, $stud_diploma);
         // 变更学生信息
-        xonStudent::setsById(compact('step_id'), $stud_id);
+        xonStudent::setsById(compact('steps_id'), $stud_id);
         return xovGradeStud::getsById($grade_stud_id);
     }
 
@@ -276,7 +287,6 @@ class mvvGradeStud
         xonGradeStud::setsById(compact('cls_id', 'status_id'), $grade_stud_id);
         return xovGradeStud::getsById($grade_stud_id);
     }
-
 
 
 }

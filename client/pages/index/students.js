@@ -145,10 +145,12 @@ Page({
         required: true,
       },
     }
+    let { grade_id, cls_id } = that.data
     var json = {}
     json.title = '年度学生'
     json.notitle = true
     json.url_u = x5on.url.subsetadd
+    json.data_u = { grade_id, cls_id }
     json.arrsName = 'studs'
     json.fields = fields
     json.rules = rules
