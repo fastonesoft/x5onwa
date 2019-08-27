@@ -76,8 +76,6 @@ class Mysameset extends CI_Controller
                 $param = $_POST;
                 $result = Mvv\mvvMySameSet::update($user->unionId, $param);
 
-                var_dump($param);
-
                 $this->json(['code' => 0, 'data' => $result]);
             } catch (Exception $e) {
                 $this->json(['code' => 1, 'data' => $e->getMessage()]);

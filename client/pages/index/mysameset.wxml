@@ -7,5 +7,5 @@
 <comPick title_notshow="班级设置" notitle="{{0}}" label="班级选择" name="cls_id" rangeKey="cls_name" selectKey="cls_name"
   valueKey="id" picks="{{classes}}" bind:pickChange="classChange" />
 
-<formSwitch switchs="{{studs}}" title="班级学生" notitle="{{0}}" key="stud_name" memo="sex_name"
+<formSwitch switchs="{{studs}}" title="班级学生" notitle="{{0}}" key="stud_name" memo="sex_name" checked="same_group"
   bind:formSubmit="checkSubmit" />

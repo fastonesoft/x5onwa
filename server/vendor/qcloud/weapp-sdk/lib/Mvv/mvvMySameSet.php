@@ -2,6 +2,7 @@
 namespace QCloud_WeApp_SDK\Mvv;
 
 use QCloud_WeApp_SDK\Model\x5on;
+use QCloud_WeApp_SDK\Model\xonGradeStud;
 use QCloud_WeApp_SDK\Model\xovClass;
 use QCloud_WeApp_SDK\Model\xovGradeCurrent;
 use QCloud_WeApp_SDK\Model\xovGradeStudIn;
@@ -50,6 +51,7 @@ class mvvMySameSet
             $count = 0;
             foreach ($param as $uid => $value) {
                 $same_group = x5on::getBool($value);
+                xonGradeStud::setsByUid(compact('same_group'), $uid);
 
                 $count++;
             }

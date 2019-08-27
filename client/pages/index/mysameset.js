@@ -39,10 +39,11 @@ Page({
   },
 
   checkSubmit: function(e) {
-		const that = this
+		var that = this
 		x5on.http(x5on.url.mysamesetupdate, e.detail)
 		.then(number => {
-			x5on.updateSuccess(number)
+      x5on.updateSuccess(number)
+      that.setData({ studs: [] })
 		})
 		.catch(error => {
 			x5on.showError(error)
