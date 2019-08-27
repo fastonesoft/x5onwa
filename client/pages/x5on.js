@@ -239,8 +239,16 @@ var doUrl = {
     studownquery: `${host}/weapp/studown/query`,
     studowndone: `${host}/weapp/studown/done`,
 
+  // 调动设置
+  mydiviset: `${host}/weapp/mydiviset`,
+  mydivisetdata: `${host}/weapp/mydiviset/data`,
+  mydivisetupdate: `${host}/weapp/mydiviset/update`,
 
-
+  // 同班设置
+  mysameset: `${host}/weapp/mysameset`,
+  mysamesetcls: `${host}/weapp/mysameset/cls`,
+  mysamesetstuds: `${host}/weapp/mysameset/studs`,
+  mysamesetupdate: `${host}/weapp/mysameset/update`,
 
 
 
@@ -274,16 +282,7 @@ var doUrl = {
 
 
 
-  // 同班设置
-  mysameset: `${host}/weapp/mysameset`,
-  mysamesetclass: `${host}/weapp/mysameset/classes`,
-  mysamesetstudent: `${host}/weapp/mysameset/students`,
-  mysamesetstudentupdate: `${host}/weapp/mysameset/update`,
 
-  // 班号变更
-  myrename: `${host}/weapp/myrename`,
-  myrenameclass: `${host}/weapp/myrename/classes`,
-  myrenameupdate: `${host}/weapp/myrename/update`,
 
   // 分班微调
   mytuning: `${host}/weapp/mytuning`,
@@ -321,10 +320,6 @@ var doUrl = {
   myadjustclassmoving: `${host}/weapp/myadjust/classmoving`,
   myadjustmovingqrcode: `${host}/weapp/myadjust/movingqrcode`,
 
-  // 调动设置
-  mydiviset: `${host}/weapp/mydiviset`,
-  mydivisetdata: `${host}/weapp/mydiviset/data`,
-  mydivisetupdate: `${host}/weapp/mydiviset/update`,
 
 
 

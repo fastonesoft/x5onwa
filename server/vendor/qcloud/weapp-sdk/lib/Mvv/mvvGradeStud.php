@@ -72,7 +72,7 @@ class mvvGradeStud
         mvvUserSchoolGroup::schUser($sch_user_id, function ($user_sch_group) use ($cls_id, &$result) {
             $sch_id = $user_sch_group->sch_id;
 
-            $result = xovGradeStudIn::getsBySuff(compact('cls_id'), 'order by grade_id, cls_num, sex_num, stud_id');
+            $result = xovGradeStudIn::getsBySuff(compact('cls_id'), 'order by sex_num, stud_id');
         });
         return $result;
     }

@@ -1,49 +1,11 @@
 <!--pages/index/mysameset.wxml-->
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
-  <view class="weui-cells__title">年级设置</view>
-  <view class="weui-cells weui-cells_after-title">
-    <view class="weui-cell weui-cell_select">
-      <view class="weui-cell__hd weui-cell__hd_in-select-after">
-        <view class="weui-label">年级选择</view>
-      </view>
-      <view class="weui-cell__bd">
-        <picker bindchange="gradeChange" value="{{gradeIndex}}" range="{{grades}}" range-key="name" disabled="{{grades.length===0}}">
-          <view class="weui-select weui-select_in-select-after">{{grades[gradeIndex].name}}</view>
-        </picker>
-      </view>
-    </view>
-  </view>
+<comPick title="年级设置" notitle="{{1}}" label="年级选择" name="grade_id" rangeKey="steps_grade" selectKey="steps_grade"
+  valueKey="id" picks="{{grades}}" bind:pickChange="gradeChange" />
 
-  <view class="weui-cells__title">班级设置</view>
-  <view class="weui-cells weui-cells_after-title">
-    <view class="weui-cell weui-cell_select">
-      <view class="weui-cell__hd weui-cell__hd_in-select-after">
-        <view class="weui-label">班级选择</view>
-      </view>
-      <view class="weui-cell__bd">
-        <picker bindchange="classChange" value="{{classIndex}}" range="{{classes}}" range-key="cls_name" disabled="{{classes.length===0}}">
-          <view class="weui-select weui-select_in-select-after">{{classes[classIndex].cls_name}}</view>
-        </picker>
-      </view>
-    </view>
-  </view>
+<comPick title_notshow="班级设置" notitle="{{0}}" label="班级选择" name="cls_id" rangeKey="cls_name" selectKey="cls_name"
+  valueKey="id" picks="{{classes}}" bind:pickChange="classChange" />
 
-<form bindsubmit="samesetSubmit" wx:if="{{students.length>0}}">
-  <view class="weui-cells__title">班级学生</view>
-  <view class="weui-cells weui-cells_after-title">
-  <block wx:for="{{students}}" wx:key="uid">
-    <view class="weui-cell weui-cell_switch">
-      <view class="weui-cell__bd">{{item.stud_name}}({{item.stud_sex}})</view>
-      <view class="weui-cell__ft">
-        <switch name="{{item.uid}}" checked="{{item.same_group}}"/>
-      </view>
-    </view>
-  </block>
-  </view>
-  <view class="x5ui-half-btn">
-    <view class="weui-btn-area">
-      <button type="primary" form-type="submit">提交同班</button>
-    </view>
-  </view>
-</form>
+<formSwitch switchs="{{studs}}" title="班级学生" notitle="{{0}}" key="stud_name" memo="sex_name"
+  bind:formSubmit="checkSubmit" />
