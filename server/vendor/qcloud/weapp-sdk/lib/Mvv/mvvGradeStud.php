@@ -47,7 +47,7 @@ class mvvGradeStud
             $sex_num = 1;
             $male = xovGradeStudIn::count(compact('grade_id', 'sex_num'));
 
-            $classes = xovClass::getsBy(compact('grade_id'));
+            $classes = xovClass::getsBySuff(compact('grade_id'), 'order by num, id');
             $notins = xovGradeStudNot::getsBySuff(compact('grade_id'), 'order by status_id desc, id');
             $counts = compact('total', 'female', 'male');
             $result = compact('classes', 'counts', 'notins');

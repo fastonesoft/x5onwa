@@ -1,0 +1,8 @@
+<!--pages/index/mydiviset.wxml-->
+<view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
+
+<comPick title="年级设置" notitle="{{1}}" label="年级选择" name="grade_id" rangeKey="steps_grade" selectKey="steps_grade"
+  valueKey="id" picks="{{grades}}" bind:pickChange="gradeChange" />
+
+<formForm title_notshow="调动设置" notitle="{{0}}" fields="{{fields}}" rules="{{rules}}"
+  bind:formSubmit="mydivisetSubmit" />

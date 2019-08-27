@@ -31,6 +31,7 @@
     "pages/index/studinto",
     "pages/index/studup",
     "pages/index/studown",
+    
     "pages/index/stud_add",
     "pages/index/stud_modi",
     "pages/index/stud_auth",
@@ -52,7 +53,7 @@
     "pages/index/mysameset",
     "pages/index/mytuning",
     "pages/index/mydivi",
-    "pages/index/mydivisionset",
+    "pages/index/mydiviset",
     "pages/index/myadjust",
     "pages/index/myclass",
     "pages/index/mystud",

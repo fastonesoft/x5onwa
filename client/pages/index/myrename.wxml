@@ -1,20 +1,10 @@
 <!--pages/index/myrename.wxml-->
-
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
-  <view class="weui-cells__title">年级设置</view>
-  <view class="weui-cells weui-cells_after-title">
-    <view class="weui-cell weui-cell_select">
-      <view class="weui-cell__hd weui-cell__hd_in-select-after">
-        <view class="weui-label">年级选择</view>
-      </view>
-      <view class="weui-cell__bd">
-        <picker bindchange="gradeChange" value="{{gradeIndex}}" range="{{grades}}" range-key="name" disabled="{{grades.length===0}}">
-          <view class="weui-select weui-select_in-select-after">{{grades[gradeIndex].name}}</view>
-        </picker>
-      </view>
-    </view>
-  </view>
+<comPick title="年级设置" notitle="{{1}}" label="年级选择" name="grade_id" rangeKey="steps_grade" selectKey="steps_grade"
+  valueKey="id" picks="{{grades}}" bind:pickChange="gradeChange" />
+
+
 
 <form bindsubmit="myrenameSubmit" wx:if="{{items.length>0}}">
   <view class="weui-cells__title">班级列表</view>

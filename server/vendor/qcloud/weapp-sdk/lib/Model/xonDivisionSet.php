@@ -51,11 +51,4 @@ class xonDivisionSet
     return $res->limit_num;
   }
 
-  public static function update ($grade_id, $section, $limit_num, $samesex, $godown, $finished) {
-    $res = dbs::row('xonDivisionSet', ['*'], compact('grade_id'));
-    if ( $res !== null ) {
-      return dbs::update('xonDivisionSet', compact('section', 'limit_num', 'samesex', 'godown', 'finished'), compact('grade_id'));
-    }
-  }
-
 }
