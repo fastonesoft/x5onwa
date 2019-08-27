@@ -25,7 +25,9 @@ class x5on
 
     // 学籍状态
     const STATUS_RETURN = 2;
+    const STATUS_DOWN = 21;
     const STATUS_TEMP = 99;
+
 
     // 用户信息设置
     const USER_SET_MYSELF = 'user-set-myself';

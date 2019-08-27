@@ -44,6 +44,7 @@ Page({
               var arrs = page.data[arrsName]
               if (Array.isArray(arrs)) {
                 // 检测是否为数组，是数组，修改数组当前改动的对象
+                
                 arrs = x5on.setArr(arrs, 'uid', result.uid, result)
                 page.setData({ [arrsName]: arrs })
               } else {

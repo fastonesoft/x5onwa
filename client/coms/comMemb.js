@@ -17,6 +17,10 @@ Component({
     split: String,
     memo: String,
     selected: String,
+    canRemove: {
+      type: Boolean,
+      value: true,
+    },
   },
 
   lifetimes: {

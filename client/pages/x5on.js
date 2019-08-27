@@ -216,7 +216,33 @@ var doUrl = {
   studintoquery: `${host}/weapp/studinto/query`,
   studintoout: `${host}/weapp/studinto/out`,
 
+    // 学生学籍
+    gradestud: `${host}/weapp/gradestud`,
+    gradestudclass: `${host}/weapp/gradestud/classes`,
+    gradestudstudcls: `${host}/weapp/gradestud/studcls`,
+    gradestudquery: `${host}/weapp/gradestud/query`,
+    gradestudcls: `${host}/weapp/gradestud/cls`,
+    gradestudtype: `${host}/weapp/gradestud/type`,
+    gradestudstatusin: `${host}/weapp/gradestud/statusin`,
+    gradestudauth: `${host}/weapp/gradestud/auth`,
+    gradestudadd: `${host}/weapp/gradestud/add`,
+    gradestudedit: `${host}/weapp/gradestud/edit`,
+    gradestudtemp: `${host}/weapp/gradestud/temp`,
+    gradestudbackck: `${host}/weapp/gradestud/backck`,
+    gradestudback: `${host}/weapp/gradestud/back`,
+    gradestudbackref: `${host}/weapp/gradestud/backref`,
   
+    // 学生休学
+    studown: `${host}/weapp/studown`,
+    studowndown: `${host}/weapp/studown/down`,
+    studowncls: `${host}/weapp/studown/cls`,
+    studownquery: `${host}/weapp/studown/query`,
+    studowndone: `${host}/weapp/studown/done`,
+
+
+
+
+
 
 //-----------------------------------
   // 班级分管
@@ -300,29 +326,7 @@ var doUrl = {
   mydivisetdata: `${host}/weapp/mydiviset/data`,
   mydivisetupdate: `${host}/weapp/mydiviset/update`,
 
-  // 学生学籍
-  gradestud: `${host}/weapp/gradestud`,
-  gradestudclass: `${host}/weapp/gradestud/classes`,
-  gradestudcls: `${host}/weapp/gradestud/studcls`,
-  gradestudquery: `${host}/weapp/gradestud/query`,
-  gradestudtype: `${host}/weapp/gradestud/type`,
-  gradestudstatusin: `${host}/weapp/gradestud/statusin`,
-  gradestudauth: `${host}/weapp/gradestud/auth`,
 
-
-  gradestuduid: `${host}/weapp/gradestud/uid`,
-  gradestudadd: `${host}/weapp/gradestud/add`,
-  gradestudmove: `${host}/weapp/gradestud/move`,
-  gradestudmodi: `${host}/weapp/gradestud/modi`,
-  gradestudcome: `${host}/weapp/gradestud/come`,
-  gradestudrepet: `${host}/weapp/gradestud/repet`,
-  gradestudread: `${host}/weapp/gradestud/read`,
-  gradestuddown: `${host}/weapp/gradestud/down`,
-  gradestudtask: `${host}/weapp/gradestud/task`,
-  gradestudgradesdown: `${host}/weapp/gradestud/gradesdown`,
-  gradestudreturns: `${host}/weapp/gradestud/returns`,
-  gradestudback: `${host}/weapp/gradestud/back`,
-  gradestudtemp: `${host}/weapp/gradestud/temp`,
 
 
   // 错误测试地址
@@ -368,7 +372,7 @@ var doGetIndex = function (arrs, id_value) {
 var doGetIndexe = function (arrs, obj_name, obj_value) {
   for (var i = 0; i < arrs.length; i++) {
     var arr = arrs[i]
-    if (arr[obj_name] === obj_value) return i
+    if (arr[obj_name] == obj_value) return i
   }
   return -1
 }

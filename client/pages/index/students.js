@@ -3,11 +3,7 @@ var x5on = require('../x5on.js')
 
 Page({
 
-  data: {
-    comeshow: 1,
-  },
-
-  onLoad: function (options) {
+  onLoad: function (e) {
     var that = this
     var mes = {
       total: { label: '总人数', type: 0 },
@@ -32,8 +28,8 @@ Page({
     x5on.http(x5on.url.gradestudclass, e.detail)
     .then(classes_counts=>{
       that.setData(classes_counts)
-      // 清除班级编号残留
-      that.setData({ cls_id: null })
+      // 清除班级编号残留、学生记录
+      that.setData({ studs: [], cls_id: null })
     })
     .catch(error=>{
       x5on.showError(error)
@@ -44,7 +40,7 @@ Page({
     var that = this
     that.setData(e.detail)
 
-    x5on.http(x5on.url.gradestudcls, e.detail)
+    x5on.http(x5on.url.gradestudstudcls, e.detail)
     .then(studs=>{
       var male = 0, female = 0
       studs.forEach(stud => {
@@ -81,6 +77,7 @@ Page({
   },
 
   addClick: function(e) {
+    var that = this
     var value = null
     var fields = [{
       mode: 1,
@@ -107,6 +104,15 @@ Page({
       value: value && value.type_id ? value.type_id : null,
     }, {
       mode: 3,
+      name: 'stud_auth',
+      label: '是否指标',
+      url: x5on.url.gradestudauth,
+      valueKey: 'id',
+      rangeKey: 'name',
+      selectKey: 'name',
+      value: value && value.stud_auth ? value.stud_auth : null,
+    }, {
+      mode: 3,
       name: 'status_id',
       label: '学籍状态',
       url: x5on.url.gradestudstatusin,
@@ -114,15 +120,6 @@ Page({
       rangeKey: 'name',
       selectKey: 'name',
       value: value && value.status_id ? value.status_id : null,
-    }, {
-      mode: 3,
-      name: 'stud_auth',
-      label: '学籍状态',
-      url: x5on.url.gradestudauth,
-      valueKey: 'id',
-      rangeKey: 'name',
-      selectKey: 'name',
-      value: value && value.stud_auth ? value.stud_auth : null,
     }]
     var rules = {
       stud_name: {
@@ -138,10 +135,10 @@ Page({
       type_id: {
         required: true,
       },
-      status_id: {
+      stud_auth: {
         required: true,
       },
-      stud_auth: {
+      status_id: {
         required: true,
       },
     }
@@ -149,7 +146,7 @@ Page({
     var json = {}
     json.title = '年度学生'
     json.notitle = true
-    json.url_u = x5on.url.subsetadd
+    json.url_u = x5on.url.gradestudadd
     json.data_u = { grade_id, cls_id }
     json.arrsName = 'studs'
     json.fields = fields
@@ -158,152 +155,165 @@ Page({
     wx.navigateTo({ url: 'form_add?json=' + JSON.stringify(json) })
   },
 
+  editClick: function(e) {
+    var that = this
+    var value = e.detail
+    var { uid, grade_id } = value
 
+    var fields = [{
+      mode: 0,
+      label: '学生姓名',
+      value: value && value.stud_name ? value.stud_name : null,
+    }, {
+      mode: 0,
+      label: '身份证号',
+      value: value && value.stud_idc ? value.stud_idc : null,
+    }, {
+      mode: 3,
+      name: 'cls_id',
+      label: '目标班级',
+      url: x5on.url.gradestudcls,
+      data: { grade_id },
+      valueKey: 'id',
+      rangeKey: 'cls_name',
+      selectKey: 'cls_name',
+      value: value && value.cls_id ? value.cls_id : null,
+    }, {
+      mode: 3,
+      name: 'type_id',
+      label: '学生来源',
+      url: x5on.url.gradestudtype,
+      valueKey: 'id',
+      rangeKey: 'name',
+      selectKey: 'name',
+      value: value && value.type_id ? value.type_id : null,
+    }, {
+      mode: 3,
+      name: 'stud_auth',
+      label: '是否指标',
+      url: x5on.url.gradestudauth,
+      valueKey: 'id',
+      rangeKey: 'name',
+      selectKey: 'name',
+      value: value && value.stud_auth ? value.stud_auth : null,
+    }, {
+      mode: 3,
+      name: 'status_id',
+      label: '学籍状态',
+      url: x5on.url.gradestudstatusin,
+      valueKey: 'id',
+      rangeKey: 'name',
+      selectKey: 'name',
+      value: value && value.status_id ? value.status_id : null,
+    }]
+    var rules = {
+      cls_id: {
+        required: true,
+      },
+      type_id: {
+        required: true,
+      },
+      stud_auth: {
+        required: true,
+      },
+      status_id: {
+        required: true,
+      },
+    }
 
-  studentsChange: function (e) {
-    x5on.setRadio(this.data.students, e.detail.value, students => {
-      this.setData({ students })
+    var json = {}
+    json.title = '年度学生'
+    json.notitle = true
+    json.url_u = x5on.url.gradestudedit
+    json.data_u = { uid }
+    json.arrsName = 'studs'
+    json.fields = fields
+    json.rules = rules
+
+    wx.navigateTo({ url: 'form_edit?json=' + JSON.stringify(json) })
+  },
+
+  removeClick: function(e) {
+    var that = this
+    let { uid } = e.detail
+    let { studs, notins } = that.data
+    x5on.http(x5on.url.gradestudtemp, e.detail)
+    .then(notin=>{
+      // 删除studs
+      studs = x5on.delArr(studs, 'uid', uid)
+      // 添加notins
+      notins = x5on.add(notins, notin)
+      that.setData({ studs, notins })
+    })
+    .catch(error=>{
+      x5on.showError(error)
     })
   },
 
-  studentClick: function (e) {
-    wx.navigateTo({
-      url: 'student?uid=' + e.currentTarget.dataset.uid,
-      success: () => {
+  backClick: function(e) {
+    var that = this
+    var value = e.detail
+    var { uid, grade_id } = value
+
+    x5on.http(x5on.url.gradestudbackck, { uid })
+    .then(()=>{
+      // 检测是否可以回校
+
+      var fields = [{
+        mode: 0,
+        label: '学生姓名',
+        value: value && value.stud_name ? value.stud_name : null,
+      }, {
+        mode: 0,
+        label: '身份证号',
+        value: value && value.stud_idc ? value.stud_idc : null,
+      }, {
+        mode: 3,
+        name: 'cls_id',
+        label: '目标班级',
+        url: x5on.url.gradestudcls,
+        data: { grade_id },
+        valueKey: 'id',
+        rangeKey: 'cls_name',
+        selectKey: 'cls_name',
+        value: value && value.cls_id ? value.cls_id : null,
+      }, {
+        mode: 3,
+        name: 'status_id',
+        label: '学籍状态',
+        url: x5on.url.gradestudstatusin,
+        valueKey: 'id',
+        rangeKey: 'name',
+        selectKey: 'name',
+        value: value && value.status_id ? value.status_id : null,
+      }]
+      var rules = {
+        cls_id: {
+          required: true,
+        },
+        status_id: {
+          required: true,
+        },
       }
+  
+      var json = {}
+      json.title = '年度学生'
+      json.notitle = true
+      json.url_u = x5on.url.gradestudback
+      json.data_u = { uid }
+      json.url_r = x5on.url.gradestudbackref
+      json.data_r = { grade_id }
+      json.arrsName = 'notins'
+      json.fields = fields
+      json.rules = rules
+  
+      wx.navigateTo({ url: 'form_edit?json=' + JSON.stringify(json) })
+  
     })
-  },
-
-  // 添加
-  studaddClick: function (event) {
-    wx.navigateTo({ url: 'stud_add' })
-  },
-
-  // 修改
-  studmodiClick: function (event) {
-    var that = this
-    x5on.getRadio(this.data.students, stud => {
-      wx.navigateTo({ url: 'stud_modi?uid=' + stud.uid })
-    }, () => {
-      x5on.showError('没有选中相关学生')
+    .catch(error=>{
+      x5on.showError(error)
     })
-  },
 
-  // 指标
-  studauthClick: function (event) {
-    var that = this
-    x5on.getRadio(this.data.students, stud => {
-      wx.navigateTo({ url: 'stud_auth?uid=' + stud.uid })
-    }, () => {
-      x5on.showError('没有选中相关学生')
-    })
-  },
-
-  // 转入
-  studcomeClick: function (e) {
-    wx.navigateTo({ url: 'stud_come' })
-  },
-
-  // 调动
-  studmoveClick: function (e) {
-    var that = this
-    x5on.getRadio(this.data.students, stud => {
-      wx.navigateTo({ url: 'stud_move?uid=' + stud.uid })
-    }, () => {
-      x5on.showError('没有选中相关学生')
-    })
-  },
-
-  // 跳级，一定要变更学生编号
-  studjumpClick: function (e) {
-    x5on.getRadio(this.data.students, stud => {
-      console.log(stud)
-    }, () => {
-      console.log('error')
-    })
-    // wx.navigateTo({ url: 'stud_jump' })
-  },
-
-  // 回校
-  studbackClick: function (e) {
-    var that = this
-    var grade_id = that.getGradeid()
-    var task_status_id = x5on.data.status_temp
-    var form = { grade_id, task_status_id }
-    x5on.post({
-      url: x5on.url.gradestudtask,
-      data: form,
-      success: tasks => {
-        tasks.length === 0 && x5on.showError('本年度没有要回校的学生')
-        tasks.length !== 0 && wx.navigateTo({ url: 'stud_back?tasks=' + JSON.stringify(tasks) })
-      }
-    })
-  },
-
-  // 复学
-  studreturnClick: function (e) {
-    var that = this
-    var grade_id = that.getGradeid()
-    var task_status_id = x5on.data.status_down
-    var form = { grade_id, task_status_id }
-    x5on.post({
-      url: x5on.url.gradestudtask,
-      data: form,
-      success: tasks => {
-        tasks.length === 0 && x5on.showError('本年度没有要复学的学生')
-        tasks.length !== 0 && wx.navigateTo({ url: 'stud_return?tasks=' + JSON.stringify(tasks) })
-      }
-    })
-  },
-
-  // 重读
-  studrepetClick: function (e) {
-    wx.navigateTo({ url: 'stud_repetition' })
-  },
-
-  // 借读
-  studreadClick: function (e) {
-    wx.navigateTo({ url: 'stud_read' })
-  },
-
-  // 休学
-  studdownClick: function (e) {
-    var that = this
-    x5on.getRadio(this.data.students, stud => {
-      wx.navigateTo({ url: 'stud_down?uid=' + stud.uid })
-    }, () => {
-      x5on.showError('没有选中相关学生')
-    })
-  },
-
-  // 转出
-  studoutClick: function (e) {
-    var that = this
-    x5on.getRadio(this.data.students, stud => {
-      wx.navigateTo({ url: 'stud_out?uid=' + stud.uid })
-    }, () => {
-      x5on.showError('没有选中相关学生')
-    })
-  },
-
-  // 离校
-  studleaveClick: function (e) {
-    var that = this
-    x5on.getRadio(this.data.students, stud => {
-      wx.navigateTo({ url: 'stud_leave?uid=' + stud.uid })
-    }, () => {
-      x5on.showError('没有选中相关学生')
-    })
-  },
-
-  // 临时
-  studtempClick: function (e) {
-    var that = this
-    x5on.getRadio(this.data.students, stud => {
-      wx.navigateTo({ url: 'stud_temp?uid=' + stud.uid })
-    }, () => {
-      x5on.showError('没有选中相关学生')
-    })
   },
 
 })

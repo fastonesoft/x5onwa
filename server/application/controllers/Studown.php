@@ -4,18 +4,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 use QCloud_WeApp_SDK\Mvv;
 use QCloud_WeApp_SDK\Model;
 
-class Studin extends CI_Controller
+class Studown extends CI_Controller
 {
     /**
-     * 学生录取
+     * 休学申请
      */
-    const role_name = 'studin';
+    const role_name = 'studown';
+
     public function index()
     {
         Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
             try {
-                // 当前用户对应可招分级查询
-                $result = Mvv\mvvStudIn::steps($userinfor->unionId);
+                // 当前年度年级
+                $result = Mvv\mvvStudown::grades($userinfor->unionId);
 
                 $this->json(['code' => 0, 'data' => $result]);
             } catch (Exception $e) {
@@ -26,15 +27,15 @@ class Studin extends CI_Controller
         });
     }
 
-    public function notin()
+    public function down()
     {
         Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
             try {
-                // 未录取
+                // 休学年级
                 $param = $_POST;
-                $steps_id = $param['steps_id'];
+                $grade_id = $param['grade_id'];
 
-                $result = Mvv\mvvStudIn::notin($userinfor->unionId, $steps_id);
+                $result = Mvv\mvvStudown::down($userinfor->unionId, $grade_id);
 
                 $this->json(['code' => 0, 'data' => $result]);
             } catch (Exception $e) {
@@ -45,17 +46,15 @@ class Studin extends CI_Controller
         });
     }
 
-    public function enter()
+    public function cls()
     {
         Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
             try {
-                // 录取
+                // 休学班级
                 $param = $_POST;
-                // 分级信息
-                $steps_id = $param['steps_id'];
-                $uids = $param['uids'];
+                $grade_id = $param['down_id'];
 
-                $result = Mvv\mvvStudIn::enter($userinfor->unionId, $steps_id, $uids);
+                $result = Mvv\mvvStudown::cls($userinfor->unionId, $grade_id);
 
                 $this->json(['code' => 0, 'data' => $result]);
             } catch (Exception $e) {
@@ -70,12 +69,12 @@ class Studin extends CI_Controller
     {
         Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
             try {
-                // 未录取查询
+                // 学生查询
                 $param = $_POST;
-                $steps_id = $param['steps_id'];
+                $grade_id = $param['grade_id'];
                 $stud_name = Model\x5on::getLike($param['stud_name']);
 
-                $result = Mvv\mvvStudIn::query($userinfor->unionId, $steps_id, $stud_name);
+                $result = Mvv\mvvStudown::query($userinfor->unionId, $grade_id, $stud_name);
 
                 $this->json(['code' => 0, 'data' => $result]);
             } catch (Exception $e) {
@@ -86,17 +85,17 @@ class Studin extends CI_Controller
         });
     }
 
-    public function out()
+    public function done()
     {
         Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
             try {
-                // 录取删除
+                // 学生查询
                 $param = $_POST;
-                // 分级信息
-                $steps_id = $param['steps_id'];
-                $uids = $param['uids'];
+                $grade_id = $param['down_id'];
+                $cls_id = $param['cls_id'];
+                $grade_stud_uid = $param['stud_uid'];
 
-                $result = Mvv\mvvStudIn::out($userinfor->unionId, $steps_id, $uids);
+                $result = Mvv\mvvStudown::done($userinfor->unionId, $grade_id, $cls_id, $grade_stud_uid);
 
                 $this->json(['code' => 0, 'data' => $result]);
             } catch (Exception $e) {
@@ -106,6 +105,5 @@ class Studin extends CI_Controller
             $this->json($error);
         });
     }
-
 
 }

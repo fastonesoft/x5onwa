@@ -1,0 +1,20 @@
+<!--pages/index/studown.wxml-->
+<view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
+
+<comPick title="年级设置" notitle="{{1}}" label="年级选择" name="grade_id" rangeKey="steps_grade" selectKey="steps_grade"
+    valueKey="id" picks="{{grades}}" bind:pickChange="gradeChange" />
+
+<comPick title="休学年级" notitle="{{0}}" label="年级选择" name="down_id" rangeKey="steps_grade" selectKey="steps_grade"
+    valueKey="id" picks="{{downs}}" bind:pickChange="downChange" />
+
+<comPick title_notshow="班级设置" notitle="{{0}}" label="班级选择" name="cls_id" rangeKey="cls_name" selectKey="cls_name"
+    valueKey="id" picks="{{classes}}" bind:pickChange="classChange" />
+
+<formFind title="申请休学学生" notitle="{{0}}" label="学生姓名" name="stud_name" bind:findSubmit="findSubmit"
+    wx:if="{{grade_id&&down_id&&cls_id}}" />
+
+<comRadio radios="{{studs}}" name="stud_uid" valueKey="uid" key="cls_name" split=" - " memo="stud_name"
+    bind:radioChange="radioChange" />
+
+<comBtn canShow="{{grade_id&&down_id&&cls_id&&stud_uid}}" title="休学" bind:buttonClick="downClick" />
+<comMemb title="不在班学生" membs="{{notins}}" key="stud_name" memo="status_name" canRemove="{{0}}" />

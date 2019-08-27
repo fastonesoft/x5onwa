@@ -23,7 +23,7 @@
 					<icon type="success_no_circle" size="20" wx:if="{{item[selected]}}"></icon>
 				</view>
 			</block>
-			<view class="weui-cell__ft">
+			<view class="weui-cell__ft" wx:if="{{canRemove}}">
 				<icon class="remove-icon" data-uid="{{item.uid}}" bindtap="removeClick"></icon>
 			</view>
 		</view>

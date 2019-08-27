@@ -9,6 +9,7 @@
 
 <comList title_notshow="统计信息" notitle="{{0}}" obj="{{counts}}" mes="{{mes}}" />
 
-<comMemb title="年级学生" membs="{{studs}}" key="cls_name" split=" - " memo="stud_name" bind:editClick="editClick"
+<comMemb title="年度学生" membs="{{studs}}" key="cls_name" split=" - " memo="stud_name" bind:editClick="editClick"
   bind:removeClick="removeClick" />
 <comBtn canShow="{{grade_id&&cls_id}}" title="添加" bind:buttonClick="addClick" />
+<comMemb title="不在班学生" membs="{{notins}}" key="stud_name" memo="status_name" canRemove="{{0}}" bind:editClick="backClick" />

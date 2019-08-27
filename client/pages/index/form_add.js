@@ -43,7 +43,7 @@ Page({
             if (arrsName) {
               var arrs = page.data[arrsName]
               if (Array.isArray(arrs)) {
-                // 检测是否为数组，是数组，删除原始，插入新值
+                // 检测是否为数组，是数组，插入新值
                 arrs = x5on.add(arrs, result)
                 page.setData({ [arrsName]: arrs })
               } else {

@@ -30,7 +30,7 @@ class Gradestud extends CI_Controller
                 $param = $_POST;
                 $grade_id = $param['grade_id'];
 
-                // 班级列表
+                // 班级列表、班级学生统计信息
                 $result = Mvv\mvvGradeStud::classes($user->unionId, $grade_id);
                 $this->json(['code' => 0, 'data' => $result]);
             } catch (Exception $e) {
@@ -70,6 +70,24 @@ class Gradestud extends CI_Controller
 
                 // 模糊查询学生
                 $result = Mvv\mvvGradeStud::query($user->unionId, $grade_id, $cls_id, $stud_name);
+                $this->json(['code' => 0, 'data' => $result]);
+            } catch (Exception $e) {
+                $this->json(['code' => 1, 'data' => $e->getMessage()]);
+            }
+        }, function ($error) {
+            $this->json($error);
+        });
+    }
+
+    public function cls()
+    {
+        Mvv\mvvLogin::check(self::role_name, function ($user) {
+            try {
+                $param = $_POST;
+                $grade_id = $param['grade_id'];
+
+                // 班级列表
+                $result = Mvv\mvvGradeStud::cls($user->unionId, $grade_id);
                 $this->json(['code' => 0, 'data' => $result]);
             } catch (Exception $e) {
                 $this->json(['code' => 1, 'data' => $e->getMessage()]);
@@ -138,7 +156,7 @@ class Gradestud extends CI_Controller
                 $type_id = $param['type_id'];
                 $status_id = $param['status_id'];
                 $stud_auth = $param['stud_auth'];
-                // 添加学生
+                // 添加年度学生
                 $result = Mvv\mvvGradeStud::addNoExam($user->unionId, $grade_id, $cls_id, $stud_name, $stud_idc, $type_id, $status_id, $stud_auth, $come_date);
                 $this->json(['code' => 0, 'data' => $result]);
             } catch (Exception $e) {
@@ -149,7 +167,97 @@ class Gradestud extends CI_Controller
         });
     }
 
+    public function edit()
+    {
+        Mvv\mvvLogin::check(self::role_name, function ($user) {
+            try {
+                $param = $_POST;
+                $grade_stud_uid = $param['uid'];
+                $cls_id = $param['cls_id'];
+                $type_id = $param['type_id'];
+                $status_id = $param['status_id'];
+                $stud_auth = $param['stud_auth'];
+                // 年度学生修改
+                $result = Mvv\mvvGradeStud::edit($user->unionId, $grade_stud_uid, $cls_id, $type_id, $status_id, $stud_auth);
+                $this->json(['code' => 0, 'data' => $result]);
+            } catch (Exception $e) {
+                $this->json(['code' => 1, 'data' => $e->getMessage()]);
+            }
+        }, function ($error) {
+            $this->json($error);
+        });
+    }
 
+    public function temp()
+    {
+        Mvv\mvvLogin::check(self::role_name, function ($user) {
+            try {
+                $param = $_POST;
+                $grade_stud_uid = $param['uid'];
+                //
+                $result = Mvv\mvvGradeStud::temp($user->unionId, $grade_stud_uid);
+                $this->json(['code' => 0, 'data' => $result]);
+            } catch (Exception $e) {
+                $this->json(['code' => 1, 'data' => $e->getMessage()]);
+            }
+        }, function ($error) {
+            $this->json($error);
+        });
+    }
+
+    public function backck()
+    {
+        Mvv\mvvLogin::check(self::role_name, function ($user) {
+            try {
+                $param = $_POST;
+                $grade_stud_uid = $param['uid'];
+
+                // 年度学生回校检测
+                $result = Mvv\mvvGradeStud::backck($user->unionId, $grade_stud_uid);
+                $this->json(['code' => 0, 'data' => $result]);
+            } catch (Exception $e) {
+                $this->json(['code' => 1, 'data' => $e->getMessage()]);
+            }
+        }, function ($error) {
+            $this->json($error);
+        });
+    }
+
+    public function back()
+    {
+        Mvv\mvvLogin::check(self::role_name, function ($user) {
+            try {
+                $param = $_POST;
+                $grade_stud_uid = $param['uid'];
+                $cls_id = $param['cls_id'];
+                $status_id = $param['status_id'];
+                // 年度学生回校
+                $result = Mvv\mvvGradeStud::back($user->unionId, $grade_stud_uid, $cls_id, $status_id);
+                $this->json(['code' => 0, 'data' => $result]);
+            } catch (Exception $e) {
+                $this->json(['code' => 1, 'data' => $e->getMessage()]);
+            }
+        }, function ($error) {
+            $this->json($error);
+        });
+    }
+
+    public function backref()
+    {
+        Mvv\mvvLogin::check(self::role_name, function ($user) {
+            try {
+                $param = $_POST;
+                $grade_id = $param['grade_id'];
+                // 年度学生回校
+                $result = Mvv\mvvGradeStud::backref($user->unionId, $grade_id);
+                $this->json(['code' => 0, 'data' => $result]);
+            } catch (Exception $e) {
+                $this->json(['code' => 1, 'data' => $e->getMessage()]);
+            }
+        }, function ($error) {
+            $this->json($error);
+        });
+    }
 
 
 
@@ -380,26 +488,8 @@ class Gradestud extends CI_Controller
         });
     }
 
-    public function temp()
-    {
-        Mvv\mvvLogin::check(self::role_name, function ($user) {
-            try {
-                $param = $_POST;
-                $grade_stud_id = $param['id'];
-                $grade_stud_uid = $param['uid'];
-                $task_memo = $param['task_memo'];
-                //
-                $result = Mvv\mvvGradeStud::taskTemp($grade_stud_id, $grade_stud_uid, $task_memo);
-                $this->json(['code' => 0, 'data' => $result]);
-            } catch (Exception $e) {
-                $this->json(['code' => 1, 'data' => $e->getMessage()]);
-            }
-        }, function ($error) {
-            $this->json($error);
-        });
-    }
 
-    public function back()
+    public function back11()
     {
         Mvv\mvvLogin::check(self::role_name, function ($user) {
             try {

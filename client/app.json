@@ -30,6 +30,7 @@
     "pages/index/studin",
     "pages/index/studinto",
     "pages/index/studup",
+    "pages/index/studown",
     "pages/index/stud_add",
     "pages/index/stud_modi",
     "pages/index/stud_auth",
