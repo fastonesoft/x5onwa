@@ -250,6 +250,26 @@ var doUrl = {
   mysamesetstuds: `${host}/weapp/mysameset/studs`,
   mysamesetupdate: `${host}/weapp/mysameset/update`,
 
+  // 分班考试
+  mykaodivi: `${host}/weapp/mykaodivi`,
+  mykaodivikaos: `${host}/weapp/mykaodivi/kaos`,
+  mykaodivicounts: `${host}/weapp/mykaodivi/counts`,
+  mykaodiviadd: `${host}/weapp/mykaodivi/add`,
+
+  // 分班成绩
+  mykaoscore: `${host}/weapp/mykaoscore`,
+  mykaoscorekaos: `${host}/weapp/mykaoscore/kaos`,
+  mykaoscoresubs: `${host}/weapp/mykaoscore/subs`,
+  mykaoscorecounts: `${host}/weapp/mykaoscore/counts`,
+  mykaoscoreadd: `${host}/weapp/mykaoscore/add`,
+
+    // 分班调整
+    myadjust: `${host}/weapp/myadjust`,
+    myadjustcls: `${host}/weapp/myadjust/cls`,
+    myadjuststudent: `${host}/weapp/myadjust/student`,
+    myadjuststudmove: `${host}/weapp/myadjust/studmove`,
+    myadjuststudremove: `${host}/weapp/myadjust/studremove`,
+
 
 
 //-----------------------------------
@@ -294,12 +314,7 @@ var doUrl = {
 
 
 
-  // 分班调整
-  myadjust: `${host}/weapp/myadjust`,
-  myadjustclass: `${host}/weapp/myadjust/classes`,
-  myadjuststudent: `${host}/weapp/myadjust/student`,
-  myadjuststudmove: `${host}/weapp/myadjust/studmove`,
-  myadjuststudremove: `${host}/weapp/myadjust/studremove`,
+
   // 识别调动学生，并返回交换学生
   myadjuststudscanmove: `${host}/weapp/myadjust/scanmove`,
   // 扫二维码调动

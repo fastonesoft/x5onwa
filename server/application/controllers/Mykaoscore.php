@@ -4,19 +4,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 use QCloud_WeApp_SDK\Mvv;
 use QCloud_WeApp_SDK\Model;
 
-class Mydivi extends CI_Controller
+class Mykaoscore extends CI_Controller
 {
     /**
-     * 班级分管
+     * 分班成绩
      */
-    const role_name = 'mydivi';
+    const role_name = 'mykaoscore';
 
     public function index()
     {
-        Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
+        Mvv\mvvLogin::check(self::role_name, function ($user) {
             try {
-                // 当前年级
-                $result = Mvv\mvvMyDivi::grades($userinfor->unionId);
+                $result = Mvv\mvvMyKaoScore::grades($user->unionId);
 
                 $this->json(['code' => 0, 'data' => $result]);
             } catch (Exception $e) {
@@ -27,14 +26,16 @@ class Mydivi extends CI_Controller
         });
     }
 
-    public function clsdiv()
+    /**
+     * 分班考试表
+     */
+    public function kaos()
     {
-        Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
+        Mvv\mvvLogin::check(self::role_name, function ($user) {
             try {
-                // 年级已分管、未分管班级
                 $param = $_POST;
                 $grade_id = $param['grade_id'];
-                $result = Mvv\mvvMyDivi::clsdiv($userinfor->unionId, $grade_id);
+                $result = Mvv\mvvMyKaoScore::kaos($user->unionId, $grade_id);
 
                 $this->json(['code' => 0, 'data' => $result]);
             } catch (Exception $e) {
@@ -45,14 +46,13 @@ class Mydivi extends CI_Controller
         });
     }
 
-    public function teachs()
+    public function subs()
     {
-        Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
+        Mvv\mvvLogin::check(self::role_name, function ($user) {
             try {
-                // 教师查询
                 $param = $_POST;
-                $user_name = Model\x5on::getLike($param['user_name']);
-                $result = Mvv\mvvMyDivi::teachs($userinfor->unionId, $user_name);
+                $kao_id = $param['kao_id'];
+                $result = Mvv\mvvMyKaoScore::subs($user->unionId, $kao_id);
 
                 $this->json(['code' => 0, 'data' => $result]);
             } catch (Exception $e) {
@@ -63,16 +63,18 @@ class Mydivi extends CI_Controller
         });
     }
 
-    public function dist()
+    /**
+     * 考试统计
+     */
+    public function counts()
     {
-        Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
+        Mvv\mvvLogin::check(self::role_name, function ($user) {
             try {
-                // 设置班级分管
                 $param = $_POST;
+                $kao_id = $param['kao_id'];
+                $sub_id = $param['sub_id'];
                 $grade_id = $param['grade_id'];
-                $user_uid = $param['user_uid'];
-                $cls_uids_string = $param['uids'];
-                $result = Mvv\mvvMyDivi::dist($userinfor->unionId, $grade_id, $user_uid, $cls_uids_string);
+                $result = Mvv\mvvMyKaoScore::counts($user->unionId, $grade_id, $kao_id, $sub_id);
 
                 $this->json(['code' => 0, 'data' => $result]);
             } catch (Exception $e) {
@@ -83,14 +85,15 @@ class Mydivi extends CI_Controller
         });
     }
 
-    public function remove()
+    public function add()
     {
-        Mvv\mvvLogin::check(self::role_name, function ($userinfor) {
+        Mvv\mvvLogin::check(self::role_name, function ($user) {
             try {
-                // 删除班级分管
                 $param = $_POST;
-                $cls_div_uid = $param['uid'];
-                $result = Mvv\mvvMyDivi::remove($userinfor->unionId, $cls_div_uid);
+                $kao_id = $param['kao_id'];
+                $sub_id = $param['sub_id'];
+                $grade_id = $param['grade_id'];
+                $result = Mvv\mvvMyKaoScore::add($user->unionId, $grade_id, $kao_id, $sub_id);
 
                 $this->json(['code' => 0, 'data' => $result]);
             } catch (Exception $e) {

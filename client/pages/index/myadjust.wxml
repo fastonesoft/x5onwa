@@ -1,19 +1,12 @@
 <!--pages/index/myadjust.wxml-->
 <view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
 
-<view class="weui-cells__title">年级设置</view>
-<view class="weui-cells weui-cells_after-title">
-  <view class="weui-cell weui-cell_select">
-    <view class="weui-cell__hd weui-cell__hd_in-select-after">
-      <view class="weui-label">年级选择</view>
-    </view>
-    <view class="weui-cell__bd">
-      <picker bindchange="gradeChange" value="{{gradeIndex}}" range="{{grades}}" range-key="name" disabled="{{grades.length===0}}">
-        <view class="weui-select weui-select_in-select-after">{{grades[gradeIndex].name}}</view>
-      </picker>
-    </view>
-  </view>
-</view>
+<comPick title="年级设置" notitle="{{1}}" label="年级选择" name="grade_id" rangeKey="steps_grade" selectKey="steps_grade"
+    valueKey="id" picks="{{grades}}" bind:pickChange="gradeChange" />
+
+    <comPick title_notshow="班级设置" notitle="{{0}}" label="目标班级" name="cls_id" rangeKey="cls_order" selectKey="cls_order"
+    valueKey="id" picks="{{classes}}" bind:pickChange="classChange" />
+
 
 <view class="weui-cells__title">分管班级</view>
 <view class="weui-cells weui-cells_after-title">

@@ -1,0 +1,13 @@
+<!--pages/index/mykaoscore.wxml-->
+<view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
+
+<comPick title="年级设置" notitle="{{1}}" label="年级选择" name="grade_id" rangeKey="steps_grade" selectKey="steps_grade"
+    valueKey="id" picks="{{grades}}" bind:pickChange="gradeChange" />
+<comPick title_notshow="分班考试" notitle="{{0}}" label="考试选择" name="kao_id" rangeKey="name" selectKey="name" valueKey="id"
+    picks="{{kaos}}" bind:pickChange="kaoChange" />
+<comPick title_notshow="考试学科" notitle="{{0}}" label="学科选择" name="sub_id" rangeKey="sub_name" selectKey="sub_name"
+    valueKey="sub_id" picks="{{subs}}" bind:pickChange="subChange" />
+    
+<comList title_notshow="统计信息" notitle="{{0}}" obj="{{counts}}" mes="{{mes}}" />
+
+<comBtn canShow="{{counts.notin_count}}" title="参加" bind:buttonClick="addClick" />

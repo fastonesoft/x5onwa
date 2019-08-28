@@ -10,8 +10,7 @@ class Myadjust extends CI_Controller {
   public function index() {
     Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
-        $grades = Model\xovGradeCurrent::gets();
-        $result = compact('grades');
+          $result = Mvv\mvvMyAdjust::grades($user->unionId);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {
@@ -22,15 +21,12 @@ class Myadjust extends CI_Controller {
     });
   }
 
-  public function classes() {
+  public function cls() {
     Mvv\mvvLogin::check(self::role_name, function ($user) {
       try {
         $param = $_POST;
-        $user_id = $user['unionId'];
         $grade_id = $param['grade_id'];
-
-        $classes = Model\xovClass::getRows4UserDivisioned($user_id, $grade_id);
-        $result = compact('classes');
+        $result = Mvv\mvvMyAdjust::cls($user->unionId, $grade_id);
 
         $this->json(['code' => 0, 'data' => $result]);
       } catch (Exception $e) {

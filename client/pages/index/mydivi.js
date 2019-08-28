@@ -5,126 +5,77 @@ Page({
 
   onLoad: function (e) {
     var that = this
-    x5on.request({
-      url: x5on.url.mydivi,
-      success(grades) {
-        that.setData({ grades })
-      }
+    x5on.http(x5on.url.mydivi)
+    .then(grades=>{
+      that.setData({ grades })
+    })
+    .catch(error=>{
+      x5on.showError(error)
     })
   },
 
   findSubmit: function (e) {
     var that = this
-    var rules = {
-      user_name: {
-        required: true,
-        chinese: true,
-        rangelength: [1, 3],
-      }
-    }
-    var messages = {
-      user_name: {
-        required: '教师姓名'
-      }
-    }
-    x5on.checkForm(e.detail.value, rules, messages, form => {
-      x5on.post({
-        url: x5on.url.mydiviteachs,
-        data: form,
-        success(teachs) {
-          teachs.length !== 0 && that.setData({ teachs })
-          teachs.length === 0 && x5on.showError('没有找到你要的教师！')
-        }
-      })
-    }, message => {
-      x5on.showError(message)
+
+    x5on.http(x5on.url.mydiviteachs, e.detail)
+    .then(sch_users=>{
+      that.setData({ sch_users, user_uid: null })
     })
+    .catch(error=>{
+      x5on.showError(error)
+    })
+
+  },
+
+  userChange: function (e) {
+    var that = this
+    that.setData(e.detail)
   },
 
   gradeChange: function (e) {
     var that = this
-    x5on.setPick(e, gradeIndex => {
-      that.setData({ gradeIndex })
-      var grade_id = x5on.getId(that.data.grades, gradeIndex)
-      x5on.post({
-        url: x5on.url.mydiviclsdiv,
-        data: { grade_id },
-        success(class_classed) {
-          that.setData(class_classed)
-        }
-      })
+    that.setData(e.detail)
+
+    x5on.http(x5on.url.mydiviclsdiv, e.detail)
+    .then(class_classed=>{
+      that.setData(class_classed)
     })
+    .catch(error=>{
+      x5on.showError(error)
+    })
+
   },
 
-  classChange: function (e) {
+  checkSubmit: function (e) {
     var that = this
-    x5on.setCheckbox(that.data.classes, e.detail.value, classes => {
-      that.setData({ classes })
+    let { grade_id, user_uid, classes } = that.data
+    let form = Object.assign({ grade_id, user_uid }, e.detail)
+
+    x5on.http(x5on.url.mydividist, form)
+    .then(classed=>{
+      // 删除
+      let { uids } = e.detail
+      uids.forEach(uid => {
+        classes = x5on.delArr(classes, 'uid', uid)
+      });
+      // 显示
+      that.setData({ classes, classed })
     })
+    .catch(error=>{
+      x5on.showError(error)
+    })
+
   },
 
-  teachChange: function (e) {
+  removeClick: function (e) {
     var that = this
-    x5on.setRadio(that.data.teachs, e.detail.value, teachs => {
-      that.setData({ teachs })
+    x5on.http(x5on.url.mydiviremove, e.detail)
+    .then(number=>{
+      x5on.delSuccess(number)
     })
-  },
-
-  mydiviSubmit: function (e) {
-    var that = this
-    var rules = {
-      user_uid: {
-        required: true,
-      },
-      grade: {
-        required: true,
-        min: 0,
-      },
-      cls_uids: {
-        required: true,
-        arr: true,
-      }
-    }
-    var messages = {
-      user_uid: {
-        required: '教师选择'
-      },
-      grade: {
-        required: '年级选择'
-      },
-      cls_uids: {
-        required: '班级选择'
-      }
-    }
-    x5on.checkForm(e.detail.value, rules, messages, form => {
-      form.grade_id = x5on.getId(that.data.grades, form.grade)
-      form.cls_uid_jsons = JSON.stringify(form.cls_uids)
-      x5on.post({
-        url: x5on.url.mydividist,
-        data: form,
-        success(class_classed) {
-          that.setData(class_classed)
-        }
-      })
-    }, mes => {
-      x5on.showError(mes)
-    })
-  },
-
-  mydiviRemove: function (e) {
-    var that = this
-    var class_div_uid = e.currentTarget.dataset.uid
-    x5on.post({
-      url: x5on.url.mydiviremove,
-      data: { class_div_uid },
-      success(class_classed) {
-        that.setData(class_classed)
-      }
+    .catch(error=>{
+      x5on.showError(error)
     })
   },
   
-	returnClick: function (e) {
-		wx.navigateBack()
-	},
-
 })

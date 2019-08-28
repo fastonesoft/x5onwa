@@ -3,48 +3,29 @@ var x5on = require('../x5on.js')
 
 Page({
 
-  data: {
-    errorMessage: '错误提示',
-    errorArray: [1],
-
-    grades: [],
-    classes: [],
-    grade_stud_uid: '',
-  },
-
-  onLoad: function (options) {
+  onLoad: function (e) {
     var that = this
-    x5on.request({
-      url: x5on.url.myadjust,
-      success: function (result) {
-        // 年级列表
-        that.setData(result.data)
-      }
+
+    x5on.http(x5on.url.myadjust)
+    .then(grades=>{
+      that.setData({ grades })
+    })
+    .catch(error=>{
+      x5on.showError(error)
     })
   },
 
   gradeChange: function (e) {
     var that = this
-    var students = []
-    var classIndex = -1
-    var gradeIndex = e.detail.value
-    that.setData({ gradeIndex, classIndex, students })
 
-    // 分管班级列表
-    var grades = that.data.grades
-    var grade_id = grades[gradeIndex].id
-    x5on.post({
-      url: x5on.url.myadjustclass,
-      data: { grade_id },
-      success: (result) => {
-        var classes = result.data.classes
-        that.setData({ classes })
-      }
+    x5on.http(x5on.url.myadjustcls, e.detail)
+    .then(classes=>{
+      that.setData({ classes })
     })
-  },
+    .catch(error=>{
+      x5on.showError(error)
+    })
 
-  checkInput: function (e) {
-    x5on.checkInput(e, this)
   },
 
   findSubmit: function (e) {
