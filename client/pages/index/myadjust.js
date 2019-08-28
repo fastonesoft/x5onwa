@@ -17,10 +17,11 @@ Page({
 
   gradeChange: function (e) {
     var that = this
+    that.setData(e.detail)
 
     x5on.http(x5on.url.myadjustcls, e.detail)
     .then(classes=>{
-      that.setData({ classes })
+      that.setData({ classes, cls_id: null, studs: [], comes: [], moveds: [], grade_stud_uid: null, grade_cls_id: null, outs: [], out_stud_uid: null, come_stud_uid: null })
     })
     .catch(error=>{
       x5on.showError(error)
@@ -30,147 +31,127 @@ Page({
 
   classChange: function (e) {
     var that = this
-    var classIndex = e.detail.value
-    var students = []
-    this.setData({ classIndex, students })
-    if (!classIndex || classIndex == -1) {
-      x5on.showError('目标班级、调动学生必须设置！')
-      return
-    }
-    var cls_id = this.data.classes[classIndex].cls_id
-    x5on.post({
-      url: x5on.url.myadjustclassmove,
-      data: { cls_id },
-      success: (result) => {
-        var studmoves = result.data.studmoves
-        var studmoveds = result.data.studmoveds
-        that.setData({ studmoves, studmoveds })
-      }
-    })
+    that.setData(e.detail)
 
+    // 读取调动成功的、未成功的学生
+    x5on.http(x5on.url.myadjustmoves, e.detail)
+    .then(moves=>{
+      that.setData(moves)
+      that.setData({ studs: [], grade_stud_uid: null, grade_cls_id: null, outs: [], out_stud_uid: null, come_stud_uid: null })
+    })
+    .catch(error=>{
+      x5on.showError(error)
+    })
   },
 
   findSubmit: function (e) {
     var that = this
-    var grades = this.data.grades
-    var classes = this.data.classes
-    var gradeIndex = this.data.gradeIndex
-    var classIndex = this.data.classIndex
-    if (!gradeIndex || !classIndex || classIndex == -1 || gradeIndex == -1) {
-      x5on.showError('年级选择、目标班级不得为空')
-      return
-    }
-    var btn_show = false
-    that.setData({ btn_show })
+    let { comes, grade_id } = that.data
+    Object.assign(e.detail, { grade_id })
 
-    var grade_id = grades[gradeIndex].id
-    var stud_name = e.detail.value.stud_name
-    x5on.checkForm(that, 0, 0, function () {
-      x5on.post({
-        url: x5on.url.myadjuststudent,
-        data: { grade_id, stud_name },
-        success: (result) => {
-          var students = result.data
-          that.setData({ students })
-          if (students.length === 0) {
-            x5on.showError('没有找到你要的学生！')
-          }
-        }
-      })
+    // 查询要调动的学生
+    x5on.http(x5on.url.myadjustquery, e.detail)
+    .then(studs=>{
+      that.setData({ comes, studs, grade_stud_uid: null, grade_cls_id: null, outs: [], out_stud_uid: null, come_stud_uid: null })
     })
-
+    .catch(error=>{
+      x5on.showError(error)
+    })
   },
 
-
-  studentChange: function (e) {
+  studChange: function (e) {
     var that = this
-    var students = this.data.students
-    var btn_show = true
-    that.setData({ btn_show })
-    
-    for (var index = 0; index < students.length; index++) {
-      var item = students[index]
-      item.checked = item.uid === e.detail.value
-      if (item.checked) {
-        var cls_id = item.cls_id
-        var classes = that.data.classes
-        var classIndex = that.data.classIndex
-        var localcls_id = classes[classIndex].cls_id
+    var { uid, cls_id } = e.detail
 
-        if (cls_id === localcls_id) {
-          var grade_stud_uid = item.uid
-          that.setData({ grade_stud_uid })
-        } else {
-          var grade_stud_uid = ''
-          that.setData({ grade_stud_uid })
-        }
-      }
-    }
-    this.setData({ students })
+    let grade_stud_uid = uid
+    let grade_cls_id = cls_id
+
+    that.setData({ grade_stud_uid, grade_cls_id, outs: [], out_stud_uid: null, come_stud_uid: null })
   },
 
-  studmoveSubmit: function (e) {
+  localClick: function (e) {
     var that = this
-    var classIndex = this.data.classIndex
-    var grade_stud_uid = e.detail.value.grade_stud_uid
-    if (!classIndex || classIndex == -1 || !grade_stud_uid) {
-      x5on.showError('目标班级、调动学生必须设置！')
-      return
-    }
-    var cls_id = this.data.classes[classIndex].cls_id
-    x5on.post({
-      url: x5on.url.myadjuststudmove,
-      data: { grade_stud_uid, cls_id },
-      success: (result) => {
-        var students = []
-        var studmoves = result.data
-        that.setData({ students, studmoves })
-      }
+    let { studs, moveds, grade_stud_uid } = that.data
+
+    x5on.http(x5on.url.myadjustlocal, { grade_stud_uid })
+    .then(moved=>{
+      // 删除
+      studs = x5on.delArr(studs, 'uid', grade_stud_uid)
+      // 添加
+      moveds = x5on.add(moveds, moved)
+      that.setData({ studs, moveds, grade_stud_uid: null, outs: [], out_stud_uid: null, come_stud_uid: null })
+    })
+    .catch(error=>{
+      x5on.showError(error)
     })
   },
 
-  localtap: function (e) {
+  requestClick: function (e) {
     var that = this
-    var grade_stud_uid = this.data.grade_stud_uid
-    if (grade_stud_uid.length == 0) {
-      x5on.showError('不是同班学生选择，无法提交')
-      return
-    }
-    x5on.post({
-      url: x5on.url.myadjuststudlocal,
-      data: { grade_stud_uid },
-      success: result => {
-        grade_stud_uid = ''
-        var students = []
-        that.setData({ grade_stud_uid, students })
-        x5on.showSuccess('标识' + result.data + '个学生')
-      }
+    let { studs, comes, grade_stud_uid, cls_id } = that.data
+
+    x5on.http(x5on.url.myadjustreq, { grade_stud_uid, cls_id })
+    .then(moved=>{
+      // 删除
+      studs = x5on.delArr(studs, 'uid', grade_stud_uid)
+      // 添加
+      comes = x5on.add(comes, moved)
+      that.setData({ studs, comes, grade_stud_uid: null, outs: [], out_stud_uid: null, come_stud_uid: null })
+    })
+    .catch(error=>{
+      x5on.showError(error)
     })
   },
 
-  myadjustRemove: function (e) {
+  removeClick: function (e) {
     var that = this
-    var studmoves = this.data.studmoves
-    var grade_stud_uid = e.currentTarget.dataset.uid
-    x5on.post({
-      url: x5on.url.myadjuststudremove,
-      data: { grade_stud_uid },
-      success: result => {
-        studmoves.forEach(function (item, index) {
-          if (item.uid == grade_stud_uid) {
-            studmoves.splice(index, 1)
-          }
-        })
-        that.setData({ studmoves })
-        x5on.showSuccess('删除' + result.data + '个调动')
-      }
+    let { comes } = that.data
+    let { uid } = e.detail
+
+    x5on.http(x5on.url.myadjustremove, e.detail)
+    .then(number=>{
+      x5on.delSuccess(number)
+      // 删除
+      comes = x5on.delArr(comes, 'uid', uid)
+      that.setData({ comes, outs: [], out_stud_uid: null, come_stud_uid: null })
+    })
+    .catch(error=>{
+      x5on.showError(error)
     })
   },
 
-  showexchange: function (e) {
-    var uid = e.currentTarget.dataset.uid
-    wx.navigateTo({
-      url: '/pages/index/myexqrcode?uid=' + uid,
+  comeChange: function (e) {
+    var that = this
+    let { cls_id } = that.data
+    let form = Object.assign({ cls_id }, e.detail)
+
+    that.setData(e.detail)
+    x5on.http(x5on.url.myadjustout, form)
+    .then(outs=>{
+      that.setData({ outs, out_stud_uid: null })
+    })
+    .catch(error=>{
+      x5on.showError(error)
     })
   },
+
+  outChange: function (e) {
+    var that = this
+    that.setData(e.detail)
+  },
+
+  exchangeClick: function(e) {
+    var that = this
+    let { comes, come_stud_uid, out_stud_uid } = that.data
+    x5on.http(x5on.url.myadjustchange, { come_stud_uid, out_stud_uid })
+    .then(moveds=>{
+      // 删除
+      comes = x5on.delArr(comes, 'uid', come_stud_uid)
+      that.setData({ comes, moveds, outs: [], come_stud_uid: null, out_stud_uid: null })
+    })
+    .catch(error=>{
+      x5on.showError(error)
+    })
+  }
+
 })

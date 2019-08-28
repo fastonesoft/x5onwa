@@ -4,7 +4,7 @@
 <comPick title="年级设置" notitle="{{1}}" label="年级选择" name="grade_id" rangeKey="steps_grade" selectKey="steps_grade"
   valueKey="id" picks="{{grades}}" bind:pickChange="gradeChange" />
 
-<comPick title_notshow="班级设置" notitle="{{0}}" label="班级选择" name="cls_id" rangeKey="cls_name" selectKey="cls_name"
+<comPick title_notshow="班级设置" notitle="{{0}}" label="班级选择" name="cls_id" rangeKey="cls_order" selectKey="cls_order"
   valueKey="id" picks="{{classes}}" bind:pickChange="classChange" />
 
 <formSwitch switchs="{{studs}}" title="班级学生" notitle="{{0}}" key="stud_name" memo="sex_name" checked="same_group"

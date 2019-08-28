@@ -2,190 +2,100 @@
 var x5on = require('../x5on.js')
 
 Page({
-  
-  data: {
-    errorMessage: '错误提示',
-    errorArray: [1],
 
-    grades: [],
-    classes: [],
-    studmoves: [],
-    studchanges: [],
-    all: false,
-    grade_stud_uid: '',
-  },
-
-  onLoad: function (options) {
+  onLoad: function (e) {
     var that = this
-    x5on.request({
-      url: x5on.url.mytuning,
-      success: function (result) {
-        // 年级列表
-        that.setData(result.data)
-      }
+
+    x5on.http(x5on.url.mytuning)
+    .then(grades=>{
+      that.setData({ grades })
+    })
+    .catch(error=>{
+      x5on.showError(error)
     })
   },
 
   gradeChange: function (e) {
     var that = this
-    var studmoves = []
-    var studchanges = []
-    var classIndex = -1
-    var gradeIndex = e.detail.value
-    that.setData({ gradeIndex, classIndex, studmoves, studchanges })
+    that.setData(e.detail)
 
-    // 班级列表
-    var grade_id = this.data.grades[gradeIndex].id
-    x5on.post({
-      url: x5on.url.mytuningclass,
-      data: { grade_id },
-      success: function (result) {
-        var classes = result.data
-        that.setData({ classes })
-      }
+    x5on.http(x5on.url.mytuningcls, e.detail)
+    .then(classes=>{
+      that.setData({ classes, cls_id: null, come_stud_uid: null, out_stud_uid: null })
     })
+    .catch(error=>{
+      x5on.showError(error)
+    })
+
   },
 
   classChange: function (e) {
-    var studmoves = []
-    var studchanges = []
-    var classIndex = e.detail.value
-    this.setData({ classIndex, studmoves, studchanges })
-  },
-
-  checkInput: function (e) {
-    x5on.checkInput(e, this)
+    var that = this
+    that.setData(e.detail)
+    that.setData({ comes: [], outs: [], out_stud_uid: null, come_stud_uid: null })
   },
 
   findSubmit: function (e) {
     var that = this
-    var grades = this.data.grades
-    var classes = this.data.classes
-    var gradeIndex = this.data.gradeIndex
-    var classIndex = this.data.classIndex
-    if (!gradeIndex || !classIndex || classIndex == -1 || gradeIndex == -1) {
-      x5on.showError('年级选择、目标班级不得为空')
-      return
-    }
-    var grade_id = grades[gradeIndex].id
-    var stud_name = e.detail.value.stud_name
-    x5on.checkForm(that, 0, 0, function () {
-      x5on.post({
-        url: x5on.url.mytuningstudmoves,
-        data: { grade_id, stud_name },
-        success: result => {
-          var studmoves = result.data
-          var studchanges = []
-          var grade_stud_uid = ''
-          that.setData({ studmoves, studchanges, grade_stud_uid })
-          if (studmoves.length === 0) {
-            x5on.showError('没有找到你要的学生！')
-          }
-        }
-      })
+    let { grade_id } = that.data
+    Object.assign(e.detail, { grade_id })
+
+    // 查询要调动的学生
+    x5on.http(x5on.url.mytuningquery, e.detail)
+    .then(comes=>{
+      that.setData({ comes, outs: [], out_stud_uid: null, come_stud_uid: null })
+    })
+    .catch(error=>{
+      x5on.showError(error)
     })
   },
 
-  switchtap: function (e) {
-    var all = ! this.data.all
-    var studchanges = []
-    var studmoves = this.data.studmoves
-    for (var i = 0; i < studmoves.length; i++) {
-      var item = studmoves[i]
-      item.checked = false
-    }
-    this.setData({ all, studmoves, studchanges })
-  },
-
-  studmoveChange: function (e) {
+  studChange: function (e) {
     var that = this
-    var studmoves = this.data.studmoves
-    for (var index=0; index<studmoves.length; index++) {
-      var item = studmoves[index]
-      item.checked = item.uid === e.detail.value
-      if (item.checked) {
-        var cls_id = item.cls_id
-        var classes = that.data.classes
-        var classIndex = that.data.classIndex
-        var localcls_id = classes[classIndex].id
-        if ( cls_id === localcls_id ) {
-          var studchanges = []
-          var grade_stud_uid = item.uid
-          that.setData({ studchanges, grade_stud_uid })
-          continue
-          // 同班，跳过下面代码，继续更新checked
-        } else {
-          var grade_stud_uid = ''
-          that.setData({ grade_stud_uid })
-        }
-        var all = this.data.all
-        var stud_sex_num = item.stud_sex_num
-        var data = { value: item.value, cls_id: localcls_id, all, stud_sex_num }
-        // 查询用于交换的本班学生
-        x5on.post({
-          url: x5on.url.mytuningstudchanges,
-          data: data,
-          success: result => {
-            var studchanges = result.data
-            that.setData({ studchanges })
-          }
-        })
-        // break 不能跳出，要清除原先的真
-      }
-    }
-    that.setData({ studmoves })
-  },
+    let { uid, cls_id } = e.detail
+    let come_stud_uid = uid
+    let come_cls_id = cls_id
+    that.setData({ come_stud_uid, come_cls_id })
 
-  studchangeChange: function (e) {
-    var that = this
-    var values = e.detail.value
-    var studchanges = that.data.studchanges
-    studchanges.forEach(function (item) {
-      item.checked = false
-      for (var i=0; i<values.length; i++) {
-        if (item.uid == values[i]) {
-          item.checked = true
-          break
-        }
-      }
+    x5on.http(x5on.url.mytuningout, { come_stud_uid, cls_id: that.data.cls_id })
+    .then(outs=>{
+      that.setData({ outs, out_stud_uid: null })
     })
-    that.setData({ studchanges })
+    .catch(error=>{
+      x5on.showError(error)
+    })
+
   },
 
-  mytuningSubmit: function (e) {
+  localClick: function (e) {
     var that = this
-    var data = e.detail.value
-    if (!data.movestud_uid || data.changestud_uids.length === 0) {
-      x5on.showError('选择调动、交换的学生')
-      return
-    }
+    let { come_stud_uid } = that.data
 
-    x5on.post({
-      url: x5on.url.mytuningexchange,
-      data: data,
-      success: result => {
-        var studmoves = []
-        var studchanges = []
-        that.setData({ studmoves, studchanges })
-        x5on.showSuccess('调动' + result.data + '个学生')
-      }
+    x5on.http(x5on.url.mytuninglocal, { come_stud_uid })
+    .then(moved=>{
+      that.setData({ comes: [], outs: [], out_stud_uid: null, come_stud_uid: null })
+    })
+    .catch(error=>{
+      x5on.showError(error)
     })
   },
 
-  localtap: function (e) {
+
+  outChange: function (e) {
     var that = this
-    var grade_stud_uid = this.data.grade_stud_uid
-    x5on.post({
-      url: x5on.url.mytuninglocal,
-      data: { grade_stud_uid },
-      success: result => {
-        grade_stud_uid = ''
-        var studmoves = []
-        var studchanges = []
-        that.setData({ grade_stud_uid, studmoves, studchanges })
-        x5on.showSuccess('标识' + result.data + '个学生')
-      }
-    })
+    that.setData(e.detail)
   },
+
+  exchangeClick: function(e) {
+    var that = this
+    let { comes, come_stud_uid, out_stud_uid } = that.data
+    x5on.http(x5on.url.mytuningchange, { come_stud_uid, out_stud_uid })
+    .then(moveds=>{
+      that.setData({ comes: [], outs: [], out_stud_uid: null, come_stud_uid: null })
+    })
+    .catch(error=>{
+      x5on.showError(error)
+    })
+  }
 
 })

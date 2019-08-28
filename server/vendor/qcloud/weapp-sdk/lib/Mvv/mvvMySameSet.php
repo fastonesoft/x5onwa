@@ -27,7 +27,7 @@ class mvvMySameSet
         mvvUserSchoolGroup::schUser($sch_user_id, function ($user_sch_group) use ($grade_id, &$result) {
             $sch_id = $user_sch_group->sch_id;
 
-            $result = xovClass::getsBySuff(compact('grade_id'), 'order by num, id');
+            $result = xovClass::getsBySuff(compact('grade_id'), 'order by id');
         });
         return $result;
     }

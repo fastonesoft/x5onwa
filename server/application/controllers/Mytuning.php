@@ -7,123 +7,112 @@ use QCloud_WeApp_SDK\Model;
 class Mytuning extends CI_Controller {
   const role_name = 'mytuning';
 
-  /**
-   * 当前年级列表
-   */
-  public function index() {
-    Mvv\mvvLogin::check(self::role_name, function ($user) {
-      try {
-        $grades = Model\xovGradeCurrent::gets();
-        $result = compact('grades');
+    public function index()
+    {
+        Mvv\mvvLogin::check(self::role_name, function ($user) {
+            try {
+                $result = Mvv\mvvMyTuning::grades($user->unionId);
 
-        $this->json(['code' => 0, 'data' => $result]);
-      } catch (Exception $e) {
-        $this->json(['code' => 1, 'data' => $e->getMessage()]);
-      }
-    }, function ($error) {
-      $this->json($error);
-    });
-  }
+                $this->json(['code' => 0, 'data' => $result]);
+            } catch (Exception $e) {
+                $this->json(['code' => 1, 'data' => $e->getMessage()]);
+            }
+        }, function ($error) {
+            $this->json($error);
+        });
+    }
 
-  /**
-   * 当前年级班级
-   */
-  public function classes() {
-    Mvv\mvvLogin::check(self::role_name, function ($user) {
-      try {
-        $param = $_POST;
-        $grade_id = $param['grade_id'];
-        $result = Model\xovClass::getRows4Tuning($grade_id);
+    // 分管班级名条
+    public function cls()
+    {
+        Mvv\mvvLogin::check(self::role_name, function ($user) {
+            try {
+                $param = $_POST;
+                $grade_id = $param['grade_id'];
+                $result = Mvv\mvvMyTuning::cls($user->unionId, $grade_id);
 
-        $this->json(['code' => 0, 'data' => $result]);
-      } catch (Exception $e) {
-        $this->json(['code' => 1, 'data' => $e->getMessage()]);
-      }
-    }, function ($error) {
-      $this->json($error);
-    });
-  }
+                $this->json(['code' => 0, 'data' => $result]);
+            } catch (Exception $e) {
+                $this->json(['code' => 1, 'data' => $e->getMessage()]);
+            }
+        }, function ($error) {
+            $this->json($error);
+        });
+    }
 
-  /**
-   * 调动学生查询
-   */
-  public function studmoves() {
-    Mvv\mvvLogin::check(self::role_name, function ($user) {
-      try {
-        $param = $_POST;
-        $grade_id = $param['grade_id'];
-        $stud_name = $param['stud_name'];
-        $result = Model\xovGradeDivisionStud::getStudSumByName($grade_id, $stud_name);
+    public function local()
+    {
+        Mvv\mvvLogin::check(self::role_name, function ($user) {
+            try {
+                $param = $_POST;
+                $grade_stud_uid = $param['come_stud_uid'];
 
-        $this->json(['code' => 0, 'data' => $result]);
-      } catch (Exception $e) {
-        $this->json(['code' => 1, 'data' => $e->getMessage()]);
-      }
-    }, function ($error) {
-      $this->json($error);
-    });
-  }
+                $result = Mvv\mvvMyTuning::local($user->unionId, $grade_stud_uid);
 
-  /**
-   * 查询本班用于交换的学生
-   */
-  public function studchanges() {
-    Mvv\mvvLogin::check(self::role_name, function ($user) {
-      try {
-        $param = $_POST;
+                $this->json(['code' => 0, 'data' => $result]);
+            } catch (Exception $e) {
+                $this->json(['code' => 1, 'data' => $e->getMessage()]);
+            }
+        }, function ($error) {
+            $this->json($error);
+        });
+    }
 
-        $all = $param['all'];
-        $value = $param['value'];
-        $cls_id = $param['cls_id'];
-        $sex_num = $param['sex_num'];
+    // 调动学生查询
+    public function query()
+    {
+        Mvv\mvvLogin::check(self::role_name, function ($user) {
+            try {
+                $param = $_POST;
+                $grade_id = $param['grade_id'];
+                $stud_name = Model\x5on::getLike($param['stud_name']);
+                $result = Mvv\mvvMyTuning::query($user->unionId, $grade_id, $stud_name);
 
-        $grade_id = Model\xonClass::getGradeIdByClassId($cls_id);
-        $section = Model\xonDivisionSet::getSectionByGradeId($grade_id);
-        $result = Model\xovGradeDivisionStud::getStudSumByValue($cls_id, $value, $all, $section, $sex_num);
+                $this->json(['code' => 0, 'data' => $result]);
+            } catch (Exception $e) {
+                $this->json(['code' => 1, 'data' => $e->getMessage()]);
+            }
+        }, function ($error) {
+            $this->json($error);
+        });
+    }
 
-        $this->json(['code' => 0, 'data' => $result]);
-      } catch (Exception $e) {
-        $this->json(['code' => 1, 'data' => $e->getMessage()]);
-      }
-    }, function ($error) {
-      $this->json($error);
-    });
-  }
+    // 本班调出学生查询
+    public function out()
+    {
+        Mvv\mvvLogin::check(self::role_name, function ($user) {
+            try {
+                $param = $_POST;
+                $grade_stud_uid = $param['come_stud_uid'];
+                $cls_id = $param['cls_id'];
 
-  /**
-   * 微调学生交换
-   */
-  public function exchange() {
-    Mvv\mvvLogin::check(self::role_name, function ($user) {
-      try {
-        $param = $_POST;
+                $result = Mvv\mvvMyTuning::out($user->unionId, $grade_stud_uid, $cls_id);
 
-        $movestud_uid = $param['movestud_uid'];
-        $changestud_uids = $param['changestud_uids'];
-        $result = Model\xonGradeStud::exchange($movestud_uid, $changestud_uids);
+                $this->json(['code' => 0, 'data' => $result]);
+            } catch (Exception $e) {
+                $this->json(['code' => 1, 'data' => $e->getMessage()]);
+            }
+        }, function ($error) {
+            $this->json($error);
+        });
+    }
 
-        $this->json(['code' => 0, 'data' => $result]);
-      } catch (Exception $e) {
-        $this->json(['code' => 1, 'data' => $e->getMessage()]);
-      }
-    }, function ($error) {
-      $this->json($error);
-    });
-  }
+    public function change()
+    {
+        Mvv\mvvLogin::check(self::role_name, function ($user) {
+            try {
+                $param = $_POST;
+                $come_stud_uid = $param['come_stud_uid'];
+                $out_stud_uid = $param['out_stud_uid'];
 
-  public function local() {
-    Mvv\mvvLogin::check(self::role_name, function ($user) {
-      try {
-        $param = $_POST;
-        $grade_stud_uid = $param['grade_stud_uid'];
-        $result = Model\xonGradeStud::local($grade_stud_uid);
+                $result = Mvv\mvvMyTuning::change($user->unionId, $come_stud_uid, $out_stud_uid);
 
-        $this->json(['code' => 0, 'data' => $result]);
-      } catch (Exception $e) {
-        $this->json(['code' => 1, 'data' => $e->getMessage()]);
-      }
-    }, function ($error) {
-      $this->json($error);
-    });
-  }
+                $this->json(['code' => 0, 'data' => $result]);
+            } catch (Exception $e) {
+                $this->json(['code' => 1, 'data' => $e->getMessage()]);
+            }
+        }, function ($error) {
+            $this->json($error);
+        });
+    }
 }

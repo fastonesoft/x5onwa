@@ -266,13 +266,29 @@ var doUrl = {
     // 分班调整
     myadjust: `${host}/weapp/myadjust`,
     myadjustcls: `${host}/weapp/myadjust/cls`,
-    myadjuststudent: `${host}/weapp/myadjust/student`,
-    myadjuststudmove: `${host}/weapp/myadjust/studmove`,
-    myadjuststudremove: `${host}/weapp/myadjust/studremove`,
+    myadjustmoves: `${host}/weapp/myadjust/moves`,
+    myadjustquery: `${host}/weapp/myadjust/query`,
+    myadjustlocal: `${host}/weapp/myadjust/local`,
+    myadjustreq: `${host}/weapp/myadjust/req`,
+    myadjustremove: `${host}/weapp/myadjust/remove`,
+    myadjustout: `${host}/weapp/myadjust/out`,
+    myadjustchange: `${host}/weapp/myadjust/change`,
+
+    // 分班微调
+    mytuning: `${host}/weapp/mytuning`,
+    mytuningcls: `${host}/weapp/mytuning/cls`,
+    mytuningmoves: `${host}/weapp/mytuning/moves`,
+    mytuningquery: `${host}/weapp/mytuning/query`,
+    mytuninglocal: `${host}/weapp/mytuning/local`,
+    mytuningreq: `${host}/weapp/mytuning/req`,
+    mytuningremove: `${host}/weapp/mytuning/remove`,
+    mytuningout: `${host}/weapp/mytuning/out`,
+    mytuningchange: `${host}/weapp/mytuning/change`,
 
 
 
-//-----------------------------------
+
+
   // 班级分管
   mydivi: `${host}/weapp/mydivi`,
   mydiviclsdiv: `${host}/weapp/mydivi/clsdiv`,
@@ -299,41 +315,41 @@ var doUrl = {
   subsetdel: `${host}/weapp/subset/del`,
   
 
+//-----------------------------------
 
 
 
 
-
-  // 分班微调
-  mytuning: `${host}/weapp/mytuning`,
-  mytuningclass: `${host}/weapp/mytuning/classes`,
-  mytuningstudmoves: `${host}/weapp/mytuning/studmoves`,
-  mytuningstudchanges: `${host}/weapp/mytuning/studchanges`,
-  mytuningexchange: `${host}/weapp/mytuning/exchange`,
-  mytuninglocal: `${host}/weapp/mytuning/local`,
-
+  // // 分班微调
+  // mytuning: `${host}/weapp/mytuning`,
+  // mytuningclass: `${host}/weapp/mytuning/classes`,
+  // mytuningstudmoves: `${host}/weapp/mytuning/studmoves`,
+  // mytuningstudchanges: `${host}/weapp/mytuning/studchanges`,
+  // mytuningexchange: `${host}/weapp/mytuning/exchange`,
+  // mytuninglocal: `${host}/weapp/mytuning/local`,
 
 
 
-  // 识别调动学生，并返回交换学生
-  myadjuststudscanmove: `${host}/weapp/myadjust/scanmove`,
-  // 扫二维码调动
-  myadjuststudexchange: `${host}/weapp/myadjust/studexchange`,
-  // 自主调动
-  myadjuststudexchangeself: `${host}/weapp/myadjust/studexchangeself`,
-  // 添加交换学生记录
-  myadjustaddexchange: `${host}/weapp/myadjust/addexchange`,
-  // 显示查询交换学生信息
-  myadjustqueryexchange: `${host}/weapp/myadjust/queryexchange`,
-  // 交换学生列表
-  myadjustexchangelist: `${host}/weapp/myadjust/exchangelist`,
-  myadjustremoveliststud: `${host}/weapp/myadjust/removeliststud`,
 
-  myadjuststudlocal: `${host}/weapp/myadjust/studlocal`,
-  myadjustclassmove: `${host}/weapp/myadjust/classmove`,
-  myadjustclassmoved: `${host}/weapp/myadjust/classmoved`,
-  myadjustclassmoving: `${host}/weapp/myadjust/classmoving`,
-  myadjustmovingqrcode: `${host}/weapp/myadjust/movingqrcode`,
+  // // 识别调动学生，并返回交换学生
+  // myadjuststudscanmove: `${host}/weapp/myadjust/scanmove`,
+  // // 扫二维码调动
+  // myadjuststudexchange: `${host}/weapp/myadjust/studexchange`,
+  // // 自主调动
+  // myadjuststudexchangeself: `${host}/weapp/myadjust/studexchangeself`,
+  // // 添加交换学生记录
+  // myadjustaddexchange: `${host}/weapp/myadjust/addexchange`,
+  // // 显示查询交换学生信息
+  // myadjustqueryexchange: `${host}/weapp/myadjust/queryexchange`,
+  // // 交换学生列表
+  // myadjustexchangelist: `${host}/weapp/myadjust/exchangelist`,
+  // myadjustremoveliststud: `${host}/weapp/myadjust/removeliststud`,
+
+  // myadjuststudlocal: `${host}/weapp/myadjust/studlocal`,
+  // myadjustclassmove: `${host}/weapp/myadjust/classmove`,
+  // myadjustclassmoved: `${host}/weapp/myadjust/classmoved`,
+  // myadjustclassmoving: `${host}/weapp/myadjust/classmoving`,
+  // myadjustmovingqrcode: `${host}/weapp/myadjust/movingqrcode`,
 
 
 
