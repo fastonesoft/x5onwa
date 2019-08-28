@@ -28,6 +28,28 @@ Page({
 
   },
 
+  classChange: function (e) {
+    var that = this
+    var classIndex = e.detail.value
+    var students = []
+    this.setData({ classIndex, students })
+    if (!classIndex || classIndex == -1) {
+      x5on.showError('目标班级、调动学生必须设置！')
+      return
+    }
+    var cls_id = this.data.classes[classIndex].cls_id
+    x5on.post({
+      url: x5on.url.myadjustclassmove,
+      data: { cls_id },
+      success: (result) => {
+        var studmoves = result.data.studmoves
+        var studmoveds = result.data.studmoveds
+        that.setData({ studmoves, studmoveds })
+      }
+    })
+
+  },
+
   findSubmit: function (e) {
     var that = this
     var grades = this.data.grades
@@ -59,27 +81,6 @@ Page({
 
   },
 
-  classChange: function (e) {
-    var that = this
-    var classIndex = e.detail.value
-    var students = []
-    this.setData({ classIndex, students })
-    if (!classIndex || classIndex == -1) {
-      x5on.showError('目标班级、调动学生必须设置！')
-      return
-    }
-    var cls_id = this.data.classes[classIndex].cls_id
-    x5on.post({
-      url: x5on.url.myadjustclassmove,
-      data: { cls_id },
-      success: (result) => {
-        var studmoves = result.data.studmoves
-        var studmoveds = result.data.studmoveds
-        that.setData({ studmoves, studmoveds })
-      }
-    })
-
-  },
 
   studentChange: function (e) {
     var that = this
