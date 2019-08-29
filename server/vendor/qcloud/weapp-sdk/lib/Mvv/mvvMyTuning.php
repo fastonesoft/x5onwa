@@ -2,6 +2,7 @@
 
 namespace QCloud_WeApp_SDK\Mvv;
 
+use QCloud_WeApp_SDK\Model\xovGradeStud;
 use QCloud_WeApp_SDK\Mysql\Mysql as dbs;
 
 use QCloud_WeApp_SDK\Model\x5on;
@@ -120,7 +121,7 @@ class mvvMyTuning
 
             $same_group = 0;
             $uid = $out_stud_uid;
-            $out_stud = xovGradeStudDivCan::checkByCustom(compact('uid', 'same_group'), '要调的学生不存在，请重新查找！');
+            $out_stud = xovGradeStudDiv::checkByCustom(compact('uid', 'same_group'), '要调的学生不存在，请重新查找！');
 
             $grade_id = $out_stud->grade_id;
             $divi_set = xonDiviSet::checkBy(compact('grade_id'));
@@ -128,7 +129,7 @@ class mvvMyTuning
 
             // 交换学生班级信息
             $uid = $come_stud_uid;
-            $come_stud = xovGradeStudDivCan::checkByCustom(compact('uid', 'same_group'), '要调的学生不存在，请重新查找！');
+            $come_stud = xovGradeStudDiv::checkByCustom(compact('uid', 'same_group'), '要调的学生不存在，请重新查找！');
             // 先出去out
             $come_cls_id = $come_stud->cls_id;
             $out_cls_id = $out_stud->cls_id;
