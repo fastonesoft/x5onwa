@@ -263,6 +263,7 @@ var doUrl = {
   mykaoscorecounts: `${host}/weapp/mykaoscore/counts`,
   mykaoscoreadd: `${host}/weapp/mykaoscore/add`,
 
+
     // 分班调整
     myadjust: `${host}/weapp/myadjust`,
     myadjustcls: `${host}/weapp/myadjust/cls`,
@@ -284,6 +285,14 @@ var doUrl = {
     mytuningremove: `${host}/weapp/mytuning/remove`,
     mytuningout: `${host}/weapp/mytuning/out`,
     mytuningchange: `${host}/weapp/mytuning/change`,
+
+
+    // 成绩修改
+    mykaomodi: `${host}/weapp/mykaomodi`,
+    mykaomodiquery: `${host}/weapp/mykaomodi/query`,
+    mykaomodiupdate: `${host}/weapp/mykaomodi/update`,
+    
+
 
 
 

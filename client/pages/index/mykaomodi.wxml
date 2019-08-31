@@ -1,0 +1,9 @@
+<!--pages/index/mykaomodi.wxml-->
+<view class="weui-toptips weui-toptips_warn" wx:if="{{errorShow}}">{{errorMessage}}</view>
+
+<comPick title="年级设置" notitle="{{1}}" label="年级选择" name="grade_id" rangeKey="steps_grade" selectKey="steps_grade"
+    valueKey="id" picks="{{grades}}" bind:pickChange="gradeChange" />
+
+<formFind title_notshow="学生设置" notitle="{{0}}" label="学生姓名" name="stud_name" bind:findSubmit="findSubmit" wx:if="{{grade_id}}"/>
+<comMemb title="年度学生" membs="{{studs}}" key="stud_name" memo="value" bind:editClick="editClick"
+    canRemove="{{0}}" />
