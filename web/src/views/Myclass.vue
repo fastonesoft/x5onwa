@@ -21,7 +21,8 @@
                             <Button type="primary" :loading="isFind" @click="studFind">查询</Button>
                             <Button class="margin-left8" type="error" :loading="isPrint" @click="studPrint">打印
                             </Button>
-                            <Icon type="md-arrow-round-down" title="数据下载" class="margin-left32" size="24"
+                            <Icon type="md-arrow-
+                            -down" title="数据下载" class="margin-left32" size="24"
                                   @click="downLoad"/>
                         </i-col>
                         <i-col span="12" class="hidden-nowrap align-right">

@@ -51,9 +51,7 @@ class mvvMySameSet
             $count = 0;
             foreach ($param as $uid => $value) {
                 $same_group = x5on::getBool($value);
-                xonGradeStud::setsByUid(compact('same_group'), $uid);
-
-                $count++;
+                $count += xonGradeStud::setsByUid(compact('same_group'), $uid);
             }
             $result = $count;
         });

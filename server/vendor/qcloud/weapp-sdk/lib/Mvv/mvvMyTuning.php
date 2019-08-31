@@ -104,8 +104,8 @@ class mvvMyTuning
             $divi_set = xonDiviSet::checkBy(compact('grade_id'));
             if ($divi_set->finished) throw new \Exception('调动结束，不好再调！');
             // 区间设置
-            $end = $value + 20;
-            $begin = $value - 20;
+            $end = $value + 10;
+            $begin = $value - 10;
 
             $result = dbs::select('xovGradeStudDivCan', ['*'], "cls_id = '$cls_id' and value between $begin and $end ", 'and', "order by value limit 10");
         });

@@ -136,6 +136,8 @@
             // 二、请求微信登录头像
             that.$.gets('/appmenu/menus')
                 .then(res => {
+                    
+                    window.console.log(res)
 
                         // 菜单数据
                         let roles = '';
