@@ -2,4 +2,6 @@ sftp-config.json
 application/logs/*.log
 application/business/*.json
 
+# idea
 .idea
+server\.idea
